@@ -1,0 +1,2699 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>QtDesignerSharp</name>
+    </assembly>
+    <members>
+        <member name="T:QtDesigner.QAbstractExtensionFactory">
+            <summary>
+            <para>The QAbstractExtensionFactory class provides an interface for
+            extension factories in Qt Designer.</para>
+            </summary>
+            <remarks>
+            <para>QAbstractExtensionFactory is not intended to be instantiated
+            directly; use the QExtensionFactory instead.</para>
+            <para>In Qt Designer, extension factories are used to look up and
+            create named extensions as they are required. For that reason, when
+            implementing a custom extension, you must also create a QExtensionFactory,
+            i.e a class that is able to make an instance of your extension, and
+            register it using Qt Designer's extension manager.</para>
+            <para>When an extension is required, Qt Designer's extension manager
+            will run through all its registered factories calling
+            QExtensionFactory::createExtension() for each until the first one that is
+            able to create the requested extension for the selected object, is found.
+            This factory will then make an instance of the extension.</para>
+            <para></para>
+            <para>See also QExtensionFactory and QExtensionManager.</para>
+            </remarks>
+        </member>
+        <member name="M:QtDesigner.QAbstractExtensionFactory.Extension(QtCore.QObject,System.String)">
+            <summary>
+            <para>Returns the extension specified by iid for the given
+            object.</para>
+            </summary>
+        </member>
+        <member name="T:QtDesigner.QAbstractExtensionManager">
+            <summary>
+            <para>The QAbstractExtensionManager class provides an interface for
+            extension managers in Qt Designer.</para>
+            </summary>
+            <remarks>
+            <para>QAbstractExtensionManager is not intended to be instantiated
+            directly; use the QExtensionManager instead.</para>
+            <para>In Qt Designer, extension are not created until they are
+            required. For that reason, when implementing a custom extension, you must
+            also create a QExtensionFactory, i.e a class that is able to make an
+            instance of your extension, and register it using Qt Designer's extension
+            manager.</para>
+            <para>When an extension is required, Qt Designer's extension manager
+            will run through all its registered factories calling
+            QExtensionFactory::createExtension() for each until the first one that is
+            able to create the requested extension for the selected object, is found.
+            This factory will then make an instance of the extension.</para>
+            <para></para>
+            <para>See also QExtensionManager and QExtensionFactory.</para>
+            </remarks>
+        </member>
+        <member name="T:QtDesigner.IQAbstractExtensionManager">
+            <summary>
+            <para>The QAbstractExtensionManager class provides an interface for
+            extension managers in Qt Designer.</para>
+            </summary>
+            <remarks>
+            <para>QAbstractExtensionManager is not intended to be instantiated
+            directly; use the QExtensionManager instead.</para>
+            <para>In Qt Designer, extension are not created until they are
+            required. For that reason, when implementing a custom extension, you must
+            also create a QExtensionFactory, i.e a class that is able to make an
+            instance of your extension, and register it using Qt Designer's extension
+            manager.</para>
+            <para>When an extension is required, Qt Designer's extension manager
+            will run through all its registered factories calling
+            QExtensionFactory::createExtension() for each until the first one that is
+            able to create the requested extension for the selected object, is found.
+            This factory will then make an instance of the extension.</para>
+            <para></para>
+            <para>See also QExtensionManager and QExtensionFactory.</para>
+            </remarks>
+        </member>
+        <member name="M:QtDesigner.IQAbstractExtensionManager.RegisterExtensions(QtDesigner.QAbstractExtensionFactory,System.String)">
+            <summary>
+            <para>Register the given extension factory with the extension specified
+            by iid.</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.IQAbstractExtensionManager.UnregisterExtensions(QtDesigner.QAbstractExtensionFactory,System.String)">
+            <summary>
+            <para>Unregister the given factory with the extension specified by
+            iid.</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.IQAbstractExtensionManager.Extension(QtCore.QObject,System.String)">
+            <summary>
+            <para>Returns the extension, specified by iid, for the given
+            object.</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QAbstractExtensionManager.RegisterExtensions(QtDesigner.QAbstractExtensionFactory,System.String)">
+            <summary>
+            <para>Register the given extension factory with the extension specified
+            by iid.</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QAbstractExtensionManager.UnregisterExtensions(QtDesigner.QAbstractExtensionFactory,System.String)">
+            <summary>
+            <para>Unregister the given factory with the extension specified by
+            iid.</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QAbstractExtensionManager.Extension(QtCore.QObject,System.String)">
+            <summary>
+            <para>Returns the extension, specified by iid, for the given
+            object.</para>
+            </summary>
+        </member>
+        <member name="T:QtDesigner.QExtensionManager">
+            <summary>
+            <para>The QExtensionManager class provides extension management
+            facilities for Qt Designer.</para>
+            </summary>
+            <remarks>
+            <para>In Qt Designer the extensions are not created until they are
+            required. For that reason, when implementing an extension, you must also
+            create a QExtensionFactory, i.e a class that is able to make an instance of
+            your extension, and register it using Qt Designer's extension
+            manager.</para>
+            <para>The registration of an extension factory is typically made in the
+            QDesignerCustomWidgetInterface::initialize() function:</para>
+            <para>        void MyPlugin::initialize(QDesignerFormEditorInterface
+            *formEditor)</para>
+            <para>        {</para>
+            <para>            if (initialized)</para>
+            <para>                return;</para>
+            <para></para>
+            <para>            QExtensionManager *manager =
+            formEditor-&gt;extensionManager();</para>
+            <para>            Q_ASSERT(manager != 0);</para>
+            <para></para>
+            <para>            manager-&gt;registerExtensions(new
+            MyExtensionFactory(manager),</para>
+            <para>
+            Q_TYPEID(QDesignerTaskMenuExtension));</para>
+            <para></para>
+            <para>            initialized = true;</para>
+            <para>        }</para>
+            <para>The QExtensionManager is not intended to be instantiated
+            directly. You can retrieve an interface to Qt Designer's extension manager
+            using the QDesignerFormEditorInterface::extensionManager() function. A
+            pointer to Qt Designer's current QDesignerFormEditorInterface object
+            (formEditor in the example above) is provided by the
+            QDesignerCustomWidgetInterface::initialize() function's parameter. When
+            implementing a custom widget plugin, you must subclass the
+            QDesignerCustomWidgetInterface to expose your plugin to Qt Designer.</para>
+            <para>Then, when an extension is required, Qt Designer's extension
+            manager will run through all its registered factories calling
+            QExtensionFactory::createExtension() for each until the first one that is
+            able to create the requested extension for the selected object, is found.
+            This factory will then make an instance of the extension.</para>
+            <para>There are four available types of extensions in Qt Designer:
+            QDesignerContainerExtension , QDesignerMemberSheetExtension,
+            QDesignerPropertySheetExtension and QDesignerTaskMenuExtension. Qt
+            Designer's behavior is the same whether the requested extension is
+            associated with a container, a member sheet, a property sheet or a task
+            menu.</para>
+            <para>For a complete example using the QExtensionManager class, see the
+            Task Menu Extension example. The example shows how to create a custom
+            widget plugin for Qt Designer, and how to to use the
+            QDesignerTaskMenuExtension class to add custom items to Qt Designer's task
+            menu.</para>
+            <para></para>
+            <para>See also QExtensionFactory and QAbstractExtensionManager.</para>
+            </remarks>
+        </member>
+        <member name="M:QtDesigner.QExtensionManager.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs an extension manager with the given parent.</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QExtensionManager.RegisterExtensions(QtDesigner.QAbstractExtensionFactory,System.String)">
+            <summary>
+            <para>Reimplemented from
+            QAbstractExtensionManager::registerExtensions().</para>
+            <para>Register the extension specified by the given factory and
+            extension identifier iid.</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QExtensionManager.UnregisterExtensions(QtDesigner.QAbstractExtensionFactory,System.String)">
+            <summary>
+            <para>Reimplemented from
+            QAbstractExtensionManager::unregisterExtensions().</para>
+            <para>Unregister the extension specified by the given factory and
+            extension identifier iid.</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QExtensionManager.Extension(QtCore.QObject,System.String)">
+            <summary>
+            <para>Reimplemented from QAbstractExtensionManager::extension().</para>
+            <para>Returns the extension specified by iid, for the given
+            object.</para>
+            </summary>
+        </member>
+        <member name="T:QtDesigner.QDesignerActionEditorInterface">
+            <summary>
+            <para>The QDesignerActionEditorInterface class allows you to change the
+            focus of Qt Designer's action editor.</para>
+            </summary>
+            <remarks>
+            <para>The QDesignerActionEditorInterface class is not intended to be
+            instantiated directly. You can retrieve an interface to Qt Designer's
+            action editor using the QDesignerFormEditorInterface::actionEditor()
+            function.</para>
+            <para>You can control which actions that are available in the action
+            editor's window using the manageAction() and unmanageAction() functions. An
+            action that is managed by Qt Designer is available in the action editor
+            while an unmanaged action is ignored.</para>
+            <para>QDesignerActionEditorInterface also provides the core() function
+            that you can use to retrieve a pointer to Qt Designer's current
+            QDesignerFormEditorInterface object, and the setFormWindow() function that
+            enables you to change the currently selected form window.</para>
+            <para></para>
+            <para>See also QDesignerFormEditorInterface and
+            QDesignerFormWindowInterface.</para>
+            </remarks>
+        </member>
+        <member name="M:QtDesigner.QDesignerActionEditorInterface.#ctor(QtWidgets.QWidget,QtCore.Qt.WindowType)">
+            <summary>
+            <para>Constructs an action editor interface with the given parent and
+            the specified window flags.</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerActionEditorInterface.ManageAction(QtWidgets.QAction)">
+            <summary>
+            <para>Instructs Qt Designer to manage the specified action. An action
+            that is managed by Qt Designer is available in the action editor.</para>
+            <para>See also unmanageAction().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerActionEditorInterface.UnmanageAction(QtWidgets.QAction)">
+            <summary>
+            <para>Instructs Qt Designer to ignore the specified action. An
+            unmanaged action is not available in the action editor.</para>
+            <para>See also manageAction().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerActionEditorInterface.SetFormWindow(QtDesigner.QDesignerFormWindowInterface)">
+            <summary>
+            <para>Sets the currently selected form window to formWindow.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerActionEditorInterface.Core">
+            <summary>
+            <para>Returns a pointer to Qt Designer's current
+            QDesignerFormEditorInterface object.</para>
+            </summary>
+        </member>
+        <member name="T:QtDesigner.QDesignerFormEditorInterface">
+            <summary>
+            <para>The QDesignerFormEditorInterface class allows you to access Qt
+            Designer's various components.</para>
+            </summary>
+            <remarks>
+            <para>Qt Designer's current QDesignerFormEditorInterface object holds
+            information about all Qt Designer's components: The action editor, the
+            object inspector, the property editor, the widget box, and the extension
+            and form window managers. QDesignerFormEditorInterface contains a
+            collection of functions that provides interfaces to all these components.
+            They are typically used to query (and manipulate) the respective component.
+            For example:</para>
+            <para>        QDesignerObjectInspectorInterface *objectInspector =
+            0;</para>
+            <para>        objectInspector =
+            formEditor-&gt;objectInspector();</para>
+            <para></para>
+            <para>        QDesignerFormWindowManagerInterface *manager = 0;</para>
+            <para>        manager = formEditor-&gt;formWindowManager();</para>
+            <para></para>
+            <para>
+            objectInspector-&gt;setFormWindow(manager-&gt;formWindow(0));</para>
+            <para>QDesignerFormEditorInterface is not intended to be instantiated
+            directly. A pointer to Qt Designer's current QDesignerFormEditorInterface
+            object (formEditor in the example above) is provided by the
+            QDesignerCustomWidgetInterface::initialize() function's parameter. When
+            implementing a custom widget plugin, you must subclass the
+            QDesignerCustomWidgetInterface to expose your plugin to Qt Designer.</para>
+            <para>QDesignerFormEditorInterface also provides functions that can set
+            the action editor, property editor, object inspector and widget box. These
+            are only useful if you want to provide your own custom components.</para>
+            <para>If designer is embedded in another program, one could to provide
+            its own settings manager. The manager is used by the components of Qt
+            Designer to store/retrieve persistent configuration settings. The default
+            manager uses QSettings as the backend.</para>
+            <para>Finally, QDesignerFormEditorInterface provides the topLevel()
+            function that returns Qt Designer's top-level widget.</para>
+            <para></para>
+            <para>See also QDesignerCustomWidgetInterface.</para>
+            </remarks>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormEditorInterface.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs a QDesignerFormEditorInterface object with the given
+            parent.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormEditorInterface.TopLevel">
+            <summary>
+            <para>Returns Qt Designer's top-level widget.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormEditorInterface.WidgetBox">
+            <summary>
+            <para>Returns an interface to Qt Designer's widget box.</para>
+            <para>See also setWidgetBox().</para>
+            <para></para>
+            <para>Sets Qt Designer's widget box to be the specified
+            widgetBox.</para>
+            <para>See also widgetBox().</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormEditorInterface.PropertyEditor">
+            <summary>
+            <para>Returns an interface to Qt Designer's property editor.</para>
+            <para>See also setPropertyEditor().</para>
+            <para></para>
+            <para>Sets Qt Designer's property editor to be the specified
+            propertyEditor.</para>
+            <para>See also propertyEditor().</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormEditorInterface.ObjectInspector">
+            <summary>
+            <para>Returns an interface to Qt Designer's object inspector.</para>
+            <para>See also setObjectInspector().</para>
+            <para></para>
+            <para>Sets Qt Designer's object inspector to be the specified
+            objectInspector.</para>
+            <para>See also objectInspector().</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormEditorInterface.ActionEditor">
+            <summary>
+            <para>Returns an interface to Qt Designer's action editor.</para>
+            <para>See also setActionEditor().</para>
+            <para></para>
+            <para>Sets Qt Designer's action editor to be the specified
+            actionEditor.</para>
+            <para>See also actionEditor().</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormEditorInterface.ExtensionManager">
+            <summary>
+            <para>Returns an interface to Qt Designer's extension manager.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormEditorInterface.FormWindowManager">
+            <summary>
+            <para>Returns an interface to Qt Designer's form window manager.</para>
+            </summary>
+        </member>
+        <member name="T:QtDesigner.QDesignerFormWindowInterface">
+            <summary>
+            <para>The QDesignerFormWindowInterface class allows you to query and
+            manipulate form windows appearing in Qt Designer's workspace.</para>
+            </summary>
+            <remarks>
+            <para>QDesignerFormWindowInterface provides information about the
+            associated form window as well as allowing its properties to be altered.
+            The interface is not intended to be instantiated directly, but to provide
+            access to Qt Designer's current form windows controlled by Qt Designer's
+            form window manager.</para>
+            <para>If you are looking for the form window containing a specific
+            widget, you can use the static
+            QDesignerFormWindowInterface::findFormWindow() function:</para>
+            <para>    QDesignerFormWindowInterface *formWindow;</para>
+            <para>    formWindow =
+            QDesignerFormWindowInterface::findFormWindow(myWidget);</para>
+            <para>But in addition, you can access any of the current form windows
+            through Qt Designer's form window manager: Use the
+            QDesignerFormEditorInterface::formWindowManager() function to retrieve an
+            interface to the manager. Once you have this interface, you have access to
+            all of Qt Designer's current form windows through the
+            QDesignerFormWindowManagerInterface::formWindow() function. For
+            example:</para>
+            <para>    QList&lt;QDesignerFormWindowInterface *&gt; forms;</para>
+            <para>    QDesignerFormWindowInterface *formWindow;</para>
+            <para></para>
+            <para>    QDesignerFormWindowManagerInterface *manager =
+            formEditor-&gt;formWindowManager();</para>
+            <para></para>
+            <para>    for (int i = 0; i &lt; manager-&gt;formWindowCount(); i++)
+            {</para>
+            <para>        formWindow = manager-&gt;formWindow(i);</para>
+            <para>        forms.append(formWindow);</para>
+            <para>    }</para>
+            <para>The pointer to Qt Designer's current QDesignerFormEditorInterface
+            object (formEditor in the example above) is provided by the
+            QDesignerCustomWidgetInterface::initialize() function's parameter. When
+            implementing a custom widget plugin, you must subclass the
+            QDesignerCustomWidgetInterface class to expose your plugin to Qt
+            Designer.</para>
+            <para>Once you have the form window, you can query its properties. For
+            example, a plain custom widget plugin is managed by Qt Designer only at its
+            top level, i.e. none of its child widgets can be resized in Qt Designer's
+            workspace. But QDesignerFormWindowInterface provides you with functions
+            that enables you to control whether a widget should be managed by Qt
+            Designer, or not:</para>
+            <para>        if (formWindow-&gt;isManaged(myWidget))</para>
+            <para>
+            formWindow-&gt;manageWidget(myWidget-&gt;childWidget);</para>
+            <para>The complete list of functions concerning widget management is:
+            isManaged(), manageWidget() and unmanageWidget(). There is also several
+            associated signals: widgetManaged(), widgetRemoved(),
+            aboutToUnmanageWidget() and widgetUnmanaged().</para>
+            <para>In addition to controlling the management of widgets, you can
+            control the current selection in the form window using the selectWidget(),
+            clearSelection() and emitSelectionChanged() functions, and the
+            selectionChanged() signal.</para>
+            <para>You can also retrieve information about where the form is stored
+            using absoluteDir(), its include files using includeHints(), and its layout
+            and pixmap functions using layoutDefault(), layoutFunction() and
+            pixmapFunction(). You can find out whether the form window has been
+            modified (but not saved) or not, using the isDirty() function. You can
+            retrieve its author(), its contents(), its fileName(), associated comment()
+            and exportMacro(), its mainContainer(), its features(), its grid() and its
+            resourceFiles().</para>
+            <para>The interface provides you with functions and slots allowing you
+            to alter most of this information as well. The exception is the directory
+            storing the form window. Finally, there is several signals associated with
+            changes to the information mentioned above and to the form window in
+            general.</para>
+            <para></para>
+            <para>See also QDesignerFormWindowCursorInterface,
+            QDesignerFormEditorInterface, and
+            QDesignerFormWindowManagerInterface.</para>
+            </remarks>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowInterface.#ctor(QtWidgets.QWidget,QtCore.Qt.WindowType)">
+            <summary>
+            <para>Constructs a form window interface with the given parent and the
+            specified window flags.</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowInterface.CheckContents">
+            <summary>
+            <para>Performs checks on the current form and returns a list of
+            richtext warnings about potential issues (for example, top level spacers on
+            unlaid-out forms).</para>
+            <para>IDE integrations can call this before handling starting a save
+            operation.</para>
+            <para>This function was introduced in  Qt 5.0.</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowInterface.SetContents(QtCore.QIODevice,System.String)">
+            <summary>
+            <para>Sets the form's contents using data obtained from the given
+            device and returns whether loading succeeded. If it fails, the error
+            message is returned in errorMessage.</para>
+            <para>Data can be read from QFile objects or any other subclass of
+            QIODevice.</para>
+            <para>See also contents().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowInterface.HasFeature(QtDesigner.QDesignerFormWindowInterface.FeatureFlag)">
+            <summary>
+            <para>Returns true if the form window offers the specified feature;
+            otherwise returns false.</para>
+            <para>See also features().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowInterface.LayoutDefault(System.Int32@,System.Int32@)">
+            <summary>
+            <para>Fills in the default margin and spacing for the form's default
+            layout in the margin and spacing variables specified.</para>
+            <para>See also setLayoutDefault().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowInterface.SetLayoutDefault(System.Int32,System.Int32)">
+            <summary>
+            <para>Sets the default margin and spacing for the form's layout.</para>
+            <para>See also layoutDefault().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowInterface.LayoutFunction(System.String,System.String)">
+            <summary>
+            <para>Fills in the current margin and spacing for the form's layout in
+            the margin and spacing variables specified.</para>
+            <para>See also setLayoutFunction().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowInterface.SetLayoutFunction(System.String,System.String)">
+            <summary>
+            <para>Sets the margin and spacing for the form's layout.</para>
+            <para>The default layout properties will be replaced by the
+            corresponding layout functions when uic generates code for the form, that
+            is, if the functions are specified. This is useful when different
+            environments requires different layouts for the same form.</para>
+            <para>See also layoutFunction().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowInterface.IsManaged(QtWidgets.QWidget)">
+            <summary>
+            <para>Returns true if the specified widget is managed by the form
+            window; otherwise returns false.</para>
+            <para>See also manageWidget().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowInterface.EmitSelectionChanged">
+            <summary>
+            <para>Emits the selectionChanged() signal.</para>
+            <para>See also selectWidget() and clearSelection().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowInterface.AddResourceFile(System.String)">
+            <summary>
+            <para>Adds the resource file at the given path to those used by the
+            form.</para>
+            <para>See also resourceFiles() and resourceFilesChanged().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowInterface.RemoveResourceFile(System.String)">
+            <summary>
+            <para>Removes the resource file at the specified path from the list of
+            those used by the form.</para>
+            <para>See also resourceFiles() and resourceFilesChanged().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowInterface.ManageWidget(QtWidgets.QWidget)">
+            <summary>
+            <para>Instructs the form window to manage the specified widget.</para>
+            <para>See also isManaged(), unmanageWidget(), and
+            widgetManaged().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowInterface.UnmanageWidget(QtWidgets.QWidget)">
+            <summary>
+            <para>Instructs the form window not to manage the specified
+            widget.</para>
+            <para>See also aboutToUnmanageWidget() and widgetUnmanaged().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowInterface.ClearSelection(System.Boolean)">
+            <summary>
+            <para>Clears the current selection in the form window. If update is
+            true, the emitSelectionChanged() function is called, emitting the
+            selectionChanged() signal.</para>
+            <para>See also selectWidget().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowInterface.SelectWidget(QtWidgets.QWidget,System.Boolean)">
+            <summary>
+            <para>If select is true, the given widget is selected; otherwise the
+            widget is deselected.</para>
+            <para>See also clearSelection() and selectionChanged().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowInterface.SetContents(System.String)">
+            <summary>
+            <para>Sets the contents of the form using data read from the specified
+            contents string and returns whether the operation succeeded.</para>
+            <para>See also contents().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowInterface.ActivateResourceFilePaths(QtCore.QStringList,System.Int32@,System.String)">
+            <summary>
+            <para>Activates the resource (.qrc) file paths paths, returning the
+            count of errors in errorCount and error message in errorMessages. Qt
+            Designer loads the resources using the QResource class, making them
+            available for form editing.</para>
+            <para>In IDE integrations, a list of the project's resource (.qrc) file
+            can be activated, making them available to Qt Designer.</para>
+            <para>This function was introduced in  Qt 5.0.</para>
+            <para>See also activeResourceFilePaths() and QResource.</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowInterface.ActivateResourceFilePaths(QtCore.QStringList)">
+            <summary>
+            <para>Activates the resource (.qrc) file paths paths, returning the
+            count of errors in errorCount and error message in errorMessages. Qt
+            Designer loads the resources using the QResource class, making them
+            available for form editing.</para>
+            <para>In IDE integrations, a list of the project's resource (.qrc) file
+            can be activated, making them available to Qt Designer.</para>
+            <para>This function was introduced in  Qt 5.0.</para>
+            <para>See also activeResourceFilePaths() and QResource.</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowInterface.FindFormWindow(QtWidgets.QWidget)">
+            <summary>
+            <para>Returns the form window interface for the given widget.</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowInterface.FindFormWindow(QtCore.QObject)">
+            <summary>
+            <para>Returns the form window interface for the given object.</para>
+            <para>This function was introduced in  Qt 4.4.</para>
+            </summary>
+        </member>
+        <member name="E:QtDesigner.QDesignerFormWindowInterface.MainContainerChanged">
+            <summary>
+            <para>This signal is emitted whenever the main container changes. The new container is specified by mainContainer.</para>
+            <para>See also setMainContainer().</para>
+            </summary>
+        </member>
+        <member name="E:QtDesigner.QDesignerFormWindowInterface.FileNameChanged">
+            <summary>
+            <para>This signal is emitted whenever the file name of the form changes. The new file name is specified by fileName.</para>
+            <para>See also setFileName().</para>
+            </summary>
+        </member>
+        <member name="E:QtDesigner.QDesignerFormWindowInterface.FeatureChanged">
+            <summary>
+            <para>This signal is emitted whenever a feature changes in the form. The new feature is specified by feature.</para>
+            <para>See also setFeatures().</para>
+            </summary>
+        </member>
+        <member name="E:QtDesigner.QDesignerFormWindowInterface.SelectionChanged">
+            <summary>
+            <para>This signal is emitted whenever the selection in the form changes.</para>
+            <para>See also selectWidget() and clearSelection().</para>
+            </summary>
+        </member>
+        <member name="E:QtDesigner.QDesignerFormWindowInterface.GeometryChanged">
+            <summary>
+            <para>This signal is emitted whenever the form's geometry changes.</para>
+            </summary>
+        </member>
+        <member name="E:QtDesigner.QDesignerFormWindowInterface.ResourceFilesChanged">
+            <summary>
+            <para>This signal is emitted whenever the list of resource files used by the form changes.</para>
+            <para>See also resourceFiles().</para>
+            </summary>
+        </member>
+        <member name="E:QtDesigner.QDesignerFormWindowInterface.WidgetManaged">
+            <summary>
+            <para>This signal is emitted whenever a widget on the form becomes managed. The newly managed widget is specified by widget.</para>
+            <para>See also manageWidget().</para>
+            </summary>
+        </member>
+        <member name="E:QtDesigner.QDesignerFormWindowInterface.WidgetUnmanaged">
+            <summary>
+            <para>This signal is emitted whenever a widget on the form becomes unmanaged. The newly released widget is specified by widget.</para>
+            <para>See also unmanageWidget() and aboutToUnmanageWidget().</para>
+            </summary>
+        </member>
+        <member name="E:QtDesigner.QDesignerFormWindowInterface.AboutToUnmanageWidget">
+            <summary>
+            <para>This signal is emitted whenever a widget on the form is about to become unmanaged. When this signal is emitted, the specified widget is still managed, and a widgetUnmanaged() signal will follow, indicating when it is no longer managed.</para>
+            <para>See also unmanageWidget() and isManaged().</para>
+            </summary>
+        </member>
+        <member name="E:QtDesigner.QDesignerFormWindowInterface.Activated">
+            <summary>
+            <para>This signal is emitted whenever a widget is activated on the form. The activated widget is specified by widget.</para>
+            </summary>
+        </member>
+        <member name="E:QtDesigner.QDesignerFormWindowInterface.Changed">
+            <summary>
+            <para>This signal is emitted whenever a form is changed.</para>
+            </summary>
+        </member>
+        <member name="E:QtDesigner.QDesignerFormWindowInterface.WidgetRemoved">
+            <summary>
+            <para>This signal is emitted whenever a widget is removed from the form. The widget that was removed is specified by widget.</para>
+            </summary>
+        </member>
+        <member name="E:QtDesigner.QDesignerFormWindowInterface.ObjectRemoved">
+            <summary>
+            <para>This signal is emitted whenever an object (such as an action or a QButtonGroup) is removed from the form. The object that was removed is specified by object.</para>
+            <para>This function was introduced in  Qt 4.5.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowInterface.Author">
+            <summary>
+            <para>Returns details of the author or creator of the form currently
+            being displayed in the window.</para>
+            <para>See also setAuthor().</para>
+            <para></para>
+            <para>Sets the details for the author or creator of the form to the
+            author specified.</para>
+            <para>See also author().</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowInterface.Comment">
+            <summary>
+            <para>Returns comments about the form currently being displayed in the
+            window.</para>
+            <para>See also setComment().</para>
+            <para></para>
+            <para>Sets the information about the form to the comment specified.
+            This information should be a human-readable comment about the form.</para>
+            <para>See also comment().</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowInterface.PixmapFunction">
+            <summary>
+            <para>Returns the name of the function used to load pixmaps into the
+            form window.</para>
+            <para>See also setPixmapFunction().</para>
+            <para></para>
+            <para>Sets the function used to load pixmaps into the form window to
+            the given pixmapFunction.</para>
+            <para>See also pixmapFunction().</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowInterface.ExportMacro">
+            <summary>
+            <para>Returns the export macro associated with the form currently being
+            displayed in the window. The export macro is used when the form is compiled
+            to create a widget plugin.</para>
+            <para>See also setExportMacro() and Creating Custom Widgets for Qt
+            Designer.</para>
+            <para></para>
+            <para>Sets the form window's export macro to exportMacro. The export
+            macro is used when building a widget plugin to export the form's interface
+            to other components.</para>
+            <para>See also exportMacro().</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowInterface.IncludeHints">
+            <summary>
+            <para>Returns a list of the header files that will be included in the
+            form window's associated UI file.</para>
+            <para>Header files may be local, i.e. relative to the project's
+            directory, &quot;mywidget.h&quot;, or global, i.e. part of Qt or the
+            compilers standard libraries: &lt;QtGui/QWidget&gt;.</para>
+            <para>See also setIncludeHints().</para>
+            <para></para>
+            <para>Sets the header files that will be included in the form window's
+            associated UI file to the specified includeHints.</para>
+            <para>Header files may be local, i.e. relative to the project's
+            directory, &quot;mywidget.h&quot;, or global, i.e. part of Qt or the
+            compilers standard libraries: &lt;QtGui/QWidget&gt;.</para>
+            <para>See also includeHints().</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowInterface.resourceFileSaveMode">
+            <summary>
+            <para>See also setResourceFileSaveMode().</para>
+            <para></para>
+            <para>See also resourceFileSaveMode().</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowInterface.MainContainer">
+            <summary>
+            <para>Sets the main container widget on the form to the specified
+            mainContainer.</para>
+            <para>See also mainContainerChanged().</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowInterface.Features">
+            <summary>
+            <para>Returns a combination of the features provided by the form window
+            associated with the interface. The value returned can be tested against the
+            Feature enum values to determine which features are supported by the
+            window.</para>
+            <para>See also setFeatures() and hasFeature().</para>
+            <para></para>
+            <para>Enables the specified features for the form window.</para>
+            <para>See also features() and featureChanged().</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowInterface.Dirty">
+            <summary>
+            <para>Returns true if the form window is &quot;dirty&quot; (modified
+            but not saved); otherwise returns false.</para>
+            <para>See also setDirty().</para>
+            <para></para>
+            <para>If dirty is true, the form window is marked as dirty, meaning
+            that it is modified but not saved. If dirty is false, the form window is
+            considered to be unmodified.</para>
+            <para>See also isDirty().</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowInterface.Grid">
+            <summary>
+            <para>Returns the grid spacing used by the form window.</para>
+            <para>See also setGrid().</para>
+            <para></para>
+            <para>Sets the grid size for the form window to the point specified by
+            grid. In this function, the coordinates in the QPoint are used to specify
+            the dimensions of a rectangle in the grid.</para>
+            <para>See also grid().</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowInterface.FileName">
+            <summary>
+            <para>Returns the file name of the UI file that describes the form
+            currently being shown.</para>
+            <para>See also setFileName().</para>
+            <para></para>
+            <para>Sets the file name for the form to the given fileName.</para>
+            <para>See also fileName() and fileNameChanged().</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowInterface.AbsoluteDir">
+            <summary>
+            <para>Returns the absolute location of the directory containing the
+            form shown in the form window.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowInterface.Contents">
+            <summary>
+            <para>Returns details of the contents of the form currently being
+            displayed in the window.</para>
+            <para>See also setContents().</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowInterface.ActiveResourceFilePaths">
+            <summary>
+            <para>Returns the active resource (.qrc) file paths currently loaded in
+            Qt Designer.</para>
+            <para>This function was introduced in  Qt 5.0.</para>
+            <para>See also activateResourceFilePaths().</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowInterface.Core">
+            <summary>
+            <para>Returns a pointer to Qt Designer's current
+            QDesignerFormEditorInterface object.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowInterface.Cursor">
+            <summary>
+            <para>Returns the cursor interface used by the form window.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowInterface.FormContainer">
+            <summary>
+            <para>Returns the form the widget containing the main container
+            widget.</para>
+            <para>This function was introduced in  Qt 5.0.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowInterface.ResourceFiles">
+            <summary>
+            <para>Returns a list of paths to resource files that are currently
+            being used by the form window.</para>
+            <para>See also addResourceFile() and removeResourceFile().</para>
+            </summary>
+        </member>
+        <member name="T:QtDesigner.QDesignerFormWindowInterface.FeatureFlag">
+            <summary>
+            <para>This enum describes the features that are available and can be
+            controlled by the form window interface. These values are used when
+            querying the form window to determine which features it supports:</para>
+            <para>The Feature type is a typedef for QFlags&lt;FeatureFlag&gt;. It
+            stores an OR combination of FeatureFlag values.</para>
+            <para>See also hasFeature() and features().</para>
+            </summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowInterface.FeatureFlag.EditFeature">
+            <summary>Form editing</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowInterface.FeatureFlag.GridFeature">
+            <summary>Grid display and snap-to-grid facilities for editing</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowInterface.FeatureFlag.TabOrderFeature">
+            <summary>Tab order management</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowInterface.FeatureFlag.DefaultFeature">
+            <summary>Support for default features (form editing and grid)</summary>
+        </member>
+        <member name="T:QtDesigner.QDesignerFormWindowInterface.ResourceFileSaveMode">
+            <summary>
+            <para>This enum describes how resource files are saved.</para>
+            <para>This enum was introduced or modified in  Qt 5.0.</para>
+            </summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowInterface.ResourceFileSaveMode.SaveAllResourceFiles">
+            <summary>Save all resource files.</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowInterface.ResourceFileSaveMode.SaveOnlyUsedResourceFiles">
+            <summary>Save resource files used by form.</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowInterface.ResourceFileSaveMode.DontSaveResourceFiles">
+            <summary>Do not save resource files.</summary>
+        </member>
+        <member name="T:QtDesigner.QDesignerFormWindowCursorInterface">
+            <summary>
+            <para>The QDesignerFormWindowCursorInterface class allows you to query
+            and modify a form window's widget selection, and in addition modify the
+            properties of all the form's widgets.</para>
+            </summary>
+            <remarks>
+            <para>QDesignerFormWindowCursorInterface is a convenience class that
+            provides an interface to the associated form window's text cursor; it
+            provides a collection of functions that enables you to query a given form
+            window's selection and change the selection's focus according to defined
+            modes (MoveMode) and movements (MoveOperation). You can also use the
+            interface to query the form's widgets and change their properties.</para>
+            <para>The interface is not intended to be instantiated directly, but to
+            provide access to the selections and widgets of Qt Designer's current form
+            windows. QDesignerFormWindowInterface always provides an associated cursor
+            interface. The form window for a given widget can be retrieved using the
+            static QDesignerFormWindowInterface::findFormWindow() functions. For
+            example:</para>
+            <para>    QDesignerFormWindowInterface *formWindow = 0;</para>
+            <para>    formWindow =
+            QDesignerFormWindowInterface::findFormWindow(myWidget);</para>
+            <para></para>
+            <para>    formWindow-&gt;cursor()-&gt;setProperty(myWidget, myProperty,
+            newValue);</para>
+            <para>You can retrieve any of Qt Designer's current form windows
+            through Qt Designer's form window manager.</para>
+            <para>Once you have a form window's cursor interface, you can check if
+            the form window has a selection at all using the hasSelection() function.
+            You can query the form window for its total widgetCount() and
+            selectedWidgetCount(). You can retrieve the currently selected widget (or
+            widgets) using the current() or selectedWidget() functions.</para>
+            <para>You can retrieve any of the form window's widgets using the
+            widget() function, and check if a widget is selected using the
+            isWidgetSelected() function. You can use the setProperty() function to set
+            the selected widget's properties, and the setWidgetProperty() or
+            resetWidgetProperty() functions to modify the properties of any given
+            widget.</para>
+            <para>Finally, you can change the selection by changing the text
+            cursor's position() using the setPosition() and movePosition()
+            functions.</para>
+            <para></para>
+            <para>See also QDesignerFormWindowInterface and
+            QDesignerFormWindowManagerInterface.</para>
+            </remarks>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowCursorInterface.MovePosition(QtDesigner.QDesignerFormWindowCursorInterface.MoveOperation,QtDesigner.QDesignerFormWindowCursorInterface.MoveMode)">
+            <summary>
+            <para>Performs the given operation on the cursor using the specified
+            mode, and returns true if it completed successfully; otherwise returns
+            false.</para>
+            <para>See also position() and setPosition().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowCursorInterface.SetPosition(System.Int32,QtDesigner.QDesignerFormWindowCursorInterface.MoveMode)">
+            <summary>
+            <para>Sets the position of the cursor to the given position using the
+            mode to specify how it is moved there.</para>
+            <para>See also position() and movePosition().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowCursorInterface.Widget(System.Int32)">
+            <summary>
+            <para>Returns the widget with the given index in the list of widgets in
+            the form window.</para>
+            <para>See also selectedWidget().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowCursorInterface.SelectedWidget(System.Int32)">
+            <summary>
+            <para>Returns the widget with the given index in the list of selected
+            widgets.</para>
+            <para>See also current() and widget().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowCursorInterface.SetProperty(System.String,QtCore.QVariant)">
+            <summary>
+            <para>Sets the property with the given name for the currently selected
+            widget to the specified value.</para>
+            <para>See also setWidgetProperty() and resetWidgetProperty().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowCursorInterface.SetWidgetProperty(QtWidgets.QWidget,System.String,QtCore.QVariant)">
+            <summary>
+            <para>Sets the property with the given name for the given widget to the
+            specified value.</para>
+            <para>See also resetWidgetProperty() and setProperty().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowCursorInterface.ResetWidgetProperty(QtWidgets.QWidget,System.String)">
+            <summary>
+            <para>Resets the property with the given name for the specified widget
+            to its default value.</para>
+            <para>See also setProperty() and setWidgetProperty().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowCursorInterface.IsWidgetSelected(QtWidgets.QWidget)">
+            <summary>
+            <para>Returns true if the specified widget is selected; otherwise
+            returns false.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowCursorInterface.Position">
+            <summary>
+            <para>Returns the cursor position.</para>
+            <para>See also setPosition() and movePosition().</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowCursorInterface.FormWindow">
+            <summary>
+            <para>Returns the form window interface associated with this cursor
+            interface.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowCursorInterface.Current">
+            <summary>
+            <para>Returns the currently selected widget in the form window.</para>
+            <para>See also selectedWidget().</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowCursorInterface.WidgetCount">
+            <summary>
+            <para>Returns the number of widgets in the form window.</para>
+            <para>See also selectedWidgetCount().</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowCursorInterface.HasSelection">
+            <summary>
+            <para>Returns true if the form window contains a selection; otherwise
+            returns false.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowCursorInterface.SelectedWidgetCount">
+            <summary>
+            <para>Returns the number of selected widgets in the form window.</para>
+            <para>See also widgetCount().</para>
+            </summary>
+        </member>
+        <member name="T:QtDesigner.QDesignerFormWindowCursorInterface.MoveOperation">
+            <summary>
+            <para>This enum describes the types of text cursor operation that can
+            occur in a form window.</para>
+            </summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowCursorInterface.MoveOperation.NoMove">
+            <summary>The cursor does not move.</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowCursorInterface.MoveOperation.Start">
+            <summary>Moves the cursor to the start of the focus chain.</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowCursorInterface.MoveOperation.End">
+            <summary>Moves the cursor to the end of the focus chain.</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowCursorInterface.MoveOperation.Next">
+            <summary>Moves the cursor to the next widget in the focus chain.</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowCursorInterface.MoveOperation.Prev">
+            <summary>Moves the cursor to the previous widget in the focus chain.</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowCursorInterface.MoveOperation.Left">
+            <summary>The cursor moves to the left.</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowCursorInterface.MoveOperation.Right">
+            <summary>The cursor moves to the right.</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowCursorInterface.MoveOperation.Up">
+            <summary>The cursor moves upwards.</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowCursorInterface.MoveOperation.Down">
+            <summary>The cursor moves downwards.</summary>
+        </member>
+        <member name="T:QtDesigner.QDesignerFormWindowCursorInterface.MoveMode">
+            <summary>
+            <para>This enum describes the different modes that are used when the
+            text cursor moves.</para>
+            </summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowCursorInterface.MoveMode.MoveAnchor">
+            <summary>The anchor moves with the cursor to its new location.</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowCursorInterface.MoveMode.KeepAnchor">
+            <summary>The anchor remains at the cursor's old location.</summary>
+        </member>
+        <member name="T:QtDesigner.QDesignerFormWindowManagerInterface">
+            <summary>
+            <para>The QDesignerFormWindowManagerInterface class allows you to
+            manipulate the collection of form windows in Qt Designer, and control Qt
+            Designer's form editing actions.</para>
+            </summary>
+            <remarks>
+            <para>QDesignerFormWindowManagerInterface is not intended to be
+            instantiated directly. Qt Designer uses the form window manager to control
+            the various form windows in its workspace. You can retrieve an interface to
+            Qt Designer's form window manager using the
+            QDesignerFormEditorInterface::formWindowManager() function. For
+            example:</para>
+            <para>        QDesignerFormWindowManagerInterface *manager = 0;</para>
+            <para>        QDesignerFormWindowInterface *formWindow = 0;</para>
+            <para></para>
+            <para>        manager = formEditor-&gt;formWindowManager();</para>
+            <para>        formWindow = manager-&gt;formWindow(0);</para>
+            <para></para>
+            <para>        manager-&gt;setActiveFormWindow(formWindow);</para>
+            <para>When implementing a custom widget plugin, a pointer to Qt
+            Designer's current QDesignerFormEditorInterface object (formEditor in the
+            example above) is provided by the
+            QDesignerCustomWidgetInterface::initialize() function's parameter. You must
+            subclass the QDesignerCustomWidgetInterface to expose your plugin to Qt
+            Designer.</para>
+            <para>The form window manager interface provides the createFormWindow()
+            function that enables you to create a new form window which you can add to
+            the collection of form windows that the manager maintains, using the
+            addFormWindow() slot. It also provides the formWindowCount() function
+            returning the number of form windows currently under the manager's control,
+            the formWindow() function returning the form window associated with a given
+            index, and the activeFormWindow() function returning the currently selected
+            form window. The removeFormWindow() slot allows you to reduce the number of
+            form windows the manager must maintain, and the setActiveFormWindow() slot
+            allows you to change the form window focus in Qt Designer's
+            workspace.</para>
+            <para>In addition, QDesignerFormWindowManagerInterface contains a
+            collection of functions that enables you to intervene and control Qt
+            Designer's form editing actions. All these functions return the original
+            action, making it possible to propagate the function further after
+            intervention.</para>
+            <para>Finally, the interface provides three signals which are emitted
+            when a form window is added, when the currently selected form window
+            changes, or when a form window is removed, respectively. All the signals
+            carry the form window in question as their parameter.</para>
+            <para></para>
+            <para>See also QDesignerFormEditorInterface and
+            QDesignerFormWindowInterface.</para>
+            </remarks>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowManagerInterface.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs an interface with the given parent for the form window
+            manager.</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowManagerInterface.action(QtDesigner.QDesignerFormWindowManagerInterface.Action)">
+            <summary>
+            <para>Returns the action specified by the enumeration value
+            action.</para>
+            <para>Obsoletes the action accessors of Qt 4.X.</para>
+            <para>This function was introduced in  Qt 5.0.</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowManagerInterface.actionGroup(QtDesigner.QDesignerFormWindowManagerInterface.ActionGroup)">
+            <summary>
+            <para>Returns the action group specified by the enumeration value
+            actionGroup.</para>
+            <para>This function was introduced in  Qt 5.0.</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowManagerInterface.FormWindow(System.Int32)">
+            <summary>
+            <para>Returns the form window at the given index.</para>
+            <para>See also setActiveFormWindow() and removeFormWindow().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowManagerInterface.CreateFormWindow(QtWidgets.QWidget,QtCore.Qt.WindowType)">
+            <summary>
+            <para>Creates a form window with the given parent and the given window
+            flags.</para>
+            <para>See also addFormWindow().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowManagerInterface.AddFormWindow(QtDesigner.QDesignerFormWindowInterface)">
+            <summary>
+            <para>Adds the given formWindow to the collection of windows that Qt
+            Designer's form window manager maintains.</para>
+            <para>See also formWindowAdded().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowManagerInterface.RemoveFormWindow(QtDesigner.QDesignerFormWindowInterface)">
+            <summary>
+            <para>Removes the given formWindow from the collection of windows that
+            Qt Designer's form window manager maintains.</para>
+            <para>See also formWindow() and formWindowRemoved().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowManagerInterface.ShowPreview">
+            <summary>
+            <para>Show a preview of the current form using the default
+            parameters.</para>
+            <para>This function was introduced in  Qt 5.0.</para>
+            <para>See also closeAllPreviews().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowManagerInterface.CloseAllPreviews">
+            <summary>
+            <para>Close all currently open previews.</para>
+            <para>This function was introduced in  Qt 5.0.</para>
+            <para>See also showPreview().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerFormWindowManagerInterface.ShowPluginDialog">
+            <summary>
+            <para>Opens a dialog showing the plugins loaded by Qt Designer's and
+            its plugin load failures.</para>
+            <para>This function was introduced in  Qt 5.0.</para>
+            </summary>
+        </member>
+        <member name="E:QtDesigner.QDesignerFormWindowManagerInterface.FormWindowAdded">
+            <summary>
+            <para>This signal is emitted when a new form window is added to the collection of windows that Qt Designer's form window manager maintains. A pointer to the new formWindow is passed as an argument.</para>
+            <para>See also addFormWindow() and setActiveFormWindow().</para>
+            </summary>
+        </member>
+        <member name="E:QtDesigner.QDesignerFormWindowManagerInterface.FormWindowRemoved">
+            <summary>
+            <para>This signal is emitted when a form window is removed from the collection of windows that Qt Designer's form window manager maintains. A pointer to the removed formWindow is passed as an argument.</para>
+            <para>See also removeFormWindow().</para>
+            </summary>
+        </member>
+        <member name="E:QtDesigner.QDesignerFormWindowManagerInterface.ActiveFormWindowChanged">
+            <summary>
+            <para>This signal is emitted when the contents of the currently active form window in Qt Designer's workspace changed. A pointer to the currently active formWindow is passed as an argument.</para>
+            <para>See also activeFormWindow().</para>
+            </summary>
+        </member>
+        <member name="E:QtDesigner.QDesignerFormWindowManagerInterface.FormWindowSettingsChanged">
+            <summary>
+            <para>This signal is emitted when the settings of the form window change. It can be used to update window titles, etc. accordingly. A pointer to the formWindow is passed as an argument.</para>
+            <para>See also FormWindowSettingsDialogAction.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowManagerInterface.ActiveFormWindow">
+            <summary>
+            <para>Returns the currently active form window in Qt Designer's
+            workspace.</para>
+            <para>See also setActiveFormWindow() and removeFormWindow().</para>
+            <para></para>
+            <para>Sets the given formWindow to be the currently active form window
+            in Qt Designer's workspace.</para>
+            <para>See also activeFormWindow() and activeFormWindowChanged().</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowManagerInterface.ActionCut">
+            <summary>
+            <para>Allows you to intervene and control Qt Designer's &quot;cut&quot;
+            action. The function returns the original action.</para>
+            <para>Use action() instead.</para>
+            <para>See also QAction.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowManagerInterface.ActionCopy">
+            <summary>
+            <para>Allows you to intervene and control Qt Designer's
+            &quot;copy&quot; action. The function returns the original action.</para>
+            <para>Use action() instead.</para>
+            <para>See also QAction.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowManagerInterface.ActionPaste">
+            <summary>
+            <para>Allows you to intervene and control Qt Designer's
+            &quot;paste&quot; action. The function returns the original action.</para>
+            <para>Use action() instead.</para>
+            <para>See also QAction.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowManagerInterface.ActionDelete">
+            <summary>
+            <para>Allows you to intervene and control Qt Designer's
+            &quot;delete&quot; action. The function returns the original action.</para>
+            <para>Use action() instead.</para>
+            <para>See also QAction.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowManagerInterface.ActionSelectAll">
+            <summary>
+            <para>Allows you to intervene and control Qt Designer's &quot;select
+            all&quot; action. The function returns the original action.</para>
+            <para>Use action() instead.</para>
+            <para>See also QAction.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowManagerInterface.ActionLower">
+            <summary>
+            <para>Allows you to intervene and control the action of lowering a form
+            window in Qt Designer's workspace. The function returns the original
+            action.</para>
+            <para>Use action() instead.</para>
+            <para>See also QAction.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowManagerInterface.ActionRaise">
+            <summary>
+            <para>Allows you to intervene and control the action of raising of a
+            form window in Qt Designer's workspace. The function returns the original
+            action.</para>
+            <para>Use action() instead.</para>
+            <para>See also QAction.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowManagerInterface.ActionUndo">
+            <summary>
+            <para>Allows you to intervene and control Qt Designer's
+            &quot;undo&quot; action. The function returns the original action.</para>
+            <para>Use action() instead.</para>
+            <para>See also QAction.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowManagerInterface.ActionRedo">
+            <summary>
+            <para>Allows you to intervene and control Qt Designer's
+            &quot;redo&quot; action. The function returns the original action.</para>
+            <para>Use action() instead.</para>
+            <para>See also QAction.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowManagerInterface.ActionHorizontalLayout">
+            <summary>
+            <para>Allows you to intervene and control a request for horizontal
+            layout for a form window in Qt Designer's workspace. The function returns
+            the original action.</para>
+            <para>Use action() instead.</para>
+            <para>See also QAction.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowManagerInterface.ActionVerticalLayout">
+            <summary>
+            <para>Allows you to intervene and control a request for vertical layout
+            for a form window in Qt Designer's workspace. The function returns the
+            original action.</para>
+            <para>Use action() instead.</para>
+            <para>See also QAction.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowManagerInterface.ActionSplitHorizontal">
+            <summary>
+            <para>Allows you to intervene and control Qt Designer's &quot;split
+            horizontal&quot; action. The function returns the original action.</para>
+            <para>Use action() instead.</para>
+            <para>See also QAction.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowManagerInterface.ActionSplitVertical">
+            <summary>
+            <para>Allows you to intervene and control Qt Designer's &quot;split
+            vertical&quot; action. The function returns the original action.</para>
+            <para>Use action() instead.</para>
+            <para>See also QAction.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowManagerInterface.ActionGridLayout">
+            <summary>
+            <para>Allows you to intervene and control a request for grid layout for
+            a form window in Qt Designer's workspace. The function returns the original
+            action.</para>
+            <para>Use action() instead.</para>
+            <para>See also QAction.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowManagerInterface.ActionFormLayout">
+            <summary>
+            <para>Allows you to intervene and control Qt Designer's &quot;form
+            layout&quot; action. The function returns the original action.</para>
+            <para>Use action() instead.</para>
+            <para>This function was introduced in  Qt 4.4.</para>
+            <para>See also QAction.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowManagerInterface.ActionBreakLayout">
+            <summary>
+            <para>Allows you to intervene and control Qt Designer's &quot;break
+            layout&quot; action. The function returns the original action.</para>
+            <para>Use action() instead.</para>
+            <para>See also QAction.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowManagerInterface.ActionAdjustSize">
+            <summary>
+            <para>Allows you to intervene and control Qt Designer's &quot;adjust
+            size&quot; action. The function returns the original action.</para>
+            <para>Use action() instead.</para>
+            <para>See also QAction.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowManagerInterface.ActionSimplifyLayout">
+            <summary>
+            <para>Allows you to intervene and control Qt Designer's &quot;simplify
+            layout&quot; action. The function returns the original action.</para>
+            <para>Use action() instead.</para>
+            <para>This function was introduced in  Qt 4.4.</para>
+            <para>See also QAction.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowManagerInterface.FormWindowCount">
+            <summary>
+            <para>Returns the number of form windows maintained by Qt Designer's
+            form window manager.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerFormWindowManagerInterface.Core">
+            <summary>
+            <para>Returns a pointer to Qt Designer's current
+            QDesignerFormEditorInterface object.</para>
+            </summary>
+        </member>
+        <member name="T:QtDesigner.QDesignerFormWindowManagerInterface.Action">
+            <summary>
+            <para>Specifies an action of Qt Designer.</para>
+            <para>This enum was introduced or modified in  Qt 5.0.</para>
+            <para>See also action().</para>
+            </summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowManagerInterface.Action.CutAction">
+            <summary>Clipboard Cut</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowManagerInterface.Action.CopyAction">
+            <summary>Clipboard Copy</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowManagerInterface.Action.PasteAction">
+            <summary>Clipboard Paste</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowManagerInterface.Action.DeleteAction">
+            <summary>Clipboard Delete</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowManagerInterface.Action.SelectAllAction">
+            <summary>Select All</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowManagerInterface.Action.LowerAction">
+            <summary>Lower current widget</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowManagerInterface.Action.RaiseAction">
+            <summary>Raise current widget</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowManagerInterface.Action.UndoAction">
+            <summary>Undo</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowManagerInterface.Action.RedoAction">
+            <summary>Redo</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowManagerInterface.Action.HorizontalLayoutAction">
+            <summary>Lay out using QHBoxLayout</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowManagerInterface.Action.VerticalLayoutAction">
+            <summary>Lay out using QVBoxLayout</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowManagerInterface.Action.SplitHorizontalAction">
+            <summary>Lay out in horizontal QSplitter</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowManagerInterface.Action.SplitVerticalAction">
+            <summary>Lay out in vertical QSplitter</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowManagerInterface.Action.GridLayoutAction">
+            <summary>Lay out using QGridLayout</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowManagerInterface.Action.FormLayoutAction">
+            <summary>Lay out using QFormLayout</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowManagerInterface.Action.BreakLayoutAction">
+            <summary>Break existing layout</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowManagerInterface.Action.AdjustSizeAction">
+            <summary>Adjust size</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowManagerInterface.Action.SimplifyLayoutAction">
+            <summary>Simplify QGridLayout or QFormLayout</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowManagerInterface.Action.DefaultPreviewAction">
+            <summary>Create a preview in default style</summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowManagerInterface.Action.FormWindowSettingsDialogAction">
+            <summary>Show dialog with form settings</summary>
+        </member>
+        <member name="T:QtDesigner.QDesignerFormWindowManagerInterface.ActionGroup">
+            <summary>
+            <para>Specifies an action group of Qt Designer.</para>
+            <para>This enum was introduced or modified in  Qt 5.0.</para>
+            <para>See also actionGroup().</para>
+            </summary>
+        </member>
+        <member name="F:QtDesigner.QDesignerFormWindowManagerInterface.ActionGroup.StyledPreviewActionGroup">
+            <summary>Action group containing styled preview actions</summary>
+        </member>
+        <member name="T:QtDesigner.QDesignerObjectInspectorInterface">
+            <summary>
+            <para>The QDesignerObjectInspectorInterface class allows you to change
+            the focus of Qt Designer's object inspector.</para>
+            </summary>
+            <remarks>
+            <para>You can use the QDesignerObjectInspectorInterface to change the
+            current form window selection. For example, when implementing a custom
+            widget plugin:</para>
+            <para>        QDesignerObjectInspectorInterface *objectInspector =
+            0;</para>
+            <para>        objectInspector =
+            formEditor-&gt;objectInspector();</para>
+            <para></para>
+            <para>        QDesignerFormWindowManagerInterface *manager = 0;</para>
+            <para>        manager = formEditor-&gt;formWindowManager();</para>
+            <para></para>
+            <para>
+            objectInspector-&gt;setFormWindow(manager-&gt;formWindow(0));</para>
+            <para>The QDesignerObjectInspectorInterface class is not intended to be
+            instantiated directly. You can retrieve an interface to Qt Designer's
+            object inspector using the QDesignerFormEditorInterface::objectInspector()
+            function. A pointer to Qt Designer's current QDesignerFormEditorInterface
+            object (formEditor in the example above) is provided by the
+            QDesignerCustomWidgetInterface::initialize() function's parameter. When
+            implementing a custom widget plugin, you must subclass the
+            QDesignerCustomWidgetInterface to expose your plugin to Qt Designer.</para>
+            <para>The interface provides the core() function that you can use to
+            retrieve a pointer to Qt Designer's current QDesignerFormEditorInterface
+            object, and the setFormWindow() function that enables you to change the
+            current form window selection.</para>
+            <para></para>
+            <para>See also QDesignerFormEditorInterface and
+            QDesignerFormWindowInterface.</para>
+            </remarks>
+        </member>
+        <member name="M:QtDesigner.QDesignerObjectInspectorInterface.#ctor(QtWidgets.QWidget,QtCore.Qt.WindowType)">
+            <summary>
+            <para>Constructs an object inspector interface with the given parent
+            and the specified window flags.</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerObjectInspectorInterface.SetFormWindow(QtDesigner.QDesignerFormWindowInterface)">
+            <summary>
+            <para>Sets the currently selected form window to formWindow.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerObjectInspectorInterface.Core">
+            <summary>
+            <para>Returns a pointer to Qt Designer's current
+            QDesignerFormEditorInterface object.</para>
+            </summary>
+        </member>
+        <member name="T:QtDesigner.QDesignerPropertyEditorInterface">
+            <summary>
+            <para>The QDesignerPropertyEditorInterface class allows you to query
+            and manipulate the current state of Qt Designer's property editor.</para>
+            </summary>
+            <remarks>
+            <para>QDesignerPropertyEditorInterface contains a collection of
+            functions that is typically used to query the property editor for its
+            current state, and several slots manipulating it's state. The interface
+            also provide a signal, propertyChanged(), which is emitted whenever a
+            property changes in the property editor. The signal's arguments are the
+            property that changed and its new value.</para>
+            <para>For example, when implementing a custom widget plugin, you can
+            connect the signal to a custom slot:</para>
+            <para>        QDesignerPropertyEditorInterface *propertyEditor =
+            0;</para>
+            <para>        propertyEditor = formEditor-&gt;propertyEditor();</para>
+            <para></para>
+            <para>        connect(propertyEditor,
+            SIGNAL(propertyChanged(QString,QVariant)),</para>
+            <para>                this,
+            SLOT(checkProperty(QString,QVariant)));</para>
+            <para>Then the custom slot can check if the new value is within the
+            range we want when a specified property, belonging to a particular widget,
+            changes:</para>
+            <para>        void checkProperty(QString property, QVariant value)
+            {</para>
+            <para>            QDesignerPropertyEditorInterface *propertyEditor =
+            0;</para>
+            <para>            propertyEditor =
+            formEditor-&gt;propertyEditor();</para>
+            <para></para>
+            <para>            QObject *object = propertyeditor-&gt;object();</para>
+            <para>            MyCustomWidget *widget =
+            qobject_cast&lt;MyCustomWidget&gt;(object);</para>
+            <para></para>
+            <para>            if (widget &amp;&amp; property == aProperty
+            &amp;&amp; value != expectedValue)</para>
+            <para>                {...}</para>
+            <para>        }</para>
+            <para>The QDesignerPropertyEditorInterface class is not intended to be
+            instantiated directly. You can retrieve an interface to Qt Designer's
+            property editor using the QDesignerFormEditorInterface::propertyEditor()
+            function. A pointer to Qt Designer's current QDesignerFormEditorInterface
+            object (formEditor in the examples above) is provided by the
+            QDesignerCustomWidgetInterface::initialize() function's parameter. When
+            implementing a custom widget plugin, you must subclass the
+            QDesignerCustomWidgetInterface to expose your plugin to Qt Designer.</para>
+            <para>The functions accessing the property editor are the core()
+            function that you can use to retrieve an interface to the form editor, the
+            currentPropertyName() function that returns the name of the currently
+            selected property in the property editor, the object() function that
+            returns the currently selected object in Qt Designer's workspace, and the
+            isReadOnly() function that returns true if the property editor is write
+            proteced (otherwise false).</para>
+            <para>The slots manipulating the property editor's state are the
+            setObject() slot that you can use to change the currently selected object
+            in Qt Designer's workspace, the setPropertyValue() slot that changes the
+            value of a given property and the setReadOnly() slot that control the write
+            protection of the property editor.</para>
+            <para></para>
+            <para>See also QDesignerFormEditorInterface.</para>
+            </remarks>
+        </member>
+        <member name="M:QtDesigner.QDesignerPropertyEditorInterface.#ctor(QtWidgets.QWidget,QtCore.Qt.WindowType)">
+            <summary>
+            <para>Constructs a property editor interface with the given parent and
+            the specified window flags.</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerPropertyEditorInterface.SetObject(QtCore.QObject)">
+            <summary>
+            <para>Changes the currently selected object in Qt Designer's workspace,
+            to object.</para>
+            <para>See also object().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerPropertyEditorInterface.SetPropertyValue(System.String,QtCore.QVariant,System.Boolean)">
+            <summary>
+            <para>Sets the value of the property specified by name to value.</para>
+            <para>In addition, the property is marked as changed in the property
+            editor, i.e. its value is different from the default value.</para>
+            <para>See also currentPropertyName() and propertyChanged().</para>
+            </summary>
+        </member>
+        <member name="E:QtDesigner.QDesignerPropertyEditorInterface.PropertyChanged">
+            <summary>
+            <para>This signal is emitted whenever a property changes in the property editor. The property that changed and its new value are specified by name and value respectively.</para>
+            <para>See also setPropertyValue().</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerPropertyEditorInterface.ReadOnly">
+            <summary>
+            <para>Returns true if the property editor is write protected; otherwise
+            false.</para>
+            <para>See also setReadOnly().</para>
+            <para></para>
+            <para>If readOnly is true, the property editor is made write protected;
+            otherwise the write protection is removed.</para>
+            <para>See also isReadOnly().</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerPropertyEditorInterface.Core">
+            <summary>
+            <para>Returns a pointer to Qt Designer's current
+            QDesignerFormEditorInterface object.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerPropertyEditorInterface.Object">
+            <summary>
+            <para>Returns the currently selected object in Qt Designer's
+            workspace.</para>
+            <para>See also setObject().</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerPropertyEditorInterface.CurrentPropertyName">
+            <summary>
+            <para>Returns the name of the currently selected property in the
+            property editor.</para>
+            <para>See also setPropertyValue().</para>
+            </summary>
+        </member>
+        <member name="T:QtDesigner.QDesignerWidgetBoxInterface">
+            <summary>
+            <para>The QDesignerWidgetBoxInterface class allows you to control the
+            contents of Qt Designer's widget box.</para>
+            </summary>
+            <remarks>
+            <para>QDesignerWidgetBoxInterface contains a collection of functions
+            that is typically used to manipulate the contents of Qt Designer's widget
+            box.</para>
+            <para>Qt Designer uses an XML file to populate its widget box. The name
+            of that file is one of the widget box's properties, and you can retrieve it
+            using the fileName() function.</para>
+            <para>QDesignerWidgetBoxInterface also provides the save() function
+            that saves the contents of the widget box in the file specified by the
+            widget box's file name property. If you have made changes to the widget
+            box, for example by dropping a widget into the widget box, without calling
+            the save() function, the original content can be restored by a simple
+            invocation of the load() function:</para>
+            <para>        QDesignerWidgetBoxInterface *widgetBox = 0:</para>
+            <para>        widgetBox = formEditor-&gt;widgetBox();</para>
+            <para></para>
+            <para>        widgetBox-&gt;load();</para>
+            <para>The QDesignerWidgetBoxInterface class is not intended to be
+            instantiated directly. You can retrieve an interface to Qt Designer's
+            widget box using the QDesignerFormEditorInterface::widgetBox() function. A
+            pointer to Qt Designer's current QDesignerFormEditorInterface object
+            (formEditor in the example above) is provided by the
+            QDesignerCustomWidgetInterface::initialize() function's parameter. When
+            implementing a custom widget plugin, you must subclass the
+            QDesignerCustomWidgetInterface to expose your plugin to Qt Designer.</para>
+            <para>If you want to save your changes, and at the same time preserve
+            the original contents, you can use the save() function combined with the
+            setFileName() function to save your changes into another file. Remember to
+            store the name of the original file first:</para>
+            <para>        QString originalFile = widgetBox-&gt;fileName();</para>
+            <para></para>
+            <para>
+            widgetBox-&gt;setFileName(&quot;myWidgetBox.xml&quot;);</para>
+            <para>        widgetBox-&gt;save();</para>
+            <para>Then you can restore the original contents of the widget box by
+            resetting the file name to the original file and calling load():</para>
+            <para>        widgetBox-&gt;setFileName(originalFile);</para>
+            <para>        widgetBox-&gt;load();</para>
+            <para>In a similar way, you can later use your customized XML
+            file:</para>
+            <para>        if (widgetBox-&gt;filename() !=
+            &quot;myWidgetBox.xml&quot;) {</para>
+            <para>
+            widgetBox-&gt;setFileName(&quot;myWidgetBox.xml&quot;);</para>
+            <para>            widgetBox-&gt;load();</para>
+            <para>        }</para>
+            <para></para>
+            <para>See also QDesignerFormEditorInterface.</para>
+            </remarks>
+        </member>
+        <member name="M:QtDesigner.QDesignerWidgetBoxInterface.#ctor(QtWidgets.QWidget,QtCore.Qt.WindowType)">
+            <summary>
+            <para>Constructs a widget box interface with the given parent and the
+            specified window flags.</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerWidgetBoxInterface.Load">
+            <summary>
+            <para>Populates Qt Designer's widget box by loading (or reloading) the
+            currently specified XML file. Returns true if the file is successfully
+            loaded; otherwise false.</para>
+            <para>See also setFileName().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerWidgetBoxInterface.Save">
+            <summary>
+            <para>Saves the contents of Qt Designer's widget box in the file
+            specified by the fileName() function. Returns true if the content is
+            successfully saved; otherwise false.</para>
+            <para>See also fileName() and setFileName().</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerWidgetBoxInterface.FileName">
+            <summary>
+            <para>Returns the name of the XML file Qt Designer is currently using
+            to populate its widget box.</para>
+            <para>See also setFileName().</para>
+            <para></para>
+            <para>Sets the XML file that Qt Designer will use to populate its
+            widget box, to fileName. You must call load() to update the widget box with
+            the new XML file.</para>
+            <para>See also fileName() and load().</para>
+            </summary>
+        </member>
+        <member name="T:QtDesigner.QDesignerContainerExtension">
+            <summary>
+            <para>The QDesignerContainerExtension class allows you to add pages to
+            a custom multi-page container in Qt Designer's workspace.</para>
+            </summary>
+            <remarks>
+            <para></para>
+            <para>QDesignerContainerExtension provide an interface for creating
+            custom container extensions. A container extension consists of a collection
+            of functions that Qt Designer needs to manage a multi-page container
+            plugin, and a list of the container's pages.</para>
+            <para>Warning: This is not an extension for container plugins in
+            general, only custom multi-page containers.</para>
+            <para>To create a container extension, your extension class must
+            inherit from both QObject and QDesignerContainerExtension. For
+            example:</para>
+            <para>class MyContainerExtension : public QObject,</para>
+            <para>       public QDesignerContainerExtension</para>
+            <para>{</para>
+            <para>    Q_OBJECT</para>
+            <para>    Q_INTERFACES(QDesignerContainerExtension)</para>
+            <para></para>
+            <para>public:</para>
+            <para>    MyContainerExtension(MyCustomWidget *widget,</para>
+            <para>                         QObject *parent = 0);</para>
+            <para>    int count() const;</para>
+            <para>    QWidget *widget(int index) const;</para>
+            <para>    int currentIndex() const;</para>
+            <para>    void setCurrentIndex(int index);</para>
+            <para>    void addWidget(QWidget *widget);</para>
+            <para>    void insertWidget(int index, QWidget *widget);</para>
+            <para>    void remove(int index);</para>
+            <para></para>
+            <para>private:</para>
+            <para>    MyCustomWidget *myWidget;</para>
+            <para>};</para>
+            <para>Since we are implementing an interface, we must ensure that it's
+            made known to the meta object system using the Q_INTERFACES() macro. This
+            enables Qt Designer to use the qobject_cast() function to query for
+            supported interfaces using nothing but a QObject pointer.</para>
+            <para>You must reimplement several functions to enable Qt Designer to
+            manage a custom multi-page container widget: Qt Designer uses count() to
+            keep track of the number pages in your container, widget() to return the
+            page at a given index in the list of the container's pages, and
+            currentIndex() to return the list index of the selected page. Qt Designer
+            uses the addWidget() function to add a given page to the container,
+            expecting it to be appended to the list of pages, while it expects the
+            insertWidget() function to add a given page to the container by inserting
+            it at a given index.</para>
+            <para>In Qt Designer the extensions are not created until they are
+            required. For that reason you must also create a QExtensionFactory, i.e a
+            class that is able to make an instance of your extension, and register it
+            using Qt Designer's extension manager.</para>
+            <para>When a container extension is required, Qt Designer's extension
+            manager will run through all its registered factories calling
+            QExtensionFactory::createExtension() for each until the first one that is
+            able to create a container extension, is found. This factory will then
+            create the extension for the plugin.</para>
+            <para>There are four available types of extensions in Qt Designer:
+            QDesignerContainerExtension , QDesignerMemberSheetExtension,
+            QDesignerPropertySheetExtension and QDesignerTaskMenuExtension. Qt
+            Designer's behavior is the same whether the requested extension is
+            associated with a multi page container, a member sheet, a property sheet or
+            a task menu.</para>
+            <para>The QExtensionFactory class provides a standard extension
+            factory, and can also be used as an interface for custom extension
+            factories. You can either create a new QExtensionFactory and reimplement
+            the QExtensionFactory::createExtension() function. For example:</para>
+            <para>QObject *ANewExtensionFactory::createExtension(QObject
+            *object,</para>
+            <para>        const QString &amp;iid, QObject *parent) const</para>
+            <para>{</para>
+            <para>    if (iid != Q_TYPEID(QDesignerContainerExtension))</para>
+            <para>        return 0;</para>
+            <para></para>
+            <para>    if (MyCustomWidget *widget =
+            qobject_cast&lt;MyCustomWidget*&gt;</para>
+            <para>           (object))</para>
+            <para>        return new MyContainerExtension(widget, parent);</para>
+            <para></para>
+            <para>    return 0;</para>
+            <para>}</para>
+            <para>Or you can use an existing factory, expanding the
+            QExtensionFactory::createExtension() function to make the factory able to
+            create a container extension as well. For example:</para>
+            <para>QObject *AGeneralExtensionFactory::createExtension(QObject
+            *object,</para>
+            <para>        const QString &amp;iid, QObject *parent) const</para>
+            <para>{</para>
+            <para>    MyCustomWidget *widget =
+            qobject_cast&lt;MyCustomWidget*&gt;(object);</para>
+            <para></para>
+            <para>    if (widget &amp;&amp; (iid ==
+            Q_TYPEID(QDesignerTaskMenuExtension))) {</para>
+            <para>        return new MyTaskMenuExtension(widget, parent);</para>
+            <para></para>
+            <para>    } else if (widget &amp;&amp; (iid ==
+            Q_TYPEID(QDesignerContainerExtension))) {</para>
+            <para>        return new MyContainerExtension(widget, parent);</para>
+            <para></para>
+            <para>    } else {</para>
+            <para>        return 0;</para>
+            <para>    }</para>
+            <para>}</para>
+            <para>For a complete example using the QDesignerContainerExtension
+            class, see the Container Extension example. The example shows how to create
+            a custom multi-page plugin for Qt Designer.</para>
+            <para></para>
+            <para>See also QExtensionFactory, QExtensionManager, and Creating
+            Custom Widget Extensions.</para>
+            </remarks>
+        </member>
+        <member name="M:QtDesigner.QDesignerContainerExtension.Widget(System.Int32)">
+            <summary>
+            <para>Returns the page at the given index in the extension's list of
+            pages.</para>
+            <para>See also addWidget() and insertWidget().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerContainerExtension.AddWidget(QtWidgets.QWidget)">
+            <summary>
+            <para>Adds the given page to the container by appending it to the
+            extension's list of pages.</para>
+            <para>See also insertWidget(), remove(), and widget().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerContainerExtension.InsertWidget(System.Int32,QtWidgets.QWidget)">
+            <summary>
+            <para>Adds the given page to the container by inserting it at the given
+            index in the extension's list of pages.</para>
+            <para>See also addWidget(), remove(), and widget().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerContainerExtension.Remove(System.Int32)">
+            <summary>
+            <para>Removes the page at the given index from the extension's list of
+            pages.</para>
+            <para>See also addWidget() and insertWidget().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerContainerExtension.CanAddWidget">
+            <summary>
+            <para>Returns whether a widget can be added. This determines whether
+            the context menu options to add or insert pages are enabled.</para>
+            <para>This should return false for containers that have a single, fixed
+            page, for example QScrollArea or QDockWidget.</para>
+            <para>This function was introduced in  Qt 5.0.</para>
+            <para>See also addWidget() and canRemove().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerContainerExtension.CanRemove(System.Int32)">
+            <summary>
+            <para>Returns whether the widget at the given index can be removed.
+            This determines whether the context menu option to remove the current page
+            is enabled.</para>
+            <para>This should return false for containers that have a single, fixed
+            page, for example QScrollArea or QDockWidget.</para>
+            <para>This function was introduced in  Qt 5.0.</para>
+            <para>See also remove() and canAddWidget().</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerContainerExtension.CurrentIndex">
+            <summary>
+            <para>Returns the index of the currently selected page in the
+            container.</para>
+            <para>See also setCurrentIndex().</para>
+            <para></para>
+            <para>Sets the currently selected page in the container to be the page
+            at the given index in the extension's list of pages.</para>
+            <para>See also currentIndex().</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerContainerExtension.Count">
+            <summary>
+            <para>Returns the number of pages in the container.</para>
+            </summary>
+        </member>
+        <member name="T:QtDesigner.QDesignerDynamicPropertySheetExtension">
+            <summary>
+            <para>The QDesignerDynamicPropertySheetExtension class allows you to
+            manipulate a widget's dynamic properties in Qt Designer's property
+            editor.</para>
+            </summary>
+            <remarks>
+            <para></para>
+            <para>See also QDesignerPropertySheetExtension and Dynamic
+            Properties.</para>
+            </remarks>
+        </member>
+        <member name="M:QtDesigner.QDesignerDynamicPropertySheetExtension.AddDynamicProperty(System.String,QtCore.QVariant)">
+            <summary>
+            <para>Adds a dynamic property named propertyName and sets its value to
+            value. Returns the index of the property if it was added successfully;
+            otherwise returns -1 to indicate failure.</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerDynamicPropertySheetExtension.RemoveDynamicProperty(System.Int32)">
+            <summary>
+            <para>Removes the dynamic property at the given index. Returns true if
+            the operation succeeds; otherwise returns false.</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerDynamicPropertySheetExtension.IsDynamicProperty(System.Int32)">
+            <summary>
+            <para>Returns true if the property at the given index is a dynamic
+            property; otherwise returns false.</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerDynamicPropertySheetExtension.CanAddDynamicProperty(System.String)">
+            <summary>
+            <para>Returns true if propertyName is a valid, unique name for a
+            dynamic property; otherwise returns false.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerDynamicPropertySheetExtension.DynamicPropertiesAllowed">
+            <summary>
+            <para>Returns true if the widget supports dynamic properties; otherwise
+            returns false.</para>
+            </summary>
+        </member>
+        <member name="T:QtDesigner.QDesignerMemberSheetExtension">
+            <summary>
+            <para>The QDesignerMemberSheetExtension class allows you to manipulate
+            a widget's member functions which is displayed when configuring connections
+            using Qt Designer's mode for editing signals and slots.</para>
+            </summary>
+            <remarks>
+            <para>QDesignerMemberSheetExtension is a collection of functions that
+            is typically used to query a widget's member functions, and to manipulate
+            the member functions' appearance in Qt Designer's signals and slots editing
+            mode. For example:</para>
+            <para>QDesignerMemberSheetExtension *memberSheet  = 0;</para>
+            <para>QExtensionManager manager =
+            formEditor-&gt;extensionManager();</para>
+            <para></para>
+            <para>memberSheet =
+            qt_extension&lt;QDesignerMemberSheetExtension*&gt;(manager, widget);</para>
+            <para>int index = memberSheet-&gt;indexOf(setEchoMode);</para>
+            <para>memberSheet-&gt;setVisible(index, false);</para>
+            <para></para>
+            <para>delete memberSheet;</para>
+            <para>When implementing a custom widget plugin, a pointer to Qt
+            Designer's current QDesignerFormEditorInterface object (formEditor in the
+            example above) is provided by the
+            QDesignerCustomWidgetInterface::initialize() function's parameter.</para>
+            <para>The member sheet (and any other extension), can be retrieved by
+            querying Qt Designer's extension manager using the qt_extension() function.
+            When you want to release the extension, you only need to delete the
+            pointer.</para>
+            <para>All widgets have a default member sheet used in Qt Designer's
+            signals and slots editing mode with the widget's member functions. But
+            QDesignerMemberSheetExtension also provides an interface for creating
+            custom member sheet extensions.</para>
+            <para>Warning: Qt Designer uses the QDesignerMemberSheetExtension to
+            facilitate the signal and slot editing mode. Whenever a connection between
+            two widgets is requested, Qt Designer will query for the widgets' member
+            sheet extensions. If a widget has an implemented member sheet extension,
+            this extension will override the default member sheet.</para>
+            <para>To create a member sheet extension, your extension class must
+            inherit from both QObject and QDesignerMemberSheetExtension. Then, since we
+            are implementing an interface, we must ensure that it's made known to the
+            meta object system using the Q_INTERFACES() macro:</para>
+            <para>class MyMemberSheetExtension : public QObject,</para>
+            <para>        public QDesignerMemberSheetExtension</para>
+            <para>{</para>
+            <para>    Q_OBJECT</para>
+            <para>    Q_INTERFACES(QDesignerMemberSheetExtension)</para>
+            <para></para>
+            <para>public:</para>
+            <para>    ...</para>
+            <para>}</para>
+            <para>This enables Qt Designer to use qobject_cast() to query for
+            supported interfaces using nothing but a QObject pointer.</para>
+            <para>In Qt Designer the extensions are not created until they are
+            required. For that reason, when implementing a member sheet extension, you
+            must also create a QExtensionFactory, i.e a class that is able to make an
+            instance of your extension, and register it using Qt Designer's extension
+            manager.</para>
+            <para>When a widget's member sheet extension is required, Qt Designer's
+            extension manager will run through all its registered factories calling
+            QExtensionFactory::createExtension() for each until the first one that is
+            able to create a member sheet extension for that widget, is found. This
+            factory will then make an instance of the extension. If no such factory is
+            found, Qt Designer will use the default member sheet.</para>
+            <para>There are four available types of extensions in Qt Designer:
+            QDesignerContainerExtension, QDesignerMemberSheetExtension,
+            QDesignerPropertySheetExtension and QDesignerTaskMenuExtension. Qt
+            Designer's behavior is the same whether the requested extension is
+            associated with a multi page container, a member sheet, a property sheet or
+            a task menu.</para>
+            <para>The QExtensionFactory class provides a standard extension
+            factory, and can also be used as an interface for custom extension
+            factories. You can either create a new QExtensionFactory and reimplement
+            the QExtensionFactory::createExtension() function. For example:</para>
+            <para>QObject *ANewExtensionFactory::createExtension(QObject
+            *object,</para>
+            <para>        const QString &amp;iid, QObject *parent) const</para>
+            <para>{</para>
+            <para>    if (iid != Q_TYPEID(QDesignerMemberSheetExtension))</para>
+            <para>        return 0;</para>
+            <para></para>
+            <para>    if (MyCustomWidget *widget =
+            qobject_cast&lt;MyCustomWidget*&gt;</para>
+            <para>           (object))</para>
+            <para>        return new MyMemberSheetExtension(widget, parent);</para>
+            <para></para>
+            <para>    return 0;</para>
+            <para>}</para>
+            <para>Or you can use an existing factory, expanding the
+            QExtensionFactory::createExtension() function to make the factory able to
+            create a member sheet extension as well. For example:</para>
+            <para>QObject *AGeneralExtensionFactory::createExtension(QObject
+            *object,</para>
+            <para>        const QString &amp;iid, QObject *parent) const</para>
+            <para>{</para>
+            <para>    MyCustomWidget *widget =
+            qobject_cast&lt;MyCustomWidget*&gt;(object);</para>
+            <para></para>
+            <para>    if (widget &amp;&amp; (iid ==
+            Q_TYPEID(QDesignerTaskMenuExtension))) {</para>
+            <para>        return new MyTaskMenuExtension(widget, parent);</para>
+            <para></para>
+            <para>    } else if (widget &amp;&amp; (iid ==
+            Q_TYPEID(QDesignerMemberSheetExtension))) {</para>
+            <para>        return new MyMemberSheetExtension(widget, parent);</para>
+            <para></para>
+            <para>    } else {</para>
+            <para>        return 0;</para>
+            <para>    }</para>
+            <para>}</para>
+            <para>For a complete example using an extension class, see Task Menu
+            Extension example. The example shows how to create a custom widget plugin
+            for Qt Designer, and how to to use the QDesignerTaskMenuExtension class to
+            add custom items to Qt Designer's task menu.</para>
+            <para></para>
+            <para>See also QExtensionFactory, QExtensionManager, and Creating
+            Custom Widget Extensions.</para>
+            </remarks>
+        </member>
+        <member name="M:QtDesigner.QDesignerMemberSheetExtension.IndexOf(System.String)">
+            <summary>
+            <para>Returns the index of the member function specified by the given
+            name.</para>
+            <para>See also memberName().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerMemberSheetExtension.MemberName(System.Int32)">
+            <summary>
+            <para>Returns the name of the member function with the given
+            index.</para>
+            <para>See also indexOf().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerMemberSheetExtension.MemberGroup(System.Int32)">
+            <summary>
+            <para>Returns the name of the member group specified for the function
+            with the given index.</para>
+            <para>See also indexOf() and setMemberGroup().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerMemberSheetExtension.SetMemberGroup(System.Int32,System.String)">
+            <summary>
+            <para>Sets the member group of the member function with the given
+            index, to group.</para>
+            <para>See also indexOf() and memberGroup().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerMemberSheetExtension.IsVisible(System.Int32)">
+            <summary>
+            <para>Returns true if the member function with the given index is
+            visible in Qt Designer's signal and slot editor, otherwise false.</para>
+            <para>See also indexOf() and setVisible().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerMemberSheetExtension.SetVisible(System.Int32,System.Boolean)">
+            <summary>
+            <para>If visible is true, the member function with the given index is
+            visible in Qt Designer's signals and slots editing mode; otherwise the
+            member function is hidden.</para>
+            <para>See also indexOf() and isVisible().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerMemberSheetExtension.IsSignal(System.Int32)">
+            <summary>
+            <para>Returns true if the member function with the given index is a
+            signal, otherwise false.</para>
+            <para>See also indexOf().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerMemberSheetExtension.IsSlot(System.Int32)">
+            <summary>
+            <para>Returns true if the member function with the given index is a
+            slot, otherwise false.</para>
+            <para>See also indexOf().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerMemberSheetExtension.InheritedFromWidget(System.Int32)">
+            <summary>
+            <para>Returns true if the member function with the given index is
+            inherited from QWidget, otherwise false.</para>
+            <para>See also indexOf().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerMemberSheetExtension.DeclaredInClass(System.Int32)">
+            <summary>
+            <para>Returns the name of the class in which the member function with
+            the given index is declared.</para>
+            <para>See also indexOf().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerMemberSheetExtension.Signature(System.Int32)">
+            <summary>
+            <para>Returns the signature of the member function with the given
+            index.</para>
+            <para>See also indexOf().</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerMemberSheetExtension.Count">
+            <summary>
+            <para>Returns the extension's number of member functions.</para>
+            </summary>
+        </member>
+        <member name="T:QtDesigner.QDesignerPropertySheetExtension">
+            <summary>
+            <para>The QDesignerPropertySheetExtension class allows you to
+            manipulate a widget's properties which is displayed in Qt Designer's
+            property editor.</para>
+            </summary>
+            <remarks>
+            <para>QDesignerPropertySheetExtension provides a collection of
+            functions that are typically used to query a widget's properties, and to
+            manipulate the properties' appearance in the property editor. For
+            example:</para>
+            <para>QDesignerPropertySheetExtension *propertySheet  = 0;</para>
+            <para>QExtensionManager manager =
+            formEditor-&gt;extensionManager();</para>
+            <para></para>
+            <para>propertySheet =
+            qt_extension&lt;QDesignerPropertySheetExtension*&gt;(manager,
+            widget);</para>
+            <para>int index =
+            propertySheet-&gt;indexOf(QLatin1String(&quot;margin&quot;));</para>
+            <para></para>
+            <para>propertySheet-&gt;setProperty(index, 10);</para>
+            <para>propertySheet-&gt;setChanged(index, true);</para>
+            <para></para>
+            <para>delete propertySheet;</para>
+            <para>Note that if you change the value of a property using the
+            QDesignerPropertySheetExtension::setProperty() function, the undo stack is
+            not updated. To ensure that a property's value can be reverted using the
+            undo stack, you must use the
+            QDesignerFormWindowCursorInterface::setProperty() function, or its buddy
+            setWidgetProperty(), instead.</para>
+            <para>When implementing a custom widget plugin, a pointer to Qt
+            Designer's current QDesignerFormEditorInterface object (formEditor in the
+            example above) is provided by the
+            QDesignerCustomWidgetInterface::initialize() function's parameter.</para>
+            <para>The property sheet, or any other extension, can be retrieved by
+            querying Qt Designer's extension manager using the qt_extension() function.
+            When you want to release the extension, you only need to delete the
+            pointer.</para>
+            <para>All widgets have a default property sheet which populates Qt
+            Designer's property editor with the widget's properties (i.e the ones
+            defined with the Q_PROPERTY() macro). But QDesignerPropertySheetExtension
+            also provides an interface for creating custom property sheet
+            extensions.</para>
+            <para>Warning: Qt Designer uses the QDesignerPropertySheetExtension to
+            feed its property editor. Whenever a widget is selected in its workspace,
+            Qt Designer will query for the widget's property sheet extension. If the
+            selected widget has an implemented property sheet extension, this extension
+            will override the default property sheet.</para>
+            <para>Warning: The data types used by the property sheet for some
+            properties are opaque custom QVariant types containing additional
+            information instead of plain Qt data types. For example, this is the case
+            for enumerations, flags, icons, pixmaps and strings.</para>
+            <para>To create a property sheet extension, your extension class must
+            inherit from both QObject and QDesignerPropertySheetExtension. Then, since
+            we are implementing an interface, we must ensure that it's made known to
+            the meta object system using the Q_INTERFACES() macro:</para>
+            <para>class MyPropertySheetExtension : public QObject,</para>
+            <para>        public QDesignerPropertySheetExtension</para>
+            <para>{</para>
+            <para>    Q_OBJECT</para>
+            <para>    Q_INTERFACES(QDesignerPropertySheetExtension)</para>
+            <para></para>
+            <para>public:</para>
+            <para>    ...</para>
+            <para>}</para>
+            <para>This enables Qt Designer to use qobject_cast() to query for
+            supported interfaces using nothing but a QObject pointer.</para>
+            <para>In Qt Designer the extensions are not created until they are
+            required. For that reason, when implementing a property sheet extension,
+            you must also create a QExtensionFactory, i.e a class that is able to make
+            an instance of your extension, and register it using Qt Designer's
+            extension manager.</para>
+            <para>When a property sheet extension is required, Qt Designer's
+            extension manager will run through all its registered factories calling
+            QExtensionFactory::createExtension() for each until the first one that is
+            able to create a property sheet extension for the selected widget, is
+            found. This factory will then make an instance of the extension. If no such
+            factory can be found, Qt Designer will use the default property
+            sheet.</para>
+            <para>There are four available types of extensions in Qt Designer:
+            QDesignerContainerExtension, QDesignerMemberSheetExtension,
+            QDesignerPropertySheetExtension and QDesignerTaskMenuExtension. Qt
+            Designer's behavior is the same whether the requested extension is
+            associated with a multi page container, a member sheet, a property sheet or
+            a task menu.</para>
+            <para>The QExtensionFactory class provides a standard extension
+            factory, and can also be used as an interface for custom extension
+            factories. You can either create a new QExtensionFactory and reimplement
+            the QExtensionFactory::createExtension() function. For example:</para>
+            <para>QObject *ANewExtensionFactory::createExtension(QObject
+            *object,</para>
+            <para>        const QString &amp;iid, QObject *parent) const</para>
+            <para>{</para>
+            <para>    if (iid != Q_TYPEID(QDesignerPropertySheetExtension))</para>
+            <para>        return 0;</para>
+            <para></para>
+            <para>    if (MyCustomWidget *widget =
+            qobject_cast&lt;MyCustomWidget*&gt;</para>
+            <para>           (object))</para>
+            <para>        return new MyPropertySheetExtension(widget,
+            parent);</para>
+            <para></para>
+            <para>    return 0;</para>
+            <para>}</para>
+            <para>Or you can use an existing factory, expanding the
+            QExtensionFactory::createExtension() function to make the factory able to
+            create a property sheet extension extension as well. For example:</para>
+            <para>QObject *AGeneralExtensionFactory::createExtension(QObject
+            *object,</para>
+            <para>        const QString &amp;iid, QObject *parent) const</para>
+            <para>{</para>
+            <para>    MyCustomWidget *widget =
+            qobject_cast&lt;MyCustomWidget*&gt;(object);</para>
+            <para></para>
+            <para>    if (widget &amp;&amp; (iid ==
+            Q_TYPEID(QDesignerTaskMenuExtension))) {</para>
+            <para>        return new MyTaskMenuExtension(widget, parent);</para>
+            <para></para>
+            <para>    } else if (widget &amp;&amp; (iid ==
+            Q_TYPEID(QDesignerPropertySheetExtension))) {</para>
+            <para>        return new MyPropertySheetExtension(widget,
+            parent);</para>
+            <para></para>
+            <para>    } else {</para>
+            <para>        return 0;</para>
+            <para>    }</para>
+            <para>}</para>
+            <para>For a complete example using an extension class, see the Task
+            Menu Extension example. The example shows how to create a custom widget
+            plugin for Qt Designer, and how to to use the QDesignerTaskMenuExtension
+            class to add custom items to Qt Designer's task menu.</para>
+            <para></para>
+            <para>See also QDesignerDynamicPropertySheetExtension,
+            QExtensionFactory, QExtensionManager, and Creating Custom Widget
+            Extensions.</para>
+            </remarks>
+        </member>
+        <member name="M:QtDesigner.QDesignerPropertySheetExtension.IndexOf(System.String)">
+            <summary>
+            <para>Returns the index for a given property name.</para>
+            <para>See also propertyName().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerPropertySheetExtension.PropertyName(System.Int32)">
+            <summary>
+            <para>Returns the name of the property at the given index.</para>
+            <para>See also indexOf().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerPropertySheetExtension.PropertyGroup(System.Int32)">
+            <summary>
+            <para>Returns the property group for the property at the given
+            index.</para>
+            <para>Qt Designer's property editor supports property groups, i.e.
+            sections of related properties. A property can be related to a group using
+            the setPropertyGroup() function. The default group of any property is the
+            name of the class that defines it. For example, the QObject::objectName
+            property appears within the QObject property group.</para>
+            <para>See also indexOf() and setPropertyGroup().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerPropertySheetExtension.SetPropertyGroup(System.Int32,System.String)">
+            <summary>
+            <para>Sets the property group for the property at the given index to
+            group.</para>
+            <para>Relating a property to a group makes it appear within that
+            group's section in the property editor. The default property group of any
+            property is the name of the class that defines it. For example, the
+            QObject::objectName property appears within the QObject property
+            group.</para>
+            <para>See also indexOf(), property(), and propertyGroup().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerPropertySheetExtension.HasReset(System.Int32)">
+            <summary>
+            <para>Returns true if the property at the given index has a reset
+            button in Qt Designer's property editor, otherwise false.</para>
+            <para>See also indexOf() and reset().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerPropertySheetExtension.Reset(System.Int32)">
+            <summary>
+            <para>Resets the value of the property at the given index, to the
+            default value. Returns true if a default value could be found, otherwise
+            false.</para>
+            <para>See also indexOf(), hasReset(), and isChanged().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerPropertySheetExtension.IsVisible(System.Int32)">
+            <summary>
+            <para>Returns true if the property at the given index is visible in Qt
+            Designer's property editor, otherwise false.</para>
+            <para>See also indexOf() and setVisible().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerPropertySheetExtension.SetVisible(System.Int32,System.Boolean)">
+            <summary>
+            <para>If visible is true, the property at the given index is visible in
+            Qt Designer's property editor; otherwise the property is hidden.</para>
+            <para>See also indexOf() and isVisible().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerPropertySheetExtension.IsAttribute(System.Int32)">
+            <summary>
+            <para>Returns true if the property at the given index is an attribute,
+            which will be excluded from the UI file, otherwise false.</para>
+            <para>See also indexOf() and setAttribute().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerPropertySheetExtension.SetAttribute(System.Int32,System.Boolean)">
+            <summary>
+            <para>If attribute is true, the property at the given index is made an
+            attribute which will be excluded from the UI file; otherwise it will be
+            included.</para>
+            <para>See also indexOf() and isAttribute().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerPropertySheetExtension.Property(System.Int32)">
+            <summary>
+            <para>Returns the value of the property at the given index.</para>
+            <para>See also indexOf(), setProperty(), and propertyGroup().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerPropertySheetExtension.SetProperty(System.Int32,QtCore.QVariant)">
+            <summary>
+            <para>Sets the value of the property at the given index.</para>
+            <para>Warning: If you change the value of a property using this
+            function, the undo stack is not updated. To ensure that a property's value
+            can be reverted using the undo stack, you must use the
+            QDesignerFormWindowCursorInterface::setProperty() function, or its buddy
+            setWidgetProperty(), instead.</para>
+            <para>See also indexOf(), property(), and propertyGroup().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerPropertySheetExtension.IsChanged(System.Int32)">
+            <summary>
+            <para>Returns true if the value of the property at the given index
+            differs from the property's default value, otherwise false.</para>
+            <para>See also indexOf(), setChanged(), and reset().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerPropertySheetExtension.SetChanged(System.Int32,System.Boolean)">
+            <summary>
+            <para>Sets whether the property at the given index is different from
+            its default value, or not, depending on the changed parameter.</para>
+            <para>See also indexOf() and isChanged().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerPropertySheetExtension.IsEnabled(System.Int32)">
+            <summary>
+            <para>Returns true if the property at the given index is enabled in Qt
+            Designer's property editor, otherwise false.</para>
+            <para>This function was introduced in  Qt 5.0.</para>
+            <para>See also indexOf().</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerPropertySheetExtension.Count">
+            <summary>
+            <para>Returns the selected widget's number of properties.</para>
+            </summary>
+        </member>
+        <member name="T:QtDesigner.QDesignerTaskMenuExtension">
+            <summary>
+            <para>The QDesignerTaskMenuExtension class allows you to add custom
+            menu entries to Qt Designer's task menu.</para>
+            </summary>
+            <remarks>
+            <para>QDesignerTaskMenuExtension provides an interface for creating
+            custom task menu extensions. It is typically used to create task menu
+            entries that are specific to a plugin in Qt Designer.</para>
+            <para>Qt Designer uses the QDesignerTaskMenuExtension to feed its task
+            menu. Whenever a task menu is requested, Qt Designer will query for the
+            selected widget's task menu extension.</para>
+            <para></para>
+            <para>A task menu extension is a collection of QActions. The actions
+            appear as entries in the task menu when the plugin with the specified
+            extension is selected. The image above shows the custom Edit State...
+            action which appears in addition to Qt Designer's default task menu
+            entries: Cut, Copy, Paste etc.</para>
+            <para>To create a custom task menu extension, your extension class must
+            inherit from both QObject and QDesignerTaskMenuExtension. For
+            example:</para>
+            <para>class MyTaskMenuExtension : public QObject,</para>
+            <para>        public QDesignerTaskMenuExtension</para>
+            <para>{</para>
+            <para>    Q_OBJECT</para>
+            <para>    Q_INTERFACES(QDesignerTaskMenuExtension)</para>
+            <para></para>
+            <para>public:</para>
+            <para>    MyTaskMenuExtension(MyCustomWidget *widget, QObject
+            *parent);</para>
+            <para></para>
+            <para>    QAction *preferredEditAction() const;</para>
+            <para>    QList&lt;QAction *&gt; taskActions() const;</para>
+            <para></para>
+            <para>private slots:</para>
+            <para>    void mySlot();</para>
+            <para></para>
+            <para>private:</para>
+            <para>    MyCustomWidget *widget;</para>
+            <para>    QAction *myAction;</para>
+            <para>};</para>
+            <para>Since we are implementing an interface, we must ensure that it is
+            made known to the meta-object system using the Q_INTERFACES() macro. This
+            enables Qt Designer to use the qobject_cast() function to query for
+            supported interfaces using nothing but a QObject pointer.</para>
+            <para>You must reimplement the taskActions() function to return a list
+            of actions that will be included in Qt Designer task menu. Optionally, you
+            can reimplement the preferredEditAction() function to set the action that
+            is invoked when selecting your plugin and pressing F2. The preferred edit
+            action must be one of the actions returned by taskActions() and, if it's
+            not defined, pressing the F2 key will simply be ignored.</para>
+            <para>In Qt Designer, extensions are not created until they are
+            required. A task menu extension, for example, is created when you click the
+            right mouse button over a widget in Qt Designer's workspace. For that
+            reason you must also construct an extension factory, using either
+            QExtensionFactory or a subclass, and register it using Qt Designer's
+            extension manager.</para>
+            <para>When a task menu extension is required, Qt Designer's extension
+            manager will run through all its registered factories calling
+            QExtensionFactory::createExtension() for each until it finds one that is
+            able to create a task menu extension for the selected widget. This factory
+            will then make an instance of the extension.</para>
+            <para>There are four available types of extensions in Qt Designer:
+            QDesignerContainerExtension, QDesignerMemberSheetExtension,
+            QDesignerPropertySheetExtension, and QDesignerTaskMenuExtension. Qt
+            Designer's behavior is the same whether the requested extension is
+            associated with a container, a member sheet, a property sheet or a task
+            menu.</para>
+            <para>The QExtensionFactory class provides a standard extension
+            factory, and can also be used as an interface for custom extension
+            factories. You can either create a new QExtensionFactory and reimplement
+            the QExtensionFactory::createExtension() function. For example:</para>
+            <para>QObject *ANewExtensionFactory::createExtension(QObject
+            *object,</para>
+            <para>        const QString &amp;iid, QObject *parent) const</para>
+            <para>{</para>
+            <para>    if (iid != Q_TYPEID(QDesignerTaskMenuExtension))</para>
+            <para>        return 0;</para>
+            <para></para>
+            <para>    if (MyCustomWidget *widget =
+            qobject_cast&lt;MyCustomWidget*&gt;(object))</para>
+            <para>        return new MyTaskMenuExtension(widget, parent);</para>
+            <para></para>
+            <para>    return 0;</para>
+            <para>}</para>
+            <para>Or you can use an existing factory, expanding the
+            QExtensionFactory::createExtension() function to make the factory able to
+            create a task menu extension as well. For example:</para>
+            <para>QObject *AGeneralExtensionFactory::createExtension(QObject
+            *object,</para>
+            <para>        const QString &amp;iid, QObject *parent) const</para>
+            <para>{</para>
+            <para>    MyCustomWidget *widget =
+            qobject_cast&lt;MyCustomWidget*&gt;(object);</para>
+            <para></para>
+            <para>    if (widget &amp;&amp; (iid ==
+            Q_TYPEID(QDesignerContainerExtension))) {</para>
+            <para>        return new MyContainerExtension(widget, parent);</para>
+            <para></para>
+            <para>    } else if (widget &amp;&amp; (iid ==
+            Q_TYPEID(QDesignerTaskMenuExtension))) {</para>
+            <para>        return new MyTaskMenuExtension(widget, parent);</para>
+            <para></para>
+            <para>    } else {</para>
+            <para>        return 0;</para>
+            <para>    }</para>
+            <para>}</para>
+            <para>For a complete example using the QDesignerTaskMenuExtension
+            class, see the Task Menu Extension example. The example shows how to create
+            a custom widget plugin for Qt Designer, and how to to use the
+            QDesignerTaskMenuExtension class to add custom items to Qt Designer's task
+            menu.</para>
+            <para></para>
+            <para>See also QExtensionFactory, QExtensionManager, and Creating
+            Custom Widget Extensions.</para>
+            </remarks>
+        </member>
+        <member name="P:QtDesigner.QDesignerTaskMenuExtension.PreferredEditAction">
+            <summary>
+            <para>Returns the action that is invoked when selecting a plugin with
+            the specified extension and pressing F2.</para>
+            <para>The action must be one of the actions returned by
+            taskActions().</para>
+            </summary>
+        </member>
+        <member name="T:QtDesigner.QAbstractFormBuilder">
+            <summary>
+            <para>The QAbstractFormBuilder class provides a default implementation
+            for classes that create user interfaces at run-time.</para>
+            </summary>
+            <remarks>
+            <para>QAbstractFormBuilder provides a standard interface and a default
+            implementation for constructing forms from user interface files. It is not
+            intended to be instantiated directly. Use the QFormBuilder class to create
+            user interfaces from UI files at run-time. For example:</para>
+            <para>        MyForm::MyForm(QWidget *parent)</para>
+            <para>            : QWidget(parent)</para>
+            <para>        {</para>
+            <para>            QFormBuilder builder;</para>
+            <para>            QFile file(&quot;:/forms/myWidget.ui&quot;);</para>
+            <para>            file.open(QFile::ReadOnly);</para>
+            <para>            QWidget *myWidget = builder.load(&amp;file,
+            this);</para>
+            <para>            file.close();</para>
+            <para></para>
+            <para>            QVBoxLayout *layout = new QVBoxLayout;</para>
+            <para>            layout-&gt;addWidget(myWidget);</para>
+            <para>            setLayout(layout);</para>
+            <para>        }</para>
+            <para>To override certain aspects of the form builder's behavior,
+            subclass QAbstractFormBuilder and reimplement the relevant virtual
+            functions:</para>
+            <para></para>
+            <para>load() handles reading of UI format files from arbitrary
+            QIODevices, and construction of widgets from the XML data that they
+            contain.</para>
+            <para>save() handles saving of widget details in UI format to arbitrary
+            QIODevices.</para>
+            <para>workingDirectory() and setWorkingDirectory() control the
+            directory in which forms are held. The form builder looks for other
+            resources on paths relative to this directory.</para>
+            <para></para>
+            <para>The QFormBuilder class is typically used by custom components and
+            applications that embed Qt Designer. Standalone applications that need to
+            dynamically generate user interfaces at run-time use the QUiLoader, found
+            in the Qt UI Tools module.</para>
+            <para></para>
+            <para>See also Qt UI Tools.</para>
+            </remarks>
+        </member>
+        <member name="M:QtDesigner.QAbstractFormBuilder.#ctor">
+            <summary>
+            <para>Constructs a new form builder.</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QAbstractFormBuilder.Load(QtCore.QIODevice,QtWidgets.QWidget)">
+            <summary>
+            <para>Loads an XML representation of a widget from the given device,
+            and constructs a new widget with the specified parent.</para>
+            <para>See also save() and errorString().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QAbstractFormBuilder.Save(QtCore.QIODevice,QtWidgets.QWidget)">
+            <summary>
+            <para>Saves an XML representation of the given widget to the specified
+            device in the standard UI file format.</para>
+            <para>See also load().</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QAbstractFormBuilder.WorkingDirectory">
+            <summary>
+            <para>Returns the current working directory of the form builder.</para>
+            <para>See also setWorkingDirectory().</para>
+            <para></para>
+            <para>Sets the current working directory of the form builder to the
+            specified directory.</para>
+            <para>See also workingDirectory().</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QAbstractFormBuilder.ErrorString">
+            <summary>
+            <para>Returns a human-readable description of the last error occurred
+            in load().</para>
+            <para>This function was introduced in  Qt 5.0.</para>
+            <para>See also load().</para>
+            </summary>
+        </member>
+        <member name="T:QtDesigner.QFormBuilder">
+            <summary>
+            <para>The QFormBuilder class is used to dynamically construct user
+            interfaces from UI files at run-time.</para>
+            </summary>
+            <remarks>
+            <para>The QFormBuilder class provides a mechanism for dynamically
+            creating user interfaces at run-time, based on UI files created with Qt
+            Designer. For example:</para>
+            <para>        MyForm::MyForm(QWidget *parent)</para>
+            <para>            : QWidget(parent)</para>
+            <para>        {</para>
+            <para>            QFormBuilder builder;</para>
+            <para>            QFile file(&quot;:/forms/myWidget.ui&quot;);</para>
+            <para>            file.open(QFile::ReadOnly);</para>
+            <para>            QWidget *myWidget = builder.load(&amp;file,
+            this);</para>
+            <para>            file.close();</para>
+            <para></para>
+            <para>            QVBoxLayout *layout = new QVBoxLayout;</para>
+            <para>            layout-&gt;addWidget(myWidget);</para>
+            <para>            setLayout(layout);</para>
+            <para>        }</para>
+            <para>By including the user interface in the example's resources
+            (myForm.qrc), we ensure that it will be present when the example is
+            run:</para>
+            <para>    &lt;!DOCTYPE RCC&gt;&lt;RCC
+            version=&quot;1.0&quot;&gt;</para>
+            <para>    &lt;qresource prefix=&quot;/forms&quot;&gt;</para>
+            <para>       &lt;file&gt;mywidget.ui&lt;/file&gt;</para>
+            <para>    &lt;/qresource&gt;</para>
+            <para>    &lt;/RCC&gt;</para>
+            <para>QFormBuilder extends the QAbstractFormBuilder base class with a
+            number of functions that are used to support custom widget plugins:</para>
+            <para></para>
+            <para>pluginPaths() returns the list of paths that the form builder
+            searches when loading custom widget plugins.</para>
+            <para>addPluginPath() allows additional paths to be registered with the
+            form builder.</para>
+            <para>setPluginPath() is used to replace the existing list of paths
+            with a list obtained from some other source.</para>
+            <para>clearPluginPaths() removes all paths registered with the form
+            builder.</para>
+            <para>customWidgets() returns a list of interfaces to plugins that can
+            be used to create new instances of registered custom widgets.</para>
+            <para></para>
+            <para>The QFormBuilder class is typically used by custom components and
+            applications that embed Qt Designer. Standalone applications that need to
+            dynamically generate user interfaces at run-time use the QUiLoader class,
+            found in the QtUiTools module.</para>
+            <para></para>
+            <para>See also QAbstractFormBuilder and Qt UI Tools.</para>
+            </remarks>
+        </member>
+        <member name="M:QtDesigner.QFormBuilder.#ctor">
+            <summary>
+            <para>Constructs a new form builder.</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QFormBuilder.ClearPluginPaths">
+            <summary>
+            <para>Clears the list of paths that the form builder uses to search for
+            custom widget plugins.</para>
+            <para>See also pluginPaths().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QFormBuilder.AddPluginPath(System.String)">
+            <summary>
+            <para>Adds a new plugin path specified by pluginPath to the list of
+            paths that will be searched by the form builder when loading a custom
+            widget plugin.</para>
+            <para>See also setPluginPath() and clearPluginPaths().</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QFormBuilder.SetPluginPath(QtCore.QStringList)">
+            <summary>
+            <para>Sets the list of plugin paths to the list specified by
+            pluginPaths.</para>
+            <para>See also addPluginPath().</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QFormBuilder.PluginPaths">
+            <summary>
+            <para>Returns the list of paths the form builder searches for
+            plugins.</para>
+            <para>See also addPluginPath().</para>
+            </summary>
+        </member>
+    </members>
+</doc>
