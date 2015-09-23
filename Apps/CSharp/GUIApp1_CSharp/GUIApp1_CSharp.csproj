@@ -60,8 +60,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CStringArray.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="App\CStringArray.cs" />
+    <Compile Include="App\SetupQApplication.cs" />
+    <Compile Include="Examples\BasicFormExample.cs" />
+    <Compile Include="Examples\LayoutsExample1.cs" />
+    <Compile Include="App\Program.cs" />
+    <Compile Include="Examples\LayoutsExample2.cs" />
+    <Compile Include="Examples\UILoadExample.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

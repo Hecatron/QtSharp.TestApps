@@ -5,16 +5,18 @@ using System.Runtime.InteropServices;
 
 // Based on code from http://stackoverflow.com/questions/13317931/marshal-an-array-of-strings-from-c-sharp-to-c-code-using-p-invoke
 
-namespace GUIApp1_CSharp
+namespace GUIApp1_CSharp.App
 {
 
     /// <summary> Helper class for generating C String arrays. </summary>
-    public class CStringArray {
+    public class CStringArray
+    {
         #region Properties
 
         /// <summary> List of Managed Strings. </summary>
         /// <value> List of Managed Strings. </value>
-        public string[] ManagedArray {
+        public string[] ManagedArray
+        {
             get { return _ManagedArray; }
         }
 
@@ -22,7 +24,8 @@ namespace GUIApp1_CSharp
 
         /// <summary> Handle to the allocated memory block. </summary>
         /// <value> Handle to the allocated memory block. </value>
-        public GCHandle Handle {
+        public GCHandle Handle
+        {
             get { return _Handle; }
         }
 
@@ -30,7 +33,8 @@ namespace GUIApp1_CSharp
 
         /// <summary> Array of Pointers. </summary>
         /// <value> Array of Pointers. </value>
-        public IntPtr[] PointerArray {
+        public IntPtr[] PointerArray
+        {
             get { return _PointerArray; }
         }
 
@@ -40,37 +44,45 @@ namespace GUIApp1_CSharp
 
         #region Methods
 
-        public CStringArray(IEnumerable<string> strarray) {
+        public CStringArray(IEnumerable<string> strarray)
+        {
             _ManagedArray = strarray.ToArray();
             _PointerArray = null;
         }
 
-        ~CStringArray() {
+        ~CStringArray()
+        {
             DeAlloc();
         }
 
         public void Alloc() {
             List<IntPtr> PointerList = new List<IntPtr>();
-            foreach (var item in ManagedArray) {
+            foreach (var item in ManagedArray)
+            {
                 PointerList.Add(Marshal.StringToHGlobalAnsi(item));
             }
             _PointerArray = PointerList.ToArray();
             _Handle = GCHandle.Alloc(PointerArray, GCHandleType.Pinned);
         }
 
-        public void DeAlloc() {
-            if (_PointerArray == null) {
+        public void DeAlloc()
+        {
+            if (_PointerArray == null)
+            {
                 return;
             }
             _Handle.Free();
-            foreach (var item in _PointerArray) {
+            foreach (var item in _PointerArray)
+            {
                 Marshal.FreeHGlobal(item);
             }
         }
 
         /// <summary> Return the Address of the String Array. </summary>
-        public IntPtr Address() {
-            if (_PointerArray == null) {
+        public IntPtr Address()
+        {
+            if (_PointerArray == null)
+            {
                 throw new ArgumentException("Memory has not been allocated");
             }
             return Handle.AddrOfPinnedObject();
