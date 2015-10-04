@@ -826,6 +826,33 @@
             <para>See also connect().</para>
             </summary>
         </member>
+        <member name="E:QtCore.QObject.Destroyed">
+            <summary>
+            <para>This signal is emitted immediately before the object obj is destroyed, and can not be blocked.</para>
+            <para>All the objects's children are destroyed immediately after this signal is emitted.</para>
+            <para>See also deleteLater() and QPointer.</para>
+            </summary>
+        </member>
+        <member name="E:QtCore.QObject.ObjectNameChanged">
+            <summary>
+            <para>This property holds the name of this object.</para>
+            <para>You can find an object by name (and type) using findChild(). You can find a set of objects with findChildren().</para>
+            <para>qDebug(&quot;MyClass::setPrecision(): (%s) invalid precision %f&quot;,</para>
+            <para>       qPrintable(objectName()), newPrecision);</para>
+            <para>By default, this property contains an empty string.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QString 	objectName() const</para>
+            <para> void 	setObjectName(const QString &amp; name)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	objectNameChanged(const QString &amp; objectName)	[see note below]</para>
+            <para></para>
+            <para>Note: This is a private signal. It can be used in signal connections but cannot be emitted by the user.</para>
+            <para>See also metaObject() and QMetaObject::className().</para>
+            </summary>
+        </member>
         <member name="E:QtCore.QObject.Event">
             <summary>
             <para>This virtual function receives events to an object and should return true if the event e was recognized and processed.</para>
@@ -854,33 +881,6 @@
             <summary>
             <para>This event handler can be reimplemented in a subclass to receive custom events. Custom events are user-defined events with a type value at least as large as the QEvent::User item of the QEvent::Type enum, and is typically a QEvent subclass. The event is passed in the event parameter.</para>
             <para>See also event() and QEvent.</para>
-            </summary>
-        </member>
-        <member name="E:QtCore.QObject.Destroyed">
-            <summary>
-            <para>This signal is emitted immediately before the object obj is destroyed, and can not be blocked.</para>
-            <para>All the objects's children are destroyed immediately after this signal is emitted.</para>
-            <para>See also deleteLater() and QPointer.</para>
-            </summary>
-        </member>
-        <member name="E:QtCore.QObject.ObjectNameChanged">
-            <summary>
-            <para>This property holds the name of this object.</para>
-            <para>You can find an object by name (and type) using findChild(). You can find a set of objects with findChildren().</para>
-            <para>qDebug(&quot;MyClass::setPrecision(): (%s) invalid precision %f&quot;,</para>
-            <para>       qPrintable(objectName()), newPrecision);</para>
-            <para>By default, this property contains an empty string.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> QString 	objectName() const</para>
-            <para> void 	setObjectName(const QString &amp; name)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	objectNameChanged(const QString &amp; objectName)	[see note below]</para>
-            <para></para>
-            <para>Note: This is a private signal. It can be used in signal connections but cannot be emitted by the user.</para>
-            <para>See also metaObject() and QMetaObject::className().</para>
             </summary>
         </member>
         <member name="P:QtCore.QObject.ObjectName">
@@ -16463,11 +16463,6 @@
             Internationalization with Qt.</para>
             </summary>
         </member>
-        <member name="E:QtCore.QAbstractAnimation.Event">
-            <summary>
-            <para>Reimplemented from QObject::event().</para>
-            </summary>
-        </member>
         <member name="E:QtCore.QAbstractAnimation.Finished">
             <summary>
             <para>QAbstractAnimation emits this signal after the animation has stopped and has reached the end.</para>
@@ -16774,11 +16769,6 @@
             Internationalization with Qt.</para>
             </summary>
         </member>
-        <member name="E:QtCore.QAnimationGroup.Event">
-            <summary>
-            <para>Reimplemented from QObject::event().</para>
-            </summary>
-        </member>
         <member name="P:QtCore.QAnimationGroup.AnimationCount">
             <summary>
             <para>Returns the number of animations managed by this group.</para>
@@ -16856,11 +16846,6 @@
             Internationalization with Qt.</para>
             </summary>
         </member>
-        <member name="E:QtCore.QParallelAnimationGroup.Event">
-            <summary>
-            <para>Reimplemented from QObject::event().</para>
-            </summary>
-        </member>
         <member name="P:QtCore.QParallelAnimationGroup.Duration">
             <summary>
             <para>Reimplemented from QAbstractAnimation::duration().</para>
@@ -16931,11 +16916,6 @@
             <para>label-&gt;setText(tr(&quot;F\374r \310lise&quot;));</para>
             <para>See also tr(), QCoreApplication::translate(), and
             Internationalization with Qt.</para>
-            </summary>
-        </member>
-        <member name="E:QtCore.QPauseAnimation.Event">
-            <summary>
-            <para>Reimplemented from QObject::event().</para>
             </summary>
         </member>
         <member name="P:QtCore.QPauseAnimation.Duration">
@@ -18940,11 +18920,6 @@
             Internationalization with Qt.</para>
             </summary>
         </member>
-        <member name="E:QtCore.QVariantAnimation.Event">
-            <summary>
-            <para>Reimplemented from QObject::event().</para>
-            </summary>
-        </member>
         <member name="E:QtCore.QVariantAnimation.ValueChanged">
             <summary>
             <para>This property holds the current value of the animation.</para>
@@ -19113,11 +19088,6 @@
             Internationalization with Qt.</para>
             </summary>
         </member>
-        <member name="E:QtCore.QPropertyAnimation.Event">
-            <summary>
-            <para>Reimplemented from QObject::event().</para>
-            </summary>
-        </member>
         <member name="P:QtCore.QPropertyAnimation.TargetObject">
             <summary>
             <para>This property holds the target QObject for this animation.</para>
@@ -19225,11 +19195,6 @@
             <para>label-&gt;setText(tr(&quot;F\374r \310lise&quot;));</para>
             <para>See also tr(), QCoreApplication::translate(), and
             Internationalization with Qt.</para>
-            </summary>
-        </member>
-        <member name="E:QtCore.QSequentialAnimationGroup.Event">
-            <summary>
-            <para>Reimplemented from QObject::event().</para>
             </summary>
         </member>
         <member name="E:QtCore.QSequentialAnimationGroup.CurrentAnimationChanged">
@@ -31286,11 +31251,6 @@
             <para>See also registerFormat().</para>
             </summary>
         </member>
-        <member name="E:QtCore.QSettings.Event">
-            <summary>
-            <para>Reimplemented from QObject::event().</para>
-            </summary>
-        </member>
         <member name="P:QtCore.QSettings.FallbacksEnabled">
             <summary>
             <para>Returns true if fallbacks are enabled; returns false
@@ -38554,11 +38514,6 @@
             Internationalization with Qt.</para>
             </summary>
         </member>
-        <member name="E:QtCore.QEventLoop.Event">
-            <summary>
-            <para>Reimplemented from QObject::event().</para>
-            </summary>
-        </member>
         <member name="P:QtCore.QEventLoop.IsRunning">
             <summary>
             <para>Returns true if the event loop is running; otherwise returns
@@ -40198,11 +40153,6 @@
             this function has no effect.</para>
             <para>This function was introduced in  Qt 5.3.</para>
             <para>See also qAddPostRoutine().</para>
-            </summary>
-        </member>
-        <member name="E:QtCore.QCoreApplication.Event">
-            <summary>
-            <para>Reimplemented from QObject::event().</para>
             </summary>
         </member>
         <member name="E:QtCore.QCoreApplication.AboutToQuit">
@@ -42546,11 +42496,6 @@
             Internationalization with Qt.</para>
             </summary>
         </member>
-        <member name="E:QtCore.QSocketNotifier.Event">
-            <summary>
-            <para>Reimplemented from QObject::event().</para>
-            </summary>
-        </member>
         <member name="E:QtCore.QSocketNotifier.Activated">
             <summary>
             <para>This signal is emitted whenever the socket notifier is enabled and a socket event corresponding to its type occurs.</para>
@@ -42987,11 +42932,6 @@
             <para>See also start().</para>
             </summary>
         </member>
-        <member name="E:QtCore.QTimer.TimerEvent">
-            <summary>
-            <para>Reimplemented from QObject::timerEvent().</para>
-            </summary>
-        </member>
         <member name="E:QtCore.QTimer.Timeout">
             <summary>
             <para>This signal is emitted when the timer times out.</para>
@@ -43333,11 +43273,6 @@
             <para>label-&gt;setText(tr(&quot;F\374r \310lise&quot;));</para>
             <para>See also tr(), QCoreApplication::translate(), and
             Internationalization with Qt.</para>
-            </summary>
-        </member>
-        <member name="E:QtCore.QWinEventNotifier.Event">
-            <summary>
-            <para>Reimplemented from QObject::event().</para>
             </summary>
         </member>
         <member name="P:QtCore.QWinEventNotifier.Enabled">
@@ -44667,11 +44602,6 @@
             Internationalization with Qt.</para>
             </summary>
         </member>
-        <member name="E:QtCore.QAbstractState.Event">
-            <summary>
-            <para>Reimplemented from QObject::event().</para>
-            </summary>
-        </member>
         <member name="E:QtCore.QAbstractState.Entered">
             <summary>
             <para>This signal is emitted when the state has been entered (after onEntry() has been called).</para>
@@ -44801,11 +44731,6 @@
             <para>label-&gt;setText(tr(&quot;F\374r \310lise&quot;));</para>
             <para>See also tr(), QCoreApplication::translate(), and
             Internationalization with Qt.</para>
-            </summary>
-        </member>
-        <member name="E:QtCore.QAbstractTransition.Event">
-            <summary>
-            <para>Reimplemented from QObject::event().</para>
             </summary>
         </member>
         <member name="E:QtCore.QAbstractTransition.Triggered">
@@ -44974,11 +44899,6 @@
             Internationalization with Qt.</para>
             </summary>
         </member>
-        <member name="E:QtCore.QEventTransition.Event">
-            <summary>
-            <para>Reimplemented from QObject::event().</para>
-            </summary>
-        </member>
         <member name="P:QtCore.QEventTransition.EventSource">
             <summary>
             <para>This property holds the event source that this event transition
@@ -45057,11 +44977,6 @@
             <para>label-&gt;setText(tr(&quot;F\374r \310lise&quot;));</para>
             <para>See also tr(), QCoreApplication::translate(), and
             Internationalization with Qt.</para>
-            </summary>
-        </member>
-        <member name="E:QtCore.QFinalState.Event">
-            <summary>
-            <para>Reimplemented from QObject::event().</para>
             </summary>
         </member>
         <member name="T:QtCore.QHistoryState">
@@ -45145,11 +45060,6 @@
             <para>label-&gt;setText(tr(&quot;F\374r \310lise&quot;));</para>
             <para>See also tr(), QCoreApplication::translate(), and
             Internationalization with Qt.</para>
-            </summary>
-        </member>
-        <member name="E:QtCore.QHistoryState.Event">
-            <summary>
-            <para>Reimplemented from QObject::event().</para>
             </summary>
         </member>
         <member name="E:QtCore.QHistoryState.DefaultStateChanged">
@@ -45300,11 +45210,6 @@
             <para>label-&gt;setText(tr(&quot;F\374r \310lise&quot;));</para>
             <para>See also tr(), QCoreApplication::translate(), and
             Internationalization with Qt.</para>
-            </summary>
-        </member>
-        <member name="E:QtCore.QSignalTransition.Event">
-            <summary>
-            <para>Reimplemented from QObject::event().</para>
             </summary>
         </member>
         <member name="E:QtCore.QSignalTransition.SenderObjectChanged">
@@ -45459,11 +45364,6 @@
             <para>label-&gt;setText(tr(&quot;F\374r \310lise&quot;));</para>
             <para>See also tr(), QCoreApplication::translate(), and
             Internationalization with Qt.</para>
-            </summary>
-        </member>
-        <member name="E:QtCore.QState.Event">
-            <summary>
-            <para>Reimplemented from QObject::event().</para>
             </summary>
         </member>
         <member name="E:QtCore.QState.Finished">
@@ -45796,11 +45696,6 @@
             <para>label-&gt;setText(tr(&quot;F\374r \310lise&quot;));</para>
             <para>See also tr(), QCoreApplication::translate(), and
             Internationalization with Qt.</para>
-            </summary>
-        </member>
-        <member name="E:QtCore.QStateMachine.Event">
-            <summary>
-            <para>Reimplemented from QObject::event().</para>
             </summary>
         </member>
         <member name="E:QtCore.QStateMachine.Started">
@@ -47019,11 +46914,6 @@
             disabled), this function will terminate the calling thread immediately.
             Note that this function will not return in this case.</para>
             <para>See also terminate().</para>
-            </summary>
-        </member>
-        <member name="E:QtCore.QThread.Event">
-            <summary>
-            <para>Reimplemented from QObject::event().</para>
             </summary>
         </member>
         <member name="E:QtCore.QThread.Started">
@@ -53863,11 +53753,6 @@
             <para>label-&gt;setText(tr(&quot;F\374r \310lise&quot;));</para>
             <para>See also tr(), QCoreApplication::translate(), and
             Internationalization with Qt.</para>
-            </summary>
-        </member>
-        <member name="E:QtCore.QTimeLine.TimerEvent">
-            <summary>
-            <para>Reimplemented from QObject::timerEvent().</para>
             </summary>
         </member>
         <member name="E:QtCore.QTimeLine.ValueChanged">

@@ -4180,6 +4180,11 @@
             <para>See also setCommitString().</para>
             </summary>
         </member>
+        <member name="M:QtGui.QInputMethodEvent.#ctor(QtGui.QInputMethodEvent)">
+            <summary>
+            <para>Constructs a copy of other.</para>
+            </summary>
+        </member>
         <member name="M:QtGui.QInputMethodEvent.SetCommitString(System.String,System.Int32,System.Int32)">
             <summary>
             <para>Sets the commit string to commitString.</para>
@@ -17768,10 +17773,63 @@
             <para>See also setColumnCount().</para>
             </summary>
         </member>
+        <member name="M:QtGui.QStandardItemModel.HasChildren(QtCore.QModelIndex)">
+            <summary>
+            <para>Reimplemented from QAbstractItemModel::hasChildren().</para>
+            </summary>
+        </member>
+        <member name="M:QtGui.QStandardItemModel.Sibling(System.Int32,System.Int32,QtCore.QModelIndex)">
+            <summary>
+            <para>Reimplemented from QAbstractItemModel::sibling().</para>
+            </summary>
+        </member>
         <member name="M:QtGui.QStandardItemModel.Data(QtCore.QModelIndex,System.Int32)">
             <summary>
             <para>Reimplemented from QAbstractItemModel::data().</para>
             <para>See also setData().</para>
+            </summary>
+        </member>
+        <member name="M:QtGui.QStandardItemModel.SetData(QtCore.QModelIndex,QtCore.QVariant,System.Int32)">
+            <summary>
+            <para>Reimplemented from QAbstractItemModel::setData().</para>
+            <para>See also data().</para>
+            </summary>
+        </member>
+        <member name="M:QtGui.QStandardItemModel.HeaderData(System.Int32,QtCore.Qt.Orientation,System.Int32)">
+            <summary>
+            <para>Reimplemented from QAbstractItemModel::headerData().</para>
+            <para>See also setHeaderData().</para>
+            </summary>
+        </member>
+        <member name="M:QtGui.QStandardItemModel.SetHeaderData(System.Int32,QtCore.Qt.Orientation,QtCore.QVariant,System.Int32)">
+            <summary>
+            <para>Reimplemented from QAbstractItemModel::setHeaderData().</para>
+            <para>See also headerData().</para>
+            </summary>
+        </member>
+        <member name="M:QtGui.QStandardItemModel.InsertRows(System.Int32,System.Int32,QtCore.QModelIndex)">
+            <summary>
+            <para>Reimplemented from QAbstractItemModel::insertRows().</para>
+            </summary>
+        </member>
+        <member name="M:QtGui.QStandardItemModel.InsertColumns(System.Int32,System.Int32,QtCore.QModelIndex)">
+            <summary>
+            <para>Reimplemented from QAbstractItemModel::insertColumns().</para>
+            </summary>
+        </member>
+        <member name="M:QtGui.QStandardItemModel.RemoveRows(System.Int32,System.Int32,QtCore.QModelIndex)">
+            <summary>
+            <para>Reimplemented from QAbstractItemModel::removeRows().</para>
+            </summary>
+        </member>
+        <member name="M:QtGui.QStandardItemModel.RemoveColumns(System.Int32,System.Int32,QtCore.QModelIndex)">
+            <summary>
+            <para>Reimplemented from QAbstractItemModel::removeColumns().</para>
+            </summary>
+        </member>
+        <member name="M:QtGui.QStandardItemModel.Flags(QtCore.QModelIndex)">
+            <summary>
+            <para>Reimplemented from QAbstractItemModel::flags().</para>
             </summary>
         </member>
         <member name="M:QtGui.QStandardItemModel.Clear">
@@ -17779,6 +17837,11 @@
             <para>Removes all items (including header items) from the model and
             sets the number of rows and columns to zero.</para>
             <para>See also removeColumns() and removeRows().</para>
+            </summary>
+        </member>
+        <member name="M:QtGui.QStandardItemModel.Sort(System.Int32,QtCore.Qt.SortOrder)">
+            <summary>
+            <para>Reimplemented from QAbstractItemModel::sort().</para>
             </summary>
         </member>
         <member name="M:QtGui.QStandardItemModel.ItemFromIndex(QtCore.QModelIndex)">
@@ -17965,6 +18028,11 @@
             takeHorizontalHeaderItem().</para>
             </summary>
         </member>
+        <member name="M:QtGui.QStandardItemModel.DropMimeData(QtCore.QMimeData,QtCore.Qt.DropAction,System.Int32,System.Int32,QtCore.QModelIndex)">
+            <summary>
+            <para>Reimplemented from QAbstractItemModel::dropMimeData().</para>
+            </summary>
+        </member>
         <member name="E:QtGui.QStandardItemModel.ItemChanged">
             <summary>
             <para>This signal is emitted whenever the data of item has changed.</para>
@@ -17999,6 +18067,18 @@
             <para>The default value is Qt::DisplayRole.</para>
             <para>This property was introduced in  Qt 4.2.</para>
             <para>See also sort() and QStandardItem::sortChildren().</para>
+            </summary>
+        </member>
+        <member name="P:QtGui.QStandardItemModel.SupportedDropActions">
+            <summary>
+            <para>Reimplemented from
+            QAbstractItemModel::supportedDropActions().</para>
+            <para>QStandardItemModel supports both copy and move.</para>
+            </summary>
+        </member>
+        <member name="P:QtGui.QStandardItemModel.MimeTypes">
+            <summary>
+            <para>Reimplemented from QAbstractItemModel::mimeTypes().</para>
             </summary>
         </member>
         <member name="P:QtGui.QStandardItemModel.InvisibleRootItem">
@@ -19197,6 +19277,16 @@
             <para>See also arguments() and QGuiApplication::platformName.</para>
             </summary>
         </member>
+        <member name="M:QtGui.QGuiApplication.Notify(QtCore.QObject,QtCore.QEvent)">
+            <summary>
+            <para>Reimplemented from QCoreApplication::notify().</para>
+            </summary>
+        </member>
+        <member name="M:QtGui.QGuiApplication.OnEvent(QtCore.QEvent)">
+            <summary>
+            <para>Reimplemented from QObject::event().</para>
+            </summary>
+        </member>
         <member name="M:QtGui.QGuiApplication.TopLevelAt(QtCore.QPoint)">
             <summary>
             <para>Returns the top level window at the given position pos, if
@@ -19272,11 +19362,6 @@
             call to QCoreApplication::processEvents();</para>
             <para>This function is timeconsuming and its use is discouraged.</para>
             <para>This function was introduced in  Qt 5.2.</para>
-            </summary>
-        </member>
-        <member name="E:QtGui.QGuiApplication.Event">
-            <summary>
-            <para>Reimplemented from QObject::event().</para>
             </summary>
         </member>
         <member name="E:QtGui.QGuiApplication.FontDatabaseChanged">
@@ -21367,6 +21452,15 @@
             in the windowing system.</para>
             </summary>
         </member>
+        <member name="M:QtGui.QWindow.OnEvent(QtCore.QEvent)">
+            <summary>
+            <para>Reimplemented from QObject::event().</para>
+            <para>Override this to handle any event (ev) sent to the window. Return
+            true if the event was recognized and processed.</para>
+            <para>Remember to call the base class version if you wish for mouse
+            events, key events, resize events, etc to be dispatched as usual.</para>
+            </summary>
+        </member>
         <member name="M:QtGui.QWindow.OnKeyPressEvent(QtGui.QKeyEvent)">
             <summary>
             <para>Override this to handle key press events (ev).</para>
@@ -21440,111 +21534,6 @@
             platforms which support it, to embed a window inside a container or to make
             a window stick on top of a window created by another process.</para>
             <para>See also setParent() and setTransientParent().</para>
-            </summary>
-        </member>
-        <member name="E:QtGui.QWindow.ExposeEvent">
-            <summary>
-            <para>The expose event (ev) is sent by the window system whenever the window's exposure on screen changes.</para>
-            <para>The application can start rendering into the window with QBackingStore and QOpenGLContext as soon as it gets an exposeEvent() such that isExposed() is true.</para>
-            <para>If the window is moved off screen, is made totally obscured by another window, iconified or similar, this function might be called and the value of isExposed() might change to false. When this happens, an application should stop its rendering as it is no longer visible to the user.</para>
-            <para>A resize event will always be sent before the expose event the first time a window is shown.</para>
-            <para>See also isExposed().</para>
-            </summary>
-        </member>
-        <member name="E:QtGui.QWindow.ResizeEvent">
-            <summary>
-            <para>Override this to handle resize events (ev).</para>
-            <para>The resize event is called whenever the window is resized in the windowing system, either directly through the windowing system acknowledging a setGeometry() or resize() request, or indirectly through the user resizing the window manually.</para>
-            </summary>
-        </member>
-        <member name="E:QtGui.QWindow.MoveEvent">
-            <summary>
-            <para>Override this to handle window move events (ev).</para>
-            </summary>
-        </member>
-        <member name="E:QtGui.QWindow.FocusInEvent">
-            <summary>
-            <para>Override this to handle focus in events (ev).</para>
-            <para>Focus in events are sent when the window receives keyboard focus.</para>
-            <para>See also focusOutEvent().</para>
-            </summary>
-        </member>
-        <member name="E:QtGui.QWindow.FocusOutEvent">
-            <summary>
-            <para>Override this to handle focus out events (ev).</para>
-            <para>Focus out events are sent when the window loses keyboard focus.</para>
-            <para>See also focusInEvent().</para>
-            </summary>
-        </member>
-        <member name="E:QtGui.QWindow.ShowEvent">
-            <summary>
-            <para>Override this to handle show events (ev).</para>
-            <para>The function is called when the window has requested becoming visible.</para>
-            <para>If the window is successfully shown by the windowing system, this will be followed by a resize and an expose event.</para>
-            </summary>
-        </member>
-        <member name="E:QtGui.QWindow.HideEvent">
-            <summary>
-            <para>Override this to handle hide events (ev).</para>
-            <para>The function is called when the window has requested being hidden in the windowing system.</para>
-            </summary>
-        </member>
-        <member name="E:QtGui.QWindow.Event">
-            <summary>
-            <para>Reimplemented from QObject::event().</para>
-            <para>Override this to handle any event (ev) sent to the window. Return true if the event was recognized and processed.</para>
-            <para>Remember to call the base class version if you wish for mouse events, key events, resize events, etc to be dispatched as usual.</para>
-            </summary>
-        </member>
-        <member name="E:QtGui.QWindow.KeyPressEvent">
-            <summary>
-            <para>Override this to handle key press events (ev).</para>
-            <para>See also keyReleaseEvent().</para>
-            </summary>
-        </member>
-        <member name="E:QtGui.QWindow.KeyReleaseEvent">
-            <summary>
-            <para>Override this to handle key release events (ev).</para>
-            <para>See also keyPressEvent().</para>
-            </summary>
-        </member>
-        <member name="E:QtGui.QWindow.MousePressEvent">
-            <summary>
-            <para>Override this to handle mouse press events (ev).</para>
-            <para>See also mouseReleaseEvent().</para>
-            </summary>
-        </member>
-        <member name="E:QtGui.QWindow.MouseReleaseEvent">
-            <summary>
-            <para>Override this to handle mouse release events (ev).</para>
-            <para>See also mousePressEvent().</para>
-            </summary>
-        </member>
-        <member name="E:QtGui.QWindow.MouseDoubleClickEvent">
-            <summary>
-            <para>Override this to handle mouse double click events (ev).</para>
-            <para>See also mousePressEvent() and QStyleHints::mouseDoubleClickInterval().</para>
-            </summary>
-        </member>
-        <member name="E:QtGui.QWindow.MouseMoveEvent">
-            <summary>
-            <para>Override this to handle mouse move events (ev).</para>
-            </summary>
-        </member>
-        <member name="E:QtGui.QWindow.WheelEvent">
-            <summary>
-            <para>Override this to handle mouse wheel or other wheel events (ev).</para>
-            </summary>
-        </member>
-        <member name="E:QtGui.QWindow.TouchEvent">
-            <summary>
-            <para>Override this to handle touch events (ev).</para>
-            </summary>
-        </member>
-        <member name="E:QtGui.QWindow.TabletEvent">
-            <summary>
-            <para>Override this to handle tablet press, move, and release events (ev).</para>
-            <para>Proximity enter and leave events are not sent to windows, they are delivered to the application instance.</para>
             </summary>
         </member>
         <member name="E:QtGui.QWindow.ScreenChanged">
@@ -21791,6 +21780,104 @@
             <para></para>
             <para> void 	opacityChanged(qreal opacity)</para>
             <para></para>
+            </summary>
+        </member>
+        <member name="E:QtGui.QWindow.ExposeEvent">
+            <summary>
+            <para>The expose event (ev) is sent by the window system whenever the window's exposure on screen changes.</para>
+            <para>The application can start rendering into the window with QBackingStore and QOpenGLContext as soon as it gets an exposeEvent() such that isExposed() is true.</para>
+            <para>If the window is moved off screen, is made totally obscured by another window, iconified or similar, this function might be called and the value of isExposed() might change to false. When this happens, an application should stop its rendering as it is no longer visible to the user.</para>
+            <para>A resize event will always be sent before the expose event the first time a window is shown.</para>
+            <para>See also isExposed().</para>
+            </summary>
+        </member>
+        <member name="E:QtGui.QWindow.ResizeEvent">
+            <summary>
+            <para>Override this to handle resize events (ev).</para>
+            <para>The resize event is called whenever the window is resized in the windowing system, either directly through the windowing system acknowledging a setGeometry() or resize() request, or indirectly through the user resizing the window manually.</para>
+            </summary>
+        </member>
+        <member name="E:QtGui.QWindow.MoveEvent">
+            <summary>
+            <para>Override this to handle window move events (ev).</para>
+            </summary>
+        </member>
+        <member name="E:QtGui.QWindow.FocusInEvent">
+            <summary>
+            <para>Override this to handle focus in events (ev).</para>
+            <para>Focus in events are sent when the window receives keyboard focus.</para>
+            <para>See also focusOutEvent().</para>
+            </summary>
+        </member>
+        <member name="E:QtGui.QWindow.FocusOutEvent">
+            <summary>
+            <para>Override this to handle focus out events (ev).</para>
+            <para>Focus out events are sent when the window loses keyboard focus.</para>
+            <para>See also focusInEvent().</para>
+            </summary>
+        </member>
+        <member name="E:QtGui.QWindow.ShowEvent">
+            <summary>
+            <para>Override this to handle show events (ev).</para>
+            <para>The function is called when the window has requested becoming visible.</para>
+            <para>If the window is successfully shown by the windowing system, this will be followed by a resize and an expose event.</para>
+            </summary>
+        </member>
+        <member name="E:QtGui.QWindow.HideEvent">
+            <summary>
+            <para>Override this to handle hide events (ev).</para>
+            <para>The function is called when the window has requested being hidden in the windowing system.</para>
+            </summary>
+        </member>
+        <member name="E:QtGui.QWindow.KeyPressEvent">
+            <summary>
+            <para>Override this to handle key press events (ev).</para>
+            <para>See also keyReleaseEvent().</para>
+            </summary>
+        </member>
+        <member name="E:QtGui.QWindow.KeyReleaseEvent">
+            <summary>
+            <para>Override this to handle key release events (ev).</para>
+            <para>See also keyPressEvent().</para>
+            </summary>
+        </member>
+        <member name="E:QtGui.QWindow.MousePressEvent">
+            <summary>
+            <para>Override this to handle mouse press events (ev).</para>
+            <para>See also mouseReleaseEvent().</para>
+            </summary>
+        </member>
+        <member name="E:QtGui.QWindow.MouseReleaseEvent">
+            <summary>
+            <para>Override this to handle mouse release events (ev).</para>
+            <para>See also mousePressEvent().</para>
+            </summary>
+        </member>
+        <member name="E:QtGui.QWindow.MouseDoubleClickEvent">
+            <summary>
+            <para>Override this to handle mouse double click events (ev).</para>
+            <para>See also mousePressEvent() and QStyleHints::mouseDoubleClickInterval().</para>
+            </summary>
+        </member>
+        <member name="E:QtGui.QWindow.MouseMoveEvent">
+            <summary>
+            <para>Override this to handle mouse move events (ev).</para>
+            </summary>
+        </member>
+        <member name="E:QtGui.QWindow.WheelEvent">
+            <summary>
+            <para>Override this to handle mouse wheel or other wheel events (ev).</para>
+            </summary>
+        </member>
+        <member name="E:QtGui.QWindow.TouchEvent">
+            <summary>
+            <para>Override this to handle touch events (ev).</para>
+            </summary>
+        </member>
+        <member name="E:QtGui.QWindow.TabletEvent">
+            <summary>
+            <para>Override this to handle tablet press, move, and release events (ev).</para>
+            <para>Proximity enter and leave events are not sent to windows, they are delivered to the application instance.</para>
             </summary>
         </member>
         <member name="P:QtGui.QWindow.surfaceType">
@@ -22662,20 +22749,6 @@
             </summary>
         </member>
         <member name="M:QtGui.QOpenGLWindow.OnResizeEvent(QtGui.QResizeEvent)">
-            <summary>
-            <para>Reimplemented from QWindow::resizeEvent().</para>
-            <para>Resize event handler. Calls resizeGL().</para>
-            <para>See also resizeGL().</para>
-            </summary>
-        </member>
-        <member name="E:QtGui.QOpenGLWindow.PaintEvent">
-            <summary>
-            <para>Reimplemented from QPaintDeviceWindow::paintEvent().</para>
-            <para>Paint event handler. Calls paintGL().</para>
-            <para>See also paintGL().</para>
-            </summary>
-        </member>
-        <member name="E:QtGui.QOpenGLWindow.ResizeEvent">
             <summary>
             <para>Reimplemented from QWindow::resizeEvent().</para>
             <para>Resize event handler. Calls resizeGL().</para>

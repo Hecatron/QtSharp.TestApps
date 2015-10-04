@@ -18,7 +18,7 @@ namespace GUIApp1_CSharp.Examples
             // Load the widget from a ui file
             QFile file1 = new QFile("testform1.ui");
             file1.Open(QIODevice.OpenModeFlag.ReadOnly);
-            //With QtUiTools the error shows up in QtWidgets.QWidget CreateWidget
+            //error shows up in QtCore.OnEvent
             QWidget widg1 = loader.Load(file1); // System.AccessViolationException
             file1.Close();
 
