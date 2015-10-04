@@ -46,8 +46,9 @@ namespace GUIApp1_CSharp.Examples
             createGridGroupBox();
             createFormGroupBox();
 
-            bigEditor = new QTextEdit();
-            bigEditor.SetPlainText("This widget takes up all the remaining space in the top-level layout.");
+            // Causes an error on dialog close
+            //bigEditor = new QTextEdit();
+            //bigEditor.SetPlainText("This widget takes up all the remaining space in the top-level layout.");
 
             // TODO
             //buttonBox = new QDialogButtonBox(QtWidgets.QDialogButtonBox.Ok  QtWidgets.QDialogButtonBox.Cancel);
@@ -61,7 +62,7 @@ namespace GUIApp1_CSharp.Examples
             mainLayout.AddWidget(horizontalGroupBox);
             mainLayout.AddWidget(gridGroupBox);
             mainLayout.AddWidget(formGroupBox);
-            mainLayout.AddWidget(bigEditor);
+            //mainLayout.AddWidget(bigEditor);
             //mainLayout.AddWidget(buttonBox);
             Layout = mainLayout;
             WindowTitle = "Basic Layouts";
@@ -109,11 +110,12 @@ namespace GUIApp1_CSharp.Examples
         private void createFormGroupBox()
         {
             formGroupBox = new QGroupBox("Form layout");
-            QFormLayout layout = new QFormLayout();
-            layout.AddRow(new QLabel("Line 1:"), new QLineEdit());
-            layout.AddRow(new QLabel("Line 2, long text:"), new QComboBox());
-            layout.AddRow(new QLabel("Line 3:"), new QSpinBox());
-            formGroupBox.Layout = layout;
+            // error within QtWidget.HasHeightForWidth
+            //QFormLayout layout = new QFormLayout();
+            //layout.AddRow(new QLabel("Line 1:"), new QLineEdit());
+            //layout.AddRow(new QLabel("Line 2, long text:"), new QComboBox());
+            //layout.AddRow(new QLabel("Line 3:"), new QSpinBox());
+            //formGroupBox.Layout = layout;
         }
     }
 }

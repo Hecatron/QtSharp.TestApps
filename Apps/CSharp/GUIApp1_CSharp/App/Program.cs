@@ -9,9 +9,9 @@ namespace GUIApp1_CSharp.App
     {
         private static void Main(string[] args)
         {
-            Examples.BasicFormExample.Run();
+            //Examples.BasicFormExample.Run();
             //Examples.LayoutsExample1.Run();
-            //Examples.LayoutsExample2.Run();
+            Examples.LayoutsExample2.Run();
             //Examples.UILoadExample.Run();
         }
 
