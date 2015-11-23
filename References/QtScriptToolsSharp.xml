@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>QtScriptToolsSharp</name>
+    </assembly>
+    <members>
+        <member name="T:QtScriptTools.QScriptEngineDebugger">
+            <summary>
+            <para>The QScriptEngineDebugger class provides a QScriptEngine debugger.</para>
+            </summary>
+            <remarks>
+            <para>The QScriptEngineDebugger class provides a debugger that can be embedded into Qt applications that use Qt Script. The debugger enables the application user to inspect the state of the script environment and control script execution.</para>
+            <para>To attach the debugger to a script engine, call the attachTo() function.</para>
+            <para>    QScriptEngine engine;</para>
+            <para>    QScriptEngineDebugger debugger;</para>
+            <para>    debugger.attachTo(&amp;engine);</para>
+            <para>Once the debugger has been attached to a script engine, you can proceed to evaluate scripts as usual, e.g. by calling QScriptEngine::evaluate(). The debugger will be triggered when an uncaught exception occurs, or when a debugger statement is encountered in a script. It is also possible to interrupt script evaluation at an arbitrary time by triggering the InterruptAction. For instance, to start the debugger when script evaluation starts, you trigger the action before you begin to evaluate() the script.</para>
+            <para>     debugger-&gt;action(QScriptEngineDebugger::InterruptAction)-&gt;trigger();</para>
+            <para>     engine-&gt;evaluate(contents, fileName);</para>
+            <para>By default, the standard debugger window is shown when evaluation is suspended. This can be changed by calling the setAutoShowStandardWindow() function.</para>
+            <para>The debugger defines a set of actions that are available, such as stopping execution or printing the contents of a variable. It also provides a set of widgets (components) that display the information available from the debugger and that trigger the actions on request. The actions available are identified by the DebuggerAction enum, and the widgets are identified by the DebuggerWidget enum.</para>
+            <para>Access to the individual debugger widgets is provided by the widget() function. This makes it possible to arrange the widgets in a custom manner. Similarly, the action() function provides access to the various debugger actions.</para>
+            <para>The createStandardToolBar() function creates a standard toolbar, and the createStandardMenu() function creates a standard menu; these functions can be useful if you are creating a custom debugger configuration.</para>
+            <para>The evaluationSuspended() signal is emitted when the debugger has suspended script evaluation and entered interactive mode, i.e., the mode in which it accepts input from the user. The evaluationResumed() signal is emitted when script evaluation is resumed, i.e, when execution control is given back to the script engine. The state() function returns the debugger's current state.</para>
+            <para>When calling QScriptEngine::evaluate() it is useful to pass a descriptive script name (file name) as second argument, as this is the name that will be displayed by the debugger in the ScriptsWidget; if a name is not passed, the script will be labelled &quot;anonymous&quot;.</para>
+            <para>When evaluation is suspended, the debugger will also suspend the event loop of the script. In the following snippet, the call to QScriptEngine::evaluate() causes the debugger to be triggered, and the function call does not return until the user has finished interacting with the debugger.</para>
+            <para>    engine.evaluate(&quot;debugger&quot;);</para>
+            <para>When the Qt Script debugger is running, the C++ application itself is not &quot;frozen&quot;. This means that it is possible that more scripts are evaluated, even though the debugger has suspended evaluation of the current script evaluation. For example, a C++ timer might trigger that causes a script function to be called, or the user might click on a button in the main application user interface whose clicked() signal is connected to a script function. This kind of nested evaluation is permitted. The debugger will enter interactive mode for the new script if an exception is thrown or a breakpoint is reached. Note that it will not stop when encountering debugger statements.</para>
+            <para>Nested evaluation requires some thought when deciding how the debugger is presented to the user; for example, whether a modal dialog is suitable, or whether some parts of the main application user interface should be disabled while the debugger is running.</para>
+            <para>Debugging inside of a paintEvent() is currently not supported. If you need to debug painting-related script code, that code should be evaluated outside of the C++ paintEvent(), e.g. by rendering to an image, like the Context2D and Tetrix Qt Script examples do. This will make the code safe for debugging.</para>
+            <para>The debugger adds some special properties to the script engine: __FILE__ holds the name of the script in which the current evaluation occurs, and __LINE__ holds the current line number. These are useful when doing print()-style debugging (the messages appear in the debugger's debug output widget).</para>
+            <para>The Qt Script Debugger Manual describes how to use the debugger. The Context2D example shows how to integrate the debugger in applications.</para>
+            <para></para>
+            <para>See also QScriptEngine and Context2D Example.</para>
+            </remarks>
+        </member>
+        <member name="M:QtScriptTools.QScriptEngineDebugger.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs a new QScriptEngineDebugger object with the given parent.</para>
+            <para>To attach a QScriptEngine to the debugger, use attachTo() function.</para>
+            </summary>
+        </member>
+        <member name="M:QtScriptTools.QScriptEngineDebugger.Detach">
+            <summary>
+            <para>Detaches from the current script engine, if any.</para>
+            <para>See also attachTo().</para>
+            </summary>
+        </member>
+        <member name="E:QtScriptTools.QScriptEngineDebugger.EvaluationSuspended">
+            <summary>
+            <para>This signal is emitted when the debugger has suspended script evaluation for whatever reason (e.g. due to an uncaught script exception, or due to a breakpoint being triggered).</para>
+            <para>See also evaluationResumed().</para>
+            </summary>
+        </member>
+        <member name="E:QtScriptTools.QScriptEngineDebugger.EvaluationResumed">
+            <summary>
+            <para>This signal is emitted when the debugger has resumed script evaluation (e.g. the user gave the &quot;continue&quot; command).</para>
+            <para>See also evaluationSuspended().</para>
+            </summary>
+        </member>
+        <member name="P:QtScriptTools.QScriptEngineDebugger.AutoShowStandardWindow">
+            <summary>
+            <para>Returns whether the standard debugger window is automatically shown when evaluation is suspended.</para>
+            <para>The default is true.</para>
+            <para>See also setAutoShowStandardWindow().</para>
+            <para></para>
+            <para>Sets whether the standard debugger window is automatically shown when evaluation is suspended. If autoShow is true, the window will be automatically shown, otherwise it will not.</para>
+            <para>See also autoShowStandardWindow().</para>
+            </summary>
+        </member>
+        <member name="P:QtScriptTools.QScriptEngineDebugger.State">
+            <summary>
+            <para>Returns the current state of the debugger.</para>
+            <para>This function was introduced in  Qt 4.6.</para>
+            <para>See also evaluationResumed() and evaluationSuspended().</para>
+            </summary>
+        </member>
+        <member name="T:QtScriptTools.QScriptEngineDebugger.DebuggerWidget">
+            <summary>
+            <para>This enum decides the widget that the widget() function should retrieve. We treat these widgets in more detail in the Qt Script Debugger Manual.</para>
+            </summary>
+        </member>
+        <member name="F:QtScriptTools.QScriptEngineDebugger.DebuggerWidget.ConsoleWidget">
+            <summary>Provides a command-line interface to the debugger.</summary>
+        </member>
+        <member name="F:QtScriptTools.QScriptEngineDebugger.DebuggerWidget.StackWidget">
+            <summary>Shows a backtrace of the script's execution state.</summary>
+        </member>
+        <member name="F:QtScriptTools.QScriptEngineDebugger.DebuggerWidget.ScriptsWidget">
+            <summary>Displays a list of currently loaded scripts.</summary>
+        </member>
+        <member name="F:QtScriptTools.QScriptEngineDebugger.DebuggerWidget.LocalsWidget">
+            <summary>Shows the local variables of the current stack frame.</summary>
+        </member>
+        <member name="F:QtScriptTools.QScriptEngineDebugger.DebuggerWidget.CodeWidget">
+            <summary>Displays the code of the current script.</summary>
+        </member>
+        <member name="F:QtScriptTools.QScriptEngineDebugger.DebuggerWidget.CodeFinderWidget">
+            <summary>Provides a widget that can search for text in the script shown in the CodeWidget.</summary>
+        </member>
+        <member name="F:QtScriptTools.QScriptEngineDebugger.DebuggerWidget.BreakpointsWidget">
+            <summary>Shows breakpoints that have been set.</summary>
+        </member>
+        <member name="F:QtScriptTools.QScriptEngineDebugger.DebuggerWidget.DebugOutputWidget">
+            <summary>Contains output from the print() script function.</summary>
+        </member>
+        <member name="F:QtScriptTools.QScriptEngineDebugger.DebuggerWidget.ErrorLogWidget">
+            <summary>Shows error messages that have been generated.</summary>
+        </member>
+        <member name="T:QtScriptTools.QScriptEngineDebugger.DebuggerAction">
+            <summary>
+            <para>This enum specifies the action that the action() function should retrieve. The actions retrieved can be connected to any slot and connected to any widget. Please see the Qt Script Debugger Manual's Console Command Reference for a detailed description of these actions.</para>
+            </summary>
+        </member>
+        <member name="F:QtScriptTools.QScriptEngineDebugger.DebuggerAction.InterruptAction">
+            <summary>Suspends script execution as soon as the next script statement is reached.</summary>
+        </member>
+        <member name="F:QtScriptTools.QScriptEngineDebugger.DebuggerAction.ContinueAction">
+            <summary>Gives the execution control back to the script engine.</summary>
+        </member>
+        <member name="F:QtScriptTools.QScriptEngineDebugger.DebuggerAction.StepIntoAction">
+            <summary>Performs a step action.</summary>
+        </member>
+        <member name="F:QtScriptTools.QScriptEngineDebugger.DebuggerAction.StepOverAction">
+            <summary>Performs a next action.</summary>
+        </member>
+        <member name="F:QtScriptTools.QScriptEngineDebugger.DebuggerAction.StepOutAction">
+            <summary>Executes the script until the current function returns.</summary>
+        </member>
+        <member name="F:QtScriptTools.QScriptEngineDebugger.DebuggerAction.RunToCursorAction">
+            <summary>Continues execution to the selected line (which contains the cursor) in the CodeWidget.</summary>
+        </member>
+        <member name="F:QtScriptTools.QScriptEngineDebugger.DebuggerAction.RunToNewScriptAction">
+            <summary>Returns control to the script engine until a new script is executed.</summary>
+        </member>
+        <member name="F:QtScriptTools.QScriptEngineDebugger.DebuggerAction.ToggleBreakpointAction">
+            <summary>Toggles a breakpoint at the selected line in the CodeWidget.</summary>
+        </member>
+        <member name="F:QtScriptTools.QScriptEngineDebugger.DebuggerAction.ClearDebugOutputAction">
+            <summary>Clears the contents of the DebugOutputWidget.</summary>
+        </member>
+        <member name="F:QtScriptTools.QScriptEngineDebugger.DebuggerAction.ClearErrorLogAction">
+            <summary>Clears the contents of the ErrorLogWidget.</summary>
+        </member>
+        <member name="F:QtScriptTools.QScriptEngineDebugger.DebuggerAction.ClearConsoleAction">
+            <summary>Clears the contents of the ConsoleWidget.</summary>
+        </member>
+        <member name="F:QtScriptTools.QScriptEngineDebugger.DebuggerAction.FindInScriptAction">
+            <summary>Displays the CodeFinderWidget.</summary>
+        </member>
+        <member name="F:QtScriptTools.QScriptEngineDebugger.DebuggerAction.FindNextInScriptAction">
+            <summary>Finds next occurrence in the CodeWidget.</summary>
+        </member>
+        <member name="F:QtScriptTools.QScriptEngineDebugger.DebuggerAction.FindPreviousInScriptAction">
+            <summary>Finds previous occurrence in the CodeWidget.</summary>
+        </member>
+        <member name="F:QtScriptTools.QScriptEngineDebugger.DebuggerAction.GoToLineAction">
+            <summary>Shows the "Go to Line" dialog.</summary>
+        </member>
+        <member name="T:QtScriptTools.QScriptEngineDebugger.DebuggerState">
+            <summary>
+            <para>This enum specifies the current state of the debugger.</para>
+            <para>This enum was introduced or modified in  Qt 4.6.</para>
+            </summary>
+        </member>
+        <member name="F:QtScriptTools.QScriptEngineDebugger.DebuggerState.RunningState">
+            <summary>The debugger is running. (Script evaluation is allowed.)</summary>
+        </member>
+        <member name="F:QtScriptTools.QScriptEngineDebugger.DebuggerState.SuspendedState">
+            <summary>The debugger has suspended script evaluation.</summary>
+        </member>
+    </members>
+</doc>
