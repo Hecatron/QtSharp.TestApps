@@ -62,6 +62,20 @@
             <para>An object is a Controller to any other object connected to a controlling signal.</para>
             </summary>
         </member>
+        <member name="M:QtWidgets.QAccessibleWidget.LocalizedActionName(System.String)">
+            <summary>
+            <para>Returns a localized action name of actionName.</para>
+            <para>For custom actions this function has to be re-implemented. When using one of the default names, you can call this function in QAccessibleActionInterface to get the localized string.</para>
+            <para>See also actionNames() and localizedActionDescription().</para>
+            </summary>
+        </member>
+        <member name="M:QtWidgets.QAccessibleWidget.LocalizedActionDescription(System.String)">
+            <summary>
+            <para>Returns a localized action description of the action actionName.</para>
+            <para>When using one of the default names, you can call this function in QAccessibleActionInterface to get the localized string.</para>
+            <para>See also actionNames() and localizedActionName().</para>
+            </summary>
+        </member>
         <member name="P:QtWidgets.QAccessibleWidget.IsValid">
             <summary>
             <para>Reimplemented from QAccessibleInterface::isValid().</para>
@@ -40860,11 +40874,6 @@
             <para>Constructs an empty time editor with a parent. The time is set to time.</para>
             </summary>
         </member>
-        <member name="E:QtWidgets.QTimeEdit.QTimeEditParent">
-            <summary>
-            <para>Constructs an empty time editor with a parent.</para>
-            </summary>
-        </member>
         <member name="T:QtWidgets.QDateEdit">
             <summary>
             <para>The QDateEdit class provides a widget for editing dates based on the QDateTimeEdit widget.</para>
@@ -40894,11 +40903,6 @@
         <member name="M:QtWidgets.QDateEdit.#ctor(QtCore.QDate,QtWidgets.QWidget)">
             <summary>
             <para>Constructs an empty date editor with a parent. The date is set to date.</para>
-            </summary>
-        </member>
-        <member name="E:QtWidgets.QDateEdit.QDateEditParent">
-            <summary>
-            <para>Constructs an empty date editor with a parent.</para>
             </summary>
         </member>
         <member name="T:QtWidgets.QDial">

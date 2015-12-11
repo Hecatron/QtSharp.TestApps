@@ -2259,11 +2259,6 @@
             <para>Signals when a new sensor gesture becomes available for use.</para>
             </summary>
         </member>
-        <member name="E:QtSensors.QSensorGestureManager.QSensorGestureManagerParent">
-            <summary>
-            <para>Constructs the QSensorGestureManager as a child of parent</para>
-            </summary>
-        </member>
         <member name="P:QtSensors.QSensorGestureManager.GestureIds">
             <summary>
             <para>Returns the list of the currently registered gestures. Includes all the standard built-ins as well as available plugins.</para>

@@ -72,6 +72,10 @@
       <Link>QtGui-inlines.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\..\References\QtMultimedia-inlines.dll">
+      <Link>QtMultimedia-inlines.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\..\References\QtNetwork-inlines.dll">
       <Link>QtNetwork-inlines.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -88,6 +92,10 @@
       <Link>QtQml-inlines.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\..\References\QtQuick-inlines.dll">
+      <Link>QtQuick-inlines.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\..\References\QtScriptTools-inlines.dll">
       <Link>QtScriptTools-inlines.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -98,6 +106,10 @@
     </Content>
     <Content Include="..\..\References\QtSerialPort-inlines.dll">
       <Link>QtSerialPort-inlines.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\References\QtSvg-inlines.dll">
+      <Link>QtSvg-inlines.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="..\..\References\QtWidgets-inlines.dll">
