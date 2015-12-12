@@ -371,6 +371,11 @@
             <para>Loads the specified SVG format contents and updates the widget.</para>
             </summary>
         </member>
+        <member name="M:QtSvg.QSvgWidget.OnPaintEvent(QtGui.QPaintEvent)">
+            <summary>
+            <para>Reimplemented from QWidget::paintEvent().</para>
+            </summary>
+        </member>
         <member name="P:QtSvg.QSvgWidget.SizeHint">
             <summary>
             <para>Reimplemented from QWidget::sizeHint().</para>
