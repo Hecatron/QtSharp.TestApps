@@ -24,6 +24,10 @@ Public Class Program
         widg1.ObjectName = "Simple example"
         widg1.Show()
 
+        ' TODO missing QObject.findChild QBoject.findChildren
+        ' This might be because the function calls in C++ use templates (generics) to specify the type
+        'QWidget.Qt_qFindChild_helper(widg1, "pushButton", )
+
         ' Run the QApplication Process
         QApplication.Exec()
 

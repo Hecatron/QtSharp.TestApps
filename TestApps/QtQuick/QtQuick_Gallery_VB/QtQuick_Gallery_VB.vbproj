@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A92A7947-C817-42E2-B7A1-CBE83AB916CC}</ProjectGuid>
+    <ProjectGuid>{ED5A0A35-5790-414F-8D22-408C5AA0E18E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>BasicLayouts1_VB.Program</StartupObject>
-    <RootNamespace>BasicLayouts1_VB</RootNamespace>
-    <AssemblyName>BasicLayouts1_VB</AssemblyName>
+    <StartupObject>QtQuick_Gallery_VB.Program</StartupObject>
+    <RootNamespace>QtQuick_Gallery_VB</RootNamespace>
+    <AssemblyName>QtQuick_Gallery_VB</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsFormsWithCustomSubMain</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
@@ -20,7 +20,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>BasicLayouts1_VB.xml</DocumentationFile>
+    <DocumentationFile>QtQuick_Gallery_VB.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -30,7 +30,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>BasicLayouts1_VB.xml</DocumentationFile>
+    <DocumentationFile>QtQuick_Gallery_VB.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -46,25 +46,6 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CppSharp.Runtime">
-      <HintPath>..\..\..\References\CppSharp.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="QtCoreSharp">
-      <HintPath>..\..\..\References\QtCoreSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="QtQmlSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References\QtQmlSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="QtQuickSharp">
-      <HintPath>..\..\..\References\QtQuickSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="QtQuickWidgetsSharp">
-      <HintPath>..\..\..\References\QtQuickWidgetsSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="QtWidgetsSharp">
-      <HintPath>..\..\..\References\QtWidgetsSharp.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -125,15 +106,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Lib\QtSharpHelper\QtSharpHelper.csproj">
-      <Project>{2162cc35-77c7-45a6-88a3-f3aa21192d90}</Project>
-      <Name>QtSharpHelper</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="main.qml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="qtres\main.qml" />
+    <Content Include="qtres\qml\+android\UI.js" />
+    <Content Include="qtres\qml\+ios\UI.js" />
+    <Content Include="qtres\qml\+osx\UI.js" />
+    <Content Include="qtres\qml\ButtonPage.qml" />
+    <Content Include="qtres\qml\InputPage.qml" />
+    <Content Include="qtres\qml\ProgressPage.qml" />
+    <Content Include="qtres\qml\UI.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

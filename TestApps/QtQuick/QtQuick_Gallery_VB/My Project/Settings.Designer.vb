@@ -64,9 +64,9 @@ Namespace My
     Friend Module MySettingsProperty
         
         <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
-        Friend ReadOnly Property Settings() As Global.BasicLayouts1_VB.My.MySettings
+        Friend ReadOnly Property Settings() As Global.QtQuick_Gallery_VB.My.MySettings
             Get
-                Return Global.BasicLayouts1_VB.My.MySettings.Default
+                Return Global.QtQuick_Gallery_VB.My.MySettings.Default
             End Get
         End Property
     End Module
