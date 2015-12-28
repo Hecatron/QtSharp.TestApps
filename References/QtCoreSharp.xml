@@ -11503,6 +11503,53 @@
             <para>See also signalsBlocked().</para>
             </summary>
         </member>
+        <member name="M:QtCore.QObject.OnTimerEvent(QtCore.QTimerEvent)">
+            <summary>
+            <para>This event handler can be reimplemented in a subclass to receive timer events for the object.</para>
+            <para>QTimer provides a higher-level interface to the timer functionality, and also more general information about timers. The timer event is passed in the event parameter.</para>
+            <para>See also startTimer(), killTimer(), and event().</para>
+            </summary>
+        </member>
+        <member name="M:QtCore.QObject.OnChildEvent(QtCore.QChildEvent)">
+            <summary>
+            <para>This event handler can be reimplemented in a subclass to receive child events. The event is passed in the event parameter.</para>
+            <para>QEvent::ChildAdded and QEvent::ChildRemoved events are sent to objects when children are added or removed. In both cases you can only rely on the child being a QObject, or if isWidgetType() returns true, a QWidget. (This is because, in the ChildAdded case, the child is not yet fully constructed, and in the ChildRemoved case it might have been destructed already).</para>
+            <para>QEvent::ChildPolished events are sent to widgets when children are polished, or when polished children are added. If you receive a child polished event, the child's construction is usually completed. However, this is not guaranteed, and multiple polish events may be delivered during the execution of a widget's constructor.</para>
+            <para>For every child widget, you receive one ChildAdded event, zero or more ChildPolished events, and one ChildRemoved event.</para>
+            <para>The ChildPolished event is omitted if a child is removed immediately after it is added. If a child is polished several times during construction and destruction, you may receive several child polished events for the same child, each time with a different virtual table.</para>
+            <para>See also event().</para>
+            </summary>
+        </member>
+        <member name="M:QtCore.QObject.OnCustomEvent(QtCore.QEvent)">
+            <summary>
+            <para>This event handler can be reimplemented in a subclass to receive custom events. Custom events are user-defined events with a type value at least as large as the QEvent::User item of the QEvent::Type enum, and is typically a QEvent subclass. The event is passed in the event parameter.</para>
+            <para>See also event() and QEvent.</para>
+            </summary>
+        </member>
+        <member name="M:QtCore.QObject.ConnectNotify(QtCore.QMetaMethod)">
+            <summary>
+            <para>This virtual function is called when something has been connected to signal in this object.</para>
+            <para>If you want to compare signal with a specific signal, you can use QMetaMethod::fromSignal() as follows:</para>
+            <para>if (signal == QMetaMethod::fromSignal(&amp;MyObject::valueChanged)) {</para>
+            <para>    // signal is valueChanged</para>
+            <para>}</para>
+            <para>Warning: This function violates the object-oriented principle of modularity. However, it might be useful when you need to perform expensive initialization only if something is connected to a signal.</para>
+            <para>Warning: This function is called from the thread which performs the connection, which may be a different thread from the thread in which this object lives.</para>
+            <para>This function was introduced in  Qt 5.0.</para>
+            <para>See also connect() and disconnectNotify().</para>
+            </summary>
+        </member>
+        <member name="M:QtCore.QObject.DisconnectNotify(QtCore.QMetaMethod)">
+            <summary>
+            <para>This virtual function is called when something has been disconnected from signal in this object.</para>
+            <para>See connectNotify() for an example of how to compare signal with a specific signal.</para>
+            <para>If all signals were disconnected from this object (e.g., the signal argument to disconnect() was 0), disconnectNotify() is only called once, and the signal will be an invalid QMetaMethod (QMetaMethod::isValid() returns false).</para>
+            <para>Warning: This function violates the object-oriented principle of modularity. However, it might be useful for optimizing access to expensive resources.</para>
+            <para>Warning: This function is called from the thread which performs the disconnection, which may be a different thread from the thread in which this object lives. This function may also be called with a QObject internal mutex locked. It is therefore not allowed to re-enter any of any QObject functions from your reimplementation and if you lock a mutex in your reimplementation, make sure that you don't call QObject functions with that mutex held in other places or it will result in a deadlock.</para>
+            <para>This function was introduced in  Qt 5.0.</para>
+            <para>See also disconnect() and connectNotify().</para>
+            </summary>
+        </member>
         <member name="M:QtCore.QObject.MoveToThread(QtCore.QThread)">
             <summary>
             <para>Changes the thread affinity for this object and its children. The object cannot be moved if it has a parent. Event processing will continue in the targetThread.</para>
@@ -11716,53 +11763,6 @@
             <para>As the code snippet above illustrates, you can use this function to avoid emitting a signal that nobody listens to.</para>
             <para>Warning: This function violates the object-oriented principle of modularity. However, it might be useful when you need to perform expensive initialization only if something is connected to a signal.</para>
             <para>This function was introduced in  Qt 5.0.</para>
-            </summary>
-        </member>
-        <member name="M:QtCore.QObject.OnTimerEvent(QtCore.QTimerEvent)">
-            <summary>
-            <para>This event handler can be reimplemented in a subclass to receive timer events for the object.</para>
-            <para>QTimer provides a higher-level interface to the timer functionality, and also more general information about timers. The timer event is passed in the event parameter.</para>
-            <para>See also startTimer(), killTimer(), and event().</para>
-            </summary>
-        </member>
-        <member name="M:QtCore.QObject.OnChildEvent(QtCore.QChildEvent)">
-            <summary>
-            <para>This event handler can be reimplemented in a subclass to receive child events. The event is passed in the event parameter.</para>
-            <para>QEvent::ChildAdded and QEvent::ChildRemoved events are sent to objects when children are added or removed. In both cases you can only rely on the child being a QObject, or if isWidgetType() returns true, a QWidget. (This is because, in the ChildAdded case, the child is not yet fully constructed, and in the ChildRemoved case it might have been destructed already).</para>
-            <para>QEvent::ChildPolished events are sent to widgets when children are polished, or when polished children are added. If you receive a child polished event, the child's construction is usually completed. However, this is not guaranteed, and multiple polish events may be delivered during the execution of a widget's constructor.</para>
-            <para>For every child widget, you receive one ChildAdded event, zero or more ChildPolished events, and one ChildRemoved event.</para>
-            <para>The ChildPolished event is omitted if a child is removed immediately after it is added. If a child is polished several times during construction and destruction, you may receive several child polished events for the same child, each time with a different virtual table.</para>
-            <para>See also event().</para>
-            </summary>
-        </member>
-        <member name="M:QtCore.QObject.OnCustomEvent(QtCore.QEvent)">
-            <summary>
-            <para>This event handler can be reimplemented in a subclass to receive custom events. Custom events are user-defined events with a type value at least as large as the QEvent::User item of the QEvent::Type enum, and is typically a QEvent subclass. The event is passed in the event parameter.</para>
-            <para>See also event() and QEvent.</para>
-            </summary>
-        </member>
-        <member name="M:QtCore.QObject.ConnectNotify(QtCore.QMetaMethod)">
-            <summary>
-            <para>This virtual function is called when something has been connected to signal in this object.</para>
-            <para>If you want to compare signal with a specific signal, you can use QMetaMethod::fromSignal() as follows:</para>
-            <para>if (signal == QMetaMethod::fromSignal(&amp;MyObject::valueChanged)) {</para>
-            <para>    // signal is valueChanged</para>
-            <para>}</para>
-            <para>Warning: This function violates the object-oriented principle of modularity. However, it might be useful when you need to perform expensive initialization only if something is connected to a signal.</para>
-            <para>Warning: This function is called from the thread which performs the connection, which may be a different thread from the thread in which this object lives.</para>
-            <para>This function was introduced in  Qt 5.0.</para>
-            <para>See also connect() and disconnectNotify().</para>
-            </summary>
-        </member>
-        <member name="M:QtCore.QObject.DisconnectNotify(QtCore.QMetaMethod)">
-            <summary>
-            <para>This virtual function is called when something has been disconnected from signal in this object.</para>
-            <para>See connectNotify() for an example of how to compare signal with a specific signal.</para>
-            <para>If all signals were disconnected from this object (e.g., the signal argument to disconnect() was 0), disconnectNotify() is only called once, and the signal will be an invalid QMetaMethod (QMetaMethod::isValid() returns false).</para>
-            <para>Warning: This function violates the object-oriented principle of modularity. However, it might be useful for optimizing access to expensive resources.</para>
-            <para>Warning: This function is called from the thread which performs the disconnection, which may be a different thread from the thread in which this object lives. This function may also be called with a QObject internal mutex locked. It is therefore not allowed to re-enter any of any QObject functions from your reimplementation and if you lock a mutex in your reimplementation, make sure that you don't call QObject functions with that mutex held in other places or it will result in a deadlock.</para>
-            <para>This function was introduced in  Qt 5.0.</para>
-            <para>See also disconnect() and connectNotify().</para>
             </summary>
         </member>
         <member name="M:QtCore.QObject.Tr(System.String,System.String,System.Int32)">
@@ -12091,6 +12091,24 @@
             <para>See also QVariantAnimation and QAnimationGroup.</para>
             </summary>
         </member>
+        <member name="M:QtCore.QAbstractAnimation.UpdateCurrentTime(System.Int32)">
+            <summary>
+            <para>This pure virtual function is called every time the animation's currentTime changes.</para>
+            <para>See also updateState().</para>
+            </summary>
+        </member>
+        <member name="M:QtCore.QAbstractAnimation.UpdateState(QtCore.QAbstractAnimation.State,QtCore.QAbstractAnimation.State)">
+            <summary>
+            <para>This virtual function is called by QAbstractAnimation when the state of the animation is changed from oldState to newState.</para>
+            <para>See also start(), stop(), pause(), and resume().</para>
+            </summary>
+        </member>
+        <member name="M:QtCore.QAbstractAnimation.UpdateDirection(QtCore.QAbstractAnimation.Direction)">
+            <summary>
+            <para>This virtual function is called by QAbstractAnimation when the direction of the animation is changed. The direction argument is the new direction.</para>
+            <para>See also setDirection() and direction().</para>
+            </summary>
+        </member>
         <member name="M:QtCore.QAbstractAnimation.Start(QtCore.QAbstractAnimation.DeletionPolicy)">
             <summary>
             <para>Starts the animation. The policy argument says whether or not the animation should be deleted when it's done. When the animation starts, the stateChanged() signal is emitted, and state() returns Running. When control reaches the event loop, the animation will run by itself, periodically calling updateCurrentTime() as the animation progresses.</para>
@@ -12127,24 +12145,6 @@
         <member name="M:QtCore.QAbstractAnimation.OnEvent(QtCore.QEvent)">
             <summary>
             <para>Reimplemented from QObject::event().</para>
-            </summary>
-        </member>
-        <member name="M:QtCore.QAbstractAnimation.UpdateCurrentTime(System.Int32)">
-            <summary>
-            <para>This pure virtual function is called every time the animation's currentTime changes.</para>
-            <para>See also updateState().</para>
-            </summary>
-        </member>
-        <member name="M:QtCore.QAbstractAnimation.UpdateState(QtCore.QAbstractAnimation.State,QtCore.QAbstractAnimation.State)">
-            <summary>
-            <para>This virtual function is called by QAbstractAnimation when the state of the animation is changed from oldState to newState.</para>
-            <para>See also start(), stop(), pause(), and resume().</para>
-            </summary>
-        </member>
-        <member name="M:QtCore.QAbstractAnimation.UpdateDirection(QtCore.QAbstractAnimation.Direction)">
-            <summary>
-            <para>This virtual function is called by QAbstractAnimation when the direction of the animation is changed. The direction argument is the new direction.</para>
-            <para>See also setDirection() and direction().</para>
             </summary>
         </member>
         <member name="M:QtCore.QAbstractAnimation.TrUtf8(System.String,System.String,System.Int32)">
@@ -12235,6 +12235,12 @@
             <para>This property describes the current state of the animation. When the animation state changes, QAbstractAnimation emits the stateChanged() signal.</para>
             </summary>
         </member>
+        <member name="P:QtCore.QAbstractAnimation.Duration">
+            <summary>
+            <para>This property holds the duration of the animation.</para>
+            <para>If the duration is -1, it means that the duration is undefined. In this case, loopCount is ignored.</para>
+            </summary>
+        </member>
         <member name="P:QtCore.QAbstractAnimation.Group">
             <summary>
             <para>If this animation is part of a QAnimationGroup, this function returns a pointer to the group; otherwise, it returns 0.</para>
@@ -12252,12 +12258,6 @@
             <para>This property holds the current loop of the animation.</para>
             <para>This property describes the current loop of the animation. By default, the animation's loop count is 1, and so the current loop will always be 0. If the loop count is 2 and the animation runs past its duration, it will automatically rewind and restart at current time 0, and current loop 1, and so on.</para>
             <para>When the current loop changes, QAbstractAnimation emits the currentLoopChanged() signal.</para>
-            </summary>
-        </member>
-        <member name="P:QtCore.QAbstractAnimation.Duration">
-            <summary>
-            <para>This property holds the duration of the animation.</para>
-            <para>If the duration is -1, it means that the duration is undefined. In this case, loopCount is ignored.</para>
             </summary>
         </member>
         <member name="P:QtCore.QAbstractAnimation.TotalDuration">

@@ -31,9 +31,15 @@ Public Class LayoutExample
         bigEditor = New QTextEdit()
         bigEditor.SetPlainText("This widget takes up all the remaining space in the top-level layout.")
 
-        ' TODO
-        ' QDialogButtonBox.StandardButton is ambiguous, both function and enum
-        'buttonBox = new QDialogButtonBox(QtWidgets.QDialogButtonBox.Ok,  QtWidgets.QDialogButtonBox.Cancel);
+        ' For VB Currently QDialogButtonBox.StandardButton is ambiguous, both function and enum so we use reflection to call
+
+        ' Create an Enum
+        Dim stdbutttype As Type = GetType(QDialogButtonBox).GetNestedType("StandardButton")
+        Dim enumval = [Enum].Parse(stdbutttype, "Ok")
+        enumval = enumval Or [Enum].Parse(stdbutttype, "Cancel")
+
+        ' Create a Button Box
+        buttonBox = Activator.CreateInstance(GetType(QDialogButtonBox), enumval, Nothing)
 
         ' TODO
         'connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
@@ -45,7 +51,7 @@ Public Class LayoutExample
         mainLayout.AddWidget(gridGroupBox)
         mainLayout.AddWidget(formGroupBox)
         mainLayout.AddWidget(bigEditor)
-        'mainLayout.AddWidget(buttonBox)
+        mainLayout.AddWidget(buttonBox)
         Layout = mainLayout
         WindowTitle = "Basic Layouts"
 

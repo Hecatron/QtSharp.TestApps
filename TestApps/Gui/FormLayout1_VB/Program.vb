@@ -21,6 +21,8 @@ Public Class Program
         Dim button4 As New QPushButton("Four")
         Dim button5 As New QPushButton("Five")
 
+        AddHandler button1.Clicked, AddressOf Button1Clicked
+
         Dim layout As New QHBoxLayout()
         layout.AddWidget(button1)
         layout.AddWidget(button2)
@@ -33,6 +35,10 @@ Public Class Program
 
         QApplication.Exec()
 
+    End Sub
+
+    Public Shared Sub Button1Clicked(clicked As Boolean)
+        Debug.WriteLine(clicked)
     End Sub
 
 End Class
