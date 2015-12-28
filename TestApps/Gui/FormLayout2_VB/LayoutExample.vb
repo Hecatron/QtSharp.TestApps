@@ -1,4 +1,5 @@
-﻿Imports QtWidgets
+﻿Imports System.Reflection
+Imports QtWidgets
 
 ' TODO try signaling and slotting buttons
 
@@ -41,9 +42,9 @@ Public Class LayoutExample
         ' Create a Button Box
         buttonBox = Activator.CreateInstance(GetType(QDialogButtonBox), enumval, Nothing)
 
-        ' TODO
-        'connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-        'connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+        ' Instead of using slots / signals we can just use lambadas and events instead
+        AddHandler buttonBox.Accepted, Sub() Me.Accept()
+        AddHandler buttonBox.Rejected, Sub() Me.Reject()
 
         Dim mainLayout As New QVBoxLayout()
         mainLayout.MenuBar = menuBar
@@ -63,10 +64,12 @@ Public Class LayoutExample
         exitAction = fileMenu.AddAction("E&xit")
         menuBar.AddMenu(fileMenu)
 
-        ' TODO
-        ' Singal and slot just turn parameters into string literals, so in theory this should work, but doesn't seem to
-        Connect(exitAction, "triggered()", Me, "accept()")
-        'connect(exitAction, SIGNAL(triggered()), this, SLOT(accept()));
+        AddHandler exitAction.Triggered, _
+            Sub(obj As Boolean)
+                Debug.WriteLine("Menu Exit: " & obj)
+                Me.Accept()
+            End Sub
+
     End Sub
 
 
