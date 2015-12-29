@@ -16,7 +16,7 @@ Public Class Program
         QApp = QApp.CreateQApp()
 
         ' File Access - System Access Violation Error
-        QmlEngine = New QQmlApplicationEngine("main.qml")
+        'QmlEngine = New QQmlApplicationEngine("main.qml")
         'QmlEngine = New QQmlApplicationEngine("D:\SourceControl\GitRepos\QtSharp.TestApps\TestApps\QtQuick\BasicLayouts1_VB\main.qml")
 
         ' 2nd form of File Access
@@ -33,6 +33,11 @@ Public Class Program
         'Dim qarr As New QByteArray(qmltxt, Len(qmltxt))
         'QmlEngine = New QQmlApplicationEngine()
         'QmlEngine.LoadData(qarr)
+
+        ' Try QResource method
+        Debug.WriteLine(QResource.RegisterResource("qresource.rcc"))
+        Dim url1 As new QUrl("qrc:/main.qml")
+        QmlEngine = New QQmlApplicationEngine(url1)
 
         ' Run the QApplication Process
         QApplication.Exec()

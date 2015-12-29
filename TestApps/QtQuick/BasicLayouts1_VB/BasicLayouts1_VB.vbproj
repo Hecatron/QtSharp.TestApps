@@ -52,6 +52,10 @@
     <Reference Include="QtCoreSharp">
       <HintPath>..\..\..\References\QtCoreSharp.dll</HintPath>
     </Reference>
+    <Reference Include="QtGuiSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\QtGuiSharp.dll</HintPath>
+    </Reference>
     <Reference Include="QtQmlSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\QtQmlSharp.dll</HintPath>
@@ -122,6 +126,10 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="qresource.qrc" />
+    <None Include="qresource.rcc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
