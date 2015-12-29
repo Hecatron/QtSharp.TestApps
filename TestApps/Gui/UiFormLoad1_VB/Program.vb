@@ -31,7 +31,7 @@ Public Class Program
         ' Looks like we'll need to re-implement our own findchild / find children method
         ' using QWidget.Qt_qFindChild_helper
         ' see C:\Qt\Qt5.5.1\5.5\Src\qtbase\src\corelib\kernel\qobject.h
-        Dim test1 = findChild(Of QPushButton)(widg1,"pushButton")
+        'Dim test1 = findChild(Of QPushButton)(widg1,"pushButton")
 
         ' Run the QApplication Process
         QApplication.Exec()
