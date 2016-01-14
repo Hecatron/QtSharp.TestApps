@@ -105,7 +105,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Lib\QtSharpHelper\QtSharpHelper.csproj">
+    <ProjectReference Include="..\..\..\Lib\QtSharpHelper\QtSharpHelper.csproj">
       <Project>{2162cc35-77c7-45a6-88a3-f3aa21192d90}</Project>
       <Name>QtSharpHelper</Name>
     </ProjectReference>

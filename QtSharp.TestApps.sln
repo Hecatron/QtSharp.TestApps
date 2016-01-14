@@ -31,7 +31,7 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "QtQuick_Gallery_VB", "TestA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIFormLoad1_CS", "TestApps\Gui\UIFormLoad1_CS\UIFormLoad1_CS.csproj", "{FCB6CD2F-B0FF-40FC-A901-483AE7CEE06B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicLayouts1_CS", "TestApps\QtQuick\BasicLayouts1_VB\BasicLayouts1_CS\BasicLayouts1_CS.csproj", "{ACFD6502-1192-46D6-B956-4E6C60856D6D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicLayouts1_CS", "TestApps\QtQuick\BasicLayouts1_CS\BasicLayouts1_CS.csproj", "{ACFD6502-1192-46D6-B956-4E6C60856D6D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

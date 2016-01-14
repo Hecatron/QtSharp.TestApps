@@ -23,6 +23,8 @@ Public Class Program
         quickView.Source = QUrl.FromLocalFile("main.qml")
         quickView.Show()
 
+        quickView.
+
         ' Run the QApplication Process
         QApplication.Exec()
 
