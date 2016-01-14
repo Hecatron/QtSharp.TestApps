@@ -28,21 +28,32 @@ namespace BasicLayouts1_CS
         [STAThread]
         static unsafe void Main()
         {
-
-            //Application.EnableVisualStyles();
-            //Application.SetCompatibleTextRenderingDefault(false);
-
-            //int argc = 0;
-            //new QGuiApplication(ref argc, null);
-
             QGuiApp = QGuiApp.CreateQGuiApp();
 
-            QQuickView quickView = new QQuickView();
-            quickView.Source = QUrl.FromLocalFile(@"main.qml");
-            quickView.Show();
+            // 1. File Access
+            QmlEngine = new QQmlApplicationEngine("main.qml");
+
+            // 2. File Access
+            //QmlEngine = new QQmlApplicationEngine();
+            //QmlEngine.Load("main.qml");
+
+            // 3. Url Access
+            //QUrl url1 = QUrl.FromLocalFile("main.qml");
+            //QmlEngine = new QQmlApplicationEngine(url1);
+
+            // 4. LoadData
+            //string qmltxt = System.IO.File.ReadAllText("main.qml");
+            //QByteArray qarr = new QByteArray(qmltxt, qmltxt.Length);
+            //QmlEngine = new QQmlApplicationEngine();
+            //QmlEngine.LoadData(qarr);
+
+            // This shows an empty form, perhaps it's supposed to
+            //QQuickView quickView = new QQuickView();
+            //quickView.Source = QUrl.FromLocalFile(@"main.qml");
+            //quickView.Show();
 
             // Run the QApplication Process
-            QApplication.Exec();
+            QGuiApplication.Exec();
         }
     }
 }

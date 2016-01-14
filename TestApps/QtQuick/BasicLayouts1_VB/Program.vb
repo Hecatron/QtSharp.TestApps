@@ -16,17 +16,33 @@ Public Class Program
 
     Public Shared Sub Main()
 
-        QApp = QApp.CreateQApp()
-        'QGuiApp = QGuiApp.CreateQGuiApp()
+        'QApp = QApp.CreateQApp()
+        QGuiApp = QGuiApp.CreateQGuiApp()
 
-        Dim quickView As New QQuickView()
-        quickView.Source = QUrl.FromLocalFile("main.qml")
-        quickView.Show()
+        ' 1. File Access
+        QmlEngine = New QQmlApplicationEngine("main.qml")
 
-        quickView.
+        ' 2. File Access
+        'QmlEngine = New QQmlApplicationEngine()
+        'QmlEngine.Load("main.qml")
+
+        ' 3. Url Access
+        'Dim url1 As QUrl = QUrl.FromLocalFile("main.qml")
+        'QmlEngine = New QQmlApplicationEngine(url1)
+
+        ' 4. LoadData
+        'Dim qmltxt As String = System.IO.File.ReadAllText("main.qml")
+        'Dim qarr As New QByteArray(qmltxt, Len(qmltxt))
+        'QmlEngine = New QQmlApplicationEngine()
+        'QmlEngine.LoadData(qarr)
+
+        ' This shows an empty form, perhaps it's supposed to
+        'Dim quickView As New QQuickView()
+        'quickView.Source = QUrl.FromLocalFile("main.qml")
+        'quickView.Show()
 
         ' Run the QApplication Process
-        QApplication.Exec()
+        QGuiApplication.Exec()
 
     End Sub
 
