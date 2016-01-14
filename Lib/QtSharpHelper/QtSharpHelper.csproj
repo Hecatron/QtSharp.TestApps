@@ -58,7 +58,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CHelper\CHelper.cs" />
     <Compile Include="CHelper\CStringArray.cs" />
+    <Compile Include="CHelper\CStruct.cs" />
     <Compile Include="Qt\QApp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Qt\QGuiApp.cs" />

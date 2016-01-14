@@ -60,6 +60,7 @@ Public Class Program
         ' TODO need to find a way of passing types into QList, then getting the QMetaObject from it
         Dim x As New QList()
 
+
         Dim meta As QMetaObject = QPushButton.StaticMetaObject
         'Dim meta As QMetaObject = GetType(T).GetProperty("StaticMetaObject").GetValue(Nothing, Nothing)
         

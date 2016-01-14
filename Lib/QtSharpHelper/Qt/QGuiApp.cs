@@ -28,6 +28,7 @@ namespace QtSharpHelper.Qt
         protected CStringArray COpts { get; set; }
 
         protected bool disposed = false;
+        protected int argc;
 
         #endregion
 
@@ -36,14 +37,16 @@ namespace QtSharpHelper.Qt
         /// <summary> Specialised default constructor for use only by derived class. </summary>
         protected unsafe QGuiApp(List<String> opts)
         {
+            argc = opts.Count;
+            char** argv = null;
 
-            // Convert the string list to a C String Array
-            COpts = new CStringArray(opts);
-            COpts.Alloc();
-
-            // Create a new QGuiApplication
-            int argc = opts.Count;
-            char** argv = (char**)COpts.Address();
+            if (opts.Count > 0)
+            {
+                // Convert the string list to a C String Array
+                COpts = new CStringArray(opts);
+                COpts.Alloc();
+                argv = (char**)COpts.Address();
+            }
             _QGuiApplication = new QGuiApplication(ref argc, argv);
         }
 
@@ -53,7 +56,7 @@ namespace QtSharpHelper.Qt
         {
             if (_QGuiApplication != null) throw new Exception("Only one QGuiApplication class may be created at a time");
             List<String> opts = new List<String>();
-            opts.Add("");
+            //opts.Add("");
             QGuiApp ret = new QGuiApp(opts);
             return ret;
         }

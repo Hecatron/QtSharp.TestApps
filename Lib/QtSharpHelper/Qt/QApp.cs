@@ -25,6 +25,7 @@ namespace QtSharpHelper.Qt
         protected CStringArray COpts { get; set; }
 
         protected bool disposed = false;
+        protected int argc;
 
         #endregion
 
@@ -33,14 +34,16 @@ namespace QtSharpHelper.Qt
         /// <summary> Specialised default constructor for use only by derived class. </summary>
         protected unsafe QApp(List<String> opts)
         {
+            argc = opts.Count;
+            char** argv = null;
 
-            // Convert the string list to a C String Array
-            COpts = new CStringArray(opts);
-            COpts.Alloc();
-
-            // Create a new QApplication
-            int argc = opts.Count;
-            char** argv = (char**)COpts.Address();
+            if (opts.Count > 0)
+            {
+                // Convert the string list to a C String Array
+                COpts = new CStringArray(opts);
+                COpts.Alloc();
+                argv = (char**)COpts.Address();
+            }
             _QApplication = new QApplication(ref argc, argv);
         }
 

@@ -27136,106 +27136,6 @@
             <para>This function is provided for STL compatibility. It is equivalent to isEmpty() and returns true if the array is empty.</para>
             </summary>
         </member>
-        <member name="T:QtCore.QJsonArray.Const_iterator">
-            <summary>
-            <para>The QJsonArray::const_iterator class provides an STL-style const iterator for QJsonArray.</para>
-            </summary>
-            <remarks>
-            <para>QJsonArray::const_iterator allows you to iterate over a QJsonArray. If you want to modify the QJsonArray as you iterate over it, use QJsonArray::iterator instead. It is generally a good practice to use QJsonArray::const_iterator on a non-const QJsonArray as well, unless you need to change the QJsonArray through the iterator. Const iterators are slightly faster and improves code readability.</para>
-            <para>The default QJsonArray::const_iterator constructor creates an uninitialized iterator. You must initialize it using a QJsonArray function like QJsonArray::constBegin(), QJsonArray::constEnd(), or QJsonArray::insert() before you can start iterating.</para>
-            <para>Most QJsonArray functions accept an integer index rather than an iterator. For that reason, iterators are rarely useful in connection with QJsonArray. One place where STL-style iterators do make sense is as arguments to generic algorithms.</para>
-            <para>Multiple iterators can be used on the same array. However, be aware that any non-const function call performed on the QJsonArray will render all existing iterators undefined.</para>
-            <para></para>
-            <para>See also QJsonArray::iterator.</para>
-            </remarks>
-        </member>
-        <member name="M:QtCore.QJsonArray.Const_iterator.#ctor">
-            <summary>
-            <para>Constructs an uninitialized iterator.</para>
-            <para>Functions like operator*() and operator++() should not be called on an uninitialized iterator. Use operator=() to assign a value to it before using it.</para>
-            <para>See also QJsonArray::constBegin() and QJsonArray::constEnd().</para>
-            </summary>
-        </member>
-        <member name="M:QtCore.QJsonArray.Const_iterator.#ctor(QtCore.QJsonArray.Const_iterator)">
-            <summary>
-            <para>Constructs a copy of other.</para>
-            </summary>
-        </member>
-        <member name="M:QtCore.QJsonArray.Const_iterator.#ctor(QtCore.QJsonArray.Iterator)">
-            <summary>
-            <para>Constructs a copy of other.</para>
-            </summary>
-        </member>
-        <member name="M:QtCore.QJsonArray.Const_iterator.op_Equality(QtCore.QJsonArray.Const_iterator,QtCore.QJsonArray.Const_iterator)">
-            <summary>
-            <para>Returns true if other points to the same item as this iterator; otherwise returns false.</para>
-            <para>See also operator!=().</para>
-            </summary>
-        </member>
-        <member name="M:QtCore.QJsonArray.Const_iterator.op_Inequality(QtCore.QJsonArray.Const_iterator,QtCore.QJsonArray.Const_iterator)">
-            <summary>
-            <para>Returns true if other points to a different item than this iterator; otherwise returns false.</para>
-            <para>See also operator==().</para>
-            </summary>
-        </member>
-        <member name="M:QtCore.QJsonArray.Const_iterator.op_LessThan(QtCore.QJsonArray.Const_iterator,QtCore.QJsonArray.Const_iterator)">
-            <summary>
-            <para>Returns true if the item pointed to by this iterator is less than the item pointed to by the other iterator.</para>
-            </summary>
-        </member>
-        <member name="M:QtCore.QJsonArray.Const_iterator.op_LessThanOrEqual(QtCore.QJsonArray.Const_iterator,QtCore.QJsonArray.Const_iterator)">
-            <summary>
-            <para>Returns true if the item pointed to by this iterator is less than or equal to the item pointed to by the other iterator.</para>
-            </summary>
-        </member>
-        <member name="M:QtCore.QJsonArray.Const_iterator.op_GreaterThan(QtCore.QJsonArray.Const_iterator,QtCore.QJsonArray.Const_iterator)">
-            <summary>
-            <para>Returns true if the item pointed to by this iterator is greater than the item pointed to by the other iterator.</para>
-            </summary>
-        </member>
-        <member name="M:QtCore.QJsonArray.Const_iterator.op_GreaterThanOrEqual(QtCore.QJsonArray.Const_iterator,QtCore.QJsonArray.Const_iterator)">
-            <summary>
-            <para>Returns true if the item pointed to by this iterator is greater than or equal to the item pointed to by the other iterator.</para>
-            </summary>
-        </member>
-        <member name="M:QtCore.QJsonArray.Const_iterator.op_Increment(QtCore.QJsonArray.Const_iterator)">
-            <summary>
-            <para>The prefix ++ operator, ++it, advances the iterator to the next item in the array and returns an iterator to the new current item.</para>
-            <para>Calling this function on QJsonArray::end() leads to undefined results.</para>
-            <para>See also operator--().</para>
-            </summary>
-        </member>
-        <member name="M:QtCore.QJsonArray.Const_iterator.op_Decrement(QtCore.QJsonArray.Const_iterator)">
-            <summary>
-            <para>The prefix -- operator, --it, makes the preceding item current and returns an iterator to the new current item.</para>
-            <para>Calling this function on QJsonArray::begin() leads to undefined results.</para>
-            <para>See also operator++().</para>
-            </summary>
-        </member>
-        <member name="M:QtCore.QJsonArray.Const_iterator.op_Addition(QtCore.QJsonArray.Const_iterator,System.Int32)">
-            <summary>
-            <para>Returns an iterator to the item at j positions forward from this iterator. If j is negative, the iterator goes backward.</para>
-            <para>See also operator-() and operator+=().</para>
-            </summary>
-        </member>
-        <member name="M:QtCore.QJsonArray.Const_iterator.op_Subtraction(QtCore.QJsonArray.Const_iterator,System.Int32)">
-            <summary>
-            <para>Returns an iterator to the item at j positions backward from this iterator. If j is negative, the iterator goes forward.</para>
-            <para>See also operator+() and operator-=().</para>
-            </summary>
-        </member>
-        <member name="M:QtCore.QJsonArray.Const_iterator.op_Subtraction(QtCore.QJsonArray.Const_iterator,QtCore.QJsonArray.Const_iterator)">
-            <summary>
-            <para>Returns the number of items between the item pointed to by other and the item pointed to by this iterator.</para>
-            </summary>
-        </member>
-        <member name="P:QtCore.QJsonArray.Const_iterator.Item(System.Int32)">
-            <summary>
-            <para>Returns the item at offset j from the item pointed to by this iterator (the item at position *this + j).</para>
-            <para>This function is provided to make QJsonArray iterators behave like C++ pointers.</para>
-            <para>See also operator+().</para>
-            </summary>
-        </member>
         <member name="T:QtCore.QJsonArray.Iterator">
             <summary>
             <para>The QJsonArray::iterator class provides an STL-style non-const iterator for QJsonArray.</para>
@@ -27356,6 +27256,106 @@
             <para>Returns a modifiable reference to the item at offset j from the item pointed to by this iterator (the item at position *this + j).</para>
             <para>This function is provided to make QJsonArray iterators behave like C++ pointers.</para>
             <para>The return value is of type  and QJsonObject. When you get an object of type  use it as if it were a reference to a QJsonValue. If you assign to it, the assignment will apply to the character in the QJsonArray of QJsonObject from which you got the reference.</para>
+            <para>See also operator+().</para>
+            </summary>
+        </member>
+        <member name="T:QtCore.QJsonArray.Const_iterator">
+            <summary>
+            <para>The QJsonArray::const_iterator class provides an STL-style const iterator for QJsonArray.</para>
+            </summary>
+            <remarks>
+            <para>QJsonArray::const_iterator allows you to iterate over a QJsonArray. If you want to modify the QJsonArray as you iterate over it, use QJsonArray::iterator instead. It is generally a good practice to use QJsonArray::const_iterator on a non-const QJsonArray as well, unless you need to change the QJsonArray through the iterator. Const iterators are slightly faster and improves code readability.</para>
+            <para>The default QJsonArray::const_iterator constructor creates an uninitialized iterator. You must initialize it using a QJsonArray function like QJsonArray::constBegin(), QJsonArray::constEnd(), or QJsonArray::insert() before you can start iterating.</para>
+            <para>Most QJsonArray functions accept an integer index rather than an iterator. For that reason, iterators are rarely useful in connection with QJsonArray. One place where STL-style iterators do make sense is as arguments to generic algorithms.</para>
+            <para>Multiple iterators can be used on the same array. However, be aware that any non-const function call performed on the QJsonArray will render all existing iterators undefined.</para>
+            <para></para>
+            <para>See also QJsonArray::iterator.</para>
+            </remarks>
+        </member>
+        <member name="M:QtCore.QJsonArray.Const_iterator.#ctor">
+            <summary>
+            <para>Constructs an uninitialized iterator.</para>
+            <para>Functions like operator*() and operator++() should not be called on an uninitialized iterator. Use operator=() to assign a value to it before using it.</para>
+            <para>See also QJsonArray::constBegin() and QJsonArray::constEnd().</para>
+            </summary>
+        </member>
+        <member name="M:QtCore.QJsonArray.Const_iterator.#ctor(QtCore.QJsonArray.Const_iterator)">
+            <summary>
+            <para>Constructs a copy of other.</para>
+            </summary>
+        </member>
+        <member name="M:QtCore.QJsonArray.Const_iterator.#ctor(QtCore.QJsonArray.Iterator)">
+            <summary>
+            <para>Constructs a copy of other.</para>
+            </summary>
+        </member>
+        <member name="M:QtCore.QJsonArray.Const_iterator.op_Equality(QtCore.QJsonArray.Const_iterator,QtCore.QJsonArray.Const_iterator)">
+            <summary>
+            <para>Returns true if other points to the same item as this iterator; otherwise returns false.</para>
+            <para>See also operator!=().</para>
+            </summary>
+        </member>
+        <member name="M:QtCore.QJsonArray.Const_iterator.op_Inequality(QtCore.QJsonArray.Const_iterator,QtCore.QJsonArray.Const_iterator)">
+            <summary>
+            <para>Returns true if other points to a different item than this iterator; otherwise returns false.</para>
+            <para>See also operator==().</para>
+            </summary>
+        </member>
+        <member name="M:QtCore.QJsonArray.Const_iterator.op_LessThan(QtCore.QJsonArray.Const_iterator,QtCore.QJsonArray.Const_iterator)">
+            <summary>
+            <para>Returns true if the item pointed to by this iterator is less than the item pointed to by the other iterator.</para>
+            </summary>
+        </member>
+        <member name="M:QtCore.QJsonArray.Const_iterator.op_LessThanOrEqual(QtCore.QJsonArray.Const_iterator,QtCore.QJsonArray.Const_iterator)">
+            <summary>
+            <para>Returns true if the item pointed to by this iterator is less than or equal to the item pointed to by the other iterator.</para>
+            </summary>
+        </member>
+        <member name="M:QtCore.QJsonArray.Const_iterator.op_GreaterThan(QtCore.QJsonArray.Const_iterator,QtCore.QJsonArray.Const_iterator)">
+            <summary>
+            <para>Returns true if the item pointed to by this iterator is greater than the item pointed to by the other iterator.</para>
+            </summary>
+        </member>
+        <member name="M:QtCore.QJsonArray.Const_iterator.op_GreaterThanOrEqual(QtCore.QJsonArray.Const_iterator,QtCore.QJsonArray.Const_iterator)">
+            <summary>
+            <para>Returns true if the item pointed to by this iterator is greater than or equal to the item pointed to by the other iterator.</para>
+            </summary>
+        </member>
+        <member name="M:QtCore.QJsonArray.Const_iterator.op_Increment(QtCore.QJsonArray.Const_iterator)">
+            <summary>
+            <para>The prefix ++ operator, ++it, advances the iterator to the next item in the array and returns an iterator to the new current item.</para>
+            <para>Calling this function on QJsonArray::end() leads to undefined results.</para>
+            <para>See also operator--().</para>
+            </summary>
+        </member>
+        <member name="M:QtCore.QJsonArray.Const_iterator.op_Decrement(QtCore.QJsonArray.Const_iterator)">
+            <summary>
+            <para>The prefix -- operator, --it, makes the preceding item current and returns an iterator to the new current item.</para>
+            <para>Calling this function on QJsonArray::begin() leads to undefined results.</para>
+            <para>See also operator++().</para>
+            </summary>
+        </member>
+        <member name="M:QtCore.QJsonArray.Const_iterator.op_Addition(QtCore.QJsonArray.Const_iterator,System.Int32)">
+            <summary>
+            <para>Returns an iterator to the item at j positions forward from this iterator. If j is negative, the iterator goes backward.</para>
+            <para>See also operator-() and operator+=().</para>
+            </summary>
+        </member>
+        <member name="M:QtCore.QJsonArray.Const_iterator.op_Subtraction(QtCore.QJsonArray.Const_iterator,System.Int32)">
+            <summary>
+            <para>Returns an iterator to the item at j positions backward from this iterator. If j is negative, the iterator goes forward.</para>
+            <para>See also operator+() and operator-=().</para>
+            </summary>
+        </member>
+        <member name="M:QtCore.QJsonArray.Const_iterator.op_Subtraction(QtCore.QJsonArray.Const_iterator,QtCore.QJsonArray.Const_iterator)">
+            <summary>
+            <para>Returns the number of items between the item pointed to by other and the item pointed to by this iterator.</para>
+            </summary>
+        </member>
+        <member name="P:QtCore.QJsonArray.Const_iterator.Item(System.Int32)">
+            <summary>
+            <para>Returns the item at offset j from the item pointed to by this iterator (the item at position *this + j).</para>
+            <para>This function is provided to make QJsonArray iterators behave like C++ pointers.</para>
             <para>See also operator+().</para>
             </summary>
         </member>
@@ -27770,6 +27770,90 @@
             <para>This function is provided for STL compatibility. It is equivalent to isEmpty(), returning true if the object is empty; otherwise returning false.</para>
             </summary>
         </member>
+        <member name="T:QtCore.QJsonObject.Iterator">
+            <summary>
+            <para>The QJsonObject::iterator class provides an STL-style non-const iterator for QJsonObject.</para>
+            </summary>
+            <remarks>
+            <para>QJsonObject::iterator allows you to iterate over a QJsonObject and to modify the value (but not the key) stored under a particular key. If you want to iterate over a const QJsonObject, you should use QJsonObject::const_iterator. It is generally good practice to use QJsonObject::const_iterator on a non-const QJsonObject as well, unless you need to change the QJsonObject through the iterator. Const iterators are slightly faster, and improve code readability.</para>
+            <para>The default QJsonObject::iterator constructor creates an uninitialized iterator. You must initialize it using a QJsonObject function like QJsonObject::begin(), QJsonObject::end(), or QJsonObject::find() before you can start iterating.</para>
+            <para>Multiple iterators can be used on the same object. Existing iterators will however become dangling once the object gets modified.</para>
+            <para></para>
+            <para>See also QJsonObject::const_iterator, JSON Support in Qt, and JSON Save Game Example.</para>
+            </remarks>
+        </member>
+        <member name="M:QtCore.QJsonObject.Iterator.#ctor">
+            <summary>
+            <para>Constructs an uninitialized iterator.</para>
+            <para>Functions like key(), value(), and operator++() must not be called on an uninitialized iterator. Use operator=() to assign a value to it before using it.</para>
+            <para>See also QJsonObject::begin() and QJsonObject::end().</para>
+            </summary>
+        </member>
+        <member name="M:QtCore.QJsonObject.Iterator.op_Equality(QtCore.QJsonObject.Iterator,QtCore.QJsonObject.Iterator)">
+            <summary>
+            <para>Returns true if other points to the same item as this iterator; otherwise returns false.</para>
+            <para>See also operator!=().</para>
+            </summary>
+        </member>
+        <member name="M:QtCore.QJsonObject.Iterator.op_Inequality(QtCore.QJsonObject.Iterator,QtCore.QJsonObject.Iterator)">
+            <summary>
+            <para>Returns true if other points to a different item than this iterator; otherwise returns false.</para>
+            <para>See also operator==().</para>
+            </summary>
+        </member>
+        <member name="M:QtCore.QJsonObject.Iterator.op_Increment(QtCore.QJsonObject.Iterator)">
+            <summary>
+            <para>The prefix ++ operator, ++i, advances the iterator to the next item in the object and returns an iterator to the new current item.</para>
+            <para>Calling this function on QJsonObject::end() leads to undefined results.</para>
+            <para>See also operator--().</para>
+            </summary>
+        </member>
+        <member name="M:QtCore.QJsonObject.Iterator.op_Decrement(QtCore.QJsonObject.Iterator)">
+            <summary>
+            <para>The prefix -- operator, --i, makes the preceding item current and returns an iterator pointing to the new current item.</para>
+            <para>Calling this function on QJsonObject::begin() leads to undefined results.</para>
+            <para>See also operator++().</para>
+            </summary>
+        </member>
+        <member name="M:QtCore.QJsonObject.Iterator.op_Addition(QtCore.QJsonObject.Iterator,System.Int32)">
+            <summary>
+            <para>Returns an iterator to the item at j positions forward from this iterator. If j is negative, the iterator goes backward.</para>
+            <para>See also operator-().</para>
+            </summary>
+        </member>
+        <member name="M:QtCore.QJsonObject.Iterator.op_Subtraction(QtCore.QJsonObject.Iterator,System.Int32)">
+            <summary>
+            <para>Returns an iterator to the item at j positions backward from this iterator. If j is negative, the iterator goes forward.</para>
+            <para>See also operator+().</para>
+            </summary>
+        </member>
+        <member name="M:QtCore.QJsonObject.Iterator.op_Equality(QtCore.QJsonObject.Iterator,QtCore.QJsonObject.Const_iterator)">
+            <summary>
+            <para>Returns true if other points to the same item as this iterator; otherwise returns false.</para>
+            <para>See also operator!=().</para>
+            </summary>
+        </member>
+        <member name="M:QtCore.QJsonObject.Iterator.op_Inequality(QtCore.QJsonObject.Iterator,QtCore.QJsonObject.Const_iterator)">
+            <summary>
+            <para>Returns true if other points to a different item than this iterator; otherwise returns false.</para>
+            <para>See also operator==().</para>
+            </summary>
+        </member>
+        <member name="P:QtCore.QJsonObject.Iterator.Key">
+            <summary>
+            <para>Returns the current item's key.</para>
+            <para>There is no direct way of changing an item's key through an iterator, although it can be done by calling QJsonObject::erase() followed by QJsonObject::insert().</para>
+            <para>See also value().</para>
+            </summary>
+        </member>
+        <member name="P:QtCore.QJsonObject.Iterator.Value">
+            <summary>
+            <para>Returns a modifiable reference to the current item's value.</para>
+            <para>You can change the value of an item by using value() on the left side of an assignment.</para>
+            <para>The return value is of type QJsonValueRef, a helper class for QJsonArray and QJsonObject. When you get an object of type QJsonValueRef, you can use it as if it were a reference to a QJsonValue. If you assign to it, the assignment will apply to the element in the QJsonArray or QJsonObject from which you got the reference.</para>
+            <para>See also key() and operator*().</para>
+            </summary>
+        </member>
         <member name="T:QtCore.QJsonObject.Const_iterator">
             <summary>
             <para>The QJsonObject::const_iterator class provides an STL-style const iterator for QJsonObject.</para>
@@ -27855,90 +27939,6 @@
         <member name="P:QtCore.QJsonObject.Const_iterator.Value">
             <summary>
             <para>Returns the current item's value.</para>
-            <para>See also key() and operator*().</para>
-            </summary>
-        </member>
-        <member name="T:QtCore.QJsonObject.Iterator">
-            <summary>
-            <para>The QJsonObject::iterator class provides an STL-style non-const iterator for QJsonObject.</para>
-            </summary>
-            <remarks>
-            <para>QJsonObject::iterator allows you to iterate over a QJsonObject and to modify the value (but not the key) stored under a particular key. If you want to iterate over a const QJsonObject, you should use QJsonObject::const_iterator. It is generally good practice to use QJsonObject::const_iterator on a non-const QJsonObject as well, unless you need to change the QJsonObject through the iterator. Const iterators are slightly faster, and improve code readability.</para>
-            <para>The default QJsonObject::iterator constructor creates an uninitialized iterator. You must initialize it using a QJsonObject function like QJsonObject::begin(), QJsonObject::end(), or QJsonObject::find() before you can start iterating.</para>
-            <para>Multiple iterators can be used on the same object. Existing iterators will however become dangling once the object gets modified.</para>
-            <para></para>
-            <para>See also QJsonObject::const_iterator, JSON Support in Qt, and JSON Save Game Example.</para>
-            </remarks>
-        </member>
-        <member name="M:QtCore.QJsonObject.Iterator.#ctor">
-            <summary>
-            <para>Constructs an uninitialized iterator.</para>
-            <para>Functions like key(), value(), and operator++() must not be called on an uninitialized iterator. Use operator=() to assign a value to it before using it.</para>
-            <para>See also QJsonObject::begin() and QJsonObject::end().</para>
-            </summary>
-        </member>
-        <member name="M:QtCore.QJsonObject.Iterator.op_Equality(QtCore.QJsonObject.Iterator,QtCore.QJsonObject.Iterator)">
-            <summary>
-            <para>Returns true if other points to the same item as this iterator; otherwise returns false.</para>
-            <para>See also operator!=().</para>
-            </summary>
-        </member>
-        <member name="M:QtCore.QJsonObject.Iterator.op_Inequality(QtCore.QJsonObject.Iterator,QtCore.QJsonObject.Iterator)">
-            <summary>
-            <para>Returns true if other points to a different item than this iterator; otherwise returns false.</para>
-            <para>See also operator==().</para>
-            </summary>
-        </member>
-        <member name="M:QtCore.QJsonObject.Iterator.op_Increment(QtCore.QJsonObject.Iterator)">
-            <summary>
-            <para>The prefix ++ operator, ++i, advances the iterator to the next item in the object and returns an iterator to the new current item.</para>
-            <para>Calling this function on QJsonObject::end() leads to undefined results.</para>
-            <para>See also operator--().</para>
-            </summary>
-        </member>
-        <member name="M:QtCore.QJsonObject.Iterator.op_Decrement(QtCore.QJsonObject.Iterator)">
-            <summary>
-            <para>The prefix -- operator, --i, makes the preceding item current and returns an iterator pointing to the new current item.</para>
-            <para>Calling this function on QJsonObject::begin() leads to undefined results.</para>
-            <para>See also operator++().</para>
-            </summary>
-        </member>
-        <member name="M:QtCore.QJsonObject.Iterator.op_Addition(QtCore.QJsonObject.Iterator,System.Int32)">
-            <summary>
-            <para>Returns an iterator to the item at j positions forward from this iterator. If j is negative, the iterator goes backward.</para>
-            <para>See also operator-().</para>
-            </summary>
-        </member>
-        <member name="M:QtCore.QJsonObject.Iterator.op_Subtraction(QtCore.QJsonObject.Iterator,System.Int32)">
-            <summary>
-            <para>Returns an iterator to the item at j positions backward from this iterator. If j is negative, the iterator goes forward.</para>
-            <para>See also operator+().</para>
-            </summary>
-        </member>
-        <member name="M:QtCore.QJsonObject.Iterator.op_Equality(QtCore.QJsonObject.Iterator,QtCore.QJsonObject.Const_iterator)">
-            <summary>
-            <para>Returns true if other points to the same item as this iterator; otherwise returns false.</para>
-            <para>See also operator!=().</para>
-            </summary>
-        </member>
-        <member name="M:QtCore.QJsonObject.Iterator.op_Inequality(QtCore.QJsonObject.Iterator,QtCore.QJsonObject.Const_iterator)">
-            <summary>
-            <para>Returns true if other points to a different item than this iterator; otherwise returns false.</para>
-            <para>See also operator==().</para>
-            </summary>
-        </member>
-        <member name="P:QtCore.QJsonObject.Iterator.Key">
-            <summary>
-            <para>Returns the current item's key.</para>
-            <para>There is no direct way of changing an item's key through an iterator, although it can be done by calling QJsonObject::erase() followed by QJsonObject::insert().</para>
-            <para>See also value().</para>
-            </summary>
-        </member>
-        <member name="P:QtCore.QJsonObject.Iterator.Value">
-            <summary>
-            <para>Returns a modifiable reference to the current item's value.</para>
-            <para>You can change the value of an item by using value() on the left side of an assignment.</para>
-            <para>The return value is of type QJsonValueRef, a helper class for QJsonArray and QJsonObject. When you get an object of type QJsonValueRef, you can use it as if it were a reference to a QJsonValue. If you assign to it, the assignment will apply to the element in the QJsonArray or QJsonObject from which you got the reference.</para>
             <para>See also key() and operator*().</para>
             </summary>
         </member>
