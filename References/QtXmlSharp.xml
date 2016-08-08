@@ -74,21 +74,25 @@
             <para></para>
             <para>Sets the invalid data policy, which specifies what should be done when a factory function in QDomDocument is passed invalid data.</para>
             <para>The policy is set for all instances of QDomDocument which already exist and which will be created in the future.</para>
-            <para>QDomDocument doc;</para>
-            <para>QDomImplementation impl;</para>
             <para></para>
-            <para>// This will create the element, but the resulting XML document will</para>
-            <para>// be invalid, because '~' is not a valid character in a tag name.</para>
-            <para>impl.setInvalidDataPolicy(QDomImplementation::AcceptInvalidData);</para>
-            <para>QDomElement elt1 = doc.createElement(&quot;foo~bar&quot;);</para>
             <para></para>
-            <para>// This will create an element with the tag name &quot;foobar&quot;.</para>
-            <para>impl.setInvalidDataPolicy(QDomImplementation::DropInvalidData);</para>
-            <para>QDomElement elt2 = doc.createElement(&quot;foo~bar&quot;);</para>
+            <para>  QDomDocument doc;</para>
+            <para>  QDomImplementation impl;</para>
             <para></para>
-            <para>// This will create a null element.</para>
-            <para>impl.setInvalidDataPolicy(QDomImplementation::ReturnNullNode);</para>
-            <para>QDomElement elt3 = doc.createElement(&quot;foo~bar&quot;);</para>
+            <para>  // This will create the element, but the resulting XML document will</para>
+            <para>  // be invalid, because '~' is not a valid character in a tag name.</para>
+            <para>  impl.setInvalidDataPolicy(QDomImplementation::AcceptInvalidData);</para>
+            <para>  QDomElement elt1 = doc.createElement(&quot;foo~bar&quot;);</para>
+            <para></para>
+            <para>  // This will create an element with the tag name &quot;foobar&quot;.</para>
+            <para>  impl.setInvalidDataPolicy(QDomImplementation::DropInvalidData);</para>
+            <para>  QDomElement elt2 = doc.createElement(&quot;foo~bar&quot;);</para>
+            <para></para>
+            <para>  // This will create a null element.</para>
+            <para>  impl.setInvalidDataPolicy(QDomImplementation::ReturnNullNode);</para>
+            <para>  QDomElement elt3 = doc.createElement(&quot;foo~bar&quot;);</para>
+            <para></para>
+            <para></para>
             <para>Warning: This function is not reentrant.</para>
             <para>This function was introduced in  Qt 4.1.</para>
             <para>See also invalidDataPolicy() and InvalidDataPolicy.</para>
@@ -132,17 +136,21 @@
             <para>QDomElement and QDomAttr nodes can have namespaces which can be retrieved with namespaceURI(). Their local name is retrieved with localName(), and their prefix with prefix(). The prefix can be set with setPrefix().</para>
             <para>You can write the XML representation of the node to a text stream with save().</para>
             <para>The following example looks for the first element in an XML document and prints the names of all the elements that are its direct children.</para>
-            <para>QDomDocument d;</para>
-            <para>d.setContent(someXML);</para>
-            <para>QDomNode n = d.firstChild();</para>
-            <para>while (!n.isNull()) {</para>
-            <para>    if (n.isElement()) {</para>
-            <para>        QDomElement e = n.toElement();</para>
-            <para>        cout &lt;&lt; &quot;Element name: &quot; &lt;&lt; e.tagName() &lt;&lt; endl;</para>
-            <para>        break;</para>
-            <para>    }</para>
-            <para>    n = n.nextSibling();</para>
-            <para>}</para>
+            <para></para>
+            <para></para>
+            <para>  QDomDocument d;</para>
+            <para>  d.setContent(someXML);</para>
+            <para>  QDomNode n = d.firstChild();</para>
+            <para>  while (!n.isNull()) {</para>
+            <para>      if (n.isElement()) {</para>
+            <para>          QDomElement e = n.toElement();</para>
+            <para>          cout &lt;&lt; &quot;Element name: &quot; &lt;&lt; e.tagName() &lt;&lt; endl;</para>
+            <para>          break;</para>
+            <para>      }</para>
+            <para>      n = n.nextSibling();</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>For further information about the Document Object Model see Level 1 and Level 2 Core. For a more general introduction of the DOM implementation see the QDomDocument documentation.</para>
             </remarks>
         </member>
@@ -161,12 +169,20 @@
             <summary>
             <para>Returns true if n and this DOM node are equal; otherwise returns false.</para>
             <para>Any instance of QDomNode acts as a reference to an underlying data structure in QDomDocument. The test for equality checks if the two references point to the same underlying node. For example:</para>
-            <para>QDomDocument document;</para>
-            <para>QDomElement element1 = document.documentElement();</para>
-            <para>QDomElement element2 = element1;</para>
+            <para></para>
+            <para></para>
+            <para>  QDomDocument document;</para>
+            <para>  QDomElement element1 = document.documentElement();</para>
+            <para>  QDomElement element2 = element1;</para>
+            <para></para>
+            <para></para>
             <para>The two nodes (QDomElement is a QDomNode subclass) both refer to the document's root element, and element1 == element2 will return true. On the other hand:</para>
-            <para>QDomElement element3 = document.createElement(&quot;MyElement&quot;);</para>
-            <para>QDomElement element4 = document.createElement(&quot;MyElement&quot;);</para>
+            <para></para>
+            <para></para>
+            <para>  QDomElement element3 = document.createElement(&quot;MyElement&quot;);</para>
+            <para>  QDomElement element4 = document.createElement(&quot;MyElement&quot;);</para>
+            <para></para>
+            <para></para>
             <para>Even though both nodes are empty elements carrying the same name, element3 == element4 will return false because they refer to two different nodes in the underlying data structure.</para>
             </summary>
         </member>
@@ -440,10 +456,14 @@
             <para>Returns a list of all direct child nodes.</para>
             <para>Most often you will call this function on a QDomElement object.</para>
             <para>For example, if the XML document looks like this:</para>
-            <para>&lt;body&gt;</para>
-            <para>&lt;h1&gt;Heading&lt;/h1&gt;</para>
-            <para>&lt;p&gt;Hello &lt;b&gt;you&lt;/b&gt;&lt;/p&gt;</para>
-            <para>&lt;/body&gt;</para>
+            <para></para>
+            <para></para>
+            <para>  &lt;body&gt;</para>
+            <para>  &lt;h1&gt;Heading&lt;/h1&gt;</para>
+            <para>  &lt;p&gt;Hello &lt;b&gt;you&lt;/b&gt;&lt;/p&gt;</para>
+            <para>  &lt;/body&gt;</para>
+            <para></para>
+            <para></para>
             <para>Then the list of child nodes for the &quot;body&quot;-element will contain the node created by the &amp;lt;h1&amp;gt; tag and the node created by the &amp;lt;p&amp;gt; tag.</para>
             <para>The nodes in the list are not copied; so changing the nodes in the list will also change the children of this node.</para>
             <para>See also firstChild() and lastChild().</para>
@@ -465,9 +485,13 @@
             <summary>
             <para>Returns the previous sibling in the document tree. Changing the returned node will also change the node in the document tree.</para>
             <para>For example, if you have XML like this:</para>
-            <para>&lt;h1&gt;Heading&lt;/h1&gt;</para>
-            <para>&lt;p&gt;The text...&lt;/p&gt;</para>
-            <para>&lt;h2&gt;Next heading&lt;/h2&gt;</para>
+            <para></para>
+            <para></para>
+            <para>  &lt;h1&gt;Heading&lt;/h1&gt;</para>
+            <para>  &lt;p&gt;The text...&lt;/p&gt;</para>
+            <para>  &lt;h2&gt;Next heading&lt;/h2&gt;</para>
+            <para></para>
+            <para></para>
             <para>and this QDomNode represents the &amp;lt;p&amp;gt; tag, previousSibling() will return the node representing the &amp;lt;h1&amp;gt; tag.</para>
             <para>See also nextSibling().</para>
             </summary>
@@ -476,9 +500,13 @@
             <summary>
             <para>Returns the next sibling in the document tree. Changing the returned node will also change the node in the document tree.</para>
             <para>If you have XML like this:</para>
-            <para>&lt;h1&gt;Heading&lt;/h1&gt;</para>
-            <para>&lt;p&gt;The text...&lt;/p&gt;</para>
-            <para>&lt;h2&gt;Next heading&lt;/h2&gt;</para>
+            <para></para>
+            <para></para>
+            <para>  &lt;h1&gt;Heading&lt;/h1&gt;</para>
+            <para>  &lt;p&gt;The text...&lt;/p&gt;</para>
+            <para>  &lt;h2&gt;Next heading&lt;/h2&gt;</para>
+            <para></para>
+            <para></para>
             <para>and this QDomNode represents the &lt;p&gt; tag, nextSibling() will return the node representing the &lt;h2&gt; tag.</para>
             <para>See also previousSibling().</para>
             </summary>
@@ -786,46 +814,54 @@
             <para>It is possible to insert a node from another document into the document using importNode().</para>
             <para>You can obtain a list of all the elements that have a particular tag with elementsByTagName() or with elementsByTagNameNS().</para>
             <para>The QDom classes are typically used as follows:</para>
-            <para>QDomDocument doc(&quot;mydocument&quot;);</para>
-            <para>QFile file(&quot;mydocument.xml&quot;);</para>
-            <para>if (!file.open(QIODevice::ReadOnly))</para>
-            <para>    return;</para>
-            <para>if (!doc.setContent(&amp;file)) {</para>
-            <para>    file.close();</para>
-            <para>    return;</para>
-            <para>}</para>
-            <para>file.close();</para>
             <para></para>
-            <para>// print out the element names of all elements that are direct children</para>
-            <para>// of the outermost element.</para>
-            <para>QDomElement docElem = doc.documentElement();</para>
             <para></para>
-            <para>QDomNode n = docElem.firstChild();</para>
-            <para>while(!n.isNull()) {</para>
-            <para>    QDomElement e = n.toElement(); // try to convert the node to an element.</para>
-            <para>    if(!e.isNull()) {</para>
-            <para>        cout &lt;&lt; qPrintable(e.tagName()) &lt;&lt; endl; // the node really is an element.</para>
-            <para>    }</para>
-            <para>    n = n.nextSibling();</para>
-            <para>}</para>
+            <para>  QDomDocument doc(&quot;mydocument&quot;);</para>
+            <para>  QFile file(&quot;mydocument.xml&quot;);</para>
+            <para>  if (!file.open(QIODevice::ReadOnly))</para>
+            <para>      return;</para>
+            <para>  if (!doc.setContent(&amp;file)) {</para>
+            <para>      file.close();</para>
+            <para>      return;</para>
+            <para>  }</para>
+            <para>  file.close();</para>
             <para></para>
-            <para>// Here we append a new element to the end of the document</para>
-            <para>QDomElement elem = doc.createElement(&quot;img&quot;);</para>
-            <para>elem.setAttribute(&quot;src&quot;, &quot;myimage.png&quot;);</para>
-            <para>docElem.appendChild(elem);</para>
+            <para>  // print out the element names of all elements that are direct children</para>
+            <para>  // of the outermost element.</para>
+            <para>  QDomElement docElem = doc.documentElement();</para>
+            <para></para>
+            <para>  QDomNode n = docElem.firstChild();</para>
+            <para>  while(!n.isNull()) {</para>
+            <para>      QDomElement e = n.toElement(); // try to convert the node to an element.</para>
+            <para>      if(!e.isNull()) {</para>
+            <para>          cout &lt;&lt; qPrintable(e.tagName()) &lt;&lt; endl; // the node really is an element.</para>
+            <para>      }</para>
+            <para>      n = n.nextSibling();</para>
+            <para>  }</para>
+            <para></para>
+            <para>  // Here we append a new element to the end of the document</para>
+            <para>  QDomElement elem = doc.createElement(&quot;img&quot;);</para>
+            <para>  elem.setAttribute(&quot;src&quot;, &quot;myimage.png&quot;);</para>
+            <para>  docElem.appendChild(elem);</para>
+            <para></para>
+            <para></para>
             <para>Once doc and elem go out of scope, the whole internal tree representing the XML document is deleted.</para>
             <para>To create a document using DOM use code like this:</para>
-            <para>QDomDocument doc(&quot;MyML&quot;);</para>
-            <para>QDomElement root = doc.createElement(&quot;MyML&quot;);</para>
-            <para>doc.appendChild(root);</para>
             <para></para>
-            <para>QDomElement tag = doc.createElement(&quot;Greeting&quot;);</para>
-            <para>root.appendChild(tag);</para>
             <para></para>
-            <para>QDomText t = doc.createTextNode(&quot;Hello World&quot;);</para>
-            <para>tag.appendChild(t);</para>
+            <para>  QDomDocument doc(&quot;MyML&quot;);</para>
+            <para>  QDomElement root = doc.createElement(&quot;MyML&quot;);</para>
+            <para>  doc.appendChild(root);</para>
             <para></para>
-            <para>QString xml = doc.toString();</para>
+            <para>  QDomElement tag = doc.createElement(&quot;Greeting&quot;);</para>
+            <para>  root.appendChild(tag);</para>
+            <para></para>
+            <para>  QDomText t = doc.createTextNode(&quot;Hello World&quot;);</para>
+            <para>  tag.appendChild(t);</para>
+            <para></para>
+            <para>  QString xml = doc.toString();</para>
+            <para></para>
+            <para></para>
             <para>For further information about the Document Object Model see the Document Object Model (DOM) Level 1 and Level 2 Core Specifications.</para>
             <para></para>
             <para>See also DOM Bookmarks Example and Simple DOM Model Example.</para>
@@ -1209,7 +1245,6 @@
             <remarks>
             <para>Note that QDomNamedNodeMap does not inherit from QDomNodeList. QDomNamedNodeMaps do not provide any specific node ordering. Although nodes in a QDomNamedNodeMap may be accessed by an ordinal index, this is simply to allow a convenient enumeration of the contents of a QDomNamedNodeMap, and does not imply that the DOM specifies an ordering of the nodes.</para>
             <para>The QDomNamedNodeMap is used in three places:</para>
-            <para></para>
             <para>QDomDocumentType::entities() returns a map of all entities described in the DTD.</para>
             <para>QDomDocumentType::notations() returns a map of all notations described in the DTD.</para>
             <para>QDomNode::attributes() returns a map of all attributes of an element.</para>
@@ -1414,15 +1449,23 @@
             </summary>
             <remarks>
             <para>For example, the following piece of XML produces an element with no children, but two attributes:</para>
-            <para>&lt;link href=&quot;http://qt-project.org&quot; color=&quot;red&quot; /&gt;</para>
+            <para></para>
+            <para></para>
+            <para>  &lt;link href=&quot;http://qt-project.org&quot; color=&quot;red&quot; /&gt;</para>
+            <para></para>
+            <para></para>
             <para>You can access the attributes of an element with code like this:</para>
-            <para>QDomElement e = //...</para>
-            <para>//...</para>
-            <para>QDomAttr a = e.attributeNode(&quot;href&quot;);</para>
-            <para>cout &lt;&lt; a.value() &lt;&lt; endl;                // prints &quot;http://qt-project.org&quot;</para>
-            <para>a.setValue(&quot;http://qt-project.org/doc&quot;); // change the node's attribute</para>
-            <para>QDomAttr a2 = e.attributeNode(&quot;href&quot;);</para>
-            <para>cout &lt;&lt; a2.value() &lt;&lt; endl;               // prints &quot;http://qt-project.org/doc&quot;</para>
+            <para></para>
+            <para></para>
+            <para>  QDomElement e = //...</para>
+            <para>  //...</para>
+            <para>  QDomAttr a = e.attributeNode(&quot;href&quot;);</para>
+            <para>  cout &lt;&lt; a.value() &lt;&lt; endl;                // prints &quot;http://qt-project.org&quot;</para>
+            <para>  a.setValue(&quot;http://qt-project.org/doc&quot;); // change the node's attribute</para>
+            <para>  QDomAttr a2 = e.attributeNode(&quot;href&quot;);</para>
+            <para>  cout &lt;&lt; a2.value() &lt;&lt; endl;               // prints &quot;http://qt-project.org/doc&quot;</para>
+            <para></para>
+            <para></para>
             <para>This example also shows that changing an attribute received from an element changes the attribute of the element. If you do not want to change the value of the element's attribute you must use cloneNode() to get an independent copy of the attribute.</para>
             <para>QDomAttr can return the name() and value() of an attribute. An attribute's value is set with setValue(). If specified() returns true the value was set with setValue(). The node this attribute is attached to (if any) is returned by ownerElement().</para>
             <para>For further information about the Document Object Model see http://www.w3.org/TR/REC-DOM-Level-1/ and http://www.w3.org/TR/DOM-Level-2-Core/. For a more general introduction of the DOM implementation see the QDomDocument documentation.</para>
@@ -1477,27 +1520,39 @@
             <para>Elements have a tagName() and zero or more attributes associated with them. The tag name can be changed with setTagName().</para>
             <para>Element attributes are represented by QDomAttr objects that can be queried using the attribute() and attributeNode() functions. You can set attributes with the setAttribute() and setAttributeNode() functions. Attributes can be removed with removeAttribute(). There are namespace-aware equivalents to these functions, i.e. setAttributeNS(), setAttributeNodeNS() and removeAttributeNS().</para>
             <para>If you want to access the text of a node use text(), e.g.</para>
-            <para>QDomElement e = //...</para>
-            <para>//...</para>
-            <para>QString s = e.text()</para>
+            <para></para>
+            <para></para>
+            <para>  QDomElement e = //...</para>
+            <para>  //...</para>
+            <para>  QString s = e.text()</para>
+            <para></para>
+            <para></para>
             <para>The text() function operates recursively to find the text (since not all elements contain text). If you want to find all the text in all of a node's children, iterate over the children looking for QDomText nodes, e.g.</para>
-            <para>QString text;</para>
-            <para>QDomElement element = doc.documentElement();</para>
-            <para>for(QDomNode n = element.firstChild(); !n.isNull(); n = n.nextSibling())</para>
-            <para>{</para>
-            <para>    QDomText t = n.toText();</para>
-            <para>    if (!t.isNull())</para>
-            <para>        text += t.data();</para>
-            <para>}</para>
+            <para></para>
+            <para></para>
+            <para>  QString text;</para>
+            <para>  QDomElement element = doc.documentElement();</para>
+            <para>  for(QDomNode n = element.firstChild(); !n.isNull(); n = n.nextSibling())</para>
+            <para>  {</para>
+            <para>      QDomText t = n.toText();</para>
+            <para>      if (!t.isNull())</para>
+            <para>          text += t.data();</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>Note that we attempt to convert each node to a text node and use text() rather than using firstChild().toText().data() or n.toText().data() directly on the node, because the node may not be a text element.</para>
             <para>You can get a list of all the decendents of an element which have a specified tag name with elementsByTagName() or elementsByTagNameNS().</para>
             <para>To browse the elements of a dom document use firstChildElement(), lastChildElement(), nextSiblingElement() and previousSiblingElement(). For example, to iterate over all child elements called &quot;entry&quot; in a root element called &quot;database&quot;, you can use:</para>
-            <para>QDomDocument doc = // ...</para>
-            <para>QDomElement root = doc.firstChildElement(&quot;database&quot;);</para>
-            <para>QDomElement elt = root.firstChildElement(&quot;entry&quot;);</para>
-            <para>for (; !elt.isNull(); elt = elt.nextSiblingElement(&quot;entry&quot;)) {</para>
-            <para>    // ...</para>
-            <para>}</para>
+            <para></para>
+            <para></para>
+            <para>  QDomDocument doc = // ...</para>
+            <para>  QDomElement root = doc.firstChildElement(&quot;database&quot;);</para>
+            <para>  QDomElement elt = root.firstChildElement(&quot;entry&quot;);</para>
+            <para>  for (; !elt.isNull(); elt = elt.nextSiblingElement(&quot;entry&quot;)) {</para>
+            <para>      // ...</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>For further information about the Document Object Model see Level 1 and Level 2 Core. For a more general introduction of the DOM implementation see the QDomDocument documentation.</para>
             </remarks>
         </member>
@@ -1669,7 +1724,11 @@
         <member name="P:QtXml.QDomElement.TagName">
             <summary>
             <para>Returns the tag name of this element. For an XML element like this:</para>
-            <para>&lt;img src=&quot;myimg.png&quot;&gt;</para>
+            <para></para>
+            <para></para>
+            <para>  &lt;img src=&quot;myimg.png&quot;&gt;</para>
+            <para></para>
+            <para></para>
             <para>the tagname would return &quot;img&quot;.</para>
             <para>See also setTagName().</para>
             <para></para>
@@ -1692,9 +1751,17 @@
             <summary>
             <para>Returns the element's text or an empty string.</para>
             <para>Example:</para>
-            <para>&lt;h1&gt;Hello &lt;b&gt;Qt&lt;/b&gt; &lt;![CDATA[&lt;xml is cool&gt;]]&gt;&lt;/h1&gt;</para>
+            <para></para>
+            <para></para>
+            <para>  &lt;h1&gt;Hello &lt;b&gt;Qt&lt;/b&gt; &lt;![CDATA[&lt;xml is cool&gt;]]&gt;&lt;/h1&gt;</para>
+            <para></para>
+            <para></para>
             <para>The function text() of the QDomElement for the &lt;h1&gt; tag, will return the following text:</para>
-            <para>Hello Qt &lt;xml is cool&gt;</para>
+            <para></para>
+            <para></para>
+            <para>  Hello Qt &lt;xml is cool&gt;</para>
+            <para></para>
+            <para></para>
             <para>Comments are ignored by this function. It only evaluates QDomText and QDomCDATASection objects.</para>
             </summary>
         </member>
@@ -1737,7 +1804,11 @@
             </summary>
             <remarks>
             <para>A comment in the parsed XML such as this:</para>
-            <para>&lt;!-- this is a comment --&gt;</para>
+            <para></para>
+            <para></para>
+            <para>  &lt;!-- this is a comment --&gt;</para>
+            <para></para>
+            <para></para>
             <para>is represented by QDomComment objects in the parsed Dom tree.</para>
             <para>For further information about the Document Object Model see Level 1 and Level 2 Core. For a more general introduction of the DOM implementation see the QDomDocument documentation.</para>
             </remarks>
@@ -2425,22 +2496,38 @@
             <para>This XML reader is suitable for a wide range of applications. It is able to parse well-formed XML and can report the namespaces of elements to a content handler; however, it does not parse any external entities. For historical reasons, Attribute Value Normalization and End-of-Line Handling as described in the XML 1.0 specification is not performed.</para>
             <para>The easiest pattern of use for this class is to create a reader instance, define an input source, specify the handlers to be used by the reader, and parse the data.</para>
             <para>For example, we could use a QFile to supply the input. Here, we create a reader, and define an input source to be used by the reader:</para>
-            <para>    QXmlSimpleReader xmlReader;</para>
-            <para>    QXmlInputSource *source = new QXmlInputSource(file);</para>
+            <para></para>
+            <para></para>
+            <para>      QXmlSimpleReader xmlReader;</para>
+            <para>      QXmlInputSource *source = new QXmlInputSource(file);</para>
+            <para></para>
+            <para></para>
             <para>A handler lets us perform actions when the reader encounters certain types of content, or if errors in the input are found. The reader must be told which handler to use for each type of event. For many common applications, we can create a custom handler by subclassing QXmlDefaultHandler, and use this to handle both error and content events:</para>
-            <para>    Handler *handler = new Handler;</para>
-            <para>    xmlReader.setContentHandler(handler);</para>
-            <para>    xmlReader.setErrorHandler(handler);</para>
+            <para></para>
+            <para></para>
+            <para>      Handler *handler = new Handler;</para>
+            <para>      xmlReader.setContentHandler(handler);</para>
+            <para>      xmlReader.setErrorHandler(handler);</para>
+            <para></para>
+            <para></para>
             <para>If you don't set at least the content and error handlers, the parser will fall back on its default behavior---and will do nothing.</para>
             <para>The most convenient way to handle the input is to read it in a single pass using the parse() function with an argument that specifies the input source:</para>
-            <para>    bool ok = xmlReader.parse(source);</para>
             <para></para>
-            <para>    if (!ok)</para>
-            <para>        std::cout &lt;&lt; &quot;Parsing failed.&quot; &lt;&lt; std::endl;</para>
+            <para></para>
+            <para>      bool ok = xmlReader.parse(source);</para>
+            <para></para>
+            <para>      if (!ok)</para>
+            <para>          std::cout &lt;&lt; &quot;Parsing failed.&quot; &lt;&lt; std::endl;</para>
+            <para></para>
+            <para></para>
             <para>If you can't parse the entire input in one go (for example, it is huge, or is being delivered over a network connection), data can be fed to the parser in pieces. This is achieved by telling parse() to work incrementally, and making subsequent calls to the parseContinue() function, until all the data has been processed.</para>
             <para>A common way to perform incremental parsing is to connect the readyRead() signal of a network reply a slot, and handle the incoming data there. See QNetworkAccessManager.</para>
             <para>Aspects of the parsing behavior can be adapted using setFeature() and setProperty().</para>
-            <para>xmlReader.setFeature(&quot;http://xml.org/sax/features/namespace-prefixes&quot;, true);</para>
+            <para></para>
+            <para></para>
+            <para>  xmlReader.setFeature(&quot;http://xml.org/sax/features/namespace-prefixes&quot;, true);</para>
+            <para></para>
+            <para></para>
             <para>QXmlSimpleReader is not reentrant. If you want to use the class in threaded code, lock the code using QXmlSimpleReader with a locking mechanism, such as a QMutex.</para>
             </remarks>
         </member>
@@ -3127,17 +3214,25 @@
             <para>This class gathers together the features of the specialized handler classes, making it a convenient starting point when implementing custom handlers for subclasses of QXmlReader, particularly QXmlSimpleReader. The virtual functions from each of the base classes are reimplemented in this class, providing sensible default behavior for many common cases. By subclassing this class, and overriding these functions, you can concentrate on implementing the parts of the handler relevant to your application.</para>
             <para>The XML reader must be told which handler to use for different kinds of events during parsing. This means that, although QXmlDefaultHandler provides default implementations of functions inherited from all its base classes, we can still use specialized handlers for particular kinds of events.</para>
             <para>For example, QXmlDefaultHandler subclasses both QXmlContentHandler and QXmlErrorHandler, so by subclassing it we can use the same handler for both of the following reader functions:</para>
-            <para>    xmlReader.setContentHandler(handler);</para>
-            <para>    xmlReader.setErrorHandler(handler);</para>
-            <para>Since the reader will inform the handler of parsing errors, it is necessary to reimplement QXmlErrorHandler::fatalError() if, for example, we want to stop parsing when such an error occurs:</para>
-            <para>bool Handler::fatalError (const QXmlParseException &amp; exception)</para>
-            <para>{</para>
-            <para>    qWarning() &lt;&lt; &quot;Fatal error on line&quot; &lt;&lt; exception.lineNumber()</para>
-            <para>               &lt;&lt; &quot;, column&quot; &lt;&lt; exception.columnNumber() &lt;&lt; &quot;:&quot;</para>
-            <para>               &lt;&lt; exception.message();</para>
             <para></para>
-            <para>    return false;</para>
-            <para>}</para>
+            <para></para>
+            <para>      xmlReader.setContentHandler(handler);</para>
+            <para>      xmlReader.setErrorHandler(handler);</para>
+            <para></para>
+            <para></para>
+            <para>Since the reader will inform the handler of parsing errors, it is necessary to reimplement QXmlErrorHandler::fatalError() if, for example, we want to stop parsing when such an error occurs:</para>
+            <para></para>
+            <para></para>
+            <para>  bool Handler::fatalError (const QXmlParseException &amp; exception)</para>
+            <para>  {</para>
+            <para>      qWarning() &lt;&lt; &quot;Fatal error on line&quot; &lt;&lt; exception.lineNumber()</para>
+            <para>                 &lt;&lt; &quot;, column&quot; &lt;&lt; exception.columnNumber() &lt;&lt; ':'</para>
+            <para>                 &lt;&lt; exception.message();</para>
+            <para></para>
+            <para>      return false;</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>The above function returns false, which tells the reader to stop parsing. To continue to use the same reader, it is necessary to create a new handler instance, and set up the reader to use it in the manner described above.</para>
             <para>It is useful to examine some of the functions inherited by QXmlDefaultHandler, and consider why they might be reimplemented in a custom handler. Custom handlers will typically reimplement QXmlContentHandler::startDocument() to prepare the handler for new content. Document elements and the text within them can be processed by reimplementing QXmlContentHandler::startElement(), QXmlContentHandler::endElement(), and QXmlContentHandler::characters(). You may want to reimplement QXmlContentHandler::endDocument() to perform some finalization or validation on the content once the document has been read completely.</para>
             <para></para>

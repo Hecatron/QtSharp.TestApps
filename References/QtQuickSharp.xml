@@ -45,14 +45,18 @@
         </member>
         <member name="M:QtQuick.QQuickItem.StackBefore(QtQuick.QQuickItem)">
             <summary>
-            <para>Moves the specified sibling item to the index before this item within the visual stacking order.</para>
+            <para>Moves the specified sibling item to the index before this item within the list of children. The order of children affects both the visual stacking order and tab focus navigation order.</para>
+            <para>Assuming the z values of both items are the same, this will cause sibling to be rendered above this item.</para>
+            <para>If both items have activeFocusOnTab set to true, this will also cause the tab focus order to change, with sibling receiving focus after this item.</para>
             <para>The given sibling must be a sibling of this item; that is, they must have the same immediate parent.</para>
             <para>See also Concepts - Visual Parent in Qt Quick.</para>
             </summary>
         </member>
         <member name="M:QtQuick.QQuickItem.StackAfter(QtQuick.QQuickItem)">
             <summary>
-            <para>Moves the specified sibling item to the index after this item within the visual stacking order.</para>
+            <para>Moves the specified sibling item to the index after this item within the list of children. The order of children affects both the visual stacking order and tab focus navigation order.</para>
+            <para>Assuming the z values of both items are the same, this will cause sibling to be rendered below this item.</para>
+            <para>If both items have activeFocusOnTab set to true, this will also cause the tab focus order to change, with sibling receiving focus before this item.</para>
             <para>The given sibling must be a sibling of this item; that is, they must have the same immediate parent.</para>
             <para>See also Concepts - Visual Parent in Qt Quick.</para>
             </summary>
@@ -84,29 +88,37 @@
             <summary>
             <para>This property holds whether the item has focus within the enclosing FocusScope. If true, this item will gain active focus when the enclosing FocusScope gains active focus.</para>
             <para>In the following example, input will be given active focus when scope gains active focus:</para>
-            <para>import QtQuick 2.0</para>
             <para></para>
-            <para>Rectangle {</para>
-            <para>    width: 100; height: 100</para>
             <para></para>
-            <para>    FocusScope {</para>
-            <para>        id: scope</para>
+            <para>  import QtQuick 2.0</para>
             <para></para>
-            <para>        TextInput {</para>
+            <para>  Rectangle {</para>
+            <para>      width: 100; height: 100</para>
+            <para></para>
+            <para>      FocusScope {</para>
+            <para>          id: scope</para>
+            <para></para>
+            <para>          TextInput {</para>
+            <para>              id: input</para>
+            <para>              focus: true</para>
+            <para>          }</para>
+            <para>      }</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
+            <para>For the purposes of this property, the scene as a whole is assumed to act like a focus scope. On a practical level, that means the following QML will give active focus to input on startup.</para>
+            <para></para>
+            <para></para>
+            <para>  Rectangle {</para>
+            <para>      width: 100; height: 100</para>
+            <para></para>
+            <para>      TextInput {</para>
             <para>            id: input</para>
             <para>            focus: true</para>
-            <para>        }</para>
-            <para>    }</para>
-            <para>}</para>
-            <para>For the purposes of this property, the scene as a whole is assumed to act like a focus scope. On a practical level, that means the following QML will give active focus to input on startup.</para>
-            <para>Rectangle {</para>
-            <para>    width: 100; height: 100</para>
+            <para>      }</para>
+            <para>  }</para>
             <para></para>
-            <para>    TextInput {</para>
-            <para>          id: input</para>
-            <para>          focus: true</para>
-            <para>    }</para>
-            <para>}</para>
+            <para></para>
             <para>Access functions:</para>
             <para></para>
             <para> bool 	hasFocus() const</para>
@@ -120,29 +132,37 @@
             <summary>
             <para>This property holds whether the item has focus within the enclosing FocusScope. If true, this item will gain active focus when the enclosing FocusScope gains active focus.</para>
             <para>In the following example, input will be given active focus when scope gains active focus:</para>
-            <para>import QtQuick 2.0</para>
             <para></para>
-            <para>Rectangle {</para>
-            <para>    width: 100; height: 100</para>
             <para></para>
-            <para>    FocusScope {</para>
-            <para>        id: scope</para>
+            <para>  import QtQuick 2.0</para>
             <para></para>
-            <para>        TextInput {</para>
+            <para>  Rectangle {</para>
+            <para>      width: 100; height: 100</para>
+            <para></para>
+            <para>      FocusScope {</para>
+            <para>          id: scope</para>
+            <para></para>
+            <para>          TextInput {</para>
+            <para>              id: input</para>
+            <para>              focus: true</para>
+            <para>          }</para>
+            <para>      }</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
+            <para>For the purposes of this property, the scene as a whole is assumed to act like a focus scope. On a practical level, that means the following QML will give active focus to input on startup.</para>
+            <para></para>
+            <para></para>
+            <para>  Rectangle {</para>
+            <para>      width: 100; height: 100</para>
+            <para></para>
+            <para>      TextInput {</para>
             <para>            id: input</para>
             <para>            focus: true</para>
-            <para>        }</para>
-            <para>    }</para>
-            <para>}</para>
-            <para>For the purposes of this property, the scene as a whole is assumed to act like a focus scope. On a practical level, that means the following QML will give active focus to input on startup.</para>
-            <para>Rectangle {</para>
-            <para>    width: 100; height: 100</para>
+            <para>      }</para>
+            <para>  }</para>
             <para></para>
-            <para>    TextInput {</para>
-            <para>          id: input</para>
-            <para>          focus: true</para>
-            <para>    }</para>
-            <para>}</para>
+            <para></para>
             <para>Access functions:</para>
             <para></para>
             <para> bool 	hasFocus() const</para>
@@ -280,7 +300,7 @@
             <summary>
             <para>Schedules a call to updatePaintNode() for this item.</para>
             <para>The call to QQuickItem::updatePaintNode() will always happen if the item is showing in a QQuickWindow.</para>
-            <para>Only items which specifies QQuickItem::ItemHasContents are allowed to call QQuickItem::update().</para>
+            <para>Only items which specify QQuickItem::ItemHasContents are allowed to call QQuickItem::update().</para>
             </summary>
         </member>
         <member name="M:QtQuick.QQuickItem.OnEvent(QtCore.QEvent)">
@@ -293,7 +313,11 @@
             <para>Called when change occurs for this item.</para>
             <para>value contains extra information relating to the change, when applicable.</para>
             <para>If you re-implement this method in a subclass, be sure to call</para>
-            <para>QQuickItem::itemChange(change, value);</para>
+            <para></para>
+            <para></para>
+            <para>  QQuickItem::itemChange(change, value);</para>
+            <para></para>
+            <para></para>
             <para>typically at the end of your implementation, to ensure the windowChanged() signal will be emitted.</para>
             </summary>
         </member>
@@ -445,16 +469,20 @@
             <para>Called on the render thread when it is time to sync the state of the item with the scene graph.</para>
             <para>The function is called as a result of QQuickItem::update(), if the user has set the QQuickItem::ItemHasContents flag on the item.</para>
             <para>The function should return the root of the scene graph subtree for this item. Most implementations will return a single QSGGeometryNode containing the visual representation of this item. oldNode is the node that was returned the last time the function was called. updatePaintNodeData provides a pointer to the QSGTransformNode associated with this QQuickItem.</para>
-            <para>QSGNode *MyItem::updatePaintNode(QSGNode *node, UpdatePaintNodeData *)</para>
-            <para>{</para>
-            <para>    QSGSimpleRectNode *n = static_cast&lt;QSGSimpleRectNode *&gt;(node);</para>
-            <para>    if (!n) {</para>
-            <para>        n = new QSGSimpleRectNode();</para>
-            <para>        n-&gt;setColor(Qt::red);</para>
-            <para>    }</para>
-            <para>    n-&gt;setRect(boundingRect());</para>
-            <para>    return n;</para>
-            <para>}</para>
+            <para></para>
+            <para></para>
+            <para>  QSGNode *MyItem::updatePaintNode(QSGNode *node, UpdatePaintNodeData *)</para>
+            <para>  {</para>
+            <para>      QSGSimpleRectNode *n = static_cast&lt;QSGSimpleRectNode *&gt;(node);</para>
+            <para>      if (!n) {</para>
+            <para>          n = new QSGSimpleRectNode();</para>
+            <para>          n-&gt;setColor(Qt::red);</para>
+            <para>      }</para>
+            <para>      n-&gt;setRect(boundingRect());</para>
+            <para>      return n;</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>The main thread is blocked while this function is executed so it is safe to read values from the QQuickItem instance and other objects in the main thread.</para>
             <para>If no call to QQuickItem::updatePaintNode() result in actual scene graph changes, like QSGNode::markDirty() or adding and removing nodes, then the underlying implementation may decide to not render the scene again as the visual outcome is identical.</para>
             <para>Warning: It is crucial that OpenGL operations and interaction with the scene graph happens exclusively on the render thread, primarily during the QQuickItem::updatePaintNode() call. The best rule of thumb is to only use classes with the &quot;QSG&quot; prefix inside the QQuickItem::updatePaintNode() function.</para>
@@ -589,16 +617,16 @@
             <para>Note: The concept of the visual parent differs from that of the QObject parent. An item's visual parent may not necessarily be the same as its object parent. See Concepts - Visual Parent in Qt Quick for more details.</para>
             <para>Access functions:</para>
             <para></para>
-            <para> QQuickItem * 	parentItem() const</para>
-            <para> void 	setParentItem(QQuickItem * parent)</para>
+            <para> QQuickItem *	parentItem() const</para>
+            <para> void 	setParentItem(QQuickItem *parent)</para>
             <para></para>
             <para></para>
             <para>This property holds the visual parent of the item.</para>
             <para>Note: The concept of the visual parent differs from that of the QObject parent. An item's visual parent may not necessarily be the same as its object parent. See Concepts - Visual Parent in Qt Quick for more details.</para>
             <para>Access functions:</para>
             <para></para>
-            <para> QQuickItem * 	parentItem() const</para>
-            <para> void 	setParentItem(QQuickItem * parent)</para>
+            <para> QQuickItem *	parentItem() const</para>
+            <para> void 	setParentItem(QQuickItem *parent)</para>
             <para></para>
             </summary>
         </member>
@@ -642,22 +670,26 @@
             <para>Defines the natural width or height of the Item if no width or height is specified.</para>
             <para>The default implicit size for most items is 0x0, however some items have an inherent implicit size which cannot be overridden, for example, Image and Text.</para>
             <para>Setting the implicit size is useful for defining components that have a preferred size based on their content, for example:</para>
-            <para>// Label.qml</para>
-            <para>import QtQuick 2.0</para>
             <para></para>
-            <para>Item {</para>
-            <para>    property alias icon: image.source</para>
-            <para>    property alias label: text.text</para>
-            <para>    implicitWidth: text.implicitWidth + image.implicitWidth</para>
-            <para>    implicitHeight: Math.max(text.implicitHeight, image.implicitHeight)</para>
-            <para>    Image { id: image }</para>
-            <para>    Text {</para>
-            <para>        id: text</para>
-            <para>        wrapMode: Text.Wrap</para>
-            <para>        anchors.left: image.right; anchors.right: parent.right</para>
-            <para>        anchors.verticalCenter: parent.verticalCenter</para>
-            <para>    }</para>
-            <para>}</para>
+            <para></para>
+            <para>  // Label.qml</para>
+            <para>  import QtQuick 2.0</para>
+            <para></para>
+            <para>  Item {</para>
+            <para>      property alias icon: image.source</para>
+            <para>      property alias label: text.text</para>
+            <para>      implicitWidth: text.implicitWidth + image.implicitWidth</para>
+            <para>      implicitHeight: Math.max(text.implicitHeight, image.implicitHeight)</para>
+            <para>      Image { id: image }</para>
+            <para>      Text {</para>
+            <para>          id: text</para>
+            <para>          wrapMode: Text.Wrap</para>
+            <para>          anchors.left: image.right; anchors.right: parent.right</para>
+            <para>          anchors.verticalCenter: parent.verticalCenter</para>
+            <para>      }</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>Note: Using implicitWidth of Text or TextEdit and setting the width explicitly incurs a performance penalty as the text must be laid out twice.</para>
             </summary>
         </member>
@@ -671,22 +703,26 @@
             <para>Defines the natural width or height of the Item if no width or height is specified.</para>
             <para>The default implicit size for most items is 0x0, however some items have an inherent implicit size which cannot be overridden, for example, Image and Text.</para>
             <para>Setting the implicit size is useful for defining components that have a preferred size based on their content, for example:</para>
-            <para>// Label.qml</para>
-            <para>import QtQuick 2.0</para>
             <para></para>
-            <para>Item {</para>
-            <para>    property alias icon: image.source</para>
-            <para>    property alias label: text.text</para>
-            <para>    implicitWidth: text.implicitWidth + image.implicitWidth</para>
-            <para>    implicitHeight: Math.max(text.implicitHeight, image.implicitHeight)</para>
-            <para>    Image { id: image }</para>
-            <para>    Text {</para>
-            <para>        id: text</para>
-            <para>        wrapMode: Text.Wrap</para>
-            <para>        anchors.left: image.right; anchors.right: parent.right</para>
-            <para>        anchors.verticalCenter: parent.verticalCenter</para>
-            <para>    }</para>
-            <para>}</para>
+            <para></para>
+            <para>  // Label.qml</para>
+            <para>  import QtQuick 2.0</para>
+            <para></para>
+            <para>  Item {</para>
+            <para>      property alias icon: image.source</para>
+            <para>      property alias label: text.text</para>
+            <para>      implicitWidth: text.implicitWidth + image.implicitWidth</para>
+            <para>      implicitHeight: Math.max(text.implicitHeight, image.implicitHeight)</para>
+            <para>      Image { id: image }</para>
+            <para>      Text {</para>
+            <para>          id: text</para>
+            <para>          wrapMode: Text.Wrap</para>
+            <para>          anchors.left: image.right; anchors.right: parent.right</para>
+            <para>          anchors.verticalCenter: parent.verticalCenter</para>
+            <para>      }</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>Note: Using implicitWidth of Text or TextEdit and setting the width explicitly incurs a performance penalty as the text must be laid out twice.</para>
             </summary>
         </member>
@@ -703,51 +739,67 @@
             <para>Items with a higher stacking value are drawn on top of siblings with a lower stacking order. Items with the same stacking value are drawn bottom up in the order they appear. Items with a negative stacking value are drawn under their parent's content.</para>
             <para>The following example shows the various effects of stacking order.</para>
             <para></para>
-            <para> 	Same z - later children above earlier children:Item {</para>
-            <para>    Rectangle {</para>
-            <para>        color: &quot;red&quot;</para>
-            <para>        width: 100; height: 100</para>
-            <para>    }</para>
-            <para>    Rectangle {</para>
-            <para>        color: &quot;blue&quot;</para>
-            <para>        x: 50; y: 50; width: 100; height: 100</para>
-            <para>    }</para>
-            <para>}</para>
+            <para> 	Same z - later children above earlier children:</para>
             <para></para>
-            <para>	Higher z on top:Item {</para>
-            <para>    Rectangle {</para>
-            <para>        z: 1</para>
-            <para>        color: &quot;red&quot;</para>
-            <para>        width: 100; height: 100</para>
-            <para>    }</para>
-            <para>    Rectangle {</para>
-            <para>        color: &quot;blue&quot;</para>
-            <para>        x: 50; y: 50; width: 100; height: 100</para>
-            <para>    }</para>
-            <para>}</para>
+            <para>  Item {</para>
+            <para>      Rectangle {</para>
+            <para>          color: &quot;red&quot;</para>
+            <para>          width: 100; height: 100</para>
+            <para>      }</para>
+            <para>      Rectangle {</para>
+            <para>          color: &quot;blue&quot;</para>
+            <para>          x: 50; y: 50; width: 100; height: 100</para>
+            <para>      }</para>
+            <para>  }</para>
             <para></para>
-            <para>	Same z - children above parents:Item {</para>
-            <para>    Rectangle {</para>
-            <para>        color: &quot;red&quot;</para>
-            <para>        width: 100; height: 100</para>
-            <para>        Rectangle {</para>
-            <para>            color: &quot;blue&quot;</para>
-            <para>            x: 50; y: 50; width: 100; height: 100</para>
-            <para>        }</para>
-            <para>    }</para>
-            <para>}</para>
             <para></para>
-            <para>	Lower z below:Item {</para>
-            <para>    Rectangle {</para>
-            <para>        color: &quot;red&quot;</para>
-            <para>        width: 100; height: 100</para>
-            <para>        Rectangle {</para>
-            <para>            z: -1</para>
-            <para>            color: &quot;blue&quot;</para>
-            <para>            x: 50; y: 50; width: 100; height: 100</para>
-            <para>        }</para>
-            <para>    }</para>
-            <para>}</para>
+            <para></para>
+            <para>	Higher z on top:</para>
+            <para></para>
+            <para>  Item {</para>
+            <para>      Rectangle {</para>
+            <para>          z: 1</para>
+            <para>          color: &quot;red&quot;</para>
+            <para>          width: 100; height: 100</para>
+            <para>      }</para>
+            <para>      Rectangle {</para>
+            <para>          color: &quot;blue&quot;</para>
+            <para>          x: 50; y: 50; width: 100; height: 100</para>
+            <para>      }</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
+            <para></para>
+            <para>	Same z - children above parents:</para>
+            <para></para>
+            <para>  Item {</para>
+            <para>      Rectangle {</para>
+            <para>          color: &quot;red&quot;</para>
+            <para>          width: 100; height: 100</para>
+            <para>          Rectangle {</para>
+            <para>              color: &quot;blue&quot;</para>
+            <para>              x: 50; y: 50; width: 100; height: 100</para>
+            <para>          }</para>
+            <para>      }</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
+            <para></para>
+            <para>	Lower z below:</para>
+            <para></para>
+            <para>  Item {</para>
+            <para>      Rectangle {</para>
+            <para>          color: &quot;red&quot;</para>
+            <para>          width: 100; height: 100</para>
+            <para>          Rectangle {</para>
+            <para>              z: -1</para>
+            <para>              color: &quot;blue&quot;</para>
+            <para>              x: 50; y: 50; width: 100; height: 100</para>
+            <para>          }</para>
+            <para>      }</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para></para>
             <para></para>
             </summary>
@@ -757,15 +809,19 @@
             <para>This property holds the rotation of the item in degrees clockwise around its transformOrigin.</para>
             <para>The default value is 0 degrees (that is, no rotation).</para>
             <para></para>
-            <para> 	Rectangle {</para>
-            <para>    color: &quot;blue&quot;</para>
-            <para>    width: 100; height: 100</para>
-            <para>    Rectangle {</para>
-            <para>        color: &quot;red&quot;</para>
-            <para>        x: 25; y: 25; width: 50; height: 50</para>
-            <para>        rotation: 30</para>
-            <para>    }</para>
-            <para>}</para>
+            <para> 	</para>
+            <para></para>
+            <para>  Rectangle {</para>
+            <para>      color: &quot;blue&quot;</para>
+            <para>      width: 100; height: 100</para>
+            <para>      Rectangle {</para>
+            <para>          color: &quot;red&quot;</para>
+            <para>          x: 25; y: 25; width: 50; height: 50</para>
+            <para>          rotation: 30</para>
+            <para>      }</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para></para>
             <para></para>
             <para>See also Transform and Rotation.</para>
@@ -778,23 +834,27 @@
             <para>The default value is 1.0.</para>
             <para>Scaling is applied from the transformOrigin.</para>
             <para></para>
-            <para> 	import QtQuick 2.0</para>
+            <para> 	</para>
             <para></para>
-            <para>Rectangle {</para>
-            <para>    color: &quot;blue&quot;</para>
-            <para>    width: 100; height: 100</para>
+            <para>  import QtQuick 2.0</para>
             <para></para>
-            <para>    Rectangle {</para>
-            <para>        color: &quot;green&quot;</para>
-            <para>        width: 25; height: 25</para>
-            <para>    }</para>
+            <para>  Rectangle {</para>
+            <para>      color: &quot;blue&quot;</para>
+            <para>      width: 100; height: 100</para>
             <para></para>
-            <para>    Rectangle {</para>
-            <para>        color: &quot;red&quot;</para>
-            <para>        x: 25; y: 25; width: 50; height: 50</para>
-            <para>        scale: 1.4</para>
-            <para>    }</para>
-            <para>}</para>
+            <para>      Rectangle {</para>
+            <para>          color: &quot;green&quot;</para>
+            <para>          width: 25; height: 25</para>
+            <para>      }</para>
+            <para></para>
+            <para>      Rectangle {</para>
+            <para>          color: &quot;red&quot;</para>
+            <para>          x: 25; y: 25; width: 50; height: 50</para>
+            <para>          scale: 1.4</para>
+            <para>      }</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para></para>
             <para></para>
             <para>See also Transform and Scale.</para>
@@ -806,28 +866,36 @@
             <para>When this property is set, the specified opacity is also applied individually to child items. This may have an unintended effect in some circumstances. For example in the second set of rectangles below, the red rectangle has specified an opacity of 0.5, which affects the opacity of its blue child rectangle even though the child has not specified an opacity.</para>
             <para>Values outside the range of 0 to 1 will be clamped.</para>
             <para></para>
-            <para> 	Item {</para>
-            <para>    Rectangle {</para>
-            <para>        color: &quot;red&quot;</para>
-            <para>        width: 100; height: 100</para>
-            <para>        Rectangle {</para>
-            <para>            color: &quot;blue&quot;</para>
-            <para>            x: 50; y: 50; width: 100; height: 100</para>
-            <para>        }</para>
-            <para>    }</para>
-            <para>}</para>
+            <para> 	</para>
             <para></para>
-            <para>	Item {</para>
-            <para>    Rectangle {</para>
-            <para>        opacity: 0.5</para>
-            <para>        color: &quot;red&quot;</para>
-            <para>        width: 100; height: 100</para>
-            <para>        Rectangle {</para>
-            <para>            color: &quot;blue&quot;</para>
-            <para>            x: 50; y: 50; width: 100; height: 100</para>
-            <para>        }</para>
-            <para>    }</para>
-            <para>}</para>
+            <para>  Item {</para>
+            <para>      Rectangle {</para>
+            <para>          color: &quot;red&quot;</para>
+            <para>          width: 100; height: 100</para>
+            <para>          Rectangle {</para>
+            <para>              color: &quot;blue&quot;</para>
+            <para>              x: 50; y: 50; width: 100; height: 100</para>
+            <para>          }</para>
+            <para>      }</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
+            <para></para>
+            <para>	</para>
+            <para></para>
+            <para>  Item {</para>
+            <para>      Rectangle {</para>
+            <para>          opacity: 0.5</para>
+            <para>          color: &quot;red&quot;</para>
+            <para>          width: 100; height: 100</para>
+            <para>          Rectangle {</para>
+            <para>              color: &quot;blue&quot;</para>
+            <para>              x: 50; y: 50; width: 100; height: 100</para>
+            <para>          }</para>
+            <para>      }</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para></para>
             <para></para>
             <para>Changing an item's opacity does not affect whether the item receives user input events. (In contrast, setting visible property to false stops mouse events, and setting the enabled property to false stops mouse and keyboard events, and also removes active focus from the item.)</para>
@@ -857,12 +925,12 @@
             <para>This property specifies whether the item is smoothed or not.</para>
             <para>Primarily used in image based items to decide if the item should use smooth sampling or not. Smooth sampling is performed using linear interpolation, while non-smooth is performed using nearest neighbor.</para>
             <para>In Qt Quick 2.0, this property has minimal impact on performance.</para>
-            <para>By default is true.</para>
+            <para>By default, this property is set to true.</para>
             </summary>
         </member>
         <member name="P:QtQuick.QQuickItem.ActiveFocusOnTab">
             <summary>
-            <para>This property holds whether the item wants to be in tab focus chain. By default this is set to false.</para>
+            <para>This property holds whether the item wants to be in the tab focus chain. By default, this is set to false.</para>
             </summary>
         </member>
         <member name="P:QtQuick.QQuickItem.Antialiasing">
@@ -963,20 +1031,24 @@
             <para>This read-only property indicates whether the item has active focus.</para>
             <para>If activeFocus is true, either this item is the one that currently receives keyboard input, or it is a FocusScope ancestor of the item that currently receives keyboard input.</para>
             <para>Usually, activeFocus is gained by setting focus on an item and its enclosing FocusScope objects. In the following example, the input and focusScope objects will have active focus, while the root rectangle object will not.</para>
-            <para>import QtQuick 2.0</para>
             <para></para>
-            <para>Rectangle {</para>
-            <para>    width: 100; height: 100</para>
             <para></para>
-            <para>    FocusScope {</para>
-            <para>        focus: true</para>
+            <para>  import QtQuick 2.0</para>
             <para></para>
-            <para>        TextInput {</para>
-            <para>            id: input</para>
-            <para>            focus: true</para>
-            <para>        }</para>
-            <para>    }</para>
-            <para>}</para>
+            <para>  Rectangle {</para>
+            <para>      width: 100; height: 100</para>
+            <para></para>
+            <para>      FocusScope {</para>
+            <para>          focus: true</para>
+            <para></para>
+            <para>          TextInput {</para>
+            <para>              id: input</para>
+            <para>              focus: true</para>
+            <para>          }</para>
+            <para>      }</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>Access functions:</para>
             <para></para>
             <para> bool 	hasActiveFocus() const</para>
@@ -988,29 +1060,37 @@
             <summary>
             <para>This property holds whether the item has focus within the enclosing FocusScope. If true, this item will gain active focus when the enclosing FocusScope gains active focus.</para>
             <para>In the following example, input will be given active focus when scope gains active focus:</para>
-            <para>import QtQuick 2.0</para>
             <para></para>
-            <para>Rectangle {</para>
-            <para>    width: 100; height: 100</para>
             <para></para>
-            <para>    FocusScope {</para>
-            <para>        id: scope</para>
+            <para>  import QtQuick 2.0</para>
             <para></para>
-            <para>        TextInput {</para>
+            <para>  Rectangle {</para>
+            <para>      width: 100; height: 100</para>
+            <para></para>
+            <para>      FocusScope {</para>
+            <para>          id: scope</para>
+            <para></para>
+            <para>          TextInput {</para>
+            <para>              id: input</para>
+            <para>              focus: true</para>
+            <para>          }</para>
+            <para>      }</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
+            <para>For the purposes of this property, the scene as a whole is assumed to act like a focus scope. On a practical level, that means the following QML will give active focus to input on startup.</para>
+            <para></para>
+            <para></para>
+            <para>  Rectangle {</para>
+            <para>      width: 100; height: 100</para>
+            <para></para>
+            <para>      TextInput {</para>
             <para>            id: input</para>
             <para>            focus: true</para>
-            <para>        }</para>
-            <para>    }</para>
-            <para>}</para>
-            <para>For the purposes of this property, the scene as a whole is assumed to act like a focus scope. On a practical level, that means the following QML will give active focus to input on startup.</para>
-            <para>Rectangle {</para>
-            <para>    width: 100; height: 100</para>
+            <para>      }</para>
+            <para>  }</para>
             <para></para>
-            <para>    TextInput {</para>
-            <para>          id: input</para>
-            <para>          focus: true</para>
-            <para>    }</para>
-            <para>}</para>
+            <para></para>
             <para>Access functions:</para>
             <para></para>
             <para> bool 	hasFocus() const</para>
@@ -1110,6 +1190,9 @@
         </member>
         <member name="F:QtQuick.QQuickItem.ItemChange.ItemRotationHasChanged">
             <summary>The item's rotation has changed. ItemChangeData::realValue contains the new rotation.</summary>
+        </member>
+        <member name="F:QtQuick.QQuickItem.ItemChange.ItemDevicePixelRatioHasChanged">
+            <summary>The device pixel ratio of the screen the item is on has changed. ItemChangedData::realValue contains the new device pixel ratio.</summary>
         </member>
         <member name="T:QtQuick.QQuickItem.TransformOrigin">
             <summary>
@@ -1225,10 +1308,33 @@
             <para></para>
             </summary>
         </member>
+        <member name="E:QtQuick.QQuickFramebufferObject.MirrorVerticallyChanged">
+            <summary>
+            <para>This property controls if the size of the FBO's contents should be mirrored vertically when drawing. This allows easy integration of third-party rendering code that does not follow the standard expectations.</para>
+            <para>The default value is false.</para>
+            <para>This property was introduced in  Qt 5.6.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	mirrorVertically() const</para>
+            <para> void 	setMirrorVertically(bool enable)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	mirrorVerticallyChanged(bool)</para>
+            <para></para>
+            </summary>
+        </member>
         <member name="P:QtQuick.QQuickFramebufferObject.TextureFollowsItemSize">
             <summary>
             <para>This property controls if the size of the FBO's texture should follow the dimensions of the QQuickFramebufferObject item. When this property is false, the FBO will be created once the first time it is displayed. If it is set to true, the FBO will be recreated every time the dimensions of the item change.</para>
             <para>The default value is true.</para>
+            </summary>
+        </member>
+        <member name="P:QtQuick.QQuickFramebufferObject.MirrorVertically">
+            <summary>
+            <para>This property controls if the size of the FBO's contents should be mirrored vertically when drawing. This allows easy integration of third-party rendering code that does not follow the standard expectations.</para>
+            <para>The default value is false.</para>
+            <para>This property was introduced in  Qt 5.6.</para>
             </summary>
         </member>
         <member name="P:QtQuick.QQuickFramebufferObject.IsTextureProvider">
@@ -1245,9 +1351,6 @@
             <summary>
             <para>The QQuickFramebufferObject::Renderer class is used to implement the rendering logic of a QQuickFramebufferObject.</para>
             </summary>
-            <remarks>
-            <para></para>
-            </remarks>
         </member>
         <member name="M:QtQuick.QQuickFramebufferObject.Renderer.#ctor">
             <summary>
@@ -1301,7 +1404,6 @@
             <para>The QQuickItemGrabResult contains the result from QQuickItem::grabToImage().</para>
             </summary>
             <remarks>
-            <para></para>
             <para>See also QQuickItem::grabToImage().</para>
             </remarks>
         </member>
@@ -1335,8 +1437,7 @@
             <remarks>
             <para>The QQuickPaintedItem makes it possible to use the QPainter API with the QML Scene Graph. It sets up a textured rectangle in the Scene Graph and uses a QPainter to paint onto the texture. The render target can be either a QImage or a QOpenGLFramebufferObject. When the render target is a QImage, QPainter first renders into the image then the content is uploaded to the texture. When a QOpenGLFramebufferObject is used, QPainter paints directly onto the texture. Call update() to trigger a repaint.</para>
             <para>To enable QPainter to do anti-aliased rendering, use setAntialiasing().</para>
-            <para>To write your own painted item, you first create a subclass of QQuickPaintedItem, and then start by implementing its only pure virtual public function: paint(), which implements the actual painting. To get the size of the area painted by the item, use contentsBoundingRect().</para>
-            <para>Starting Qt 5.4, the QQuickPaintedItem is a texture provider and can be used directly in ShaderEffects and other classes that consume texture providers.</para>
+            <para>To write your own painted item, you first create a subclass of QQuickPaintedItem, and then start by implementing its only pure virtual public function: paint(), which implements the actual painting. The painting will be inside the rectangle spanning from 0,0 to width(),height().</para>
             </remarks>
         </member>
         <member name="M:QtQuick.QQuickPaintedItem.#ctor(QtQuick.QQuickItem)">
@@ -1367,10 +1468,12 @@
         <member name="M:QtQuick.QQuickPaintedItem.Paint(QtGui.QPainter)">
             <summary>
             <para>This function, which is usually called by the QML Scene Graph, paints the contents of an item in local coordinates.</para>
+            <para>The underlying texture will have a size defined by textureSize when set, or the item's size, multiplied by the window's device pixel ratio.</para>
             <para>The function is called after the item has been filled with the fillColor.</para>
             <para>Reimplement this function in a QQuickPaintedItem subclass to provide the item's painting implementation, using painter.</para>
             <para>Note: The QML Scene Graph uses two separate threads, the main thread does things such as processing events or updating animations while a second thread does the actual OpenGL rendering. As a consequence, paint() is not called from the main GUI thread but from the GL enabled renderer thread. At the moment paint() is called, the GUI thread is blocked and this is therefore thread-safe.</para>
             <para>Warning: Extreme caution must be used when creating QObjects, emitting signals, starting timers and similar inside this function as these will have affinity to the rendering thread.</para>
+            <para>See also width(), height(), and textureSize.</para>
             </summary>
         </member>
         <member name="M:QtQuick.QQuickPaintedItem.UpdatePaintNode(QtQuick.QSGNode,QtQuick.QQuickItem.UpdatePaintNodeData)">
@@ -1400,8 +1503,8 @@
         </member>
         <member name="E:QtQuick.QQuickPaintedItem.ContentsSizeChanged">
             <summary>
-            <para>This property holds the size of the contents.</para>
-            <para>The contents size is the size of the item in regards to how it is painted using the paint() function. This is distinct from the size of the item in regards to height() and width().</para>
+            <para>This property holds obsolete method for setting the contents size.</para>
+            <para>This function is provided for compatibility, use size in combination with textureSize to decide the size of what you are drawing.</para>
             <para>Access functions:</para>
             <para></para>
             <para> QSize 	contentsSize() const</para>
@@ -1411,13 +1514,13 @@
             <para></para>
             <para> void 	contentsSizeChanged()</para>
             <para></para>
+            <para>See also width(), height(), and textureSize().</para>
             </summary>
         </member>
         <member name="E:QtQuick.QQuickPaintedItem.ContentsScaleChanged">
             <summary>
-            <para>This property holds the scale of the contents.</para>
-            <para>All painting happening in paint() is scaled by the contents scale. This is distinct from the scale of the item in regards to scale().</para>
-            <para>The default value is 1.</para>
+            <para>This property holds obsolete method for scaling the contents.</para>
+            <para>This function is provided for compatibility, use size() in combination with textureSize() to decide the size of what you are drawing.</para>
             <para>Access functions:</para>
             <para></para>
             <para> qreal 	contentsScale() const</para>
@@ -1427,12 +1530,13 @@
             <para></para>
             <para> void 	contentsScaleChanged()</para>
             <para></para>
+            <para>See also width(), height(), and textureSize().</para>
             </summary>
         </member>
         <member name="E:QtQuick.QQuickPaintedItem.RenderTargetChanged">
             <summary>
             <para>This property holds the item's render target.</para>
-            <para>This property defines which render target the QPainter renders into, it can be either QSGPaintedItem::Image, QSGPaintedItem::FramebufferObject or QSGPaintedItem::InvertedYFramebufferObject.</para>
+            <para>This property defines which render target the QPainter renders into, it can be either QQuickPaintedItem::Image, QQuickPaintedItem::FramebufferObject or QQuickPaintedItem::InvertedYFramebufferObject.</para>
             <para>Each has certain benefits, typically performance versus quality. Using a framebuffer object avoids a costly upload of the image contents to the texture in graphics memory, while using an image enables high quality anti-aliasing.</para>
             <para>Warning: Resizing a framebuffer object is a costly operation, avoid using the QQuickPaintedItem::FramebufferObject render target if the item gets resized often.</para>
             <para>By default, the render target is QQuickPaintedItem::Image.</para>
@@ -1444,6 +1548,23 @@
             <para>Notifier signal:</para>
             <para></para>
             <para> void 	renderTargetChanged()</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:QtQuick.QQuickPaintedItem.TextureSizeChanged">
+            <summary>
+            <para>This property defines the size of the texture.</para>
+            <para>Changing the texture's size does not affect the coordinate system used in paint(). A scale factor is instead applied so painting should still happen inside 0,0 to width(),height().</para>
+            <para>By default, the texture size will have the same size as this item.</para>
+            <para>Note: If the item is on a window with a device pixel ratio different from 1, this scale factor will be implicitly applied to the texture size.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QSize 	textureSize() const</para>
+            <para> void 	setTextureSize(const QSize &amp;size)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	textureSizeChanged()</para>
             <para></para>
             </summary>
         </member>
@@ -1495,15 +1616,24 @@
         </member>
         <member name="P:QtQuick.QQuickPaintedItem.ContentsSize">
             <summary>
-            <para>This property holds the size of the contents.</para>
-            <para>The contents size is the size of the item in regards to how it is painted using the paint() function. This is distinct from the size of the item in regards to height() and width().</para>
+            <para>This property holds obsolete method for setting the contents size.</para>
+            <para>This function is provided for compatibility, use size in combination with textureSize to decide the size of what you are drawing.</para>
+            <para>See also width(), height(), and textureSize().</para>
             </summary>
         </member>
         <member name="P:QtQuick.QQuickPaintedItem.ContentsScale">
             <summary>
-            <para>This property holds the scale of the contents.</para>
-            <para>All painting happening in paint() is scaled by the contents scale. This is distinct from the scale of the item in regards to scale().</para>
-            <para>The default value is 1.</para>
+            <para>This property holds obsolete method for scaling the contents.</para>
+            <para>This function is provided for compatibility, use size() in combination with textureSize() to decide the size of what you are drawing.</para>
+            <para>See also width(), height(), and textureSize().</para>
+            </summary>
+        </member>
+        <member name="P:QtQuick.QQuickPaintedItem.TextureSize">
+            <summary>
+            <para>This property defines the size of the texture.</para>
+            <para>Changing the texture's size does not affect the coordinate system used in paint(). A scale factor is instead applied so painting should still happen inside 0,0 to width(),height().</para>
+            <para>By default, the texture size will have the same size as this item.</para>
+            <para>Note: If the item is on a window with a device pixel ratio different from 1, this scale factor will be implicitly applied to the texture size.</para>
             </summary>
         </member>
         <member name="P:QtQuick.QQuickPaintedItem.FillColor">
@@ -1515,7 +1645,7 @@
         <member name="P:QtQuick.QQuickPaintedItem.renderTarget">
             <summary>
             <para>This property holds the item's render target.</para>
-            <para>This property defines which render target the QPainter renders into, it can be either QSGPaintedItem::Image, QSGPaintedItem::FramebufferObject or QSGPaintedItem::InvertedYFramebufferObject.</para>
+            <para>This property defines which render target the QPainter renders into, it can be either QQuickPaintedItem::Image, QQuickPaintedItem::FramebufferObject or QQuickPaintedItem::InvertedYFramebufferObject.</para>
             <para>Each has certain benefits, typically performance versus quality. Using a framebuffer object avoids a costly upload of the image contents to the texture in graphics memory, while using an image enables high quality anti-aliasing.</para>
             <para>Warning: Resizing a framebuffer object is a costly operation, avoid using the QQuickPaintedItem::FramebufferObject render target if the item gets resized often.</para>
             <para>By default, the render target is QQuickPaintedItem::Image.</para>
@@ -1533,10 +1663,8 @@
         </member>
         <member name="P:QtQuick.QQuickPaintedItem.ContentsBoundingRect">
             <summary>
-            <para>This function returns the outer bounds of the item as a rectangle; all painting must be restricted to inside an item's bounding rect.</para>
-            <para>If the contents size has not been set it reflects the size of the item; otherwise it reflects the contents size scaled by the contents scale.</para>
-            <para>Use this function to know the area painted by the item.</para>
-            <para>See also QQuickItem::width(), QQuickItem::height(), contentsSize(), and contentsScale().</para>
+            <para>This function is provided for compatibility, use size in combination with textureSize to decide the size of what you are drawing.</para>
+            <para>See also width(), height(), and textureSize().</para>
             </summary>
         </member>
         <member name="T:QtQuick.QQuickPaintedItem.RenderTarget">
@@ -1561,7 +1689,7 @@
             </summary>
         </member>
         <member name="F:QtQuick.QQuickPaintedItem.PerformanceHint.FastFBOResizing">
-            <summary>If your item gets resized often and you are using the QQuickPaintedItem::FramebufferObject render target, set this flag to true to reduce the item resizing time at the cost of using more graphics memory. Resizing a Framebuffer object is a costly operation, by enabling this property the Framebuffer Object will use a texture larger than the actual size of the item to avoid as much as possible resizing it.</summary>
+            <summary>Resizing an FBO can be a costly operation on a few OpenGL driver implementations. To work around this, one can set this flag to let the QQuickPaintedItem allocate one large framebuffer object and instead draw into a subregion of it. This saves the resize at the cost of using more memory. Please note that this is not a common problem.</summary>
         </member>
         <member name="T:QtQuick.QQuickRenderControl">
             <summary>
@@ -1666,6 +1794,16 @@
             <para>Warning: The QTextDocument provided is used internally by Qt Quick elements to provide text manipulation primitives. You are not allowed to perform any modification of the internal state of the QTextDocument. If you do, the element in question may stop functioning or crash.</para>
             </remarks>
         </member>
+        <member name="M:QtQuick.QQuickTextDocument.#ctor(QtQuick.QQuickItem)">
+            <summary>
+            <para>Constructs a QQuickTextDocument object with parent as the parent object.</para>
+            </summary>
+        </member>
+        <member name="P:QtQuick.QQuickTextDocument.TextDocument">
+            <summary>
+            <para>Returns a pointer to the QTextDocument object.</para>
+            </summary>
+        </member>
         <member name="T:QtQuick.QQuickWindow">
             <summary>
             <para>The QQuickWindow class provides the window for displaying a graphical QML scene</para>
@@ -1736,7 +1874,9 @@
             <summary>
             <para>Creates a new QSGTexture from the supplied image. If the image has an alpha channel, the corresponding texture will have an alpha channel.</para>
             <para>The caller of the function is responsible for deleting the returned texture. The actual GL texture will be deleted when the texture object is deleted.</para>
-            <para>When options contains TextureCanUseAtlas the engine may put the image into a texture atlas. Textures in an atlas need to rely on QSGTexture::normalizedTextureSubRect() for their geometry and will not support QSGTexture::Repeat. Other values from CreateTextureOption are ignored.</para>
+            <para>When options contains TextureCanUseAtlas, the engine may put the image into a texture atlas. Textures in an atlas need to rely on QSGTexture::normalizedTextureSubRect() for their geometry and will not support QSGTexture::Repeat. Other values from CreateTextureOption are ignored.</para>
+            <para>When options contains TextureIsOpaque, the engine will create an RGB texture which returns false for QSGTexture::hasAlphaChannel(). Opaque textures will in most cases be faster to render. When this flag is not set, the texture will have an alpha channel based on the image's format.</para>
+            <para>When options contains TextureHasMipmaps, the engine will create a texture which can use mipmap filtering. Mipmapped textures can not be in an atlas.</para>
             <para>The returned texture will be using GL_TEXTURE_2D as texture target and GL_RGBA as internal format. Reimplement QSGTexture to create textures with different parameters.</para>
             <para>Warning: This function will return 0 if the scene graph has not yet been initialized.</para>
             <para>Warning: The returned texture is not memory managed by the scene graph and must be explicitly deleted by the caller on the rendering thread. This is achieved by deleting the texture from a QSGNode destructor or by using deleteLater() in the case where the texture already has affinity to the rendering thread.</para>
@@ -1754,14 +1894,15 @@
             <para>See also sceneGraphInitialized() and QSGTexture.</para>
             </summary>
         </member>
-        <member name="M:QtQuick.QQuickWindow.ScheduleRenderJob(QtCore.QRunnable,QtQuick.QQuickWindow.RenderStage)">
+        <member name="M:QtQuick.QQuickWindow.ScheduleRenderJob(QtCore.IQRunnable,QtQuick.QQuickWindow.RenderStage)">
             <summary>
             <para>Schedules job to run when the rendering of this window reaches the given stage.</para>
             <para>This is a convenience to the equivalent signals in QQuickWindow for &quot;one shot&quot; tasks.</para>
             <para>The window takes ownership over job and will delete it when the job is completed.</para>
             <para>If rendering is shut down before job has a chance to run, the job will be run and then deleted as part of the scene graph cleanup. If the window is never shown and no rendering happens before the QQuickWindow is destroyed, all pending jobs will be destroyed without their run() method being called.</para>
             <para>If the rendering is happening on a different thread, then the job will happen on the rendering thread.</para>
-            <para>Note: This function does not trigger rendering; the job will be stored run until rendering is triggered elsewhere. To force the job to run earlier, call QQuickWindow::update();</para>
+            <para>If stage is NoStage, job will be run at the earliest opportunity whenever the render thread is not busy rendering a frame. If there is no OpenGL context available or the window is not exposed at the time the job is either posted or handled, it is deleted without executing the run() method. If a non-threaded renderer is in use, the run() method of the job is executed synchronously. The OpenGL context is changed to the renderer context before executing a NoStage job.</para>
+            <para>Note: This function does not trigger rendering; the jobs targeting any other stage than NoStage will be stored run until rendering is triggered elsewhere. To force the job to run earlier, call QQuickWindow::update();</para>
             <para>This function was introduced in  Qt 5.4.</para>
             <para>See also beforeRendering(), afterRendering(), beforeSynchronizing(), afterSynchronizing(), frameSwapped(), and sceneGraphInvalidated().</para>
             </summary>
@@ -1811,7 +1952,7 @@
         </member>
         <member name="M:QtQuick.QQuickWindow.OnEvent(QtCore.QEvent)">
             <summary>
-            <para>Reimplemented from QObject::event().</para>
+            <para>Reimplemented from QWindow::event().</para>
             </summary>
         </member>
         <member name="M:QtQuick.QQuickWindow.OnKeyPressEvent(QtGui.QKeyEvent)">
@@ -1950,7 +2091,7 @@
             <para>Access functions:</para>
             <para></para>
             <para> QColor 	color() const</para>
-            <para> void 	setColor(const QColor &amp; color)</para>
+            <para> void 	setColor(const QColor &amp;color)</para>
             <para></para>
             <para>Notifier signal:</para>
             <para></para>
@@ -1964,7 +2105,7 @@
             <para>This property holds the item which currently has active focus or  if there is no item with active focus.</para>
             <para>Access functions:</para>
             <para></para>
-            <para> QQuickItem * 	activeFocusItem() const</para>
+            <para> QQuickItem *	activeFocusItem() const</para>
             <para></para>
             <para>Notifier signal:</para>
             <para></para>
@@ -2123,6 +2264,9 @@
         <member name="F:QtQuick.QQuickWindow.CreateTextureOption.TextureCanUseAtlas">
             <summary>The image can be uploaded into a texture atlas.</summary>
         </member>
+        <member name="F:QtQuick.QQuickWindow.CreateTextureOption.TextureIsOpaque">
+            <summary>The texture will return false for QSGTexture::hasAlphaChannel() and will not be blended. This flag was added in Qt 5.6.</summary>
+        </member>
         <member name="T:QtQuick.QQuickWindow.RenderStage">
             <summary>
             <para>This enum was introduced or modified in  Qt 5.4.</para>
@@ -2144,6 +2288,9 @@
         <member name="F:QtQuick.QQuickWindow.RenderStage.AfterSwapStage">
             <summary>After the frame is swapped.</summary>
         </member>
+        <member name="F:QtQuick.QQuickWindow.RenderStage.NoStage">
+            <summary>As soon as possible. This value was added in Qt 5.6.</summary>
+        </member>
         <member name="T:QtQuick.QQuickWindow.SceneGraphError">
             <summary>
             <para>This enum describes the error in a sceneGraphError() signal.</para>
@@ -2160,9 +2307,13 @@
             <remarks>
             <para>This is a convenience subclass of QQuickWindow which will automatically load and display a QML scene when given the URL of the main source file. Alternatively, you can instantiate your own objects using QQmlComponent and place them in a manually setup QQuickWindow.</para>
             <para>Typical usage:</para>
-            <para>QQuickView *view = new QQuickView;</para>
-            <para>view-&gt;setSource(QUrl::fromLocalFile(&quot;myqmlfile.qml&quot;));</para>
-            <para>view-&gt;show();</para>
+            <para></para>
+            <para></para>
+            <para>  QQuickView *view = new QQuickView;</para>
+            <para>  view-&gt;setSource(QUrl::fromLocalFile(&quot;myqmlfile.qml&quot;));</para>
+            <para>  view-&gt;show();</para>
+            <para></para>
+            <para></para>
             <para>To receive errors related to loading and executing QML with QQuickView, you can connect to the statusChanged() signal and monitor for QQuickView::Error. The errors are available via QQuickView::errors().</para>
             <para>QQuickView also manages sizing of the view and root object. By default, the resizeMode is SizeViewToRootObject, which will load the component and resize it to the size of the view. Alternatively the resizeMode may be set to SizeRootObjectToView which will resize the view to the size of the root object.</para>
             <para></para>
@@ -2213,15 +2364,8 @@
         </member>
         <member name="E:QtQuick.QQuickView.StatusChanged">
             <summary>
-            <para>The component's current status.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> Status 	status() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	statusChanged(QQuickView::Status status)</para>
-            <para></para>
+            <para>This signal is emitted when the component's current status changes.</para>
+            <para>Note: Notifier signal for property status. </para>
             </summary>
         </member>
         <member name="P:QtQuick.QQuickView.resizeMode">
@@ -2314,6 +2458,13 @@
             <para>The OpenGL context used for rendering is bound when this function is called.</para>
             </summary>
         </member>
+        <member name="M:QtQuick.QQuickTextureFactory.TextureFactoryForImage(QtGui.QImage)">
+            <summary>
+            <para>Returns a QQuickTextureFactory holding the given image.</para>
+            <para>This is typically used as a helper in QQuickImageResponse::textureFactory.</para>
+            <para>This function was introduced in  Qt 5.6.</para>
+            </summary>
+        </member>
         <member name="P:QtQuick.QQuickTextureFactory.TextureSize">
             <summary>
             <para>Returns the size of the texture. This function will be called from arbitrary threads and should not rely on an OpenGL context bound.</para>
@@ -2331,6 +2482,44 @@
             <para>This function is not commonly used and is expected to be slow.</para>
             </summary>
         </member>
+        <member name="T:QtQuick.QQuickImageResponse">
+            <summary>
+            <para>The QQuickImageResponse class provides an interface for asynchronous image loading in QQuickAsyncImageProvider.</para>
+            </summary>
+            <remarks>
+            <para>The purpose of an image response is to provide a way for image provider jobs to be executed in an asynchronous way.</para>
+            <para>Responses are deleted via deleteLater once the finished() signal has been emitted. If you are using QRunnable as base for your QQuickImageResponse ensure automatic deletion is disabled.</para>
+            <para></para>
+            <para>See also QQuickImageProvider.</para>
+            </remarks>
+        </member>
+        <member name="M:QtQuick.QQuickImageResponse.#ctor">
+            <summary>
+            <para>Constructs the image response</para>
+            </summary>
+        </member>
+        <member name="M:QtQuick.QQuickImageResponse.Cancel">
+            <summary>
+            <para>This method is used to communicate that the response is no longer required by the engine.</para>
+            <para>It may be reimplemented to cancel a request in the provider side, however, it is not mandatory.</para>
+            </summary>
+        </member>
+        <member name="E:QtQuick.QQuickImageResponse.Finished">
+            <summary>
+            <para>Signals that the job execution has finished (be it successfully, because an error happened or because it was cancelled).</para>
+            </summary>
+        </member>
+        <member name="P:QtQuick.QQuickImageResponse.TextureFactory">
+            <summary>
+            <para>Returns the texture factory for the job. You can use QQuickTextureFactory::textureFactoryForImage if your provider works with QImage. The engine takes ownership of the returned QQuickTextureFactory.</para>
+            <para>Note: This method will be called only when needed. For example, it may not be called if there is an error or the job is cancelled. Therefore, allocate the QQuickTextureFactory instance only in this method or otherwise ensure its deletion.</para>
+            </summary>
+        </member>
+        <member name="P:QtQuick.QQuickImageResponse.ErrorString">
+            <summary>
+            <para>Returns the error string for the job execution. An empty string means no error.</para>
+            </summary>
+        </member>
         <member name="T:QtQuick.QQuickImageProvider">
             <summary>
             <para>The QQuickImageProvider class provides an interface for supporting pixmaps and threaded image requests in QML.</para>
@@ -2342,61 +2531,82 @@
             <para>Loaded asynchronously in a separate thread</para>
             <para></para>
             <para>To specify that an image should be loaded by an image provider, use the &quot;image:&quot; scheme for the URL source of the image, followed by the identifiers of the image provider and the requested image. For example:</para>
-            <para>Image { source: &quot;image://myimageprovider/image.png&quot; }</para>
+            <para></para>
+            <para></para>
+            <para>  Image { source: &quot;image://myimageprovider/image.png&quot; }</para>
+            <para></para>
+            <para></para>
             <para>This specifies that the image should be loaded by the image provider named &quot;myimageprovider&quot;, and the image to be loaded is named &quot;image.png&quot;. The QML engine invokes the appropriate image provider according to the providers that have been registered through QQmlEngine::addImageProvider().</para>
             <para>Note that the identifiers are case-insensitive, but the rest of the URL will be passed on with preserved case. For example, the below snippet would still specify that the image is loaded by the image provider named &quot;myimageprovider&quot;, but it would request a different image than the above snippet (&quot;Image.png&quot; instead of &quot;image.png&quot;).</para>
-            <para>Image { source: &quot;image://MyImageProvider/Image.png&quot; }</para>
+            <para></para>
+            <para></para>
+            <para>  Image { source: &quot;image://MyImageProvider/Image.png&quot; }</para>
+            <para></para>
+            <para></para>
             <para>If you want the rest of the URL to be case insensitive, you will have to take care of that yourself inside your image provider.</para>
             <para></para>
             <para>An example</para>
             <para>Here are two images. Their source values indicate they should be loaded by an image provider named &quot;colors&quot;, and the images to be loaded are &quot;yellow&quot; and &quot;red&quot;, respectively:</para>
-            <para>Column {</para>
-            <para>    Image { source: &quot;image://colors/yellow&quot; }</para>
-            <para>    Image { source: &quot;image://colors/red&quot; }</para>
-            <para>}</para>
+            <para></para>
+            <para></para>
+            <para>  Column {</para>
+            <para>      Image { source: &quot;image://colors/yellow&quot; }</para>
+            <para>      Image { source: &quot;image://colors/red&quot; }</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>When these images are loaded by QML, it looks for a matching image provider and calls its requestImage() or requestPixmap() method (depending on its imageType()) to load the image. The method is called with the id parameter set to &quot;yellow&quot; for the first image, and &quot;red&quot; for the second.</para>
             <para>Here is an image provider implementation that can load the images requested by the above QML. This implementation dynamically generates QPixmap images that are filled with the requested color:</para>
-            <para>class ColorImageProvider : public QQuickImageProvider</para>
-            <para>{</para>
-            <para>public:</para>
-            <para>    ColorImageProvider()</para>
-            <para>        : QQuickImageProvider(QQuickImageProvider::Pixmap)</para>
-            <para>    {</para>
-            <para>    }</para>
             <para></para>
-            <para>    QPixmap requestPixmap(const QString &amp;id, QSize *size, const QSize &amp;requestedSize)</para>
-            <para>    {</para>
-            <para>        int width = 100;</para>
-            <para>        int height = 50;</para>
             <para></para>
-            <para>        if (size)</para>
-            <para>            *size = QSize(width, height);</para>
-            <para>        QPixmap pixmap(requestedSize.width() &gt; 0 ? requestedSize.width() : width,</para>
-            <para>                       requestedSize.height() &gt; 0 ? requestedSize.height() : height);</para>
-            <para>        pixmap.fill(QColor(id).rgba());</para>
+            <para>  class ColorImageProvider : public QQuickImageProvider</para>
+            <para>  {</para>
+            <para>  public:</para>
+            <para>      ColorImageProvider()</para>
+            <para>          : QQuickImageProvider(QQuickImageProvider::Pixmap)</para>
+            <para>      {</para>
+            <para>      }</para>
             <para></para>
-            <para>        return pixmap;</para>
-            <para>    }</para>
-            <para>};</para>
+            <para>      QPixmap requestPixmap(const QString &amp;id, QSize *size, const QSize &amp;requestedSize)</para>
+            <para>      {</para>
+            <para>          int width = 100;</para>
+            <para>          int height = 50;</para>
+            <para></para>
+            <para>          if (size)</para>
+            <para>              *size = QSize(width, height);</para>
+            <para>          QPixmap pixmap(requestedSize.width() &gt; 0 ? requestedSize.width() : width,</para>
+            <para>                         requestedSize.height() &gt; 0 ? requestedSize.height() : height);</para>
+            <para>          pixmap.fill(QColor(id).rgba());</para>
+            <para></para>
+            <para>          return pixmap;</para>
+            <para>      }</para>
+            <para>  };</para>
+            <para></para>
+            <para></para>
             <para>To make this provider accessible to QML, it is registered with the QML engine with a &quot;colors&quot; identifier:</para>
-            <para>int main(int argc, char *argv[])</para>
-            <para>{</para>
-            <para>    ...</para>
             <para></para>
-            <para>    QQuickView view;</para>
-            <para>    QQmlEngine *engine = view.engine();</para>
-            <para>    engine-&gt;addImageProvider(QLatin1String(&quot;colors&quot;), new ColorPixmapProvider);</para>
             <para></para>
-            <para>    ...</para>
-            <para>}</para>
+            <para>  int main(int argc, char *argv[])</para>
+            <para>  {</para>
+            <para>      ...</para>
+            <para></para>
+            <para>      QQuickView view;</para>
+            <para>      QQmlEngine *engine = view.engine();</para>
+            <para>      engine-&gt;addImageProvider(QLatin1String(&quot;colors&quot;), new ColorPixmapProvider);</para>
+            <para></para>
+            <para>      ...</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>Now the images can be successfully loaded in QML:</para>
             <para></para>
             <para>See the Image Provider Example for the complete implementation. Note that the example registers the provider via a plugin instead of registering it in the application main() function as shown above.</para>
             <para></para>
             <para>Asynchronous image loading</para>
             <para>Image providers that support QImage or Texture loading automatically include support for asychronous loading of images. To enable asynchronous loading for an image source, set the asynchronous property to true for the relevant Image, BorderImage or AnimatedImage object. When this is enabled, the image request to the provider is run in a low priority thread, allowing image loading to be executed in the background, and reducing the performance impact on the user interface.</para>
-            <para>To force asynchronous image loading, even for image sources that do not have the asynchronous property set to true, you may pass the QQuickImageProvider::ForceAsynchronousImageLoading flag to the image provider constructor. This ensures that all image requests for the provider are handled in a separate thread.</para>
+            <para>To force asynchronous image loading, even for image sources that do not have the asynchronous property set to true, you may pass the QQmlImageProviderBase::ForceAsynchronousImageLoading flag to the image provider constructor. This ensures that all image requests for the provider are handled in a separate thread.</para>
             <para>Asynchronous loading for image providers that provide QPixmap is only supported in platforms that have the ThreadedPixmaps feature, in platforms where pixmaps can only be created in the main thread (i.e. ThreadedPixmaps is not supported) if asynchronous is set to true, the value is ignored and the image is loaded synchronously.</para>
+            <para>Asynchronous image loading for providers of type other than ImageResponse are executed on a single thread per engine basis. That means that a slow image provider will block the loading of any other request. To avoid that we suggest using QQuickAsyncImageProvider and implement threading on the provider side via a QThreadPool or similar. See the Image Response Provider Example for a complete implementation.</para>
             <para></para>
             <para>Image caching</para>
             <para>Images returned by a QQuickImageProvider are automatically cached, similar to any image loaded by the QML engine. When an image with a &quot;image://&quot; prefix is loaded from cache, requestImage() and requestPixmap() will not be called for the relevant image provider. If an image should always be fetched from the image provider, and should not be cached at all, set the cache property to false for the relevant Image, BorderImage or AnimatedImage object.</para>
@@ -2408,6 +2618,33 @@
         <member name="M:QtQuick.QQuickImageProvider.#ctor(QtQml.QQmlImageProviderBase.ImageType,QtQml.QQmlImageProviderBase.Flag)">
             <summary>
             <para>Creates an image provider that will provide images of the given type and behave according to the given flags.</para>
+            </summary>
+        </member>
+        <member name="M:QtQuick.QQuickImageProvider.RequestImage(System.String,QtCore.QSize,QtCore.QSize)">
+            <summary>
+            <para>Implement this method to return the image with id. The default implementation returns an empty image.</para>
+            <para>The id is the requested image source, with the &quot;image:&quot; scheme and provider identifier removed. For example, if the image source was &quot;image://myprovider/icons/home&quot;, the given id would be &quot;icons/home&quot;.</para>
+            <para>The requestedSize corresponds to the Image::sourceSize requested by an Image item. If requestedSize is a valid size, the image returned should be of that size.</para>
+            <para>In all cases, size must be set to the original size of the image. This is used to set the width and height of the relevant Image if these values have not been set explicitly.</para>
+            <para>Note: this method may be called by multiple threads, so ensure the implementation of this method is reentrant.</para>
+            </summary>
+        </member>
+        <member name="M:QtQuick.QQuickImageProvider.RequestPixmap(System.String,QtCore.QSize,QtCore.QSize)">
+            <summary>
+            <para>Implement this method to return the pixmap with id. The default implementation returns an empty pixmap.</para>
+            <para>The id is the requested image source, with the &quot;image:&quot; scheme and provider identifier removed. For example, if the image source was &quot;image://myprovider/icons/home&quot;, the given id would be &quot;icons/home&quot;.</para>
+            <para>The requestedSize corresponds to the Image::sourceSize requested by an Image item. If requestedSize is a valid size, the image returned should be of that size.</para>
+            <para>In all cases, size must be set to the original size of the image. This is used to set the width and height of the relevant Image if these values have not been set explicitly.</para>
+            <para>Note: this method may be called by multiple threads, so ensure the implementation of this method is reentrant.</para>
+            </summary>
+        </member>
+        <member name="M:QtQuick.QQuickImageProvider.RequestTexture(System.String,QtCore.QSize,QtCore.QSize)">
+            <summary>
+            <para>Implement this method to return the texture with id. The default implementation returns 0.</para>
+            <para>The id is the requested image source, with the &quot;image:&quot; scheme and provider identifier removed. For example, if the image source was &quot;image://myprovider/icons/home&quot;, the given id would be &quot;icons/home&quot;.</para>
+            <para>The requestedSize corresponds to the Image::sourceSize requested by an Image item. If requestedSize is a valid size, the image returned should be of that size.</para>
+            <para>In all cases, size must be set to the original size of the image. This is used to set the width and height of the relevant Image if these values have not been set explicitly.</para>
+            <para>Note: this method may be called by multiple threads, so ensure the implementation of this method is reentrant.</para>
             </summary>
         </member>
         <member name="P:QtQuick.QQuickImageProvider.imageType">
@@ -2422,6 +2659,27 @@
             <para>Returns the flags set for this provider.</para>
             </summary>
         </member>
+        <member name="T:QtQuick.QQuickAsyncImageProvider">
+            <summary>
+            <para>The QQuickAsyncImageProvider class provides an interface for for asynchronous control of QML image requests.</para>
+            </summary>
+            <remarks>
+            <para>See also QQuickImageProvider.</para>
+            </remarks>
+        </member>
+        <member name="M:QtQuick.QQuickAsyncImageProvider.#ctor">
+            <summary>
+            <para>Default constructs an instance of QQuickAsyncImageProvider.</para>
+            </summary>
+        </member>
+        <member name="M:QtQuick.QQuickAsyncImageProvider.RequestImageResponse(System.String,QtCore.QSize)">
+            <summary>
+            <para>Implement this method to return the job that will provide the texture with id.</para>
+            <para>The id is the requested image source, with the &quot;image:&quot; scheme and provider identifier removed. For example, if the image source was &quot;image://myprovider/icons/home&quot;, the given id would be &quot;icons/home&quot;.</para>
+            <para>The requestedSize corresponds to the Image::sourceSize requested by an Image item. If requestedSize is a valid size, the image returned should be of that size.</para>
+            <para>Note: this method may be called by multiple threads, so ensure the implementation of this method is reentrant.</para>
+            </summary>
+        </member>
         <member name="T:QtQuick.QSGGeometry">
             <summary>
             <para>The QSGGeometry class provides low-level storage for graphics primitives in the Qt Quick Scene Graph.</para>
@@ -2431,43 +2689,47 @@
             <para>Vertices can be as simple as points defined by x and y values or can be more complex where each vertex contains a normal, texture coordinates and a 3D position. The QSGGeometry::AttributeSet is used to describe how the vertex data is built up. The attribute set can only be specified on construction. The QSGGeometry class provides a few convenience attributes and attribute sets by default. The defaultAttributes_Point2D() function returns an attribute set to be used in normal solid color rectangles, while the defaultAttributes_TexturedPoint2D function returns attributes to be used for textured 2D geometry. The vertex data is internally stored as a void * and is accessible with the vertexData() function. Convenience accessors for the common attribute sets are available with vertexDataAsPoint2D() and vertexDataAsTexturedPoint2D(). Vertex data is allocated by passing a vertex count to the constructor or by calling allocate() later.</para>
             <para>The QSGGeometry can optionally contain indices of either unsigned 32-bit, unsigned 16-bit, or unsigned 8-bit integers. The index type must be specified during construction and cannot be changed.</para>
             <para>Below is a snippet illustrating how a geometry composed of position and color vertices can be built.</para>
-            <para>struct MyPoint2D {</para>
-            <para>    float x;</para>
-            <para>    float y;</para>
-            <para>    float r;</para>
-            <para>    float g;</para>
-            <para>    float b;</para>
-            <para>    float a;</para>
             <para></para>
-            <para>    void set(float x_, float y_, float r_, float g_, float b_, float a_) {</para>
-            <para>        x = x_;</para>
-            <para>        y = y_;</para>
-            <para>        r = r_;</para>
-            <para>        g = g_;</para>
-            <para>        b = b_;</para>
-            <para>        a = a_;</para>
-            <para>    }</para>
-            <para>};</para>
             <para></para>
-            <para>QSGGeometry::Attribute MyPoint2D_Attributes[] = {</para>
-            <para>    QSGGeometry::Attribute::create(0, 2, GL_FLOAT, true),</para>
-            <para>    QSGGeometry::Attribute::create(1, 4, GL_FLOAT, false)</para>
-            <para>};</para>
+            <para>  struct MyPoint2D {</para>
+            <para>      float x;</para>
+            <para>      float y;</para>
+            <para>      float r;</para>
+            <para>      float g;</para>
+            <para>      float b;</para>
+            <para>      float a;</para>
             <para></para>
-            <para>QSGGeometry::AttributeSet MyPoint2D_AttributeSet = {</para>
-            <para>    2,</para>
-            <para>    sizeof(MyPoint2D),</para>
-            <para>    MyPoint2D_Attributes</para>
-            <para>};</para>
+            <para>      void set(float x_, float y_, float r_, float g_, float b_, float a_) {</para>
+            <para>          x = x_;</para>
+            <para>          y = y_;</para>
+            <para>          r = r_;</para>
+            <para>          g = g_;</para>
+            <para>          b = b_;</para>
+            <para>          a = a_;</para>
+            <para>      }</para>
+            <para>  };</para>
             <para></para>
-            <para>...</para>
+            <para>  QSGGeometry::Attribute MyPoint2D_Attributes[] = {</para>
+            <para>      QSGGeometry::Attribute::create(0, 2, GL_FLOAT, true),</para>
+            <para>      QSGGeometry::Attribute::create(1, 4, GL_FLOAT, false)</para>
+            <para>  };</para>
             <para></para>
-            <para>geometry = new QSGGeometry(MyPoint2D_AttributeSet, 2);</para>
-            <para>geometry-&gt;setDrawingMode(GL_LINES);</para>
+            <para>  QSGGeometry::AttributeSet MyPoint2D_AttributeSet = {</para>
+            <para>      2,</para>
+            <para>      sizeof(MyPoint2D),</para>
+            <para>      MyPoint2D_Attributes</para>
+            <para>  };</para>
             <para></para>
-            <para>MyPoint2D *vertices = static_cast&lt;MyPoint2D *&gt;(geometry-&gt;vertexData());</para>
-            <para>vertices[0].set(0, 0, 1, 0, 0, 1);</para>
-            <para>vertices[1].set(width(), height(), 0, 0, 1, 1);</para>
+            <para>  ...</para>
+            <para></para>
+            <para>  geometry = new QSGGeometry(MyPoint2D_AttributeSet, 2);</para>
+            <para>  geometry-&gt;setDrawingMode(GL_LINES);</para>
+            <para></para>
+            <para>  MyPoint2D *vertices = static_cast&lt;MyPoint2D *&gt;(geometry-&gt;vertexData());</para>
+            <para>  vertices[0].set(0, 0, 1, 0, 0, 1);</para>
+            <para>  vertices[1].set(width(), height(), 0, 0, 1, 1);</para>
+            <para></para>
+            <para></para>
             <para>The QSGGeometry is a software buffer and client-side in terms of OpenGL rendering, as the buffers used in 2D graphics typically consist of many small buffers that change every frame and do not benefit from being uploaded to graphics memory. However, the QSGGeometry supports hinting to the renderer that a buffer should be uploaded using the setVertexDataPattern() and setIndexDataPattern() functions. Whether this hint is respected or not is implementation specific.</para>
             <para>Note: All classes with QSG prefix should be used solely on the scene graph's rendering thread. See Scene Graph and Rendering for more information.</para>
             <para></para>
@@ -2686,7 +2948,6 @@
             <para>The QSGGeometry::AttributeSet describes how the vertices in a QSGGeometry are built up.</para>
             </summary>
             <remarks>
-            <para></para>
             <para>See also QSGGeometry.</para>
             </remarks>
         </member>
@@ -2694,9 +2955,6 @@
             <summary>
             <para>The QSGGeometry::Point2D struct is a convenience struct for accessing 2D Points.</para>
             </summary>
-            <remarks>
-            <para></para>
-            </remarks>
         </member>
         <member name="M:QtQuick.QSGGeometry.Point2D.Set(System.Single,System.Single)">
             <summary>
@@ -2707,9 +2965,6 @@
             <summary>
             <para>The QSGGeometry::TexturedPoint2D struct is a convenience struct for accessing 2D Points with texture coordinates.</para>
             </summary>
-            <remarks>
-            <para></para>
-            </remarks>
         </member>
         <member name="M:QtQuick.QSGGeometry.TexturedPoint2D.Set(System.Single,System.Single,System.Single,System.Single)">
             <summary>
@@ -2720,9 +2975,6 @@
             <summary>
             <para>The QSGGeometry::ColoredPoint2D struct is a convenience struct for accessing 2D Points with a color.</para>
             </summary>
-            <remarks>
-            <para></para>
-            </remarks>
         </member>
         <member name="M:QtQuick.QSGGeometry.ColoredPoint2D.Set(System.Single,System.Single,System.Byte,System.Byte,System.Byte,System.Byte)">
             <summary>
@@ -2957,20 +3209,24 @@
             <remarks>
             <para>The QSGGeometryNode consists of geometry and material. The geometry defines the mesh, the vertices and their structure, to be drawn. The Material defines how the shape is filled.</para>
             <para>The following is a code snippet illustrating how to create a red line using a QSGGeometryNode:</para>
-            <para>QSGGeometry *geometry = new QSGGeometry(QSGGeometry::defaultAttributes_Point2D(), 2);</para>
-            <para>geometry-&gt;setDrawingMode(GL_LINES);</para>
-            <para>geometry-&gt;setLineWidth(3);</para>
-            <para>geometry-&gt;vertexDataAsPoint2D()[0].set(0, 0);</para>
-            <para>geometry-&gt;vertexDataAsPoint2D()[1].set(width(), height());</para>
             <para></para>
-            <para>QSGFlatColorMaterial *material = new QSGFlatColorMaterial;</para>
-            <para>material-&gt;setColor(QColor(255, 0, 0));</para>
             <para></para>
-            <para>QSGGeometryNode *node = new QSGGeometryNode;</para>
-            <para>node-&gt;setGeometry(geometry);</para>
-            <para>node-&gt;setFlag(QSGNode::OwnsGeometry);</para>
-            <para>node-&gt;setMaterial(material);</para>
-            <para>node-&gt;setFlag(QSGNode::OwnsMaterial);</para>
+            <para>  QSGGeometry *geometry = new QSGGeometry(QSGGeometry::defaultAttributes_Point2D(), 2);</para>
+            <para>  geometry-&gt;setDrawingMode(GL_LINES);</para>
+            <para>  geometry-&gt;setLineWidth(3);</para>
+            <para>  geometry-&gt;vertexDataAsPoint2D()[0].set(0, 0);</para>
+            <para>  geometry-&gt;vertexDataAsPoint2D()[1].set(width(), height());</para>
+            <para></para>
+            <para>  QSGFlatColorMaterial *material = new QSGFlatColorMaterial;</para>
+            <para>  material-&gt;setColor(QColor(255, 0, 0));</para>
+            <para></para>
+            <para>  QSGGeometryNode *node = new QSGGeometryNode;</para>
+            <para>  node-&gt;setGeometry(geometry);</para>
+            <para>  node-&gt;setFlag(QSGNode::OwnsGeometry);</para>
+            <para>  node-&gt;setMaterial(material);</para>
+            <para>  node-&gt;setFlag(QSGNode::OwnsMaterial);</para>
+            <para></para>
+            <para></para>
             <para>A geometry node must have both geometry and a normal material before it is added to the scene graph. When the geometry and materials are changed after the node has been added to the scene graph, the user should also mark them as dirty using QSGNode::markDirty().</para>
             <para>The geometry node supports two types of materials, the opaqueMaterial and the normal material. The opaqueMaterial is used when the accumulated scene graph opacity at the time of rendering is 1. The primary usecase is to special case opaque rendering to avoid an extra operation in the fragment shader can have significant performance impact on embedded graphics chips. The opaque material is optional.</para>
             <para>Note: All classes with QSG prefix should be used solely on the scene graph's rendering thread. See Scene Graph and Rendering for more information.</para>
@@ -3224,52 +3480,56 @@
             <para>The attributeNames() returns the name of the attributes used in the vertexShader(). These are used in the default implementation of activate() and deactivate() to decide whice vertex registers are enabled.</para>
             <para>The initialize() function is called during program creation to allow subclasses to prepare for use, such as resolve uniform names in the vertexShader() and fragmentShader().</para>
             <para>A minimal example:</para>
-            <para>class Shader : public QSGMaterialShader</para>
-            <para>{</para>
-            <para>public:</para>
-            <para>    const char *vertexShader() const {</para>
-            <para>        return</para>
-            <para>        &quot;attribute highp vec4 vertex;          \n&quot;</para>
-            <para>        &quot;uniform highp mat4 matrix;            \n&quot;</para>
-            <para>        &quot;void main() {                         \n&quot;</para>
-            <para>        &quot;    gl_Position = matrix * vertex;    \n&quot;</para>
-            <para>        &quot;}&quot;;</para>
-            <para>    }</para>
             <para></para>
-            <para>    const char *fragmentShader() const {</para>
-            <para>        return</para>
-            <para>        &quot;uniform lowp float opacity;                            \n&quot;</para>
-            <para>        &quot;void main() {                                          \n&quot;</para>
-            <para>                &quot;    gl_FragColor = vec4(1, 0, 0, 1) * opacity; \n&quot;</para>
-            <para>        &quot;}&quot;;</para>
-            <para>    }</para>
             <para></para>
-            <para>    char const *const *attributeNames() const</para>
-            <para>    {</para>
-            <para>        static char const *const names[] = { &quot;vertex&quot;, 0 };</para>
-            <para>        return names;</para>
-            <para>    }</para>
+            <para>  class Shader : public QSGMaterialShader</para>
+            <para>  {</para>
+            <para>  public:</para>
+            <para>      const char *vertexShader() const {</para>
+            <para>          return</para>
+            <para>          &quot;attribute highp vec4 vertex;          \n&quot;</para>
+            <para>          &quot;uniform highp mat4 matrix;            \n&quot;</para>
+            <para>          &quot;void main() {                         \n&quot;</para>
+            <para>          &quot;    gl_Position = matrix * vertex;    \n&quot;</para>
+            <para>          &quot;}&quot;;</para>
+            <para>      }</para>
             <para></para>
-            <para>    void initialize()</para>
-            <para>    {</para>
-            <para>        QSGMaterialShader::initialize();</para>
-            <para>        m_id_matrix = program()-&gt;uniformLocation(&quot;matrix&quot;);</para>
-            <para>        m_id_opacity = program()-&gt;uniformLocation(&quot;opacity&quot;);</para>
-            <para>    }</para>
+            <para>      const char *fragmentShader() const {</para>
+            <para>          return</para>
+            <para>          &quot;uniform lowp float opacity;                            \n&quot;</para>
+            <para>          &quot;void main() {                                          \n&quot;</para>
+            <para>                  &quot;    gl_FragColor = vec4(1, 0, 0, 1) * opacity; \n&quot;</para>
+            <para>          &quot;}&quot;;</para>
+            <para>      }</para>
             <para></para>
-            <para>    void updateState(const RenderState &amp;state, QSGMaterial *newMaterial, QSGMaterial *oldMaterial)</para>
-            <para>    {</para>
-            <para>        Q_ASSERT(program()-&gt;isLinked());</para>
-            <para>        if (state.isMatrixDirty())</para>
-            <para>            program()-&gt;setUniformValue(m_id_matrix, state.combinedMatrix());</para>
-            <para>        if (state.isOpacityDirty())</para>
-            <para>            program()-&gt;setUniformValue(m_id_opacity, state.opacity());</para>
-            <para>    }</para>
+            <para>      char const *const *attributeNames() const</para>
+            <para>      {</para>
+            <para>          static char const *const names[] = { &quot;vertex&quot;, 0 };</para>
+            <para>          return names;</para>
+            <para>      }</para>
             <para></para>
-            <para>private:</para>
-            <para>    int m_id_matrix;</para>
-            <para>    int m_id_opacity;</para>
-            <para>};</para>
+            <para>      void initialize()</para>
+            <para>      {</para>
+            <para>          QSGMaterialShader::initialize();</para>
+            <para>          m_id_matrix = program()-&gt;uniformLocation(&quot;matrix&quot;);</para>
+            <para>          m_id_opacity = program()-&gt;uniformLocation(&quot;opacity&quot;);</para>
+            <para>      }</para>
+            <para></para>
+            <para>      void updateState(const RenderState &amp;state, QSGMaterial *newMaterial, QSGMaterial *oldMaterial)</para>
+            <para>      {</para>
+            <para>          Q_ASSERT(program()-&gt;isLinked());</para>
+            <para>          if (state.isMatrixDirty())</para>
+            <para>              program()-&gt;setUniformValue(m_id_matrix, state.combinedMatrix());</para>
+            <para>          if (state.isOpacityDirty())</para>
+            <para>              program()-&gt;setUniformValue(m_id_opacity, state.opacity());</para>
+            <para>      }</para>
+            <para></para>
+            <para>  private:</para>
+            <para>      int m_id_matrix;</para>
+            <para>      int m_id_opacity;</para>
+            <para>  };</para>
+            <para></para>
+            <para></para>
             <para>Note: All classes with QSG prefix should be used solely on the scene graph's rendering thread. See Scene Graph and Rendering for more information.</para>
             </remarks>
         </member>
@@ -3407,6 +3667,11 @@
             <para>Returns the modelview determinant to be used for rendering.</para>
             </summary>
         </member>
+        <member name="P:QtQuick.QSGMaterialShader.RenderState.DevicePixelRatio">
+            <summary>
+            <para>Returns the ratio between physical pixels and device-independent pixels to be used for rendering.</para>
+            </summary>
+        </member>
         <member name="P:QtQuick.QSGMaterialShader.RenderState.Context">
             <summary>
             <para>Returns the QOpenGLContext that is being used for rendering</para>
@@ -3435,12 +3700,16 @@
             <para>The QSGMaterial and QSGMaterialShader subclasses form a tight relationship. For one scene graph (including nested graphs), there is one unique QSGMaterialShader instance which encapsulates the QOpenGLShaderProgram the scene graph uses to render that material, such as a shader to flat coloring of geometry. Each QSGGeometryNode can have a unique QSGMaterial containing the how the shader should be configured when drawing that node, such as the actual color to used to render the geometry.</para>
             <para>The QSGMaterial has two virtual functions that both need to be implemented. The function type() should return a unique instance for all instances of a specific subclass. The createShader() function should return a new instance of QSGMaterialShader, specific to the subclass of QSGMaterial.</para>
             <para>A minimal QSGMaterial implementation could look like this:</para>
-            <para>class Material : public QSGMaterial</para>
-            <para>{</para>
-            <para>public:</para>
-            <para>    QSGMaterialType *type() const { static QSGMaterialType type; return &amp;type; }</para>
-            <para>    QSGMaterialShader *createShader() const { return new Shader; }</para>
-            <para>};</para>
+            <para></para>
+            <para></para>
+            <para>  class Material : public QSGMaterial</para>
+            <para>  {</para>
+            <para>  public:</para>
+            <para>      QSGMaterialType *type() const { static QSGMaterialType type; return &amp;type; }</para>
+            <para>      QSGMaterialShader *createShader() const { return new Shader; }</para>
+            <para>  };</para>
+            <para></para>
+            <para></para>
             <para>Note: All classes with QSG prefix should be used solely on the scene graph's rendering thread. See Scene Graph and Rendering for more information.</para>
             </remarks>
         </member>
@@ -3531,7 +3800,7 @@
         <member name="M:QtQuick.QSGEngine.CreateTextureFromImage(QtGui.QImage,QtQuick.QSGEngine.CreateTextureOption)">
             <summary>
             <para>Creates a texture using the data of image</para>
-            <para>Valid options are TextureCanUseAtlas</para>
+            <para>Valid options are TextureCanUseAtlas and TextureIsOpaque.</para>
             <para>The caller takes ownership of the texture and the texture should only be used with this engine.</para>
             <para>See also createTextureFromId(), QSGSimpleTextureNode::setOwnsTexture(), and QQuickWindow::createTextureFromImage().</para>
             </summary>
@@ -3589,9 +3858,6 @@
             <summary>
             <para>The QSGSimpleRectNode class is a convenience class for drawing solid filled rectangles using scenegraph.</para>
             </summary>
-            <remarks>
-            <para></para>
-            </remarks>
         </member>
         <member name="M:QtQuick.QSGSimpleRectNode.#ctor(QtCore.QRectF,QtGui.QColor)">
             <summary>
@@ -3990,7 +4256,12 @@
         </member>
         <member name="E:QtQuick.QSGTextureProvider.TextureChanged">
             <summary>
-            <para></para>
+            <para>This signal is emitted when the texture changes.</para>
+            </summary>
+        </member>
+        <member name="P:QtQuick.QSGTextureProvider.Texture">
+            <summary>
+            <para>Returns a pointer to the texture object.</para>
             </summary>
         </member>
         <member name="T:QtQuick.QSGVertexColorMaterial">

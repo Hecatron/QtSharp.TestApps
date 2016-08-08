@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Qt3DQuickSharp</name>
+    </assembly>
+    <members>
+        <member name="T:Qt3DQuick.Qt3DCore.Quick.QQmlAspectEngine">
+            <summary>
+            <para>The QQmlAspectEngine provides an environment for the QAspectEngine and a method for instantiating QML components.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DQuick.Qt3DCore.Quick.QQmlAspectEngine.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs a new QQmlAspectEngine with parent.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DQuick.Qt3DCore.Quick.QQmlAspectEngine.SetSource(QtCore.QUrl)">
+            <summary>
+            <para>Sets source as a source for the QML component to be created.</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DQuick.Qt3DCore.Quick.QQmlAspectEngine.StatusChanged">
+            <summary>
+            <para>This signal is emitted with status when the status of the engine changes.</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DQuick.Qt3DCore.Quick.QQmlAspectEngine.status">
+            <summary>
+            <para>Returns the status.</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DQuick.Qt3DCore.Quick.QQmlAspectEngine.QmlEngine">
+            <summary>
+            <para>Returns the engine.</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DQuick.Qt3DCore.Quick.QQmlAspectEngine.AspectEngine">
+            <summary>
+            <para>Returns the aspectEngine.</para>
+            </summary>
+        </member>
+        <member name="T:Qt3DQuick.Qt3DCore.Quick.QQmlAspectEngine.Status">
+            <summary>
+            <para>The status of the engine.</para>
+            </summary>
+        </member>
+    </members>
+</doc>

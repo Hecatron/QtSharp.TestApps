@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>QtConcurrentSharp</name>
+    </assembly>
+    <members>
+        <member name="T:QtConcurrent.QtConcurrent.ReduceOption">
+            <summary>
+            <para>This enum specifies the order of which results from the map or filter function are passed to the reduce function.</para>
+            <para>The ReduceOptions type is a typedef for QFlags&lt;ReduceOption&gt;. It stores an OR combination of ReduceOption values.</para>
+            </summary>
+        </member>
+        <member name="F:QtConcurrent.QtConcurrent.ReduceOption.UnorderedReduce">
+            <summary>Reduction is done in an arbitrary order.</summary>
+        </member>
+        <member name="F:QtConcurrent.QtConcurrent.ReduceOption.OrderedReduce">
+            <summary>Reduction is done in the order of the original sequence.</summary>
+        </member>
+        <member name="F:QtConcurrent.QtConcurrent.ReduceOption.SequentialReduce">
+            <summary>Reduction is done sequentially: only one thread will enter the reduce function at a time. (Parallel reduction might be supported in a future version of Qt Concurrent.)</summary>
+        </member>
+    </members>
+</doc>

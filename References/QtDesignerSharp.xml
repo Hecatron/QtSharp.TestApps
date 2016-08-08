@@ -4,6 +4,170 @@
         <name>QtDesignerSharp</name>
     </assembly>
     <members>
+        <member name="T:QtDesigner.QDesignerCustomWidgetInterface">
+            <summary>
+            <para>The QDesignerCustomWidgetInterface class enables Qt Designer to access and construct custom widgets.</para>
+            </summary>
+            <remarks>
+            <para>QDesignerCustomWidgetInterface provides a custom widget with an interface. The class contains a set of functions that must be subclassed to return basic information about the widget, such as its class name and the name of its header file. Other functions must be implemented to initialize the plugin when it is loaded, and to construct instances of the custom widget for Qt Designer to use.</para>
+            <para>When implementing a custom widget you must subclass QDesignerCustomWidgetInterface to expose your widget to Qt Designer. For example, this is the declaration for the plugin used in the Custom Widget Plugin example that enables an analog clock custom widget to be used by Qt Designer:</para>
+            <para></para>
+            <para></para>
+            <para>  class AnalogClockPlugin : public QObject, public QDesignerCustomWidgetInterface</para>
+            <para>  {</para>
+            <para>      Q_OBJECT</para>
+            <para>      Q_PLUGIN_METADATA(IID &quot;org.qt-project.Qt.QDesignerCustomWidgetInterface&quot;)</para>
+            <para>      Q_INTERFACES(QDesignerCustomWidgetInterface)</para>
+            <para>  public:</para>
+            <para>      explicit AnalogClockPlugin(QObject *parent = 0);</para>
+            <para></para>
+            <para>      bool isContainer() const Q_DECL_OVERRIDE;</para>
+            <para>      bool isInitialized() const Q_DECL_OVERRIDE;</para>
+            <para>      QIcon icon() const Q_DECL_OVERRIDE;</para>
+            <para>      QString domXml() const Q_DECL_OVERRIDE;</para>
+            <para>      QString group() const Q_DECL_OVERRIDE;</para>
+            <para>      QString includeFile() const Q_DECL_OVERRIDE;</para>
+            <para>      QString name() const Q_DECL_OVERRIDE;</para>
+            <para>      QString toolTip() const Q_DECL_OVERRIDE;</para>
+            <para>      QString whatsThis() const Q_DECL_OVERRIDE;</para>
+            <para>      QWidget *createWidget(QWidget *parent) Q_DECL_OVERRIDE;</para>
+            <para>      void initialize(QDesignerFormEditorInterface *core) Q_DECL_OVERRIDE;</para>
+            <para></para>
+            <para>  private:</para>
+            <para>      bool initialized;</para>
+            <para>  };</para>
+            <para></para>
+            <para></para>
+            <para>Note that the only part of the class definition that is specific to this particular custom widget is the class name. In addition, since we are implementing an interface, we must ensure that it's made known to the meta object system using the Q_INTERFACES() macro. This enables Qt Designer to use the qobject_cast() function to query for supported interfaces using nothing but a QObject pointer.</para>
+            <para>After Qt Designer loads a custom widget plugin, it calls the interface's initialize() function to enable it to set up any resources that it may need. This function is called with a QDesignerFormEditorInterface parameter that provides the plugin with a gateway to all of Qt Designer's API.</para>
+            <para>Qt Designer constructs instances of the custom widget by calling the plugin's createWidget() function with a suitable parent widget. Plugins must construct and return an instance of a custom widget with the specified parent widget.</para>
+            <para>Exporting your custom widget plugin to Qt Designer using the Q_PLUGIN_METADATA() macro. For example, if a library called libcustomwidgetplugin.so (on Unix) or libcustomwidget.dll (on Windows) contains a widget class called MyCustomWidget, we can export it by adding the following line to the file containing the plugin header:</para>
+            <para></para>
+            <para></para>
+            <para>  Q_PLUGIN_METADATA(IID &quot;org.qt-project.Qt.QDesignerCustomWidgetInterface&quot;)</para>
+            <para></para>
+            <para></para>
+            <para>This macro ensures that Qt Designer can access and construct the custom widget. Without this macro, there is no way for Qt Designer to use it.</para>
+            <para>When implementing a custom widget plugin, you build it as a separate library. If you want to include several custom widget plugins in the same library, you must in addition subclass QDesignerCustomWidgetCollectionInterface.</para>
+            <para>Warning: If your custom widget plugin contains QVariant properties, be aware that only the following types are supported:</para>
+            <para></para>
+            <para>QVariant::ByteArray</para>
+            <para>QVariant::Bool</para>
+            <para>QVariant::Color</para>
+            <para>QVariant::Cursor</para>
+            <para>QVariant::Date</para>
+            <para>QVariant::DateTime</para>
+            <para>QVariant::Double</para>
+            <para>QVariant::Int</para>
+            <para>QVariant::Point</para>
+            <para>QVariant::Rect</para>
+            <para>QVariant::Size</para>
+            <para>QVariant::SizePolicy</para>
+            <para>QVariant::String</para>
+            <para>QVariant::Time</para>
+            <para>QVariant::UInt</para>
+            <para></para>
+            <para>For a complete example using the QDesignerCustomWidgetInterface class, see the Custom Widget Example. The example shows how to create a custom widget plugin for Qt Designer.</para>
+            <para></para>
+            <para>See also QDesignerCustomWidgetCollectionInterface and Creating Custom Widgets for Qt Designer.</para>
+            </remarks>
+        </member>
+        <member name="M:QtDesigner.QDesignerCustomWidgetInterface.IncludeFile">
+            <summary>
+            <para>Returns the path to the include file that uic uses when creating code for the custom widget.</para>
+            </summary>
+        </member>
+        <member name="M:QtDesigner.QDesignerCustomWidgetInterface.CreateWidget(QtWidgets.QWidget)">
+            <summary>
+            <para>Returns a new instance of the custom widget, with the given parent.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerCustomWidgetInterface.Name">
+            <summary>
+            <para>Returns the class name of the custom widget supplied by the interface.</para>
+            <para>The name returned must be identical to the class name used for the custom widget.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerCustomWidgetInterface.Group">
+            <summary>
+            <para>Returns the name of the group to which the custom widget belongs.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerCustomWidgetInterface.ToolTip">
+            <summary>
+            <para>Returns a short description of the widget that can be used by Qt Designer in a tool tip.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerCustomWidgetInterface.WhatsThis">
+            <summary>
+            <para>Returns a description of the widget that can be used by Qt Designer in &quot;What's This?&quot; help for the widget.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerCustomWidgetInterface.Icon">
+            <summary>
+            <para>Returns the icon used to represent the custom widget in Qt Designer's widget box.</para>
+            </summary>
+        </member>
+        <member name="P:QtDesigner.QDesignerCustomWidgetInterface.IsContainer">
+            <summary>
+            <para>Returns true if the custom widget is intended to be used as a container; otherwise returns false.</para>
+            <para>Most custom widgets are not used to hold other widgets, so their implementations of this function will return false, but custom containers will return true to ensure that they behave correctly in Qt Designer.</para>
+            </summary>
+        </member>
+        <member name="T:QtDesigner.QDesignerCustomWidgetCollectionInterface">
+            <summary>
+            <para>The QDesignerCustomWidgetCollectionInterface class allows you to include several custom widgets in one single library.</para>
+            </summary>
+            <remarks>
+            <para>When implementing a custom widget plugin, you build it as a separate library. If you want to include several custom widget plugins in the same library, you must in addition subclass QDesignerCustomWidgetCollectionInterface.</para>
+            <para>QDesignerCustomWidgetCollectionInterface contains one single function returning a list of the collection's QDesignerCustomWidgetInterface objects. For example, if you have several custom widgets CustomWidgetOne, CustomWidgetTwo and CustomWidgetThree, the class definition may look like this:</para>
+            <para></para>
+            <para></para>
+            <para>  #include customwidgetoneinterface.h</para>
+            <para>  #include customwidgettwointerface.h</para>
+            <para>  #include customwidgetthreeinterface.h</para>
+            <para></para>
+            <para>  #include &lt;QtDesigner/QtDesigner&gt;</para>
+            <para>  #include &lt;QtCore/qplugin.h&gt;</para>
+            <para></para>
+            <para>  class MyCustomWidgets: public QObject, public QDesignerCustomWidgetCollectionInterface</para>
+            <para>  {</para>
+            <para>      Q_OBJECT</para>
+            <para>      Q_PLUGIN_METADATA(IID &quot;org.qt-project.Qt.QDesignerCustomWidgetCollectionInterface&quot;)</para>
+            <para>      Q_INTERFACES(QDesignerCustomWidgetCollectionInterface)</para>
+            <para></para>
+            <para>  public:</para>
+            <para>      MyCustomWidgets(QObject *parent = 0);</para>
+            <para></para>
+            <para>      QList&lt;QDesignerCustomWidgetInterface*&gt; customWidgets() const Q_DECL_OVERRIDE;</para>
+            <para></para>
+            <para>  private:</para>
+            <para>      QList&lt;QDesignerCustomWidgetInterface*&gt; widgets;</para>
+            <para>  };</para>
+            <para></para>
+            <para></para>
+            <para>In the class constructor you add the interfaces to your custom widgets to the list which you return in the customWidgets() function:</para>
+            <para></para>
+            <para></para>
+            <para>  MyCustomWidgets::MyCustomWidgets(QObject *parent)</para>
+            <para>          : QObject(parent)</para>
+            <para>  {</para>
+            <para>      widgets.append(new CustomWidgetOneInterface(this));</para>
+            <para>      widgets.append(new CustomWidgetTwoInterface(this));</para>
+            <para>      widgets.append(new CustomWidgetThreeInterface(this));</para>
+            <para>  }</para>
+            <para></para>
+            <para>  QList&lt;QDesignerCustomWidgetInterface*&gt; MyCustomWidgets::customWidgets() const</para>
+            <para>  {</para>
+            <para>      return widgets;</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
+            <para>Note that instead of exporting each custom widget plugin using the Q_PLUGIN_METADATA() macro, you export the entire collection. The Q_PLUGIN_METADATA() macro ensures that Qt Designer can access and construct the custom widgets. Without this macro, there is no way for Qt Designer to use them.</para>
+            <para></para>
+            <para>See also QDesignerCustomWidgetInterface and Creating Custom Widgets for Qt Designer.</para>
+            </remarks>
+        </member>
         <member name="T:QtDesigner.QAbstractExtensionFactory">
             <summary>
             <para>The QAbstractExtensionFactory class provides an interface for extension factories in Qt Designer.</para>
@@ -82,19 +246,23 @@
             <remarks>
             <para>In Qt Designer the extensions are not created until they are required. For that reason, when implementing an extension, you must also create a QExtensionFactory, i.e a class that is able to make an instance of your extension, and register it using Qt Designer's extension manager.</para>
             <para>The registration of an extension factory is typically made in the QDesignerCustomWidgetInterface::initialize() function:</para>
-            <para>        void MyPlugin::initialize(QDesignerFormEditorInterface *formEditor)</para>
-            <para>        {</para>
-            <para>            if (initialized)</para>
-            <para>                return;</para>
             <para></para>
-            <para>            QExtensionManager *manager = formEditor-&gt;extensionManager();</para>
-            <para>            Q_ASSERT(manager != 0);</para>
             <para></para>
-            <para>            manager-&gt;registerExtensions(new MyExtensionFactory(manager),</para>
-            <para>                                        Q_TYPEID(QDesignerTaskMenuExtension));</para>
+            <para>          void MyPlugin::initialize(QDesignerFormEditorInterface *formEditor)</para>
+            <para>          {</para>
+            <para>              if (initialized)</para>
+            <para>                  return;</para>
             <para></para>
-            <para>            initialized = true;</para>
-            <para>        }</para>
+            <para>              QExtensionManager *manager = formEditor-&gt;extensionManager();</para>
+            <para>              Q_ASSERT(manager != 0);</para>
+            <para></para>
+            <para>              manager-&gt;registerExtensions(new MyExtensionFactory(manager),</para>
+            <para>                                          Q_TYPEID(QDesignerTaskMenuExtension));</para>
+            <para></para>
+            <para>              initialized = true;</para>
+            <para>          }</para>
+            <para></para>
+            <para></para>
             <para>The QExtensionManager is not intended to be instantiated directly. You can retrieve an interface to Qt Designer's extension manager using the QDesignerFormEditorInterface::extensionManager() function. A pointer to Qt Designer's current QDesignerFormEditorInterface object (formEditor in the example above) is provided by the QDesignerCustomWidgetInterface::initialize() function's parameter. When implementing a custom widget plugin, you must subclass the QDesignerCustomWidgetInterface to expose your plugin to Qt Designer.</para>
             <para>Then, when an extension is required, Qt Designer's extension manager will run through all its registered factories calling QExtensionFactory::createExtension() for each until the first one that is able to create the requested extension for the selected object, is found. This factory will then make an instance of the extension.</para>
             <para>There are four available types of extensions in Qt Designer: QDesignerContainerExtension , QDesignerMemberSheetExtension, QDesignerPropertySheetExtension and QDesignerTaskMenuExtension. Qt Designer's behavior is the same whether the requested extension is associated with a container, a member sheet, a property sheet or a task menu.</para>
@@ -171,13 +339,17 @@
             </summary>
             <remarks>
             <para>Qt Designer's current QDesignerFormEditorInterface object holds information about all Qt Designer's components: The action editor, the object inspector, the property editor, the widget box, and the extension and form window managers. QDesignerFormEditorInterface contains a collection of functions that provides interfaces to all these components. They are typically used to query (and manipulate) the respective component. For example:</para>
-            <para>        QDesignerObjectInspectorInterface *objectInspector = 0;</para>
-            <para>        objectInspector = formEditor-&gt;objectInspector();</para>
             <para></para>
-            <para>        QDesignerFormWindowManagerInterface *manager = 0;</para>
-            <para>        manager = formEditor-&gt;formWindowManager();</para>
             <para></para>
-            <para>        objectInspector-&gt;setFormWindow(manager-&gt;formWindow(0));</para>
+            <para>          QDesignerObjectInspectorInterface *objectInspector = 0;</para>
+            <para>          objectInspector = formEditor-&gt;objectInspector();</para>
+            <para></para>
+            <para>          QDesignerFormWindowManagerInterface *manager = 0;</para>
+            <para>          manager = formEditor-&gt;formWindowManager();</para>
+            <para></para>
+            <para>          objectInspector-&gt;setFormWindow(manager-&gt;formWindow(0));</para>
+            <para></para>
+            <para></para>
             <para>QDesignerFormEditorInterface is not intended to be instantiated directly. A pointer to Qt Designer's current QDesignerFormEditorInterface object (formEditor in the example above) is provided by the QDesignerCustomWidgetInterface::initialize() function's parameter. When implementing a custom widget plugin, you must subclass the QDesignerCustomWidgetInterface to expose your plugin to Qt Designer.</para>
             <para>QDesignerFormEditorInterface also provides functions that can set the action editor, property editor, object inspector and widget box. These are only useful if you want to provide your own custom components.</para>
             <para>If designer is embedded in another program, one could to provide its own settings manager. The manager is used by the components of Qt Designer to store/retrieve persistent configuration settings. The default manager uses QSettings as the backend.</para>
@@ -249,22 +421,34 @@
             <remarks>
             <para>QDesignerFormWindowInterface provides information about the associated form window as well as allowing its properties to be altered. The interface is not intended to be instantiated directly, but to provide access to Qt Designer's current form windows controlled by Qt Designer's form window manager.</para>
             <para>If you are looking for the form window containing a specific widget, you can use the static QDesignerFormWindowInterface::findFormWindow() function:</para>
-            <para>    QDesignerFormWindowInterface *formWindow;</para>
-            <para>    formWindow = QDesignerFormWindowInterface::findFormWindow(myWidget);</para>
+            <para></para>
+            <para></para>
+            <para>      QDesignerFormWindowInterface *formWindow;</para>
+            <para>      formWindow = QDesignerFormWindowInterface::findFormWindow(myWidget);</para>
+            <para></para>
+            <para></para>
             <para>But in addition, you can access any of the current form windows through Qt Designer's form window manager: Use the QDesignerFormEditorInterface::formWindowManager() function to retrieve an interface to the manager. Once you have this interface, you have access to all of Qt Designer's current form windows through the QDesignerFormWindowManagerInterface::formWindow() function. For example:</para>
-            <para>    QList&lt;QDesignerFormWindowInterface *&gt; forms;</para>
-            <para>    QDesignerFormWindowInterface *formWindow;</para>
             <para></para>
-            <para>    QDesignerFormWindowManagerInterface *manager = formEditor-&gt;formWindowManager();</para>
             <para></para>
-            <para>    for (int i = 0; i &lt; manager-&gt;formWindowCount(); i++) {</para>
-            <para>        formWindow = manager-&gt;formWindow(i);</para>
-            <para>        forms.append(formWindow);</para>
-            <para>    }</para>
+            <para>      QList&lt;QDesignerFormWindowInterface *&gt; forms;</para>
+            <para>      QDesignerFormWindowInterface *formWindow;</para>
+            <para></para>
+            <para>      QDesignerFormWindowManagerInterface *manager = formEditor-&gt;formWindowManager();</para>
+            <para></para>
+            <para>      for (int i = 0; i &lt; manager-&gt;formWindowCount(); i++) {</para>
+            <para>          formWindow = manager-&gt;formWindow(i);</para>
+            <para>          forms.append(formWindow);</para>
+            <para>      }</para>
+            <para></para>
+            <para></para>
             <para>The pointer to Qt Designer's current QDesignerFormEditorInterface object (formEditor in the example above) is provided by the QDesignerCustomWidgetInterface::initialize() function's parameter. When implementing a custom widget plugin, you must subclass the QDesignerCustomWidgetInterface class to expose your plugin to Qt Designer.</para>
             <para>Once you have the form window, you can query its properties. For example, a plain custom widget plugin is managed by Qt Designer only at its top level, i.e. none of its child widgets can be resized in Qt Designer's workspace. But QDesignerFormWindowInterface provides you with functions that enables you to control whether a widget should be managed by Qt Designer, or not:</para>
-            <para>        if (formWindow-&gt;isManaged(myWidget))</para>
-            <para>            formWindow-&gt;manageWidget(myWidget-&gt;childWidget);</para>
+            <para></para>
+            <para></para>
+            <para>          if (formWindow-&gt;isManaged(myWidget))</para>
+            <para>              formWindow-&gt;manageWidget(myWidget-&gt;childWidget);</para>
+            <para></para>
+            <para></para>
             <para>The complete list of functions concerning widget management is: isManaged(), manageWidget() and unmanageWidget(). There is also several associated signals: widgetManaged(), widgetRemoved(), aboutToUnmanageWidget() and widgetUnmanaged().</para>
             <para>In addition to controlling the management of widgets, you can control the current selection in the form window using the selectWidget(), clearSelection() and emitSelectionChanged() functions, and the selectionChanged() signal.</para>
             <para>You can also retrieve information about where the form is stored using absoluteDir(), its include files using includeHints(), and its layout and pixmap functions using layoutDefault(), layoutFunction() and pixmapFunction(). You can find out whether the form window has been modified (but not saved) or not, using the isDirty() function. You can retrieve its author(), its contents(), its fileName(), associated comment() and exportMacro(), its mainContainer(), its features(), its grid() and its resourceFiles().</para>
@@ -655,10 +839,14 @@
             <remarks>
             <para>QDesignerFormWindowCursorInterface is a convenience class that provides an interface to the associated form window's text cursor; it provides a collection of functions that enables you to query a given form window's selection and change the selection's focus according to defined modes (MoveMode) and movements (MoveOperation). You can also use the interface to query the form's widgets and change their properties.</para>
             <para>The interface is not intended to be instantiated directly, but to provide access to the selections and widgets of Qt Designer's current form windows. QDesignerFormWindowInterface always provides an associated cursor interface. The form window for a given widget can be retrieved using the static QDesignerFormWindowInterface::findFormWindow() functions. For example:</para>
-            <para>    QDesignerFormWindowInterface *formWindow = 0;</para>
-            <para>    formWindow = QDesignerFormWindowInterface::findFormWindow(myWidget);</para>
             <para></para>
-            <para>    formWindow-&gt;cursor()-&gt;setProperty(myWidget, myProperty, newValue);</para>
+            <para></para>
+            <para>      QDesignerFormWindowInterface *formWindow = 0;</para>
+            <para>      formWindow = QDesignerFormWindowInterface::findFormWindow(myWidget);</para>
+            <para></para>
+            <para>      formWindow-&gt;cursor()-&gt;setProperty(myWidget, myProperty, newValue);</para>
+            <para></para>
+            <para></para>
             <para>You can retrieve any of Qt Designer's current form windows through Qt Designer's form window manager.</para>
             <para>Once you have a form window's cursor interface, you can check if the form window has a selection at all using the hasSelection() function. You can query the form window for its total widgetCount() and selectedWidgetCount(). You can retrieve the currently selected widget (or widgets) using the current() or selectedWidget() functions.</para>
             <para>You can retrieve any of the form window's widgets using the widget() function, and check if a widget is selected using the isWidgetSelected() function. You can use the setProperty() function to set the selected widget's properties, and the setWidgetProperty() or resetWidgetProperty() functions to modify the properties of any given widget.</para>
@@ -797,13 +985,17 @@
             </summary>
             <remarks>
             <para>QDesignerFormWindowManagerInterface is not intended to be instantiated directly. Qt Designer uses the form window manager to control the various form windows in its workspace. You can retrieve an interface to Qt Designer's form window manager using the QDesignerFormEditorInterface::formWindowManager() function. For example:</para>
-            <para>        QDesignerFormWindowManagerInterface *manager = 0;</para>
-            <para>        QDesignerFormWindowInterface *formWindow = 0;</para>
             <para></para>
-            <para>        manager = formEditor-&gt;formWindowManager();</para>
-            <para>        formWindow = manager-&gt;formWindow(0);</para>
             <para></para>
-            <para>        manager-&gt;setActiveFormWindow(formWindow);</para>
+            <para>          QDesignerFormWindowManagerInterface *manager = 0;</para>
+            <para>          QDesignerFormWindowInterface *formWindow = 0;</para>
+            <para></para>
+            <para>          manager = formEditor-&gt;formWindowManager();</para>
+            <para>          formWindow = manager-&gt;formWindow(0);</para>
+            <para></para>
+            <para>          manager-&gt;setActiveFormWindow(formWindow);</para>
+            <para></para>
+            <para></para>
             <para>When implementing a custom widget plugin, a pointer to Qt Designer's current QDesignerFormEditorInterface object (formEditor in the example above) is provided by the QDesignerCustomWidgetInterface::initialize() function's parameter. You must subclass the QDesignerCustomWidgetInterface to expose your plugin to Qt Designer.</para>
             <para>The form window manager interface provides the createFormWindow() function that enables you to create a new form window which you can add to the collection of form windows that the manager maintains, using the addFormWindow() slot. It also provides the formWindowCount() function returning the number of form windows currently under the manager's control, the formWindow() function returning the form window associated with a given index, and the activeFormWindow() function returning the currently selected form window. The removeFormWindow() slot allows you to reduce the number of form windows the manager must maintain, and the setActiveFormWindow() slot allows you to change the form window focus in Qt Designer's workspace.</para>
             <para>In addition, QDesignerFormWindowManagerInterface contains a collection of functions that enables you to intervene and control Qt Designer's form editing actions. All these functions return the original action, making it possible to propagate the function further after intervention.</para>
@@ -1128,13 +1320,17 @@
             </summary>
             <remarks>
             <para>You can use the QDesignerObjectInspectorInterface to change the current form window selection. For example, when implementing a custom widget plugin:</para>
-            <para>        QDesignerObjectInspectorInterface *objectInspector = 0;</para>
-            <para>        objectInspector = formEditor-&gt;objectInspector();</para>
             <para></para>
-            <para>        QDesignerFormWindowManagerInterface *manager = 0;</para>
-            <para>        manager = formEditor-&gt;formWindowManager();</para>
             <para></para>
-            <para>        objectInspector-&gt;setFormWindow(manager-&gt;formWindow(0));</para>
+            <para>          QDesignerObjectInspectorInterface *objectInspector = 0;</para>
+            <para>          objectInspector = formEditor-&gt;objectInspector();</para>
+            <para></para>
+            <para>          QDesignerFormWindowManagerInterface *manager = 0;</para>
+            <para>          manager = formEditor-&gt;formWindowManager();</para>
+            <para></para>
+            <para>          objectInspector-&gt;setFormWindow(manager-&gt;formWindow(0));</para>
+            <para></para>
+            <para></para>
             <para>The QDesignerObjectInspectorInterface class is not intended to be instantiated directly. You can retrieve an interface to Qt Designer's object inspector using the QDesignerFormEditorInterface::objectInspector() function. A pointer to Qt Designer's current QDesignerFormEditorInterface object (formEditor in the example above) is provided by the QDesignerCustomWidgetInterface::initialize() function's parameter. When implementing a custom widget plugin, you must subclass the QDesignerCustomWidgetInterface to expose your plugin to Qt Designer.</para>
             <para>The interface provides the core() function that you can use to retrieve a pointer to Qt Designer's current QDesignerFormEditorInterface object, and the setFormWindow() function that enables you to change the current form window selection.</para>
             <para></para>
@@ -1163,22 +1359,30 @@
             <remarks>
             <para>QDesignerPropertyEditorInterface contains a collection of functions that is typically used to query the property editor for its current state, and several slots manipulating it's state. The interface also provide a signal, propertyChanged(), which is emitted whenever a property changes in the property editor. The signal's arguments are the property that changed and its new value.</para>
             <para>For example, when implementing a custom widget plugin, you can connect the signal to a custom slot:</para>
-            <para>        QDesignerPropertyEditorInterface *propertyEditor = 0;</para>
-            <para>        propertyEditor = formEditor-&gt;propertyEditor();</para>
             <para></para>
-            <para>        connect(propertyEditor, SIGNAL(propertyChanged(QString,QVariant)),</para>
-            <para>                this, SLOT(checkProperty(QString,QVariant)));</para>
+            <para></para>
+            <para>          QDesignerPropertyEditorInterface *propertyEditor = 0;</para>
+            <para>          propertyEditor = formEditor-&gt;propertyEditor();</para>
+            <para></para>
+            <para>          connect(propertyEditor, SIGNAL(propertyChanged(QString,QVariant)),</para>
+            <para>                  this, SLOT(checkProperty(QString,QVariant)));</para>
+            <para></para>
+            <para></para>
             <para>Then the custom slot can check if the new value is within the range we want when a specified property, belonging to a particular widget, changes:</para>
-            <para>        void checkProperty(QString property, QVariant value) {</para>
-            <para>            QDesignerPropertyEditorInterface *propertyEditor = 0;</para>
-            <para>            propertyEditor = formEditor-&gt;propertyEditor();</para>
             <para></para>
-            <para>            QObject *object = propertyeditor-&gt;object();</para>
-            <para>            MyCustomWidget *widget = qobject_cast&lt;MyCustomWidget&gt;(object);</para>
             <para></para>
-            <para>            if (widget &amp;&amp; property == aProperty &amp;&amp; value != expectedValue)</para>
-            <para>                {...}</para>
-            <para>        }</para>
+            <para>          void checkProperty(QString property, QVariant value) {</para>
+            <para>              QDesignerPropertyEditorInterface *propertyEditor = 0;</para>
+            <para>              propertyEditor = formEditor-&gt;propertyEditor();</para>
+            <para></para>
+            <para>              QObject *object = propertyeditor-&gt;object();</para>
+            <para>              MyCustomWidget *widget = qobject_cast&lt;MyCustomWidget&gt;(object);</para>
+            <para></para>
+            <para>              if (widget &amp;&amp; property == aProperty &amp;&amp; value != expectedValue)</para>
+            <para>                  {...}</para>
+            <para>          }</para>
+            <para></para>
+            <para></para>
             <para>The QDesignerPropertyEditorInterface class is not intended to be instantiated directly. You can retrieve an interface to Qt Designer's property editor using the QDesignerFormEditorInterface::propertyEditor() function. A pointer to Qt Designer's current QDesignerFormEditorInterface object (formEditor in the examples above) is provided by the QDesignerCustomWidgetInterface::initialize() function's parameter. When implementing a custom widget plugin, you must subclass the QDesignerCustomWidgetInterface to expose your plugin to Qt Designer.</para>
             <para>The functions accessing the property editor are the core() function that you can use to retrieve an interface to the form editor, the currentPropertyName() function that returns the name of the currently selected property in the property editor, the object() function that returns the currently selected object in Qt Designer's workspace, and the isReadOnly() function that returns true if the property editor is write proteced (otherwise false).</para>
             <para>The slots manipulating the property editor's state are the setObject() slot that you can use to change the currently selected object in Qt Designer's workspace, the setPropertyValue() slot that changes the value of a given property and the setReadOnly() slot that control the write protection of the property editor.</para>
@@ -1244,24 +1448,40 @@
             <para>QDesignerWidgetBoxInterface contains a collection of functions that is typically used to manipulate the contents of Qt Designer's widget box.</para>
             <para>Qt Designer uses an XML file to populate its widget box. The name of that file is one of the widget box's properties, and you can retrieve it using the fileName() function.</para>
             <para>QDesignerWidgetBoxInterface also provides the save() function that saves the contents of the widget box in the file specified by the widget box's file name property. If you have made changes to the widget box, for example by dropping a widget into the widget box, without calling the save() function, the original content can be restored by a simple invocation of the load() function:</para>
-            <para>        QDesignerWidgetBoxInterface *widgetBox = 0:</para>
-            <para>        widgetBox = formEditor-&gt;widgetBox();</para>
             <para></para>
-            <para>        widgetBox-&gt;load();</para>
+            <para></para>
+            <para>          QDesignerWidgetBoxInterface *widgetBox = 0:</para>
+            <para>          widgetBox = formEditor-&gt;widgetBox();</para>
+            <para></para>
+            <para>          widgetBox-&gt;load();</para>
+            <para></para>
+            <para></para>
             <para>The QDesignerWidgetBoxInterface class is not intended to be instantiated directly. You can retrieve an interface to Qt Designer's widget box using the QDesignerFormEditorInterface::widgetBox() function. A pointer to Qt Designer's current QDesignerFormEditorInterface object (formEditor in the example above) is provided by the QDesignerCustomWidgetInterface::initialize() function's parameter. When implementing a custom widget plugin, you must subclass the QDesignerCustomWidgetInterface to expose your plugin to Qt Designer.</para>
             <para>If you want to save your changes, and at the same time preserve the original contents, you can use the save() function combined with the setFileName() function to save your changes into another file. Remember to store the name of the original file first:</para>
-            <para>        QString originalFile = widgetBox-&gt;fileName();</para>
             <para></para>
-            <para>        widgetBox-&gt;setFileName(&quot;myWidgetBox.xml&quot;);</para>
-            <para>        widgetBox-&gt;save();</para>
+            <para></para>
+            <para>          QString originalFile = widgetBox-&gt;fileName();</para>
+            <para></para>
+            <para>          widgetBox-&gt;setFileName(&quot;myWidgetBox.xml&quot;);</para>
+            <para>          widgetBox-&gt;save();</para>
+            <para></para>
+            <para></para>
             <para>Then you can restore the original contents of the widget box by resetting the file name to the original file and calling load():</para>
-            <para>        widgetBox-&gt;setFileName(originalFile);</para>
-            <para>        widgetBox-&gt;load();</para>
+            <para></para>
+            <para></para>
+            <para>          widgetBox-&gt;setFileName(originalFile);</para>
+            <para>          widgetBox-&gt;load();</para>
+            <para></para>
+            <para></para>
             <para>In a similar way, you can later use your customized XML file:</para>
-            <para>        if (widgetBox-&gt;filename() != &quot;myWidgetBox.xml&quot;) {</para>
-            <para>            widgetBox-&gt;setFileName(&quot;myWidgetBox.xml&quot;);</para>
-            <para>            widgetBox-&gt;load();</para>
-            <para>        }</para>
+            <para></para>
+            <para></para>
+            <para>          if (widgetBox-&gt;filename() != &quot;myWidgetBox.xml&quot;) {</para>
+            <para>              widgetBox-&gt;setFileName(&quot;myWidgetBox.xml&quot;);</para>
+            <para>              widgetBox-&gt;load();</para>
+            <para>          }</para>
+            <para></para>
+            <para></para>
             <para></para>
             <para>See also QDesignerFormEditorInterface.</para>
             </remarks>
@@ -1297,64 +1517,75 @@
             <para>The QDesignerContainerExtension class allows you to add pages to a custom multi-page container in Qt Designer's workspace.</para>
             </summary>
             <remarks>
-            <para></para>
             <para>QDesignerContainerExtension provide an interface for creating custom container extensions. A container extension consists of a collection of functions that Qt Designer needs to manage a multi-page container plugin, and a list of the container's pages.</para>
             <para>Warning: This is not an extension for container plugins in general, only custom multi-page containers.</para>
             <para>To create a container extension, your extension class must inherit from both QObject and QDesignerContainerExtension. For example:</para>
-            <para>class MyContainerExtension : public QObject,</para>
-            <para>       public QDesignerContainerExtension</para>
-            <para>{</para>
-            <para>    Q_OBJECT</para>
-            <para>    Q_INTERFACES(QDesignerContainerExtension)</para>
             <para></para>
-            <para>public:</para>
-            <para>    MyContainerExtension(MyCustomWidget *widget,</para>
-            <para>                         QObject *parent = 0);</para>
-            <para>    int count() const;</para>
-            <para>    QWidget *widget(int index) const;</para>
-            <para>    int currentIndex() const;</para>
-            <para>    void setCurrentIndex(int index);</para>
-            <para>    void addWidget(QWidget *widget);</para>
-            <para>    void insertWidget(int index, QWidget *widget);</para>
-            <para>    void remove(int index);</para>
             <para></para>
-            <para>private:</para>
-            <para>    MyCustomWidget *myWidget;</para>
-            <para>};</para>
+            <para>  class MyContainerExtension : public QObject,</para>
+            <para>         public QDesignerContainerExtension</para>
+            <para>  {</para>
+            <para>      Q_OBJECT</para>
+            <para>      Q_INTERFACES(QDesignerContainerExtension)</para>
+            <para></para>
+            <para>  public:</para>
+            <para>      MyContainerExtension(MyCustomWidget *widget,</para>
+            <para>                           QObject *parent = 0);</para>
+            <para>      int count() const;</para>
+            <para>      QWidget *widget(int index) const;</para>
+            <para>      int currentIndex() const;</para>
+            <para>      void setCurrentIndex(int index);</para>
+            <para>      void addWidget(QWidget *widget);</para>
+            <para>      void insertWidget(int index, QWidget *widget);</para>
+            <para>      void remove(int index);</para>
+            <para></para>
+            <para>  private:</para>
+            <para>      MyCustomWidget *myWidget;</para>
+            <para>  };</para>
+            <para></para>
+            <para></para>
             <para>Since we are implementing an interface, we must ensure that it's made known to the meta object system using the Q_INTERFACES() macro. This enables Qt Designer to use the qobject_cast() function to query for supported interfaces using nothing but a QObject pointer.</para>
             <para>You must reimplement several functions to enable Qt Designer to manage a custom multi-page container widget: Qt Designer uses count() to keep track of the number pages in your container, widget() to return the page at a given index in the list of the container's pages, and currentIndex() to return the list index of the selected page. Qt Designer uses the addWidget() function to add a given page to the container, expecting it to be appended to the list of pages, while it expects the insertWidget() function to add a given page to the container by inserting it at a given index.</para>
             <para>In Qt Designer the extensions are not created until they are required. For that reason you must also create a QExtensionFactory, i.e a class that is able to make an instance of your extension, and register it using Qt Designer's extension manager.</para>
             <para>When a container extension is required, Qt Designer's extension manager will run through all its registered factories calling QExtensionFactory::createExtension() for each until the first one that is able to create a container extension, is found. This factory will then create the extension for the plugin.</para>
             <para>There are four available types of extensions in Qt Designer: QDesignerContainerExtension , QDesignerMemberSheetExtension, QDesignerPropertySheetExtension and QDesignerTaskMenuExtension. Qt Designer's behavior is the same whether the requested extension is associated with a multi page container, a member sheet, a property sheet or a task menu.</para>
             <para>The QExtensionFactory class provides a standard extension factory, and can also be used as an interface for custom extension factories. You can either create a new QExtensionFactory and reimplement the QExtensionFactory::createExtension() function. For example:</para>
-            <para>QObject *ANewExtensionFactory::createExtension(QObject *object,</para>
-            <para>        const QString &amp;iid, QObject *parent) const</para>
-            <para>{</para>
-            <para>    if (iid != Q_TYPEID(QDesignerContainerExtension))</para>
-            <para>        return 0;</para>
             <para></para>
-            <para>    if (MyCustomWidget *widget = qobject_cast&lt;MyCustomWidget*&gt;</para>
-            <para>           (object))</para>
-            <para>        return new MyContainerExtension(widget, parent);</para>
             <para></para>
-            <para>    return 0;</para>
-            <para>}</para>
+            <para>  QObject *ANewExtensionFactory::createExtension(QObject *object,</para>
+            <para>          const QString &amp;iid, QObject *parent) const</para>
+            <para>  {</para>
+            <para>      if (iid != Q_TYPEID(QDesignerContainerExtension))</para>
+            <para>          return 0;</para>
+            <para></para>
+            <para>      if (MyCustomWidget *widget = qobject_cast&lt;MyCustomWidget*&gt;</para>
+            <para>             (object))</para>
+            <para>          return new MyContainerExtension(widget, parent);</para>
+            <para></para>
+            <para>      return 0;</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>Or you can use an existing factory, expanding the QExtensionFactory::createExtension() function to make the factory able to create a container extension as well. For example:</para>
-            <para>QObject *AGeneralExtensionFactory::createExtension(QObject *object,</para>
-            <para>        const QString &amp;iid, QObject *parent) const</para>
-            <para>{</para>
-            <para>    MyCustomWidget *widget = qobject_cast&lt;MyCustomWidget*&gt;(object);</para>
             <para></para>
-            <para>    if (widget &amp;&amp; (iid == Q_TYPEID(QDesignerTaskMenuExtension))) {</para>
-            <para>        return new MyTaskMenuExtension(widget, parent);</para>
             <para></para>
-            <para>    } else if (widget &amp;&amp; (iid == Q_TYPEID(QDesignerContainerExtension))) {</para>
-            <para>        return new MyContainerExtension(widget, parent);</para>
+            <para>  QObject *AGeneralExtensionFactory::createExtension(QObject *object,</para>
+            <para>          const QString &amp;iid, QObject *parent) const</para>
+            <para>  {</para>
+            <para>      MyCustomWidget *widget = qobject_cast&lt;MyCustomWidget*&gt;(object);</para>
             <para></para>
-            <para>    } else {</para>
-            <para>        return 0;</para>
-            <para>    }</para>
-            <para>}</para>
+            <para>      if (widget &amp;&amp; (iid == Q_TYPEID(QDesignerTaskMenuExtension))) {</para>
+            <para>          return new MyTaskMenuExtension(widget, parent);</para>
+            <para></para>
+            <para>      } else if (widget &amp;&amp; (iid == Q_TYPEID(QDesignerContainerExtension))) {</para>
+            <para>          return new MyContainerExtension(widget, parent);</para>
+            <para></para>
+            <para>      } else {</para>
+            <para>          return 0;</para>
+            <para>      }</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>For a complete example using the QDesignerContainerExtension class, see the Container Extension example. The example shows how to create a custom multi-page plugin for Qt Designer.</para>
             <para></para>
             <para>See also QExtensionFactory, QExtensionManager, and Creating Custom Widget Extensions.</para>
@@ -1384,22 +1615,6 @@
             <para>See also addWidget() and insertWidget().</para>
             </summary>
         </member>
-        <member name="M:QtDesigner.QDesignerContainerExtension.CanAddWidget">
-            <summary>
-            <para>Returns whether a widget can be added. This determines whether the context menu options to add or insert pages are enabled.</para>
-            <para>This should return false for containers that have a single, fixed page, for example QScrollArea or QDockWidget.</para>
-            <para>This function was introduced in  Qt 5.0.</para>
-            <para>See also addWidget() and canRemove().</para>
-            </summary>
-        </member>
-        <member name="M:QtDesigner.QDesignerContainerExtension.CanRemove(System.Int32)">
-            <summary>
-            <para>Returns whether the widget at the given index can be removed. This determines whether the context menu option to remove the current page is enabled.</para>
-            <para>This should return false for containers that have a single, fixed page, for example QScrollArea or QDockWidget.</para>
-            <para>This function was introduced in  Qt 5.0.</para>
-            <para>See also remove() and canAddWidget().</para>
-            </summary>
-        </member>
         <member name="P:QtDesigner.QDesignerContainerExtension.CurrentIndex">
             <summary>
             <para>Returns the index of the currently selected page in the container.</para>
@@ -1419,7 +1634,6 @@
             <para>The QDesignerDynamicPropertySheetExtension class allows you to manipulate a widget's dynamic properties in Qt Designer's property editor.</para>
             </summary>
             <remarks>
-            <para></para>
             <para>See also QDesignerPropertySheetExtension and Dynamic Properties.</para>
             </remarks>
         </member>
@@ -1454,61 +1668,77 @@
             </summary>
             <remarks>
             <para>QDesignerMemberSheetExtension is a collection of functions that is typically used to query a widget's member functions, and to manipulate the member functions' appearance in Qt Designer's signals and slots editing mode. For example:</para>
-            <para>QDesignerMemberSheetExtension *memberSheet  = 0;</para>
-            <para>QExtensionManager manager = formEditor-&gt;extensionManager();</para>
             <para></para>
-            <para>memberSheet = qt_extension&lt;QDesignerMemberSheetExtension*&gt;(manager, widget);</para>
-            <para>int index = memberSheet-&gt;indexOf(setEchoMode);</para>
-            <para>memberSheet-&gt;setVisible(index, false);</para>
             <para></para>
-            <para>delete memberSheet;</para>
+            <para>  QDesignerMemberSheetExtension *memberSheet  = 0;</para>
+            <para>  QExtensionManager manager = formEditor-&gt;extensionManager();</para>
+            <para></para>
+            <para>  memberSheet = qt_extension&lt;QDesignerMemberSheetExtension*&gt;(manager, widget);</para>
+            <para>  int index = memberSheet-&gt;indexOf(setEchoMode);</para>
+            <para>  memberSheet-&gt;setVisible(index, false);</para>
+            <para></para>
+            <para>  delete memberSheet;</para>
+            <para></para>
+            <para></para>
             <para>When implementing a custom widget plugin, a pointer to Qt Designer's current QDesignerFormEditorInterface object (formEditor in the example above) is provided by the QDesignerCustomWidgetInterface::initialize() function's parameter.</para>
             <para>The member sheet (and any other extension), can be retrieved by querying Qt Designer's extension manager using the qt_extension() function. When you want to release the extension, you only need to delete the pointer.</para>
             <para>All widgets have a default member sheet used in Qt Designer's signals and slots editing mode with the widget's member functions. But QDesignerMemberSheetExtension also provides an interface for creating custom member sheet extensions.</para>
             <para>Warning: Qt Designer uses the QDesignerMemberSheetExtension to facilitate the signal and slot editing mode. Whenever a connection between two widgets is requested, Qt Designer will query for the widgets' member sheet extensions. If a widget has an implemented member sheet extension, this extension will override the default member sheet.</para>
             <para>To create a member sheet extension, your extension class must inherit from both QObject and QDesignerMemberSheetExtension. Then, since we are implementing an interface, we must ensure that it's made known to the meta object system using the Q_INTERFACES() macro:</para>
-            <para>class MyMemberSheetExtension : public QObject,</para>
-            <para>        public QDesignerMemberSheetExtension</para>
-            <para>{</para>
-            <para>    Q_OBJECT</para>
-            <para>    Q_INTERFACES(QDesignerMemberSheetExtension)</para>
             <para></para>
-            <para>public:</para>
-            <para>    ...</para>
-            <para>}</para>
+            <para></para>
+            <para>  class MyMemberSheetExtension : public QObject,</para>
+            <para>          public QDesignerMemberSheetExtension</para>
+            <para>  {</para>
+            <para>      Q_OBJECT</para>
+            <para>      Q_INTERFACES(QDesignerMemberSheetExtension)</para>
+            <para></para>
+            <para>  public:</para>
+            <para>      ...</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>This enables Qt Designer to use qobject_cast() to query for supported interfaces using nothing but a QObject pointer.</para>
             <para>In Qt Designer the extensions are not created until they are required. For that reason, when implementing a member sheet extension, you must also create a QExtensionFactory, i.e a class that is able to make an instance of your extension, and register it using Qt Designer's extension manager.</para>
             <para>When a widget's member sheet extension is required, Qt Designer's extension manager will run through all its registered factories calling QExtensionFactory::createExtension() for each until the first one that is able to create a member sheet extension for that widget, is found. This factory will then make an instance of the extension. If no such factory is found, Qt Designer will use the default member sheet.</para>
             <para>There are four available types of extensions in Qt Designer: QDesignerContainerExtension, QDesignerMemberSheetExtension, QDesignerPropertySheetExtension and QDesignerTaskMenuExtension. Qt Designer's behavior is the same whether the requested extension is associated with a multi page container, a member sheet, a property sheet or a task menu.</para>
             <para>The QExtensionFactory class provides a standard extension factory, and can also be used as an interface for custom extension factories. You can either create a new QExtensionFactory and reimplement the QExtensionFactory::createExtension() function. For example:</para>
-            <para>QObject *ANewExtensionFactory::createExtension(QObject *object,</para>
-            <para>        const QString &amp;iid, QObject *parent) const</para>
-            <para>{</para>
-            <para>    if (iid != Q_TYPEID(QDesignerMemberSheetExtension))</para>
-            <para>        return 0;</para>
             <para></para>
-            <para>    if (MyCustomWidget *widget = qobject_cast&lt;MyCustomWidget*&gt;</para>
-            <para>           (object))</para>
-            <para>        return new MyMemberSheetExtension(widget, parent);</para>
             <para></para>
-            <para>    return 0;</para>
-            <para>}</para>
+            <para>  QObject *ANewExtensionFactory::createExtension(QObject *object,</para>
+            <para>          const QString &amp;iid, QObject *parent) const</para>
+            <para>  {</para>
+            <para>      if (iid != Q_TYPEID(QDesignerMemberSheetExtension))</para>
+            <para>          return 0;</para>
+            <para></para>
+            <para>      if (MyCustomWidget *widget = qobject_cast&lt;MyCustomWidget*&gt;</para>
+            <para>             (object))</para>
+            <para>          return new MyMemberSheetExtension(widget, parent);</para>
+            <para></para>
+            <para>      return 0;</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>Or you can use an existing factory, expanding the QExtensionFactory::createExtension() function to make the factory able to create a member sheet extension as well. For example:</para>
-            <para>QObject *AGeneralExtensionFactory::createExtension(QObject *object,</para>
-            <para>        const QString &amp;iid, QObject *parent) const</para>
-            <para>{</para>
-            <para>    MyCustomWidget *widget = qobject_cast&lt;MyCustomWidget*&gt;(object);</para>
             <para></para>
-            <para>    if (widget &amp;&amp; (iid == Q_TYPEID(QDesignerTaskMenuExtension))) {</para>
-            <para>        return new MyTaskMenuExtension(widget, parent);</para>
             <para></para>
-            <para>    } else if (widget &amp;&amp; (iid == Q_TYPEID(QDesignerMemberSheetExtension))) {</para>
-            <para>        return new MyMemberSheetExtension(widget, parent);</para>
+            <para>  QObject *AGeneralExtensionFactory::createExtension(QObject *object,</para>
+            <para>          const QString &amp;iid, QObject *parent) const</para>
+            <para>  {</para>
+            <para>      MyCustomWidget *widget = qobject_cast&lt;MyCustomWidget*&gt;(object);</para>
             <para></para>
-            <para>    } else {</para>
-            <para>        return 0;</para>
-            <para>    }</para>
-            <para>}</para>
+            <para>      if (widget &amp;&amp; (iid == Q_TYPEID(QDesignerTaskMenuExtension))) {</para>
+            <para>          return new MyTaskMenuExtension(widget, parent);</para>
+            <para></para>
+            <para>      } else if (widget &amp;&amp; (iid == Q_TYPEID(QDesignerMemberSheetExtension))) {</para>
+            <para>          return new MyMemberSheetExtension(widget, parent);</para>
+            <para></para>
+            <para>      } else {</para>
+            <para>          return 0;</para>
+            <para>      }</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>For a complete example using an extension class, see Task Menu Extension example. The example shows how to create a custom widget plugin for Qt Designer, and how to to use the QDesignerTaskMenuExtension class to add custom items to Qt Designer's task menu.</para>
             <para></para>
             <para>See also QExtensionFactory, QExtensionManager, and Creating Custom Widget Extensions.</para>
@@ -1591,16 +1821,20 @@
             </summary>
             <remarks>
             <para>QDesignerPropertySheetExtension provides a collection of functions that are typically used to query a widget's properties, and to manipulate the properties' appearance in the property editor. For example:</para>
-            <para>QDesignerPropertySheetExtension *propertySheet  = 0;</para>
-            <para>QExtensionManager manager = formEditor-&gt;extensionManager();</para>
             <para></para>
-            <para>propertySheet = qt_extension&lt;QDesignerPropertySheetExtension*&gt;(manager, widget);</para>
-            <para>int index = propertySheet-&gt;indexOf(QLatin1String(&quot;margin&quot;));</para>
             <para></para>
-            <para>propertySheet-&gt;setProperty(index, 10);</para>
-            <para>propertySheet-&gt;setChanged(index, true);</para>
+            <para>  QDesignerPropertySheetExtension *propertySheet  = 0;</para>
+            <para>  QExtensionManager manager = formEditor-&gt;extensionManager();</para>
             <para></para>
-            <para>delete propertySheet;</para>
+            <para>  propertySheet = qt_extension&lt;QDesignerPropertySheetExtension*&gt;(manager, widget);</para>
+            <para>  int index = propertySheet-&gt;indexOf(QLatin1String(&quot;margin&quot;));</para>
+            <para></para>
+            <para>  propertySheet-&gt;setProperty(index, 10);</para>
+            <para>  propertySheet-&gt;setChanged(index, true);</para>
+            <para></para>
+            <para>  delete propertySheet;</para>
+            <para></para>
+            <para></para>
             <para>Note that if you change the value of a property using the QDesignerPropertySheetExtension::setProperty() function, the undo stack is not updated. To ensure that a property's value can be reverted using the undo stack, you must use the QDesignerFormWindowCursorInterface::setProperty() function, or its buddy setWidgetProperty(), instead.</para>
             <para>When implementing a custom widget plugin, a pointer to Qt Designer's current QDesignerFormEditorInterface object (formEditor in the example above) is provided by the QDesignerCustomWidgetInterface::initialize() function's parameter.</para>
             <para>The property sheet, or any other extension, can be retrieved by querying Qt Designer's extension manager using the qt_extension() function. When you want to release the extension, you only need to delete the pointer.</para>
@@ -1608,48 +1842,60 @@
             <para>Warning: Qt Designer uses the QDesignerPropertySheetExtension to feed its property editor. Whenever a widget is selected in its workspace, Qt Designer will query for the widget's property sheet extension. If the selected widget has an implemented property sheet extension, this extension will override the default property sheet.</para>
             <para>Warning: The data types used by the property sheet for some properties are opaque custom QVariant types containing additional information instead of plain Qt data types. For example, this is the case for enumerations, flags, icons, pixmaps and strings.</para>
             <para>To create a property sheet extension, your extension class must inherit from both QObject and QDesignerPropertySheetExtension. Then, since we are implementing an interface, we must ensure that it's made known to the meta object system using the Q_INTERFACES() macro:</para>
-            <para>class MyPropertySheetExtension : public QObject,</para>
-            <para>        public QDesignerPropertySheetExtension</para>
-            <para>{</para>
-            <para>    Q_OBJECT</para>
-            <para>    Q_INTERFACES(QDesignerPropertySheetExtension)</para>
             <para></para>
-            <para>public:</para>
-            <para>    ...</para>
-            <para>}</para>
+            <para></para>
+            <para>  class MyPropertySheetExtension : public QObject,</para>
+            <para>          public QDesignerPropertySheetExtension</para>
+            <para>  {</para>
+            <para>      Q_OBJECT</para>
+            <para>      Q_INTERFACES(QDesignerPropertySheetExtension)</para>
+            <para></para>
+            <para>  public:</para>
+            <para>      ...</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>This enables Qt Designer to use qobject_cast() to query for supported interfaces using nothing but a QObject pointer.</para>
             <para>In Qt Designer the extensions are not created until they are required. For that reason, when implementing a property sheet extension, you must also create a QExtensionFactory, i.e a class that is able to make an instance of your extension, and register it using Qt Designer's extension manager.</para>
             <para>When a property sheet extension is required, Qt Designer's extension manager will run through all its registered factories calling QExtensionFactory::createExtension() for each until the first one that is able to create a property sheet extension for the selected widget, is found. This factory will then make an instance of the extension. If no such factory can be found, Qt Designer will use the default property sheet.</para>
             <para>There are four available types of extensions in Qt Designer: QDesignerContainerExtension, QDesignerMemberSheetExtension, QDesignerPropertySheetExtension and QDesignerTaskMenuExtension. Qt Designer's behavior is the same whether the requested extension is associated with a multi page container, a member sheet, a property sheet or a task menu.</para>
             <para>The QExtensionFactory class provides a standard extension factory, and can also be used as an interface for custom extension factories. You can either create a new QExtensionFactory and reimplement the QExtensionFactory::createExtension() function. For example:</para>
-            <para>QObject *ANewExtensionFactory::createExtension(QObject *object,</para>
-            <para>        const QString &amp;iid, QObject *parent) const</para>
-            <para>{</para>
-            <para>    if (iid != Q_TYPEID(QDesignerPropertySheetExtension))</para>
-            <para>        return 0;</para>
             <para></para>
-            <para>    if (MyCustomWidget *widget = qobject_cast&lt;MyCustomWidget*&gt;</para>
-            <para>           (object))</para>
-            <para>        return new MyPropertySheetExtension(widget, parent);</para>
             <para></para>
-            <para>    return 0;</para>
-            <para>}</para>
+            <para>  QObject *ANewExtensionFactory::createExtension(QObject *object,</para>
+            <para>          const QString &amp;iid, QObject *parent) const</para>
+            <para>  {</para>
+            <para>      if (iid != Q_TYPEID(QDesignerPropertySheetExtension))</para>
+            <para>          return 0;</para>
+            <para></para>
+            <para>      if (MyCustomWidget *widget = qobject_cast&lt;MyCustomWidget*&gt;</para>
+            <para>             (object))</para>
+            <para>          return new MyPropertySheetExtension(widget, parent);</para>
+            <para></para>
+            <para>      return 0;</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>Or you can use an existing factory, expanding the QExtensionFactory::createExtension() function to make the factory able to create a property sheet extension extension as well. For example:</para>
-            <para>QObject *AGeneralExtensionFactory::createExtension(QObject *object,</para>
-            <para>        const QString &amp;iid, QObject *parent) const</para>
-            <para>{</para>
-            <para>    MyCustomWidget *widget = qobject_cast&lt;MyCustomWidget*&gt;(object);</para>
             <para></para>
-            <para>    if (widget &amp;&amp; (iid == Q_TYPEID(QDesignerTaskMenuExtension))) {</para>
-            <para>        return new MyTaskMenuExtension(widget, parent);</para>
             <para></para>
-            <para>    } else if (widget &amp;&amp; (iid == Q_TYPEID(QDesignerPropertySheetExtension))) {</para>
-            <para>        return new MyPropertySheetExtension(widget, parent);</para>
+            <para>  QObject *AGeneralExtensionFactory::createExtension(QObject *object,</para>
+            <para>          const QString &amp;iid, QObject *parent) const</para>
+            <para>  {</para>
+            <para>      MyCustomWidget *widget = qobject_cast&lt;MyCustomWidget*&gt;(object);</para>
             <para></para>
-            <para>    } else {</para>
-            <para>        return 0;</para>
-            <para>    }</para>
-            <para>}</para>
+            <para>      if (widget &amp;&amp; (iid == Q_TYPEID(QDesignerTaskMenuExtension))) {</para>
+            <para>          return new MyTaskMenuExtension(widget, parent);</para>
+            <para></para>
+            <para>      } else if (widget &amp;&amp; (iid == Q_TYPEID(QDesignerPropertySheetExtension))) {</para>
+            <para>          return new MyPropertySheetExtension(widget, parent);</para>
+            <para></para>
+            <para>      } else {</para>
+            <para>          return 0;</para>
+            <para>      }</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>For a complete example using an extension class, see the Task Menu Extension example. The example shows how to create a custom widget plugin for Qt Designer, and how to to use the QDesignerTaskMenuExtension class to add custom items to Qt Designer's task menu.</para>
             <para></para>
             <para>See also QDesignerDynamicPropertySheetExtension, QExtensionFactory, QExtensionManager, and Creating Custom Widget Extensions.</para>
@@ -1742,13 +1988,6 @@
             <para>See also indexOf() and isChanged().</para>
             </summary>
         </member>
-        <member name="M:QtDesigner.QDesignerPropertySheetExtension.IsEnabled(System.Int32)">
-            <summary>
-            <para>Returns true if the property at the given index is enabled in Qt Designer's property editor, otherwise false.</para>
-            <para>This function was introduced in  Qt 5.0.</para>
-            <para>See also indexOf().</para>
-            </summary>
-        </member>
         <member name="P:QtDesigner.QDesignerPropertySheetExtension.Count">
             <summary>
             <para>Returns the selected widget's number of properties.</para>
@@ -1764,68 +2003,74 @@
             <para></para>
             <para>A task menu extension is a collection of QActions. The actions appear as entries in the task menu when the plugin with the specified extension is selected. The image above shows the custom Edit State... action which appears in addition to Qt Designer's default task menu entries: Cut, Copy, Paste etc.</para>
             <para>To create a custom task menu extension, your extension class must inherit from both QObject and QDesignerTaskMenuExtension. For example:</para>
-            <para>class MyTaskMenuExtension : public QObject,</para>
-            <para>        public QDesignerTaskMenuExtension</para>
-            <para>{</para>
-            <para>    Q_OBJECT</para>
-            <para>    Q_INTERFACES(QDesignerTaskMenuExtension)</para>
             <para></para>
-            <para>public:</para>
-            <para>    MyTaskMenuExtension(MyCustomWidget *widget, QObject *parent);</para>
             <para></para>
-            <para>    QAction *preferredEditAction() const;</para>
-            <para>    QList&lt;QAction *&gt; taskActions() const;</para>
+            <para>  class MyTaskMenuExtension : public QObject,</para>
+            <para>          public QDesignerTaskMenuExtension</para>
+            <para>  {</para>
+            <para>      Q_OBJECT</para>
+            <para>      Q_INTERFACES(QDesignerTaskMenuExtension)</para>
             <para></para>
-            <para>private slots:</para>
-            <para>    void mySlot();</para>
+            <para>  public:</para>
+            <para>      MyTaskMenuExtension(MyCustomWidget *widget, QObject *parent);</para>
             <para></para>
-            <para>private:</para>
-            <para>    MyCustomWidget *widget;</para>
-            <para>    QAction *myAction;</para>
-            <para>};</para>
+            <para>      QAction *preferredEditAction() const;</para>
+            <para>      QList&lt;QAction *&gt; taskActions() const;</para>
+            <para></para>
+            <para>  private slots:</para>
+            <para>      void mySlot();</para>
+            <para></para>
+            <para>  private:</para>
+            <para>      MyCustomWidget *widget;</para>
+            <para>      QAction *myAction;</para>
+            <para>  };</para>
+            <para></para>
+            <para></para>
             <para>Since we are implementing an interface, we must ensure that it is made known to the meta-object system using the Q_INTERFACES() macro. This enables Qt Designer to use the qobject_cast() function to query for supported interfaces using nothing but a QObject pointer.</para>
             <para>You must reimplement the taskActions() function to return a list of actions that will be included in Qt Designer task menu. Optionally, you can reimplement the preferredEditAction() function to set the action that is invoked when selecting your plugin and pressing F2. The preferred edit action must be one of the actions returned by taskActions() and, if it's not defined, pressing the F2 key will simply be ignored.</para>
             <para>In Qt Designer, extensions are not created until they are required. A task menu extension, for example, is created when you click the right mouse button over a widget in Qt Designer's workspace. For that reason you must also construct an extension factory, using either QExtensionFactory or a subclass, and register it using Qt Designer's extension manager.</para>
             <para>When a task menu extension is required, Qt Designer's extension manager will run through all its registered factories calling QExtensionFactory::createExtension() for each until it finds one that is able to create a task menu extension for the selected widget. This factory will then make an instance of the extension.</para>
             <para>There are four available types of extensions in Qt Designer: QDesignerContainerExtension, QDesignerMemberSheetExtension, QDesignerPropertySheetExtension, and QDesignerTaskMenuExtension. Qt Designer's behavior is the same whether the requested extension is associated with a container, a member sheet, a property sheet or a task menu.</para>
             <para>The QExtensionFactory class provides a standard extension factory, and can also be used as an interface for custom extension factories. You can either create a new QExtensionFactory and reimplement the QExtensionFactory::createExtension() function. For example:</para>
-            <para>QObject *ANewExtensionFactory::createExtension(QObject *object,</para>
-            <para>        const QString &amp;iid, QObject *parent) const</para>
-            <para>{</para>
-            <para>    if (iid != Q_TYPEID(QDesignerTaskMenuExtension))</para>
-            <para>        return 0;</para>
             <para></para>
-            <para>    if (MyCustomWidget *widget = qobject_cast&lt;MyCustomWidget*&gt;(object))</para>
-            <para>        return new MyTaskMenuExtension(widget, parent);</para>
             <para></para>
-            <para>    return 0;</para>
-            <para>}</para>
+            <para>  QObject *ANewExtensionFactory::createExtension(QObject *object,</para>
+            <para>          const QString &amp;iid, QObject *parent) const</para>
+            <para>  {</para>
+            <para>      if (iid != Q_TYPEID(QDesignerTaskMenuExtension))</para>
+            <para>          return 0;</para>
+            <para></para>
+            <para>      if (MyCustomWidget *widget = qobject_cast&lt;MyCustomWidget*&gt;(object))</para>
+            <para>          return new MyTaskMenuExtension(widget, parent);</para>
+            <para></para>
+            <para>      return 0;</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>Or you can use an existing factory, expanding the QExtensionFactory::createExtension() function to make the factory able to create a task menu extension as well. For example:</para>
-            <para>QObject *AGeneralExtensionFactory::createExtension(QObject *object,</para>
-            <para>        const QString &amp;iid, QObject *parent) const</para>
-            <para>{</para>
-            <para>    MyCustomWidget *widget = qobject_cast&lt;MyCustomWidget*&gt;(object);</para>
             <para></para>
-            <para>    if (widget &amp;&amp; (iid == Q_TYPEID(QDesignerContainerExtension))) {</para>
-            <para>        return new MyContainerExtension(widget, parent);</para>
             <para></para>
-            <para>    } else if (widget &amp;&amp; (iid == Q_TYPEID(QDesignerTaskMenuExtension))) {</para>
-            <para>        return new MyTaskMenuExtension(widget, parent);</para>
+            <para>  QObject *AGeneralExtensionFactory::createExtension(QObject *object,</para>
+            <para>          const QString &amp;iid, QObject *parent) const</para>
+            <para>  {</para>
+            <para>      MyCustomWidget *widget = qobject_cast&lt;MyCustomWidget*&gt;(object);</para>
             <para></para>
-            <para>    } else {</para>
-            <para>        return 0;</para>
-            <para>    }</para>
-            <para>}</para>
+            <para>      if (widget &amp;&amp; (iid == Q_TYPEID(QDesignerContainerExtension))) {</para>
+            <para>          return new MyContainerExtension(widget, parent);</para>
+            <para></para>
+            <para>      } else if (widget &amp;&amp; (iid == Q_TYPEID(QDesignerTaskMenuExtension))) {</para>
+            <para>          return new MyTaskMenuExtension(widget, parent);</para>
+            <para></para>
+            <para>      } else {</para>
+            <para>          return 0;</para>
+            <para>      }</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>For a complete example using the QDesignerTaskMenuExtension class, see the Task Menu Extension example. The example shows how to create a custom widget plugin for Qt Designer, and how to to use the QDesignerTaskMenuExtension class to add custom items to Qt Designer's task menu.</para>
             <para></para>
             <para>See also QExtensionFactory, QExtensionManager, and Creating Custom Widget Extensions.</para>
             </remarks>
-        </member>
-        <member name="P:QtDesigner.QDesignerTaskMenuExtension.PreferredEditAction">
-            <summary>
-            <para>Returns the action that is invoked when selecting a plugin with the specified extension and pressing F2.</para>
-            <para>The action must be one of the actions returned by taskActions().</para>
-            </summary>
         </member>
         <member name="T:QtDesigner.QAbstractFormBuilder">
             <summary>
@@ -1833,19 +2078,23 @@
             </summary>
             <remarks>
             <para>QAbstractFormBuilder provides a standard interface and a default implementation for constructing forms from user interface files. It is not intended to be instantiated directly. Use the QFormBuilder class to create user interfaces from UI files at run-time. For example:</para>
-            <para>        MyForm::MyForm(QWidget *parent)</para>
-            <para>            : QWidget(parent)</para>
-            <para>        {</para>
-            <para>            QFormBuilder builder;</para>
-            <para>            QFile file(&quot;:/forms/myWidget.ui&quot;);</para>
-            <para>            file.open(QFile::ReadOnly);</para>
-            <para>            QWidget *myWidget = builder.load(&amp;file, this);</para>
-            <para>            file.close();</para>
             <para></para>
-            <para>            QVBoxLayout *layout = new QVBoxLayout;</para>
-            <para>            layout-&gt;addWidget(myWidget);</para>
-            <para>            setLayout(layout);</para>
-            <para>        }</para>
+            <para></para>
+            <para>          MyForm::MyForm(QWidget *parent)</para>
+            <para>              : QWidget(parent)</para>
+            <para>          {</para>
+            <para>              QFormBuilder builder;</para>
+            <para>              QFile file(&quot;:/forms/myWidget.ui&quot;);</para>
+            <para>              file.open(QFile::ReadOnly);</para>
+            <para>              QWidget *myWidget = builder.load(&amp;file, this);</para>
+            <para>              file.close();</para>
+            <para></para>
+            <para>              QVBoxLayout *layout = new QVBoxLayout;</para>
+            <para>              layout-&gt;addWidget(myWidget);</para>
+            <para>              setLayout(layout);</para>
+            <para>          }</para>
+            <para></para>
+            <para></para>
             <para>To override certain aspects of the form builder's behavior, subclass QAbstractFormBuilder and reimplement the relevant virtual functions:</para>
             <para></para>
             <para>load() handles reading of UI format files from arbitrary QIODevices, and construction of widgets from the XML data that they contain.</para>
@@ -1896,25 +2145,33 @@
             </summary>
             <remarks>
             <para>The QFormBuilder class provides a mechanism for dynamically creating user interfaces at run-time, based on UI files created with Qt Designer. For example:</para>
-            <para>        MyForm::MyForm(QWidget *parent)</para>
-            <para>            : QWidget(parent)</para>
-            <para>        {</para>
-            <para>            QFormBuilder builder;</para>
-            <para>            QFile file(&quot;:/forms/myWidget.ui&quot;);</para>
-            <para>            file.open(QFile::ReadOnly);</para>
-            <para>            QWidget *myWidget = builder.load(&amp;file, this);</para>
-            <para>            file.close();</para>
             <para></para>
-            <para>            QVBoxLayout *layout = new QVBoxLayout;</para>
-            <para>            layout-&gt;addWidget(myWidget);</para>
-            <para>            setLayout(layout);</para>
-            <para>        }</para>
+            <para></para>
+            <para>          MyForm::MyForm(QWidget *parent)</para>
+            <para>              : QWidget(parent)</para>
+            <para>          {</para>
+            <para>              QFormBuilder builder;</para>
+            <para>              QFile file(&quot;:/forms/myWidget.ui&quot;);</para>
+            <para>              file.open(QFile::ReadOnly);</para>
+            <para>              QWidget *myWidget = builder.load(&amp;file, this);</para>
+            <para>              file.close();</para>
+            <para></para>
+            <para>              QVBoxLayout *layout = new QVBoxLayout;</para>
+            <para>              layout-&gt;addWidget(myWidget);</para>
+            <para>              setLayout(layout);</para>
+            <para>          }</para>
+            <para></para>
+            <para></para>
             <para>By including the user interface in the example's resources (myForm.qrc), we ensure that it will be present when the example is run:</para>
-            <para>    &lt;!DOCTYPE RCC&gt;&lt;RCC version=&quot;1.0&quot;&gt;</para>
-            <para>    &lt;qresource prefix=&quot;/forms&quot;&gt;</para>
-            <para>       &lt;file&gt;mywidget.ui&lt;/file&gt;</para>
-            <para>    &lt;/qresource&gt;</para>
-            <para>    &lt;/RCC&gt;</para>
+            <para></para>
+            <para></para>
+            <para>      &lt;!DOCTYPE RCC&gt;&lt;RCC version=&quot;1.0&quot;&gt;</para>
+            <para>      &lt;qresource prefix=&quot;/forms&quot;&gt;</para>
+            <para>         &lt;file&gt;mywidget.ui&lt;/file&gt;</para>
+            <para>      &lt;/qresource&gt;</para>
+            <para>      &lt;/RCC&gt;</para>
+            <para></para>
+            <para></para>
             <para>QFormBuilder extends the QAbstractFormBuilder base class with a number of functions that are used to support custom widget plugins:</para>
             <para></para>
             <para>pluginPaths() returns the list of paths that the form builder searches when loading custom widget plugins.</para>

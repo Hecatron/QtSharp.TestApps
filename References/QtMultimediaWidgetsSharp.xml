@@ -10,18 +10,22 @@
             </summary>
             <remarks>
             <para>Attaching a QVideoWidget to a QMediaObject allows it to display the video or image output of that media object. A QVideoWidget is attached to media object by passing a pointer to the QMediaObject in its constructor, and detached by destroying the QVideoWidget.</para>
-            <para>player = new QMediaPlayer;</para>
             <para></para>
-            <para>playlist = new QMediaPlaylist(player);</para>
-            <para>playlist-&gt;addMedia(QUrl(&quot;http://example.com/myclip1.mp4&quot;));</para>
-            <para>playlist-&gt;addMedia(QUrl(&quot;http://example.com/myclip2.mp4&quot;));</para>
             <para></para>
-            <para>videoWidget = new QVideoWidget;</para>
-            <para>player-&gt;setVideoOutput(videoWidget);</para>
+            <para>  player = new QMediaPlayer;</para>
             <para></para>
-            <para>videoWidget-&gt;show();</para>
-            <para>playlist-&gt;setCurrentIndex(1);</para>
-            <para>player-&gt;play();</para>
+            <para>  playlist = new QMediaPlaylist(player);</para>
+            <para>  playlist-&gt;addMedia(QUrl(&quot;http://example.com/myclip1.mp4&quot;));</para>
+            <para>  playlist-&gt;addMedia(QUrl(&quot;http://example.com/myclip2.mp4&quot;));</para>
+            <para></para>
+            <para>  videoWidget = new QVideoWidget;</para>
+            <para>  player-&gt;setVideoOutput(videoWidget);</para>
+            <para></para>
+            <para>  videoWidget-&gt;show();</para>
+            <para>  playlist-&gt;setCurrentIndex(1);</para>
+            <para>  player-&gt;play();</para>
+            <para></para>
+            <para></para>
             <para>Note: Only a single display output can be attached to a media object at one time.</para>
             <para></para>
             <para>See also QMediaObject, QMediaPlayer, and QGraphicsVideoItem.</para>
@@ -49,7 +53,6 @@
         </member>
         <member name="M:QtMultimediaWidgets.QVideoWidget.OnEvent(QtCore.QEvent)">
             <summary>
-            <para>Reimplemented from QObject::event().</para>
             <para>Current event event. Returns the value of the baseclass QWidget::event(QEvent *event) function.</para>
             </summary>
         </member>
@@ -85,76 +88,37 @@
         </member>
         <member name="E:QtMultimediaWidgets.QVideoWidget.FullScreenChanged">
             <summary>
-            <para>This property holds whether video display is confined to a window or is fullScreen.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> bool 	isFullScreen() const</para>
-            <para> void 	setFullScreen(bool fullScreen)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	fullScreenChanged(bool fullScreen)</para>
-            <para></para>
+            <para>Signals that the fullScreen mode of a video widget has changed.</para>
+            <para>Note: Notifier signal for property fullScreen. </para>
+            <para>See also isFullScreen().</para>
             </summary>
         </member>
         <member name="E:QtMultimediaWidgets.QVideoWidget.BrightnessChanged">
             <summary>
-            <para>This property holds an adjustment to the brightness of displayed video.</para>
-            <para>Valid brightness values range between -100 and 100, the default is 0.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> int 	brightness() const</para>
-            <para> void 	setBrightness(int brightness)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	brightnessChanged(int brightness)</para>
-            <para></para>
+            <para>Signals that a video widgets's brightness adjustment has changed.</para>
+            <para>Note: Notifier signal for property brightness. </para>
+            <para>See also brightness().</para>
             </summary>
         </member>
         <member name="E:QtMultimediaWidgets.QVideoWidget.ContrastChanged">
             <summary>
-            <para>This property holds an adjustment to the contrast of displayed video.</para>
-            <para>Valid contrast values range between -100 and 100, the default is 0.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> int 	contrast() const</para>
-            <para> void 	setContrast(int contrast)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	contrastChanged(int contrast)</para>
-            <para></para>
+            <para>Signals that a video widgets's contrast adjustment has changed.</para>
+            <para>Note: Notifier signal for property contrast. </para>
+            <para>See also contrast().</para>
             </summary>
         </member>
         <member name="E:QtMultimediaWidgets.QVideoWidget.HueChanged">
             <summary>
-            <para>This property holds an adjustment to the hue of displayed video.</para>
-            <para>Valid hue values range between -100 and 100, the default is 0.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> int 	hue() const</para>
-            <para> void 	setHue(int hue)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	hueChanged(int hue)</para>
-            <para></para>
+            <para>Signals that a video widgets's hue has changed.</para>
+            <para>Note: Notifier signal for property hue. </para>
+            <para>See also hue().</para>
             </summary>
         </member>
         <member name="E:QtMultimediaWidgets.QVideoWidget.SaturationChanged">
             <summary>
-            <para>This property holds an adjustment to the saturation of displayed video.</para>
-            <para>Valid saturation values range between -100 and 100, the default is 0.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> int 	saturation() const</para>
-            <para> void 	setSaturation(int saturation)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	saturationChanged(int saturation)</para>
-            <para></para>
+            <para>Signals that a video widgets's saturation has changed.</para>
+            <para>Note: Notifier signal for property saturation. </para>
+            <para>See also saturation().</para>
             </summary>
         </member>
         <member name="P:QtMultimediaWidgets.QVideoWidget.AspectRatioMode">
@@ -202,17 +166,17 @@
             <para>The QCameraViewfinder class provides a camera viewfinder widget.</para>
             </summary>
             <remarks>
-            <para>camera = new QCamera;</para>
+            <para>  camera = new QCamera;</para>
             <para></para>
-            <para>viewfinder = new QCameraViewfinder();</para>
-            <para>viewfinder-&gt;show();</para>
+            <para>  viewfinder = new QCameraViewfinder();</para>
+            <para>  viewfinder-&gt;show();</para>
             <para></para>
-            <para>camera-&gt;setViewfinder(viewfinder);</para>
+            <para>  camera-&gt;setViewfinder(viewfinder);</para>
             <para></para>
-            <para>imageCapture = new QCameraImageCapture(camera);</para>
+            <para>  imageCapture = new QCameraImageCapture(camera);</para>
             <para></para>
-            <para>camera-&gt;setCaptureMode(QCamera::CaptureStillImage);</para>
-            <para>camera-&gt;start();</para>
+            <para>  camera-&gt;setCaptureMode(QCamera::CaptureStillImage);</para>
+            <para>  camera-&gt;start();</para>
             </remarks>
         </member>
         <member name="M:QtMultimediaWidgets.QCameraViewfinder.#ctor(QtWidgets.QWidget)">
@@ -239,15 +203,19 @@
             </summary>
             <remarks>
             <para>Attaching a QGraphicsVideoItem to a QMediaObject allows it to display the video or image output of that media object. A QGraphicsVideoItem is attached to a media object by passing a pointer to the QMediaObject to the setMediaObject() function.</para>
-            <para>player = new QMediaPlayer(this);</para>
             <para></para>
-            <para>QGraphicsVideoItem *item = new QGraphicsVideoItem;</para>
-            <para>player-&gt;setVideoOutput(item);</para>
-            <para>graphicsView-&gt;scene()-&gt;addItem(item);</para>
-            <para>graphicsView-&gt;show();</para>
             <para></para>
-            <para>player-&gt;setMedia(QUrl(&quot;http://example.com/myclip4.ogv&quot;));</para>
-            <para>player-&gt;play();</para>
+            <para>  player = new QMediaPlayer(this);</para>
+            <para></para>
+            <para>  QGraphicsVideoItem *item = new QGraphicsVideoItem;</para>
+            <para>  player-&gt;setVideoOutput(item);</para>
+            <para>  graphicsView-&gt;scene()-&gt;addItem(item);</para>
+            <para>  graphicsView-&gt;show();</para>
+            <para></para>
+            <para>  player-&gt;setMedia(QUrl(&quot;http://example.com/myclip4.ogv&quot;));</para>
+            <para>  player-&gt;play();</para>
+            <para></para>
+            <para></para>
             <para>Note: Only a single display output can be attached to a media object at one time.</para>
             <para></para>
             <para>See also QMediaObject, QMediaPlayer, and QVideoWidget.</para>
@@ -266,15 +234,8 @@
         </member>
         <member name="E:QtMultimediaWidgets.QGraphicsVideoItem.NativeSizeChanged">
             <summary>
-            <para>This property holds the native size of the video.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> QSizeF 	nativeSize() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	nativeSizeChanged(const QSizeF &amp; size)</para>
-            <para></para>
+            <para>Signals that the native size of the video has changed.</para>
+            <para>Note: Notifier signal for property nativeSize. </para>
             </summary>
         </member>
         <member name="P:QtMultimediaWidgets.QGraphicsVideoItem.AspectRatioMode">
@@ -315,8 +276,12 @@
             </summary>
             <remarks>
             <para>The videoWidget() property of QVideoWidgetControl provides a pointer to a video widget implemented by the control's media service. This widget is owned by the media service and so care should be taken not to delete it.</para>
-            <para>QVideoWidgetControl *widgetControl = mediaService-&gt;requestControl&lt;QVideoWidgetControl *&gt;();</para>
-            <para>layout-&gt;addWidget(widgetControl-&gt;videoWidget());</para>
+            <para></para>
+            <para></para>
+            <para>  QVideoWidgetControl *widgetControl = mediaService-&gt;requestControl&lt;QVideoWidgetControl *&gt;();</para>
+            <para>  layout-&gt;addWidget(widgetControl-&gt;videoWidget());</para>
+            <para></para>
+            <para></para>
             <para>QVideoWidgetControl is one of number of possible video output controls.</para>
             <para>The interface name of QVideoWidgetControl is org.qt-project.qt.videowidgetcontrol/5.0 as defined in QVideoWidgetControl_iid.</para>
             <para></para>

@@ -1,0 +1,545 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>QtHelpSharp</name>
+    </assembly>
+    <members>
+        <member name="T:QtHelp.QHelpContentItem">
+            <summary>
+            <para>The QHelpContentItem class provides an item for use with QHelpContentModel.</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpContentItem.Child(System.Int32)">
+            <summary>
+            <para>Returns the child of the content item in the give row.</para>
+            <para>See also parent().</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpContentItem.ChildPosition(QtHelp.QHelpContentItem)">
+            <summary>
+            <para>Returns the position of a given child.</para>
+            </summary>
+        </member>
+        <member name="P:QtHelp.QHelpContentItem.ChildCount">
+            <summary>
+            <para>Returns the number of child items.</para>
+            </summary>
+        </member>
+        <member name="P:QtHelp.QHelpContentItem.Title">
+            <summary>
+            <para>Returns the title of the content item.</para>
+            </summary>
+        </member>
+        <member name="P:QtHelp.QHelpContentItem.Url">
+            <summary>
+            <para>Returns the URL of this content item.</para>
+            </summary>
+        </member>
+        <member name="P:QtHelp.QHelpContentItem.Row">
+            <summary>
+            <para>Returns the row of this item from its parents view.</para>
+            </summary>
+        </member>
+        <member name="P:QtHelp.QHelpContentItem.Parent">
+            <summary>
+            <para>Returns the parent content item.</para>
+            </summary>
+        </member>
+        <member name="T:QtHelp.QHelpContentModel">
+            <summary>
+            <para>The QHelpContentModel class provides a model that supplies content to views.</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpContentModel.CreateContents(System.String)">
+            <summary>
+            <para>Creates new contents by querying the help system for contents specified for the customFilterName.</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpContentModel.ContentItemAt(QtCore.QModelIndex)">
+            <summary>
+            <para>Returns the help content item at the model index position index.</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpContentModel.Data(QtCore.QModelIndex,System.Int32)">
+            <summary>
+            <para>Reimplemented from QAbstractItemModel::data().</para>
+            <para>Returns the data stored under the given role for the item referred to by the index.</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpContentModel.Index(System.Int32,System.Int32,QtCore.QModelIndex)">
+            <summary>
+            <para>Reimplemented from QAbstractItemModel::index().</para>
+            <para>Returns the index of the item in the model specified by the given row, column and parent index.</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpContentModel.parent(QtCore.QModelIndex)">
+            <summary>
+            <para>Reimplemented from QAbstractItemModel::parent().</para>
+            <para>Returns the parent of the model item with the given index, or QModelIndex() if it has no parent.</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpContentModel.RowCount(QtCore.QModelIndex)">
+            <summary>
+            <para>Reimplemented from QAbstractItemModel::rowCount().</para>
+            <para>Returns the number of rows under the given parent.</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpContentModel.ColumnCount(QtCore.QModelIndex)">
+            <summary>
+            <para>Reimplemented from QAbstractItemModel::columnCount().</para>
+            <para>Returns the number of columns under the given parent. Currently returns always 1.</para>
+            </summary>
+        </member>
+        <member name="E:QtHelp.QHelpContentModel.ContentsCreationStarted">
+            <summary>
+            <para>This signal is emitted when the creation of the contents has started. The current contents are invalid from this point on until the signal contentsCreated() is emitted.</para>
+            <para>See also isCreatingContents().</para>
+            </summary>
+        </member>
+        <member name="E:QtHelp.QHelpContentModel.ContentsCreated">
+            <summary>
+            <para>This signal is emitted when the contents have been created.</para>
+            </summary>
+        </member>
+        <member name="P:QtHelp.QHelpContentModel.IsCreatingContents">
+            <summary>
+            <para>Returns true if the contents are currently rebuilt, otherwise false.</para>
+            </summary>
+        </member>
+        <member name="T:QtHelp.QHelpContentWidget">
+            <summary>
+            <para>The QHelpContentWidget class provides a tree view for displaying help content model items.</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpContentWidget.IndexOf(QtCore.QUrl)">
+            <summary>
+            <para>Returns the index of the content item with the link. An invalid index is returned if no such an item exists.</para>
+            </summary>
+        </member>
+        <member name="E:QtHelp.QHelpContentWidget.LinkActivated">
+            <summary>
+            <para>This signal is emitted when a content item is activated and its associated link should be shown.</para>
+            </summary>
+        </member>
+        <member name="T:QtHelp.QHelpEngineCore">
+            <summary>
+            <para>The QHelpEngineCore class provides the core functionality of the help system.</para>
+            </summary>
+            <remarks>
+            <para>Before the help engine can be used, it must be initialized by calling setupData(). At the beginning of the setup process the signal setupStarted() is emitted. From this point on until the signal setupFinished() is emitted, is the help data in an undefined meaning unusable state.</para>
+            <para>The core help engine can be used to perform different tasks. By calling linksForIdentifier() the engine returns urls specifying the file locations inside the help system. The actual file data can then be retrived by calling fileData(). In contrast to all other functions in this class, linksForIdentifier() depends on the currently set custom filter. Depending on the filter, the function may return different hits.</para>
+            <para>Every help engine can contain any number of custom filters. A custom filter is defined by a name and set of filter attributes and can be added to the help engine by calling addCustomFilter(). Analogous, it is removed by calling removeCustomFilter(). customFilters() returns all defined filters.</para>
+            <para>The help engine also offers the possibility to set and read values in a persistant way comparable to ini files or Windows registry entries. For more information see setValue() or value().</para>
+            <para>This class does not offer any GUI components or functionality for indices or contents. If you need one of those use QHelpEngine instead.</para>
+            <para>When creating a custom help viewer the viewer can be configured by writing a custom collection file which could contain various keywords to be used to configure the help engine. These keywords and values and their meaning can be found in the help information for creating a custom help collection file for Assistant.</para>
+            </remarks>
+        </member>
+        <member name="M:QtHelp.QHelpEngineCore.#ctor(System.String,QtCore.QObject)">
+            <summary>
+            <para>Constructs a new core help engine with a parent. The help engine uses the information stored in the collectionFile to provide help. If the collection file does not exist yet, it'll be created.</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpEngineCore.SetupData">
+            <summary>
+            <para>Sets up the help engine by processing the information found in the collection file and returns true if successful; otherwise returns false.</para>
+            <para>By calling the function, the help engine is forced to initialize itself immediately. Most of the times, this function does not have to be called explicitly because getter functions which depend on a correctly set up help engine do that themselves.</para>
+            <para>Note: qsqlite4.dll needs to be deployed with the application as the help system uses the sqlite driver when loading help collections.</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpEngineCore.CopyCollectionFile(System.String)">
+            <summary>
+            <para>Creates the file fileName and copies all contents from the current collection file into the newly created file, and returns true if successful; otherwise returns false.</para>
+            <para>The copying process makes sure that file references to Qt Collection files (.qch) files are updated accordingly.</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpEngineCore.RegisterDocumentation(System.String)">
+            <summary>
+            <para>Registers the Qt compressed help file (.qch) contained in the file documentationFileName. One compressed help file, uniquely identified by its namespace can only be registered once. True is returned if the registration was successful, otherwise false.</para>
+            <para>See also unregisterDocumentation() and error().</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpEngineCore.UnregisterDocumentation(System.String)">
+            <summary>
+            <para>Unregisters the Qt compressed help file (.qch) identified by its namespaceName from the help collection. Returns true on success, otherwise false.</para>
+            <para>See also registerDocumentation() and error().</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpEngineCore.DocumentationFileName(System.String)">
+            <summary>
+            <para>Returns the absolute file name of the Qt compressed help file (.qch) identified by the namespaceName. If there is no Qt compressed help file with the specified namespace registered, an empty string is returned.</para>
+            <para>See also namespaceName().</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpEngineCore.RemoveCustomFilter(System.String)">
+            <summary>
+            <para>Returns true if the filter filterName was removed successfully, otherwise false.</para>
+            <para>See also addCustomFilter() and customFilters().</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpEngineCore.AddCustomFilter(System.String,QtCore.QStringList)">
+            <summary>
+            <para>Adds the new custom filter filterName. The filter attributes are specified by attributes. If the filter already exists, its attribute set is replaced. The function returns true if the operation succeeded, otherwise it returns false.</para>
+            <para>See also customFilters() and removeCustomFilter().</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpEngineCore.FilterAttributes">
+            <summary>
+            <para>Returns a list of all defined filter attributes.</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpEngineCore.FilterAttributes(System.String)">
+            <summary>
+            <para>Returns a list of filter attributes used by the custom filter filterName.</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpEngineCore.FindFile(QtCore.QUrl)">
+            <summary>
+            <para>Returns an invalid URL if the file url cannot be found. If the file exists, either the same url is returned or a different url if the file is located in a different namespace which is merged via a common virtual folder.</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpEngineCore.FileData(QtCore.QUrl)">
+            <summary>
+            <para>Returns the data of the file specified by url. If the file does not exist, an empty QByteArray is returned.</para>
+            <para>See also findFile().</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpEngineCore.RemoveCustomValue(System.String)">
+            <summary>
+            <para>Removes the key from the settings section in the collection file. Returns true if the value was removed successfully, otherwise false.</para>
+            <para>See also customValue() and setCustomValue().</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpEngineCore.CustomValue(System.String,QtCore.QVariant)">
+            <summary>
+            <para>Returns the value assigned to the key. If the requested key does not exist, the specified defaultValue is returned.</para>
+            <para>See also setCustomValue() and removeCustomValue().</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpEngineCore.SetCustomValue(System.String,QtCore.QVariant)">
+            <summary>
+            <para>Save the value under the key. If the key already exist, the value will be overwritten. Returns true if the value was saved successfully, otherwise false.</para>
+            <para>See also customValue() and removeCustomValue().</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpEngineCore.NamespaceName(System.String)">
+            <summary>
+            <para>Returns the namespace name defined for the Qt compressed help file (.qch) specified by its documentationFileName. If the file is not valid, an empty string is returned.</para>
+            <para>See also documentationFileName().</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpEngineCore.MetaData(System.String,System.String)">
+            <summary>
+            <para>Returns the meta data for the Qt compressed help file documentationFileName. If there is no data available for name, an invalid QVariant() is returned. The meta data is defined when creating the Qt compressed help file and cannot be modified later. Common meta data includes e.g. the author of the documentation.</para>
+            </summary>
+        </member>
+        <member name="E:QtHelp.QHelpEngineCore.SetupStarted">
+            <summary>
+            <para>This signal is emitted when setup is started.</para>
+            </summary>
+        </member>
+        <member name="E:QtHelp.QHelpEngineCore.SetupFinished">
+            <summary>
+            <para>This signal is emitted when the setup is complete.</para>
+            </summary>
+        </member>
+        <member name="E:QtHelp.QHelpEngineCore.CurrentFilterChanged">
+            <summary>
+            <para>This signal is emitted when the current filter is changed to newFilter.</para>
+            </summary>
+        </member>
+        <member name="E:QtHelp.QHelpEngineCore.Warning">
+            <summary>
+            <para>This signal is emitted when a non critical error occurs. The warning message is stored in msg.</para>
+            </summary>
+        </member>
+        <member name="E:QtHelp.QHelpEngineCore.ReadersAboutToBeInvalidated">
+            <summary>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:QtHelp.QHelpEngineCore.CollectionFile">
+            <summary>
+            <para>This property holds the absolute file name of the collection file currently used.</para>
+            <para>Setting this property leaves the help engine in an invalid state. It is important to invoke setupData() or any getter function in order to setup the help engine again.</para>
+            <para>This property was introduced in  Qt 4.5.</para>
+            </summary>
+        </member>
+        <member name="P:QtHelp.QHelpEngineCore.CurrentFilter">
+            <summary>
+            <para>This property holds the name of the custom filter currently applied.</para>
+            <para>Setting this property will save the new custom filter permanently in the help collection file. To set a custom filter without saving it permanently, disable the auto save filter mode.</para>
+            <para>This property was introduced in  Qt 4.5.</para>
+            <para>See also autoSaveFilter().</para>
+            </summary>
+        </member>
+        <member name="P:QtHelp.QHelpEngineCore.AutoSaveFilter">
+            <summary>
+            <para>This property holds whether QHelpEngineCore is in auto save filter mode or not.</para>
+            <para>If QHelpEngineCore is in auto save filter mode, the current filter is automatically saved when it is changed by the setCurrentFilter() function. The filter is saved persistently in the help collection file.</para>
+            <para>By default, this mode is on.</para>
+            <para>This property was introduced in  Qt 4.5.</para>
+            </summary>
+        </member>
+        <member name="P:QtHelp.QHelpEngineCore.CustomFilters">
+            <summary>
+            <para>Returns a list of custom filters.</para>
+            <para>See also addCustomFilter() and removeCustomFilter().</para>
+            </summary>
+        </member>
+        <member name="P:QtHelp.QHelpEngineCore.RegisteredDocumentations">
+            <summary>
+            <para>Returns a list of all registered Qt compressed help files of the current collection file. The returned names are the namespaces of the registered Qt compressed help files (.qch).</para>
+            </summary>
+        </member>
+        <member name="P:QtHelp.QHelpEngineCore.Error">
+            <summary>
+            <para>Returns a description of the last error that occurred.</para>
+            </summary>
+        </member>
+        <member name="T:QtHelp.QHelpEngine">
+            <summary>
+            <para>The QHelpEngine class provides access to contents and indices of the help engine.</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpEngine.#ctor(System.String,QtCore.QObject)">
+            <summary>
+            <para>Constructs a new help engine with the given parent. The help engine uses the information stored in the collectionFile for providing help. If the collection file does not already exist, it will be created.</para>
+            </summary>
+        </member>
+        <member name="P:QtHelp.QHelpEngine.ContentModel">
+            <summary>
+            <para>Returns the content model.</para>
+            </summary>
+        </member>
+        <member name="P:QtHelp.QHelpEngine.IndexModel">
+            <summary>
+            <para>Returns the index model.</para>
+            </summary>
+        </member>
+        <member name="P:QtHelp.QHelpEngine.ContentWidget">
+            <summary>
+            <para>Returns the content widget.</para>
+            </summary>
+        </member>
+        <member name="P:QtHelp.QHelpEngine.IndexWidget">
+            <summary>
+            <para>Returns the index widget.</para>
+            </summary>
+        </member>
+        <member name="P:QtHelp.QHelpEngine.SearchEngine">
+            <summary>
+            <para>Returns the default search engine.</para>
+            </summary>
+        </member>
+        <member name="T:QtHelp.QHelpIndexModel">
+            <summary>
+            <para>The QHelpIndexModel class provides a model that supplies index keywords to views.</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpIndexModel.CreateIndex(System.String)">
+            <summary>
+            <para>Creates a new index by querying the help system for keywords for the specified customFilterName.</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpIndexModel.Filter(System.String,System.String)">
+            <summary>
+            <para>Filters the indices and returns the model index of the best matching keyword. In a first step, only the keywords containing filter are kept in the model's index list. Analogously, if wildcard is not empty, only the keywords matched are left in the index list. In a second step, the best match is determined and its index model returned. When specifying a wildcard expression, the filter string is used to search for the best match.</para>
+            </summary>
+        </member>
+        <member name="E:QtHelp.QHelpIndexModel.IndexCreationStarted">
+            <summary>
+            <para>This signal is emitted when the creation of a new index has started. The current index is invalid from this point on until the signal indexCreated() is emitted.</para>
+            <para>See also isCreatingIndex().</para>
+            </summary>
+        </member>
+        <member name="E:QtHelp.QHelpIndexModel.IndexCreated">
+            <summary>
+            <para>This signal is emitted when the index has been created.</para>
+            </summary>
+        </member>
+        <member name="P:QtHelp.QHelpIndexModel.IsCreatingIndex">
+            <summary>
+            <para>Returns true if the index is currently built up, otherwise false.</para>
+            </summary>
+        </member>
+        <member name="T:QtHelp.QHelpIndexWidget">
+            <summary>
+            <para>The QHelpIndexWidget class provides a list view displaying the QHelpIndexModel.</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpIndexWidget.FilterIndices(System.String,System.String)">
+            <summary>
+            <para>Filters the indices according to filter or wildcard. The item with the best match is set as current item.</para>
+            <para>See also QHelpIndexModel::filter().</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpIndexWidget.ActivateCurrentItem">
+            <summary>
+            <para>Activates the current item which will result eventually in the emitting of a linkActivated() or linksActivated() signal.</para>
+            </summary>
+        </member>
+        <member name="E:QtHelp.QHelpIndexWidget.LinkActivated">
+            <summary>
+            <para>This signal is emitted when an item is activated and its associated link should be shown. To know where the link belongs to, the keyword is given as a second paremeter.</para>
+            </summary>
+        </member>
+        <member name="T:QtHelp.QHelpSearchQuery">
+            <summary>
+            <para>The QHelpSearchQuery class contains the field name and the associated search term</para>
+            </summary>
+            <remarks>
+            <para>The QHelpSearchQuery class contains the field name and the associated search term. Depending on the field the search term might get split up into separate terms to be parsed differently by the search engine.</para>
+            <para></para>
+            <para>See also QHelpSearchQueryWidget.</para>
+            </remarks>
+        </member>
+        <member name="M:QtHelp.QHelpSearchQuery.#ctor">
+            <summary>
+            <para>Constructs a new empty QHelpSearchQuery.</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpSearchQuery.#ctor(QtHelp.QHelpSearchQuery.FieldName,QtCore.QStringList)">
+            <summary>
+            <para>Constructs a new QHelpSearchQuery and initializes it with the given field and wordList.</para>
+            </summary>
+        </member>
+        <member name="T:QtHelp.QHelpSearchQuery.FieldName">
+            <summary>
+            <para>This enum type specifies the field names that are handled by the search engine.</para>
+            </summary>
+        </member>
+        <member name="F:QtHelp.QHelpSearchQuery.FieldName.DEFAULT">
+            <summary>the default field provided by the search widget, several terms should be split and stored in the word list except search terms enclosed in quotes.</summary>
+        </member>
+        <member name="F:QtHelp.QHelpSearchQuery.FieldName.FUZZY">
+            <summary>a field only provided in use with clucene. Terms should be split in separate words and passed to the search engine.</summary>
+        </member>
+        <member name="F:QtHelp.QHelpSearchQuery.FieldName.WITHOUT">
+            <summary>a field only provided in use with clucene. Terms should be split in separate words and passed to the search engine.</summary>
+        </member>
+        <member name="F:QtHelp.QHelpSearchQuery.FieldName.PHRASE">
+            <summary>a field only provided in use with clucene. Terms should not be split in separate words.</summary>
+        </member>
+        <member name="F:QtHelp.QHelpSearchQuery.FieldName.ALL">
+            <summary>a field only provided in use with clucene. Terms should be split in separate words and passed to the search engine</summary>
+        </member>
+        <member name="F:QtHelp.QHelpSearchQuery.FieldName.ATLEAST">
+            <summary>a field only provided in use with clucene. Terms should be split in separate words and passed to the search engine</summary>
+        </member>
+        <member name="T:QtHelp.QHelpSearchEngine">
+            <summary>
+            <para>The QHelpSearchEngine class provides access to widgets reusable to integrate fulltext search as well as to index and search documentation.</para>
+            </summary>
+            <remarks>
+            <para>Before the search engine can be used, one has to instantiate at least a QHelpEngineCore object that needs to be passed to the search engines constructor. This is required as the search engine needs to be connected to the help engines setupFinished() signal to know when it can start to index documentation.</para>
+            <para>After starting the indexing process the signal indexingStarted() is emitted and on the end of the indexing process the indexingFinished() is emitted. To stop the indexing one can call cancelIndexing().</para>
+            <para>While the indexing process has finished, the search engine can now be used to search thru its index for a given term. To do this one may use the possibility of creating the QHelpSearchQuery list by self or reuse the QHelpSearchQueryWidget which has the inbuild functionality to set up a proper search queries list that get's passed to the search engines search() function.</para>
+            <para>After the list of querys has been passed to the search engine, the signal searchingStarted() is emitted and after the search has finished the searchingFinished() signal is emitted. The search process can be stopped by calling cancelSearching().</para>
+            <para>If the search succeeds, the searchingFinished() will be called with the search hits count, which can be reused to fetch the search hits from the search engine. Calling the hits() function with the range of hits you would like to get will return a list of the requested SearchHits. They basically constist at the moment of a pair of strings where the values of that pair are the documentation file path and the page title.</para>
+            <para>To display the given hits use the QHelpSearchResultWidget or build up your own one if you need more advanced functionality. Note that the QHelpSearchResultWidget can not be instantiated directly, you must retrieve the widget from the search engine in use as all connections will be established for you by the widget itself.</para>
+            </remarks>
+        </member>
+        <member name="M:QtHelp.QHelpSearchEngine.#ctor(QtHelp.QHelpEngineCore,QtCore.QObject)">
+            <summary>
+            <para>Constructs a new search engine with the given parent. The search engine uses the given helpEngine to access the documentation that needs to be indexed. The QHelpEngine's setupFinished() signal is automatically connected to the QHelpSearchEngine's indexing function, so that new documentation will be indexed after the signal is emitted.</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpSearchEngine.ReindexDocumentation">
+            <summary>
+            <para>Forces the search engine to reindex all documentation files.</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpSearchEngine.CancelIndexing">
+            <summary>
+            <para>Stops the indexing process.</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpSearchEngine.CancelSearching">
+            <summary>
+            <para>Stops the search process.</para>
+            </summary>
+        </member>
+        <member name="E:QtHelp.QHelpSearchEngine.IndexingStarted">
+            <summary>
+            <para>This signal is emitted when indexing process is started.</para>
+            </summary>
+        </member>
+        <member name="E:QtHelp.QHelpSearchEngine.IndexingFinished">
+            <summary>
+            <para>This signal is emitted when the indexing process is complete.</para>
+            </summary>
+        </member>
+        <member name="E:QtHelp.QHelpSearchEngine.SearchingStarted">
+            <summary>
+            <para>This signal is emitted when the search process is started.</para>
+            </summary>
+        </member>
+        <member name="E:QtHelp.QHelpSearchEngine.SearchingFinished">
+            <summary>
+            <para>This signal is emitted when the search process is complete. The hit count is stored in hits.</para>
+            </summary>
+        </member>
+        <member name="P:QtHelp.QHelpSearchEngine.QueryWidget">
+            <summary>
+            <para>Returns a widget to use as input widget. Depending on your search engine configuration you will get a different widget with more or less subwidgets.</para>
+            </summary>
+        </member>
+        <member name="P:QtHelp.QHelpSearchEngine.ResultWidget">
+            <summary>
+            <para>Returns a widget that can hold and display the search results.</para>
+            </summary>
+        </member>
+        <member name="P:QtHelp.QHelpSearchEngine.HitsCount">
+            <summary>
+            <para>Returns the amount of hits the search engine found.</para>
+            <para>See also hitCount().</para>
+            </summary>
+        </member>
+        <member name="P:QtHelp.QHelpSearchEngine.HitCount">
+            <summary>
+            <para>Returns the amount of hits the search engine found.</para>
+            <para>This function was introduced in  Qt 4.6.</para>
+            </summary>
+        </member>
+        <member name="T:QtHelp.QHelpSearchQueryWidget">
+            <summary>
+            <para>The QHelpSearchQueryWidget class provides a simple line edit or an advanced widget to enable the user to input a search term in a standardized input mask.</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpSearchQueryWidget.#ctor(QtWidgets.QWidget)">
+            <summary>
+            <para>Constructs a new search query widget with the given parent.</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpSearchQueryWidget.ExpandExtendedSearch">
+            <summary>
+            <para>Expands the search query widget so that the extended search fields are shown.</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpSearchQueryWidget.CollapseExtendedSearch">
+            <summary>
+            <para>Collapses the search query widget so that only the default search field is shown.</para>
+            </summary>
+        </member>
+        <member name="E:QtHelp.QHelpSearchQueryWidget.Search">
+            <summary>
+            <para>This signal is emitted when a the user has the search button invoked. After receiving the signal you can ask the QHelpSearchQueryWidget for the build list of QHelpSearchQuery's that you may pass to the QHelpSearchEngine's search() function.</para>
+            </summary>
+        </member>
+        <member name="T:QtHelp.QHelpSearchResultWidget">
+            <summary>
+            <para>The QHelpSearchResultWidget class provides either a tree widget or a text browser depending on the used search engine to display the hits found by the search.</para>
+            </summary>
+        </member>
+        <member name="M:QtHelp.QHelpSearchResultWidget.LinkAt(QtCore.QPoint)">
+            <summary>
+            <para>Returns a reference of the URL that the item at point owns, or an empty URL if no item exists at that point.</para>
+            </summary>
+        </member>
+        <member name="E:QtHelp.QHelpSearchResultWidget.RequestShowLink">
+            <summary>
+            <para>This signal is emitted when a item is activated and its associated link should be shown.</para>
+            </summary>
+        </member>
+    </members>
+</doc>

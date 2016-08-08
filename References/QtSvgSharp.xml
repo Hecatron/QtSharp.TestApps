@@ -12,15 +12,19 @@
             <para>QGraphicsSvgItem provides a way of rendering SVG files onto QGraphicsView. QGraphicsSvgItem can be created by passing the SVG file to be rendered to its constructor or by explicit setting a shared QSvgRenderer on it.</para>
             <para>Note that setting QSvgRenderer on a QGraphicsSvgItem doesn't make the item take ownership of the renderer, therefore if using setSharedRenderer() method one has to make sure that the lifetime of the QSvgRenderer object will be at least as long as that of the QGraphicsSvgItem.</para>
             <para>QGraphicsSvgItem provides a way of rendering only parts of the SVG files via the setElementId. If setElementId() method is called, only the SVG element (and its children) with the passed id will be renderer. This provides a convenient way of selectively rendering large SVG files that contain a number of discrete elements. For example the following code renders only jokers from a SVG file containing a whole card deck:</para>
-            <para>QSvgRenderer *renderer = new QSvgRenderer(QLatin1String(&quot;SvgCardDeck.svg&quot;));</para>
-            <para>QGraphicsSvgItem *black = new QGraphicsSvgItem();</para>
-            <para>QGraphicsSvgItem *red   = new QGraphicsSvgItem();</para>
             <para></para>
-            <para>black-&gt;setSharedRenderer(renderer);</para>
-            <para>black-&gt;setElementId(QLatin1String(&quot;black_joker&quot;));</para>
             <para></para>
-            <para>red-&gt;setSharedRenderer(renderer);</para>
-            <para>red-&gt;setElementId(QLatin1String(&quot;red_joker&quot;));</para>
+            <para>  QSvgRenderer *renderer = new QSvgRenderer(QLatin1String(&quot;SvgCardDeck.svg&quot;));</para>
+            <para>  QGraphicsSvgItem *black = new QGraphicsSvgItem();</para>
+            <para>  QGraphicsSvgItem *red   = new QGraphicsSvgItem();</para>
+            <para></para>
+            <para>  black-&gt;setSharedRenderer(renderer);</para>
+            <para>  black-&gt;setElementId(QLatin1String(&quot;black_joker&quot;));</para>
+            <para></para>
+            <para>  red-&gt;setSharedRenderer(renderer);</para>
+            <para>  red-&gt;setElementId(QLatin1String(&quot;red_joker&quot;));</para>
+            <para></para>
+            <para></para>
             <para>Size of the item can be set via the setSize() method of the bounding rectangle or via direct manipulation of the items transformation matrix.</para>
             <para>By default the SVG rendering is cached using QGraphicsItem::DeviceCoordinateCache mode to speedup the display of items. Caching can be disabled by passing QGraphicsItem::NoCache to the QGraphicsItem::setCacheMode() method.</para>
             <para></para>
@@ -90,19 +94,27 @@
             <remarks>
             <para>This paint device represents a Scalable Vector Graphics (SVG) drawing. Like QPrinter, it is designed as a write-only device that generates output in a specific format.</para>
             <para>To write an SVG file, you first need to configure the output by setting the fileName or outputDevice properties. It is usually necessary to specify the size of the drawing by setting the size property, and in some cases where the drawing will be included in another, the viewBox property also needs to be set.</para>
-            <para>    QSvgGenerator generator;</para>
-            <para>    generator.setFileName(path);</para>
-            <para>    generator.setSize(QSize(200, 200));</para>
-            <para>    generator.setViewBox(QRect(0, 0, 200, 200));</para>
-            <para>    generator.setTitle(tr(&quot;SVG Generator Example Drawing&quot;));</para>
-            <para>    generator.setDescription(tr(&quot;An SVG drawing created by the SVG Generator &quot;</para>
-            <para>                                &quot;Example provided with Qt.&quot;));</para>
+            <para></para>
+            <para></para>
+            <para>      QSvgGenerator generator;</para>
+            <para>      generator.setFileName(path);</para>
+            <para>      generator.setSize(QSize(200, 200));</para>
+            <para>      generator.setViewBox(QRect(0, 0, 200, 200));</para>
+            <para>      generator.setTitle(tr(&quot;SVG Generator Example Drawing&quot;));</para>
+            <para>      generator.setDescription(tr(&quot;An SVG drawing created by the SVG Generator &quot;</para>
+            <para>                                  &quot;Example provided with Qt.&quot;));</para>
+            <para></para>
+            <para></para>
             <para>Other meta-data can be specified by setting the title, description and resolution properties.</para>
             <para>As with other QPaintDevice subclasses, a QPainter object is used to paint onto an instance of this class:</para>
-            <para>    QPainter painter;</para>
-            <para>    painter.begin(&amp;generator);</para>
-            <para>    ...</para>
-            <para>    painter.end();</para>
+            <para></para>
+            <para></para>
+            <para>      QPainter painter;</para>
+            <para>      painter.begin(&amp;generator);</para>
+            <para>      ...</para>
+            <para>      painter.end();</para>
+            <para></para>
+            <para></para>
             <para>Painting is performed in the same way as for any other paint device. However, it is necessary to use the QPainter::begin() and end() to explicitly begin and end painting on the device.</para>
             <para>The SVG Generator Example shows how the same painting commands can be used for painting a widget and writing an SVG file.</para>
             <para></para>
@@ -369,6 +381,11 @@
         <member name="M:QtSvg.QSvgWidget.Load(QtCore.QByteArray)">
             <summary>
             <para>Loads the specified SVG format contents and updates the widget.</para>
+            </summary>
+        </member>
+        <member name="M:QtSvg.QSvgWidget.OnPaintEvent(QtGui.QPaintEvent)">
+            <summary>
+            <para>Reimplemented from QWidget::paintEvent().</para>
             </summary>
         </member>
         <member name="P:QtSvg.QSvgWidget.SizeHint">

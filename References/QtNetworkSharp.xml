@@ -78,7 +78,11 @@
             <summary>
             <para>Sets the header headerName to be of value headerValue. If headerName corresponds to a known header (see QNetworkRequest::KnownHeaders), the raw format will be parsed and the corresponding &quot;cooked&quot; header will be set as well.</para>
             <para>For example:</para>
-            <para>request.setRawHeader(QByteArray(&quot;Last-Modified&quot;), QByteArray(&quot;Sun, 06 Nov 1994 08:49:37 GMT&quot;));</para>
+            <para></para>
+            <para></para>
+            <para>  request.setRawHeader(QByteArray(&quot;Last-Modified&quot;), QByteArray(&quot;Sun, 06 Nov 1994 08:49:37 GMT&quot;));</para>
+            <para></para>
+            <para></para>
             <para>will also set the known header LastModifiedHeader to be the QDateTime object of the parsed date.</para>
             <para>Note: Setting the same header twice overrides the previous setting. To accomplish the behaviour of multiple HTTP headers of the same name, you should concatenate the two values, separating them with a comma (&quot;,&quot;) and set one single raw header.</para>
             <para>See also KnownHeaders, setHeader(), hasRawHeader(), and rawHeader().</para>
@@ -140,6 +144,17 @@
             <para>See also priority().</para>
             </summary>
         </member>
+        <member name="P:QtNetwork.QNetworkRequest.MaximumRedirectsAllowed">
+            <summary>
+            <para>Returns the maximum number of redirects allowed to be followed for this request.</para>
+            <para>This function was introduced in  Qt 5.6.</para>
+            <para>See also setMaximumRedirectsAllowed().</para>
+            <para></para>
+            <para>Sets the maximum number of redirects allowed to be followed for this request to maxRedirectsAllowed.</para>
+            <para>This function was introduced in  Qt 5.6.</para>
+            <para>See also maximumRedirectsAllowed().</para>
+            </summary>
+        </member>
         <member name="T:QtNetwork.QNetworkRequest.KnownHeaders">
             <summary>
             <para>List of known header types that QNetworkRequest parses. Each known header is also represented in raw form with its full HTTP name.</para>
@@ -184,7 +199,7 @@
             <summary>Replies only, type: QMetaType::QByteArray (no default) Indicates the HTTP reason phrase as received from the HTTP server (like "Ok", "Found", "Not Found", "Access Denied", etc.) This is the human-readable representation of the status code (see above). If the connection was not HTTP-based, this attribute will not be present.</summary>
         </member>
         <member name="F:QtNetwork.QNetworkRequest.Attribute.RedirectionTargetAttribute">
-            <summary>Replies only, type: QMetaType::QUrl (no default) If present, it indicates that the server is redirecting the request to a different URL. The Network Access API does not by default follow redirections: it's up to the application to determine if the requested redirection should be allowed, according to its security policies. The returned URL might be relative. Use QUrl::resolved() to create an absolute URL out of it.</summary>
+            <summary>Replies only, type: QMetaType::QUrl (no default) If present, it indicates that the server is redirecting the request to a different URL. The Network Access API does not by default follow redirections: the application can determine if the requested redirection should be allowed, according to its security policies, or it can set QNetworkRequest::FollowRedirectsAttribute to true (in which case the redirection will be followed and this attribute will not be present in the reply). The returned URL might be relative. Use QUrl::resolved() to create an absolute URL out of it.</summary>
         </member>
         <member name="F:QtNetwork.QNetworkRequest.Attribute.ConnectionEncryptedAttribute">
             <summary>Replies only, type: QMetaType::Bool (default: false) Indicates whether the data was obtained through an encrypted (secure) connection.</summary>
@@ -230,6 +245,9 @@
         </member>
         <member name="F:QtNetwork.QNetworkRequest.Attribute.EmitAllUploadProgressSignalsAttribute">
             <summary>Requests only, type: QMetaType::Bool (default: false) Indicates whether all upload signals should be emitted. By default, the uploadProgress signal is emitted only in 100 millisecond intervals. (This value was introduced in 5.5.)</summary>
+        </member>
+        <member name="F:QtNetwork.QNetworkRequest.Attribute.FollowRedirectsAttribute">
+            <summary>Requests only, type: QMetaType::Bool (default: false) Indicates whether the Network Access API should automatically follow a HTTP redirect response or not. Currently redirects that are insecure, that is redirecting from "https" to "http" protocol, are not allowed. (This value was introduced in 5.6.)</summary>
         </member>
         <member name="F:QtNetwork.QNetworkRequest.Attribute.User">
             <summary>Special type. Additional information can be passed in QVariants with types ranging from User to UserMax. The default implementation of Network Access will ignore any request attributes in this range and it will not produce any attributes in this range in replies. The range is reserved for extensions of QNetworkAccessManager.</summary>
@@ -448,25 +466,37 @@
             </summary>
             <remarks>
             <para>The QHttpPart class holds a body part to be used inside a HTTP multipart MIME message (which is represented by the QHttpMultiPart class). A QHttpPart consists of a header block and a data block, which are separated by each other by two consecutive new lines. An example for one part would be:</para>
-            <para>Content-Type: text/plain</para>
-            <para>Content-Disposition: form-data; name=&quot;text&quot;</para>
             <para></para>
-            <para>here goes the body</para>
+            <para></para>
+            <para>  Content-Type: text/plain</para>
+            <para>  Content-Disposition: form-data; name=&quot;text&quot;</para>
+            <para></para>
+            <para>  here goes the body</para>
+            <para></para>
+            <para></para>
             <para>For setting headers, use setHeader() and setRawHeader(), which behave exactly like QNetworkRequest::setHeader() and QNetworkRequest::setRawHeader().</para>
             <para>For reading small pieces of data, use setBody(); for larger data blocks like e.g. images, use setBodyDevice(). The latter method saves memory by not copying the data internally, but reading directly from the device. This means that the device must be opened and readable at the moment when the multipart message containing the body part is sent on the network via QNetworkAccessManager::post().</para>
             <para>To construct a QHttpPart with a small body, consider the following snippet (this produces the data shown in the example above):</para>
-            <para>QHttpPart textPart;</para>
-            <para>textPart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant(&quot;text/plain&quot;));</para>
-            <para>textPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant(&quot;form-data; name=\&quot;text\&quot;&quot;));</para>
-            <para>textPart.setBody(&quot;here goes the body&quot;);</para>
+            <para></para>
+            <para></para>
+            <para>  QHttpPart textPart;</para>
+            <para>  textPart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant(&quot;text/plain&quot;));</para>
+            <para>  textPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant(&quot;form-data; name=\&quot;text\&quot;&quot;));</para>
+            <para>  textPart.setBody(&quot;here goes the body&quot;);</para>
+            <para></para>
+            <para></para>
             <para>To construct a QHttpPart reading from a device (e.g. a file), the following can be applied:</para>
-            <para>QHttpPart imagePart;</para>
-            <para>imagePart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant(&quot;image/jpeg&quot;));</para>
-            <para>imagePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant(&quot;form-data; name=\&quot;image\&quot;&quot;));</para>
-            <para>imagePart.setRawHeader(&quot;Content-ID&quot;, &quot;my@content.id&quot;); // add any headers you like via setRawHeader()</para>
-            <para>QFile *file = new QFile(&quot;image.jpg&quot;);</para>
-            <para>file-&gt;open(QIODevice::ReadOnly);</para>
-            <para>imagePart.setBodyDevice(file);</para>
+            <para></para>
+            <para></para>
+            <para>  QHttpPart imagePart;</para>
+            <para>  imagePart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant(&quot;image/jpeg&quot;));</para>
+            <para>  imagePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant(&quot;form-data; name=\&quot;image\&quot;&quot;));</para>
+            <para>  imagePart.setRawHeader(&quot;Content-ID&quot;, &quot;my@content.id&quot;); // add any headers you like via setRawHeader()</para>
+            <para>  QFile *file = new QFile(&quot;image.jpg&quot;);</para>
+            <para>  file-&gt;open(QIODevice::ReadOnly);</para>
+            <para>  imagePart.setBodyDevice(file);</para>
+            <para></para>
+            <para></para>
             <para>Be aware that QHttpPart does not take ownership of the device when set, so it is the developer's responsibility to destroy it when it is not needed anymore. A good idea might be to set the multipart message as parent object for the device, as documented at the documentation for QHttpMultiPart.</para>
             <para></para>
             <para>See also QHttpMultiPart and QNetworkAccessManager.</para>
@@ -532,30 +562,34 @@
             <remarks>
             <para>The QHttpMultiPart resembles a MIME multipart message, as described in RFC 2046, which is to be sent over HTTP. A multipart message consists of an arbitrary number of body parts (see QHttpPart), which are separated by a unique boundary. The boundary of the QHttpMultiPart is constructed with the string &quot;boundary_.oOo._&quot; followed by random characters, and provides enough uniqueness to make sure it does not occur inside the parts itself. If desired, the boundary can still be set via setBoundary().</para>
             <para>As an example, consider the following code snippet, which constructs a multipart message containing a text part followed by an image part:</para>
-            <para>QHttpMultiPart *multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType);</para>
             <para></para>
-            <para>QHttpPart textPart;</para>
-            <para>textPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant(&quot;form-data; name=\&quot;text\&quot;&quot;));</para>
-            <para>textPart.setBody(&quot;my text&quot;);</para>
             <para></para>
-            <para>QHttpPart imagePart;</para>
-            <para>imagePart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant(&quot;image/jpeg&quot;));</para>
-            <para>imagePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant(&quot;form-data; name=\&quot;image\&quot;&quot;));</para>
-            <para>QFile *file = new QFile(&quot;image.jpg&quot;);</para>
-            <para>file-&gt;open(QIODevice::ReadOnly);</para>
-            <para>imagePart.setBodyDevice(file);</para>
-            <para>file-&gt;setParent(multiPart); // we cannot delete the file now, so delete it with the multiPart</para>
+            <para>  QHttpMultiPart *multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType);</para>
             <para></para>
-            <para>multiPart-&gt;append(textPart);</para>
-            <para>multiPart-&gt;append(imagePart);</para>
+            <para>  QHttpPart textPart;</para>
+            <para>  textPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant(&quot;form-data; name=\&quot;text\&quot;&quot;));</para>
+            <para>  textPart.setBody(&quot;my text&quot;);</para>
             <para></para>
-            <para>QUrl url(&quot;http://my.server.tld&quot;);</para>
-            <para>QNetworkRequest request(url);</para>
+            <para>  QHttpPart imagePart;</para>
+            <para>  imagePart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant(&quot;image/jpeg&quot;));</para>
+            <para>  imagePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant(&quot;form-data; name=\&quot;image\&quot;&quot;));</para>
+            <para>  QFile *file = new QFile(&quot;image.jpg&quot;);</para>
+            <para>  file-&gt;open(QIODevice::ReadOnly);</para>
+            <para>  imagePart.setBodyDevice(file);</para>
+            <para>  file-&gt;setParent(multiPart); // we cannot delete the file now, so delete it with the multiPart</para>
             <para></para>
-            <para>QNetworkAccessManager manager;</para>
-            <para>QNetworkReply *reply = manager.post(request, multiPart);</para>
-            <para>multiPart-&gt;setParent(reply); // delete the multiPart with the reply</para>
-            <para>// here connect signals etc.</para>
+            <para>  multiPart-&gt;append(textPart);</para>
+            <para>  multiPart-&gt;append(imagePart);</para>
+            <para></para>
+            <para>  QUrl url(&quot;http://my.server.tld&quot;);</para>
+            <para>  QNetworkRequest request(url);</para>
+            <para></para>
+            <para>  QNetworkAccessManager manager;</para>
+            <para>  QNetworkReply *reply = manager.post(request, multiPart);</para>
+            <para>  multiPart-&gt;setParent(reply); // delete the multiPart with the reply</para>
+            <para>  // here connect signals etc.</para>
+            <para></para>
+            <para></para>
             <para></para>
             <para>See also QHttpPart and QNetworkAccessManager::post().</para>
             </remarks>
@@ -636,18 +670,22 @@
             <para>waitForDisconnected() blocks until the connection has closed.</para>
             <para></para>
             <para>We show an example:</para>
-            <para>    int numRead = 0, numReadTotal = 0;</para>
-            <para>    char buffer[50];</para>
             <para></para>
-            <para>    forever {</para>
-            <para>        numRead  = socket.read(buffer, 50);</para>
             <para></para>
-            <para>        // do whatever with array</para>
+            <para>      int numRead = 0, numReadTotal = 0;</para>
+            <para>      char buffer[50];</para>
             <para></para>
-            <para>        numReadTotal += numRead;</para>
-            <para>        if (numRead == 0 &amp;&amp; !socket.waitForReadyRead())</para>
-            <para>            break;</para>
-            <para>    }</para>
+            <para>      forever {</para>
+            <para>          numRead  = socket.read(buffer, 50);</para>
+            <para></para>
+            <para>          // do whatever with array</para>
+            <para></para>
+            <para>          numReadTotal += numRead;</para>
+            <para>          if (numRead == 0 &amp;&amp; !socket.waitForReadyRead())</para>
+            <para>              break;</para>
+            <para>      }</para>
+            <para></para>
+            <para></para>
             <para>If waitForReadyRead() returns false, the connection has been closed or an error has occurred.</para>
             <para>Programming with a blocking socket is radically different from programming with a non-blocking socket. A blocking socket doesn't require an event loop and typically leads to simpler code. However, in a GUI application, blocking sockets should only be used in non-GUI threads, to avoid freezing the user interface. See the fortuneclient and blockingfortuneclient examples for an overview of both approaches.</para>
             <para>Note: We discourage the use of the blocking functions together with signals. One of the two possibilities should be used.</para>
@@ -756,9 +794,13 @@
             <summary>
             <para>Waits until the socket is connected, up to msecs milliseconds. If the connection has been established, this function returns true; otherwise it returns false. In the case where it returns false, you can call error() to determine the cause of the error.</para>
             <para>The following example waits up to one second for a connection to be established:</para>
-            <para>socket-&gt;connectToHost(&quot;imap&quot;, 143);</para>
-            <para>if (socket-&gt;waitForConnected(1000))</para>
-            <para>    qDebug(&quot;Connected!&quot;);</para>
+            <para></para>
+            <para></para>
+            <para>  socket-&gt;connectToHost(&quot;imap&quot;, 143);</para>
+            <para>  if (socket-&gt;waitForConnected(1000))</para>
+            <para>      qDebug(&quot;Connected!&quot;);</para>
+            <para></para>
+            <para></para>
             <para>If msecs is -1, this function will not time out.</para>
             <para>Note: This function may wait slightly longer than msecs, depending on the time it takes to complete the host lookup.</para>
             <para>Note: Multiple calls to this functions do not accumulate the time. If the function times out, the connecting process will be aborted.</para>
@@ -788,10 +830,14 @@
             <summary>
             <para>Waits until the socket has disconnected, up to msecs milliseconds. If the connection has been disconnected, this function returns true; otherwise it returns false. In the case where it returns false, you can call error() to determine the cause of the error.</para>
             <para>The following example waits up to one second for a connection to be closed:</para>
-            <para>socket-&gt;disconnectFromHost();</para>
-            <para>    if (socket-&gt;state() == QAbstractSocket::UnconnectedState ||</para>
-            <para>        socket-&gt;waitForDisconnected(1000))</para>
-            <para>        qDebug(&quot;Disconnected!&quot;);</para>
+            <para></para>
+            <para></para>
+            <para>  socket-&gt;disconnectFromHost();</para>
+            <para>      if (socket-&gt;state() == QAbstractSocket::UnconnectedState ||</para>
+            <para>          socket-&gt;waitForDisconnected(1000))</para>
+            <para>          qDebug(&quot;Disconnected!&quot;);</para>
+            <para></para>
+            <para></para>
             <para>If msecs is -1, this function will not time out.</para>
             <para>Note: This function may fail randomly on Windows. Consider using the event loop and the disconnected() signal if your software will run on Windows.</para>
             <para>See also disconnectFromHost() and close().</para>
@@ -857,6 +903,17 @@
             <para>This signal is emitted after an error occurred. The socketError parameter describes the type of error that occurred.</para>
             <para>When this signal is emitted, the socket may not be ready for a reconnect attempt. In that case, attempts to reconnect should be done from the event loop. For example, use a QTimer::singleShot() with 0 as the timeout.</para>
             <para>QAbstractSocket::SocketError is not a registered metatype, so for queued connections, you will have to register it with Q_DECLARE_METATYPE() and qRegisterMetaType().</para>
+            <para></para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>error</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
+            <para></para>
+            <para></para>
+            <para>  connect(abstractSocket, static_cast&lt;void(QAbstractSocket::*)(QAbstractSocket::SocketError)&gt;(&amp;QAbstractSocket::error),</para>
+            <para>      [=](QAbstractSocket::SocketError socketError){ /* ... */ });</para>
+            <para></para>
+            <para></para>
             <para>See also error(), errorString(), and Creating Custom Qt Types.</para>
             </summary>
         </member>
@@ -900,7 +957,11 @@
             <para></para>
             <para>Sets the explicit network proxy for this socket to networkProxy.</para>
             <para>To disable the use of a proxy for this socket, use the QNetworkProxy::NoProxy proxy type:</para>
-            <para>socket-&gt;setProxy(QNetworkProxy::NoProxy);</para>
+            <para></para>
+            <para></para>
+            <para>  socket-&gt;setProxy(QNetworkProxy::NoProxy);</para>
+            <para></para>
+            <para></para>
             <para>The default value for the proxy is QNetworkProxy::DefaultProxy, which means the socket will use the application settings: if a proxy is set with QNetworkProxy::setApplicationProxy, it will use that; otherwise, if a factory is set with QNetworkProxyFactory::setApplicationProxyFactory, it will query that factory with type QNetworkProxyQuery::TcpSocket.</para>
             <para>This function was introduced in  Qt 4.1.</para>
             <para>See also proxy(), QNetworkProxy, and QNetworkProxyFactory::queryProxy().</para>
@@ -988,14 +1049,18 @@
             <para>Reimplemented from QIODevice::atEnd().</para>
             <para>Returns true if no more data is currently available for reading; otherwise returns false.</para>
             <para>This function is most commonly used when reading data from the socket in a loop. For example:</para>
-            <para> // This slot is connected to QAbstractSocket::readyRead()</para>
-            <para> void SocketClass::readyReadSlot()</para>
-            <para> {</para>
-            <para>     while (!socket.atEnd()) {</para>
-            <para>         QByteArray data = socket.read(100);</para>
-            <para>         ....</para>
-            <para>     }</para>
-            <para> }</para>
+            <para></para>
+            <para></para>
+            <para>   // This slot is connected to QAbstractSocket::readyRead()</para>
+            <para>   void SocketClass::readyReadSlot()</para>
+            <para>   {</para>
+            <para>       while (!socket.atEnd()) {</para>
+            <para>           QByteArray data = socket.read(100);</para>
+            <para>           ....</para>
+            <para>       }</para>
+            <para>   }</para>
+            <para></para>
+            <para></para>
             <para>See also bytesAvailable() and readyRead().</para>
             </summary>
         </member>
@@ -1234,7 +1299,7 @@
             <summary>Bind the address and port exclusively, so that no other services are allowed to rebind. By passing this option to QAbstractSocket::bind(), you are guaranteed that on successs, your service is the only one that listens to the address and port. No services are allowed to rebind, even if they pass ReuseAddressHint. This option provides more security than ShareAddress, but on certain operating systems, it requires you to run the server with administrator privileges. On Unix and OS X, not sharing is the default behavior for binding an address and port, so this option is ignored. On Windows, this option uses the SO_EXCLUSIVEADDRUSE socket option.</summary>
         </member>
         <member name="F:QtNetwork.QAbstractSocket.BindFlag.ReuseAddressHint">
-            <summary>Provides a hint to QAbstractSocket that it should try to rebind the service even if the address and port are already bound by another socket. On Windows, this is equivalent to the SO_REUSEADDR socket option. On Unix, this option is ignored.</summary>
+            <summary>Provides a hint to QAbstractSocket that it should try to rebind the service even if the address and port are already bound by another socket. On Windows and Unix, this is equivalent to the SO_REUSEADDR socket option.</summary>
         </member>
         <member name="T:QtNetwork.QAbstractSocket.PauseMode">
             <summary>
@@ -1391,6 +1456,9 @@
         </member>
         <member name="F:QtNetwork.QSsl.SslOption.SslOptionDisableSessionPersistence">
             <summary>Disables storing the SSL session in ASN.1 format as returned by QSslConfiguration::sessionTicket(). Enabling this feature adds memory overhead of approximately 1K per used session ticket.</summary>
+        </member>
+        <member name="F:QtNetwork.QSsl.SslOption.SslOptionDisableServerCipherPreference">
+            <summary>Disables selecting the cipher chosen based on the servers preferences rather than the order ciphers were sent by the client. This option is only relevant to server sockets, and is only honored by the OpenSSL backend.</summary>
         </member>
         <member name="T:QtNetwork.QSslCertificate">
             <summary>
@@ -1623,6 +1691,12 @@
             <para>This function was introduced in  Qt 4.4.</para>
             </summary>
         </member>
+        <member name="M:QtNetwork.QSslError.QHash(QtNetwork.QSslError,System.UInt32)">
+            <summary>
+            <para>Returns the hash value for the key, using seed to seed the calculation.</para>
+            <para>This function was introduced in  Qt 5.0.</para>
+            </summary>
+        </member>
         <member name="P:QtNetwork.QSslError.Error">
             <summary>
             <para>Returns the type of the error.</para>
@@ -1655,44 +1729,57 @@
             <para>QSslSocket establishes a secure, encrypted TCP connection you can use for transmitting encrypted data. It can operate in both client and server mode, and it supports modern SSL protocols, including SSLv3 and TLSv1_0. By default, QSslSocket uses TLSv1_0, but you can change the SSL protocol by calling setProtocol() as long as you do it before the handshake has started.</para>
             <para>SSL encryption operates on top of the existing TCP stream after the socket enters the ConnectedState. There are two simple ways to establish a secure connection using QSslSocket: With an immediate SSL handshake, or with a delayed SSL handshake occurring after the connection has been established in unencrypted mode.</para>
             <para>The most common way to use QSslSocket is to construct an object and start a secure connection by calling connectToHostEncrypted(). This method starts an immediate SSL handshake once the connection has been established.</para>
-            <para>QSslSocket *socket = new QSslSocket(this);</para>
-            <para>connect(socket, SIGNAL(encrypted()), this, SLOT(ready()));</para>
             <para></para>
-            <para>socket-&gt;connectToHostEncrypted(&quot;imap.example.com&quot;, 993);</para>
+            <para></para>
+            <para>  QSslSocket *socket = new QSslSocket(this);</para>
+            <para>  connect(socket, SIGNAL(encrypted()), this, SLOT(ready()));</para>
+            <para></para>
+            <para>  socket-&gt;connectToHostEncrypted(&quot;imap.example.com&quot;, 993);</para>
+            <para></para>
+            <para></para>
             <para>As with a plain QTcpSocket, QSslSocket enters the HostLookupState, ConnectingState, and finally the ConnectedState, if the connection is successful. The handshake then starts automatically, and if it succeeds, the encrypted() signal is emitted to indicate the socket has entered the encrypted state and is ready for use.</para>
             <para>Note that data can be written to the socket immediately after the return from connectToHostEncrypted() (i.e., before the encrypted() signal is emitted). The data is queued in QSslSocket until after the encrypted() signal is emitted.</para>
             <para>An example of using the delayed SSL handshake to secure an existing connection is the case where an SSL server secures an incoming connection. Suppose you create an SSL server class as a subclass of QTcpServer. You would override QTcpServer::incomingConnection() with something like the example below, which first constructs an instance of QSslSocket and then calls setSocketDescriptor() to set the new socket's descriptor to the existing one passed in. It then initiates the SSL handshake by calling startServerEncryption().</para>
-            <para>void SslServer::incomingConnection(qintptr socketDescriptor)</para>
-            <para>{</para>
-            <para>    QSslSocket *serverSocket = new QSslSocket;</para>
-            <para>    if (serverSocket-&gt;setSocketDescriptor(socketDescriptor)) {</para>
-            <para>        connect(serverSocket, SIGNAL(encrypted()), this, SLOT(ready()));</para>
-            <para>        serverSocket-&gt;startServerEncryption();</para>
-            <para>    } else {</para>
-            <para>        delete serverSocket;</para>
-            <para>    }</para>
-            <para>}</para>
+            <para></para>
+            <para></para>
+            <para>  void SslServer::incomingConnection(qintptr socketDescriptor)</para>
+            <para>  {</para>
+            <para>      QSslSocket *serverSocket = new QSslSocket;</para>
+            <para>      if (serverSocket-&gt;setSocketDescriptor(socketDescriptor)) {</para>
+            <para>          addPendingConnection(serverSocket);</para>
+            <para>          connect(serverSocket, &amp;QSslSocket::encrypted, this, &amp;SslServer::ready);</para>
+            <para>          serverSocket-&gt;startServerEncryption();</para>
+            <para>      } else {</para>
+            <para>          delete serverSocket;</para>
+            <para>      }</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>If an error occurs, QSslSocket emits the sslErrors() signal. In this case, if no action is taken to ignore the error(s), the connection is dropped. To continue, despite the occurrence of an error, you can call ignoreSslErrors(), either from within this slot after the error occurs, or any time after construction of the QSslSocket and before the connection is attempted. This will allow QSslSocket to ignore the errors it encounters when establishing the identity of the peer. Ignoring errors during an SSL handshake should be used with caution, since a fundamental characteristic of secure connections is that they should be established with a successful handshake.</para>
             <para>Once encrypted, you use QSslSocket as a regular QTcpSocket. When readyRead() is emitted, you can call read(), canReadLine() and readLine(), or getChar() to read decrypted data from QSslSocket's internal buffer, and you can call write() or putChar() to write data back to the peer. QSslSocket will automatically encrypt the written data for you, and emit encryptedBytesWritten() once the data has been written to the peer.</para>
             <para>As a convenience, QSslSocket supports QTcpSocket's blocking functions waitForConnected(), waitForReadyRead(), waitForBytesWritten(), and waitForDisconnected(). It also provides waitForEncrypted(), which will block the calling thread until an encrypted connection has been established.</para>
-            <para>QSslSocket socket;</para>
-            <para>socket.connectToHostEncrypted(&quot;http.example.com&quot;, 443);</para>
-            <para>if (!socket.waitForEncrypted()) {</para>
-            <para>    qDebug() &lt;&lt; socket.errorString();</para>
-            <para>    return false;</para>
-            <para>}</para>
             <para></para>
-            <para>socket.write(&quot;GET / HTTP/1.0\r\n\r\n&quot;);</para>
-            <para>while (socket.waitForReadyRead())</para>
-            <para>    qDebug() &lt;&lt; socket.readAll().data();</para>
+            <para></para>
+            <para>  QSslSocket socket;</para>
+            <para>  socket.connectToHostEncrypted(&quot;http.example.com&quot;, 443);</para>
+            <para>  if (!socket.waitForEncrypted()) {</para>
+            <para>      qDebug() &lt;&lt; socket.errorString();</para>
+            <para>      return false;</para>
+            <para>  }</para>
+            <para></para>
+            <para>  socket.write(&quot;GET / HTTP/1.0\r\n\r\n&quot;);</para>
+            <para>  while (socket.waitForReadyRead())</para>
+            <para>      qDebug() &lt;&lt; socket.readAll().data();</para>
+            <para></para>
+            <para></para>
             <para>QSslSocket provides an extensive, easy-to-use API for handling cryptographic ciphers, private keys, and local, peer, and Certification Authority (CA) certificates. It also provides an API for handling errors that occur during the handshake phase.</para>
             <para>The following features can also be customized:</para>
             <para></para>
             <para>The socket's cryptographic cipher suite can be customized before the handshake phase with setCiphers() and setDefaultCiphers().</para>
             <para>The socket's local certificate and private key can be customized before the handshake phase with setLocalCertificate() and setPrivateKey().</para>
-            <para>The CA certificate database can be extended and customized with addCaCertificate(), addCaCertificates(), setCaCertificates(), addDefaultCaCertificate(), addDefaultCaCertificates(), and setDefaultCaCertificates().</para>
+            <para>The CA certificate database can be extended and customized with addCaCertificate(), addCaCertificates(), addDefaultCaCertificate(), addDefaultCaCertificates(), and QSslConfiguration::defaultConfiguration().setCaCertificates().</para>
             <para></para>
-            <para>Note: If available, root certificates on Unix (excluding OS X) will be loaded on demand from the standard certificate directories. If you do not want to load root certificates on demand, you need to call either the static function setDefaultCaCertificates() before the first SSL handshake is made in your application, (e.g. via &quot;QSslSocket::setDefaultCaCertificates(QSslSocket::systemCaCertificates());&quot;), or call setCaCertificates() on your QSslSocket instance prior to the SSL handshake.</para>
+            <para>Note: If available, root certificates on Unix (excluding OS X) will be loaded on demand from the standard certificate directories. If you do not want to load root certificates on demand, you need to call either QSslConfiguration::defaultConfiguration().setCaCertificates() before the first SSL handshake is made in your application (for example, via passing QSslSocket::systemCaCertificates() to it), or call QSslConfiguration::defaultConfiguration()::setCaCertificates() on your QSslSocket instance prior to the SSL handshake.</para>
             <para>For more information about ciphers and certificates, refer to QSslCipher and QSslCertificate.</para>
             <para>This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit (http://www.openssl.org/).</para>
             <para>Note: Be aware of the difference between the bytesWritten() signal and the encryptedBytesWritten() signal. For a QTcpSocket, bytesWritten() will get emitted as soon as data has been written to the TCP socket. For a QSslSocket, bytesWritten() will get emitted when the data is being encrypted and encryptedBytesWritten() will get emitted as soon as data has been written to the TCP socket.</para>
@@ -1719,11 +1806,15 @@
             <para>QSslSocket first enters the HostLookupState. Then, after entering either the event loop or one of the waitFor...() functions, it enters the ConnectingState, emits connected(), and then initiates the SSL client handshake. At each state change, QSslSocket emits signal stateChanged().</para>
             <para>After initiating the SSL client handshake, if the identity of the peer can't be established, signal sslErrors() is emitted. If you want to ignore the errors and continue connecting, you must call ignoreSslErrors(), either from inside a slot function connected to the sslErrors() signal, or prior to entering encrypted mode. If ignoreSslErrors() is not called, the connection is dropped, signal disconnected() is emitted, and QSslSocket returns to the UnconnectedState.</para>
             <para>If the SSL handshake is successful, QSslSocket emits encrypted().</para>
-            <para>QSslSocket socket;</para>
-            <para>connect(&amp;socket, SIGNAL(encrypted()), receiver, SLOT(socketEncrypted()));</para>
             <para></para>
-            <para>socket.connectToHostEncrypted(&quot;imap&quot;, 993);</para>
-            <para>socket-&gt;write(&quot;1 CAPABILITY\r\n&quot;);</para>
+            <para></para>
+            <para>  QSslSocket socket;</para>
+            <para>  connect(&amp;socket, SIGNAL(encrypted()), receiver, SLOT(socketEncrypted()));</para>
+            <para></para>
+            <para>  socket.connectToHostEncrypted(&quot;imap&quot;, 993);</para>
+            <para>  socket-&gt;write(&quot;1 CAPABILITY\r\n&quot;);</para>
+            <para></para>
+            <para></para>
             <para>Note: The example above shows that text can be written to the socket immediately after requesting the encrypted connection, before the encrypted() signal has been emitted. In such cases, the text is queued in the object and written to the socket after the connection is established and the encrypted() signal has been emitted.</para>
             <para>The default for mode is ReadWrite.</para>
             <para>If you want to create a QSslSocket on the server side of a connection, you should instead call startServerEncryption() upon receiving the incoming connection through QTcpServer.</para>
@@ -1798,15 +1889,19 @@
             <summary>
             <para>Use QSslConfiguration::setCiphers() instead.</para>
             <para>Sets the cryptographic cipher suite for this socket to ciphers, which is a colon-separated list of cipher suite names. The ciphers are listed in order of preference, starting with the most preferred cipher. For example:</para>
-            <para>QSslSocket socket;</para>
-            <para>socket.setCiphers(&quot;DHE-RSA-AES256-SHA:DHE-DSS-AES256-SHA:AES256-SHA&quot;);</para>
+            <para></para>
+            <para></para>
+            <para>  QSslSocket socket;</para>
+            <para>  socket.setCiphers(&quot;DHE-RSA-AES256-SHA:DHE-DSS-AES256-SHA:AES256-SHA&quot;);</para>
+            <para></para>
+            <para></para>
             <para>Each cipher name in ciphers must be the name of a cipher in the list returned by supportedCiphers(). Restricting the cipher suite must be done before the handshake phase, where the session cipher is chosen.</para>
             <para>See also ciphers(), setDefaultCiphers(), and supportedCiphers().</para>
             </summary>
         </member>
         <member name="M:QtNetwork.QSslSocket.AddCaCertificates(System.String,QtNetwork.QSsl.EncodingFormat,QtCore.QRegExp.PatternSyntax)">
             <summary>
-            <para>Searches all files in the path for certificates encoded in the specified format and adds them to this socket's CA certificate database. path can be explicit, or it can contain wildcards in the format specified by syntax. Returns true if one or more certificates are added to the socket's CA certificate database; otherwise returns false.</para>
+            <para>Searches all files in the path for certificates encoded in the specified format and adds them to this socket's CA certificate database. path must be a file or a pattern matching one or more files, as specified by syntax. Returns true if one or more certificates are added to the socket's CA certificate database; otherwise returns false.</para>
             <para>The CA certificate database is used by the socket during the handshake phase to validate the peer's certificate.</para>
             <para>For more precise control, use addCaCertificate().</para>
             <para>See also addCaCertificate() and QSslCertificate::fromPath().</para>
@@ -1830,9 +1925,13 @@
             <summary>
             <para>Waits until the socket has completed the SSL handshake and has emitted encrypted(), or msecs milliseconds, whichever comes first. If encrypted() has been emitted, this function returns true; otherwise (e.g., the socket is disconnected, or the SSL handshake fails), false is returned.</para>
             <para>The following example waits up to one second for the socket to be encrypted:</para>
-            <para>socket-&gt;connectToHostEncrypted(&quot;imap&quot;, 993);</para>
-            <para>if (socket-&gt;waitForEncrypted(1000))</para>
-            <para>    qDebug(&quot;Encrypted!&quot;);</para>
+            <para></para>
+            <para></para>
+            <para>  socket-&gt;connectToHostEncrypted(&quot;imap&quot;, 993);</para>
+            <para>  if (socket-&gt;waitForEncrypted(1000))</para>
+            <para>      qDebug(&quot;Encrypted!&quot;);</para>
+            <para></para>
+            <para></para>
             <para>If msecs is -1, this function will not time out.</para>
             <para>See also startClientEncryption(), startServerEncryption(), encrypted(), and isEncrypted().</para>
             </summary>
@@ -2197,9 +2296,13 @@
             <para>State in QSslConfiguration objects cannot be changed.</para>
             <para>QSslConfiguration can be used with QSslSocket and the Network Access API.</para>
             <para>Note that changing settings in QSslConfiguration is not enough to change the settings in the related SSL connection. You must call setSslConfiguration on a modified QSslConfiguration object to achieve that. The following example illustrates how to change the protocol to TLSv1_0 in a QSslSocket object:</para>
-            <para>QSslConfiguration config = sslSocket.sslConfiguration();</para>
-            <para>config.setProtocol(QSsl::TlsV1_0);</para>
-            <para>sslSocket.setSslConfiguration(config);</para>
+            <para></para>
+            <para></para>
+            <para>  QSslConfiguration config = sslSocket.sslConfiguration();</para>
+            <para>  config.setProtocol(QSsl::TlsV1_0);</para>
+            <para>  sslSocket.setSslConfiguration(config);</para>
+            <para></para>
+            <para></para>
             <para></para>
             <para>See also QSsl::SslProtocol, QSslCertificate, QSslCipher, QSslKey, QSslSocket, QNetworkAccessManager, QSslSocket::sslConfiguration(), and QSslSocket::setSslConfiguration().</para>
             </remarks>
@@ -2413,16 +2516,24 @@
             <para>The QSslPreSharedKeyAuthenticator class is used by an SSL socket to provide the required authentication data in a pre shared key (PSK) ciphersuite.</para>
             <para>In a PSK handshake, the client must derive a key, which must match the key set on the server. The exact algorithm of deriving the key depends on the application; however, for this purpose, the server may send an identity hint to the client. This hint, combined with other information (for instance a passphrase), is then used by the client to construct the shared key.</para>
             <para>The QSslPreSharedKeyAuthenticator provides means to client applications for completing the PSK handshake. The client application needs to connect a slot to the QSslSocket::preSharedKeyAuthenticationRequired() signal:</para>
-            <para>connect(socket, &amp;QSslSocket::preSharedKeyAuthenticationRequired,</para>
-            <para>        this, &amp;AuthManager::handlePreSharedKeyAuthentication);</para>
-            <para>The signal carries a QSslPreSharedKeyAuthenticator object containing the identity hint the server sent to the client, and which must be filled with the corresponding client identity and the derived key:</para>
-            <para>void AuthManager::handlePreSharedKeyAuthentication(QSslPreSharedKeyAuthenticator *authenticator)</para>
-            <para>{</para>
-            <para>    authenticator-&gt;setIdentity(&quot;My Qt App&quot;);</para>
             <para></para>
-            <para>    const QByteArray key = deriveKey(authenticator-&gt;identityHint(), passphrase);</para>
-            <para>    authenticator-&gt;setPreSharedKey(key);</para>
-            <para>}</para>
+            <para></para>
+            <para>  connect(socket, &amp;QSslSocket::preSharedKeyAuthenticationRequired,</para>
+            <para>          this, &amp;AuthManager::handlePreSharedKeyAuthentication);</para>
+            <para></para>
+            <para></para>
+            <para>The signal carries a QSslPreSharedKeyAuthenticator object containing the identity hint the server sent to the client, and which must be filled with the corresponding client identity and the derived key:</para>
+            <para></para>
+            <para></para>
+            <para>  void AuthManager::handlePreSharedKeyAuthentication(QSslPreSharedKeyAuthenticator *authenticator)</para>
+            <para>  {</para>
+            <para>      authenticator-&gt;setIdentity(&quot;My Qt App&quot;);</para>
+            <para></para>
+            <para>      const QByteArray key = deriveKey(authenticator-&gt;identityHint(), passphrase);</para>
+            <para>      authenticator-&gt;setPreSharedKey(key);</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>Note: PSK ciphersuites are supported only when using OpenSSL 1.0.1 (or greater) as the SSL backend.</para>
             <para></para>
             <para>See also QSslSocket.</para>
@@ -2498,25 +2609,33 @@
             <para>The Network Access API is constructed around one QNetworkAccessManager object, which holds the common configuration and settings for the requests it sends. It contains the proxy and cache configuration, as well as the signals related to such issues, and reply signals that can be used to monitor the progress of a network operation. One QNetworkAccessManager should be enough for the whole Qt application.</para>
             <para>Once a QNetworkAccessManager object has been created, the application can use it to send requests over the network. A group of standard functions are supplied that take a request and optional data, and each return a QNetworkReply object. The returned object is used to obtain any data returned in response to the corresponding request.</para>
             <para>A simple download off the network could be accomplished with:</para>
-            <para>QNetworkAccessManager *manager = new QNetworkAccessManager(this);</para>
-            <para>connect(manager, SIGNAL(finished(QNetworkReply*)),</para>
-            <para>        this, SLOT(replyFinished(QNetworkReply*)));</para>
             <para></para>
-            <para>manager-&gt;get(QNetworkRequest(QUrl(&quot;http://qt-project.org&quot;)));</para>
+            <para></para>
+            <para>  QNetworkAccessManager *manager = new QNetworkAccessManager(this);</para>
+            <para>  connect(manager, SIGNAL(finished(QNetworkReply*)),</para>
+            <para>          this, SLOT(replyFinished(QNetworkReply*)));</para>
+            <para></para>
+            <para>  manager-&gt;get(QNetworkRequest(QUrl(&quot;http://qt-project.org&quot;)));</para>
+            <para></para>
+            <para></para>
             <para>QNetworkAccessManager has an asynchronous API. When the replyFinished slot above is called, the parameter it takes is the QNetworkReply object containing the downloaded data as well as meta-data (headers, etc.).</para>
             <para>Note: After the request has finished, it is the responsibility of the user to delete the QNetworkReply object at an appropriate time. Do not directly delete it inside the slot connected to finished(). You can use the deleteLater() function.</para>
             <para>Note: QNetworkAccessManager queues the requests it receives. The number of requests executed in parallel is dependent on the protocol. Currently, for the HTTP protocol on desktop platforms, 6 requests are executed in parallel for one host/port combination.</para>
             <para>A more involved example, assuming the manager is already existent, can be:</para>
-            <para>QNetworkRequest request;</para>
-            <para>request.setUrl(QUrl(&quot;http://qt-project.org&quot;));</para>
-            <para>request.setRawHeader(&quot;User-Agent&quot;, &quot;MyOwnBrowser 1.0&quot;);</para>
             <para></para>
-            <para>QNetworkReply *reply = manager-&gt;get(request);</para>
-            <para>connect(reply, SIGNAL(readyRead()), this, SLOT(slotReadyRead()));</para>
-            <para>connect(reply, SIGNAL(error(QNetworkReply::NetworkError)),</para>
-            <para>        this, SLOT(slotError(QNetworkReply::NetworkError)));</para>
-            <para>connect(reply, SIGNAL(sslErrors(QList&lt;QSslError&gt;)),</para>
-            <para>        this, SLOT(slotSslErrors(QList&lt;QSslError&gt;)));</para>
+            <para></para>
+            <para>  QNetworkRequest request;</para>
+            <para>  request.setUrl(QUrl(&quot;http://qt-project.org&quot;));</para>
+            <para>  request.setRawHeader(&quot;User-Agent&quot;, &quot;MyOwnBrowser 1.0&quot;);</para>
+            <para></para>
+            <para>  QNetworkReply *reply = manager-&gt;get(request);</para>
+            <para>  connect(reply, SIGNAL(readyRead()), this, SLOT(slotReadyRead()));</para>
+            <para>  connect(reply, SIGNAL(error(QNetworkReply::NetworkError)),</para>
+            <para>          this, SLOT(slotError(QNetworkReply::NetworkError)));</para>
+            <para>  connect(reply, SIGNAL(sslErrors(QList&lt;QSslError&gt;)),</para>
+            <para>          this, SLOT(slotSslErrors(QList&lt;QSslError&gt;)));</para>
+            <para></para>
+            <para></para>
             <para></para>
             <para>Network and Roaming Support</para>
             <para>With the addition of the Bearer Management API to Qt 4.7 QNetworkAccessManager gained the ability to manage network connections. QNetworkAccessManager can start the network interface if the device is offline and terminates the interface if the current process is the last one to use the uplink. Note that some platforms utilize grace periods from when the last application stops using a uplink until the system actually terminates the connectivity link. Roaming is equally transparent. Any queued/pending network requests are automatically transferred to the new access point.</para>
@@ -2695,23 +2814,8 @@
         </member>
         <member name="E:QtNetwork.QNetworkAccessManager.NetworkAccessibleChanged">
             <summary>
-            <para>This property holds whether the network is currently accessible via this network access manager.</para>
-            <para>If the network is not accessible the network access manager will not process any new network requests, all such requests will fail with an error. Requests with URLs with the file:// scheme will still be processed.</para>
-            <para>By default the value of this property reflects the physical state of the device. Applications may override it to disable all network requests via this network access manager by calling</para>
-            <para>networkAccessManager-&gt;setNetworkAccessible(QNetworkAccessManager::NotAccessible);</para>
-            <para>Network requests can be reenabled again by calling</para>
-            <para>networkAccessManager-&gt;setNetworkAccessible(QNetworkAccessManager::Accessible);</para>
-            <para>Note: Calling setNetworkAccessible() does not change the network state.</para>
-            <para>This property was introduced in  Qt 4.7.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> NetworkAccessibility 	networkAccessible() const</para>
-            <para> void 	setNetworkAccessible(NetworkAccessibility accessible)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	networkAccessibleChanged(QNetworkAccessManager::NetworkAccessibility accessible)</para>
-            <para></para>
+            <para>This signal is emitted when the value of the networkAccessible property changes. accessible is the new network accessibility.</para>
+            <para>Note: Notifier signal for property networkAccessible. </para>
             </summary>
         </member>
         <member name="P:QtNetwork.QNetworkAccessManager.Proxy">
@@ -2783,10 +2887,18 @@
             <para>The network configuration is used to create and open a network session before any request that requires network access is process. If no network configuration is explicitly set via this function the network configuration returned by QNetworkConfigurationManager::defaultConfiguration() will be used.</para>
             <para>To restore the default network configuration set the network configuration to the value returned from QNetworkConfigurationManager::defaultConfiguration().</para>
             <para>Setting a network configuration means that the QNetworkAccessManager instance will only be using the specified one. In particular, if the default network configuration changes (upon e.g. Wifi being available), this new configuration needs to be enabled manually if desired.</para>
-            <para>QNetworkConfigurationManager manager;</para>
-            <para>networkAccessManager-&gt;setConfiguration(manager.defaultConfiguration());</para>
+            <para></para>
+            <para></para>
+            <para>  QNetworkConfigurationManager manager;</para>
+            <para>  networkAccessManager-&gt;setConfiguration(manager.defaultConfiguration());</para>
+            <para></para>
+            <para></para>
             <para>If an invalid network configuration is set, a network session will not be created. In this case network requests will be processed regardless, but may fail. For example:</para>
-            <para>networkAccessManager-&gt;setConfiguration(QNetworkConfiguration());</para>
+            <para></para>
+            <para></para>
+            <para>  networkAccessManager-&gt;setConfiguration(QNetworkConfiguration());</para>
+            <para></para>
+            <para></para>
             <para>This function was introduced in  Qt 4.7.</para>
             <para>See also configuration() and QNetworkSession.</para>
             </summary>
@@ -2796,9 +2908,17 @@
             <para>This property holds whether the network is currently accessible via this network access manager.</para>
             <para>If the network is not accessible the network access manager will not process any new network requests, all such requests will fail with an error. Requests with URLs with the file:// scheme will still be processed.</para>
             <para>By default the value of this property reflects the physical state of the device. Applications may override it to disable all network requests via this network access manager by calling</para>
-            <para>networkAccessManager-&gt;setNetworkAccessible(QNetworkAccessManager::NotAccessible);</para>
-            <para>Network requests can be reenabled again by calling</para>
-            <para>networkAccessManager-&gt;setNetworkAccessible(QNetworkAccessManager::Accessible);</para>
+            <para></para>
+            <para></para>
+            <para>  networkAccessManager-&gt;setNetworkAccessible(QNetworkAccessManager::NotAccessible);</para>
+            <para></para>
+            <para></para>
+            <para>Network requests can be re-enabled again, and this property will resume to reflect the actual device state by calling</para>
+            <para></para>
+            <para></para>
+            <para>  networkAccessManager-&gt;setNetworkAccessible(QNetworkAccessManager::Accessible);</para>
+            <para></para>
+            <para></para>
             <para>Note: Calling setNetworkAccessible() does not change the network state.</para>
             <para>This property was introduced in  Qt 4.7.</para>
             </summary>
@@ -3078,29 +3198,39 @@
             <para>The QNetworkDiskCache class provides a very basic disk cache.</para>
             </summary>
             <remarks>
-            <para>QNetworkDiskCache stores each url in its own file inside of the cacheDirectory using QDataStream. Files with a text MimeType are compressed using qCompress. Each cache file starts with &quot;cache_&quot; and ends in &quot;.cache&quot;. Data is written to disk only in insert() and updateMetaData().</para>
+            <para>QNetworkDiskCache stores each url in its own file inside of the cacheDirectory using QDataStream. Files with a text MimeType are compressed using qCompress. Data is written to disk only in insert() and updateMetaData().</para>
             <para>Currently you cannot share the same cache files with more than one disk cache.</para>
             <para>QNetworkDiskCache by default limits the amount of space that the cache will use on the system to 50MB.</para>
             <para>Note you have to set the cache directory before it will work.</para>
             <para>A network disk cache can be enabled by:</para>
-            <para>QNetworkAccessManager *manager = new QNetworkAccessManager(this);</para>
-            <para>QNetworkDiskCache *diskCache = new QNetworkDiskCache(this);</para>
-            <para>diskCache-&gt;setCacheDirectory(&quot;cacheDir&quot;);</para>
-            <para>manager-&gt;setCache(diskCache);</para>
-            <para>When sending requests, to control the preference of when to use the cache and when to use the network, consider the following:</para>
-            <para>// do a normal request (preferred from network, as this is the default)</para>
-            <para>QNetworkRequest request(QUrl(QString(&quot;http://qt-project.org&quot;)));</para>
-            <para>manager-&gt;get(request);</para>
             <para></para>
-            <para>// do a request preferred from cache</para>
-            <para>QNetworkRequest request2(QUrl(QString(&quot;http://qt-project.org&quot;)));</para>
-            <para>request2.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);</para>
-            <para>manager-&gt;get(request2);</para>
+            <para></para>
+            <para>  QNetworkAccessManager *manager = new QNetworkAccessManager(this);</para>
+            <para>  QNetworkDiskCache *diskCache = new QNetworkDiskCache(this);</para>
+            <para>  diskCache-&gt;setCacheDirectory(&quot;cacheDir&quot;);</para>
+            <para>  manager-&gt;setCache(diskCache);</para>
+            <para></para>
+            <para></para>
+            <para>When sending requests, to control the preference of when to use the cache and when to use the network, consider the following:</para>
+            <para></para>
+            <para></para>
+            <para>  // do a normal request (preferred from network, as this is the default)</para>
+            <para>  QNetworkRequest request(QUrl(QString(&quot;http://qt-project.org&quot;)));</para>
+            <para>  manager-&gt;get(request);</para>
+            <para></para>
+            <para>  // do a request preferred from cache</para>
+            <para>  QNetworkRequest request2(QUrl(QString(&quot;http://qt-project.org&quot;)));</para>
+            <para>  request2.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);</para>
+            <para>  manager-&gt;get(request2);</para>
+            <para></para>
+            <para></para>
             <para>To check whether the response came from the cache or from the network, the following can be applied:</para>
-            <para>void replyFinished(QNetworkReply *reply) {</para>
-            <para>    QVariant fromCache = reply-&gt;attribute(QNetworkRequest::SourceIsFromCacheAttribute);</para>
-            <para>    qDebug() &lt;&lt; &quot;page from cache?&quot; &lt;&lt; fromCache.toBool();</para>
-            <para>}</para>
+            <para></para>
+            <para></para>
+            <para>  void replyFinished(QNetworkReply *reply) {</para>
+            <para>      QVariant fromCache = reply-&gt;attribute(QNetworkRequest::SourceIsFromCacheAttribute);</para>
+            <para>      qDebug() &lt;&lt; &quot;page from cache?&quot; &lt;&lt; fromCache.toBool();</para>
+            <para>  }</para>
             </remarks>
         </member>
         <member name="M:QtNetwork.QNetworkDiskCache.#ctor(QtCore.QObject)">
@@ -3313,6 +3443,17 @@
             <para>This signal is emitted when the reply detects an error in processing. The finished() signal will probably follow, indicating that the connection is over.</para>
             <para>The code parameter contains the code of the error that was detected. Call errorString() to obtain a textual representation of the error condition.</para>
             <para>Note: Do not delete the object in the slot connected to this signal. Use deleteLater().</para>
+            <para></para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>error</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
+            <para></para>
+            <para></para>
+            <para>  connect(networkReply, static_cast&lt;void(QNetworkReply::*)(QNetworkReply::NetworkError)&gt;(&amp;QNetworkReply::error),</para>
+            <para>      [=](QNetworkReply::NetworkError code){ /* ... */ });</para>
+            <para></para>
+            <para></para>
             <para>See also error() and errorString().</para>
             </summary>
         </member>
@@ -3332,6 +3473,13 @@
             <para>Note: The authenticator object is owned by the reply and must not be deleted by the application.</para>
             <para>This function was introduced in  Qt 5.5.</para>
             <para>See also QSslPreSharedKeyAuthenticator.</para>
+            </summary>
+        </member>
+        <member name="E:QtNetwork.QNetworkReply.Redirected">
+            <summary>
+            <para>This signal is emitted if the QNetworkRequest::FollowRedirectsAttribute was set in the request and the server responded with a 3xx status (specifically 301, 302, 303, 305 or 307 status code) with a valid url in the location header, indicating a HTTP redirect. The url parameter contains the new redirect url as returned by the server in the location header.</para>
+            <para>This function was introduced in  Qt 5.6.</para>
+            <para>See also QNetworkRequest::FollowRedirectsAttribute.</para>
             </summary>
         </member>
         <member name="E:QtNetwork.QNetworkReply.UploadProgress">
@@ -3406,8 +3554,8 @@
         </member>
         <member name="P:QtNetwork.QNetworkReply.Url">
             <summary>
-            <para>Returns the URL of the content downloaded or uploaded. Note that the URL may be different from that of the original request.</para>
-            <para>See also request(), setUrl(), and QNetworkRequest::url().</para>
+            <para>Returns the URL of the content downloaded or uploaded. Note that the URL may be different from that of the original request. If the QNetworkRequest::FollowRedirectsAttribute was set in the request, then this function returns the current url that the network API is accessing, i.e the url emitted in the QNetworkReply::redirected signal.</para>
+            <para>See also request(), setUrl(), QNetworkRequest::url(), and redirected().</para>
             <para></para>
             <para>Sets the URL being processed to be url. Normally, the URL matches that of the request that was posted, but for a variety of reasons it can be different (for example, a file path being made absolute or canonical).</para>
             <para>See also url(), request(), and QNetworkRequest::url().</para>
@@ -3467,6 +3615,12 @@
         </member>
         <member name="F:QtNetwork.QNetworkReply.NetworkError.BackgroundRequestNotAllowedError">
             <summary>the background request is not currently allowed due to platform policy.</summary>
+        </member>
+        <member name="F:QtNetwork.QNetworkReply.NetworkError.TooManyRedirectsError">
+            <summary>while following redirects, the maximum limit was reached. The limit is by default set to 50 or as set by QNetworkRequest::setMaxRedirectsAllowed(). (This value was introduced in 5.6.)</summary>
+        </member>
+        <member name="F:QtNetwork.QNetworkReply.NetworkError.InsecureRedirectError">
+            <summary>while following redirects, the network access API detected a redirect from a encrypted protocol (https) to an unencrypted one (http). (This value was introduced in 5.6.)</summary>
         </member>
         <member name="F:QtNetwork.QNetworkReply.NetworkError.UnknownNetworkError">
             <summary>an unknown network-related error was detected</summary>
@@ -3837,12 +3991,16 @@
             <summary>
             <para>Returns true if the system is considered to be connected to another device via an active network interface; otherwise returns false.</para>
             <para>This is equivalent to the following code snippet:</para>
-            <para>QNetworkConfigurationManager mgr;</para>
-            <para>QList&lt;QNetworkConfiguration&gt; activeConfigs = mgr.allConfigurations(QNetworkConfiguration::Active)</para>
-            <para>if (activeConfigs.count() &gt; 0)</para>
-            <para>    Q_ASSERT(mgr.isOnline())</para>
-            <para>else</para>
-            <para>    Q_ASSERT(!mgr.isOnline())</para>
+            <para></para>
+            <para></para>
+            <para>  QNetworkConfigurationManager mgr;</para>
+            <para>  QList&lt;QNetworkConfiguration&gt; activeConfigs = mgr.allConfigurations(QNetworkConfiguration::Active);</para>
+            <para>  if (activeConfigs.count() &gt; 0)</para>
+            <para>      Q_ASSERT(mgr.isOnline());</para>
+            <para>  else</para>
+            <para>      Q_ASSERT(!mgr.isOnline());</para>
+            <para></para>
+            <para></para>
             <para>See also onlineStateChanged().</para>
             </summary>
         </member>
@@ -3889,7 +4047,7 @@
         </member>
         <member name="M:QtNetwork.QHostAddress.#ctor">
             <summary>
-            <para>Constructs a host address object with the IP address 0.0.0.0.</para>
+            <para>Constructs a null host address object, i.e. an address which is not valid for any host or interface.</para>
             <para>See also clear().</para>
             </summary>
         </member>
@@ -3976,12 +4134,16 @@
         <member name="M:QtNetwork.QHostAddress.ToIPv6Address">
             <summary>
             <para>Returns the IPv6 address as a Q_IPV6ADDR structure. The structure consists of 16 unsigned characters.</para>
-            <para>Q_IPV6ADDR addr = hostAddr.toIPv6Address();</para>
-            <para>// addr contains 16 unsigned characters</para>
             <para></para>
-            <para>for (int i = 0; i &lt; 16; ++i) {</para>
-            <para>    // process addr[i]</para>
-            <para>}</para>
+            <para></para>
+            <para>  Q_IPV6ADDR addr = hostAddr.toIPv6Address();</para>
+            <para>  // addr contains 16 unsigned characters</para>
+            <para></para>
+            <para>  for (int i = 0; i &lt; 16; ++i) {</para>
+            <para>      // process addr[i]</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>This value is valid if the protocol() is IPv6Protocol. If the protocol is IPv4Protocol, then the address is returned an an IPv4 mapped IPv6 address. (RFC4291)</para>
             <para>See also toString().</para>
             </summary>
@@ -4036,16 +4198,15 @@
             <para></para>
             <para>Node-local: Addresses that are only used for communicating with services on the same interface (e.g., the loopback interface &quot;::1&quot;).</para>
             <para>Link-local: Addresses that are local to the network interface (link). There is always one link-local address for each IPv6 interface on your host. Link-local addresses (&quot;fe80...&quot;) are generated from the MAC address of the local network adaptor, and are not guaranteed to be unique.</para>
-            <para>Site-local: Addresses that are local to the site / private network (e.g., the company intranet). Site-local addresses (&quot;fec0...&quot;) are usually distributed by the site router, and are not guaranteed to be unique outside of the local site.</para>
             <para>Global: For globally routable addresses, such as public servers on the Internet.</para>
             <para></para>
             <para>When using a link-local or site-local address for IPv6 connections, you must specify the scope ID. The scope ID for a link-local address is usually the same as the interface name (e.g., &quot;eth0&quot;, &quot;en1&quot;) or number (e.g., &quot;1&quot;, &quot;2&quot;).</para>
             <para>This function was introduced in  Qt 4.1.</para>
-            <para>See also setScopeId().</para>
+            <para>See also setScopeId(), QNetworkInterface, and QNetworkInterface::interfaceFromName.</para>
             <para></para>
-            <para>Sets the IPv6 scope ID of the address to id. If the address protocol is not IPv6, this function does nothing.</para>
+            <para>Sets the IPv6 scope ID of the address to id. If the address protocol is not IPv6, this function does nothing. The scope ID may be set as an interface name (such as &quot;eth0&quot; or &quot;en1&quot;) or as an integer representing the interface index. If id is an interface name, QtNetwork will convert to an interface index using QNetworkInterface::interfaceIndexFromName() before calling the operating system networking functions.</para>
             <para>This function was introduced in  Qt 4.1.</para>
-            <para>See also scopeId().</para>
+            <para>See also scopeId(), QNetworkInterface, and QNetworkInterface::interfaceFromName.</para>
             </summary>
         </member>
         <member name="P:QtNetwork.QHostAddress.Protocol">
@@ -4062,6 +4223,12 @@
             <summary>
             <para>returns true if the address is the IPv6 loopback address, or any of the IPv4 loopback addresses.</para>
             <para>This function was introduced in  Qt 5.0.</para>
+            </summary>
+        </member>
+        <member name="P:QtNetwork.QHostAddress.IsMulticast">
+            <summary>
+            <para>Returns true if the address is an IPv4 or IPv6 multicast address, false otherwise.</para>
+            <para>This function was introduced in  Qt 5.6.</para>
             </summary>
         </member>
         <member name="F:QtNetwork.QHostAddress.SpecialAddress.Null">
@@ -4193,6 +4360,7 @@
         <member name="M:QtNetwork.QNetworkInterface.InterfaceFromName(System.String)">
             <summary>
             <para>Returns a QNetworkInterface object for the interface named name. If no such interface exists, this function returns an invalid QNetworkInterface object.</para>
+            <para>The string name may be either an actual interface name (such as &quot;eth0&quot; or &quot;en1&quot;) or an interface index in string form (&quot;1&quot;, &quot;2&quot;, etc.).</para>
             <para>See also name() and isValid().</para>
             </summary>
         </member>
@@ -4294,18 +4462,22 @@
             <para></para>
             <para> KeyDescription</para>
             <para>ActiveConfiguration	If the session isOpen() this property returns the identifier of the QNetworkConfiguration that is used by this session; otherwise an empty string.The main purpose of this key is to determine which Internet access point is used if the session is based on a ServiceNetwork. The following code snippet highlights the difference:</para>
-            <para>QNetworkConfigurationManager mgr;</para>
-            <para>QNetworkConfiguration ap = mgr.defaultConfiguration();</para>
-            <para>QNetworkSession *session = new QNetworkSession(ap);</para>
-            <para>... //code activates session</para>
             <para></para>
-            <para>QString ident = session-&gt;sessionProperty(&quot;ActiveConfiguration&quot;).toString();</para>
-            <para>if ( ap.type() == QNetworkConfiguration::ServiceNetwork ) {</para>
-            <para>    Q_ASSERT( ap.identifier() != ident );</para>
-            <para>    Q_ASSERT( ap.children().contains( mgr.configurationFromIdentifier(ident) ) );</para>
-            <para>} else if ( ap.type() == QNetworkConfiguration::InternetAccessPoint ) {</para>
-            <para>    Q_ASSERT( ap.identifier() == ident );</para>
-            <para>}</para>
+            <para></para>
+            <para>  QNetworkConfigurationManager mgr;</para>
+            <para>  QNetworkConfiguration ap = mgr.defaultConfiguration();</para>
+            <para>  QNetworkSession *session = new QNetworkSession(ap);</para>
+            <para>  ... //code activates session</para>
+            <para></para>
+            <para>  QString ident = session-&gt;sessionProperty(&quot;ActiveConfiguration&quot;).toString();</para>
+            <para>  if ( ap.type() == QNetworkConfiguration::ServiceNetwork ) {</para>
+            <para>      Q_ASSERT( ap.identifier() != ident );</para>
+            <para>      Q_ASSERT( ap.children().contains( mgr.configurationFromIdentifier(ident) ) );</para>
+            <para>  } else if ( ap.type() == QNetworkConfiguration::InternetAccessPoint ) {</para>
+            <para>      Q_ASSERT( ap.identifier() == ident );</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para></para>
             <para>UserChoiceConfiguration	If the session isOpen() and is bound to a QNetworkConfiguration of type UserChoice, this property returns the identifier of the QNetworkConfiguration that the configuration resolved to when open() was called; otherwise an empty string.The purpose of this key is to determine the real QNetworkConfiguration that the session is using. This key is different from ActiveConfiguration in that this key may return an identifier for either a service network or a Internet access points configurations, whereas ActiveConfiguration always returns identifiers to Internet access points configurations.</para>
             <para></para>
@@ -4327,9 +4499,13 @@
             <summary>
             <para>Waits until the session has been opened, up to msecs milliseconds. If the session has been opened, this function returns true; otherwise it returns false. In the case where it returns false, you can call error() to determine the cause of the error.</para>
             <para>The following example waits up to one second for the session to be opened:</para>
-            <para>session-&gt;open();</para>
-            <para>if (session-&gt;waitForOpened(1000))</para>
-            <para>    qDebug(&quot;Open!&quot;);</para>
+            <para></para>
+            <para></para>
+            <para>  session-&gt;open();</para>
+            <para>  if (session-&gt;waitForOpened(1000))</para>
+            <para>      qDebug(&quot;Open!&quot;);</para>
+            <para></para>
+            <para></para>
             <para>If msecs is -1, this function will not time out.</para>
             <para>See also open() and error().</para>
             </summary>
@@ -4402,6 +4578,17 @@
         <member name="E:QtNetwork.QNetworkSession.ErrorError">
             <summary>
             <para>This signal is emitted after an error occurred. The error parameter describes the error that occurred.</para>
+            <para></para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>error</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
+            <para></para>
+            <para></para>
+            <para>  connect(networkSession, static_cast&lt;void(QNetworkSession::*)(QNetworkSession::SessionError)&gt;(&amp;QNetworkSession::error),</para>
+            <para>      [=](QNetworkSession::SessionError error){ /* ... */ });</para>
+            <para></para>
+            <para></para>
             <para>See also error() and errorString().</para>
             </summary>
         </member>
@@ -4881,34 +5068,42 @@
             <remarks>
             <para>QDnsLookup uses the mechanisms provided by the operating system to perform DNS lookups. To perform a lookup you need to specify a name and type then invoke the lookup() slot. The finished() signal will be emitted upon completion.</para>
             <para>For example, you can determine which servers an XMPP chat client should connect to for a given domain with:</para>
-            <para>void MyObject::lookupServers()</para>
-            <para>{</para>
-            <para>    // Create a DNS lookup.</para>
-            <para>    dns = new QDnsLookup(this);</para>
-            <para>    connect(dns, SIGNAL(finished()),</para>
-            <para>            this, SLOT(handleServers()));</para>
             <para></para>
-            <para>    // Find the XMPP servers for gmail.com</para>
-            <para>    dns-&gt;setType(QDnsLookup::SRV);</para>
-            <para>    dns-&gt;setName(&quot;_xmpp-client._tcp.gmail.com&quot;);</para>
-            <para>    dns-&gt;lookup();</para>
-            <para>}</para>
+            <para></para>
+            <para>  void MyObject::lookupServers()</para>
+            <para>  {</para>
+            <para>      // Create a DNS lookup.</para>
+            <para>      dns = new QDnsLookup(this);</para>
+            <para>      connect(dns, SIGNAL(finished()),</para>
+            <para>              this, SLOT(handleServers()));</para>
+            <para></para>
+            <para>      // Find the XMPP servers for gmail.com</para>
+            <para>      dns-&gt;setType(QDnsLookup::SRV);</para>
+            <para>      dns-&gt;setName(&quot;_xmpp-client._tcp.gmail.com&quot;);</para>
+            <para>      dns-&gt;lookup();</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>Once the request finishes you can handle the results with:</para>
-            <para>void MyObject::handleServers()</para>
-            <para>{</para>
-            <para>    // Check the lookup succeeded.</para>
-            <para>    if (dns-&gt;error() != QDnsLookup::NoError) {</para>
-            <para>        qWarning(&quot;DNS lookup failed&quot;);</para>
-            <para>        dns-&gt;deleteLater();</para>
-            <para>        return;</para>
-            <para>    }</para>
             <para></para>
-            <para>    // Handle the results.</para>
-            <para>    foreach (const QDnsServiceRecord &amp;record, dns-&gt;serviceRecords()) {</para>
-            <para>        ...</para>
-            <para>    }</para>
-            <para>    dns-&gt;deleteLater();</para>
-            <para>}</para>
+            <para></para>
+            <para>  void MyObject::handleServers()</para>
+            <para>  {</para>
+            <para>      // Check the lookup succeeded.</para>
+            <para>      if (dns-&gt;error() != QDnsLookup::NoError) {</para>
+            <para>          qWarning(&quot;DNS lookup failed&quot;);</para>
+            <para>          dns-&gt;deleteLater();</para>
+            <para>          return;</para>
+            <para>      }</para>
+            <para></para>
+            <para>      // Handle the results.</para>
+            <para>      foreach (const QDnsServiceRecord &amp;record, dns-&gt;serviceRecords()) {</para>
+            <para>          ...</para>
+            <para>      }</para>
+            <para>      dns-&gt;deleteLater();</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>Note: If you simply want to find the IP address(es) associated with a host name, or the host name associated with an IP address you should use QHostInfo instead.</para>
             </remarks>
         </member>
@@ -4943,44 +5138,20 @@
         </member>
         <member name="E:QtNetwork.QDnsLookup.Finished">
             <summary>
-            <para>This property holds the type of error that occurred if the DNS lookup failed, or NoError.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> Error 	error() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	finished()</para>
-            <para></para>
+            <para>This signal is emitted when the reply has finished processing.</para>
+            <para>Note: Notifier signal for property error. Notifier signal for property errorString. </para>
             </summary>
         </member>
         <member name="E:QtNetwork.QDnsLookup.NameChanged">
             <summary>
-            <para>This property holds the name to lookup.</para>
-            <para>Note: The name will be encoded using IDNA, which means it's unsuitable for querying SRV records compatible with the DNS-SD specification.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> QString 	name() const</para>
-            <para> void 	setName(const QString &amp; name)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	nameChanged(const QString &amp; name)</para>
-            <para></para>
+            <para>This signal is emitted when the lookup name changes. name is the new lookup name.</para>
+            <para>Note: Notifier signal for property name. </para>
             </summary>
         </member>
         <member name="E:QtNetwork.QDnsLookup.TypeChanged">
             <summary>
-            <para>This property holds the type of DNS lookup.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> Type 	type() const</para>
-            <para> void 	setType(QDnsLookup::Type)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	typeChanged(Type type)</para>
-            <para></para>
+            <para>This signal is emitted when the lookup type changes. type is the new lookup type.</para>
+            <para>Note: Notifier signal for property type. </para>
             </summary>
         </member>
         <member name="E:QtNetwork.QDnsLookup.NameserverChanged">
@@ -4989,11 +5160,11 @@
             <para>Access functions:</para>
             <para></para>
             <para> QHostAddress 	nameserver() const</para>
-            <para> void 	setNameserver(const QHostAddress &amp; nameserver)</para>
+            <para> void 	setNameserver(const QHostAddress &amp;nameserver)</para>
             <para></para>
             <para>Notifier signal:</para>
             <para></para>
-            <para> void 	nameserverChanged(const QHostAddress &amp; nameserver)</para>
+            <para> void 	nameserverChanged(const QHostAddress &amp;nameserver)</para>
             <para></para>
             </summary>
         </member>
@@ -5097,17 +5268,25 @@
             <para>QHostInfo uses the lookup mechanisms provided by the operating system to find the IP address(es) associated with a host name, or the host name associated with an IP address. The class provides two static convenience functions: one that works asynchronously and emits a signal once the host is found, and one that blocks and returns a QHostInfo object.</para>
             <para>To look up a host's IP addresses asynchronously, call lookupHost(), which takes the host name or IP address, a receiver object, and a slot signature as arguments and returns an ID. You can abort the lookup by calling abortHostLookup() with the lookup ID.</para>
             <para>Example:</para>
-            <para>// To find the IP address of qt-project.org</para>
-            <para>QHostInfo::lookupHost(&quot;qt-project.org&quot;,</para>
-            <para>                      this, SLOT(printResults(QHostInfo)));</para>
             <para></para>
-            <para>// To find the host name for 4.2.2.1</para>
-            <para>QHostInfo::lookupHost(&quot;4.2.2.1&quot;,</para>
-            <para>                      this, SLOT(printResults(QHostInfo)));</para>
+            <para></para>
+            <para>  // To find the IP address of qt-project.org</para>
+            <para>  QHostInfo::lookupHost(&quot;qt-project.org&quot;,</para>
+            <para>                        this, SLOT(printResults(QHostInfo)));</para>
+            <para></para>
+            <para>  // To find the host name for 4.2.2.1</para>
+            <para>  QHostInfo::lookupHost(&quot;4.2.2.1&quot;,</para>
+            <para>                        this, SLOT(printResults(QHostInfo)));</para>
+            <para></para>
+            <para></para>
             <para>The slot is invoked when the results are ready. The results are stored in a QHostInfo object. Call addresses() to get the list of IP addresses for the host, and hostName() to get the host name that was looked up.</para>
             <para>If the lookup failed, error() returns the type of error that occurred. errorString() gives a human-readable description of the lookup error.</para>
             <para>If you want a blocking lookup, use the QHostInfo::fromName() function:</para>
-            <para>QHostInfo info = QHostInfo::fromName(&quot;qt-project.org&quot;);</para>
+            <para></para>
+            <para></para>
+            <para>  QHostInfo info = QHostInfo::fromName(&quot;qt-project.org&quot;);</para>
+            <para></para>
+            <para></para>
             <para>QHostInfo supports Internationalized Domain Names (IDNs) through the IDNA and Punycode standards.</para>
             <para>To retrieve the name of the local host, use the static QHostInfo::localHostName() function.</para>
             <para>Note: Since Qt 4.6.1 QHostInfo is using multiple threads for DNS lookup instead of one dedicated DNS thread. This improves performance, but also changes the order of signal emissions when using lookupHost() compared to previous versions of Qt.</para>
@@ -5131,22 +5310,34 @@
             <summary>
             <para>Looks up the IP address(es) associated with host name name, and returns an ID for the lookup. When the result of the lookup is ready, the slot or signal member in receiver is called with a QHostInfo argument. The QHostInfo object can then be inspected to get the results of the lookup.</para>
             <para>The lookup is performed by a single function call, for example:</para>
-            <para>QHostInfo::lookupHost(&quot;www.kde.org&quot;,</para>
-            <para>                      this, SLOT(lookedUp(QHostInfo)));</para>
-            <para>The implementation of the slot prints basic information about the addresses returned by the lookup, or reports an error if it failed:</para>
-            <para>void MyWidget::lookedUp(const QHostInfo &amp;host)</para>
-            <para>{</para>
-            <para>    if (host.error() != QHostInfo::NoError) {</para>
-            <para>        qDebug() &lt;&lt; &quot;Lookup failed:&quot; &lt;&lt; host.errorString();</para>
-            <para>        return;</para>
-            <para>    }</para>
             <para></para>
-            <para>    foreach (const QHostAddress &amp;address, host.addresses())</para>
-            <para>        qDebug() &lt;&lt; &quot;Found address:&quot; &lt;&lt; address.toString();</para>
-            <para>}</para>
+            <para></para>
+            <para>  QHostInfo::lookupHost(&quot;www.kde.org&quot;,</para>
+            <para>                        this, SLOT(lookedUp(QHostInfo)));</para>
+            <para></para>
+            <para></para>
+            <para>The implementation of the slot prints basic information about the addresses returned by the lookup, or reports an error if it failed:</para>
+            <para></para>
+            <para></para>
+            <para>  void MyWidget::lookedUp(const QHostInfo &amp;host)</para>
+            <para>  {</para>
+            <para>      if (host.error() != QHostInfo::NoError) {</para>
+            <para>          qDebug() &lt;&lt; &quot;Lookup failed:&quot; &lt;&lt; host.errorString();</para>
+            <para>          return;</para>
+            <para>      }</para>
+            <para></para>
+            <para>      foreach (const QHostAddress &amp;address, host.addresses())</para>
+            <para>          qDebug() &lt;&lt; &quot;Found address:&quot; &lt;&lt; address.toString();</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>If you pass a literal IP address to name instead of a host name, QHostInfo will search for the domain name for the IP (i.e., QHostInfo will perform a reverse lookup). On success, the resulting QHostInfo will contain both the resolved domain name and IP addresses for the host name. Example:</para>
-            <para>QHostInfo::lookupHost(&quot;4.2.2.1&quot;,</para>
-            <para>                      this, SLOT(lookedUp(QHostInfo)));</para>
+            <para></para>
+            <para></para>
+            <para>  QHostInfo::lookupHost(&quot;4.2.2.1&quot;,</para>
+            <para>                        this, SLOT(lookedUp(QHostInfo)));</para>
+            <para></para>
+            <para></para>
             <para>Note: There is no guarantee on the order the signals will be emitted if you start multiple requests with lookupHost().</para>
             <para>See also abortHostLookup(), addresses(), error(), and fromName().</para>
             </summary>
@@ -5202,8 +5393,10 @@
         </member>
         <member name="P:QtNetwork.QHostInfo.LocalHostName">
             <summary>
-            <para>Returns the host name of this machine.</para>
-            <para>See also hostName().</para>
+            <para>Returns this machine's host name, if one is configured. Note that hostnames are not guaranteed to be globally unique, especially if they were configured automatically.</para>
+            <para>This function does not guarantee the returned host name is a Fully Qualified Domain Name (FQDN). For that, use fromName() to resolve the returned name to an FQDN.</para>
+            <para>This function returns the same as QSysInfo::machineHostName().</para>
+            <para>See also hostName() and localDomainName().</para>
             </summary>
         </member>
         <member name="P:QtNetwork.QHostInfo.LocalDomainName">
@@ -5283,11 +5476,6 @@
             <para>See also localPort().</para>
             </summary>
         </member>
-        <member name="M:QtNetwork.QNetworkProxyQuery.#ctor(QtNetwork.QNetworkProxyQuery)">
-            <summary>
-            <para>Constructs a QNetworkProxyQuery object that is a copy of other.</para>
-            </summary>
-        </member>
         <member name="M:QtNetwork.QNetworkProxyQuery.#ctor(QtNetwork.QNetworkConfiguration,QtCore.QUrl,QtNetwork.QNetworkProxyQuery.QueryType)">
             <summary>
             <para>Constructs a QNetworkProxyQuery with the URL requestUrl and sets the query type to queryType. The specified networkConfiguration is used to resolve the proxy settings.</para>
@@ -5305,6 +5493,11 @@
             <para>Constructs a QNetworkProxyQuery of type queryType and sets the protocol tag to be protocolTag. This constructor is suitable for QNetworkProxyQuery::TcpSocket queries because it sets the local port number to bindPort. The specified networkConfiguration is used to resolve the proxy settings.</para>
             <para>Note that bindPort is of type quint16 to indicate the exact port number that is requested. The value of -1 (unknown) is not allowed in this context.</para>
             <para>See also localPort() and networkConfiguration().</para>
+            </summary>
+        </member>
+        <member name="M:QtNetwork.QNetworkProxyQuery.#ctor(QtNetwork.QNetworkProxyQuery)">
+            <summary>
+            <para>Constructs a QNetworkProxyQuery object that is a copy of other.</para>
             </summary>
         </member>
         <member name="M:QtNetwork.QNetworkProxyQuery.Swap(QtNetwork.QNetworkProxyQuery)">
@@ -5419,15 +5612,23 @@
             </summary>
             <remarks>
             <para>QNetworkProxy provides the method for configuring network layer proxy support to the Qt network classes. The currently supported classes are QAbstractSocket, QTcpSocket, QUdpSocket, QTcpServer and QNetworkAccessManager. The proxy support is designed to be as transparent as possible. This means that existing network-enabled applications that you have written should automatically support network proxy using the following code.</para>
-            <para>QNetworkProxy proxy;</para>
-            <para>proxy.setType(QNetworkProxy::Socks5Proxy);</para>
-            <para>proxy.setHostName(&quot;proxy.example.com&quot;);</para>
-            <para>proxy.setPort(1080);</para>
-            <para>proxy.setUser(&quot;username&quot;);</para>
-            <para>proxy.setPassword(&quot;password&quot;);</para>
-            <para>QNetworkProxy::setApplicationProxy(proxy);</para>
+            <para></para>
+            <para></para>
+            <para>  QNetworkProxy proxy;</para>
+            <para>  proxy.setType(QNetworkProxy::Socks5Proxy);</para>
+            <para>  proxy.setHostName(&quot;proxy.example.com&quot;);</para>
+            <para>  proxy.setPort(1080);</para>
+            <para>  proxy.setUser(&quot;username&quot;);</para>
+            <para>  proxy.setPassword(&quot;password&quot;);</para>
+            <para>  QNetworkProxy::setApplicationProxy(proxy);</para>
+            <para></para>
+            <para></para>
             <para>An alternative to setting an application wide proxy is to specify the proxy for individual sockets using QAbstractSocket::setProxy() and QTcpServer::setProxy(). In this way, it is possible to disable the use of a proxy for specific sockets using the following code:</para>
-            <para>serverSocket-&gt;setProxy(QNetworkProxy::NoProxy);</para>
+            <para></para>
+            <para></para>
+            <para>  serverSocket-&gt;setProxy(QNetworkProxy::NoProxy);</para>
+            <para></para>
+            <para></para>
             <para>Network proxy is not used if the address used in connectToHost(), bind() or listen() is equivalent to QHostAddress::LocalHost or QHostAddress::LocalHostIPv6.</para>
             <para>Each type of proxy support has certain restrictions associated with it. You should read the ProxyType documentation carefully before selecting a proxy type to use.</para>
             <para>Note: Changes made to currently connected sockets do not take effect. If you need to change a connected socket, you should reconnect it.</para>
@@ -5510,7 +5711,11 @@
             <summary>
             <para>Sets the header headerName to be of value headerValue. If headerName corresponds to a known header (see QNetworkRequest::KnownHeaders), the raw format will be parsed and the corresponding &quot;cooked&quot; header will be set as well.</para>
             <para>For example:</para>
-            <para>request.setRawHeader(QByteArray(&quot;Last-Modified&quot;), QByteArray(&quot;Sun, 06 Nov 1994 08:49:37 GMT&quot;));</para>
+            <para></para>
+            <para></para>
+            <para>  request.setRawHeader(QByteArray(&quot;Last-Modified&quot;), QByteArray(&quot;Sun, 06 Nov 1994 08:49:37 GMT&quot;));</para>
+            <para></para>
+            <para></para>
             <para>will also set the known header LastModifiedHeader to be the QDateTime object of the parsed date.</para>
             <para>Note: Setting the same header twice overrides the previous setting. To accomplish the behaviour of multiple HTTP headers of the same name, you should concatenate the two values, separating them with a comma (&quot;,&quot;) and set one single raw header.</para>
             <para>If the proxy is not of type HttpProxy or HttpCachingProxy this has no effect.</para>
@@ -5722,7 +5927,7 @@
         </member>
         <member name="M:QtNetwork.QLocalServer.Close">
             <summary>
-            <para>Stop listening for incoming connections. Existing connections are not effected, but any new connections will be refused.</para>
+            <para>Stop listening for incoming connections. Existing connections are not affected, but any new connections will be refused.</para>
             <para>See also isListening() and listen().</para>
             </summary>
         </member>
@@ -5954,9 +6159,13 @@
             <summary>
             <para>Waits until the socket is connected, up to msecs milliseconds. If the connection has been established, this function returns true; otherwise it returns false. In the case where it returns false, you can call error() to determine the cause of the error.</para>
             <para>The following example waits up to one second for a connection to be established:</para>
-            <para>socket-&gt;connectToServer(&quot;market&quot;);</para>
-            <para>if (socket-&gt;waitForConnected(1000))</para>
-            <para>    qDebug(&quot;Connected!&quot;);</para>
+            <para></para>
+            <para></para>
+            <para>  socket-&gt;connectToServer(&quot;market&quot;);</para>
+            <para>  if (socket-&gt;waitForConnected(1000))</para>
+            <para>      qDebug(&quot;Connected!&quot;);</para>
+            <para></para>
+            <para></para>
             <para>If msecs is -1, this function will not time out.</para>
             <para>See also connectToServer() and connected().</para>
             </summary>
@@ -5965,9 +6174,13 @@
             <summary>
             <para>Waits until the socket has disconnected, up to msecs milliseconds. If the connection has been disconnected, this function returns true; otherwise it returns false. In the case where it returns false, you can call error() to determine the cause of the error.</para>
             <para>The following example waits up to one second for a connection to be closed:</para>
-            <para>socket-&gt;disconnectFromServer();</para>
-            <para>if (socket-&gt;waitForDisconnected(1000))</para>
-            <para>    qDebug(&quot;Disconnected!&quot;);</para>
+            <para></para>
+            <para></para>
+            <para>  socket-&gt;disconnectFromServer();</para>
+            <para>  if (socket-&gt;waitForDisconnected(1000))</para>
+            <para>      qDebug(&quot;Disconnected!&quot;);</para>
+            <para></para>
+            <para></para>
             <para>If msecs is -1, this function will not time out.</para>
             <para>See also disconnectFromServer() and close().</para>
             </summary>
@@ -6006,6 +6219,17 @@
             <summary>
             <para>This signal is emitted after an error occurred. The socketError parameter describes the type of error that occurred.</para>
             <para>QLocalSocket::LocalSocketError is not a registered metatype, so for queued connections, you will have to register it with Q_DECLARE_METATYPE() and qRegisterMetaType().</para>
+            <para></para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>error</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
+            <para></para>
+            <para></para>
+            <para>  connect(localSocket, static_cast&lt;void(QLocalSocket::*)(QLocalSocket::LocalSocketError)&gt;(&amp;QLocalSocket::error),</para>
+            <para>      [=](QLocalSocket::LocalSocketError socketError){ /* ... */ });</para>
+            <para></para>
+            <para></para>
             <para>See also error(), errorString(), and Creating Custom Qt Types.</para>
             </summary>
         </member>
@@ -6221,6 +6445,7 @@
             <para>The base implementation creates a QTcpSocket, sets the socket descriptor and then stores the QTcpSocket in an internal list of pending connections. Finally newConnection() is emitted.</para>
             <para>Reimplement this function to alter the server's behavior when a connection is available.</para>
             <para>If this server is using QNetworkProxy then the socketDescriptor may not be usable with native socket functions, and should only be used with QTcpSocket::setSocketDescriptor().</para>
+            <para>Note: If another socket is created in the reimplementation of this method, it needs to be added to the Pending Connections mechanism by calling addPendingConnection().</para>
             <para>Note: If you want to handle an incoming connection as a new QTcpSocket object in another thread you have to pass the socketDescriptor to the other thread and create the QTcpSocket object there and use its setSocketDescriptor() method.</para>
             <para>See also newConnection(), nextPendingConnection(), and addPendingConnection().</para>
             </summary>
@@ -6280,7 +6505,11 @@
             <para></para>
             <para>Sets the explicit network proxy for this socket to networkProxy.</para>
             <para>To disable the use of a proxy for this socket, use the QNetworkProxy::NoProxy proxy type:</para>
-            <para>server-&gt;setProxy(QNetworkProxy::NoProxy);</para>
+            <para></para>
+            <para></para>
+            <para>  server-&gt;setProxy(QNetworkProxy::NoProxy);</para>
+            <para></para>
+            <para></para>
             <para>This function was introduced in  Qt 4.1.</para>
             <para>See also proxy() and QNetworkProxy.</para>
             </summary>
@@ -6348,29 +6577,33 @@
             <para>The readyRead() signal is emitted whenever datagrams arrive. In that case, hasPendingDatagrams() returns true. Call pendingDatagramSize() to obtain the size of the first pending datagram, and readDatagram() to read it.</para>
             <para>Note: An incoming datagram should be read when you receive the readyRead() signal, otherwise this signal will not be emitted for the next datagram.</para>
             <para>Example:</para>
-            <para>void Server::initSocket()</para>
-            <para>{</para>
-            <para>    udpSocket = new QUdpSocket(this);</para>
-            <para>    udpSocket-&gt;bind(QHostAddress::LocalHost, 7755);</para>
             <para></para>
-            <para>    connect(udpSocket, SIGNAL(readyRead()),</para>
-            <para>            this, SLOT(readPendingDatagrams()));</para>
-            <para>}</para>
             <para></para>
-            <para>void Server::readPendingDatagrams()</para>
-            <para>{</para>
-            <para>    while (udpSocket-&gt;hasPendingDatagrams()) {</para>
-            <para>        QByteArray datagram;</para>
-            <para>        datagram.resize(udpSocket-&gt;pendingDatagramSize());</para>
-            <para>        QHostAddress sender;</para>
-            <para>        quint16 senderPort;</para>
+            <para>  void Server::initSocket()</para>
+            <para>  {</para>
+            <para>      udpSocket = new QUdpSocket(this);</para>
+            <para>      udpSocket-&gt;bind(QHostAddress::LocalHost, 7755);</para>
             <para></para>
-            <para>        udpSocket-&gt;readDatagram(datagram.data(), datagram.size(),</para>
-            <para>                                &amp;sender, &amp;senderPort);</para>
+            <para>      connect(udpSocket, SIGNAL(readyRead()),</para>
+            <para>              this, SLOT(readPendingDatagrams()));</para>
+            <para>  }</para>
             <para></para>
-            <para>        processTheDatagram(datagram);</para>
-            <para>    }</para>
-            <para>}</para>
+            <para>  void Server::readPendingDatagrams()</para>
+            <para>  {</para>
+            <para>      while (udpSocket-&gt;hasPendingDatagrams()) {</para>
+            <para>          QByteArray datagram;</para>
+            <para>          datagram.resize(udpSocket-&gt;pendingDatagramSize());</para>
+            <para>          QHostAddress sender;</para>
+            <para>          quint16 senderPort;</para>
+            <para></para>
+            <para>          udpSocket-&gt;readDatagram(datagram.data(), datagram.size(),</para>
+            <para>                                  &amp;sender, &amp;senderPort);</para>
+            <para></para>
+            <para>          processTheDatagram(datagram);</para>
+            <para>      }</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>QUdpSocket also supports UDP multicast. Use joinMulticastGroup() and leaveMulticastGroup() to control group membership, and QAbstractSocket::MulticastTtlOption and QAbstractSocket::MulticastLoopbackOption to set the TTL and loopback socket options. Use setMulticastInterface() to control the outgoing interface for multicast datagrams, and multicastInterface() to query it.</para>
             <para>With QUdpSocket, you can also establish a virtual connection to a UDP server using connectToHost() and then use read() and write() to exchange datagrams without specifying the receiver for each datagram.</para>
             <para>The Broadcast Sender, Broadcast Receiver, Multicast Sender, and Multicast Receiver examples illustrate how to use QUdpSocket in applications.</para>
@@ -6561,6 +6794,7 @@
             <summary>
             <para>Constructs a QSslCipher object for the cipher determined by name. The constructor accepts only supported ciphers (i.e., the name must identify a cipher in the list of ciphers returned by QSslSocket::supportedCiphers()).</para>
             <para>You can call isNull() after construction to check if name correctly identified a supported cipher.</para>
+            <para>This function was introduced in  Qt 5.3.</para>
             </summary>
         </member>
         <member name="M:QtNetwork.QSslCipher.#ctor(System.String,QtNetwork.QSsl.SslProtocol)">

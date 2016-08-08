@@ -15,25 +15,33 @@
             <para>Use id() and setId() to get and set the id of the NDEF record.</para>
             <para>Use payload() and setPayload() to get and set the NDEF record payload. isEmpty() can be used to test if the payload is empty.</para>
             <para>QNdefRecord is an implicitly shared class. This means you can efficiently convert between QNdefRecord and specialized record classes. The isRecordType() template function can be used to test if a conversion is possible. The following example shows how to test if a QNdefRecord is an NFC RTD Text record and extract the text information from it.</para>
-            <para>if (record.isRecordType&lt;QNdefNfcTextRecord&gt;()) {</para>
-            <para>    QNdefNfcTextRecord textRecord(record);</para>
             <para></para>
-            <para>    qDebug() &lt;&lt; textRecord.text();</para>
-            <para>}</para>
+            <para></para>
+            <para>  if (record.isRecordType&lt;QNdefNfcTextRecord&gt;()) {</para>
+            <para>      QNdefNfcTextRecord textRecord(record);</para>
+            <para></para>
+            <para>      qDebug() &lt;&lt; textRecord.text();</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para></para>
             <para>Creating Specialized NDEF Record Classes</para>
             <para>Specialized NDEF record classes can be easily created with the Q_DECLARE_NDEF_RECORD() and Q_DECLARE_ISRECORDTYPE_FOR_NDEF_RECORD() macros. The following example shows the class declaration of the hypothetical example.com:f record type that encapsulates a single int property foo.</para>
-            <para>class ExampleComF : public QNdefRecord</para>
-            <para>{</para>
-            <para>public:</para>
-            <para>    Q_DECLARE_NDEF_RECORD(ExampleComF, QNdefRecord::ExternalRtd, &quot;example.com:f&quot;,</para>
-            <para>                          QByteArray(sizeof(int), char(0)))</para>
             <para></para>
-            <para>    int foo() const;</para>
-            <para>    void setFoo(int v);</para>
-            <para>};</para>
             <para></para>
-            <para>Q_DECLARE_ISRECORDTYPE_FOR_NDEF_RECORD(ExampleComF, QNdefRecord::ExternalRtd, &quot;example.com:f&quot;)</para>
+            <para>  class ExampleComF : public QNdefRecord</para>
+            <para>  {</para>
+            <para>  public:</para>
+            <para>      Q_DECLARE_NDEF_RECORD(ExampleComF, QNdefRecord::ExternalRtd, &quot;example.com:f&quot;,</para>
+            <para>                            QByteArray(sizeof(int), char(0)))</para>
+            <para></para>
+            <para>      int foo() const;</para>
+            <para>      void setFoo(int v);</para>
+            <para>  };</para>
+            <para></para>
+            <para>  Q_DECLARE_ISRECORDTYPE_FOR_NDEF_RECORD(ExampleComF, QNdefRecord::ExternalRtd, &quot;example.com:f&quot;)</para>
+            <para></para>
+            <para></para>
             <para>The developer only needs to provide implementations for the foo() and setFoo() functions that parse and set the contents of the NDEF record's payload.</para>
             </remarks>
         </member>
@@ -149,14 +157,20 @@
             <remarks>
             <para>The QNdefFilter encapsulates the structure of an NDEF message and is used by QNearFieldManager::registerNdefMessageHandler() to match NDEF message that have a particular structure.</para>
             <para>The following filter matches NDEF messages that contain a single smart poster record:</para>
-            <para>QNdefFilter filter;</para>
-            <para>filter.append(QNdefRecord::NfcRtd, &quot;Sp&quot;);</para>
+            <para></para>
+            <para></para>
+            <para>  QNdefFilter filter;</para>
+            <para>  filter.append(QNdefRecord::NfcRtd, &quot;Sp&quot;);</para>
+            <para></para>
+            <para></para>
             <para>The following filter matches NDEF messages that contain a URI, a localized piece of text and an optional JPEG image. The order of the records must be in the order specified:</para>
-            <para>QNdefFilter filter;</para>
-            <para>filter.setOrderMatch(true);</para>
-            <para>filter.appendRecord(QNdefRecord::NfcRtd, &quot;U&quot;);</para>
-            <para>filter.appendRecord&lt;QNdefNfcTextRecord&gt;();</para>
-            <para>filter.appendRecord(QNdefRecord::Mime, &quot;image/jpeg&quot;, 0, 1);</para>
+            <para></para>
+            <para></para>
+            <para>  QNdefFilter filter;</para>
+            <para>  filter.setOrderMatch(true);</para>
+            <para>  filter.appendRecord(QNdefRecord::NfcRtd, &quot;U&quot;);</para>
+            <para>  filter.appendRecord&lt;QNdefNfcTextRecord&gt;();</para>
+            <para>  filter.appendRecord(QNdefRecord::Mime, &quot;image/jpeg&quot;, 0, 1);</para>
             </remarks>
         </member>
         <member name="M:QtNfc.QNdefFilter.#ctor">
@@ -731,17 +745,14 @@
             <para>Automatically launching NDEF message handlers</para>
             <para>On some platforms it is possible to pre-register an application to receive NDEF messages matching a given criteria. This is useful to get the system to automatically launch your application when a matching NDEF message is received. This removes the need to have the user manually launch NDEF handling applications, prior to touching a tag, or to have those applications always running and using system resources.</para>
             <para>The process of registering the handler is different for each platform. Please refer to the platform documentation on how such a registration may be done. If the application has been registered as an NDEF message handler, the application only needs to call the registerNdefMessageHandler() function:</para>
-            <para>QNearFieldManager *manager = new QNearFieldManager(this);</para>
-            <para>manager-&gt;registerNdefMessageHandler(this,</para>
-            <para>            SLOT(handleNdefMessage(QNdefMessage,QNearFieldTarget*)));</para>
-            <para>On BlackBerry the registration for NDEF message handlers is done over the Invocation Framework. This means that the application has to set an invoke target in the bar descriptor xml file when using registerNdefMessageHandler().</para>
-            <para>&lt;invoke-target id=&quot;com.myapp.id&quot;&gt;</para>
-            <para>    &lt;type&gt;APPLICATION&lt;/type&gt;</para>
-            <para>    &lt;filter&gt;</para>
-            <para>        &lt;action&gt;bb.action.OPEN&lt;/action&gt;</para>
-            <para>        &lt;mime-type&gt;application/vnd.rim.nfc.ndef&lt;/mime-type&gt;</para>
-            <para>    &lt;/filter&gt;</para>
-            <para>&lt;/invoke-target&gt;</para>
+            <para></para>
+            <para></para>
+            <para>  QNearFieldManager *manager = new QNearFieldManager(this);</para>
+            <para>  manager-&gt;registerNdefMessageHandler(this,</para>
+            <para>              SLOT(handleNdefMessage(QNdefMessage,QNearFieldTarget*)));</para>
+            <para></para>
+            <para></para>
+            <para>Automatically launching NDEF message handlers is supported on Android.</para>
             <para></para>
             <para>NFC on Linux</para>
             <para>The Linux NFC project provides software to support NFC on Linux platforms. The neard daemon will allow access to the supported hardware via DBus interfaces. QtNfc requires neard version 0.14 which can be built from source or installed via the appropriate Linux package manager. Not all API features are currently supported. To allow QtNfc to access the DBus interfaces the neard daemon has to be running. In case of problems debug output can be enabled by enabling categorized logging for 'qt.nfc.neard'.</para>
@@ -1000,27 +1011,39 @@
             <para>The subclass must be registered with QML.</para>
             <para></para>
             <para>For example the declaration of such a class may look like the following.</para>
-            <para>class QQmlNdefFooRecord : public QQmlNdefRecord</para>
-            <para>{</para>
-            <para>    Q_OBJECT</para>
             <para></para>
-            <para>    Q_PROPERTY(int foo READ foo WRITE setFoo NOTIFY fooChanged)</para>
             <para></para>
-            <para>public:</para>
-            <para>    explicit QQmlNdefFooRecord(QObject *parent = 0);</para>
-            <para>    Q_INVOKABLE QQmlNdefFooRecord(const QNdefRecord &amp;record, QObject *parent = 0);</para>
-            <para>    ~QQmlNdefFooRecord();</para>
+            <para>  class QQmlNdefFooRecord : public QQmlNdefRecord</para>
+            <para>  {</para>
+            <para>      Q_OBJECT</para>
             <para></para>
-            <para>    int foo() const;</para>
-            <para>    void setFoo(int value);</para>
+            <para>      Q_PROPERTY(int foo READ foo WRITE setFoo NOTIFY fooChanged)</para>
             <para></para>
-            <para>signals:</para>
-            <para>    void fooChanged();</para>
-            <para>};</para>
+            <para>  public:</para>
+            <para>      explicit QQmlNdefFooRecord(QObject *parent = 0);</para>
+            <para>      Q_INVOKABLE QQmlNdefFooRecord(const QNdefRecord &amp;record, QObject *parent = 0);</para>
+            <para>      ~QQmlNdefFooRecord();</para>
+            <para></para>
+            <para>      int foo() const;</para>
+            <para>      void setFoo(int value);</para>
+            <para></para>
+            <para>  signals:</para>
+            <para>      void fooChanged();</para>
+            <para>  };</para>
+            <para></para>
+            <para></para>
             <para>Within the implementation file the Q_DECLARE_NDEFRECORD() macro is expanded:</para>
-            <para>Q_DECLARE_NDEFRECORD(QQmlNdefFooRecord, QNdefRecord::ExternalRtd, &quot;com.example:f&quot;)</para>
+            <para></para>
+            <para></para>
+            <para>  Q_DECLARE_NDEFRECORD(QQmlNdefFooRecord, QNdefRecord::ExternalRtd, &quot;com.example:f&quot;)</para>
+            <para></para>
+            <para></para>
             <para>Finially the application or plugin code calls qmlRegisterType():</para>
-            <para>qmlRegisterType&lt;QQmlNdefFooRecord&gt;(uri, 1, 0, &quot;NdefFooRecord&quot;);</para>
+            <para></para>
+            <para></para>
+            <para>  qmlRegisterType&lt;QQmlNdefFooRecord&gt;(uri, 1, 0, &quot;NdefFooRecord&quot;);</para>
+            <para></para>
+            <para></para>
             <para></para>
             <para>See also NdefRecord.</para>
             </remarks>
@@ -1037,16 +1060,8 @@
         </member>
         <member name="E:QtNfc.QQmlNdefRecord.TypeChanged">
             <summary>
-            <para>This property hold the type of the NDEF record.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> QString 	type() const</para>
-            <para> void 	setType(const QString &amp; newtype)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	typeChanged()</para>
-            <para></para>
+            <para>This signal is emitted when the record type changes.</para>
+            <para>Note: Notifier signal for property type. </para>
             </summary>
         </member>
         <member name="E:QtNfc.QQmlNdefRecord.TypeNameFormatChanged">
@@ -1069,7 +1084,7 @@
             <para>Access functions:</para>
             <para></para>
             <para> QNdefRecord 	record() const</para>
-            <para> void 	setRecord(const QNdefRecord &amp; record)</para>
+            <para> void 	setRecord(const QNdefRecord &amp;record)</para>
             <para></para>
             <para>Notifier signal:</para>
             <para></para>

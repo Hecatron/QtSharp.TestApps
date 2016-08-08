@@ -54,7 +54,7 @@ namespace UIFormLoad1_CS
             // Looks like we'll need to re-implement our own findchild / find children method
             // using QWidget.Qt_qFindChild_helper
             // see C:\Qt\Qt5.5.1\5.5\Src\qtbase\src\corelib\kernel\qobject.h
-            //var test1 = findChild<QPushButton>(widg1, "pushButton");
+            //var test1 = findChild<QPushButton>(widg1, "pushbutton");
             var test2 = getChildren(widg1);
 
 
@@ -73,27 +73,27 @@ namespace UIFormLoad1_CS
             //QMetaObject meta = QMetaObject.__CreateInstance(*(QMetaObject.Internal*)(void*)symboltest, false);
 
             //var ret = QObject.Qt_qFindChild_helper(parent, name, meta, options);
-            var ret = Qt_qFindChild_helper (parent, name, meta, options);
+            var ret = Qt_qFindChild_helper(parent, name, meta, options);
             return ret;
         }
 
 
 
-        //public static List<T> findChildren<T>(QObject parent, string name, QtCore.Qt.FindChildOption options = QtCore.Qt.FindChildOption.FindChildrenRecursively) where T : QObject
-        //{
+        public static List<T> findChildren<T>(QObject parent, string name, QtCore.Qt.FindChildOption options = QtCore.Qt.FindChildOption.FindChildrenRecursively) where T : QObject
+        {
 
-        //    List<T> ret = new List<T>();
+            List<T> ret = new List<T>();
 
-        //    // TODO need to find a way of passing types into QList, then getting the QMetaObject from it
-        //    QList x = new QList();
+            // TODO need to find a way of passing types into QList, then getting the QMetaObject from it
+            //QList x = new QList();
 
-        //    QMetaObject meta = QPushButton.StaticMetaObject;
-        //    //Dim meta As QMetaObject = GetType(T).GetProperty("StaticMetaObject").GetValue(Nothing, Nothing)
+            QMetaObject meta = QPushButton.StaticMetaObject;
+            //Dim meta As QMetaObject = GetType(T).GetProperty("StaticMetaObject").GetValue(Nothing, Nothing)
 
-        //    var test1 = QWidget.Qt_qFindChild_helper(parent, name, meta, options);
+            var test1 = QWidget.Qt_qFindChild_helper(parent, name, meta, options);
 
-        //    return ret;
-        //}
+            return ret;
+        }
 
 
 
@@ -103,7 +103,7 @@ namespace UIFormLoad1_CS
         {
             IntPtr parent1 = object.ReferenceEquals((object)parent, (object)null) ? IntPtr.Zero : parent.__Instance;
 
-            void** numPtr = (void**) (object.ReferenceEquals((object)name, (object)null) ? (IntPtr)null : (IntPtr) Marshal.StringToHGlobalUni(name).ToPointer());
+            void** numPtr = (void**)(object.ReferenceEquals((object)name, (object)null) ? (IntPtr)null : (IntPtr)Marshal.StringToHGlobalUni(name).ToPointer());
             QString qstring = (IntPtr)numPtr == IntPtr.Zero ? (QString)null : QString.FromUtf16(numPtr, name.Length);
             IntPtr name1 = object.ReferenceEquals((object)qstring, (object)null) ? IntPtr.Zero : qstring.__Instance;
 
@@ -132,28 +132,28 @@ namespace UIFormLoad1_CS
 
 
 
-        public static unsafe QList getChildren(QObject parent)
+        public static unsafe Object getChildren(QObject parent)
         {
             IntPtr parent1 = object.ReferenceEquals((object)parent, (object)null) ? IntPtr.Zero : parent.__Instance;
 
-            QList retlst = null;
+            //QList retlst = null;
             IntPtr retptr = QObject_Children_0(parent1);
-            // seems to work, interpret QList<QObject*> into a list of pointers then interate
+            //// seems to work, interpret QList<QObject*> into a list of pointers then interate
 
             if (retptr != IntPtr.Zero)
             {
-                //TODO no worky
-                var y1 = new QList();
+            //    //TODO no worky
+            //    var y1 = new QList();
 
-                var x1 = new QListData();
-                var x2 = x1.__Instance;
-                x2.d = retptr;
+            //    var x1 = new QListData();
+            //    var x2 = x1.__Instance;
+            //    x2.d = retptr;
 
 
-                //CStruct<QList> tmpcontainer = new CStruct<QList>(retptr, CStruct<QList>.AllocatedMode.viaDll);
-                //retlst = tmpcontainer.Struct;
+            //    //CStruct<QList> tmpcontainer = new CStruct<QList>(retptr, CStruct<QList>.AllocatedMode.viaDll);
+            //    //retlst = tmpcontainer.Struct;
             }
-            return retlst;
+            return null;
         }
 
         [SuppressUnmanagedCodeSecurity]

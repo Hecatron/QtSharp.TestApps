@@ -13,11 +13,15 @@
             <para>For the object-based types (including Date and RegExp), use the newT() functions in QJSEngine (e.g. QJSEngine::newObject()) to create a QJSValue of the desired type. For the primitive types, use one of the QJSValue constructor overloads.</para>
             <para>The methods named isT() (e.g. isBool(), isUndefined()) can be used to test if a value is of a certain type. The methods named toT() (e.g. toBool(), toString()) can be used to convert a QJSValue to another type. You can also use the generic QJSValue_cast() function.</para>
             <para>Object values have zero or more properties which are themselves QJSValues. Use setProperty() to set a property of an object, and call property() to retrieve the value of a property.</para>
-            <para>QJSEngine myEngine;</para>
-            <para>QJSValue myObject = myEngine.newObject();</para>
-            <para>QJSValue myOtherObject = myEngine.newObject();</para>
-            <para>myObject.setProperty(&quot;myChild&quot;, myOtherObject);</para>
-            <para>myObject.setProperty(&quot;name&quot;, &quot;John Doe&quot;);</para>
+            <para></para>
+            <para></para>
+            <para>  QJSEngine myEngine;</para>
+            <para>  QJSValue myObject = myEngine.newObject();</para>
+            <para>  QJSValue myOtherObject = myEngine.newObject();</para>
+            <para>  myObject.setProperty(&quot;myChild&quot;, myOtherObject);</para>
+            <para>  myObject.setProperty(&quot;name&quot;, &quot;John Doe&quot;);</para>
+            <para></para>
+            <para></para>
             <para>If you want to iterate over the properties of a script object, use the QJSValueIterator class.</para>
             <para>Object values have an internal prototype property, which can be accessed with prototype() and setPrototype().</para>
             <para>Function objects (objects for which isCallable()) returns true) can be invoked by calling call(). Constructor functions can be used to construct new objects by calling callAsConstructor().</para>
@@ -322,33 +326,48 @@
             <para>The QJSEngine class provides an environment for evaluating JavaScript code.</para>
             </summary>
             <remarks>
-            <para></para>
             <para>Evaluating Scripts</para>
             <para>Use evaluate() to evaluate script code.</para>
-            <para>QJSEngine myEngine;</para>
-            <para>QJSValue three = myEngine.evaluate(&quot;1 + 2&quot;);</para>
+            <para></para>
+            <para></para>
+            <para>  QJSEngine myEngine;</para>
+            <para>  QJSValue three = myEngine.evaluate(&quot;1 + 2&quot;);</para>
+            <para></para>
+            <para></para>
             <para>evaluate() returns a QJSValue that holds the result of the evaluation. The QJSValue class provides functions for converting the result to various C++ types (e.g. QJSValue::toString() and QJSValue::toNumber()).</para>
             <para>The following code snippet shows how a script function can be defined and then invoked from C++ using QJSValue::call():</para>
-            <para>QJSValue fun = myEngine.evaluate(&quot;(function(a, b) { return a + b; })&quot;);</para>
-            <para>QJSValueList args;</para>
-            <para>args &lt;&lt; 1 &lt;&lt; 2;</para>
-            <para>QJSValue threeAgain = fun.call(QJSValue(), args);</para>
+            <para></para>
+            <para></para>
+            <para>  QJSValue fun = myEngine.evaluate(&quot;(function(a, b) { return a + b; })&quot;);</para>
+            <para>  QJSValueList args;</para>
+            <para>  args &lt;&lt; 1 &lt;&lt; 2;</para>
+            <para>  QJSValue threeAgain = fun.call(QJSValue(), args);</para>
+            <para></para>
+            <para></para>
             <para>As can be seen from the above snippets, a script is provided to the engine in the form of a string. One common way of loading scripts is by reading the contents of a file and passing it to evaluate():</para>
-            <para>QString fileName = &quot;helloworld.qs&quot;;</para>
-            <para>QFile scriptFile(fileName);</para>
-            <para>if (!scriptFile.open(QIODevice::ReadOnly))</para>
-            <para>    // handle error</para>
-            <para>QTextStream stream(&amp;scriptFile);</para>
-            <para>QString contents = stream.readAll();</para>
-            <para>scriptFile.close();</para>
-            <para>myEngine.evaluate(contents, fileName);</para>
+            <para></para>
+            <para></para>
+            <para>  QString fileName = &quot;helloworld.qs&quot;;</para>
+            <para>  QFile scriptFile(fileName);</para>
+            <para>  if (!scriptFile.open(QIODevice::ReadOnly))</para>
+            <para>      // handle error</para>
+            <para>  QTextStream stream(&amp;scriptFile);</para>
+            <para>  QString contents = stream.readAll();</para>
+            <para>  scriptFile.close();</para>
+            <para>  myEngine.evaluate(contents, fileName);</para>
+            <para></para>
+            <para></para>
             <para>Here we pass the name of the file as the second argument to evaluate(). This does not affect evaluation in any way; the second argument is a general-purpose string that is stored in the Error object for debugging purposes.</para>
             <para></para>
             <para>Engine Configuration</para>
             <para>The globalObject() function returns the Global Object associated with the script engine. Properties of the Global Object are accessible from any script code (i.e. they are global variables). Typically, before evaluating &quot;user&quot; scripts, you will want to configure a script engine by adding one or more properties to the Global Object:</para>
-            <para>myEngine.globalObject().setProperty(&quot;myNumber&quot;, 123);</para>
-            <para>...</para>
-            <para>QJSValue myNumberPlusOne = myEngine.evaluate(&quot;myNumber + 1&quot;);</para>
+            <para></para>
+            <para></para>
+            <para>  myEngine.globalObject().setProperty(&quot;myNumber&quot;, 123);</para>
+            <para>  ...</para>
+            <para>  QJSValue myNumberPlusOne = myEngine.evaluate(&quot;myNumber + 1&quot;);</para>
+            <para></para>
+            <para></para>
             <para>Adding custom properties to the scripting environment is one of the standard means of providing a scripting API that is specific to your application. Usually these custom properties are objects created by the newQObject() or newObject() functions.</para>
             <para></para>
             <para>Script Exceptions</para>
@@ -361,28 +380,39 @@
             <para>lineNumber</para>
             <para>stack</para>
             <para></para>
-            <para>QJSValue result = myEngine.evaluate(...);</para>
-            <para>if (result.isError())</para>
-            <para>    qDebug()</para>
-            <para>            &lt;&lt; &quot;Uncaught exception at line&quot;</para>
-            <para>            &lt;&lt; result.property(&quot;lineNumber&quot;).toInt()</para>
-            <para>            &lt;&lt; &quot;:&quot; &lt;&lt; result.toString();</para>
+            <para></para>
+            <para></para>
+            <para>  QJSValue result = myEngine.evaluate(...);</para>
+            <para>  if (result.isError())</para>
+            <para>      qDebug()</para>
+            <para>              &lt;&lt; &quot;Uncaught exception at line&quot;</para>
+            <para>              &lt;&lt; result.property(&quot;lineNumber&quot;).toInt()</para>
+            <para>              &lt;&lt; &quot;:&quot; &lt;&lt; result.toString();</para>
+            <para></para>
+            <para></para>
             <para></para>
             <para>Script Object Creation</para>
             <para>Use newObject() to create a JavaScript object; this is the C++ equivalent of the script statement new Object(). You can use the object-specific functionality in QJSValue to manipulate the script object (e.g. QJSValue::setProperty()). Similarly, use newArray() to create a JavaScript array object.</para>
             <para></para>
             <para>QObject Integration</para>
             <para>Use newQObject() to wrap a QObject (or subclass) pointer. newQObject() returns a proxy script object; properties, children, and signals and slots of the QObject are available as properties of the proxy object. No binding code is needed because it is done dynamically using the Qt meta object system.</para>
-            <para>QPushButton *button = new QPushButton;</para>
-            <para>QJSValue scriptButton = myEngine.newQObject(button);</para>
-            <para>myEngine.globalObject().setProperty(&quot;button&quot;, scriptButton);</para>
             <para></para>
-            <para>myEngine.evaluate(&quot;button.checkable = true&quot;);</para>
             <para></para>
-            <para>qDebug() &lt;&lt; scriptButton.property(&quot;checkable&quot;).toBool();</para>
-            <para>scriptButton.property(&quot;show&quot;).call(); // call the show() slot</para>
+            <para>  QPushButton *button = new QPushButton;</para>
+            <para>  QJSValue scriptButton = myEngine.newQObject(button);</para>
+            <para>  myEngine.globalObject().setProperty(&quot;button&quot;, scriptButton);</para>
             <para></para>
-            <para>See also QJSValue and Making Applications Scriptable.</para>
+            <para>  myEngine.evaluate(&quot;button.checkable = true&quot;);</para>
+            <para></para>
+            <para>  qDebug() &lt;&lt; scriptButton.property(&quot;checkable&quot;).toBool();</para>
+            <para>  scriptButton.property(&quot;show&quot;).call(); // call the show() slot</para>
+            <para></para>
+            <para></para>
+            <para></para>
+            <para>Extensions</para>
+            <para>QJSEngine provides a compliant ECMAScript implementation. By default, familiar utilities like logging are not available, but they can can be installed via the installExtensions() function.</para>
+            <para></para>
+            <para>See also QJSValue, Making Applications Scriptable, and List of JavaScript Objects and Functions.</para>
             </remarks>
         </member>
         <member name="M:QtQml.QJSEngine.#ctor">
@@ -455,6 +485,20 @@
             <para>See also Internationalization with Qt.</para>
             </summary>
         </member>
+        <member name="M:QtQml.QJSEngine.InstallExtensions(QtQml.QJSEngine.Extension,QtQml.QJSValue)">
+            <summary>
+            <para>Installs JavaScript extensions to add functionality that is not available in a standard ECMAScript implementation.</para>
+            <para>The extensions are installed on the given object, or on the Global Object if no object is specified.</para>
+            <para>Several extensions can be installed at once by OR-ing the enum values:</para>
+            <para></para>
+            <para></para>
+            <para>  installExtensions(QJSEngine::TranslationExtension | QJSEngine::ConsoleExtension);</para>
+            <para></para>
+            <para></para>
+            <para>This function was introduced in  Qt 5.6.</para>
+            <para>See also Extension.</para>
+            </summary>
+        </member>
         <member name="M:QtQml.QJSEngine.InstallTranslatorFunctions">
             <summary>
             <para>Installs translator functions on the given object, or on the Global Object if no object is specified.</para>
@@ -473,11 +517,76 @@
             <para>See also Internationalization with Qt.</para>
             </summary>
         </member>
+        <member name="M:QtQml.QJSEngine.InstallExtensions(QtQml.QJSEngine.Extension)">
+            <summary>
+            <para>Installs JavaScript extensions to add functionality that is not available in a standard ECMAScript implementation.</para>
+            <para>The extensions are installed on the given object, or on the Global Object if no object is specified.</para>
+            <para>Several extensions can be installed at once by OR-ing the enum values:</para>
+            <para></para>
+            <para></para>
+            <para>  installExtensions(QJSEngine::TranslationExtension | QJSEngine::ConsoleExtension);</para>
+            <para></para>
+            <para></para>
+            <para>This function was introduced in  Qt 5.6.</para>
+            <para>See also Extension.</para>
+            </summary>
+        </member>
         <member name="P:QtQml.QJSEngine.GlobalObject">
             <summary>
             <para>Returns this engine's Global Object.</para>
             <para>By default, the Global Object contains the built-in objects that are part of ECMA-262, such as Math, Date and String. Additionally, you can set properties of the Global Object to make your own extensions available to all script code. Non-local variables in script code will be created as properties of the Global Object, as well as local variables in global code.</para>
             </summary>
+        </member>
+        <member name="T:QtQml.QJSEngine.Extension">
+            <summary>
+            <para>This enum is used to specify extensions to be installed via installExtensions().</para>
+            <para>TranslationExtension</para>
+            <para>The relation between script translation functions and C++ translation functions is described in the following table:</para>
+            <para></para>
+            <para> Script FunctionCorresponding C++ Function</para>
+            <para>qsTr()	QObject::tr()</para>
+            <para>QT_TR_NOOP()	QT_TR_NOOP()</para>
+            <para>qsTranslate()	QCoreApplication::translate()</para>
+            <para>QT_TRANSLATE_NOOP()	QT_TRANSLATE_NOOP()</para>
+            <para>qsTrId()	qtTrId()</para>
+            <para>QT_TRID_NOOP()	QT_TRID_NOOP()</para>
+            <para></para>
+            <para>This flag also adds an arg() function to the string prototype.</para>
+            <para>For more information, see the Internationalization with Qt documentation.</para>
+            <para>ConsoleExtension</para>
+            <para>The console object implements a subset of the Console API, which provides familiar logging functions, such as console.log().</para>
+            <para>The list of functions added is as follows:</para>
+            <para></para>
+            <para>console.assert()</para>
+            <para>console.debug()</para>
+            <para>console.exception()</para>
+            <para>console.info()</para>
+            <para>console.log() (equivalent to console.debug())</para>
+            <para>console.error()</para>
+            <para>console.time()</para>
+            <para>console.timeEnd()</para>
+            <para>console.trace()</para>
+            <para>console.count()</para>
+            <para>console.warn()</para>
+            <para>print() (equivalent to console.debug())</para>
+            <para></para>
+            <para>For more information, see the Console API documentation.</para>
+            <para>GarbageCollectionExtension</para>
+            <para>The gc() function is equivalent to calling collectGarbage().</para>
+            <para>The Extensions type is a typedef for QFlags&lt;Extension&gt;. It stores an OR combination of Extension values.</para>
+            </summary>
+        </member>
+        <member name="F:QtQml.QJSEngine.Extension.TranslationExtension">
+            <summary>Indicates that translation functions (qsTr(), for example) should be installed.</summary>
+        </member>
+        <member name="F:QtQml.QJSEngine.Extension.ConsoleExtension">
+            <summary>Indicates that console functions (console.log(), for example) should be installed.</summary>
+        </member>
+        <member name="F:QtQml.QJSEngine.Extension.GarbageCollectionExtension">
+            <summary>Indicates that garbage collection functions (gc(), for example) should be installed.</summary>
+        </member>
+        <member name="F:QtQml.QJSEngine.Extension.AllExtensions">
+            <summary>Indicates that all extension should be installed.</summary>
         </member>
         <member name="T:QtQml.QJSValueIterator">
             <summary>
@@ -485,24 +594,32 @@
             </summary>
             <remarks>
             <para>The QJSValueIterator constructor takes a QJSValue as argument. After construction, the iterator is located at the very beginning of the sequence of properties. Here's how to iterate over all the properties of a QJSValue:</para>
-            <para>QJSValue object;</para>
-            <para>...</para>
-            <para>QJSValueIterator it(object);</para>
-            <para>while (it.hasNext()) {</para>
-            <para>    it.next();</para>
-            <para>    qDebug() &lt;&lt; it.name() &lt;&lt; &quot;: &quot; &lt;&lt; it.value().toString();</para>
-            <para>}</para>
+            <para></para>
+            <para></para>
+            <para>  QJSValue object;</para>
+            <para>  ...</para>
+            <para>  QJSValueIterator it(object);</para>
+            <para>  while (it.hasNext()) {</para>
+            <para>      it.next();</para>
+            <para>      qDebug() &lt;&lt; it.name() &lt;&lt; &quot;: &quot; &lt;&lt; it.value().toString();</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>The next() advances the iterator. The name() and value() functions return the name and value of the last item that was jumped over.</para>
             <para>Note that QJSValueIterator only iterates over the QJSValue's own properties; i.e. it does not follow the prototype chain. You can use a loop like this to follow the prototype chain:</para>
-            <para>QJSValue obj = ...; // the object to iterate over</para>
-            <para>while (obj.isObject()) {</para>
-            <para>    QJSValueIterator it(obj);</para>
-            <para>    while (it.hasNext()) {</para>
-            <para>        it.next();</para>
-            <para>        qDebug() &lt;&lt; it.name();</para>
-            <para>    }</para>
-            <para>    obj = obj.prototype();</para>
-            <para>}</para>
+            <para></para>
+            <para></para>
+            <para>  QJSValue obj = ...; // the object to iterate over</para>
+            <para>  while (obj.isObject()) {</para>
+            <para>      QJSValueIterator it(obj);</para>
+            <para>      while (it.hasNext()) {</para>
+            <para>          it.next();</para>
+            <para>          qDebug() &lt;&lt; it.name();</para>
+            <para>      }</para>
+            <para>      obj = obj.prototype();</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para></para>
             <para>See also QJSValue::property().</para>
             </remarks>
@@ -545,19 +662,60 @@
             <para>This class is often used for optimization purposes, as it allows you to defer an expensive operation until after all the properties have been set on an object. For example, QML's Text element uses the parser status to defer text layout until all of its properties have been set (we don't want to layout when the text is assigned, and then relayout when the font is assigned, and relayout again when the width is assigned, and so on).</para>
             <para>Be aware that QQmlParserStatus methods are only called when a class is instantiated by a QQmlEngine. If you create the same class directly from C++, these methods will not be called automatically. To avoid this problem, it is recommended that you start deferring operations from classBegin instead of from the initial creation of your class. This will still prevent multiple revaluations during initial binding assignment in QML, but will not defer operations invoked from C++.</para>
             <para>To use QQmlParserStatus, you must inherit both a QObject-derived class and QQmlParserStatus, and use the Q_INTERFACES() macro.</para>
-            <para>class MyObject : public QObject, public QQmlParserStatus</para>
-            <para>{</para>
-            <para>    Q_OBJECT</para>
-            <para>    Q_INTERFACES(QQmlParserStatus)</para>
             <para></para>
-            <para>public:</para>
-            <para>    MyObject(QObject *parent = 0);</para>
-            <para>    ...</para>
-            <para>    void classBegin();</para>
-            <para>    void componentComplete();</para>
-            <para>}</para>
+            <para></para>
+            <para>  class MyObject : public QObject, public QQmlParserStatus</para>
+            <para>  {</para>
+            <para>      Q_OBJECT</para>
+            <para>      Q_INTERFACES(QQmlParserStatus)</para>
+            <para></para>
+            <para>  public:</para>
+            <para>      MyObject(QObject *parent = 0);</para>
+            <para>      ...</para>
+            <para>      void classBegin();</para>
+            <para>      void componentComplete();</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>The Qt Quick 1 version of this class is named QDeclarativeParserStatus.</para>
             </remarks>
+        </member>
+        <member name="T:QtQml.IQQmlParserStatus">
+            <summary>
+            <para>The QQmlParserStatus class provides updates on the QML parser state.</para>
+            </summary>
+            <remarks>
+            <para>QQmlParserStatus provides a mechanism for classes instantiated by a QQmlEngine to receive notification at key points in their creation.</para>
+            <para>This class is often used for optimization purposes, as it allows you to defer an expensive operation until after all the properties have been set on an object. For example, QML's Text element uses the parser status to defer text layout until all of its properties have been set (we don't want to layout when the text is assigned, and then relayout when the font is assigned, and relayout again when the width is assigned, and so on).</para>
+            <para>Be aware that QQmlParserStatus methods are only called when a class is instantiated by a QQmlEngine. If you create the same class directly from C++, these methods will not be called automatically. To avoid this problem, it is recommended that you start deferring operations from classBegin instead of from the initial creation of your class. This will still prevent multiple revaluations during initial binding assignment in QML, but will not defer operations invoked from C++.</para>
+            <para>To use QQmlParserStatus, you must inherit both a QObject-derived class and QQmlParserStatus, and use the Q_INTERFACES() macro.</para>
+            <para></para>
+            <para></para>
+            <para>  class MyObject : public QObject, public QQmlParserStatus</para>
+            <para>  {</para>
+            <para>      Q_OBJECT</para>
+            <para>      Q_INTERFACES(QQmlParserStatus)</para>
+            <para></para>
+            <para>  public:</para>
+            <para>      MyObject(QObject *parent = 0);</para>
+            <para>      ...</para>
+            <para>      void classBegin();</para>
+            <para>      void componentComplete();</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
+            <para>The Qt Quick 1 version of this class is named QDeclarativeParserStatus.</para>
+            </remarks>
+        </member>
+        <member name="M:QtQml.IQQmlParserStatus.ClassBegin">
+            <summary>
+            <para>Invoked after class creation, but before any properties have been set.</para>
+            </summary>
+        </member>
+        <member name="M:QtQml.IQQmlParserStatus.ComponentComplete">
+            <summary>
+            <para>Invoked after the root component that caused this instantiation has completed construction. At this point all static values and binding values have been assigned to the class.</para>
+            </summary>
         </member>
         <member name="M:QtQml.QQmlParserStatus.ClassBegin">
             <summary>
@@ -593,10 +751,14 @@
             </summary>
             <remarks>
             <para>QQmlListReference allows C++ programs to read from, and assign values to a QML list property in a simple and type-safe way. A QQmlListReference can be created by passing an object and property name or through a QQmlProperty instance. These two are equivalent:</para>
-            <para>QQmlListReference ref1(object, &quot;children&quot;);</para>
             <para></para>
-            <para>QQmlProperty ref2(object, &quot;children&quot;);</para>
-            <para>QQmlListReference ref2 = qvariant_cast&lt;QQmlListReference&gt;(ref2.read());</para>
+            <para></para>
+            <para>  QQmlListReference ref1(object, &quot;children&quot;);</para>
+            <para></para>
+            <para>  QQmlProperty ref2(object, &quot;children&quot;);</para>
+            <para>  QQmlListReference ref2 = qvariant_cast&lt;QQmlListReference&gt;(ref2.read());</para>
+            <para></para>
+            <para></para>
             <para>Not all QML list properties support all operations. A set of methods, canAppend(), canAt(), canClear() and canCount() allow programs to query whether an operation is supported on a given property.</para>
             <para>QML list properties are type-safe. Only QObject's that derive from the correct base class can be assigned to the list. The listElementType() method can be used to query the QMetaObject of the QObject type supported. Attempting to add objects of the incorrect type to a list property will fail.</para>
             <para>Like with normal lists, when accessing a list element by index, it is the callers responsibility to ensure that it does not request an out of range element using the count() method before calling at().</para>
@@ -702,15 +864,23 @@
             <para>Normally, the types exported by a plugin should be fixed. However, if a C++ type is not available, you should at least &quot;reserve&quot; the QML type name, and give the user of the unavailable type a meaningful error message.</para>
             <para>Returns the QML type id.</para>
             <para>Example:</para>
-            <para>#ifdef NO_GAMES_ALLOWED</para>
-            <para>qmlRegisterTypeNotAvailable(&quot;MinehuntCore&quot;, 0, 1, &quot;Game&quot;, &quot;Get back to work, slacker!&quot;);</para>
-            <para>#else</para>
-            <para>qmlRegisterType&lt;MinehuntGame&gt;(&quot;MinehuntCore&quot;, 0, 1, &quot;Game&quot;);</para>
-            <para>#endif</para>
+            <para></para>
+            <para></para>
+            <para>  #ifdef NO_GAMES_ALLOWED</para>
+            <para>  qmlRegisterTypeNotAvailable(&quot;MinehuntCore&quot;, 0, 1, &quot;Game&quot;, &quot;Get back to work, slacker!&quot;);</para>
+            <para>  #else</para>
+            <para>  qmlRegisterType&lt;MinehuntGame&gt;(&quot;MinehuntCore&quot;, 0, 1, &quot;Game&quot;);</para>
+            <para>  #endif</para>
+            <para></para>
+            <para></para>
             <para>This will cause any QML which imports the &quot;MinehuntCore&quot; type namespace and attempts to use the type to produce an error message:</para>
-            <para>fun.qml: Get back to work, slacker!</para>
-            <para>   Game {</para>
-            <para>   ^</para>
+            <para></para>
+            <para></para>
+            <para>  fun.qml: Get back to work, slacker!</para>
+            <para>     Game {</para>
+            <para>     ^</para>
+            <para></para>
+            <para></para>
             <para>Without this, a generic &quot;Game is not a type&quot; message would be given.</para>
             <para>#include &lt;QtQml&gt; to use this function.</para>
             <para>See also qmlRegisterUncreatableType().</para>
@@ -725,36 +895,44 @@
             <para>Returns true if the module with uri as a module identifier and majVersion as a major version number was found and locked, otherwise returns false. The module must contain exported types in order to be found.</para>
             </summary>
         </member>
-        <member name="M:QtQml.qqml.QmlRegisterSingletonType(System.String,System.Int32,System.Int32,System.String,QtQml.__AnonymousDelegate1)">
+        <member name="M:QtQml.qqml.QmlRegisterSingletonType(System.String,System.Int32,System.Int32,System.String,QtQml.__AnonymousDelegate0)">
             <summary>
             <para>This function may be used to register a singleton type provider callback in a particular uri and typeName with a version specified in versionMajor and versionMinor.</para>
             <para>Installing a singleton type allows developers to provide arbitrary functionality (methods and properties) to a client without requiring individual instances of the type to be instantiated by the client.</para>
             <para>A singleton type may be either a QObject or a QJSValue. This function should be used to register a singleton type provider function which returns a QJSValue as a singleton type.</para>
             <para>NOTE: QJSValue singleton type properties will not trigger binding re-evaluation if changed.</para>
             <para>Usage:</para>
-            <para>// First, define the singleton type provider function (callback).</para>
-            <para>static QJSValue example_qjsvalue_singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine)</para>
-            <para>{</para>
-            <para>    Q_UNUSED(engine)</para>
             <para></para>
-            <para>    static int seedValue = 5;</para>
-            <para>    QJSValue example = scriptEngine-&gt;newObject();</para>
-            <para>    example.setProperty(&quot;someProperty&quot;, seedValue++);</para>
-            <para>    return example;</para>
-            <para>}</para>
             <para></para>
-            <para>// Second, register the singleton type provider with QML by calling this function in an initialization function.</para>
-            <para>#include &lt;QtQml&gt;</para>
-            <para>...</para>
-            <para>qmlRegisterSingletonType(&quot;Qt.example.qjsvalueApi&quot;, 1, 0, &quot;MyApi&quot;, example_qjsvalue_singletontype_provider);</para>
-            <para>...</para>
+            <para>  // First, define the singleton type provider function (callback).</para>
+            <para>  static QJSValue example_qjsvalue_singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine)</para>
+            <para>  {</para>
+            <para>      Q_UNUSED(engine)</para>
+            <para></para>
+            <para>      static int seedValue = 5;</para>
+            <para>      QJSValue example = scriptEngine-&gt;newObject();</para>
+            <para>      example.setProperty(&quot;someProperty&quot;, seedValue++);</para>
+            <para>      return example;</para>
+            <para>  }</para>
+            <para></para>
+            <para>  // Second, register the singleton type provider with QML by calling this function in an initialization function.</para>
+            <para>  #include &lt;QtQml&gt;</para>
+            <para>  ...</para>
+            <para>  qmlRegisterSingletonType(&quot;Qt.example.qjsvalueApi&quot;, 1, 0, &quot;MyApi&quot;, example_qjsvalue_singletontype_provider);</para>
+            <para>  ...</para>
+            <para></para>
+            <para></para>
             <para>In order to use the registered singleton type in QML, you must import the singleton type.</para>
-            <para>import QtQuick 2.0</para>
-            <para>import Qt.example.qjsvalueApi 1.0 as ExampleApi</para>
-            <para>Item {</para>
-            <para>    id: root</para>
-            <para>    property int someValue: ExampleApi.MyApi.someProperty</para>
-            <para>}</para>
+            <para></para>
+            <para></para>
+            <para>  import QtQuick 2.0</para>
+            <para>  import Qt.example.qjsvalueApi 1.0 as ExampleApi</para>
+            <para>  Item {</para>
+            <para>      id: root</para>
+            <para>      property int someValue: ExampleApi.MyApi.someProperty</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             </summary>
         </member>
         <member name="M:QtQml.qqml.QmlRegisterSingletonType(QtCore.QUrl,System.String,System.Int32,System.Int32,System.String)">
@@ -763,24 +941,36 @@
             <para>In addition the type's QML file must have pragma Singleton statement among its import statements.</para>
             <para>A singleton type may be referenced via the type name with which it was registered, and this typename may be used as the target in a Connections type or otherwise used as any other type id would. One exception to this is that a singleton type property may not be aliased (because the singleton type name does not identify an object within the same component as any other item).</para>
             <para>Usage:</para>
-            <para>// First, define your QML singleton type which provides the functionality.</para>
-            <para>pragma Singleton</para>
-            <para>import QtQuick 2.0</para>
-            <para>Item {</para>
-            <para>    property int testProp1: 125</para>
-            <para>}</para>
-            <para>// Second, register the QML singleton type by calling this function in an initialization function.</para>
-            <para>#include &lt;QtQml&gt;</para>
-            <para>...</para>
-            <para>qmlRegisterSingletonType(QUrl(&quot;file:///absolute/path/SingletonType.qml&quot;), &quot;Qt.example.qobjectSingleton&quot;, 1, 0, &quot;RegisteredSingleton&quot;);</para>
-            <para>...</para>
+            <para></para>
+            <para></para>
+            <para>  // First, define your QML singleton type which provides the functionality.</para>
+            <para>  pragma Singleton</para>
+            <para>  import QtQuick 2.0</para>
+            <para>  Item {</para>
+            <para>      property int testProp1: 125</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
+            <para></para>
+            <para></para>
+            <para>  // Second, register the QML singleton type by calling this function in an initialization function.</para>
+            <para>  #include &lt;QtQml&gt;</para>
+            <para>  ...</para>
+            <para>  qmlRegisterSingletonType(QUrl(&quot;file:///absolute/path/SingletonType.qml&quot;), &quot;Qt.example.qobjectSingleton&quot;, 1, 0, &quot;RegisteredSingleton&quot;);</para>
+            <para>  ...</para>
+            <para></para>
+            <para></para>
             <para>In order to use the registered singleton type in QML, you must import the singleton type.</para>
-            <para>import QtQuick 2.0</para>
-            <para>import Qt.example.qobjectSingleton 1.0</para>
-            <para>Item {</para>
-            <para>    id: root</para>
-            <para>    property int someValue: RegisteredSingleton.testProp1</para>
-            <para>}</para>
+            <para></para>
+            <para></para>
+            <para>  import QtQuick 2.0</para>
+            <para>  import Qt.example.qobjectSingleton 1.0</para>
+            <para>  Item {</para>
+            <para>      id: root</para>
+            <para>      property int someValue: RegisteredSingleton.testProp1</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>It is also possible to have QML singleton types registered without using the qmlRegisterSingletonType function. That can be done by adding a pragma Singleton statement among the imports of the type's QML file. In addition the type must be defined in a qmldir file with a singleton keyword and the qmldir must be imported by the QML files using the singleton.</para>
             </summary>
         </member>
@@ -795,12 +985,14 @@
         <member name="M:QtQml.QtQml.qqml.QmlContext(QtCore.QObject)">
             <summary>
             <para>Returns the QQmlContext associated with object, if any. This is equivalent to QQmlEngine::contextForObject(object).</para>
+            <para>Note: Add #include &lt;QtQml&gt; to use this function.</para>
             <para>See also contextForObject() and qmlEngine().</para>
             </summary>
         </member>
         <member name="M:QtQml.QtQml.qqml.QmlEngine(QtCore.QObject)">
             <summary>
             <para>Returns the QQmlEngine associated with object, if any. This is equivalent to QQmlEngine::contextForObject(object)-&gt;engine(), but more efficient.</para>
+            <para>Note: Add #include &lt;QtQml&gt; to use this function.</para>
             <para>See also contextForObject() and qmlContext().</para>
             </summary>
         </member>
@@ -850,11 +1042,19 @@
             </summary>
             <remarks>
             <para>QQmlError includes a textual description of the error, as well as location information (the file, line, and column). The toString() method creates a single-line, human-readable string containing all of this information, for example:</para>
-            <para>file:///home/user/test.qml:7:8: Invalid property assignment: double expected</para>
+            <para></para>
+            <para></para>
+            <para>  file:///home/user/test.qml:7:8: Invalid property assignment: double expected</para>
+            <para></para>
+            <para></para>
             <para>You can use qDebug(), qInfo(), or qWarning() to output errors to the console. This method will attempt to open the file indicated by the error and include additional contextual information.</para>
-            <para>file:///home/user/test.qml:7:8: Invalid property assignment: double expected</para>
-            <para>        y: &quot;hello&quot;</para>
-            <para>           ^</para>
+            <para></para>
+            <para></para>
+            <para>  file:///home/user/test.qml:7:8: Invalid property assignment: double expected</para>
+            <para>          y: &quot;hello&quot;</para>
+            <para>             ^</para>
+            <para></para>
+            <para></para>
             <para>Note that the Qt Quick 1 version is named QDeclarativeError</para>
             <para></para>
             <para>See also QQuickView::errors() and QQmlComponent::errors().</para>
@@ -962,6 +1162,9 @@
         <member name="F:QtQml.QQmlImageProviderBase.ImageType.Texture">
             <summary>The Image Provider provides QSGTextureProvider based images. The QQuickImageProvider::requestTexture() method will be called for all image requests.</summary>
         </member>
+        <member name="F:QtQml.QQmlImageProviderBase.ImageType.ImageResponse">
+            <summary>The Image provider provides QQuickTextureFactory based images. Should only be used in QQuickAsyncImageProvider or its subclasses. The QQuickAsyncImageProvider::requestImageResponse() method will be called for all image requests. Since Qt 5.6</summary>
+        </member>
         <member name="T:QtQml.QQmlImageProviderBase.Flag">
             <summary>
             <para>Defines specific requirements or features of this image provider.</para>
@@ -978,13 +1181,17 @@
             <remarks>
             <para>Each QML component is instantiated in a QQmlContext. QQmlContext's are essential for passing data to QML components. In QML, contexts are arranged hierarchically and this hierarchy is managed by the QQmlEngine.</para>
             <para>Prior to creating any QML components, an application must have created a QQmlEngine to gain access to a QML context. The following example shows how to create a simple Text item.</para>
-            <para>QQmlEngine engine;</para>
-            <para>QQmlComponent component(&amp;engine);</para>
-            <para>component.setData(&quot;import QtQuick 2.0\nText { text: \&quot;Hello world!\&quot; }&quot;, QUrl());</para>
-            <para>QQuickItem *item = qobject_cast&lt;QQuickItem *&gt;(component.create());</para>
             <para></para>
-            <para>//add item to view, etc</para>
-            <para>...</para>
+            <para></para>
+            <para>  QQmlEngine engine;</para>
+            <para>  QQmlComponent component(&amp;engine);</para>
+            <para>  component.setData(&quot;import QtQuick 2.0\nText { text: \&quot;Hello world!\&quot; }&quot;, QUrl());</para>
+            <para>  QQuickItem *item = qobject_cast&lt;QQuickItem *&gt;(component.create());</para>
+            <para></para>
+            <para>  //add item to view, etc</para>
+            <para>  ...</para>
+            <para></para>
+            <para></para>
             <para>In this case, the Text item will be created in the engine's root context.</para>
             <para>Note that the Qt Quick 1 version is called QDeclarativeEngine.</para>
             <para></para>
@@ -1156,7 +1363,7 @@
             <para>See also setOutputWarningsToStandardError().</para>
             <para></para>
             <para>Set whether warning messages will be output to stderr to enabled.</para>
-            <para>If enabled is true, any warning messages generated by QML will be output to stderr and emitted by the warnings() signal. If enabled is false, on the warnings() signal will be emitted. This allows applications to handle warning output themselves.</para>
+            <para>If enabled is true, any warning messages generated by QML will be output to stderr and emitted by the warnings() signal. If enabled is false, only the warnings() signal will be emitted. This allows applications to handle warning output themselves.</para>
             <para>The default value is true.</para>
             <para>See also outputWarningsToStandardError().</para>
             </summary>
@@ -1196,15 +1403,19 @@
             <remarks>
             <para>This class combines a QQmlEngine and QQmlComponent to provide a convenient way to load a single QML file. It also exposes some central application functionality to QML, which a C++/QML hybrid application would normally control from C++.</para>
             <para>It can be used like so:</para>
-            <para>#include &lt;QGuiApplication&gt;</para>
-            <para>#include &lt;QQmlApplicationEngine&gt;</para>
             <para></para>
-            <para>int main(int argc, char *argv[])</para>
-            <para>{</para>
-            <para>    QGuiApplication app(argc, argv);</para>
-            <para>    QQmlApplicationEngine engine(&quot;main.qml&quot;);</para>
-            <para>    return app.exec();</para>
-            <para>}</para>
+            <para></para>
+            <para>  #include &lt;QGuiApplication&gt;</para>
+            <para>  #include &lt;QQmlApplicationEngine&gt;</para>
+            <para></para>
+            <para>  int main(int argc, char *argv[])</para>
+            <para>  {</para>
+            <para>      QGuiApplication app(argc, argv);</para>
+            <para>      QQmlApplicationEngine engine(&quot;main.qml&quot;);</para>
+            <para>      return app.exec();</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>Unlike QQuickView, QQmlApplicationEngine does not automatically create a root window. If you are using visual items from Qt Quick, you will need to place them inside of a Window.</para>
             <para>You can also use QCoreApplication with QQmlApplicationEngine, if you are not using any QML modules which require a QGuiApplication (such as QtQuick).</para>
             <para>List of configuration changes from a default QQmlEngine:</para>
@@ -1271,53 +1482,69 @@
             <remarks>
             <para>Components are reusable, encapsulated QML types with well-defined interfaces.</para>
             <para>A QQmlComponent instance can be created from a QML file. For example, if there is a main.qml file like this:</para>
-            <para>import QtQuick 2.0</para>
             <para></para>
-            <para>Item {</para>
-            <para>    width: 200</para>
-            <para>    height: 200</para>
-            <para>}</para>
+            <para></para>
+            <para>  import QtQuick 2.0</para>
+            <para></para>
+            <para>  Item {</para>
+            <para>      width: 200</para>
+            <para>      height: 200</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>The following code loads this QML file as a component, creates an instance of this component using create(), and then queries the Item's width value:</para>
-            <para>QQmlEngine *engine = new QQmlEngine;</para>
-            <para>QQmlComponent component(engine, QUrl::fromLocalFile(&quot;main.qml&quot;));</para>
             <para></para>
-            <para>QObject *myObject = component.create();</para>
-            <para>QQuickItem *item = qobject_cast&lt;QQuickItem*&gt;(myObject);</para>
-            <para>int width = item-&gt;width();  // width = 200</para>
+            <para></para>
+            <para>  QQmlEngine *engine = new QQmlEngine;</para>
+            <para>  QQmlComponent component(engine, QUrl::fromLocalFile(&quot;main.qml&quot;));</para>
+            <para></para>
+            <para>  QObject *myObject = component.create();</para>
+            <para>  QQuickItem *item = qobject_cast&lt;QQuickItem*&gt;(myObject);</para>
+            <para>  int width = item-&gt;width();  // width = 200</para>
+            <para></para>
+            <para></para>
             <para>To create instances of a component in code where a QQmlEngine instance is not available, you can use qmlContext() or qmlEngine(). For example, in the scenario below, child items are being created within a QQuickItem subclass:</para>
-            <para>void MyCppItem::init()</para>
-            <para>{</para>
-            <para>    QQmlEngine *engine = qmlEngine(this);</para>
-            <para>    // Or:</para>
-            <para>    // QQmlEngine *engine = qmlContext(this)-&gt;engine();</para>
-            <para>    QQmlComponent component(engine, QUrl::fromLocalFile(&quot;MyItem.qml&quot;));</para>
-            <para>    QQuickItem *childItem = qobject_cast&lt;QQuickItem*&gt;(component.create());</para>
-            <para>    childItem-&gt;setParentItem(this);</para>
-            <para>}</para>
+            <para></para>
+            <para></para>
+            <para>  void MyCppItem::init()</para>
+            <para>  {</para>
+            <para>      QQmlEngine *engine = qmlEngine(this);</para>
+            <para>      // Or:</para>
+            <para>      // QQmlEngine *engine = qmlContext(this)-&gt;engine();</para>
+            <para>      QQmlComponent component(engine, QUrl::fromLocalFile(&quot;MyItem.qml&quot;));</para>
+            <para>      QQuickItem *childItem = qobject_cast&lt;QQuickItem*&gt;(component.create());</para>
+            <para>      childItem-&gt;setParentItem(this);</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>Note that these functions will return null when called inside the constructor of a QObject subclass, as the instance will not yet have a context nor engine.</para>
             <para></para>
             <para>Network Components</para>
             <para>If the URL passed to QQmlComponent is a network resource, or if the QML document references a network resource, the QQmlComponent has to fetch the network data before it is able to create objects. In this case, the QQmlComponent will have a Loading status. An application will have to wait until the component is Ready before calling QQmlComponent::create().</para>
             <para>The following example shows how to load a QML file from a network resource. After creating the QQmlComponent, it tests whether the component is loading. If it is, it connects to the QQmlComponent::statusChanged() signal and otherwise calls the continueLoading() method directly. Note that QQmlComponent::isLoading() may be false for a network component if the component has been cached and is ready immediately.</para>
-            <para>MyApplication::MyApplication()</para>
-            <para>{</para>
-            <para>    // ...</para>
-            <para>    component = new QQmlComponent(engine, QUrl(&quot;http://www.example.com/main.qml&quot;));</para>
-            <para>    if (component-&gt;isLoading())</para>
-            <para>        QObject::connect(component, SIGNAL(statusChanged(QQmlComponent::Status)),</para>
-            <para>                         this, SLOT(continueLoading()));</para>
-            <para>    else</para>
-            <para>        continueLoading();</para>
-            <para>}</para>
             <para></para>
-            <para>void MyApplication::continueLoading()</para>
-            <para>{</para>
-            <para>    if (component-&gt;isError()) {</para>
-            <para>        qWarning() &lt;&lt; component-&gt;errors();</para>
-            <para>    } else {</para>
-            <para>        QObject *myObject = component-&gt;create();</para>
-            <para>    }</para>
-            <para>}</para>
+            <para></para>
+            <para>  MyApplication::MyApplication()</para>
+            <para>  {</para>
+            <para>      // ...</para>
+            <para>      component = new QQmlComponent(engine, QUrl(&quot;http://www.example.com/main.qml&quot;));</para>
+            <para>      if (component-&gt;isLoading())</para>
+            <para>          QObject::connect(component, SIGNAL(statusChanged(QQmlComponent::Status)),</para>
+            <para>                           this, SLOT(continueLoading()));</para>
+            <para>      else</para>
+            <para>          continueLoading();</para>
+            <para>  }</para>
+            <para></para>
+            <para>  void MyApplication::continueLoading()</para>
+            <para>  {</para>
+            <para>      if (component-&gt;isError()) {</para>
+            <para>          qWarning() &lt;&lt; component-&gt;errors();</para>
+            <para>      } else {</para>
+            <para>          QObject *myObject = component-&gt;create();</para>
+            <para>      }</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>Note that the Qt Quick 1 version is named QDeclarativeComponent.</para>
             </remarks>
         </member>
@@ -1363,10 +1590,9 @@
         </member>
         <member name="M:QtQml.QQmlComponent.BeginCreate(QtQml.QQmlContext)">
             <summary>
-            <para>This method provides advanced control over component instance creation. In general, programmers should use QQmlComponent::create() to create a component.</para>
+            <para>This method provides advanced control over component instance creation. In general, programmers should use QQmlComponent::create() to create object instances.</para>
             <para>Create an object instance from this component. Returns 0 if creation failed. publicContext specifies the context within which to create the object instance.</para>
             <para>When QQmlComponent constructs an instance, it occurs in three steps:</para>
-            <para></para>
             <para>The object hierarchy is created, and constant values are assigned.</para>
             <para>Property bindings are evaluated for the first time.</para>
             <para>If applicable, QQmlParserStatus::componentComplete() is called on objects.</para>
@@ -1412,28 +1638,14 @@
         </member>
         <member name="E:QtQml.QQmlComponent.StatusChanged">
             <summary>
-            <para>The component's current status.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> Status 	status() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	statusChanged(QQmlComponent::Status status)</para>
-            <para></para>
+            <para>Emitted whenever the component's status changes. status will be the new status.</para>
+            <para>Note: Notifier signal for property status. </para>
             </summary>
         </member>
         <member name="E:QtQml.QQmlComponent.ProgressChanged">
             <summary>
-            <para>The progress of loading the component, from 0.0 (nothing loaded) to 1.0 (finished).</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> qreal 	progress() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	progressChanged(qreal progress)</para>
-            <para></para>
+            <para>Emitted whenever the component's loading progress changes. progress will be the current progress between 0.0 (nothing loaded) and 1.0 (finished).</para>
+            <para>Note: Notifier signal for property progress. </para>
             </summary>
         </member>
         <member name="P:QtQml.QQmlComponent.status">
@@ -1502,7 +1714,7 @@
             <summary>This QQmlComponent is loading network data.</summary>
         </member>
         <member name="F:QtQml.QQmlComponent.Status.Error">
-            <summary>An error has occurred. Call errors() to retrieve a list of {QQmlError}{errors}.</summary>
+            <summary>An error has occurred. Call errors() to retrieve a list of errors.</summary>
         </member>
         <member name="T:QtQml.QQmlContext">
             <summary>
@@ -1511,44 +1723,56 @@
             <remarks>
             <para>Contexts allow data to be exposed to the QML components instantiated by the QML engine.</para>
             <para>Each QQmlContext contains a set of properties, distinct from its QObject properties, that allow data to be explicitly bound to a context by name. The context properties are defined and updated by calling QQmlContext::setContextProperty(). The following example shows a Qt model being bound to a context and then accessed from a QML file.</para>
-            <para>QQmlEngine engine;</para>
-            <para>QStringListModel modelData;</para>
-            <para>QQmlContext *context = new QQmlContext(engine.rootContext());</para>
-            <para>context-&gt;setContextProperty(&quot;myModel&quot;, &amp;modelData);</para>
             <para></para>
-            <para>QQmlComponent component(&amp;engine);</para>
-            <para>component.setData(&quot;import QtQuick 2.0\nListView { model: myModel }&quot;, QUrl());</para>
-            <para>QObject *window = component.create(context);</para>
+            <para></para>
+            <para>  QQmlEngine engine;</para>
+            <para>  QStringListModel modelData;</para>
+            <para>  QQmlContext *context = new QQmlContext(engine.rootContext());</para>
+            <para>  context-&gt;setContextProperty(&quot;myModel&quot;, &amp;modelData);</para>
+            <para></para>
+            <para>  QQmlComponent component(&amp;engine);</para>
+            <para>  component.setData(&quot;import QtQuick 2.0\nListView { model: myModel }&quot;, QUrl());</para>
+            <para>  QObject *window = component.create(context);</para>
+            <para></para>
+            <para></para>
             <para>Note it is the responsibility of the creator to delete any QQmlContext it constructs. If the context object in the example is no longer needed when the window component instance is destroyed, the context must be destroyed explicitly. The simplest way to ensure this is to set window as the parent of context.</para>
-            <para>To simplify binding and maintaining larger data sets, a context object can be set on a QQmlContext. All the properties of the context object are available by name in the context, as though they were all individually added through calls to QQmlContext::setContextProperty(). Changes to the property's values are detected through the property's notify signal. Setting a context object is both faster and easier than manually adding and maintaing context property values.</para>
+            <para>To simplify binding and maintaining larger data sets, a context object can be set on a QQmlContext. All the properties of the context object are available by name in the context, as though they were all individually added through calls to QQmlContext::setContextProperty(). Changes to the property's values are detected through the property's notify signal. Setting a context object is both faster and easier than manually adding and maintaining context property values.</para>
             <para>The following example has the same effect as the previous one, but it uses a context object.</para>
-            <para>class MyDataSet : ... {</para>
-            <para>    ...</para>
-            <para>    Q_PROPERTY(QAbstractItemModel *myModel READ model NOTIFY modelChanged)</para>
-            <para>    ...</para>
-            <para>};</para>
             <para></para>
-            <para>MyDataSet myDataSet;</para>
-            <para>QQmlEngine engine;</para>
-            <para>QQmlContext *context = new QQmlContext(engine.rootContext());</para>
-            <para>context-&gt;setContextObject(&amp;myDataSet);</para>
             <para></para>
-            <para>QQmlComponent component(&amp;engine);</para>
-            <para>component.setData(&quot;import QtQuick 2.0\nListView { model: myModel }&quot;, QUrl());</para>
-            <para>component.create(context);</para>
+            <para>  class MyDataSet : ... {</para>
+            <para>      ...</para>
+            <para>      Q_PROPERTY(QAbstractItemModel *myModel READ model NOTIFY modelChanged)</para>
+            <para>      ...</para>
+            <para>  };</para>
+            <para></para>
+            <para>  MyDataSet myDataSet;</para>
+            <para>  QQmlEngine engine;</para>
+            <para>  QQmlContext *context = new QQmlContext(engine.rootContext());</para>
+            <para>  context-&gt;setContextObject(&amp;myDataSet);</para>
+            <para></para>
+            <para>  QQmlComponent component(&amp;engine);</para>
+            <para>  component.setData(&quot;import QtQuick 2.0\nListView { model: myModel }&quot;, QUrl());</para>
+            <para>  component.create(context);</para>
+            <para></para>
+            <para></para>
             <para>All properties added explicitly by QQmlContext::setContextProperty() take precedence over the context object's properties.</para>
             <para></para>
             <para>The Context Hierarchy</para>
             <para>Contexts form a hierarchy. The root of this hierarchy is the QML engine's root context. Child contexts inherit the context properties of their parents; if a child context sets a context property that already exists in its parent, the new context property overrides that of the parent.</para>
             <para>The following example defines two contexts - context1 and context2. The second context overrides the &quot;b&quot; context property inherited from the first with a new value.</para>
-            <para>QQmlEngine engine;</para>
-            <para>QQmlContext *context1 = new QQmlContext(engine.rootContext());</para>
-            <para>QQmlContext *context2 = new QQmlContext(context1);</para>
             <para></para>
-            <para>context1-&gt;setContextProperty(&quot;a&quot;, 12);</para>
-            <para>context1-&gt;setContextProperty(&quot;b&quot;, 12);</para>
             <para></para>
-            <para>context2-&gt;setContextProperty(&quot;b&quot;, 15);</para>
+            <para>  QQmlEngine engine;</para>
+            <para>  QQmlContext *context1 = new QQmlContext(engine.rootContext());</para>
+            <para>  QQmlContext *context2 = new QQmlContext(context1);</para>
+            <para></para>
+            <para>  context1-&gt;setContextProperty(&quot;a&quot;, 12);</para>
+            <para>  context1-&gt;setContextProperty(&quot;b&quot;, 12);</para>
+            <para></para>
+            <para>  context2-&gt;setContextProperty(&quot;b&quot;, 15);</para>
+            <para></para>
+            <para></para>
             <para>While QML objects instantiated in a context are not strictly owned by that context, their bindings are. If a context is destroyed, the property bindings of outstanding QML objects will stop evaluating.</para>
             <para>Warning: Setting the context object or adding new context properties after an object has been created in that context is an expensive operation (essentially forcing all bindings to reevaluate). Thus whenever possible you should complete &quot;setup&quot; of the context before using it to create any objects.</para>
             <para></para>
@@ -1637,12 +1861,20 @@
             <remarks>
             <para>QQmlScriptString is used to create QObject properties that accept a script &quot;assignment&quot; from QML.</para>
             <para>Normally, the following QML would result in a binding being established for the script property; i.e. script would be assigned the value obtained from running myObj.value = Math.max(myValue, 100)</para>
-            <para>MyType {</para>
-            <para>    script: myObj.value = Math.max(myValue, 100)</para>
-            <para>}</para>
+            <para></para>
+            <para></para>
+            <para>  MyType {</para>
+            <para>      script: myObj.value = Math.max(myValue, 100)</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>If instead the property had a type of QQmlScriptString, the script itself -- myObj.value = Math.max(myValue, 100) -- would be passed to the script property and the class could choose how to handle it. Typically, the class will evaluate the script at some later time using a QQmlExpression.</para>
-            <para>QQmlExpression expr(scriptString);</para>
-            <para>expr.evaluate();</para>
+            <para></para>
+            <para></para>
+            <para>  QQmlExpression expr(scriptString);</para>
+            <para>  expr.evaluate();</para>
+            <para></para>
+            <para></para>
             <para></para>
             <para>See also QQmlExpression.</para>
             </remarks>
@@ -1705,18 +1937,26 @@
             </summary>
             <remarks>
             <para>For example, given a file main.qml like this:</para>
-            <para>import QtQuick 2.0</para>
             <para></para>
-            <para>Item {</para>
-            <para>    width: 200; height: 200</para>
-            <para>}</para>
+            <para></para>
+            <para>  import QtQuick 2.0</para>
+            <para></para>
+            <para>  Item {</para>
+            <para>      width: 200; height: 200</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>The following code evaluates a JavaScript expression in the context of the above QML:</para>
-            <para>QQmlEngine *engine = new QQmlEngine;</para>
-            <para>QQmlComponent component(engine, QUrl::fromLocalFile(&quot;main.qml&quot;));</para>
             <para></para>
-            <para>QObject *myObject = component.create();</para>
-            <para>QQmlExpression *expr = new QQmlExpression(engine-&gt;rootContext(), myObject, &quot;width * 2&quot;);</para>
-            <para>int result = expr-&gt;evaluate().toInt();  // result = 400</para>
+            <para></para>
+            <para>  QQmlEngine *engine = new QQmlEngine;</para>
+            <para>  QQmlComponent component(engine, QUrl::fromLocalFile(&quot;main.qml&quot;));</para>
+            <para></para>
+            <para>  QObject *myObject = component.create();</para>
+            <para>  QQmlExpression *expr = new QQmlExpression(engine-&gt;rootContext(), myObject, &quot;width * 2&quot;);</para>
+            <para>  int result = expr-&gt;evaluate().toInt();  // result = 400</para>
+            <para></para>
+            <para></para>
             <para>Note that the Qt Quick 1 version is called QDeclarativeExpression.</para>
             </remarks>
         </member>
@@ -1839,7 +2079,6 @@
             <remarks>
             <para>QQmlExtensionPlugin is a plugin interface that makes it possible to create QML extensions that can be loaded dynamically into QML applications. These extensions allow custom QML types to be made available to the QML engine.</para>
             <para>To write a QML extension plugin:</para>
-            <para></para>
             <para>Subclass QQmlExtensionPlugin</para>
             <para>Use the Q_PLUGIN_METADATA() macro to register the plugin with the Qt meta object system</para>
             <para>Override the registerTypes() method and call qmlRegisterType() to register the types to be exported by the plugin</para>
@@ -1852,53 +2091,73 @@
             <para></para>
             <para>Plugin Example</para>
             <para>Suppose there is a new TimeModel C++ class that should be made available as a new QML type. It provides the current time through hour and minute properties.</para>
-            <para>class TimeModel : public QObject</para>
-            <para>{</para>
-            <para>    Q_OBJECT</para>
-            <para>    Q_PROPERTY(int hour READ hour NOTIFY timeChanged)</para>
-            <para>    Q_PROPERTY(int minute READ minute NOTIFY timeChanged)</para>
-            <para>    ...</para>
-            <para>To make this type available, we create a plugin class named QExampleQmlPlugin which is a subclass of QQmlExtensionPlugin. It overrides the registerTypes() method in order to register the TimeModel type using qmlRegisterType(). It also uses the Q_PLUGIN_METADATA() macro in the class definition to register the plugin with the Qt meta object system using a unique identifier for the plugin.</para>
-            <para>class QExampleQmlPlugin : public QQmlExtensionPlugin</para>
-            <para>{</para>
-            <para>    Q_OBJECT</para>
-            <para>    Q_PLUGIN_METADATA(IID &quot;org.qt-project.Qt.QQmlExtensionInterface&quot;)</para>
             <para></para>
-            <para>public:</para>
-            <para>    void registerTypes(const char *uri)</para>
-            <para>    {</para>
-            <para>        Q_ASSERT(uri == QLatin1String(&quot;TimeExample&quot;));</para>
-            <para>        qmlRegisterType&lt;TimeModel&gt;(uri, 1, 0, &quot;Time&quot;);</para>
-            <para>    }</para>
-            <para>};</para>
+            <para></para>
+            <para>  class TimeModel : public QObject</para>
+            <para>  {</para>
+            <para>      Q_OBJECT</para>
+            <para>      Q_PROPERTY(int hour READ hour NOTIFY timeChanged)</para>
+            <para>      Q_PROPERTY(int minute READ minute NOTIFY timeChanged)</para>
+            <para>      ...</para>
+            <para></para>
+            <para></para>
+            <para>To make this type available, we create a plugin class named QExampleQmlPlugin which is a subclass of QQmlExtensionPlugin. It overrides the registerTypes() method in order to register the TimeModel type using qmlRegisterType(). It also uses the Q_PLUGIN_METADATA() macro in the class definition to register the plugin with the Qt meta object system using a unique identifier for the plugin.</para>
+            <para></para>
+            <para></para>
+            <para>  class QExampleQmlPlugin : public QQmlExtensionPlugin</para>
+            <para>  {</para>
+            <para>      Q_OBJECT</para>
+            <para>      Q_PLUGIN_METADATA(IID QQmlExtensionInterface_iid)</para>
+            <para></para>
+            <para>  public:</para>
+            <para>      void registerTypes(const char *uri)</para>
+            <para>      {</para>
+            <para>          Q_ASSERT(uri == QLatin1String(&quot;TimeExample&quot;));</para>
+            <para>          qmlRegisterType&lt;TimeModel&gt;(uri, 1, 0, &quot;Time&quot;);</para>
+            <para>      }</para>
+            <para>  };</para>
+            <para></para>
+            <para></para>
             <para>This registers the TimeModel class with version 1.0 of this plugin library, as a QML type called Time. The Q_ASSERT() macro can ensure the type namespace is imported correctly by any QML components that use this plugin. The Defining QML Types from C++ article has more information about registering C++ types into the runtime.</para>
             <para>Additionally, the project file (.pro) defines the project as a plugin library, specifies it should be built into the imports/TimeExample directory, and registers the plugin target name and various other details:</para>
-            <para>TEMPLATE = lib</para>
-            <para>CONFIG += qt plugin</para>
-            <para>QT += qml</para>
             <para></para>
-            <para>DESTDIR = imports/TimeExample</para>
-            <para>TARGET = qmlqtimeexampleplugin</para>
-            <para>SOURCES += qexampleqmlplugin.cpp</para>
+            <para></para>
+            <para>  TEMPLATE = lib</para>
+            <para>  CONFIG += qt plugin</para>
+            <para>  QT += qml</para>
+            <para></para>
+            <para>  DESTDIR = imports/TimeExample</para>
+            <para>  TARGET = qmlqtimeexampleplugin</para>
+            <para>  SOURCES += qexampleqmlplugin.cpp</para>
+            <para></para>
+            <para></para>
             <para>Finally, a qmldir file is required in the imports/TimeExample directory to describe the plugin and the types that it exports. The plugin includes a Clock.qml file along with the qmlqtimeexampleplugin that is built by the project (as shown above in the .pro file) so both of these need to be specified in the qmldir file:</para>
-            <para>module TimeExample</para>
-            <para>Clock 1.0 Clock.qml</para>
-            <para>plugin qmlqtimeexampleplugin</para>
+            <para></para>
+            <para></para>
+            <para>  module TimeExample</para>
+            <para>  Clock 1.0 Clock.qml</para>
+            <para>  plugin qmlqtimeexampleplugin</para>
+            <para></para>
+            <para></para>
             <para>To make things easier for this example, the TimeExample source directory is in imports/TimeExample, and we build in-source. However, the structure of the source directory is not so important, as the qmldir file can specify paths to installed QML files.</para>
             <para>What is important is the name of the directory that the qmldir is installed into. When the user imports our module, the QML engine uses the module identifier (TimeExample) to find the plugin, and so the directory in which it is installed must match the module identifier.</para>
             <para>Once the project is built and installed, the new Time component is accessible by any QML component that imports the TimeExample module</para>
-            <para>import TimeExample 1.0 // import types from the plugin</para>
             <para></para>
-            <para>Clock { // this class is defined in QML (imports/TimeExample/Clock.qml)</para>
             <para></para>
-            <para>    Time { // this class is defined in C++ (plugin.cpp)</para>
-            <para>        id: time</para>
-            <para>    }</para>
+            <para>  import TimeExample 1.0 // import types from the plugin</para>
             <para></para>
-            <para>    hours: time.hour</para>
-            <para>    minutes: time.minute</para>
+            <para>  Clock { // this class is defined in QML (imports/TimeExample/Clock.qml)</para>
             <para></para>
-            <para>}</para>
+            <para>      Time { // this class is defined in C++ (plugin.cpp)</para>
+            <para>          id: time</para>
+            <para>      }</para>
+            <para></para>
+            <para>      hours: time.hour</para>
+            <para>      minutes: time.minute</para>
+            <para></para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>The full source code is available in the plugins example.</para>
             <para>The Writing QML Extensions with C++ tutorial also contains a chapter on creating QML plugins.</para>
             <para>Note that the Qt Quick 1 version is called QDeclarativeExtensionPlugin.</para>
@@ -1937,14 +2196,22 @@
             <remarks>
             <para>QQmlFileSelector will automatically apply a QFileSelector to qml file and asset paths.</para>
             <para>It is used as follows:</para>
-            <para>QQmlEngine engine;</para>
-            <para>QQmlFileSelector* selector = new QQmlFileSelector(&amp;engine);</para>
+            <para></para>
+            <para></para>
+            <para>  QQmlEngine engine;</para>
+            <para>  QQmlFileSelector* selector = new QQmlFileSelector(&amp;engine);</para>
+            <para></para>
+            <para></para>
             <para>Then you can swap out files like so:</para>
-            <para>main.qml</para>
-            <para>Component.qml</para>
-            <para>asset.png</para>
-            <para>+unix/Component.qml</para>
-            <para>+mac/asset.png</para>
+            <para></para>
+            <para></para>
+            <para>  main.qml</para>
+            <para>  Component.qml</para>
+            <para>  asset.png</para>
+            <para>  +unix/Component.qml</para>
+            <para>  +mac/asset.png</para>
+            <para></para>
+            <para></para>
             <para>In this example, main.qml will normally use Component.qml for the Component type. However on a unix platform, the unix selector will be present and the +unix/Component.qml version will be used instead. Note that this acts like swapping out Component.qml with +unix/Component.qml, so when using Component.qml you should not need to alter any paths based on which version was selected.</para>
             <para>For example, to pass the &quot;asset.png&quot; file path around you would refer to it just as &quot;asset.png&quot; in all of main.qml, Component.qml, and +linux/Component.qml. It will be replaced with +mac/asset.png on Mac platforms in all cases.</para>
             <para>For a list of available selectors, see QFileSelector.</para>
@@ -1984,14 +2251,18 @@
             <remarks>
             <para>Creating QML objects - like delegates in a view, or a new page in an application - can take a noticeable amount of time, especially on resource constrained mobile devices. When an application uses QQmlComponent::create() directly, the QML object instance is created synchronously which, depending on the complexity of the object, can cause noticeable pauses or stutters in the application.</para>
             <para>The use of QQmlIncubator gives more control over the creation of a QML object, including allowing it to be created asynchronously using application idle time. The following example shows a simple use of QQmlIncubator.</para>
-            <para>QQmlIncubator incubator;</para>
-            <para>component-&gt;create(incubator);</para>
             <para></para>
-            <para>while (incubator.isReady()) {</para>
-            <para>    QCoreApplication::processEvents(QEventLoop::AllEvents, 50);</para>
-            <para>}</para>
             <para></para>
-            <para>QObject *object = incubator.object();</para>
+            <para>  QQmlIncubator incubator;</para>
+            <para>  component-&gt;create(incubator);</para>
+            <para></para>
+            <para>  while (incubator.isReady()) {</para>
+            <para>      QCoreApplication::processEvents(QEventLoop::AllEvents, 50);</para>
+            <para>  }</para>
+            <para></para>
+            <para>  QObject *object = incubator.object();</para>
+            <para></para>
+            <para></para>
             <para>Asynchronous incubators are controlled by a QQmlIncubationController that is set on the QQmlEngine, which lets the engine know when the application is idle and incubating objects should be processed. If an incubation controller is not set on the QQmlEngine, QQmlIncubator creates objects synchronously regardless of the specified IncubationMode.</para>
             <para>QQmlIncubator supports three incubation modes:</para>
             <para></para>
@@ -2004,8 +2275,6 @@
             <para>Conversely, if the ListView was to use the Synchronous incubation mode it would behave correctly but it may introduce stutters into the application. As QML would have to stop and instantiate the ListView's delegates synchronously, if the ListView was part of a QML component that was being instantiated asynchronously this would undo much of the benefit of asynchronous instantiation.</para>
             <para>The AsynchronousIfNested mode reconciles this problem. By using AsynchronousIfNested, the ListView delegates are instantiated asynchronously if the ListView itself is already part of an asynchronous instantiation, and synchronously otherwise. In the case of a nested asynchronous instantiation, the outer asynchronous instantiation will not complete until after all the nested instantiations have also completed. This ensures that by the time the outer asynchronous instantitation completes, inner items like ListView have already completed loading their initial delegates.</para>
             <para>It is almost always incorrect to use the Synchronous incubation mode - elements or components that want the appearance of synchronous instantiation, but without the downsides of introducing freezes or stutters into the application, should use the AsynchronousIfNested incubation mode.</para>
-            <para></para>
-            <para></para>
             </remarks>
         </member>
         <member name="M:QtQml.QQmlIncubator.#ctor(QtQml.QQmlIncubator.IncubationMode)">
@@ -2031,7 +2300,7 @@
         </member>
         <member name="M:QtQml.QQmlIncubator.SetInitialState(QtCore.QObject)">
             <summary>
-            <para>Called after the object is first created, but before property bindings are evaluated and, if applicable, QQmlParserStatus::componentComplete() is called. This is equivalent to the point between QQmlComponent::beginCreate() and QQmlComponent::endCreate(), and can be used to assign initial values to the object's properties.</para>
+            <para>Called after the object is first created, but before property bindings are evaluated and, if applicable, QQmlParserStatus::componentComplete() is called. This is equivalent to the point between QQmlComponent::beginCreate() and QQmlComponent::completeCreate(), and can be used to assign initial values to the object's properties.</para>
             <para>The default implementation does nothing.</para>
             </summary>
         </member>
@@ -2109,19 +2378,23 @@
             <para>In order to behave asynchronously and not introduce stutters or freezes in an application, the process of creating objects a QQmlIncubators must be driven only during the application's idle time. QQmlIncubationController allows the application to control exactly when, how often and for how long this processing occurs.</para>
             <para>A QQmlIncubationController derived instance should be created and set on a QQmlEngine by calling the QQmlEngine::setIncubationController() method. Processing is then controlled by calling the QQmlIncubationController::incubateFor() or QQmlIncubationController::incubateWhile() methods as dictated by the application's requirements.</para>
             <para>For example, this is an example of a incubation controller that will incubate for a maximum of 5 milliseconds out of every 16 milliseconds.</para>
-            <para>class PeriodicIncubationController : public QObject,</para>
-            <para>                                     public QQmlIncubationController</para>
-            <para>{</para>
-            <para>public:</para>
-            <para>    PeriodicIncubationController() {</para>
-            <para>        startTimer(16);</para>
-            <para>    }</para>
             <para></para>
-            <para>protected:</para>
-            <para>    virtual void timerEvent(QTimerEvent *) {</para>
-            <para>        incubateFor(5);</para>
-            <para>    }</para>
-            <para>};</para>
+            <para></para>
+            <para>  class PeriodicIncubationController : public QObject,</para>
+            <para>                                       public QQmlIncubationController</para>
+            <para>  {</para>
+            <para>  public:</para>
+            <para>      PeriodicIncubationController() {</para>
+            <para>          startTimer(16);</para>
+            <para>      }</para>
+            <para></para>
+            <para>  protected:</para>
+            <para>      virtual void timerEvent(QTimerEvent *) {</para>
+            <para>          incubateFor(5);</para>
+            <para>      }</para>
+            <para>  };</para>
+            <para></para>
+            <para></para>
             <para>Although the previous example would work, it is not optimal. Real world incubation controllers should try and maximize the amount of idle time they consume - rather than a static amount like 5 milliseconds - while not disturbing the application.</para>
             </remarks>
         </member>
@@ -2163,9 +2436,17 @@
             <para>When QML types display warning messages, it improves traceability if they include the QML file and line number on which the particular instance was instantiated.</para>
             <para>To include the file and line number, an object must be passed. If the file and line number is not available for that instance (either it was not instantiated by the QML engine or location information is disabled), &quot;unknown location&quot; will be used instead.</para>
             <para>For example,</para>
-            <para>qmlInfo(object) &lt;&lt; tr(&quot;component property is a write-once property&quot;);</para>
+            <para></para>
+            <para></para>
+            <para>  qmlInfo(object) &lt;&lt; tr(&quot;component property is a write-once property&quot;);</para>
+            <para></para>
+            <para></para>
             <para>prints</para>
-            <para>QML MyCustomType (unknown location): component property is a write-once property</para>
+            <para></para>
+            <para></para>
+            <para>  QML MyCustomType (unknown location): component property is a write-once property</para>
+            <para></para>
+            <para></para>
             </summary>
         </member>
         <member name="T:QtQml.QQmlNetworkAccessManagerFactory">
@@ -2200,21 +2481,29 @@
             <para>As QML uses Qt's meta-type system all of the existing QMetaObject classes can be used to introspect and interact with objects created by QML. However, some of the new features provided by QML - such as type safety and attached properties - are most easily used through the QQmlProperty class that simplifies some of their natural complexity.</para>
             <para>Unlike QMetaProperty which represents a property on a class type, QQmlProperty encapsulates a property on a specific object instance. To read a property's value, programmers create a QQmlProperty instance and call the read() method. Likewise to write a property value the write() method is used.</para>
             <para>For example, for the following QML code:</para>
-            <para>// MyItem.qml</para>
-            <para>import QtQuick 2.0</para>
             <para></para>
-            <para>Text { text: &quot;A bit of text&quot; }</para>
+            <para></para>
+            <para>  // MyItem.qml</para>
+            <para>  import QtQuick 2.0</para>
+            <para></para>
+            <para>  Text { text: &quot;A bit of text&quot; }</para>
+            <para></para>
+            <para></para>
             <para>The Text object's properties could be accessed using QQmlProperty, like this:</para>
-            <para>#include &lt;QQmlProperty&gt;</para>
-            <para>#include &lt;QGraphicsObject&gt;</para>
             <para></para>
-            <para>...</para>
             <para></para>
-            <para>QQuickView view(QUrl::fromLocalFile(&quot;MyItem.qml&quot;));</para>
-            <para>QQmlProperty property(view.rootObject(), &quot;font.pixelSize&quot;);</para>
-            <para>qWarning() &lt;&lt; &quot;Current pixel size:&quot; &lt;&lt; property.read().toInt();</para>
-            <para>property.write(24);</para>
-            <para>qWarning() &lt;&lt; &quot;Pixel size should now be 24:&quot; &lt;&lt; property.read().toInt();</para>
+            <para>  #include &lt;QQmlProperty&gt;</para>
+            <para>  #include &lt;QGraphicsObject&gt;</para>
+            <para></para>
+            <para>  ...</para>
+            <para></para>
+            <para>  QQuickView view(QUrl::fromLocalFile(&quot;MyItem.qml&quot;));</para>
+            <para>  QQmlProperty property(view.rootObject(), &quot;font.pixelSize&quot;);</para>
+            <para>  qWarning() &lt;&lt; &quot;Current pixel size:&quot; &lt;&lt; property.read().toInt();</para>
+            <para>  property.write(24);</para>
+            <para>  qWarning() &lt;&lt; &quot;Pixel size should now be 24:&quot; &lt;&lt; property.read().toInt();</para>
+            <para></para>
+            <para></para>
             <para>The Qt Quick 1 version of this class was named QDeclarativeProperty.</para>
             </remarks>
         </member>
@@ -2292,43 +2581,67 @@
         <member name="M:QtQml.QQmlProperty.Read(QtCore.QObject,System.String)">
             <summary>
             <para>Return the name property value of object. This method is equivalent to:</para>
-            <para>QQmlProperty p(object, name);</para>
-            <para>p.read();</para>
+            <para></para>
+            <para></para>
+            <para>  QQmlProperty p(object, name);</para>
+            <para>  p.read();</para>
+            <para></para>
+            <para></para>
             </summary>
         </member>
         <member name="M:QtQml.QQmlProperty.Read(QtCore.QObject,System.String,QtQml.QQmlContext)">
             <summary>
             <para>Return the name property value of object using the context ctxt. This method is equivalent to:</para>
-            <para>QQmlProperty p(object, name, context);</para>
-            <para>p.read();</para>
+            <para></para>
+            <para></para>
+            <para>  QQmlProperty p(object, name, context);</para>
+            <para>  p.read();</para>
+            <para></para>
+            <para></para>
             </summary>
         </member>
         <member name="M:QtQml.QQmlProperty.Read(QtCore.QObject,System.String,QtQml.QQmlEngine)">
             <summary>
             <para>Return the name property value of object using the environment for instantiating QML components that is provided by engine. . This method is equivalent to:</para>
-            <para>QQmlProperty p(object, name, engine);</para>
-            <para>p.read();</para>
+            <para></para>
+            <para></para>
+            <para>  QQmlProperty p(object, name, engine);</para>
+            <para>  p.read();</para>
+            <para></para>
+            <para></para>
             </summary>
         </member>
         <member name="M:QtQml.QQmlProperty.Write(QtCore.QObject,System.String,QtCore.QVariant)">
             <summary>
             <para>Writes value to the name property of object. This method is equivalent to:</para>
-            <para>QQmlProperty p(object, name);</para>
-            <para>p.write(value);</para>
+            <para></para>
+            <para></para>
+            <para>  QQmlProperty p(object, name);</para>
+            <para>  p.write(value);</para>
+            <para></para>
+            <para></para>
             </summary>
         </member>
         <member name="M:QtQml.QQmlProperty.Write(QtCore.QObject,System.String,QtCore.QVariant,QtQml.QQmlContext)">
             <summary>
             <para>Writes value to the name property of object using the context ctxt. This method is equivalent to:</para>
-            <para>QQmlProperty p(object, name, ctxt);</para>
-            <para>p.write(value);</para>
+            <para></para>
+            <para></para>
+            <para>  QQmlProperty p(object, name, ctxt);</para>
+            <para>  p.write(value);</para>
+            <para></para>
+            <para></para>
             </summary>
         </member>
         <member name="M:QtQml.QQmlProperty.Write(QtCore.QObject,System.String,QtCore.QVariant,QtQml.QQmlEngine)">
             <summary>
             <para>Writes value to the name property of object using the environment for instantiating QML components that is provided by engine. This method is equivalent to:</para>
-            <para>QQmlProperty p(object, name, engine);</para>
-            <para>p.write(value);</para>
+            <para></para>
+            <para></para>
+            <para>  QQmlProperty p(object, name, engine);</para>
+            <para>  p.write(value);</para>
+            <para></para>
+            <para></para>
             </summary>
         </member>
         <member name="P:QtQml.QQmlProperty.type">
@@ -2455,20 +2768,28 @@
             <remarks>
             <para>QQmlPropertyMap provides a convenient way to expose domain data to the UI layer. The following example shows how you might declare data in C++ and then access it in QML.</para>
             <para>In the C++ file:</para>
-            <para>// create our data</para>
-            <para>QQmlPropertyMap ownerData;</para>
-            <para>ownerData.insert(&quot;name&quot;, QVariant(QString(&quot;John Smith&quot;)));</para>
-            <para>ownerData.insert(&quot;phone&quot;, QVariant(QString(&quot;555-5555&quot;)));</para>
             <para></para>
-            <para>// expose it to the UI layer</para>
-            <para>QQuickView view;</para>
-            <para>QQmlContext *ctxt = view.rootContext();</para>
-            <para>ctxt-&gt;setContextProperty(&quot;owner&quot;, &amp;ownerData);</para>
             <para></para>
-            <para>view.setSource(QUrl::fromLocalFile(&quot;main.qml&quot;));</para>
-            <para>view.show();</para>
+            <para>  // create our data</para>
+            <para>  QQmlPropertyMap ownerData;</para>
+            <para>  ownerData.insert(&quot;name&quot;, QVariant(QString(&quot;John Smith&quot;)));</para>
+            <para>  ownerData.insert(&quot;phone&quot;, QVariant(QString(&quot;555-5555&quot;)));</para>
+            <para></para>
+            <para>  // expose it to the UI layer</para>
+            <para>  QQuickView view;</para>
+            <para>  QQmlContext *ctxt = view.rootContext();</para>
+            <para>  ctxt-&gt;setContextProperty(&quot;owner&quot;, &amp;ownerData);</para>
+            <para></para>
+            <para>  view.setSource(QUrl::fromLocalFile(&quot;main.qml&quot;));</para>
+            <para>  view.show();</para>
+            <para></para>
+            <para></para>
             <para>Then, in main.qml:</para>
-            <para>Text { text: owner.name + &quot; &quot; + owner.phone }</para>
+            <para></para>
+            <para></para>
+            <para>  Text { text: owner.name + &quot; &quot; + owner.phone }</para>
+            <para></para>
+            <para></para>
             <para>The binding is dynamic - whenever a key's value is updated, anything bound to that key will be updated as well.</para>
             <para>To detect value changes made in the UI layer you can connect to the valueChanged() signal. However, note that valueChanged() is NOT emitted when changes are made by calling insert() or clear() - it is only emitted when a value is updated from QML.</para>
             <para>Note: It is not possible to remove keys from the map; once a key has been added, you can only modify or clear its associated value.</para>
@@ -2548,39 +2869,6 @@
             <summary>
             <para>Returns true if the map contains no keys; otherwise returns false.</para>
             <para>See also size().</para>
-            </summary>
-        </member>
-        <member name="T:QtQml.IQQmlParserStatus">
-            <summary>
-            <para>The QQmlParserStatus class provides updates on the QML parser state.</para>
-            </summary>
-            <remarks>
-            <para>QQmlParserStatus provides a mechanism for classes instantiated by a QQmlEngine to receive notification at key points in their creation.</para>
-            <para>This class is often used for optimization purposes, as it allows you to defer an expensive operation until after all the properties have been set on an object. For example, QML's Text element uses the parser status to defer text layout until all of its properties have been set (we don't want to layout when the text is assigned, and then relayout when the font is assigned, and relayout again when the width is assigned, and so on).</para>
-            <para>Be aware that QQmlParserStatus methods are only called when a class is instantiated by a QQmlEngine. If you create the same class directly from C++, these methods will not be called automatically. To avoid this problem, it is recommended that you start deferring operations from classBegin instead of from the initial creation of your class. This will still prevent multiple revaluations during initial binding assignment in QML, but will not defer operations invoked from C++.</para>
-            <para>To use QQmlParserStatus, you must inherit both a QObject-derived class and QQmlParserStatus, and use the Q_INTERFACES() macro.</para>
-            <para>class MyObject : public QObject, public QQmlParserStatus</para>
-            <para>{</para>
-            <para>    Q_OBJECT</para>
-            <para>    Q_INTERFACES(QQmlParserStatus)</para>
-            <para></para>
-            <para>public:</para>
-            <para>    MyObject(QObject *parent = 0);</para>
-            <para>    ...</para>
-            <para>    void classBegin();</para>
-            <para>    void componentComplete();</para>
-            <para>}</para>
-            <para>The Qt Quick 1 version of this class is named QDeclarativeParserStatus.</para>
-            </remarks>
-        </member>
-        <member name="M:QtQml.IQQmlParserStatus.ClassBegin">
-            <summary>
-            <para>Invoked after class creation, but before any properties have been set.</para>
-            </summary>
-        </member>
-        <member name="M:QtQml.IQQmlParserStatus.ComponentComplete">
-            <summary>
-            <para>Invoked after the root component that caused this instantiation has completed construction. At this point all static values and binding values have been assigned to the class.</para>
             </summary>
         </member>
     </members>

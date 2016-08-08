@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Qt3DLogicSharp</name>
+    </assembly>
+    <members>
+        <member name="M:Qt3DLogic.Qt3DLogic.QLogicAspect.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Default constructs an instance of QLogicAspect.</para>
+            </summary>
+        </member>
+        <member name="T:Qt3DLogic.Qt3DLogic.QLogicComponent">
+            <summary>
+            <para>Provides a way to have a synchronous function executed each frame.</para>
+            </summary>
+            <remarks>
+            <para>The QLogicComponent provides a way to perform tasks each frame in synchronized with the Qt3D backend. This is useful to implement some aspects of application logic and to prototype functionality that can later be folded into an additional Qt3D aspect.</para>
+            <para>For example, the QLogicComponent can be used to animate a property in sync with the Qt3D engine where a Qt Quick animation element is not perfectly synchronized and may lead to stutters in some cases.</para>
+            <para>To execute your own code each frame override the onFrameUpdate function.</para>
+            </remarks>
+        </member>
+        <member name="M:Qt3DLogic.Qt3DLogic.QLogicComponent.#ctor(Qt3DCore.Qt3DCore.QNode)">
+            <summary>
+            <para>Default constructs an instance of QLogicComponent.</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DLogic.Qt3DLogic.QLogicComponent.FrameUpdate">
+            <summary>
+            <para></para>
+            </summary>
+        </member>
+    </members>
+</doc>

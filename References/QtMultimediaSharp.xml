@@ -115,18 +115,8 @@
         </member>
         <member name="E:QtMultimedia.QMediaObject.NotifyIntervalChanged">
             <summary>
-            <para>The interval at which notifiable properties will update.</para>
-            <para>The interval is expressed in milliseconds, the default value is 1000.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> int 	notifyInterval() const</para>
-            <para> void 	setNotifyInterval(int milliSeconds)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	notifyIntervalChanged(int milliseconds)</para>
-            <para></para>
-            <para>See also addPropertyWatch() and removePropertyWatch().</para>
+            <para>Signal a change in the notify interval period to milliseconds.</para>
+            <para>Note: Notifier signal for property notifyInterval. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMediaObject.MetaDataAvailableChanged">
@@ -138,21 +128,65 @@
             <summary>
             <para>Signals that this media object's meta-data has changed.</para>
             <para>If multiple meta-data elements are changed, metaDataChanged(const QString &amp;key, const QVariant &amp;value) signal is emitted for each of them with metaDataChanged() changed emitted once.</para>
+            <para></para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>metaDataChanged</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
+            <para></para>
+            <para></para>
+            <para>  connect(mediaObject, static_cast&lt;void(QMediaObject::*)()&gt;(&amp;QMediaObject::metaDataChanged),</para>
+            <para>      [=](){ /* ... */ });</para>
+            <para></para>
+            <para></para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMediaObject.MetaDataChangedValue">
             <summary>
             <para>Signal the changes of one meta-data element value with the given key.</para>
+            <para></para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>metaDataChanged</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
+            <para></para>
+            <para></para>
+            <para>  connect(mediaObject, static_cast&lt;void(QMediaObject::*)(const QString &amp;, const QVariant &amp;)&gt;(&amp;QMediaObject::metaDataChanged),</para>
+            <para>      [=](const QString &amp;key, const QVariant &amp;value){ /* ... */ });</para>
+            <para></para>
+            <para></para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMediaObject.AvailabilityChanged">
             <summary>
             <para>Signal emitted when the availability state has changed to available.</para>
+            <para></para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>availabilityChanged</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
+            <para></para>
+            <para></para>
+            <para>  connect(mediaObject, static_cast&lt;void(QMediaObject::*)(bool)&gt;(&amp;QMediaObject::availabilityChanged),</para>
+            <para>      [=](bool available){ /* ... */ });</para>
+            <para></para>
+            <para></para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMediaObject.AvailabilityChangedAvailability">
             <summary>
             <para>Signal emitted when the availability of the service has changed to availability.</para>
+            <para></para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>availabilityChanged</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
+            <para></para>
+            <para></para>
+            <para>  connect(mediaObject, static_cast&lt;void(QMediaObject::*)(QMultimedia::AvailabilityStatus)&gt;(&amp;QMediaObject::availabilityChanged),</para>
+            <para>      [=](QMultimedia::AvailabilityStatus availability){ /* ... */ });</para>
+            <para></para>
+            <para></para>
             </summary>
         </member>
         <member name="P:QtMultimedia.QMediaObject.NotifyInterval">
@@ -192,17 +226,11 @@
             <summary>
             <para>The QMediaBindableInterface class is the base class for objects extending media objects functionality.</para>
             </summary>
-            <remarks>
-            <para></para>
-            </remarks>
         </member>
         <member name="T:QtMultimedia.IQMediaBindableInterface">
             <summary>
             <para>The QMediaBindableInterface class is the base class for objects extending media objects functionality.</para>
             </summary>
-            <remarks>
-            <para></para>
-            </remarks>
         </member>
         <member name="P:QtMultimedia.IQMediaBindableInterface.MediaObject">
             <summary>
@@ -229,10 +257,18 @@
             <remarks>
             <para>Media controls provide an interface to individual features provided by a media service. Most services implement a principal control which exposes the core functionality of the service and a number of optional controls which expose any additional functionality.</para>
             <para>A pointer to a control implemented by a media service can be obtained using the QMediaService::requestControl() member of QMediaService. If the service doesn't implement a control it will instead return a null pointer.</para>
-            <para>QMediaPlayerControl *control = qobject_cast&lt;QMediaPlayerControl *&gt;(</para>
-            <para>        mediaService-&gt;requestControl(&quot;org.qt-project.qt.mediaplayercontrol/5.0&quot;));</para>
+            <para></para>
+            <para></para>
+            <para>  QMediaPlayerControl *control = qobject_cast&lt;QMediaPlayerControl *&gt;(</para>
+            <para>          mediaService-&gt;requestControl(&quot;org.qt-project.qt.mediaplayercontrol/5.0&quot;));</para>
+            <para></para>
+            <para></para>
             <para>Alternatively if the IId of the control has been declared using Q_MEDIA_DECLARE_CONTROL the template version of QMediaService::requestControl() can be used to request the service without explicitly passing the IId or using qobject_cast().</para>
-            <para>QMediaPlayerControl *control = mediaService-&gt;requestControl&lt;QMediaPlayerControl *&gt;();</para>
+            <para></para>
+            <para></para>
+            <para>  QMediaPlayerControl *control = mediaService-&gt;requestControl&lt;QMediaPlayerControl *&gt;();</para>
+            <para></para>
+            <para></para>
             <para>Most application code will not interface directly with a media service's controls, instead the QMediaObject which owns the service acts as an intermediary between one or more controls and the application.</para>
             <para></para>
             <para>See also QMediaService and QMediaObject.</para>
@@ -251,8 +287,12 @@
             <para>Media services provide implementations of the functionality promised by media objects, and allow multiple providers to implement a QMediaObject.</para>
             <para>To provide the functionality of a QMediaObject media services implement QMediaControl interfaces. Services typically implement one core media control which provides the core feature of a media object, and some number of additional controls which provide either optional features of the media object, or features of a secondary media object or peripheral object.</para>
             <para>A pointer to media service's QMediaControl implementation can be obtained by passing the control's interface name to the requestControl() function.</para>
-            <para>QMediaPlayerControl *control = qobject_cast&lt;QMediaPlayerControl *&gt;(</para>
-            <para>        mediaService-&gt;requestControl(&quot;org.qt-project.qt.mediaplayercontrol/5.0&quot;));</para>
+            <para></para>
+            <para></para>
+            <para>  QMediaPlayerControl *control = qobject_cast&lt;QMediaPlayerControl *&gt;(</para>
+            <para>          mediaService-&gt;requestControl(&quot;org.qt-project.qt.mediaplayercontrol/5.0&quot;));</para>
+            <para></para>
+            <para></para>
             <para>Media objects can use services loaded dynamically from plug-ins or implemented statically within an applications. Plug-in based services should also implement the QMediaServiceProviderPlugin interface. Static services should implement the QMediaServiceProvider interface. In general, implementing a QMediaService is outside of the scope of this documentation and support on the relevant mailing lists or IRC channels should be sought.</para>
             <para></para>
             <para>See also QMediaObject and QMediaControl.</para>
@@ -279,9 +319,6 @@
             <summary>
             <para>The QCameraExposure class provides interface for exposure related camera settings.</para>
             </summary>
-            <remarks>
-            <para></para>
-            </remarks>
         </member>
         <member name="M:QtMultimedia.QCameraExposure.IsFlashModeSupported(QtMultimedia.QCameraExposure.FlashMode)">
             <summary>
@@ -330,29 +367,14 @@
         </member>
         <member name="E:QtMultimedia.QCameraExposure.FlashReady">
             <summary>
-            <para>This property holds indicates if the flash is charged and ready to use.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> bool 	isFlashReady() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	flashReady(bool ready)</para>
-            <para></para>
+            <para>Signal the flash ready status has changed.</para>
+            <para>Note: Notifier signal for property flashReady. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QCameraExposure.ApertureChanged">
             <summary>
-            <para>This property holds lens aperture is specified as an F number, the ratio of the focal length to effective aperture diameter.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> qreal 	aperture() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	apertureChanged(qreal value)</para>
-            <para></para>
-            <para>See also supportedApertures(), setAutoAperture(), setManualAperture(), and requestedAperture().</para>
+            <para>Signal emitted when aperature changes to value.</para>
+            <para>Note: Notifier signal for property aperture. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QCameraExposure.ApertureRangeChanged">
@@ -362,16 +384,8 @@
         </member>
         <member name="E:QtMultimedia.QCameraExposure.ShutterSpeedChanged">
             <summary>
-            <para>This property holds camera's shutter speed in seconds.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> qreal 	shutterSpeed() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	shutterSpeedChanged(qreal speed)</para>
-            <para></para>
-            <para>See also supportedShutterSpeeds(), setAutoShutterSpeed(), and setManualShutterSpeed().</para>
+            <para>Signals that a camera's shutter speed has changed.</para>
+            <para>Note: Notifier signal for property shutterSpeed. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QCameraExposure.ShutterSpeedRangeChanged">
@@ -381,31 +395,14 @@
         </member>
         <member name="E:QtMultimedia.QCameraExposure.IsoSensitivityChanged">
             <summary>
-            <para>This property holds the sensor ISO sensitivity.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> int 	isoSensitivity() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	isoSensitivityChanged(int value)</para>
-            <para></para>
-            <para>See also supportedIsoSensitivities(), setAutoIsoSensitivity(), and setManualIsoSensitivity().</para>
+            <para>Signal emitted when sensitivity changes to value.</para>
+            <para>Note: Notifier signal for property isoSensitivity. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QCameraExposure.ExposureCompensationChanged">
             <summary>
-            <para>This property holds exposure compensation in EV units.</para>
-            <para>Exposure compensation property allows to adjust the automatically calculated exposure.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> qreal 	exposureCompensation() const</para>
-            <para> void 	setExposureCompensation(qreal ev)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	exposureCompensationChanged(qreal value)</para>
-            <para></para>
+            <para>Signal emitted when the exposure compensation changes to value.</para>
+            <para>Note: Notifier signal for property exposureCompensation. </para>
             </summary>
         </member>
         <member name="P:QtMultimedia.QCameraExposure.SpotMeteringPoint">
@@ -451,15 +448,8 @@
         </member>
         <member name="P:QtMultimedia.QCameraExposure.IsFlashReady">
             <summary>
-            <para>This property holds indicates if the flash is charged and ready to use.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> bool 	isFlashReady() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	flashReady(bool ready)</para>
-            <para></para>
+            <para>Returns true if flash is charged.</para>
+            <para>Note: Getter function for property flashReady. </para>
             </summary>
         </member>
         <member name="P:QtMultimedia.QCameraExposure.IsoSensitivity">
@@ -613,16 +603,20 @@
             <para>For cameras that support autofocusing, in order for a camera to autofocus on part of a sensor frame, it considers different zones within the frame. Which zones to use, and where the zones are located vary between different cameras.</para>
             <para>This class exposes what zones are used by a particular camera, and a list of the zones can be retrieved by a QCameraFocus instance.</para>
             <para>You can use this information to present visual feedback - for example, drawing rectangles around areas of the camera frame that are in focus, or changing the color of a zone as it comes into focus.</para>
-            <para>focus-&gt;setFocusPointMode(QCameraFocus::FocusPointAuto);</para>
-            <para>QList&lt;QCameraFocusZone&gt; zones = focus-&gt;focusZones();</para>
-            <para>foreach (QCameraFocusZone zone, zones) {</para>
-            <para>    if (zone.status() == QCameraFocusZone::Focused) {</para>
-            <para>        // Draw a green box at zone.area()</para>
-            <para>    } else if (zone.status() == QCameraFocusZone::Selected) {</para>
-            <para>        // This area is selected for autofocusing, but is not in focus</para>
-            <para>        // Draw a yellow box at zone.area()</para>
-            <para>    }</para>
-            <para>}</para>
+            <para></para>
+            <para></para>
+            <para>  focus-&gt;setFocusPointMode(QCameraFocus::FocusPointAuto);</para>
+            <para>  QList&lt;QCameraFocusZone&gt; zones = focus-&gt;focusZones();</para>
+            <para>  foreach (QCameraFocusZone zone, zones) {</para>
+            <para>      if (zone.status() == QCameraFocusZone::Focused) {</para>
+            <para>          // Draw a green box at zone.area()</para>
+            <para>      } else if (zone.status() == QCameraFocusZone::Selected) {</para>
+            <para>          // This area is selected for autofocusing, but is not in focus</para>
+            <para>          // Draw a yellow box at zone.area()</para>
+            <para>      }</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para></para>
             <para>See also QCameraFocus.</para>
             </remarks>
@@ -676,25 +670,37 @@
             </summary>
             <remarks>
             <para>On hardware that supports it, this class lets you adjust the focus or zoom (both optical and digital). This also includes things like &quot;Macro&quot; mode for close up work (e.g. reading barcodes, or recognising letters), or &quot;touch to focus&quot; - indicating an interesting area of the viewfinder for the hardware to attempt to focus on.</para>
-            <para>QCameraFocus *focus = camera-&gt;focus();</para>
-            <para>focus-&gt;setFocusPointMode(QCameraFocus::FocusPointCustom);</para>
-            <para>focus-&gt;setCustomFocusPoint(QPointF(0.25f, 0.75f)); // A point near the bottom left, 25% away from the corner, near that shiny vase</para>
+            <para></para>
+            <para></para>
+            <para>  QCameraFocus *focus = camera-&gt;focus();</para>
+            <para>  focus-&gt;setFocusPointMode(QCameraFocus::FocusPointCustom);</para>
+            <para>  focus-&gt;setCustomFocusPoint(QPointF(0.25f, 0.75f)); // A point near the bottom left, 25% away from the corner, near that shiny vase</para>
+            <para></para>
+            <para></para>
             <para>Zooming can be accomplished in a number of ways - usually the more expensive but higher quality approach is an optical zoom, which allows using the full extent of the camera sensor to gather image pixels. In addition it is possible to digitally zoom, which will generally just enlarge part of the sensor frame and throw away other parts. If the camera hardware supports optical zoom this should generally always be used first. The maximumOpticalZoom() method allows this to be checked. The zoomTo() method allows changing both optical and digital zoom at once.</para>
-            <para>focus-&gt;zoomTo(3.0, 4.0); // Super zoom!</para>
+            <para></para>
+            <para></para>
+            <para>  focus-&gt;zoomTo(3.0, 4.0); // Super zoom!</para>
+            <para></para>
+            <para></para>
             <para></para>
             <para>Some notes on autofocus</para>
             <para>Some hardware supports a movable focus lens assembly, and typically this hardware also supports automatically focusing via some heuristic. You can influence this via the FocusPointMode setting - typically the center of the frame is brought into focus, but some hardware also supports focusing on any faces detected in the frame, or on a specific point (usually provided by a user in a &quot;touch to focus&quot; scenario).</para>
             <para>This class (in combination with QCameraFocusZone) can expose information on what parts of the camera sensor image are in focus or are being used for autofocusing via the focusZones() property:</para>
-            <para>focus-&gt;setFocusPointMode(QCameraFocus::FocusPointAuto);</para>
-            <para>QList&lt;QCameraFocusZone&gt; zones = focus-&gt;focusZones();</para>
-            <para>foreach (QCameraFocusZone zone, zones) {</para>
-            <para>    if (zone.status() == QCameraFocusZone::Focused) {</para>
-            <para>        // Draw a green box at zone.area()</para>
-            <para>    } else if (zone.status() == QCameraFocusZone::Selected) {</para>
-            <para>        // This area is selected for autofocusing, but is not in focus</para>
-            <para>        // Draw a yellow box at zone.area()</para>
-            <para>    }</para>
-            <para>}</para>
+            <para></para>
+            <para></para>
+            <para>  focus-&gt;setFocusPointMode(QCameraFocus::FocusPointAuto);</para>
+            <para>  QList&lt;QCameraFocusZone&gt; zones = focus-&gt;focusZones();</para>
+            <para>  foreach (QCameraFocusZone zone, zones) {</para>
+            <para>      if (zone.status() == QCameraFocusZone::Focused) {</para>
+            <para>          // Draw a green box at zone.area()</para>
+            <para>      } else if (zone.status() == QCameraFocusZone::Selected) {</para>
+            <para>          // This area is selected for autofocusing, but is not in focus</para>
+            <para>          // Draw a yellow box at zone.area()</para>
+            <para>      }</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para></para>
             <para>See also QCameraFocusZone.</para>
             </remarks>
@@ -717,45 +723,21 @@
         </member>
         <member name="E:QtMultimedia.QCameraFocus.OpticalZoomChanged">
             <summary>
-            <para>This property holds the current optical zoom value.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> qreal 	opticalZoom() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	opticalZoomChanged(qreal value)</para>
-            <para></para>
-            <para>See also QCameraFocus::digitalZoom.</para>
+            <para>Signal emitted when optical zoom value changes to new value.</para>
+            <para>Note: Notifier signal for property opticalZoom. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QCameraFocus.DigitalZoomChanged">
             <summary>
-            <para>This property holds the current digital zoom value.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> qreal 	digitalZoom() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	digitalZoomChanged(qreal value)</para>
-            <para></para>
-            <para>See also QCameraFocus::opticalZoom.</para>
+            <para>Signal emitted when digital zoom value changes to new value.</para>
+            <para>Note: Notifier signal for property digitalZoom. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QCameraFocus.FocusZonesChanged">
             <summary>
-            <para>Returns the list of active focus zones.</para>
-            <para>If QCamera::FocusPointAuto or QCamera::FocusPointFaceDetection focus mode is selected this method returns the list of zones the camera is actually focused on.</para>
-            <para>The coordinates system is the same as for custom focus points: QPointF(0,0) points to the left top frame point, QPointF(0.5,0.5) points to the frame center.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> QCameraFocusZoneList 	focusZones() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	focusZonesChanged()</para>
-            <para></para>
+            <para>This signal is emitted when the set of zones used in autofocusing is changed.</para>
+            <para>This can change when a zone is focused or loses focus, or new focus zones have been detected.</para>
+            <para>Note: Notifier signal for property focusZones. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QCameraFocus.MaximumOpticalZoomChanged">
@@ -862,14 +844,22 @@
             <para>After capturing the data for a camera frame, the camera hardware and software performs various image processing tasks to produce a final image. This includes compensating for ambient light color, reducing noise, as well as making some other adjustments to the image.</para>
             <para>You can retrieve this class from an instance of a QCamera object.</para>
             <para>For example, you can set the white balance (or color temperature) used for processing images:</para>
-            <para>camera = new QCamera;</para>
-            <para>QCameraImageProcessing *imageProcessing = camera-&gt;imageProcessing();</para>
             <para></para>
-            <para>if (imageProcessing-&gt;isAvailable()) {</para>
-            <para>    imageProcessing-&gt;setWhiteBalanceMode(QCameraImageProcessing::WhiteBalanceFluorescent);</para>
-            <para>}</para>
+            <para></para>
+            <para>  camera = new QCamera;</para>
+            <para>  QCameraImageProcessing *imageProcessing = camera-&gt;imageProcessing();</para>
+            <para></para>
+            <para>  if (imageProcessing-&gt;isAvailable()) {</para>
+            <para>      imageProcessing-&gt;setWhiteBalanceMode(QCameraImageProcessing::WhiteBalanceFluorescent);</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>Or adjust the amount of denoising performed:</para>
-            <para>imageProcessing-&gt;setDenoisingLevel(-0.3); //reduce the amount of denoising applied</para>
+            <para></para>
+            <para></para>
+            <para>  imageProcessing-&gt;setDenoisingLevel(-0.3); //reduce the amount of denoising applied</para>
+            <para></para>
+            <para></para>
             <para>In some cases changing these settings may result in a longer delay before an image is ready.</para>
             <para>For more information on image processing of camera frames, see Camera Image Processing.</para>
             <para></para>
@@ -1530,12 +1520,16 @@
             </summary>
             <remarks>
             <para>A viewfinder settings object is used to specify the viewfinder settings used by QCamera. Viewfinder settings are selected by constructing a QCameraViewfinderSettings object, setting the desired properties and then passing it to a QCamera instance using the QCamera::setViewfinderSettings() function.</para>
-            <para>QCameraViewfinderSettings viewfinderSettings;</para>
-            <para>viewfinderSettings.setResolution(640, 480);</para>
-            <para>viewfinderSettings.setMinimumFrameRate(15.0);</para>
-            <para>viewfinderSettings.setMaximumFrameRate(30.0);</para>
             <para></para>
-            <para>camera-&gt;setViewfinderSettings(viewfinderSettings);</para>
+            <para></para>
+            <para>  QCameraViewfinderSettings viewfinderSettings;</para>
+            <para>  viewfinderSettings.setResolution(640, 480);</para>
+            <para>  viewfinderSettings.setMinimumFrameRate(15.0);</para>
+            <para>  viewfinderSettings.setMaximumFrameRate(30.0);</para>
+            <para></para>
+            <para>  camera-&gt;setViewfinderSettings(viewfinderSettings);</para>
+            <para></para>
+            <para></para>
             <para>Different cameras may have different capabilities. The application should query the camera capabilities before setting parameters. For example, the application should call QCamera::supportedViewfinderResolutions() before calling setResolution().</para>
             <para></para>
             <para>See also QCamera.</para>
@@ -1640,11 +1634,15 @@
             <remarks>
             <para>QCamera can be used with QCameraViewfinder for viewfinder display, QMediaRecorder for video recording and QCameraImageCapture for image taking.</para>
             <para>You can use QCameraInfo to list available cameras and choose which one to use.</para>
-            <para>QList&lt;QCameraInfo&gt; cameras = QCameraInfo::availableCameras();</para>
-            <para>foreach (const QCameraInfo &amp;cameraInfo, cameras) {</para>
-            <para>    if (cameraInfo.deviceName() == &quot;mycamera&quot;)</para>
-            <para>        camera = new QCamera(cameraInfo);</para>
-            <para>}</para>
+            <para></para>
+            <para></para>
+            <para>  QList&lt;QCameraInfo&gt; cameras = QCameraInfo::availableCameras();</para>
+            <para>  foreach (const QCameraInfo &amp;cameraInfo, cameras) {</para>
+            <para>      if (cameraInfo.deviceName() == &quot;mycamera&quot;)</para>
+            <para>          camera = new QCamera(cameraInfo);</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>See the camera overview for more information.</para>
             </remarks>
         </member>
@@ -1691,32 +1689,14 @@
         </member>
         <member name="M:QtMultimedia.QCamera.lockStatus">
             <summary>
-            <para>This property holds the overall status for all the requested camera locks.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> QCamera::LockStatus 	lockStatus() const</para>
-            <para> QCamera::LockStatus 	lockStatus(QCamera::LockType lockType) const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	lockStatusChanged(QCamera::LockStatus status, QCamera::LockChangeReason reason)</para>
-            <para> void 	lockStatusChanged(QCamera::LockType lock, QCamera::LockStatus status, QCamera::LockChangeReason reason)</para>
-            <para></para>
+            <para>Returns the status of requested camera settings locks.</para>
+            <para>Note: Getter function for property lockStatus. </para>
             </summary>
         </member>
         <member name="M:QtMultimedia.QCamera.lockStatus(QtMultimedia.QCamera.LockType)">
             <summary>
-            <para>This property holds the overall status for all the requested camera locks.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> QCamera::LockStatus 	lockStatus() const</para>
-            <para> QCamera::LockStatus 	lockStatus(QCamera::LockType lockType) const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	lockStatusChanged(QCamera::LockStatus status, QCamera::LockChangeReason reason)</para>
-            <para> void 	lockStatusChanged(QCamera::LockType lock, QCamera::LockStatus status, QCamera::LockChangeReason reason)</para>
-            <para></para>
+            <para>Returns the lock status for a given lockType.</para>
+            <para>Note: Getter function for property lockStatus. </para>
             </summary>
         </member>
         <member name="M:QtMultimedia.QCamera.Load">
@@ -1777,43 +1757,21 @@
         </member>
         <member name="E:QtMultimedia.QCamera.StateChanged">
             <summary>
-            <para>This property holds the current state of the camera object.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> State 	state() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	stateChanged(QCamera::State state)</para>
-            <para></para>
+            <para>Signals the camera state has changed.</para>
+            <para>Usually the state changes is caused by calling load(), unload(), start() and stop(), but the state can also be changed change as a result of camera error.</para>
+            <para>Note: Notifier signal for property state. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QCamera.CaptureModeChanged">
             <summary>
-            <para>The type of media (video or still images), the camera is configured to capture.</para>
-            <para>It's allowed to change capture mode in any camera state, but if the camera is currently active, chaging capture mode is likely to lead to camera status chaged to QCamera::LoadedStatus, QCamera::LoadingStatus, and when the camera is ready to QCamera::ActiveStatus.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> CaptureModes 	captureMode() const</para>
-            <para> void 	setCaptureMode(QCamera::CaptureModes mode)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	captureModeChanged(QCamera::CaptureModes mode)</para>
-            <para></para>
+            <para>Signals the capture mode has changed.</para>
+            <para>Note: Notifier signal for property captureMode. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QCamera.StatusChanged">
             <summary>
-            <para>This property holds the current status of the camera object.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> Status 	status() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	statusChanged(QCamera::Status status)</para>
-            <para></para>
+            <para>Signals the camera status has changed.</para>
+            <para>Note: Notifier signal for property status. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QCamera.Locked">
@@ -1828,37 +1786,52 @@
         </member>
         <member name="E:QtMultimedia.QCamera.LockStatusChanged">
             <summary>
-            <para>This property holds the overall status for all the requested camera locks.</para>
-            <para>Access functions:</para>
+            <para>Signals the overall status for all the requested camera locks was changed with specified reason.</para>
             <para></para>
-            <para> QCamera::LockStatus 	lockStatus() const</para>
-            <para> QCamera::LockStatus 	lockStatus(QCamera::LockType lockType) const</para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>lockStatusChanged</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
             <para></para>
-            <para>Notifier signal:</para>
             <para></para>
-            <para> void 	lockStatusChanged(QCamera::LockStatus status, QCamera::LockChangeReason reason)</para>
-            <para> void 	lockStatusChanged(QCamera::LockType lock, QCamera::LockStatus status, QCamera::LockChangeReason reason)</para>
+            <para>  connect(camera, static_cast&lt;void(QCamera::*)(QCamera::LockStatus, QCamera::LockChangeReason)&gt;(&amp;QCamera::lockStatusChanged),</para>
+            <para>      [=](QCamera::LockStatus status, QCamera::LockChangeReason reason){ /* ... */ });</para>
             <para></para>
+            <para></para>
+            <para>Note: Notifier signal for property lockStatus. </para>
             </summary>
         </member>
-        <member name="E:QtMultimedia.QCamera.LockStatusChangedLockChangeReason">
+        <member name="E:QtMultimedia.QCamera.LockStatusChangedReason">
             <summary>
-            <para>This property holds the overall status for all the requested camera locks.</para>
-            <para>Access functions:</para>
+            <para>Signals the lock status was changed with specified reason.</para>
             <para></para>
-            <para> QCamera::LockStatus 	lockStatus() const</para>
-            <para> QCamera::LockStatus 	lockStatus(QCamera::LockType lockType) const</para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>lockStatusChanged</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
             <para></para>
-            <para>Notifier signal:</para>
             <para></para>
-            <para> void 	lockStatusChanged(QCamera::LockStatus status, QCamera::LockChangeReason reason)</para>
-            <para> void 	lockStatusChanged(QCamera::LockType lock, QCamera::LockStatus status, QCamera::LockChangeReason reason)</para>
+            <para>  connect(camera, static_cast&lt;void(QCamera::*)(QCamera::LockType, QCamera::LockStatus, QCamera::LockChangeReason)&gt;(&amp;QCamera::lockStatusChanged),</para>
+            <para>      [=](QCamera::LockType lock, QCamera::LockStatus status, QCamera::LockChangeReason reason){ /* ... */ });</para>
             <para></para>
+            <para></para>
+            <para>Note: Notifier signal for property lockStatus. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QCamera.ErrorValue">
             <summary>
             <para>Signal emitted when error state changes to value.</para>
+            <para></para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>error</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
+            <para></para>
+            <para></para>
+            <para>  connect(camera, static_cast&lt;void(QCamera::*)(QCamera::Error)&gt;(&amp;QCamera::error),</para>
+            <para>      [=](QCamera::Error value){ /* ... */ });</para>
+            <para></para>
+            <para></para>
             </summary>
         </member>
         <member name="P:QtMultimedia.QCamera.ViewfinderSettings">
@@ -2430,6 +2403,43 @@
         <member name="F:QtMultimedia.QAudio.Mode.AudioOutput">
             <summary>audio output device</summary>
         </member>
+        <member name="T:QtMultimedia.QAudio.Role">
+            <summary>
+            <para>This enum describes the role of an audio stream.</para>
+            <para>This enum was introduced or modified in  Qt 5.6.</para>
+            <para>See also QMediaPlayer::setAudioRole().</para>
+            </summary>
+        </member>
+        <member name="F:QtMultimedia.QAudio.Role.UnknownRole">
+            <summary>The role is unknown or undefined</summary>
+        </member>
+        <member name="F:QtMultimedia.QAudio.Role.MusicRole">
+            <summary>Music</summary>
+        </member>
+        <member name="F:QtMultimedia.QAudio.Role.VideoRole">
+            <summary>Soundtrack from a movie or a video</summary>
+        </member>
+        <member name="F:QtMultimedia.QAudio.Role.VoiceCommunicationRole">
+            <summary>Voice communications, such as telephony</summary>
+        </member>
+        <member name="F:QtMultimedia.QAudio.Role.AlarmRole">
+            <summary>Alarm</summary>
+        </member>
+        <member name="F:QtMultimedia.QAudio.Role.NotificationRole">
+            <summary>Notification, such as an incoming e-mail or a chat request</summary>
+        </member>
+        <member name="F:QtMultimedia.QAudio.Role.RingtoneRole">
+            <summary>Ringtone</summary>
+        </member>
+        <member name="F:QtMultimedia.QAudio.Role.AccessibilityRole">
+            <summary>For accessibility, such as with a screen reader</summary>
+        </member>
+        <member name="F:QtMultimedia.QAudio.Role.SonificationRole">
+            <summary>Sonification, such as with user interface sounds</summary>
+        </member>
+        <member name="F:QtMultimedia.QAudio.Role.GameRole">
+            <summary>Game audio</summary>
+        </member>
         <member name="T:QtMultimedia.QAudioFormat">
             <summary>
             <para>The QAudioFormat class stores audio stream parameter information.</para>
@@ -2611,9 +2621,6 @@
             <summary>
             <para>The QAudioBuffer class represents a collection of audio samples with a specific format and sample rate.</para>
             </summary>
-            <remarks>
-            <para></para>
-            </remarks>
         </member>
         <member name="M:QtMultimedia.QAudioBuffer.#ctor">
             <summary>
@@ -2685,8 +2692,12 @@
             <para>Returns a pointer to this buffer's data. You can only read it.</para>
             <para>This method is preferred over the const version of data() to prevent unnecessary copying.</para>
             <para>There is also a templatized version of this constData() function that allows you to retrieve a specific type of read-only pointer to the data. Note that there is no checking done on the format of the audio buffer - this is simply a convenience function.</para>
-            <para>// With a 16bit sample buffer:</para>
-            <para>const quint16 *data = buffer-&gt;constData&lt;quint16&gt;();</para>
+            <para></para>
+            <para></para>
+            <para>  // With a 16bit sample buffer:</para>
+            <para>  const quint16 *data = buffer-&gt;constData&lt;quint16&gt;();</para>
+            <para></para>
+            <para></para>
             </summary>
         </member>
         <member name="P:QtMultimedia.QAudioBuffer.Data">
@@ -2695,8 +2706,12 @@
             <para>Since QAudioBuffers can share the actual sample data, calling this function will result in a deep copy being made if there are any other buffers using the sample. You should avoid calling this unless you really need to modify the data.</para>
             <para>This pointer will remain valid until the underlying storage is detached. In particular, if you obtain a pointer, and then copy this audio buffer, changing data through this pointer may change both buffer instances. Calling data() on either instance will again cause a deep copy to be made, which may invalidate the pointers returned from this function previously.</para>
             <para>There is also a templatized version of data() allows you to retrieve a specific type of pointer to the data. Note that there is no checking done on the format of the audio buffer - this is simply a convenience function.</para>
-            <para>// With a 16bit sample buffer:</para>
-            <para>quint16 *data = buffer-&gt;data&lt;quint16&gt;(); // May cause deep copy</para>
+            <para></para>
+            <para></para>
+            <para>  // With a 16bit sample buffer:</para>
+            <para>  quint16 *data = buffer-&gt;data&lt;quint16&gt;(); // May cause deep copy</para>
+            <para></para>
+            <para></para>
             </summary>
         </member>
         <member name="T:QtMultimedia.QAudioDecoder">
@@ -2745,15 +2760,10 @@
         </member>
         <member name="E:QtMultimedia.QAudioDecoder.BufferAvailableChanged">
             <summary>
-            <para>This property holds whether there is a decoded audio buffer available.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> bool 	bufferAvailable() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	bufferAvailableChanged(bool available)</para>
-            <para></para>
+            <para>Signals the availability (if available is true) of a new buffer.</para>
+            <para>If available is false, there are no buffers available.</para>
+            <para>Note: Notifier signal for property bufferAvailable. </para>
+            <para>See also bufferAvailable() and bufferReady().</para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QAudioDecoder.BufferReady">
@@ -2770,17 +2780,8 @@
         </member>
         <member name="E:QtMultimedia.QAudioDecoder.StateChanged">
             <summary>
-            <para>This property holds the audio decoder's playback state.</para>
-            <para>By default this property is QAudioDecoder::Stopped</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> State 	state() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	stateChanged(QAudioDecoder::State state)</para>
-            <para></para>
-            <para>See also start() and stop().</para>
+            <para>Signal the state of the decoder object has changed.</para>
+            <para>Note: Notifier signal for property state. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QAudioDecoder.FormatChanged">
@@ -2792,21 +2793,25 @@
         <member name="E:QtMultimedia.QAudioDecoder.ErrorError">
             <summary>
             <para>Signals that an error condition has occurred.</para>
+            <para></para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>error</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
+            <para></para>
+            <para></para>
+            <para>  connect(audioDecoder, static_cast&lt;void(QAudioDecoder::*)(QAudioDecoder::Error)&gt;(&amp;QAudioDecoder::error),</para>
+            <para>      [=](QAudioDecoder::Error error){ /* ... */ });</para>
+            <para></para>
+            <para></para>
             <para>See also errorString().</para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QAudioDecoder.SourceChanged">
             <summary>
-            <para>This property holds the active filename being decoded by the decoder object.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> QString 	sourceFilename() const</para>
-            <para> void 	setSourceFilename(const QString &amp; fileName)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	sourceChanged()</para>
-            <para></para>
+            <para>Signals that the current source of the decoder has changed.</para>
+            <para>Note: Notifier signal for property sourceFilename. </para>
+            <para>See also sourceFilename() and sourceDevice().</para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QAudioDecoder.PositionChanged">
@@ -2925,19 +2930,27 @@
             <para>A QAudioDeviceInfo is used by Qt to construct classes that communicate with the device--such as QAudioInput, and QAudioOutput.</para>
             <para>You can also query each device for the formats it supports. A format in this context is a set consisting of a specific byte order, channel, codec, frequency, sample rate, and sample type. A format is represented by the QAudioFormat class.</para>
             <para>The values supported by the device for each of these parameters can be fetched with supportedByteOrders(), supportedChannelCounts(), supportedCodecs(), supportedSampleRates(), supportedSampleSizes(), and supportedSampleTypes(). The combinations supported are dependent on the platform, audio plugins installed and the audio device capabilities. If you need a specific format, you can check if the device supports it with isFormatSupported(), or fetch a supported format that is as close as possible to the format with nearestFormat(). For instance:</para>
-            <para>QAudioFormat format;</para>
-            <para>format.setSampleRate(44100);</para>
-            <para>// ... other format parameters</para>
-            <para>format.setSampleType(QAudioFormat::SignedInt);</para>
             <para></para>
-            <para>QAudioDeviceInfo info(QAudioDeviceInfo::defaultOutputDevice());</para>
             <para></para>
-            <para>if (!info.isFormatSupported(format))</para>
-            <para>    format = info.nearestFormat(format);</para>
+            <para>  QAudioFormat format;</para>
+            <para>  format.setSampleRate(44100);</para>
+            <para>  // ... other format parameters</para>
+            <para>  format.setSampleType(QAudioFormat::SignedInt);</para>
+            <para></para>
+            <para>  QAudioDeviceInfo info(QAudioDeviceInfo::defaultOutputDevice());</para>
+            <para></para>
+            <para>  if (!info.isFormatSupported(format))</para>
+            <para>      format = info.nearestFormat(format);</para>
+            <para></para>
+            <para></para>
             <para>The static functions defaultInputDevice(), defaultOutputDevice(), and availableDevices() let you get a list of all available devices. Devices are fetched according to the value of mode this is specified by the QAudio::Mode enum. The QAudioDeviceInfo returned are only valid for the QAudio::Mode.</para>
             <para>For instance:</para>
-            <para>foreach (const QAudioDeviceInfo &amp;deviceInfo, QAudioDeviceInfo::availableDevices(QAudio::AudioOutput))</para>
-            <para>    qDebug() &lt;&lt; &quot;Device name: &quot; &lt;&lt; deviceInfo.deviceName();</para>
+            <para></para>
+            <para></para>
+            <para>  foreach (const QAudioDeviceInfo &amp;deviceInfo, QAudioDeviceInfo::availableDevices(QAudio::AudioOutput))</para>
+            <para>      qDebug() &lt;&lt; &quot;Device name: &quot; &lt;&lt; deviceInfo.deviceName();</para>
+            <para></para>
+            <para></para>
             <para>In this code sample, we loop through all devices that are able to output sound, i.e., play an audio stream in a supported format. For each device we find, we simply print the deviceName().</para>
             <para></para>
             <para>See also QAudioOutput and QAudioInput.</para>
@@ -3028,64 +3041,76 @@
             <para>To record to a file:</para>
             <para>QAudioInput lets you record audio with an audio input device. The default constructor of this class will use the systems default audio device, but you can also specify a QAudioDeviceInfo for a specific device. You also need to pass in the QAudioFormat in which you wish to record.</para>
             <para>Starting up the QAudioInput is simply a matter of calling start() with a QIODevice opened for writing. For instance, to record to a file, you can:</para>
-            <para>QFile destinationFile;   // Class member</para>
-            <para>QAudioInput* audio; // Class member</para>
-            <para>{</para>
-            <para>    destinationFile.setFileName(&quot;/tmp/test.raw&quot;);</para>
-            <para>    destinationFile.open( QIODevice::WriteOnly | QIODevice::Truncate );</para>
             <para></para>
-            <para>    QAudioFormat format;</para>
-            <para>    // Set up the desired format, for example:</para>
-            <para>    format.setSampleRate(8000);</para>
-            <para>    format.setChannelCount(1);</para>
-            <para>    format.setSampleSize(8);</para>
-            <para>    format.setCodec(&quot;audio/pcm&quot;);</para>
-            <para>    format.setByteOrder(QAudioFormat::LittleEndian);</para>
-            <para>    format.setSampleType(QAudioFormat::UnSignedInt);</para>
             <para></para>
-            <para>    QAudioDeviceInfo info = QAudioDeviceInfo::defaultInputDevice();</para>
-            <para>    if (!info.isFormatSupported(format)) {</para>
-            <para>        qWarning() &lt;&lt; &quot;Default format not supported, trying to use the nearest.&quot;;</para>
-            <para>        format = info.nearestFormat(format);</para>
-            <para>    }</para>
+            <para>  QFile destinationFile;   // Class member</para>
+            <para>  QAudioInput* audio; // Class member</para>
+            <para>  {</para>
+            <para>      destinationFile.setFileName(&quot;/tmp/test.raw&quot;);</para>
+            <para>      destinationFile.open( QIODevice::WriteOnly | QIODevice::Truncate );</para>
             <para></para>
-            <para>    audio = new QAudioInput(format, this);</para>
-            <para>    connect(audio, SIGNAL(stateChanged(QAudio::State)), this, SLOT(handleStateChanged(QAudio::State)));</para>
+            <para>      QAudioFormat format;</para>
+            <para>      // Set up the desired format, for example:</para>
+            <para>      format.setSampleRate(8000);</para>
+            <para>      format.setChannelCount(1);</para>
+            <para>      format.setSampleSize(8);</para>
+            <para>      format.setCodec(&quot;audio/pcm&quot;);</para>
+            <para>      format.setByteOrder(QAudioFormat::LittleEndian);</para>
+            <para>      format.setSampleType(QAudioFormat::UnSignedInt);</para>
             <para></para>
-            <para>    QTimer::singleShot(3000, this, SLOT(stopRecording()));</para>
-            <para>    audio-&gt;start(&amp;destinationFile);</para>
-            <para>    // Records audio for 3000ms</para>
-            <para>}</para>
+            <para>      QAudioDeviceInfo info = QAudioDeviceInfo::defaultInputDevice();</para>
+            <para>      if (!info.isFormatSupported(format)) {</para>
+            <para>          qWarning() &lt;&lt; &quot;Default format not supported, trying to use the nearest.&quot;;</para>
+            <para>          format = info.nearestFormat(format);</para>
+            <para>      }</para>
+            <para></para>
+            <para>      audio = new QAudioInput(format, this);</para>
+            <para>      connect(audio, SIGNAL(stateChanged(QAudio::State)), this, SLOT(handleStateChanged(QAudio::State)));</para>
+            <para></para>
+            <para>      QTimer::singleShot(3000, this, SLOT(stopRecording()));</para>
+            <para>      audio-&gt;start(&amp;destinationFile);</para>
+            <para>      // Records audio for 3000ms</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>This will start recording if the format specified is supported by the input device (you can check this with QAudioDeviceInfo::isFormatSupported(). In case there are any snags, use the error() function to check what went wrong. We stop recording in the stopRecording() slot.</para>
-            <para>void AudioInputExample::stopRecording()</para>
-            <para>{</para>
-            <para>    audio-&gt;stop();</para>
-            <para>    destinationFile.close();</para>
-            <para>    delete audio;</para>
-            <para>}</para>
+            <para></para>
+            <para></para>
+            <para>  void AudioInputExample::stopRecording()</para>
+            <para>  {</para>
+            <para>      audio-&gt;stop();</para>
+            <para>      destinationFile.close();</para>
+            <para>      delete audio;</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>At any point in time, QAudioInput will be in one of four states: active, suspended, stopped, or idle. These states are specified by the QAudio::State enum. You can request a state change directly through suspend(), resume(), stop(), reset(), and start(). The current state is reported by state(). QAudioOutput will also signal you when the state changes (stateChanged()).</para>
             <para>QAudioInput provides several ways of measuring the time that has passed since the start() of the recording. The processedUSecs() function returns the length of the stream in microseconds written, i.e., it leaves out the times the audio input was suspended or idle. The elapsedUSecs() function returns the time elapsed since start() was called regardless of which states the QAudioInput has been in.</para>
             <para>If an error should occur, you can fetch its reason with error(). The possible error reasons are described by the QAudio::Error enum. The QAudioInput will enter the StoppedState when an error is encountered. Connect to the stateChanged() signal to handle the error:</para>
-            <para>void AudioInputExample::handleStateChanged(QAudio::State newState)</para>
-            <para>{</para>
-            <para>    switch (newState) {</para>
-            <para>        case QAudio::StoppedState:</para>
-            <para>            if (audio-&gt;error() != QAudio::NoError) {</para>
-            <para>                // Error handling</para>
-            <para>            } else {</para>
-            <para>                // Finished recording</para>
-            <para>            }</para>
-            <para>            break;</para>
             <para></para>
-            <para>        case QAudio::ActiveState:</para>
-            <para>            // Started recording - read from IO device</para>
-            <para>            break;</para>
             <para></para>
-            <para>        default:</para>
-            <para>            // ... other cases as appropriate</para>
-            <para>            break;</para>
-            <para>    }</para>
-            <para>}</para>
+            <para>  void AudioInputExample::handleStateChanged(QAudio::State newState)</para>
+            <para>  {</para>
+            <para>      switch (newState) {</para>
+            <para>          case QAudio::StoppedState:</para>
+            <para>              if (audio-&gt;error() != QAudio::NoError) {</para>
+            <para>                  // Error handling</para>
+            <para>              } else {</para>
+            <para>                  // Finished recording</para>
+            <para>              }</para>
+            <para>              break;</para>
+            <para></para>
+            <para>          case QAudio::ActiveState:</para>
+            <para>              // Started recording - read from IO device</para>
+            <para>              break;</para>
+            <para></para>
+            <para>          default:</para>
+            <para>              // ... other cases as appropriate</para>
+            <para>              break;</para>
+            <para>      }</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para></para>
             <para>See also QAudioOutput and QAudioDeviceInfo.</para>
             </remarks>
@@ -3237,80 +3262,92 @@
             <para>You can construct an audio output with the system's default audio output device. It is also possible to create QAudioOutput with a specific QAudioDeviceInfo. When you create the audio output, you should also send in the QAudioFormat to be used for the playback (see the QAudioFormat class description for details).</para>
             <para>To play a file:</para>
             <para>Starting to play an audio stream is simply a matter of calling start() with a QIODevice. QAudioOutput will then fetch the data it needs from the io device. So playing back an audio file is as simple as:</para>
-            <para>QFile sourceFile;   // class member.</para>
-            <para>QAudioOutput* audio; // class member.</para>
-            <para>{</para>
-            <para>    sourceFile.setFileName(&quot;/tmp/test.raw&quot;);</para>
-            <para>    sourceFile.open(QIODevice::ReadOnly);</para>
             <para></para>
-            <para>    QAudioFormat format;</para>
-            <para>    // Set up the format, eg.</para>
-            <para>    format.setSampleRate(8000);</para>
-            <para>    format.setChannelCount(1);</para>
-            <para>    format.setSampleSize(8);</para>
-            <para>    format.setCodec(&quot;audio/pcm&quot;);</para>
-            <para>    format.setByteOrder(QAudioFormat::LittleEndian);</para>
-            <para>    format.setSampleType(QAudioFormat::UnSignedInt);</para>
             <para></para>
-            <para>    QAudioDeviceInfo info(QAudioDeviceInfo::defaultOutputDevice());</para>
-            <para>    if (!info.isFormatSupported(format)) {</para>
-            <para>        qWarning() &lt;&lt; &quot;Raw audio format not supported by backend, cannot play audio.&quot;;</para>
-            <para>        return;</para>
-            <para>    }</para>
+            <para>  QFile sourceFile;   // class member.</para>
+            <para>  QAudioOutput* audio; // class member.</para>
+            <para>  {</para>
+            <para>      sourceFile.setFileName(&quot;/tmp/test.raw&quot;);</para>
+            <para>      sourceFile.open(QIODevice::ReadOnly);</para>
             <para></para>
-            <para>    audio = new QAudioOutput(format, this);</para>
-            <para>    connect(audio, SIGNAL(stateChanged(QAudio::State)), this, SLOT(handleStateChanged(QAudio::State)));</para>
-            <para>    audio-&gt;start(&amp;sourceFile);</para>
-            <para>}</para>
+            <para>      QAudioFormat format;</para>
+            <para>      // Set up the format, eg.</para>
+            <para>      format.setSampleRate(8000);</para>
+            <para>      format.setChannelCount(1);</para>
+            <para>      format.setSampleSize(8);</para>
+            <para>      format.setCodec(&quot;audio/pcm&quot;);</para>
+            <para>      format.setByteOrder(QAudioFormat::LittleEndian);</para>
+            <para>      format.setSampleType(QAudioFormat::UnSignedInt);</para>
+            <para></para>
+            <para>      QAudioDeviceInfo info(QAudioDeviceInfo::defaultOutputDevice());</para>
+            <para>      if (!info.isFormatSupported(format)) {</para>
+            <para>          qWarning() &lt;&lt; &quot;Raw audio format not supported by backend, cannot play audio.&quot;;</para>
+            <para>          return;</para>
+            <para>      }</para>
+            <para></para>
+            <para>      audio = new QAudioOutput(format, this);</para>
+            <para>      connect(audio, SIGNAL(stateChanged(QAudio::State)), this, SLOT(handleStateChanged(QAudio::State)));</para>
+            <para>      audio-&gt;start(&amp;sourceFile);</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>The file will start playing assuming that the audio system and output device support it. If you run out of luck, check what's up with the error() function.</para>
             <para>After the file has finished playing, we need to stop the device:</para>
-            <para>void AudioOutputExample::handleStateChanged(QAudio::State newState)</para>
-            <para>{</para>
-            <para>    switch (newState) {</para>
-            <para>        case QAudio::IdleState:</para>
-            <para>            // Finished playing (no more data)</para>
-            <para>            audio-&gt;stop();</para>
-            <para>            sourceFile.close();</para>
-            <para>            delete audio;</para>
-            <para>            break;</para>
             <para></para>
-            <para>        case QAudio::StoppedState:</para>
-            <para>            // Stopped for other reasons</para>
-            <para>            if (audio-&gt;error() != QAudio::NoError) {</para>
-            <para>                // Error handling</para>
-            <para>            }</para>
-            <para>            break;</para>
             <para></para>
-            <para>        default:</para>
-            <para>            // ... other cases as appropriate</para>
-            <para>            break;</para>
-            <para>    }</para>
-            <para>}</para>
+            <para>  void AudioOutputExample::handleStateChanged(QAudio::State newState)</para>
+            <para>  {</para>
+            <para>      switch (newState) {</para>
+            <para>          case QAudio::IdleState:</para>
+            <para>              // Finished playing (no more data)</para>
+            <para>              audio-&gt;stop();</para>
+            <para>              sourceFile.close();</para>
+            <para>              delete audio;</para>
+            <para>              break;</para>
+            <para></para>
+            <para>          case QAudio::StoppedState:</para>
+            <para>              // Stopped for other reasons</para>
+            <para>              if (audio-&gt;error() != QAudio::NoError) {</para>
+            <para>                  // Error handling</para>
+            <para>              }</para>
+            <para>              break;</para>
+            <para></para>
+            <para>          default:</para>
+            <para>              // ... other cases as appropriate</para>
+            <para>              break;</para>
+            <para>      }</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>At any given time, the QAudioOutput will be in one of four states: active, suspended, stopped, or idle. These states are described by the QAudio::State enum. State changes are reported through the stateChanged() signal. You can use this signal to, for instance, update the GUI of the application; the mundane example here being changing the state of a play/pause button. You request a state change directly with suspend(), stop(), reset(), resume(), and start().</para>
             <para>While the stream is playing, you can set a notify interval in milliseconds with setNotifyInterval(). This interval specifies the time between two emissions of the notify() signal. This is relative to the position in the stream, i.e., if the QAudioOutput is in the SuspendedState or the IdleState, the notify() signal is not emitted. A typical use-case would be to update a slider that allows seeking in the stream. If you want the time since playback started regardless of which states the audio output has been in, elapsedUSecs() is the function for you.</para>
             <para>If an error occurs, you can fetch the error type with the error() function. Please see the QAudio::Error enum for a description of the possible errors that are reported. When an error is encountered, the state changes to QAudio::StoppedState. You can check for errors by connecting to the stateChanged() signal:</para>
-            <para>void AudioOutputExample::handleStateChanged(QAudio::State newState)</para>
-            <para>{</para>
-            <para>    switch (newState) {</para>
-            <para>        case QAudio::IdleState:</para>
-            <para>            // Finished playing (no more data)</para>
-            <para>            audio-&gt;stop();</para>
-            <para>            sourceFile.close();</para>
-            <para>            delete audio;</para>
-            <para>            break;</para>
             <para></para>
-            <para>        case QAudio::StoppedState:</para>
-            <para>            // Stopped for other reasons</para>
-            <para>            if (audio-&gt;error() != QAudio::NoError) {</para>
-            <para>                // Error handling</para>
-            <para>            }</para>
-            <para>            break;</para>
             <para></para>
-            <para>        default:</para>
-            <para>            // ... other cases as appropriate</para>
-            <para>            break;</para>
-            <para>    }</para>
-            <para>}</para>
+            <para>  void AudioOutputExample::handleStateChanged(QAudio::State newState)</para>
+            <para>  {</para>
+            <para>      switch (newState) {</para>
+            <para>          case QAudio::IdleState:</para>
+            <para>              // Finished playing (no more data)</para>
+            <para>              audio-&gt;stop();</para>
+            <para>              sourceFile.close();</para>
+            <para>              delete audio;</para>
+            <para>              break;</para>
+            <para></para>
+            <para>          case QAudio::StoppedState:</para>
+            <para>              // Stopped for other reasons</para>
+            <para>              if (audio-&gt;error() != QAudio::NoError) {</para>
+            <para>                  // Error handling</para>
+            <para>              }</para>
+            <para>              break;</para>
+            <para></para>
+            <para>          default:</para>
+            <para>              // ... other cases as appropriate</para>
+            <para>              break;</para>
+            <para>      }</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para></para>
             <para>See also QAudioInput and QAudioDeviceInfo.</para>
             </remarks>
@@ -3469,16 +3506,18 @@
             <para>The QAudioProbe class allows you to monitor audio being played or recorded.</para>
             </summary>
             <remarks>
-            <para>QAudioRecorder *recorder = new QAudioRecorder();</para>
-            <para>QAudioProbe *probe = new QAudioProbe;</para>
+            <para>  QAudioRecorder *recorder = new QAudioRecorder();</para>
+            <para>  QAudioProbe *probe = new QAudioProbe;</para>
             <para></para>
-            <para>// ... configure the audio recorder (skipped)</para>
+            <para>  // ... configure the audio recorder (skipped)</para>
             <para></para>
-            <para>connect(probe, SIGNAL(audioBufferProbed(QAudioBuffer)), this, SLOT(processBuffer(QAudioBuffer)));</para>
+            <para>  connect(probe, SIGNAL(audioBufferProbed(QAudioBuffer)), this, SLOT(processBuffer(QAudioBuffer)));</para>
             <para></para>
-            <para>probe-&gt;setSource(recorder); // Returns true, hopefully.</para>
+            <para>  probe-&gt;setSource(recorder); // Returns true, hopefully.</para>
             <para></para>
-            <para>recorder-&gt;record(); // Now we can do things like calculating levels or performing an FFT</para>
+            <para>  recorder-&gt;record(); // Now we can do things like calculating levels or performing an FFT</para>
+            <para></para>
+            <para></para>
             <para></para>
             <para>See also QVideoProbe, QMediaPlayer, and QCamera.</para>
             </remarks>
@@ -3527,10 +3566,18 @@
             </summary>
             <remarks>
             <para>Qt provides the most commonly required audio operation in GUI applications: asynchronously playing a sound file. This is most easily accomplished using the static play() function:</para>
-            <para>QSound::play(&quot;mysounds/bells.wav&quot;);</para>
+            <para></para>
+            <para></para>
+            <para>  QSound::play(&quot;mysounds/bells.wav&quot;);</para>
+            <para></para>
+            <para></para>
             <para>Alternatively, create a QSound object from the sound file first and then call the play() slot:</para>
-            <para>QSound bells(&quot;mysounds/bells.wav&quot;);</para>
-            <para>bells.play();</para>
+            <para></para>
+            <para></para>
+            <para>  QSound bells(&quot;mysounds/bells.wav&quot;);</para>
+            <para>  bells.play();</para>
+            <para></para>
+            <para></para>
             <para>Once created a QSound object can be queried for its fileName() and total number of loops() (i.e. the number of times the sound will play). The number of repetitions can be altered using the setLoops() function. While playing the sound, the loopsRemaining() function returns the remaining number of repetitions. Use the isFinished() function to determine whether the sound has finished playing.</para>
             <para>Sounds played using a QSound object may use more memory than the static play() function, but it may also play more immediately (depending on the underlying platform audio facilities).</para>
             <para>If you require finer control over playing sounds, consider the QSoundEffect or QAudioOutput classes.</para>
@@ -3601,23 +3648,31 @@
             <remarks>
             <para>This class allows you to play uncompressed audio files (typically WAV files) in a generally lower latency way, and is suitable for &quot;feedback&quot; type sounds in response to user actions (e.g. virtual keyboard sounds, positive or negative feedback for popup dialogs, or game sounds). If low latency is not important, consider using the QMediaPlayer class instead, since it supports a wider variety of media formats and is less resource intensive.</para>
             <para>This example shows how a looping, somewhat quiet sound effect can be played:</para>
-            <para>QSoundEffect effect;</para>
-            <para>effect.setSource(QUrl::fromLocalFile(&quot;engine.wav&quot;));</para>
-            <para>effect.setLoopCount(QSoundEffect::Infinite);</para>
-            <para>effect.setVolume(0.25f);</para>
-            <para>effect.play();</para>
-            <para>Typically the sound effect should be reused, which allows all the parsing and preparation to be done ahead of time, and only triggered when necessary. This assists with lower latency audio playback.</para>
-            <para>MyGame()</para>
-            <para>    : m_explosion(this)</para>
-            <para>{</para>
-            <para>    m_explosion.setSource(QUrl::fromLocalFile(&quot;explosion.wav&quot;));</para>
-            <para>    m_explosion.setVolume(0.25f);</para>
             <para></para>
-            <para>    // Set up click handling etc.</para>
-            <para>    connect(clickSource, SIGNAL(clicked()), &amp;m_explosion, SLOT(play()));</para>
-            <para>}</para>
-            <para>private:</para>
-            <para>QSoundEffect m_explosion;</para>
+            <para></para>
+            <para>  QSoundEffect effect;</para>
+            <para>  effect.setSource(QUrl::fromLocalFile(&quot;engine.wav&quot;));</para>
+            <para>  effect.setLoopCount(QSoundEffect::Infinite);</para>
+            <para>  effect.setVolume(0.25f);</para>
+            <para>  effect.play();</para>
+            <para></para>
+            <para></para>
+            <para>Typically the sound effect should be reused, which allows all the parsing and preparation to be done ahead of time, and only triggered when necessary. This assists with lower latency audio playback.</para>
+            <para></para>
+            <para></para>
+            <para>  MyGame()</para>
+            <para>      : m_explosion(this)</para>
+            <para>  {</para>
+            <para>      m_explosion.setSource(QUrl::fromLocalFile(&quot;explosion.wav&quot;));</para>
+            <para>      m_explosion.setVolume(0.25f);</para>
+            <para></para>
+            <para>      // Set up click handling etc.</para>
+            <para>      connect(clickSource, SIGNAL(clicked()), &amp;m_explosion, SLOT(play()));</para>
+            <para>  }</para>
+            <para>  private:</para>
+            <para>  QSoundEffect m_explosion;</para>
+            <para></para>
+            <para></para>
             <para>Since QSoundEffect requires slightly more resources to achieve lower latency playback, the platform may limit the number of simultaneously playing sound effects.</para>
             </remarks>
         </member>
@@ -3638,72 +3693,32 @@
         </member>
         <member name="E:QtMultimedia.QSoundEffect.SourceChanged">
             <summary>
-            <para>This property holds the url for the sound to play. For the SoundEffect to attempt to load the source, the URL must exist and the application must have read permission in the specified directory.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> QUrl 	source() const</para>
-            <para> void 	setSource(const QUrl &amp; url)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	sourceChanged()</para>
-            <para></para>
+            <para>The sourceChanged signal is emitted when the source has been changed.</para>
+            <para>Note: Notifier signal for property source. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QSoundEffect.LoopCountChanged">
             <summary>
-            <para>This property holds the number of times the sound is played. A value of 0 or 1 means the sound will be played only once; set to SoundEffect.Infinite to enable infinite looping.</para>
-            <para>The value can be changed while the sound effect is playing, in which case it will update the remaining loops to the new value.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> int 	loopCount() const</para>
-            <para> void 	setLoopCount(int loopCount)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	loopCountChanged()</para>
-            <para></para>
+            <para>The loopCountChanged signal is emitted when the initial number of loops has changed.</para>
+            <para>Note: Notifier signal for property loops. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QSoundEffect.LoopsRemainingChanged">
             <summary>
-            <para>This property contains the number of loops remaining before the sound effect stops by itself, or QSoundEffect::Infinite if that's what has been set in loops.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> int 	loopsRemaining() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	loopsRemainingChanged()</para>
-            <para></para>
+            <para>The loopsRemainingChanged signal is emitted when the remaining number of loops has changed.</para>
+            <para>Note: Notifier signal for property loopsRemaining. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QSoundEffect.VolumeChanged">
             <summary>
-            <para>This property holds the volume of the sound effect playback, from 0.0 (silent) to 1.0 (maximum volume).</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> qreal 	volume() const</para>
-            <para> void 	setVolume(qreal volume)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	volumeChanged()</para>
-            <para></para>
+            <para>The volumeChanged signal is emitted when the volume has changed.</para>
+            <para>Note: Notifier signal for property volume. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QSoundEffect.MutedChanged">
             <summary>
-            <para>This property provides a way to control muting. A value of true will mute this effect.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> bool 	isMuted() const</para>
-            <para> void 	setMuted(bool muted)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	mutedChanged()</para>
-            <para></para>
+            <para>The mutedChanged signal is emitted when the mute state has changed.</para>
+            <para>Note: Notifier signal for property muted. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QSoundEffect.LoadedChanged">
@@ -3713,44 +3728,20 @@
         </member>
         <member name="E:QtMultimedia.QSoundEffect.PlayingChanged">
             <summary>
-            <para>This property indicates whether the sound effect is playing or not.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> bool 	isPlaying() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	playingChanged()</para>
-            <para></para>
+            <para>The playingChanged signal is emitted when the playing property has changed.</para>
+            <para>Note: Notifier signal for property playing. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QSoundEffect.StatusChanged">
             <summary>
-            <para>This property indicates the current status of the sound effect from the QSoundEffect::Status enumeration.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> Status 	status() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	statusChanged()</para>
-            <para></para>
+            <para>The statusChanged signal is emitted when the status property has changed.</para>
+            <para>Note: Notifier signal for property status. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QSoundEffect.CategoryChanged">
             <summary>
-            <para>This property contains the category of this sound effect.</para>
-            <para>Some platforms can perform different audio routing for different categories, or may allow the user to set different volume levels for different categories.</para>
-            <para>This setting will be ignored on platforms that do not support audio categories.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> QString 	category() const</para>
-            <para> void 	setCategory(const QString &amp; category)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	categoryChanged()</para>
-            <para></para>
+            <para>The categoryChanged signal is emitted when the category property has changed.</para>
+            <para>Note: Notifier signal for property category. </para>
             </summary>
         </member>
         <member name="P:QtMultimedia.QSoundEffect.Source">
@@ -3760,29 +3751,15 @@
         </member>
         <member name="P:QtMultimedia.QSoundEffect.LoopCount">
             <summary>
-            <para>This property holds the number of times the sound is played. A value of 0 or 1 means the sound will be played only once; set to SoundEffect.Infinite to enable infinite looping.</para>
-            <para>The value can be changed while the sound effect is playing, in which case it will update the remaining loops to the new value.</para>
-            <para>Access functions:</para>
+            <para>Returns the total number of times that this sound effect will be played before stopping.</para>
+            <para>See the loopsRemaining() method for the number of loops currently remaining.</para>
+            <para>Note: Getter function for property loops. </para>
+            <para>See also setLoopCount().</para>
             <para></para>
-            <para> int 	loopCount() const</para>
-            <para> void 	setLoopCount(int loopCount)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	loopCountChanged()</para>
-            <para></para>
-            <para></para>
-            <para>This property holds the number of times the sound is played. A value of 0 or 1 means the sound will be played only once; set to SoundEffect.Infinite to enable infinite looping.</para>
-            <para>The value can be changed while the sound effect is playing, in which case it will update the remaining loops to the new value.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> int 	loopCount() const</para>
-            <para> void 	setLoopCount(int loopCount)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	loopCountChanged()</para>
-            <para></para>
+            <para>Set the total number of times to play this sound effect to loopCount.</para>
+            <para>Setting the loop count to 0 or 1 means the sound effect will be played only once; pass QSoundEffect::Infinite to repeat indefinitely. The loop count can be changed while the sound effect is playing, in which case it will update the remaining loops to the new loopCount.</para>
+            <para>Note: Setter function for property loops. </para>
+            <para>See also loopCount() and loopsRemaining().</para>
             </summary>
         </member>
         <member name="P:QtMultimedia.QSoundEffect.Volume">
@@ -3819,15 +3796,8 @@
         </member>
         <member name="P:QtMultimedia.QSoundEffect.IsPlaying">
             <summary>
-            <para>This property indicates whether the sound effect is playing or not.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> bool 	isPlaying() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	playingChanged()</para>
-            <para></para>
+            <para>Returns true if the sound effect is currently playing, or false otherwise</para>
+            <para>Note: Getter function for property playing. </para>
             </summary>
         </member>
         <member name="P:QtMultimedia.QSoundEffect.status">
@@ -3856,11 +3826,15 @@
             </summary>
             <remarks>
             <para>A audio encoder settings object is used to specify the audio encoder settings used by QMediaRecorder. Audio encoder settings are selected by constructing a QAudioEncoderSettings object, setting the desired properties and then passing it to a QMediaRecorder instance using the QMediaRecorder::setEncodingSettings() function.</para>
-            <para>QAudioEncoderSettings audioSettings;</para>
-            <para>audioSettings.setCodec(&quot;audio/mpeg&quot;);</para>
-            <para>audioSettings.setChannelCount(2);</para>
             <para></para>
-            <para>recorder-&gt;setAudioSettings(audioSettings);</para>
+            <para></para>
+            <para>  QAudioEncoderSettings audioSettings;</para>
+            <para>  audioSettings.setCodec(&quot;audio/mpeg&quot;);</para>
+            <para>  audioSettings.setChannelCount(2);</para>
+            <para></para>
+            <para>  recorder-&gt;setAudioSettings(audioSettings);</para>
+            <para></para>
+            <para></para>
             <para></para>
             <para>See also QMediaRecorder and QAudioEncoderSettingsControl.</para>
             </remarks>
@@ -3972,11 +3946,15 @@
             </summary>
             <remarks>
             <para>A video encoder settings object is used to specify the video encoder settings used by QMediaRecorder. Video encoder settings are selected by constructing a QVideoEncoderSettings object, setting the desired properties and then passing it to a QMediaRecorder instance using the QMediaRecorder::setEncodingSettings() function.</para>
-            <para>QVideoEncoderSettings videoSettings;</para>
-            <para>videoSettings.setCodec(&quot;video/mpeg2&quot;);</para>
-            <para>videoSettings.setResolution(640, 480);</para>
             <para></para>
-            <para>recorder-&gt;setVideoSettings(videoSettings);</para>
+            <para></para>
+            <para>  QVideoEncoderSettings videoSettings;</para>
+            <para>  videoSettings.setCodec(&quot;video/mpeg2&quot;);</para>
+            <para>  videoSettings.setResolution(640, 480);</para>
+            <para></para>
+            <para>  recorder-&gt;setVideoSettings(videoSettings);</para>
+            <para></para>
+            <para></para>
             <para></para>
             <para>See also QMediaRecorder and QVideoEncoderSettingsControl.</para>
             </remarks>
@@ -4094,11 +4072,15 @@
             </summary>
             <remarks>
             <para>A image encoder settings object is used to specify the image encoder settings used by QCameraImageCapture. Image encoder settings are selected by constructing a QImageEncoderSettings object, setting the desired properties and then passing it to a QCameraImageCapture instance using the QCameraImageCapture::setImageSettings() function.</para>
-            <para>QImageEncoderSettings imageSettings;</para>
-            <para>imageSettings.setCodec(&quot;image/jpeg&quot;);</para>
-            <para>imageSettings.setResolution(1600, 1200);</para>
             <para></para>
-            <para>imageCapture-&gt;setEncodingSettings(imageSettings);</para>
+            <para></para>
+            <para>  QImageEncoderSettings imageSettings;</para>
+            <para>  imageSettings.setCodec(&quot;image/jpeg&quot;);</para>
+            <para>  imageSettings.setResolution(1600, 1200);</para>
+            <para></para>
+            <para>  imageCapture-&gt;setEncodingSettings(imageSettings);</para>
+            <para></para>
+            <para></para>
             <para></para>
             <para>See also QImageEncoderControl.</para>
             </remarks>
@@ -4184,25 +4166,29 @@
             </summary>
             <remarks>
             <para>The QCameraImageCapture class is a high level images recording class. It's not intended to be used alone but for accessing the media recording functions of other media objects, like QCamera.</para>
-            <para>camera = new QCamera;</para>
             <para></para>
-            <para>viewfinder = new QCameraViewfinder();</para>
-            <para>viewfinder-&gt;show();</para>
             <para></para>
-            <para>camera-&gt;setViewfinder(viewfinder);</para>
+            <para>  camera = new QCamera;</para>
             <para></para>
-            <para>imageCapture = new QCameraImageCapture(camera);</para>
+            <para>  viewfinder = new QCameraViewfinder();</para>
+            <para>  viewfinder-&gt;show();</para>
             <para></para>
-            <para>camera-&gt;setCaptureMode(QCamera::CaptureStillImage);</para>
-            <para>camera-&gt;start();</para>
-            <para>//on half pressed shutter button</para>
-            <para>camera-&gt;searchAndLock();</para>
+            <para>  camera-&gt;setViewfinder(viewfinder);</para>
             <para></para>
-            <para>//on shutter button pressed</para>
-            <para>imageCapture-&gt;capture();</para>
+            <para>  imageCapture = new QCameraImageCapture(camera);</para>
             <para></para>
-            <para>//on shutter button released</para>
-            <para>camera-&gt;unlock();</para>
+            <para>  camera-&gt;setCaptureMode(QCamera::CaptureStillImage);</para>
+            <para>  camera-&gt;start();</para>
+            <para>  //on half pressed shutter button</para>
+            <para>  camera-&gt;searchAndLock();</para>
+            <para></para>
+            <para>  //on shutter button pressed</para>
+            <para>  imageCapture-&gt;capture();</para>
+            <para></para>
+            <para>  //on shutter button released</para>
+            <para>  camera-&gt;unlock();</para>
+            <para></para>
+            <para></para>
             <para></para>
             <para>See also QCamera.</para>
             </remarks>
@@ -4247,20 +4233,23 @@
         <member name="E:QtMultimedia.QCameraImageCapture.ErrorErrorString">
             <summary>
             <para>Signals that the capture request id has failed with an error and errorString description.</para>
+            <para></para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>error</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
+            <para></para>
+            <para></para>
+            <para>  connect(cameraImageCapture, static_cast&lt;void(QCameraImageCapture::*)(int, QCameraImageCapture::Error, const QString &amp;)&gt;(&amp;QCameraImageCapture::error),</para>
+            <para>      [=](int id, QCameraImageCapture::Error error, const QString &amp;errorString){ /* ... */ });</para>
+            <para></para>
+            <para></para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QCameraImageCapture.ReadyForCaptureChanged">
             <summary>
-            <para>This property holds whether the service is ready to capture a an image immediately.</para>
-            <para>Calling capture() while readyForCapture is false is not permitted and results in an error.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> bool 	isReadyForCapture() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	readyForCaptureChanged(bool ready)</para>
-            <para></para>
+            <para>Signals that a camera's ready for capture state has changed.</para>
+            <para>Note: Notifier signal for property readyForCapture. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QCameraImageCapture.BufferFormatChanged">
@@ -4414,25 +4403,37 @@
             <para>QCameraInfo lets you query for camera devices that are currently available on the system.</para>
             <para>The static functions defaultCamera() and availableCameras() provide you a list of all available cameras.</para>
             <para>This example prints the name of all available cameras:</para>
-            <para>QList&lt;QCameraInfo&gt; cameras = QCameraInfo::availableCameras();</para>
-            <para>foreach (const QCameraInfo &amp;cameraInfo, cameras)</para>
-            <para>    qDebug() &lt;&lt; cameraInfo.deviceName();</para>
+            <para></para>
+            <para></para>
+            <para>  QList&lt;QCameraInfo&gt; cameras = QCameraInfo::availableCameras();</para>
+            <para>  foreach (const QCameraInfo &amp;cameraInfo, cameras)</para>
+            <para>      qDebug() &lt;&lt; cameraInfo.deviceName();</para>
+            <para></para>
+            <para></para>
             <para>A QCameraInfo can be used to construct a QCamera. The following example instantiates a QCamera whose camera device is named 'mycamera':</para>
-            <para>QList&lt;QCameraInfo&gt; cameras = QCameraInfo::availableCameras();</para>
-            <para>foreach (const QCameraInfo &amp;cameraInfo, cameras) {</para>
-            <para>    if (cameraInfo.deviceName() == &quot;mycamera&quot;)</para>
-            <para>        camera = new QCamera(cameraInfo);</para>
-            <para>}</para>
+            <para></para>
+            <para></para>
+            <para>  QList&lt;QCameraInfo&gt; cameras = QCameraInfo::availableCameras();</para>
+            <para>  foreach (const QCameraInfo &amp;cameraInfo, cameras) {</para>
+            <para>      if (cameraInfo.deviceName() == &quot;mycamera&quot;)</para>
+            <para>          camera = new QCamera(cameraInfo);</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>You can also use QCameraInfo to get general information about a camera device such as description, physical position on the system, or camera sensor orientation.</para>
-            <para>QCamera myCamera;</para>
-            <para>QCameraInfo cameraInfo(myCamera);</para>
             <para></para>
-            <para>if (cameraInfo.position() == QCamera::FrontFace)</para>
-            <para>    qDebug() &lt;&lt; &quot;The camera is on the front face of the hardware system.&quot;;</para>
-            <para>else if (cameraInfo.position() == QCamera::BackFace)</para>
-            <para>    qDebug() &lt;&lt; &quot;The camera is on the back face of the hardware system.&quot;;</para>
             <para></para>
-            <para>qDebug() &lt;&lt; &quot;The camera sensor orientation is &quot; &lt;&lt; cameraInfo.orientation() &lt;&lt; &quot; degrees.&quot;;</para>
+            <para>  QCamera myCamera;</para>
+            <para>  QCameraInfo cameraInfo(myCamera);</para>
+            <para></para>
+            <para>  if (cameraInfo.position() == QCamera::FrontFace)</para>
+            <para>      qDebug() &lt;&lt; &quot;The camera is on the front face of the hardware system.&quot;;</para>
+            <para>  else if (cameraInfo.position() == QCamera::BackFace)</para>
+            <para>      qDebug() &lt;&lt; &quot;The camera is on the back face of the hardware system.&quot;;</para>
+            <para></para>
+            <para>  qDebug() &lt;&lt; &quot;The camera sensor orientation is &quot; &lt;&lt; cameraInfo.orientation() &lt;&lt; &quot; degrees.&quot;;</para>
+            <para></para>
+            <para></para>
             <para></para>
             <para>See also QCamera.</para>
             </remarks>
@@ -4645,16 +4646,20 @@
             </summary>
             <remarks>
             <para>The QMediaRecorder class is a high level media recording class. It's not intended to be used alone but for accessing the media recording functions of other media objects, like QRadioTuner, or QCamera.</para>
-            <para>recorder = new QMediaRecorder(camera);</para>
             <para></para>
-            <para>QAudioEncoderSettings audioSettings;</para>
-            <para>audioSettings.setCodec(&quot;audio/amr&quot;);</para>
-            <para>audioSettings.setQuality(QMultimedia::HighQuality);</para>
             <para></para>
-            <para>recorder-&gt;setAudioSettings(audioSettings);</para>
+            <para>  recorder = new QMediaRecorder(camera);</para>
             <para></para>
-            <para>recorder-&gt;setOutputLocation(QUrl::fromLocalFile(fileName));</para>
-            <para>recorder-&gt;record();</para>
+            <para>  QAudioEncoderSettings audioSettings;</para>
+            <para>  audioSettings.setCodec(&quot;audio/amr&quot;);</para>
+            <para>  audioSettings.setQuality(QMultimedia::HighQuality);</para>
+            <para></para>
+            <para>  recorder-&gt;setAudioSettings(audioSettings);</para>
+            <para></para>
+            <para>  recorder-&gt;setOutputLocation(QUrl::fromLocalFile(fileName));</para>
+            <para>  recorder-&gt;record();</para>
+            <para></para>
+            <para></para>
             <para></para>
             <para>See also QAudioRecorder.</para>
             </remarks>
@@ -4739,16 +4744,8 @@
         </member>
         <member name="E:QtMultimedia.QMediaRecorder.StateChanged">
             <summary>
-            <para>This property holds the current state of the media recorder.</para>
-            <para>The state property represents the user request and is changed synchronously during record(), pause() or stop() calls. Recorder state may also change asynchronously when recording fails.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> State 	state() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	stateChanged(QMediaRecorder::State state)</para>
-            <para></para>
+            <para>Signals that a media recorder's state has changed.</para>
+            <para>Note: Notifier signal for property state. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMediaRecorder.StatusChanged">
@@ -4767,29 +4764,14 @@
         </member>
         <member name="E:QtMultimedia.QMediaRecorder.DurationChanged">
             <summary>
-            <para>This property holds the recorded media duration in milliseconds.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> qint64 	duration() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	durationChanged(qint64 duration)</para>
-            <para></para>
+            <para>Signals that the duration of the recorded media has changed.</para>
+            <para>Note: Notifier signal for property duration. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMediaRecorder.MutedChanged">
             <summary>
-            <para>This property holds whether a recording audio stream is muted.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> bool 	isMuted() const</para>
-            <para> void 	setMuted(bool muted)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	mutedChanged(bool muted)</para>
-            <para></para>
+            <para>Signals that the muted state has changed. If true the recording is being muted.</para>
+            <para>Note: Notifier signal for property muted. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMediaRecorder.VolumeChanged">
@@ -4808,70 +4790,101 @@
         </member>
         <member name="E:QtMultimedia.QMediaRecorder.ActualLocationChanged">
             <summary>
-            <para>This property holds the actual location of the last media content.</para>
-            <para>The actual location is usually available after recording starts, and reset when new location is set or new recording starts.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> QUrl 	actualLocation() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	actualLocationChanged(const QUrl &amp; location)</para>
-            <para></para>
+            <para>Signals that the actual location of the recorded media has changed. This signal is usually emitted when recording starts.</para>
+            <para>Note: Notifier signal for property actualLocation. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMediaRecorder.ErrorError">
             <summary>
             <para>Signals that an error has occurred.</para>
+            <para></para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>error</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
+            <para></para>
+            <para></para>
+            <para>  connect(mediaRecorder, static_cast&lt;void(QMediaRecorder::*)(QMediaRecorder::Error)&gt;(&amp;QMediaRecorder::error),</para>
+            <para>      [=](QMediaRecorder::Error error){ /* ... */ });</para>
+            <para></para>
+            <para></para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMediaRecorder.MetaDataAvailableChanged">
             <summary>
-            <para>This property holds whether access to a media object's meta-data is available.</para>
-            <para>If this is true there is meta-data available, otherwise there is no meta-data available.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> bool 	isMetaDataAvailable() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	metaDataAvailableChanged(bool available)</para>
-            <para></para>
+            <para>Signals that the available state of a media object's meta-data has changed.</para>
+            <para>Note: Notifier signal for property metaDataAvailable. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMediaRecorder.MetaDataWritableChanged">
             <summary>
-            <para>This property holds whether a media object's meta-data is writable.</para>
-            <para>If this is true the meta-data is writable, otherwise the meta-data is read-only.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> bool 	isMetaDataWritable() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	metaDataWritableChanged(bool writable)</para>
-            <para></para>
+            <para>Signals that the writable state of a media object's meta-data has changed.</para>
+            <para>Note: Notifier signal for property metaDataWritable. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMediaRecorder.MetaDataChanged">
             <summary>
             <para>Signals that a media object's meta-data has changed.</para>
             <para>If multiple meta-data elements are changed, metaDataChanged(const QString &amp;key, const QVariant &amp;value) signal is emitted for each of them with metaDataChanged() changed emitted once.</para>
+            <para></para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>metaDataChanged</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
+            <para></para>
+            <para></para>
+            <para>  connect(mediaRecorder, static_cast&lt;void(QMediaRecorder::*)()&gt;(&amp;QMediaRecorder::metaDataChanged),</para>
+            <para>      [=](){ /* ... */ });</para>
+            <para></para>
+            <para></para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMediaRecorder.MetaDataChangedValue">
             <summary>
             <para>Signal the changes of one meta-data element value with the given key.</para>
+            <para></para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>metaDataChanged</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
+            <para></para>
+            <para></para>
+            <para>  connect(mediaRecorder, static_cast&lt;void(QMediaRecorder::*)(const QString &amp;, const QVariant &amp;)&gt;(&amp;QMediaRecorder::metaDataChanged),</para>
+            <para>      [=](const QString &amp;key, const QVariant &amp;value){ /* ... */ });</para>
+            <para></para>
+            <para></para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMediaRecorder.AvailabilityChanged">
             <summary>
             <para>Signals that the media recorder is now available (if available is true), or not.</para>
+            <para></para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>availabilityChanged</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
+            <para></para>
+            <para></para>
+            <para>  connect(mediaRecorder, static_cast&lt;void(QMediaRecorder::*)(bool)&gt;(&amp;QMediaRecorder::availabilityChanged),</para>
+            <para>      [=](bool available){ /* ... */ });</para>
+            <para></para>
+            <para></para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMediaRecorder.AvailabilityChangedAvailability">
             <summary>
             <para>Signals that the service availability has changed to availability.</para>
+            <para></para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>availabilityChanged</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
+            <para></para>
+            <para></para>
+            <para>  connect(mediaRecorder, static_cast&lt;void(QMediaRecorder::*)(QMultimedia::AvailabilityStatus)&gt;(&amp;QMediaRecorder::availabilityChanged),</para>
+            <para>      [=](QMultimedia::AvailabilityStatus availability){ /* ... */ });</para>
+            <para></para>
+            <para></para>
             </summary>
         </member>
         <member name="P:QtMultimedia.QMediaRecorder.AudioSettings">
@@ -5195,6 +5208,37 @@
         <member name="P:QtMultimedia.QAudioOutputSelectorControl.DefaultOutput">
             <summary>
             <para>Returns the name of the default audio output.</para>
+            </summary>
+        </member>
+        <member name="T:QtMultimedia.QAudioRoleControl">
+            <summary>
+            <para>The QAudioRoleControl class provides control over the audio role of a media object.</para>
+            </summary>
+            <remarks>
+            <para>If a QMediaService supports audio roles it will implement QAudioRoleControl.</para>
+            <para>The functionality provided by this control is exposed to application code through the QMediaPlayer class.</para>
+            <para>The interface name of QAudioRoleControl is org.qt-project.qt.audiorolecontrol/5.6 as defined in QAudioRoleControl_iid.</para>
+            <para></para>
+            <para>See also QMediaService::requestControl() and QMediaPlayer.</para>
+            </remarks>
+        </member>
+        <member name="M:QtMultimedia.QAudioRoleControl.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Construct a QAudioRoleControl with the given parent.</para>
+            </summary>
+        </member>
+        <member name="E:QtMultimedia.QAudioRoleControl.AudioRoleChanged">
+            <summary>
+            <para>Signal emitted when the audio role has changed.</para>
+            </summary>
+        </member>
+        <member name="P:QtMultimedia.QAudioRoleControl.AudioRole">
+            <summary>
+            <para>Returns the audio role of the media played by the media service.</para>
+            <para>See also setAudioRole().</para>
+            <para></para>
+            <para>Sets the audio role of the media played by the media service.</para>
+            <para>See also audioRole().</para>
             </summary>
         </member>
         <member name="T:QtMultimedia.QCameraCaptureBufferFormatControl">
@@ -6515,26 +6559,34 @@
             </summary>
             <remarks>
             <para>The QMediaPlayer class is a high level media playback class. It can be used to playback such content as songs, movies and internet radio. The content to playback is specified as a QMediaContent object, which can be thought of as a main or canonical URL with additional information attached. When provided with a QMediaContent playback may be able to commence.</para>
-            <para>player = new QMediaPlayer;</para>
-            <para>connect(player, SIGNAL(positionChanged(qint64)), this, SLOT(positionChanged(qint64)));</para>
-            <para>player-&gt;setMedia(QUrl::fromLocalFile(&quot;/Users/me/Music/coolsong.mp3&quot;));</para>
-            <para>player-&gt;setVolume(50);</para>
-            <para>player-&gt;play();</para>
+            <para></para>
+            <para></para>
+            <para>  player = new QMediaPlayer;</para>
+            <para>  connect(player, SIGNAL(positionChanged(qint64)), this, SLOT(positionChanged(qint64)));</para>
+            <para>  player-&gt;setMedia(QUrl::fromLocalFile(&quot;/Users/me/Music/coolsong.mp3&quot;));</para>
+            <para>  player-&gt;setVolume(50);</para>
+            <para>  player-&gt;play();</para>
+            <para></para>
+            <para></para>
             <para>QVideoWidget can be used with QMediaPlayer for video rendering and QMediaPlaylist for accessing playlist functionality.</para>
-            <para>playlist = new QMediaPlaylist;</para>
-            <para>playlist-&gt;addMedia(QUrl(&quot;http://example.com/movie1.mp4&quot;));</para>
-            <para>playlist-&gt;addMedia(QUrl(&quot;http://example.com/movie2.mp4&quot;));</para>
-            <para>playlist-&gt;addMedia(QUrl(&quot;http://example.com/movie3.mp4&quot;));</para>
-            <para>playlist-&gt;setCurrentIndex(1);</para>
             <para></para>
-            <para>player = new QMediaPlayer;</para>
-            <para>player-&gt;setPlaylist(playlist);</para>
             <para></para>
-            <para>videoWidget = new QVideoWidget;</para>
-            <para>player-&gt;setVideoOutput(videoWidget);</para>
-            <para>videoWidget-&gt;show();</para>
+            <para>  playlist = new QMediaPlaylist;</para>
+            <para>  playlist-&gt;addMedia(QUrl(&quot;http://example.com/movie1.mp4&quot;));</para>
+            <para>  playlist-&gt;addMedia(QUrl(&quot;http://example.com/movie2.mp4&quot;));</para>
+            <para>  playlist-&gt;addMedia(QUrl(&quot;http://example.com/movie3.mp4&quot;));</para>
+            <para>  playlist-&gt;setCurrentIndex(1);</para>
             <para></para>
-            <para>player-&gt;play();</para>
+            <para>  player = new QMediaPlayer;</para>
+            <para>  player-&gt;setPlaylist(playlist);</para>
+            <para></para>
+            <para>  videoWidget = new QVideoWidget;</para>
+            <para>  player-&gt;setVideoOutput(videoWidget);</para>
+            <para>  videoWidget-&gt;show();</para>
+            <para></para>
+            <para>  player-&gt;play();</para>
+            <para></para>
+            <para></para>
             <para>Since QMediaPlayer is a QMediaObject, you can use several of the QMediaObject functions for things like:</para>
             <para></para>
             <para>Accessing the currently playing media's metadata (QMediaObject::metaData() and predefined meta-data keys)</para>
@@ -6572,11 +6624,12 @@
         </member>
         <member name="M:QtMultimedia.QMediaPlayer.SetMedia(QtMultimedia.QMediaContent,QtCore.QIODevice)">
             <summary>
-            <para>This property holds the active media source being used by the player object.</para>
-            <para>The player object will use the QMediaContent for selection of the content to be played.</para>
-            <para>By default this property has a null QMediaContent.</para>
-            <para>Setting this property to a null QMediaContent will cause the player to discard all information relating to the current media source and to cease all I/O operations related to that media.</para>
-            <para>See also QMediaContent and currentMedia().</para>
+            <para>Sets the current media source.</para>
+            <para>If a stream is supplied; media data will be read from it instead of resolving the media source. In this case the media source may still be used to resolve additional information about the media such as mime type.</para>
+            <para>Setting the media to a null QMediaContent will cause the player to discard all information relating to the current media source and to cease all I/O operations related to that media.</para>
+            <para>Note: This function returns immediately after recording the specified source of the media. It does not wait for the media to finish loading and does not check for errors. Listen for the mediaStatusChanged() and error() signals to be notified when the media is loaded and when an error occurs during loading.</para>
+            <para>Note: Setter function for property media. </para>
+            <para>See also media().</para>
             </summary>
         </member>
         <member name="M:QtMultimedia.QMediaPlayer.HasSupport(System.String,QtCore.QStringList,QtMultimedia.QMediaPlayer.Flag)">
@@ -6600,209 +6653,120 @@
         </member>
         <member name="E:QtMultimedia.QMediaPlayer.MediaChanged">
             <summary>
-            <para>This property holds the active media source being used by the player object.</para>
-            <para>The player object will use the QMediaContent for selection of the content to be played.</para>
-            <para>By default this property has a null QMediaContent.</para>
-            <para>Setting this property to a null QMediaContent will cause the player to discard all information relating to the current media source and to cease all I/O operations related to that media.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> QMediaContent 	media() const</para>
-            <para> void 	setMedia(const QMediaContent &amp; media, QIODevice * stream = 0)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	mediaChanged(const QMediaContent &amp; media)</para>
-            <para></para>
-            <para>See also QMediaContent and currentMedia().</para>
+            <para>Signals that the media source has been changed to media.</para>
+            <para>Note: Notifier signal for property media. </para>
+            <para>See also media() and currentMediaChanged().</para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMediaPlayer.CurrentMediaChanged">
             <summary>
-            <para>This property holds the current active media content being played by the player object. This value could be different from QMediaPlayer::media property if a playlist is used. In this case currentMedia indicates the current media content being processed by the player, while QMediaPlayer::media property contains the original playlist.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> QMediaContent 	currentMedia() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	currentMediaChanged(const QMediaContent &amp; media)</para>
-            <para></para>
-            <para>See also QMediaContent and media().</para>
+            <para>Signals that the current playing content has been changed to media.</para>
+            <para>Note: Notifier signal for property currentMedia. </para>
+            <para>See also currentMedia() and mediaChanged().</para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMediaPlayer.StateChanged">
             <summary>
-            <para>This property holds the media player's playback state.</para>
-            <para>By default this property is QMediaPlayer::Stopped</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> State 	state() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	stateChanged(QMediaPlayer::State state)</para>
-            <para></para>
-            <para>See also mediaStatus(), play(), pause(), and stop().</para>
+            <para>Signal the state of the Player object has changed.</para>
+            <para>Note: Notifier signal for property state. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMediaPlayer.MediaStatusChanged">
             <summary>
-            <para>This property holds the status of the current media stream.</para>
-            <para>The stream status describes how the playback of the current stream is progressing.</para>
-            <para>By default this property is QMediaPlayer::NoMedia</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> MediaStatus 	mediaStatus() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	mediaStatusChanged(QMediaPlayer::MediaStatus status)</para>
-            <para></para>
-            <para>See also state.</para>
+            <para>Signals that the status of the current media has changed.</para>
+            <para>Note: Notifier signal for property mediaStatus. </para>
+            <para>See also mediaStatus().</para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMediaPlayer.DurationChanged">
             <summary>
-            <para>This property holds the duration of the current media.</para>
-            <para>The value is the total playback time in milliseconds of the current media. The value may change across the life time of the QMediaPlayer object and may not be available when initial playback begins, connect to the durationChanged() signal to receive status notifications.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> qint64 	duration() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	durationChanged(qint64 duration)</para>
-            <para></para>
+            <para>Signal the duration of the content has changed to duration, expressed in milliseconds.</para>
+            <para>Note: Notifier signal for property duration. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMediaPlayer.PositionChanged">
             <summary>
-            <para>This property holds the playback position of the current media.</para>
-            <para>The value is the current playback position, expressed in milliseconds since the beginning of the media. Periodically changes in the position will be indicated with the signal positionChanged(), the interval between updates can be set with QMediaObject's method setNotifyInterval().</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> qint64 	position() const</para>
-            <para> void 	setPosition(qint64 position)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	positionChanged(qint64 position)</para>
-            <para></para>
+            <para>Signal the position of the content has changed to position, expressed in milliseconds.</para>
+            <para>Note: Notifier signal for property position. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMediaPlayer.VolumeChanged">
             <summary>
-            <para>This property holds the current playback volume.</para>
-            <para>The playback volume is linear in effect and the value can range from 0 - 100, values outside this range will be clamped.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> int 	volume() const</para>
-            <para> void 	setVolume(int volume)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	volumeChanged(int volume)</para>
-            <para></para>
+            <para>Signal the playback volume has changed to volume.</para>
+            <para>Note: Notifier signal for property volume. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMediaPlayer.MutedChanged">
             <summary>
-            <para>This property holds the muted state of the current media.</para>
-            <para>The value will be true if the playback volume is muted; otherwise false.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> bool 	isMuted() const</para>
-            <para> void 	setMuted(bool muted)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	mutedChanged(bool muted)</para>
-            <para></para>
+            <para>Signal the mute state has changed to muted.</para>
+            <para>Note: Notifier signal for property muted. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMediaPlayer.AudioAvailableChanged">
             <summary>
-            <para>This property holds the audio availabilty status for the current media.</para>
-            <para>As the life time of QMediaPlayer can be longer than the playback of one QMediaContent, this property may change over time, the audioAvailableChanged signal can be used to monitor it's status.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> bool 	isAudioAvailable() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	audioAvailableChanged(bool available)</para>
-            <para></para>
+            <para>Signals the availability of audio content has changed to available.</para>
+            <para>Note: Notifier signal for property audioAvailable. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMediaPlayer.VideoAvailableChanged">
             <summary>
-            <para>This property holds the video availability status for the current media.</para>
-            <para>If available, the QVideoWidget class can be used to view the video. As the life time of QMediaPlayer can be longer than the playback of one QMediaContent, this property may change over time, the videoAvailableChanged signal can be used to monitor it's status.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> bool 	isVideoAvailable() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	videoAvailableChanged(bool videoAvailable)</para>
-            <para></para>
-            <para>See also QVideoWidget and QMediaContent.</para>
+            <para>Signal the availability of visual content has changed to videoAvailable.</para>
+            <para>Note: Notifier signal for property videoAvailable. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMediaPlayer.BufferStatusChanged">
             <summary>
-            <para>This property holds the percentage of the temporary buffer filled before playback begins or resumes, from  (empty) to  (full).</para>
-            <para>When the player object is buffering; this property holds the percentage of the temporary buffer that is filled. The buffer will need to reach 100% filled before playback can start or resume, at which time mediaStatus() will return BufferedMedia or BufferingMedia. If the value is anything lower than 100, mediaStatus() will return StalledMedia.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> int 	bufferStatus() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	bufferStatusChanged(int percentFilled)</para>
-            <para></para>
-            <para>See also mediaStatus().</para>
+            <para>Signal the amount of the local buffer filled as a percentage by percentFilled.</para>
+            <para>Note: Notifier signal for property bufferStatus. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMediaPlayer.SeekableChanged">
             <summary>
-            <para>This property holds the seek-able status of the current media.</para>
-            <para>If seeking is supported this property will be true; false otherwise. The status of this property may change across the life time of the QMediaPlayer object, use the seekableChanged signal to monitor changes.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> bool 	isSeekable() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	seekableChanged(bool seekable)</para>
-            <para></para>
+            <para>Signals the seekable status of the player object has changed.</para>
+            <para>Note: Notifier signal for property seekable. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMediaPlayer.PlaybackRateChanged">
             <summary>
-            <para>This property holds the playback rate of the current media.</para>
-            <para>This value is a multiplier applied to the media's standard play rate. By default this value is 1.0, indicating that the media is playing at the standard pace. Values higher than 1.0 will increase the rate of play. Values less than zero can be set and indicate the media will rewind at the multiplier of the standard pace.</para>
-            <para>Not all playback services support change of the playback rate. It is framework defined as to the status and quality of audio and video while fast forwarding or rewinding.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> qreal 	playbackRate() const</para>
-            <para> void 	setPlaybackRate(qreal rate)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	playbackRateChanged(qreal rate)</para>
-            <para></para>
+            <para>Signals the playbackRate has changed to rate.</para>
+            <para>Note: Notifier signal for property playbackRate. </para>
+            </summary>
+        </member>
+        <member name="E:QtMultimedia.QMediaPlayer.AudioRoleChanged">
+            <summary>
+            <para>Signals that the audio role of the media player has changed.</para>
+            <para>This function was introduced in  Qt 5.6.</para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMediaPlayer.ErrorError">
             <summary>
             <para>Signals that an error condition has occurred.</para>
+            <para></para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>error</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
+            <para></para>
+            <para></para>
+            <para>  connect(mediaPlayer, static_cast&lt;void(QMediaPlayer::*)(QMediaPlayer::Error)&gt;(&amp;QMediaPlayer::error),</para>
+            <para>      [=](QMediaPlayer::Error error){ /* ... */ });</para>
+            <para></para>
+            <para></para>
             <para>See also errorString().</para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMediaPlayer.NetworkConfigurationChanged">
             <summary>
             <para>Signal that the active in use network access point has been changed to configuration and all subsequent network access will use this configuration.</para>
+            </summary>
+        </member>
+        <member name="P:QtMultimedia.QMediaPlayer.AudioRole">
+            <summary>
+            <para>This property holds the role of the audio stream played by the media player.</para>
+            <para>It can be set to specify the type of audio being played, allowing the system to make appropriate decisions when it comes to volume, routing or post-processing.</para>
+            <para>The audio role must be set before calling setMedia().</para>
+            <para>This property was introduced in  Qt 5.6.</para>
+            <para>See also supportedAudioRoles().</para>
             </summary>
         </member>
         <member name="P:QtMultimedia.QMediaPlayer.Position">
@@ -6838,8 +6802,8 @@
             <para>If the media playlist is used as a source, QMediaPlayer::currentMedia is updated with a current playlist item. The current source should be selected with QMediaPlaylist::setCurrentIndex(int) instead of QMediaPlayer::setMedia(), otherwise the current playlist will be discarded.</para>
             <para>Access functions:</para>
             <para></para>
-            <para> QMediaPlaylist * 	playlist() const</para>
-            <para> void 	setPlaylist(QMediaPlaylist * playlist)</para>
+            <para> QMediaPlaylist *	playlist() const</para>
+            <para> void 	setPlaylist(QMediaPlaylist *playlist)</para>
             <para></para>
             <para>See also QMediaContent.</para>
             <para></para>
@@ -6849,8 +6813,8 @@
             <para>If the media playlist is used as a source, QMediaPlayer::currentMedia is updated with a current playlist item. The current source should be selected with QMediaPlaylist::setCurrentIndex(int) instead of QMediaPlayer::setMedia(), otherwise the current playlist will be discarded.</para>
             <para>Access functions:</para>
             <para></para>
-            <para> QMediaPlaylist * 	playlist() const</para>
-            <para> void 	setPlaylist(QMediaPlaylist * playlist)</para>
+            <para> QMediaPlaylist *	playlist() const</para>
+            <para> void 	setPlaylist(QMediaPlaylist *playlist)</para>
             <para></para>
             <para>See also QMediaContent.</para>
             </summary>
@@ -7502,11 +7466,33 @@
             <summary>
             <para>Signal the changes of meta-data.</para>
             <para>If multiple meta-data elements are changed, metaDataChanged(const QString &amp;key, const QVariant &amp;value) signal is emitted for each of them with metaDataChanged() changed emitted once.</para>
+            <para></para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>metaDataChanged</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
+            <para></para>
+            <para></para>
+            <para>  connect(metaDataReaderControl, static_cast&lt;void(QMetaDataReaderControl::*)()&gt;(&amp;QMetaDataReaderControl::metaDataChanged),</para>
+            <para>      [=](){ /* ... */ });</para>
+            <para></para>
+            <para></para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMetaDataReaderControl.MetaDataChangedValue">
             <summary>
             <para>Signal the changes of one meta-data element value with the given key.</para>
+            <para></para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>metaDataChanged</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
+            <para></para>
+            <para></para>
+            <para>  connect(metaDataReaderControl, static_cast&lt;void(QMetaDataReaderControl::*)(const QString &amp;, const QVariant &amp;)&gt;(&amp;QMetaDataReaderControl::metaDataChanged),</para>
+            <para>      [=](const QString &amp;key, const QVariant &amp;value){ /* ... */ });</para>
+            <para></para>
+            <para></para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMetaDataReaderControl.MetaDataAvailableChanged">
@@ -7558,11 +7544,33 @@
             <summary>
             <para>Signal the changes of meta-data.</para>
             <para>If multiple meta-data elements are changed, metaDataChanged(const QString &amp;key, const QVariant &amp;value) signal is emitted for each of them with metaDataChanged() changed emitted once.</para>
+            <para></para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>metaDataChanged</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
+            <para></para>
+            <para></para>
+            <para>  connect(metaDataWriterControl, static_cast&lt;void(QMetaDataWriterControl::*)()&gt;(&amp;QMetaDataWriterControl::metaDataChanged),</para>
+            <para>      [=](){ /* ... */ });</para>
+            <para></para>
+            <para></para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMetaDataWriterControl.MetaDataChangedValue">
             <summary>
             <para>Signal the changes of one meta-data element value with the given key.</para>
+            <para></para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>metaDataChanged</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
+            <para></para>
+            <para></para>
+            <para>  connect(metaDataWriterControl, static_cast&lt;void(QMetaDataWriterControl::*)(const QString &amp;, const QVariant &amp;)&gt;(&amp;QMetaDataWriterControl::metaDataChanged),</para>
+            <para>      [=](const QString &amp;key, const QVariant &amp;value){ /* ... */ });</para>
+            <para></para>
+            <para></para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMetaDataWriterControl.WritableChanged">
@@ -7599,8 +7607,12 @@
             <remarks>
             <para>The radio data object will emit signals for any changes in radio data. You can enable or disable alternative frequency with setAlternativeFrequenciesEnabled().</para>
             <para>You can get a QRadioData instance fromt the radioData property from a QRadioTuner instance.</para>
-            <para>radio = new QRadioTuner;</para>
-            <para>radioData = radio-&gt;radioData();</para>
+            <para></para>
+            <para></para>
+            <para>  radio = new QRadioTuner;</para>
+            <para>  radioData = radio-&gt;radioData();</para>
+            <para></para>
+            <para></para>
             <para>Alternatively, you can pass an instance of QRadioTuner to the constructor to QRadioData.</para>
             <para></para>
             <para>See also Radio Overview.</para>
@@ -7621,86 +7633,54 @@
         </member>
         <member name="E:QtMultimedia.QRadioData.StationIdChanged">
             <summary>
-            <para>This property holds current Program Identification.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> QString 	stationId() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	stationIdChanged(QString stationId)</para>
-            <para></para>
+            <para>Signals that the Program Identification code has changed to stationId</para>
+            <para>Note: Notifier signal for property stationId. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QRadioData.ProgramTypeChanged">
             <summary>
-            <para>This property holds current Program Type.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> ProgramType 	programType() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	programTypeChanged(QRadioData::ProgramType programType)</para>
-            <para></para>
+            <para>Signals that the Program Type code has changed to programType</para>
+            <para>Note: Notifier signal for property programType. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QRadioData.ProgramTypeNameChanged">
             <summary>
-            <para>This property holds current Program Type Name.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> QString 	programTypeName() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	programTypeNameChanged(QString programTypeName)</para>
-            <para></para>
+            <para>Signals that the Program Type Name has changed to programTypeName</para>
+            <para>Note: Notifier signal for property programTypeName. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QRadioData.StationNameChanged">
             <summary>
-            <para>This property holds current Program Service.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> QString 	stationName() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	stationNameChanged(QString stationName)</para>
-            <para></para>
+            <para>Signals that the Program Service has changed to stationName</para>
+            <para>Note: Notifier signal for property stationName. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QRadioData.RadioTextChanged">
             <summary>
-            <para>This property holds current Radio Text.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> QString 	radioText() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	radioTextChanged(QString radioText)</para>
-            <para></para>
+            <para>Signals that the Radio Text property has changed to radioText</para>
+            <para>Note: Notifier signal for property radioText. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QRadioData.AlternativeFrequenciesEnabledChanged">
             <summary>
-            <para>This property holds is Alternative Frequency currently enabled.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> bool 	isAlternativeFrequenciesEnabled() const</para>
-            <para> void 	setAlternativeFrequenciesEnabled(bool enabled)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	alternativeFrequenciesEnabledChanged(bool enabled)</para>
-            <para></para>
+            <para>Signals that automatically tuning to alternative frequencies has been enabled or disabled according to enabled.</para>
+            <para>Note: Notifier signal for property alternativeFrequenciesEnabled. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QRadioData.ErrorError">
             <summary>
             <para>Signals that an error occurred.</para>
+            <para></para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>error</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
+            <para></para>
+            <para></para>
+            <para>  connect(radioData, static_cast&lt;void(QRadioData::*)(QRadioData::Error)&gt;(&amp;QRadioData::error),</para>
+            <para>      [=](QRadioData::Error error){ /* ... */ });</para>
+            <para></para>
+            <para></para>
             </summary>
         </member>
         <member name="P:QtMultimedia.QRadioData.AlternativeFrequenciesEnabled">
@@ -7828,6 +7808,17 @@
         <member name="E:QtMultimedia.QRadioDataControl.ErrorError">
             <summary>
             <para>Signals that an error has occurred.</para>
+            <para></para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>error</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
+            <para></para>
+            <para></para>
+            <para>  connect(radioDataControl, static_cast&lt;void(QRadioDataControl::*)(QRadioData::Error)&gt;(&amp;QRadioDataControl::error),</para>
+            <para>      [=](QRadioData::Error error){ /* ... */ });</para>
+            <para></para>
+            <para></para>
             </summary>
         </member>
         <member name="P:QtMultimedia.QRadioDataControl.AlternativeFrequenciesEnabled">
@@ -7879,14 +7870,18 @@
             </summary>
             <remarks>
             <para>You can control the systems analog radio device using this interface, for example:</para>
-            <para>radio = new QRadioTuner;</para>
-            <para>connect(radio, SIGNAL(frequencyChanged(int)), this, SLOT(freqChanged(int)));</para>
-            <para>if (radio-&gt;isBandSupported(QRadioTuner::FM)) {</para>
-            <para>    radio-&gt;setBand(QRadioTuner::FM);</para>
-            <para>    radio-&gt;setFrequency(yourRadioStationFrequency);</para>
-            <para>    radio-&gt;setVolume(100);</para>
-            <para>    radio-&gt;start();</para>
-            <para>}</para>
+            <para></para>
+            <para></para>
+            <para>  radio = new QRadioTuner;</para>
+            <para>  connect(radio, SIGNAL(frequencyChanged(int)), this, SLOT(freqChanged(int)));</para>
+            <para>  if (radio-&gt;isBandSupported(QRadioTuner::FM)) {</para>
+            <para>      radio-&gt;setBand(QRadioTuner::FM);</para>
+            <para>      radio-&gt;setFrequency(yourRadioStationFrequency);</para>
+            <para>      radio-&gt;setVolume(100);</para>
+            <para>      radio-&gt;start();</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>The radio object will emit signals for any changes in state such as: bandChanged(), frequencyChanged(), stereoStatusChanged(), searchingChanged(), signalStrengthChanged(), volumeChanged(), mutedChanged().</para>
             <para>You can change between the frequency bands using setBand() however it is recommended that you check to make sure the band is available first using isBandSupported().</para>
             <para></para>
@@ -7947,113 +7942,50 @@
         </member>
         <member name="E:QtMultimedia.QRadioTuner.StateChanged">
             <summary>
-            <para>Return the current radio tuner state.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> State 	state() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	stateChanged(QRadioTuner::State state)</para>
-            <para></para>
-            <para>See also QRadioTuner::State.</para>
+            <para>This signal is emitted when the state changes to state.</para>
+            <para>Note: Notifier signal for property state. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QRadioTuner.BandChanged">
             <summary>
-            <para>This property holds the frequency band a radio tuner is tuned to.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> Band 	band() const</para>
-            <para> void 	setBand(Band band)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	bandChanged(QRadioTuner::Band band)</para>
-            <para></para>
-            <para>See also QRadioTuner::Band.</para>
+            <para>Signals a radio tuner's band has changed.</para>
+            <para>Note: Notifier signal for property band. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QRadioTuner.FrequencyChanged">
             <summary>
-            <para>This property holds the frequency in Hertz a radio tuner is tuned to.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> int 	frequency() const</para>
-            <para> void 	setFrequency(int frequency)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	frequencyChanged(int frequency)</para>
-            <para></para>
+            <para>Signals that the frequency a radio tuner is tuned to has changed.</para>
+            <para>Note: Notifier signal for property frequency. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QRadioTuner.StereoStatusChanged">
             <summary>
-            <para>This property holds whether a radio tuner is receiving a stereo signal.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> bool 	isStereo() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	stereoStatusChanged(bool stereo)</para>
-            <para></para>
+            <para>Signals that the stereo state of a radio tuner has changed.</para>
+            <para>Note: Notifier signal for property stereo. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QRadioTuner.SearchingChanged">
             <summary>
-            <para>This property holds whether a radio tuner is currently scanning for a signal.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> bool 	isSearching() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	searchingChanged(bool searching)</para>
-            <para></para>
-            <para>See also searchForward(), searchBackward(), and cancelSearch().</para>
+            <para>Signals that the searching state of a radio tuner has changed.</para>
+            <para>Note: Notifier signal for property searching. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QRadioTuner.SignalStrengthChanged">
             <summary>
-            <para>This property holds the strength of the current radio signal as a percentage.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> int 	signalStrength() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	signalStrengthChanged(int strength)</para>
-            <para></para>
+            <para>Signals that the strength of the signal received by a radio tuner has changed.</para>
+            <para>Note: Notifier signal for property signalStrength. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QRadioTuner.VolumeChanged">
             <summary>
-            <para>This property holds the volume of a radio tuner's audio output as a percentage.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> int 	volume() const</para>
-            <para> void 	setVolume(int volume)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	volumeChanged(int volume)</para>
-            <para></para>
+            <para>Signals that the volume of a radio tuner's audio output has changed.</para>
+            <para>Note: Notifier signal for property volume. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QRadioTuner.MutedChanged">
             <summary>
-            <para>This property holds whether a radio tuner's audio output is muted.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> bool 	isMuted() const</para>
-            <para> void 	setMuted(bool muted)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	mutedChanged(bool muted)</para>
-            <para></para>
+            <para>Signals that the muted state of a radio tuner's audio output has changed.</para>
+            <para>Note: Notifier signal for property muted. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QRadioTuner.StationFound">
@@ -8077,6 +8009,17 @@
         <member name="E:QtMultimedia.QRadioTuner.ErrorError">
             <summary>
             <para>Signals that an error occurred.</para>
+            <para></para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>error</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
+            <para></para>
+            <para></para>
+            <para>  connect(radioTuner, static_cast&lt;void(QRadioTuner::*)(QRadioTuner::Error)&gt;(&amp;QRadioTuner::error),</para>
+            <para>      [=](QRadioTuner::Error error){ /* ... */ });</para>
+            <para></para>
+            <para></para>
             </summary>
         </member>
         <member name="P:QtMultimedia.QRadioTuner.stereoMode">
@@ -8180,7 +8123,7 @@
             <para>The instance of QRadioData is already bound to this instance of QRadioTuner.</para>
             <para>Access functions:</para>
             <para></para>
-            <para> QRadioData * 	radioData() const</para>
+            <para> QRadioData *	radioData() const</para>
             <para></para>
             </summary>
         </member>
@@ -8358,6 +8301,17 @@
         <member name="E:QtMultimedia.QRadioTunerControl.ErrorError">
             <summary>
             <para>Signals that an error has occurred.</para>
+            <para></para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>error</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
+            <para></para>
+            <para></para>
+            <para>  connect(radioTunerControl, static_cast&lt;void(QRadioTunerControl::*)(QRadioTuner::Error)&gt;(&amp;QRadioTunerControl::error),</para>
+            <para>      [=](QRadioTuner::Error error){ /* ... */ });</para>
+            <para></para>
+            <para></para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QRadioTunerControl.StationFound">
@@ -8481,11 +8435,33 @@
         <member name="E:QtMultimedia.QVideoDeviceSelectorControl.SelectedDeviceChanged">
             <summary>
             <para>Signals that the selected video device index has changed.</para>
+            <para></para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>selectedDeviceChanged</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
+            <para></para>
+            <para></para>
+            <para>  connect(videoDeviceSelectorControl, static_cast&lt;void(QVideoDeviceSelectorControl::*)(int)&gt;(&amp;QVideoDeviceSelectorControl::selectedDeviceChanged),</para>
+            <para>      [=](int index){ /* ... */ });</para>
+            <para></para>
+            <para></para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QVideoDeviceSelectorControl.SelectedDeviceChangedName">
             <summary>
             <para>Signals that the selected video device name has changed.</para>
+            <para></para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>selectedDeviceChanged</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
+            <para></para>
+            <para></para>
+            <para>  connect(videoDeviceSelectorControl, static_cast&lt;void(QVideoDeviceSelectorControl::*)(const QString &amp;)&gt;(&amp;QVideoDeviceSelectorControl::selectedDeviceChanged),</para>
+            <para>      [=](const QString &amp;name){ /* ... */ });</para>
+            <para></para>
+            <para></para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QVideoDeviceSelectorControl.DevicesChanged">
@@ -8555,8 +8531,12 @@
             </summary>
             <remarks>
             <para>Using the surface() property of QVideoRendererControl a QAbstractVideoSurface may be set as the video render target of a QMediaService.</para>
-            <para>QVideoRendererControl *rendererControl = mediaService-&gt;requestControl&lt;QVideoRendererControl *&gt;();</para>
-            <para>rendererControl-&gt;setSurface(myVideoSurface);</para>
+            <para></para>
+            <para></para>
+            <para>  QVideoRendererControl *rendererControl = mediaService-&gt;requestControl&lt;QVideoRendererControl *&gt;();</para>
+            <para>  rendererControl-&gt;setSurface(myVideoSurface);</para>
+            <para></para>
+            <para></para>
             <para>QVideoRendererControl is one of a number of possible video output controls.</para>
             <para>The interface name of QVideoRendererControl is org.qt-project.qt.videorenderercontrol/5.0 as defined in QVideoRendererControl_iid.</para>
             <para></para>
@@ -8583,10 +8563,14 @@
             </summary>
             <remarks>
             <para>The winId() property QVideoWindowControl allows a platform specific window ID to be set as the video render target of a QMediaService. The displayRect() property is used to set the region of the window the video should be rendered to, and the aspectRatioMode() property indicates how the video should be scaled to fit the displayRect().</para>
-            <para>QVideoWindowControl *windowControl = mediaService-&gt;requestControl&lt;QVideoWindowControl *&gt;();</para>
-            <para>windowControl-&gt;setWinId(widget-&gt;winId());</para>
-            <para>windowControl-&gt;setDisplayRect(widget-&gt;rect());</para>
-            <para>windowControl-&gt;setAspectRatioMode(Qt::KeepAspectRatio);</para>
+            <para></para>
+            <para></para>
+            <para>  QVideoWindowControl *windowControl = mediaService-&gt;requestControl&lt;QVideoWindowControl *&gt;();</para>
+            <para>  windowControl-&gt;setWinId(widget-&gt;winId());</para>
+            <para>  windowControl-&gt;setDisplayRect(widget-&gt;rect());</para>
+            <para>  windowControl-&gt;setAspectRatioMode(Qt::KeepAspectRatio);</para>
+            <para></para>
+            <para></para>
             <para>QVideoWindowControl is one of a number of possible video output controls.</para>
             <para>The interface name of QVideoWindowControl is org.qt-project.qt.videowindowcontrol/5.0 as defined in QVideoWindowControl_iid.</para>
             <para></para>
@@ -8725,20 +8709,24 @@
             <remarks>
             <para>QMediaPlaylist is intended to be used with other media objects, like QMediaPlayer.</para>
             <para>QMediaPlaylist allows to access the service intrinsic playlist functionality if available, otherwise it provides the local memory playlist implementation.</para>
-            <para>playlist = new QMediaPlaylist;</para>
-            <para>playlist-&gt;addMedia(QUrl(&quot;http://example.com/movie1.mp4&quot;));</para>
-            <para>playlist-&gt;addMedia(QUrl(&quot;http://example.com/movie2.mp4&quot;));</para>
-            <para>playlist-&gt;addMedia(QUrl(&quot;http://example.com/movie3.mp4&quot;));</para>
-            <para>playlist-&gt;setCurrentIndex(1);</para>
             <para></para>
-            <para>player = new QMediaPlayer;</para>
-            <para>player-&gt;setPlaylist(playlist);</para>
             <para></para>
-            <para>videoWidget = new QVideoWidget;</para>
-            <para>player-&gt;setVideoOutput(videoWidget);</para>
-            <para>videoWidget-&gt;show();</para>
+            <para>  playlist = new QMediaPlaylist;</para>
+            <para>  playlist-&gt;addMedia(QUrl(&quot;http://example.com/movie1.mp4&quot;));</para>
+            <para>  playlist-&gt;addMedia(QUrl(&quot;http://example.com/movie2.mp4&quot;));</para>
+            <para>  playlist-&gt;addMedia(QUrl(&quot;http://example.com/movie3.mp4&quot;));</para>
+            <para>  playlist-&gt;setCurrentIndex(1);</para>
             <para></para>
-            <para>player-&gt;play();</para>
+            <para>  player = new QMediaPlayer;</para>
+            <para>  player-&gt;setPlaylist(playlist);</para>
+            <para></para>
+            <para>  videoWidget = new QVideoWidget;</para>
+            <para>  player-&gt;setVideoOutput(videoWidget);</para>
+            <para>  videoWidget-&gt;show();</para>
+            <para></para>
+            <para>  player-&gt;play();</para>
+            <para></para>
+            <para></para>
             <para>Depending on playlist source implementation, most of the playlist mutating operations can be asynchronous.</para>
             <para></para>
             <para>See also QMediaContent.</para>
@@ -8841,44 +8829,20 @@
         </member>
         <member name="E:QtMultimedia.QMediaPlaylist.CurrentIndexChanged">
             <summary>
-            <para>This property holds current position.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> int 	currentIndex() const</para>
-            <para> void 	setCurrentIndex(int playlistPosition)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	currentIndexChanged(int position)</para>
-            <para></para>
+            <para>Signal emitted when playlist position changed to position.</para>
+            <para>Note: Notifier signal for property currentIndex. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMediaPlaylist.PlaybackModeChanged">
             <summary>
-            <para>This property defines the order that items in the playlist are played.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> PlaybackMode 	playbackMode() const</para>
-            <para> void 	setPlaybackMode(PlaybackMode mode)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	playbackModeChanged(QMediaPlaylist::PlaybackMode mode)</para>
-            <para></para>
-            <para>See also QMediaPlaylist::PlaybackMode.</para>
+            <para>Signal emitted when playback mode changed to mode.</para>
+            <para>Note: Notifier signal for property playbackMode. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMediaPlaylist.CurrentMediaChanged">
             <summary>
-            <para>This property holds current media content.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> QMediaContent 	currentMedia() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	currentMediaChanged(const QMediaContent &amp; content)</para>
-            <para></para>
+            <para>Signal emitted when current media changes to content.</para>
+            <para>Note: Notifier signal for property currentMedia. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QMediaPlaylist.MediaAboutToBeInserted">
@@ -9018,28 +8982,36 @@
             </summary>
             <remarks>
             <para>The QAudioRecorder class is a high level media recording class and contains the same functionality as QMediaRecorder.</para>
-            <para>audioRecorder = new QAudioRecorder;</para>
             <para></para>
-            <para>QAudioEncoderSettings audioSettings;</para>
-            <para>audioSettings.setCodec(&quot;audio/amr&quot;);</para>
-            <para>audioSettings.setQuality(QMultimedia::HighQuality);</para>
             <para></para>
-            <para>audioRecorder-&gt;setEncodingSettings(audioSettings);</para>
+            <para>  audioRecorder = new QAudioRecorder;</para>
             <para></para>
-            <para>audioRecorder-&gt;setOutputLocation(QUrl::fromLocalFile(&quot;test.amr&quot;));</para>
-            <para>audioRecorder-&gt;record();</para>
+            <para>  QAudioEncoderSettings audioSettings;</para>
+            <para>  audioSettings.setCodec(&quot;audio/amr&quot;);</para>
+            <para>  audioSettings.setQuality(QMultimedia::HighQuality);</para>
+            <para></para>
+            <para>  audioRecorder-&gt;setEncodingSettings(audioSettings);</para>
+            <para></para>
+            <para>  audioRecorder-&gt;setOutputLocation(QUrl::fromLocalFile(&quot;test.amr&quot;));</para>
+            <para>  audioRecorder-&gt;record();</para>
+            <para></para>
+            <para></para>
             <para>In addition QAudioRecorder provides functionality for selecting the audio input.</para>
-            <para>QStringList inputs = audioRecorder-&gt;audioInputs();</para>
-            <para>QString selectedInput = audioRecorder-&gt;defaultAudioInput();</para>
             <para></para>
-            <para>foreach (QString input, inputs) {</para>
-            <para>    QString description = audioRecorder-&gt;audioInputDescription(input);</para>
-            <para>    // show descriptions to user and allow selection</para>
-            <para>    selectedInput = input;</para>
-            <para>}</para>
             <para></para>
-            <para>audioRecorder-&gt;setAudioInput(selectedInput);</para>
-            <para>The Audio Recorder example shows how to use this class in more detail.</para>
+            <para>  QStringList inputs = audioRecorder-&gt;audioInputs();</para>
+            <para>  QString selectedInput = audioRecorder-&gt;defaultAudioInput();</para>
+            <para></para>
+            <para>  foreach (QString input, inputs) {</para>
+            <para>      QString description = audioRecorder-&gt;audioInputDescription(input);</para>
+            <para>      // show descriptions to user and allow selection</para>
+            <para>      selectedInput = input;</para>
+            <para>  }</para>
+            <para></para>
+            <para>  audioRecorder-&gt;setAudioInput(selectedInput);</para>
+            <para></para>
+            <para></para>
+            <para>The Audio Recorder Example shows how to use this class in more detail.</para>
             <para></para>
             <para>See also QMediaRecorder and QAudioInputSelectorControl.</para>
             </remarks>
@@ -9056,16 +9028,8 @@
         </member>
         <member name="E:QtMultimedia.QAudioRecorder.AudioInputChanged">
             <summary>
-            <para>This property holds the active audio input name.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> QString 	audioInput() const</para>
-            <para> void 	setAudioInput(const QString &amp; name)</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	audioInputChanged(const QString &amp; name)</para>
-            <para></para>
+            <para>Signal emitted when active audio input changes to name.</para>
+            <para>Note: Notifier signal for property audioInput. </para>
             </summary>
         </member>
         <member name="E:QtMultimedia.QAudioRecorder.AvailableAudioInputsChanged">
@@ -9321,39 +9285,47 @@
             <para>Arbitrary data can be represented as properties on the QAbstractVideoFilter subclass and on the QObject or QJSValue instances passed to its signals. What exactly these properties and signals are, is up to the individual video filters. Completion of the operations can be indicated by signals. Computations that do not result in a modified image will pass the input image through so that subsequent filters can be placed after them.</para>
             <para>Properties set on QAbstractVideoFilter serve as input to the computation, similarly to how uniform values are specified in ShaderEffect types. The changed property values are taken into use when the next video frame is processed.</para>
             <para>The typical usage is to subclass QAbstractVideoFilter and QVideoFilterRunnable:</para>
-            <para>class MyFilterRunnable : public QVideoFilterRunnable {</para>
-            <para>public:</para>
-            <para>    QVideoFrame run(QVideoFrame *input, const QVideoSurfaceFormat &amp;surfaceFormat, RunFlags flags) { ... }</para>
-            <para>};</para>
             <para></para>
-            <para>class MyFilter : public QAbstractVideoFilter {</para>
-            <para>public:</para>
-            <para>    QVideoFilterRunnable *createFilterRunnable() { return new MyFilterRunnable; }</para>
-            <para>signals:</para>
-            <para>    void finished(QObject *result);</para>
-            <para>};</para>
             <para></para>
-            <para>int main(int argc, char **argv) {</para>
-            <para>    ...</para>
-            <para>    qmlRegisterType&lt;MyFilter&gt;(&quot;my.uri&quot;, 1, 0, &quot;MyFilter&quot;);</para>
-            <para>    ...</para>
-            <para>}</para>
+            <para>  class MyFilterRunnable : public QVideoFilterRunnable {</para>
+            <para>  public:</para>
+            <para>      QVideoFrame run(QVideoFrame *input, const QVideoSurfaceFormat &amp;surfaceFormat, RunFlags flags) { ... }</para>
+            <para>  };</para>
+            <para></para>
+            <para>  class MyFilter : public QAbstractVideoFilter {</para>
+            <para>  public:</para>
+            <para>      QVideoFilterRunnable *createFilterRunnable() { return new MyFilterRunnable; }</para>
+            <para>  signals:</para>
+            <para>      void finished(QObject *result);</para>
+            <para>  };</para>
+            <para></para>
+            <para>  int main(int argc, char **argv) {</para>
+            <para>      ...</para>
+            <para>      qmlRegisterType&lt;MyFilter&gt;(&quot;my.uri&quot;, 1, 0, &quot;MyFilter&quot;);</para>
+            <para>      ...</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>MyFilter is thus accessible from QML:</para>
-            <para>import my.uri 1.0</para>
             <para></para>
-            <para>Camera {</para>
-            <para>    id: camera</para>
-            <para>}</para>
-            <para>MyFilter {</para>
-            <para>    id: filter</para>
-            <para>    // set properties, they can also be animated</para>
-            <para>    onFinished: console.log(&quot;results of the computation: &quot; + result)</para>
-            <para>}</para>
-            <para>VideoOutput {</para>
-            <para>    source: camera</para>
-            <para>    filters: [ filter ]</para>
-            <para>    anchors.fill: parent</para>
-            <para>}</para>
+            <para></para>
+            <para>  import my.uri 1.0</para>
+            <para></para>
+            <para>  Camera {</para>
+            <para>      id: camera</para>
+            <para>  }</para>
+            <para>  MyFilter {</para>
+            <para>      id: filter</para>
+            <para>      // set properties, they can also be animated</para>
+            <para>      onFinished: console.log(&quot;results of the computation: &quot; + result)</para>
+            <para>  }</para>
+            <para>  VideoOutput {</para>
+            <para>      source: camera</para>
+            <para>      filters: [ filter ]</para>
+            <para>      anchors.fill: parent</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>This also allows providing filters in QML plugins, separately from the application.</para>
             <para></para>
             <para>See also VideoOutput, Camera, MediaPlayer, and QVideoFilterRunnable.</para>
@@ -9477,16 +9449,8 @@
         </member>
         <member name="E:QtMultimedia.QAbstractVideoSurface.NativeResolutionChanged">
             <summary>
-            <para>The native resolution of video surface. This is the resolution of video frames the surface can render with optimal quality and/or performance.</para>
-            <para>The native resolution is not always known and can be changed during playback.</para>
-            <para>Access functions:</para>
-            <para></para>
-            <para> QSize 	nativeResolution() const</para>
-            <para></para>
-            <para>Notifier signal:</para>
-            <para></para>
-            <para> void 	nativeResolutionChanged(const QSize &amp; resolution)</para>
-            <para></para>
+            <para>Signals the native resolution of video surface has changed.</para>
+            <para>Note: Notifier signal for property nativeResolution. </para>
             </summary>
         </member>
         <member name="P:QtMultimedia.QAbstractVideoSurface.error">
@@ -9542,16 +9506,18 @@
             <para>The QVideoProbe class allows you to monitor video frames being played or recorded.</para>
             </summary>
             <remarks>
-            <para>QMediaPlayer *player = new QMediaPlayer();</para>
-            <para>QVideoProbe *probe = new QVideoProbe;</para>
+            <para>  QMediaPlayer *player = new QMediaPlayer();</para>
+            <para>  QVideoProbe *probe = new QVideoProbe;</para>
             <para></para>
-            <para>connect(probe, SIGNAL(videoFrameProbed(QVideoFrame)), this, SLOT(processFrame(QVideoFrame)));</para>
+            <para>  connect(probe, SIGNAL(videoFrameProbed(QVideoFrame)), this, SLOT(processFrame(QVideoFrame)));</para>
             <para></para>
-            <para>probe-&gt;setSource(player); // Returns true, hopefully.</para>
+            <para>  probe-&gt;setSource(player); // Returns true, hopefully.</para>
             <para></para>
-            <para>player-&gt;setVideoOutput(myVideoSurface);</para>
-            <para>player-&gt;setMedia(QUrl::fromLocalFile(&quot;observation.mp4&quot;));</para>
-            <para>player-&gt;play(); // Start receiving frames as they get presented to myVideoSurface</para>
+            <para>  player-&gt;setVideoOutput(myVideoSurface);</para>
+            <para>  player-&gt;setMedia(QUrl::fromLocalFile(&quot;observation.mp4&quot;));</para>
+            <para>  player-&gt;play(); // Start receiving frames as they get presented to myVideoSurface</para>
+            <para></para>
+            <para></para>
             <para>This same approach works with the QCamera object as well, to receive viewfinder or video frames as they are captured.</para>
             <para></para>
             <para>See also QAudioProbe, QMediaPlayer, and QCamera.</para>

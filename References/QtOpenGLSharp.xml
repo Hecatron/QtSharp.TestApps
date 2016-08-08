@@ -14,25 +14,29 @@
             <para>The size() of the colormap is always set to 256 colors. Note that under Windows you can also install colormaps in child widgets.</para>
             <para>This class uses implicit sharing as a memory and speed optimization.</para>
             <para>Example of use:</para>
-            <para>#include &lt;QApplication&gt;</para>
-            <para>#include &lt;QGLColormap&gt;</para>
             <para></para>
-            <para>int main()</para>
-            <para>{</para>
-            <para>    QApplication app(argc, argv);</para>
             <para></para>
-            <para>    MySuperGLWidget widget;     // a QGLWidget in color-index mode</para>
-            <para>    QGLColormap colormap;</para>
+            <para>  #include &lt;QApplication&gt;</para>
+            <para>  #include &lt;QGLColormap&gt;</para>
             <para></para>
-            <para>    // This will fill the colormap with colors ranging from</para>
-            <para>    // black to white.</para>
-            <para>    for (int i = 0; i &lt; colormap.size(); i++)</para>
-            <para>        colormap.setEntry(i, qRgb(i, i, i));</para>
+            <para>  int main()</para>
+            <para>  {</para>
+            <para>      QApplication app(argc, argv);</para>
             <para></para>
-            <para>    widget.setColormap(colormap);</para>
-            <para>    widget.show();</para>
-            <para>    return app.exec();</para>
-            <para>}</para>
+            <para>      MySuperGLWidget widget;     // a QGLWidget in color-index mode</para>
+            <para>      QGLColormap colormap;</para>
+            <para></para>
+            <para>      // This will fill the colormap with colors ranging from</para>
+            <para>      // black to white.</para>
+            <para>      for (int i = 0; i &lt; colormap.size(); i++)</para>
+            <para>          colormap.setEntry(i, qRgb(i, i, i));</para>
+            <para></para>
+            <para>      widget.setColormap(colormap);</para>
+            <para>      widget.show();</para>
+            <para>      return app.exec();</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para></para>
             <para>See also QGLWidget::setColormap() and QGLWidget::colormap().</para>
             </remarks>
@@ -120,26 +124,38 @@
             <para>You create and tell a QGLFormat object what rendering options you want from an OpenGL rendering context.</para>
             <para>OpenGL drivers or accelerated hardware may or may not support advanced features such as alpha channel or stereographic viewing. If you request some features that the driver/hardware does not provide when you create a QGLWidget, you will get a rendering context with the nearest subset of features.</para>
             <para>There are different ways to define the display characteristics of a rendering context. One is to create a QGLFormat and make it the default for the entire application:</para>
-            <para>QGLFormat fmt;</para>
-            <para>fmt.setAlpha(true);</para>
-            <para>fmt.setStereo(true);</para>
-            <para>QGLFormat::setDefaultFormat(fmt);</para>
+            <para></para>
+            <para></para>
+            <para>  QGLFormat fmt;</para>
+            <para>  fmt.setAlpha(true);</para>
+            <para>  fmt.setStereo(true);</para>
+            <para>  QGLFormat::setDefaultFormat(fmt);</para>
+            <para></para>
+            <para></para>
             <para>Or you can specify the desired format when creating an object of your QGLWidget subclass:</para>
-            <para>QGLFormat fmt;</para>
-            <para>fmt.setDoubleBuffer(false);                 // single buffer</para>
-            <para>fmt.setDirectRendering(false);              // software rendering</para>
-            <para>MyGLWidget* myWidget = new MyGLWidget(fmt, ...);</para>
+            <para></para>
+            <para></para>
+            <para>  QGLFormat fmt;</para>
+            <para>  fmt.setDoubleBuffer(false);                 // single buffer</para>
+            <para>  fmt.setDirectRendering(false);              // software rendering</para>
+            <para>  MyGLWidget* myWidget = new MyGLWidget(fmt, ...);</para>
+            <para></para>
+            <para></para>
             <para>After the widget has been created, you can find out which of the requested features the system was able to provide:</para>
-            <para>QGLFormat fmt;</para>
-            <para>fmt.setOverlay(true);</para>
-            <para>fmt.setStereo(true);</para>
-            <para>MyGLWidget* myWidget = new MyGLWidget(fmt, ...);</para>
-            <para>if (!myWidget-&gt;format().stereo()) {</para>
-            <para>    // ok, goggles off</para>
-            <para>    if (!myWidget-&gt;format().hasOverlay()) {</para>
-            <para>        qFatal(&quot;Cool hardware required&quot;);</para>
-            <para>    }</para>
-            <para>}</para>
+            <para></para>
+            <para></para>
+            <para>  QGLFormat fmt;</para>
+            <para>  fmt.setOverlay(true);</para>
+            <para>  fmt.setStereo(true);</para>
+            <para>  MyGLWidget* myWidget = new MyGLWidget(fmt, ...);</para>
+            <para>  if (!myWidget-&gt;format().stereo()) {</para>
+            <para>      // ok, goggles off</para>
+            <para>      if (!myWidget-&gt;format().hasOverlay()) {</para>
+            <para>          qFatal(&quot;Cool hardware required&quot;);</para>
+            <para>      }</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>OpenGL is a trademark of Silicon Graphics, Inc. in the United States and other countries.</para>
             <para></para>
             <para></para>
@@ -169,17 +185,21 @@
             <para>Creates a QGLFormat object that is a copy of the current defaultFormat().</para>
             <para>If options is not 0, the default format is modified by the specified format options. The options parameter should be QGL::FormatOption values OR'ed together.</para>
             <para>This constructor makes it easy to specify a certain desired format in classes derived from QGLWidget, for example:</para>
-            <para>// The rendering in MyGLWidget depends on using</para>
-            <para>// stencil buffer and alpha channel</para>
-            <para>MyGLWidget::MyGLWidget(QWidget* parent)</para>
-            <para>    : QGLWidget(QGLFormat(QGL::StencilBuffer | QGL::AlphaChannel), parent)</para>
-            <para>{</para>
-            <para>    if (!format().stencil())</para>
-            <para>        qWarning(&quot;Could not get stencil buffer; results will be suboptimal&quot;);</para>
-            <para>    if (!format().alpha())</para>
-            <para>        qWarning(&quot;Could not get alpha channel; results will be suboptimal&quot;);</para>
-            <para>    ...</para>
-            <para>}</para>
+            <para></para>
+            <para></para>
+            <para>  // The rendering in MyGLWidget depends on using</para>
+            <para>  // stencil buffer and alpha channel</para>
+            <para>  MyGLWidget::MyGLWidget(QWidget* parent)</para>
+            <para>      : QGLWidget(QGLFormat(QGL::StencilBuffer | QGL::AlphaChannel), parent)</para>
+            <para>  {</para>
+            <para>      if (!format().stencil())</para>
+            <para>          qWarning(&quot;Could not get stencil buffer; results will be suboptimal&quot;);</para>
+            <para>      if (!format().alpha())</para>
+            <para>          qWarning(&quot;Could not get alpha channel; results will be suboptimal&quot;);</para>
+            <para>      ...</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>Note that there are QGL::FormatOption values to turn format settings both on and off, e.g. QGL::DepthBuffer and QGL::NoDepthBuffer, QGL::DirectRendering and QGL::IndirectRendering, etc.</para>
             <para>The plane parameter defaults to 0 and is the plane which this format should be associated with. Not all OpenGL implementations supports overlay/underlay rendering planes.</para>
             <para>See also defaultFormat(), setOption(), and setPlane().</para>
@@ -454,10 +474,14 @@
             <para>See also setDefaultFormat().</para>
             <para></para>
             <para>Sets a new default QGLFormat for the application to f. For example, to set single buffering as the default instead of double buffering, your main() might contain code like this:</para>
-            <para>QApplication a(argc, argv);</para>
-            <para>QGLFormat f;</para>
-            <para>f.setDoubleBuffer(false);</para>
-            <para>QGLFormat::setDefaultFormat(f);</para>
+            <para></para>
+            <para></para>
+            <para>  QApplication a(argc, argv);</para>
+            <para>  QGLFormat f;</para>
+            <para>  f.setDoubleBuffer(false);</para>
+            <para>  QGLFormat::setDefaultFormat(f);</para>
+            <para></para>
+            <para></para>
             <para>See also defaultFormat().</para>
             </summary>
         </member>
@@ -482,20 +506,28 @@
             <para></para>
             <para>Sets a new default QGLFormat for overlay contexts to f. This format is used whenever a QGLWidget is created with a format that hasOverlay() enabled.</para>
             <para>For example, to get a double buffered overlay context (if available), use code like this:</para>
-            <para>QGLFormat f = QGLFormat::defaultOverlayFormat();</para>
-            <para>f.setDoubleBuffer(true);</para>
-            <para>QGLFormat::setDefaultOverlayFormat(f);</para>
+            <para></para>
+            <para></para>
+            <para>  QGLFormat f = QGLFormat::defaultOverlayFormat();</para>
+            <para>  f.setDoubleBuffer(true);</para>
+            <para>  QGLFormat::setDefaultOverlayFormat(f);</para>
+            <para></para>
+            <para></para>
             <para>As usual, you can find out after widget creation whether the underlying OpenGL system was able to provide the requested specification:</para>
-            <para>// ...continued from above</para>
-            <para>MyGLWidget* myWidget = new MyGLWidget(QGLFormat(QGL::HasOverlay), ...);</para>
-            <para>if (myWidget-&gt;format().hasOverlay()) {</para>
-            <para>    // Yes, we got an overlay, let's check _its_ format:</para>
-            <para>    QGLContext* olContext = myWidget-&gt;overlayContext();</para>
-            <para>    if (olContext-&gt;format().doubleBuffer())</para>
-            <para>        ; // yes, we got a double buffered overlay</para>
-            <para>    else</para>
-            <para>        ; // no, only single buffered overlays are available</para>
-            <para>}</para>
+            <para></para>
+            <para></para>
+            <para>  // ...continued from above</para>
+            <para>  MyGLWidget* myWidget = new MyGLWidget(QGLFormat(QGL::HasOverlay), ...);</para>
+            <para>  if (myWidget-&gt;format().hasOverlay()) {</para>
+            <para>      // Yes, we got an overlay, let's check _its_ format:</para>
+            <para>      QGLContext* olContext = myWidget-&gt;overlayContext();</para>
+            <para>      if (olContext-&gt;format().doubleBuffer())</para>
+            <para>          ; // yes, we got a double buffered overlay</para>
+            <para>      else</para>
+            <para>          ; // no, only single buffered overlays are available</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>See also defaultOverlayFormat().</para>
             </summary>
         </member>
@@ -791,15 +823,19 @@
             <para></para>
             <para>Sets a format for this context. The context is reset.</para>
             <para>Call create() to create a new GL context that tries to match the new format.</para>
-            <para>QGLContext *cx;</para>
-            <para>//  ...</para>
-            <para>QGLFormat f;</para>
-            <para>f.setStereo(true);</para>
-            <para>cx-&gt;setFormat(f);</para>
-            <para>if (!cx-&gt;create())</para>
-            <para>    exit(); // no OpenGL support, or cannot render on the specified paintdevice</para>
-            <para>if (!cx-&gt;format().stereo())</para>
-            <para>    exit(); // could not create stereo context</para>
+            <para></para>
+            <para></para>
+            <para>  QGLContext *cx;</para>
+            <para>  //  ...</para>
+            <para>  QGLFormat f;</para>
+            <para>  f.setStereo(true);</para>
+            <para>  cx-&gt;setFormat(f);</para>
+            <para>  if (!cx-&gt;create())</para>
+            <para>      exit(); // no OpenGL support, or cannot render on the specified paintdevice</para>
+            <para>  if (!cx-&gt;format().stereo())</para>
+            <para>      exit(); // could not create stereo context</para>
+            <para></para>
+            <para></para>
             <para>See also format(), reset(), and create().</para>
             </summary>
         </member>
@@ -924,49 +960,53 @@
             <para>initializeGL() - Sets up the OpenGL rendering context, defines display lists, etc. Gets called once before the first time resizeGL() or paintGL() is called.</para>
             <para></para>
             <para>Here is a rough outline of how a QGLWidget subclass might look:</para>
-            <para>class MyGLDrawer : public QGLWidget</para>
-            <para>{</para>
-            <para>    Q_OBJECT        // must include this if you use Qt signals/slots</para>
             <para></para>
-            <para>public:</para>
-            <para>    MyGLDrawer(QWidget *parent)</para>
-            <para>        : QGLWidget(parent) {}</para>
             <para></para>
-            <para>protected:</para>
+            <para>  class MyGLDrawer : public QGLWidget</para>
+            <para>  {</para>
+            <para>      Q_OBJECT        // must include this if you use Qt signals/slots</para>
             <para></para>
-            <para>    void initializeGL()</para>
-            <para>    {</para>
-            <para>        // Set up the rendering context, define display lists etc.:</para>
-            <para>        ...</para>
-            <para>        glClearColor(0.0, 0.0, 0.0, 0.0);</para>
-            <para>        glEnable(GL_DEPTH_TEST);</para>
-            <para>        ...</para>
-            <para>    }</para>
+            <para>  public:</para>
+            <para>      MyGLDrawer(QWidget *parent)</para>
+            <para>          : QGLWidget(parent) {}</para>
             <para></para>
-            <para>    void resizeGL(int w, int h)</para>
-            <para>    {</para>
-            <para>        // setup viewport, projection etc.:</para>
-            <para>        glViewport(0, 0, (GLint)w, (GLint)h);</para>
-            <para>        ...</para>
-            <para>        glFrustum(...);</para>
-            <para>        ...</para>
-            <para>    }</para>
+            <para>  protected:</para>
             <para></para>
-            <para>    void paintGL()</para>
-            <para>    {</para>
-            <para>        // draw the scene:</para>
-            <para>        ...</para>
-            <para>        glRotatef(...);</para>
-            <para>        glMaterialfv(...);</para>
-            <para>        glBegin(GL_QUADS);</para>
-            <para>        glVertex3f(...);</para>
-            <para>        glVertex3f(...);</para>
-            <para>        ...</para>
-            <para>        glEnd();</para>
-            <para>        ...</para>
-            <para>    }</para>
+            <para>      void initializeGL()</para>
+            <para>      {</para>
+            <para>          // Set up the rendering context, define display lists etc.:</para>
+            <para>          ...</para>
+            <para>          glClearColor(0.0, 0.0, 0.0, 0.0);</para>
+            <para>          glEnable(GL_DEPTH_TEST);</para>
+            <para>          ...</para>
+            <para>      }</para>
             <para></para>
-            <para>};</para>
+            <para>      void resizeGL(int w, int h)</para>
+            <para>      {</para>
+            <para>          // setup viewport, projection etc.:</para>
+            <para>          glViewport(0, 0, (GLint)w, (GLint)h);</para>
+            <para>          ...</para>
+            <para>          glFrustum(...);</para>
+            <para>          ...</para>
+            <para>      }</para>
+            <para></para>
+            <para>      void paintGL()</para>
+            <para>      {</para>
+            <para>          // draw the scene:</para>
+            <para>          ...</para>
+            <para>          glRotatef(...);</para>
+            <para>          glMaterialfv(...);</para>
+            <para>          glBegin(GL_QUADS);</para>
+            <para>          glVertex3f(...);</para>
+            <para>          glVertex3f(...);</para>
+            <para>          ...</para>
+            <para>          glEnd();</para>
+            <para>          ...</para>
+            <para>      }</para>
+            <para></para>
+            <para>  };</para>
+            <para></para>
+            <para></para>
             <para>If you need to trigger a repaint from places other than paintGL() (a typical example is when using timers to animate scenes), you should call the widget's updateGL() function.</para>
             <para>Your widget's OpenGL rendering context is made current when paintGL(), resizeGL(), or initializeGL() is called. If you need to call the standard OpenGL API functions from other places (e.g. in your widget's constructor or in your own paint functions), you must call makeCurrent() first.</para>
             <para>QGLWidget provides functions for requesting a new display format and you can also create widgets with customized rendering contexts.</para>
@@ -1206,12 +1246,6 @@
             <para>The widget's rendering context will become the current context and initializeGL() will be called if it hasn't already been called.</para>
             </summary>
         </member>
-        <member name="M:QtOpenGL.QGLWidget.OnEvent(QtCore.QEvent)">
-            <summary>
-            <para>Reimplemented from QObject::event().</para>
-            <para>Handles the event e passed as a parameter.</para>
-            </summary>
-        </member>
         <member name="M:QtOpenGL.QGLWidget.InitializeGL">
             <summary>
             <para>This virtual function is called once before the first call to paintGL() or resizeGL(), and then once whenever the widget has been assigned a new QGLContext. Reimplement it in a subclass.</para>
@@ -1441,10 +1475,14 @@
             <remarks>
             <para>Buffer objects are created in the GL server so that the client application can avoid uploading vertices, indices, texture image data, etc every time they are needed.</para>
             <para>QGLBuffer objects can be copied around as a reference to the underlying GL buffer object:</para>
-            <para>QGLBuffer buffer1(QGLBuffer::IndexBuffer);</para>
-            <para>buffer1.create();</para>
             <para></para>
-            <para>QGLBuffer buffer2 = buffer1;</para>
+            <para></para>
+            <para>  QGLBuffer buffer1(QGLBuffer::IndexBuffer);</para>
+            <para>  buffer1.create();</para>
+            <para></para>
+            <para>  QGLBuffer buffer2 = buffer1;</para>
+            <para></para>
+            <para></para>
             <para>QGLBuffer performs a shallow copy when objects are copied in this manner, but does not implement copy-on-write semantics. The original object will be affected whenever the copy is modified.</para>
             <para>Note: This class has been deprecated in favor of QOpenGLBuffer.</para>
             </remarks>
@@ -1545,7 +1583,11 @@
             <summary>
             <para>Releases the buffer associated with type in the current QGLContext.</para>
             <para>This function is a direct call to glBindBuffer(type, 0) for use when the caller does not know which QGLBuffer has been bound to the context but wants to make sure that it is released.</para>
-            <para>QGLBuffer::release(QGLBuffer::VertexBuffer);</para>
+            <para></para>
+            <para></para>
+            <para>  QGLBuffer::release(QGLBuffer::VertexBuffer);</para>
+            <para></para>
+            <para></para>
             </summary>
         </member>
         <member name="P:QtOpenGL.QGLBuffer.usagePattern">
@@ -1652,7 +1694,6 @@
             <para>The QGLFramebufferObject class encapsulates an OpenGL framebuffer object, defined by the GL_EXT_framebuffer_object extension. In addition it provides a rendering surface that can be painted on with a QPainter, rendered to using native GL calls, or both. This surface can be bound and used as a regular texture in your own GL drawing code. By default, the QGLFramebufferObject class generates a 2D GL texture (using the GL_TEXTURE_2D target), which is used as the internal rendering target.</para>
             <para>It is important to have a current GL context when creating a QGLFramebufferObject, otherwise initialization will fail.</para>
             <para>OpenGL framebuffer objects and pbuffers (see QGLPixelBuffer) can both be used to render to offscreen surfaces, but there are a number of advantages with using framebuffer objects instead of pbuffers:</para>
-            <para></para>
             <para>A framebuffer object does not require a separate rendering context, so no context switching will occur when switching rendering targets. There is an overhead involved in switching targets, but in general it is cheaper than a context switch to a pbuffer.</para>
             <para>Rendering to dynamic textures (i.e. render-to-texture functionality) works on all platforms. No need to do explicit copy calls from a render buffer into a texture, as was necessary on systems that did not support the render_texture extension.</para>
             <para>It is possible to attach several rendering buffers (or texture objects) to the same framebuffer object, and render to all of them without doing a context switch.</para>
@@ -1724,8 +1765,12 @@
             <para>Returns the contents of this framebuffer object as a QImage.</para>
             <para>The returned image has a format of premultiplied ARGB32 or RGB32. The latter is used only when internalTextureFormat() is set to GL_RGB.</para>
             <para>If the rendering in the framebuffer was not done with premultiplied alpha in mind, create a wrapper QImage with a non-premultiplied format. This is necessary before performing operations like QImage::save() because otherwise the image data would get unpremultiplied, even though it was not premultiplied in the first place. To create such a wrapper without performing a copy of the pixel data, do the following:</para>
-            <para>QImage fboImage(fbo.toImage());</para>
-            <para>QImage image(fboImage.constBits(), fboImage.width(), fboImage.height(), QImage::Format_ARGB32);</para>
+            <para></para>
+            <para></para>
+            <para>  QImage fboImage(fbo.toImage());</para>
+            <para>  QImage image(fboImage.constBits(), fboImage.width(), fboImage.height(), QImage::Format_ARGB32);</para>
+            <para></para>
+            <para></para>
             <para>On QNX the back buffer is not preserved when a buffer swap occures. So this function might return old content.</para>
             </summary>
         </member>
@@ -1944,36 +1989,52 @@
             <remarks>
             <para>OpenGL ES 2.0 defines a subset of the OpenGL specification that is common across many desktop and embedded OpenGL implementations. However, it can be difficult to use the functions from that subset because they need to be resolved manually on desktop systems.</para>
             <para>QGLFunctions provides a guaranteed API that is available on all OpenGL systems and takes care of function resolution on systems that need it. The recommended way to use QGLFunctions is by direct inheritance:</para>
-            <para>class MyGLWidget : public QGLWidget, protected QGLFunctions</para>
-            <para>{</para>
-            <para>    Q_OBJECT</para>
-            <para>public:</para>
-            <para>    MyGLWidget(QWidget *parent = 0) : QGLWidget(parent) {}</para>
             <para></para>
-            <para>protected:</para>
-            <para>    void initializeGL();</para>
-            <para>    void paintGL();</para>
-            <para>};</para>
             <para></para>
-            <para>void MyGLWidget::initializeGL()</para>
-            <para>{</para>
-            <para>    initializeGLFunctions();</para>
-            <para>}</para>
+            <para>  class MyGLWidget : public QGLWidget, protected QGLFunctions</para>
+            <para>  {</para>
+            <para>      Q_OBJECT</para>
+            <para>  public:</para>
+            <para>      MyGLWidget(QWidget *parent = 0) : QGLWidget(parent) {}</para>
+            <para></para>
+            <para>  protected:</para>
+            <para>      void initializeGL();</para>
+            <para>      void paintGL();</para>
+            <para>  };</para>
+            <para></para>
+            <para>  void MyGLWidget::initializeGL()</para>
+            <para>  {</para>
+            <para>      initializeGLFunctions();</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>The paintGL() function can then use any of the OpenGL ES 2.0 functions without explicit resolution, such as glActiveTexture() in the following example:</para>
-            <para>void MyGLWidget::paintGL()</para>
-            <para>{</para>
-            <para>    glActiveTexture(GL_TEXTURE1);</para>
-            <para>    glBindTexture(GL_TEXTURE_2D, textureId);</para>
-            <para>    ...</para>
-            <para>}</para>
+            <para></para>
+            <para></para>
+            <para>  void MyGLWidget::paintGL()</para>
+            <para>  {</para>
+            <para>      glActiveTexture(GL_TEXTURE1);</para>
+            <para>      glBindTexture(GL_TEXTURE_2D, textureId);</para>
+            <para>      ...</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
             <para>QGLFunctions can also be used directly for ad-hoc invocation of OpenGL ES 2.0 functions on all platforms:</para>
-            <para>QGLFunctions glFuncs(QGLContext::currentContext());</para>
-            <para>glFuncs.glActiveTexture(GL_TEXTURE1);</para>
+            <para></para>
+            <para></para>
+            <para>  QGLFunctions glFuncs(QGLContext::currentContext());</para>
+            <para>  glFuncs.glActiveTexture(GL_TEXTURE1);</para>
+            <para></para>
+            <para></para>
             <para>QGLFunctions provides wrappers for all OpenGL ES 2.0 functions, except those like glDrawArrays(), glViewport(), and glBindTexture() that don't have portability issues.</para>
             <para>Including the header for QGLFunctions will also define all of the OpenGL ES 2.0 macro constants that are not already defined by the system's OpenGL headers, such as GL_TEXTURE1 above.</para>
             <para>The hasOpenGLFeature() and openGLFeatures() functions can be used to determine if the OpenGL implementation has a major OpenGL ES 2.0 feature. For example, the following checks if non power of two textures are available:</para>
-            <para>QGLFunctions funcs(QGLContext::currentContext());</para>
-            <para>bool npot = funcs.hasOpenGLFeature(QGLFunctions::NPOTTextures);</para>
+            <para></para>
+            <para></para>
+            <para>  QGLFunctions funcs(QGLContext::currentContext());</para>
+            <para>  bool npot = funcs.hasOpenGLFeature(QGLFunctions::NPOTTextures);</para>
+            <para></para>
+            <para></para>
             <para>Note: This class has been deprecated in favor of QOpenGLFunctions.</para>
             </remarks>
         </member>
@@ -2707,7 +2768,6 @@
             <remarks>
             <para>Rendering into a pbuffer is normally done using full hardware acceleration. This can be significantly faster than rendering into a QPixmap.</para>
             <para>There are three approaches to using this class:</para>
-            <para></para>
             <para>We can draw into the pbuffer and convert it to a QImage using toImage(). This is normally much faster than calling QGLWidget::renderPixmap().</para>
             <para>We can draw into the pbuffer and copy the contents into an OpenGL texture using updateDynamicTexture(). This allows us to create dynamic textures and works on all systems with pbuffer support.</para>
             <para>On systems that support it, we can bind the pbuffer to an OpenGL texture. The texture is then updated automatically when the pbuffer contents change, eliminating the need for additional copy operations. This is supported only on Windows and OS X systems that provide the render_texture extension. Note that under Windows, a multi-sampled pbuffer can't be used in conjunction with the render_texture extension. If a multi-sampled pbuffer is requested under Windows, the render_texture extension is turned off for that pbuffer.</para>
@@ -2772,13 +2832,17 @@
             <para>The texture must be of the same size and format as the pbuffer.</para>
             <para>To unbind the texture, call releaseFromDynamicTexture(). While the texture is bound, it is updated automatically when the pbuffer contents change, eliminating the need for additional copy operations.</para>
             <para>Example:</para>
-            <para>QGLPixelBuffer pbuffer(...);</para>
-            <para>...</para>
-            <para>pbuffer.makeCurrent();</para>
-            <para>GLuint dynamicTexture = pbuffer.generateDynamicTexture();</para>
-            <para>pbuffer.bindToDynamicTexture(dynamicTexture);</para>
-            <para>...</para>
-            <para>pbuffer.releaseFromDynamicTexture();</para>
+            <para></para>
+            <para></para>
+            <para>  QGLPixelBuffer pbuffer(...);</para>
+            <para>  ...</para>
+            <para>  pbuffer.makeCurrent();</para>
+            <para>  GLuint dynamicTexture = pbuffer.generateDynamicTexture();</para>
+            <para>  pbuffer.bindToDynamicTexture(dynamicTexture);</para>
+            <para>  ...</para>
+            <para>  pbuffer.releaseFromDynamicTexture();</para>
+            <para></para>
+            <para></para>
             <para>Warning: This function uses the render_texture extension, which is currently not supported under X11. An alternative that works on all systems (including X11) is to manually copy the pbuffer contents to a texture using updateDynamicTexture().</para>
             <para>Warning: For the bindToDynamicTexture() call to succeed on the OS X, the pbuffer needs a shared context, i.e. the QGLPixelBuffer must be created with a share widget.</para>
             <para>See also generateDynamicTexture() and releaseFromDynamicTexture().</para>
@@ -2795,12 +2859,16 @@
             <para>Copies the pbuffer contents into the texture specified with texture_id.</para>
             <para>The texture must be of the same size and format as the pbuffer.</para>
             <para>Example:</para>
-            <para>QGLPixelBuffer pbuffer(...);</para>
-            <para>...</para>
-            <para>pbuffer.makeCurrent();</para>
-            <para>GLuint dynamicTexture = pbuffer.generateDynamicTexture();</para>
-            <para>...</para>
-            <para>pbuffer.updateDynamicTexture(dynamicTexture);</para>
+            <para></para>
+            <para></para>
+            <para>  QGLPixelBuffer pbuffer(...);</para>
+            <para>  ...</para>
+            <para>  pbuffer.makeCurrent();</para>
+            <para>  GLuint dynamicTexture = pbuffer.generateDynamicTexture();</para>
+            <para>  ...</para>
+            <para>  pbuffer.updateDynamicTexture(dynamicTexture);</para>
+            <para></para>
+            <para></para>
             <para>An alternative on Windows and OS X systems that support the render_texture extension is to use bindToDynamicTexture() to get dynamic updates of the texture.</para>
             <para>See also generateDynamicTexture() and bindToDynamicTexture().</para>
             </summary>
@@ -3004,68 +3072,83 @@
             <para>The QGLShaderProgram class allows OpenGL shader programs to be linked and used.</para>
             </summary>
             <remarks>
-            <para></para>
             <para>Introduction</para>
             <para>This class supports shader programs written in the OpenGL Shading Language (GLSL) and in the OpenGL/ES Shading Language (GLSL/ES).</para>
             <para>QGLShader and QGLShaderProgram shelter the programmer from the details of compiling and linking vertex and fragment shaders.</para>
             <para>The following example creates a vertex shader program using the supplied source code. Once compiled and linked, the shader program is activated in the current QGLContext by calling QGLShaderProgram::bind():</para>
-            <para>QGLShader shader(QGLShader::Vertex);</para>
-            <para>shader.compileSourceCode(code);</para>
             <para></para>
-            <para>QGLShaderProgram program(context);</para>
-            <para>program.addShader(shader);</para>
-            <para>program.link();</para>
             <para></para>
-            <para>program.bind();</para>
+            <para>  QGLShader shader(QGLShader::Vertex);</para>
+            <para>  shader.compileSourceCode(code);</para>
+            <para></para>
+            <para>  QGLShaderProgram program(context);</para>
+            <para>  program.addShader(shader);</para>
+            <para>  program.link();</para>
+            <para></para>
+            <para>  program.bind();</para>
+            <para></para>
+            <para></para>
             <para></para>
             <para>Writing Portable Shaders</para>
             <para>Shader programs can be difficult to reuse across OpenGL implementations because of varying levels of support for standard vertex attributes and uniform variables. In particular, GLSL/ES lacks all of the standard variables that are present on desktop OpenGL systems: gl_Vertex, gl_Normal, gl_Color, and so on. Desktop OpenGL lacks the variable qualifiers highp, mediump, and lowp.</para>
             <para>The QGLShaderProgram class makes the process of writing portable shaders easier by prefixing all shader programs with the following lines on desktop OpenGL:</para>
-            <para>#define highp</para>
-            <para>#define mediump</para>
-            <para>#define lowp</para>
+            <para></para>
+            <para></para>
+            <para>  #define highp</para>
+            <para>  #define mediump</para>
+            <para>  #define lowp</para>
+            <para></para>
+            <para></para>
             <para>This makes it possible to run most GLSL/ES shader programs on desktop systems. The programmer should restrict themselves to just features that are present in GLSL/ES, and avoid standard variable names that only work on the desktop.</para>
             <para></para>
             <para>Simple Shader Example</para>
-            <para>program.addShaderFromSourceCode(QGLShader::Vertex,</para>
-            <para>    &quot;attribute highp vec4 vertex;\n&quot;</para>
-            <para>    &quot;uniform highp mat4 matrix;\n&quot;</para>
-            <para>    &quot;void main(void)\n&quot;</para>
-            <para>    &quot;{\n&quot;</para>
-            <para>    &quot;   gl_Position = matrix * vertex;\n&quot;</para>
-            <para>    &quot;}&quot;);</para>
-            <para>program.addShaderFromSourceCode(QGLShader::Fragment,</para>
-            <para>    &quot;uniform mediump vec4 color;\n&quot;</para>
-            <para>    &quot;void main(void)\n&quot;</para>
-            <para>    &quot;{\n&quot;</para>
-            <para>    &quot;   gl_FragColor = color;\n&quot;</para>
-            <para>    &quot;}&quot;);</para>
-            <para>program.link();</para>
-            <para>program.bind();</para>
             <para></para>
-            <para>int vertexLocation = program.attributeLocation(&quot;vertex&quot;);</para>
-            <para>int matrixLocation = program.uniformLocation(&quot;matrix&quot;);</para>
-            <para>int colorLocation = program.uniformLocation(&quot;color&quot;);</para>
+            <para></para>
+            <para>  program.addShaderFromSourceCode(QGLShader::Vertex,</para>
+            <para>      &quot;attribute highp vec4 vertex;\n&quot;</para>
+            <para>      &quot;uniform highp mat4 matrix;\n&quot;</para>
+            <para>      &quot;void main(void)\n&quot;</para>
+            <para>      &quot;{\n&quot;</para>
+            <para>      &quot;   gl_Position = matrix * vertex;\n&quot;</para>
+            <para>      &quot;}&quot;);</para>
+            <para>  program.addShaderFromSourceCode(QGLShader::Fragment,</para>
+            <para>      &quot;uniform mediump vec4 color;\n&quot;</para>
+            <para>      &quot;void main(void)\n&quot;</para>
+            <para>      &quot;{\n&quot;</para>
+            <para>      &quot;   gl_FragColor = color;\n&quot;</para>
+            <para>      &quot;}&quot;);</para>
+            <para>  program.link();</para>
+            <para>  program.bind();</para>
+            <para></para>
+            <para>  int vertexLocation = program.attributeLocation(&quot;vertex&quot;);</para>
+            <para>  int matrixLocation = program.uniformLocation(&quot;matrix&quot;);</para>
+            <para>  int colorLocation = program.uniformLocation(&quot;color&quot;);</para>
+            <para></para>
+            <para></para>
             <para>With the above shader program active, we can draw a green triangle as follows:</para>
-            <para>static GLfloat const triangleVertices[] = {</para>
-            <para>    60.0f,  10.0f,  0.0f,</para>
-            <para>    110.0f, 110.0f, 0.0f,</para>
-            <para>    10.0f,  110.0f, 0.0f</para>
-            <para>};</para>
             <para></para>
-            <para>QColor color(0, 255, 0, 255);</para>
             <para></para>
-            <para>QMatrix4x4 pmvMatrix;</para>
-            <para>pmvMatrix.ortho(rect());</para>
+            <para>  static GLfloat const triangleVertices[] = {</para>
+            <para>      60.0f,  10.0f,  0.0f,</para>
+            <para>      110.0f, 110.0f, 0.0f,</para>
+            <para>      10.0f,  110.0f, 0.0f</para>
+            <para>  };</para>
             <para></para>
-            <para>program.enableAttributeArray(vertexLocation);</para>
-            <para>program.setAttributeArray(vertexLocation, triangleVertices, 3);</para>
-            <para>program.setUniformValue(matrixLocation, pmvMatrix);</para>
-            <para>program.setUniformValue(colorLocation, color);</para>
+            <para>  QColor color(0, 255, 0, 255);</para>
             <para></para>
-            <para>glDrawArrays(GL_TRIANGLES, 0, 3);</para>
+            <para>  QMatrix4x4 pmvMatrix;</para>
+            <para>  pmvMatrix.ortho(rect());</para>
             <para></para>
-            <para>program.disableAttributeArray(vertexLocation);</para>
+            <para>  program.enableAttributeArray(vertexLocation);</para>
+            <para>  program.setAttributeArray(vertexLocation, triangleVertices, 3);</para>
+            <para>  program.setUniformValue(matrixLocation, pmvMatrix);</para>
+            <para>  program.setUniformValue(colorLocation, color);</para>
+            <para></para>
+            <para>  glDrawArrays(GL_TRIANGLES, 0, 3);</para>
+            <para></para>
+            <para>  program.disableAttributeArray(vertexLocation);</para>
+            <para></para>
+            <para></para>
             <para></para>
             <para>Binary Shaders and Programs</para>
             <para>Binary shaders may be specified using glShaderBinary() on the return value from QGLShader::shaderId(). The QGLShader instance containing the binary can then be added to the shader program with addShader() and linked in the usual fashion with link().</para>
