@@ -1,0 +1,1637 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>QtSerialBus.Sharp</name>
+    </assembly>
+    <members>
+        <member name="T:QtSerialBus.QCanBusFrame">
+            <summary>
+            <para>QCanBusFrame is a container class representing a single CAN frame.</para>
+            </summary>
+            <remarks>
+            <para>QCanBusDevice can use QCanBusFrame for read and write operations. It contains the frame identifier and the data payload. QCanBusFrame contains the timestamp of the moment it was read.</para>
+            <para></para>
+            <para>See also QCanBusFrame::TimeStamp.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSerialBus.QCanBusFrame.#ctor(QtSerialBus.QCanBusFrame.FrameType)">
+            <summary>
+            <para>Constructs a CAN frame of the specified type.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QCanBusFrame.#ctor(System.UInt32,QtCore.QByteArray)">
+            <summary>
+            <para>Constructs a CAN frame using identifier as the frame identifier and data as the payload.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QCanBusFrame.#ctor(System.UInt32)">
+            <summary>
+            <para>Constructs a CAN frame using identifier as the frame identifier and data as the payload.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QCanBusFrame.SetExtendedFrameFormat(System.Boolean)">
+            <summary>
+            <para>Sets the extended frame format flag to isExtended.</para>
+            <para>See also hasExtendedFrameFormat().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QCanBusFrame.frameType">
+            <summary>
+            <para>Returns the type of the frame.</para>
+            <para>See also setFrameType().</para>
+            <para></para>
+            <para>Sets the type of the frame to newType.</para>
+            <para>See also frameType().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QCanBusFrame.FrameId">
+            <summary>
+            <para>Returns the CAN frame identifier. If the CAN frame uses the extended frame format, the identifier has a maximum of 29 bits; otherwise 11 bits.</para>
+            <para>If the frame is of ErrorFrame type, this ID is always 0.</para>
+            <para>See also setFrameId() and hasExtendedFrameFormat().</para>
+            <para></para>
+            <para>Sets the identifier of the CAN frame to newFrameId. The maximum size of a CAN frame identifier is 11 bits, which can be extended up to 29 bits by supporting the CAN extended frame format. The CAN extended frame format setting is automatically adapted to match newFrameId.</para>
+            <para>See also frameId() and hasExtendedFrameFormat().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QCanBusFrame.Payload">
+            <summary>
+            <para>Returns the data payload of the frame.</para>
+            <para>See also setPayload().</para>
+            <para></para>
+            <para>Sets data as the payload for the CAN frame. The maximum size of payload is 8 bytes, which can be extended up to 64 bytes by supporting Flexible Data-Rate. Flexible Data-Rate has to be enabled on the QCanBusDevice by setting the QCanBusDevice::CanFdKey.</para>
+            <para>Frames of type RemoteRequestFrame (RTR) do not have a payload. However they have to provide an indication of the responses expected payload length. To set the length expection it is necessary to set a fake payload whose length matches the expected payload length of the response. One way of doing this might be as follows:</para>
+            <para></para>
+            <para></para>
+            <para>  QCanBusFrame frame(QCanBusFrame::RemoteRequestFrame);</para>
+            <para>  int expectedResponseLength = ...;</para>
+            <para>  frame.setPayload(QByteArray(expectedResponseLength, 0));</para>
+            <para></para>
+            <para></para>
+            <para>See also payload().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QCanBusFrame.timeStamp">
+            <summary>
+            <para>Returns the timestamp of the frame.</para>
+            <para>See also QCanBusFrame::TimeStamp and QCanBusFrame::setTimeStamp().</para>
+            <para></para>
+            <para>Sets ts as the timestamp for the CAN frame. Usually, this function is not needed, because the timestamp is created during the read operation and not needed during the write operation.</para>
+            <para>See also timeStamp() and QCanBusFrame::TimeStamp.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QCanBusFrame.Error">
+            <summary>
+            <para>Returns the error of the current error frame. If the frame is not an ErrorFrame, this function returns NoError.</para>
+            <para>See also setError().</para>
+            <para></para>
+            <para>Sets the frame's error type. This function does nothing if frameType() is not an ErrorFrame.</para>
+            <para>See also error().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QCanBusFrame.IsValid">
+            <summary>
+            <para>Returns false if the frameType() is InvalidFrame, the hasExtendedFrameFormat() is not set although frameId() is longer than 11 bit or the payload is longer than the maximal permitted payload length of 64 byte.</para>
+            <para>Otherwise this function returns true.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QCanBusFrame.HasExtendedFrameFormat">
+            <summary>
+            <para>Returns true if the CAN frame uses a 29bit identifier; otherwise false, implying an 11bit identifier.</para>
+            <para>See also setExtendedFrameFormat() and frameId().</para>
+            </summary>
+        </member>
+        <member name="T:QtSerialBus.QCanBusFrame.FrameType">
+            <summary>
+            <para>This enum describes the type of the CAN frame.</para>
+            <para>See also setFrameType().</para>
+            </summary>
+        </member>
+        <member name="F:QtSerialBus.QCanBusFrame.FrameType.UnknownFrame">
+            <summary>The frame type is unknown.</summary>
+        </member>
+        <member name="F:QtSerialBus.QCanBusFrame.FrameType.DataFrame">
+            <summary>This value represents a data frame.</summary>
+        </member>
+        <member name="F:QtSerialBus.QCanBusFrame.FrameType.ErrorFrame">
+            <summary>This value represents an error frame.</summary>
+        </member>
+        <member name="F:QtSerialBus.QCanBusFrame.FrameType.RemoteRequestFrame">
+            <summary>This value represents a remote request.</summary>
+        </member>
+        <member name="F:QtSerialBus.QCanBusFrame.FrameType.InvalidFrame">
+            <summary>This value represents an invalid frame. This type is used for error reporting.</summary>
+        </member>
+        <member name="T:QtSerialBus.QCanBusFrame.FrameError">
+            <summary>
+            <para>This enum describes the possible error types.</para>
+            <para>The FrameErrors type is a typedef for QFlags&lt;FrameError&gt;. It stores an OR combination of FrameError values.</para>
+            </summary>
+        </member>
+        <member name="F:QtSerialBus.QCanBusFrame.FrameError.NoError">
+            <summary>No error has occurred.</summary>
+        </member>
+        <member name="F:QtSerialBus.QCanBusFrame.FrameError.TransmissionTimeoutError">
+            <summary>The transmission has timed out.</summary>
+        </member>
+        <member name="F:QtSerialBus.QCanBusFrame.FrameError.LostArbitrationError">
+            <summary>The frame could not be sent due to lost arbitration on the bus.</summary>
+        </member>
+        <member name="F:QtSerialBus.QCanBusFrame.FrameError.ControllerError">
+            <summary>The controller encountered an error.</summary>
+        </member>
+        <member name="F:QtSerialBus.QCanBusFrame.FrameError.ProtocolViolationError">
+            <summary>A protocol violation has occurred.</summary>
+        </member>
+        <member name="F:QtSerialBus.QCanBusFrame.FrameError.TransceiverError">
+            <summary>A transceiver error occurred</summary>
+        </member>
+        <member name="F:QtSerialBus.QCanBusFrame.FrameError.MissingAcknowledgmentError">
+            <summary>The transmission received no acknowledgment.</summary>
+        </member>
+        <member name="F:QtSerialBus.QCanBusFrame.FrameError.BusOffError">
+            <summary>The CAN bus is offline.</summary>
+        </member>
+        <member name="F:QtSerialBus.QCanBusFrame.FrameError.BusError">
+            <summary>A CAN bus error occurred.</summary>
+        </member>
+        <member name="F:QtSerialBus.QCanBusFrame.FrameError.ControllerRestartError">
+            <summary>The controller restarted.</summary>
+        </member>
+        <member name="F:QtSerialBus.QCanBusFrame.FrameError.UnknownError">
+            <summary>An unknown error has occurred.</summary>
+        </member>
+        <member name="F:QtSerialBus.QCanBusFrame.FrameError.AnyError">
+            <summary>Matches every other error type.</summary>
+        </member>
+        <member name="T:QtSerialBus.QCanBusFrame.TimeStamp">
+            <summary>
+            <para>The TimeStamp class provides timestamp information with microsecond precision.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QCanBusFrame.TimeStamp.#ctor(System.Int64,System.Int64)">
+            <summary>
+            <para>Constructs a TimeStamp in seconds, s, and microseconds, usec.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QCanBusFrame.TimeStamp.Seconds">
+            <summary>
+            <para>Returns the seconds of the timestamp.</para>
+            <para>See also TimeStamp::setSeconds().</para>
+            <para></para>
+            <para>Sets the seconds in the timestamp type to s.</para>
+            <para>See also TimeStamp::seconds().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QCanBusFrame.TimeStamp.MicroSeconds">
+            <summary>
+            <para>Returns the microseconds of the timestamp.</para>
+            <para>See also TimeStamp::setMicroSeconds.</para>
+            <para></para>
+            <para>Sets the microseconds in the timestamp type to usec.</para>
+            <para>See also TimeStamp::microSeconds.</para>
+            </summary>
+        </member>
+        <member name="T:QtSerialBus.QCanBusDevice">
+            <summary>
+            <para>The QCanBusDevice class is the interface class for CAN bus.</para>
+            </summary>
+            <remarks>
+            <para>QCanBusDevice communicates with a CAN backend providing users with a convenient API. The CAN backend must be specified during the object creation.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSerialBus.QCanBusDevice.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs a serial bus device with the specified parent.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QCanBusDevice.SetConfigurationParameter(System.Int32,QtCore.QVariant)">
+            <summary>
+            <para>Sets the configuration parameter key for the CAN bus connection to value. The potential keys are represented by ConfigurationKey.</para>
+            <para>A parameter can be unset by setting an invalid QVariant. Unsetting a parameter implies that the configuration is reset to its default setting.</para>
+            <para>Note: In most cases, configuration changes only take effect after a reconnect.</para>
+            <para>See also configurationParameter().</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QCanBusDevice.ConfigurationParameter(System.Int32)">
+            <summary>
+            <para>Returns the current value assigned to the ConfigurationKey key; otherwise an invalid QVariant.</para>
+            <para>See also setConfigurationParameter() and configurationKeys().</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QCanBusDevice.WriteFrame(QtSerialBus.QCanBusFrame)">
+            <summary>
+            <para>Writes frame to the CAN bus and returns true on success; otherwise false.</para>
+            <para>On some platforms, the frame may be put into a queue and the return value may only indicate a successful insertion into the queue. The actual frame will be send later on. Therefore the framesWritten() signal is the final confirmation that the frame has been handed off to the transport layer. If an error occurs the errorOccurred() is emitted.</para>
+            <para>As per CAN bus specification, frames of type remote transfer request (RTR) do not have a payload but require a size larger than zero. This size indicates the expected response payload length from the remote party. Therefore when sending a RTR frame using this function it may still be required to set an arbitrary payload on frame. The length of the arbitrary payload is what is set as size expectation for the RTR frame.</para>
+            <para>See also QCanBusFrame::setPayload().</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QCanBusDevice.ReadFrame">
+            <summary>
+            <para>Returns the next QCanBusFrame from the queue; otherwise returns an empty QCanBusFrame. The returned frame is removed from the queue.</para>
+            <para>The queue operates according to the FIFO principle.</para>
+            <para>See also framesAvailable().</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QCanBusDevice.FramesAvailable">
+            <summary>
+            <para>Returns the number of available frames. If no frames are available, this function returns 0.</para>
+            <para>See also readFrame().</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QCanBusDevice.FramesToWrite">
+            <summary>
+            <para>Returns the number of frames waiting to be written.</para>
+            <para>See also writeFrame().</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QCanBusDevice.ConnectDevice">
+            <summary>
+            <para>Connects the device to the CAN bus. Returns true on success; otherwise false.</para>
+            <para>This function calls open() as part of its implementation.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QCanBusDevice.DisconnectDevice">
+            <summary>
+            <para>Disconnects the device from the CAN bus.</para>
+            <para>This function calls close() as part of its implementation.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QCanBusDevice.InterpretErrorFrame(QtSerialBus.QCanBusFrame)">
+            <summary>
+            <para>Interprets frame as error frame and returns a human readable description of the error.</para>
+            <para>If frame is not an error frame, the returned string is empty.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QCanBusDevice.SetError(System.String,QtSerialBus.QCanBusDevice.CanBusError)">
+            <summary>
+            <para>Sets the human readable description of the last device error to errorText. errorId categorizes the type of error.</para>
+            <para>CAN bus implementations must use this function to update the device's error state.</para>
+            <para>See also error() and errorOccurred().</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QCanBusDevice.EnqueueOutgoingFrame(QtSerialBus.QCanBusFrame)">
+            <summary>
+            <para>Appends newFrame to the internal list of outgoing frames which can be accessed by writeFrame().</para>
+            <para>Subclasses must call this function when they write a new frame.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QCanBusDevice.Open">
+            <summary>
+            <para>This function is called by connectDevice(). Subclasses must provide an implementation which returns true if the CAN bus connection could be established; otherwise false. The QCanBusDevice implementation ensures upon entry of this function that the device's state() is set to QCanBusDevice::ConnectingState already.</para>
+            <para>The implementation must ensure that upon success the instance's state() is set to QCanBusDevice::ConnectedState; otherwise QCanBusDevice::UnconnectedState. setState() must be used to set the new device state.</para>
+            <para>The custom implementation is responsible for opening the socket, instanciation of a potentially required QSocketNotifier and the application of custom and default QCanBusDevice::configurationParameter().</para>
+            <para>See also connectDevice().</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QCanBusDevice.Close">
+            <summary>
+            <para>This function is responsible for closing the CAN bus connection. The implementation must ensure that the instance's state() is set to QCanBusDevice::UnconnectedState.</para>
+            <para>This function's most important task is to close the socket to the CAN device and to call QCanBusDevice::setState().</para>
+            <para>See also disconnectDevice().</para>
+            </summary>
+        </member>
+        <member name="E:QtSerialBus.QCanBusDevice.ErrorOccurred">
+            <summary>
+            <para>This signal is emitted when an error of the type error occurs.</para>
+            </summary>
+        </member>
+        <member name="E:QtSerialBus.QCanBusDevice.FramesReceived">
+            <summary>
+            <para>This signal is emitted when one or more frames have been received. The frames should be read using readFrame() and framesAvailable().</para>
+            </summary>
+        </member>
+        <member name="E:QtSerialBus.QCanBusDevice.FramesWritten">
+            <summary>
+            <para>This signal is emitted every time a payload of frames has been written to the CAN bus. The framesCount argument is set to the number of frames that were written in this payload.</para>
+            </summary>
+        </member>
+        <member name="E:QtSerialBus.QCanBusDevice.StateChanged">
+            <summary>
+            <para>This signal is emitted every time the state of the device changes. The new state is represented by state.</para>
+            <para>See also setState() and state().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QCanBusDevice.State">
+            <summary>
+            <para>Returns the current state of the device.</para>
+            <para>See also setState() and stateChanged().</para>
+            <para></para>
+            <para>Sets the state of the device to newState. CAN bus implementations must use this function to update the device state.</para>
+            <para>See also state().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QCanBusDevice.Error">
+            <summary>
+            <para>Returns the last error that has occurred. The error value is always set to last error that occurred and it is never reset.</para>
+            <para>See also setError() and errorString().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QCanBusDevice.ErrorString">
+            <summary>
+            <para>Returns a human-readable description of the last device error that occurred.</para>
+            <para>See also error().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QCanBusDevice.DequeueOutgoingFrame">
+            <summary>
+            <para>Returns the next QCanBusFrame from the internal list of outgoing frames; otherwise returns an invalid QCanBusFrame. The returned frame is removed from the internal list.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QCanBusDevice.HasOutgoingFrames">
+            <summary>
+            <para>Returns true if the internal list of outgoing frames is not empty; otherwise returns false.</para>
+            </summary>
+        </member>
+        <member name="T:QtSerialBus.QCanBusDevice.CanBusError">
+            <summary>
+            <para>This enum describes all the possible error conditions.</para>
+            </summary>
+        </member>
+        <member name="F:QtSerialBus.QCanBusDevice.CanBusError.NoError">
+            <summary>No errors have occurred.</summary>
+        </member>
+        <member name="F:QtSerialBus.QCanBusDevice.CanBusError.ReadError">
+            <summary>An error occurred during a read operation.</summary>
+        </member>
+        <member name="F:QtSerialBus.QCanBusDevice.CanBusError.WriteError">
+            <summary>An error occurred during a write operation.</summary>
+        </member>
+        <member name="F:QtSerialBus.QCanBusDevice.CanBusError.ConnectionError">
+            <summary>An error occurred when attempting to open the backend.</summary>
+        </member>
+        <member name="F:QtSerialBus.QCanBusDevice.CanBusError.ConfigurationError">
+            <summary>An error occurred when attempting to set a configuration parameter.</summary>
+        </member>
+        <member name="F:QtSerialBus.QCanBusDevice.CanBusError.UnknownError">
+            <summary>An unknown error occurred.</summary>
+        </member>
+        <member name="T:QtSerialBus.QCanBusDevice.CanBusDeviceState">
+            <summary>
+            <para>This enum describes all possible device states.</para>
+            </summary>
+        </member>
+        <member name="F:QtSerialBus.QCanBusDevice.CanBusDeviceState.UnconnectedState">
+            <summary>The device is disconnected.</summary>
+        </member>
+        <member name="F:QtSerialBus.QCanBusDevice.CanBusDeviceState.ConnectingState">
+            <summary>The device is being connected.</summary>
+        </member>
+        <member name="F:QtSerialBus.QCanBusDevice.CanBusDeviceState.ConnectedState">
+            <summary>The device is connected to the CAN bus.</summary>
+        </member>
+        <member name="F:QtSerialBus.QCanBusDevice.CanBusDeviceState.ClosingState">
+            <summary>The device is being closed.</summary>
+        </member>
+        <member name="T:QtSerialBus.QCanBusDevice.ConfigurationKey">
+            <summary>
+            <para>This enum describes the possible configuration options for the CAN bus connection.</para>
+            <para>See also configurationParameter().</para>
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:QtSerialBus.QCanBusDevice.ConfigurationKey.RawFilterKey" -->
+        <member name="F:QtSerialBus.QCanBusDevice.ConfigurationKey.ErrorFilterKey">
+            <summary>This key defines the type of error that should be forwarded via the current connection. The associated value should be of type QCanBusFrame::FrameErrors.</summary>
+        </member>
+        <member name="F:QtSerialBus.QCanBusDevice.ConfigurationKey.LoopbackKey">
+            <summary>This key defines whether the CAN bus device should operate in loopback mode. The expected value for this key is bool.</summary>
+        </member>
+        <member name="F:QtSerialBus.QCanBusDevice.ConfigurationKey.ReceiveOwnKey">
+            <summary>This key defines whether this CAN device can send messages. The expected value for this key is bool.</summary>
+        </member>
+        <member name="F:QtSerialBus.QCanBusDevice.ConfigurationKey.BitRateKey">
+            <summary>This key defines the bitrate in bits per second.</summary>
+        </member>
+        <member name="F:QtSerialBus.QCanBusDevice.ConfigurationKey.CanFdKey">
+            <summary>This key defines whether sending and receiving of CAN FD frames should be enabled. The expected value for this key is bool.</summary>
+        </member>
+        <member name="F:QtSerialBus.QCanBusDevice.ConfigurationKey.UserKey">
+            <summary>This key defines the range where custom keys start. It's most common purpose is to permit platform-specific configuration options.</summary>
+        </member>
+        <member name="T:QtSerialBus.QCanBusDevice.Filter">
+            <summary>
+            <para>The QCanBusDevice::Filter struct defines a filter for CAN bus messages.</para>
+            </summary>
+            <remarks>
+            <para>A list of QCanBusDevice::Filter instances is passed to QCanBusDevice::setConfigurationParameter() to enable filtering. If a received CAN message matches at least one of the filters in the list, the QCanBusDevice will accept it.</para>
+            <para>The example below demonstrates how to use the struct:</para>
+            <para></para>
+            <para></para>
+            <para>  QCanBusDevice::Filter filter;</para>
+            <para>  QList&lt;QCanBusDevice::Filter&gt; filterList;</para>
+            <para></para>
+            <para>  // filter all CAN bus packages with id 0x444 (base) or 0xXXXXX444 (extended)</para>
+            <para>  filter.frameId = 0x444u;</para>
+            <para>  filter.frameIdMask = 0x7FFu;</para>
+            <para>  filter.format = QCanBusDevice::Filter::MatchBaseAndExtendedFormat;</para>
+            <para>  filter.type = QCanBusFrame::InvalidFrame;</para>
+            <para>  filterList.append(filter);</para>
+            <para></para>
+            <para>  // filter all DataFrames with extended CAN bus package format</para>
+            <para>  filter.frameId = 0x0;</para>
+            <para>  filter.frameIdMask = 0x0;</para>
+            <para>  filter.format = QCanBusDevice::Filter::MatchExtendedFormat;</para>
+            <para>  filter.type = QCanBusFrame::DataFrame;</para>
+            <para>  filterList.append(filter);</para>
+            <para></para>
+            <para>  // apply filter</para>
+            <para>  device-&gt;setConfigurationParameter(QCanBusDevice::RawFilterKey, QVariant::fromValue(filterList));</para>
+            </remarks>
+        </member>
+        <member name="P:QtSerialBus.QCanBusDevice.Filter.FrameId">
+            <summary>
+            <para>This variable holds the frame id used to filter the incoming messages.</para>
+            <para>The frameId is used in conjunction with frameIdMask. The matching is successful if the following evaluates to true:</para>
+            <para></para>
+            <para></para>
+            <para>  (receivedFrameId &amp; frameIdMask) == (frameId &amp; frameIdMask)</para>
+            <para></para>
+            <para></para>
+            <para>By default this field is set to 0x0.</para>
+            <para>See also frameIdMask.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QCanBusDevice.Filter.FrameIdMask">
+            <summary>
+            <para>This variable holds the bit mask that is applied to the frame id of the filter and the received message.</para>
+            <para>The two frame ids are matching if the following evaluates to true:</para>
+            <para></para>
+            <para></para>
+            <para>  (receivedFrameId &amp; frameIdMask) == (frameId &amp; frameIdMask)</para>
+            <para></para>
+            <para></para>
+            <para>By default this field is set to 0x0.</para>
+            <para>See also frameId.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QCanBusDevice.Filter.Type">
+            <summary>
+            <para>This variable holds the type of the message to be filtered.</para>
+            <para>Any CAN bus message type can be matched by setting this variable to QCanBusFrame::InvalidFrame. The filter object is invalid if type is equal to QCanBusFrame::UnknownFrame.</para>
+            <para>By default this field is set to QCanBusFrame::InvalidFrame.</para>
+            <para>See also QCanBusFrame::FrameType.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QCanBusDevice.Filter.Format">
+            <summary>
+            <para>This variable holds the message format of the matching CAN bus message.</para>
+            <para>By default this field is set to QCanBusDevice::Filter::MatchBaseAndExtendedFormat.</para>
+            </summary>
+        </member>
+        <member name="T:QtSerialBus.QCanBusDevice.Filter.FormatFilter">
+            <summary>
+            <para>This enum describes the format pattern, which is used to filter incoming CAN bus messages.</para>
+            <para>The FormatFilters type is a typedef for QFlags&lt;FormatFilter&gt;. It stores an OR combination of FormatFilter values.</para>
+            </summary>
+        </member>
+        <member name="T:QtSerialBus.QCanBus">
+            <summary>
+            <para>The QCanBus class handles registration and creation of bus backends.</para>
+            </summary>
+            <remarks>
+            <para>QCanBus loads Qt CAN Bus plugins at runtime. The ownership of serial bus backends is transferred to the loader.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSerialBus.QCanBus.CreateDevice(QtCore.QByteArray,System.String)">
+            <summary>
+            <para>Creates a CAN bus device. plugin is the name of the plugin as returned by the plugins() method. interfaceName is the CAN bus interface name.</para>
+            <para>Ownership of the returned backend is transferred to the caller. Returns null if no suitable device can be found.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QCanBus.Instance">
+            <summary>
+            <para>Returns a pointer to the QCanBus class. The object is loaded if necessary. QCanBus uses the singleton design pattern.</para>
+            </summary>
+        </member>
+        <member name="T:QtSerialBus.QCanBusFactory">
+            <summary>
+            <para>The QCanBusFactory class is a factory class used as the plugin interface for CAN bus plugins.</para>
+            </summary>
+            <remarks>
+            <para>All plugins must implement the functions provided by this factory class.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSerialBus.QCanBusFactory.CreateDevice(System.String)">
+            <summary>
+            <para>Creates a new QCanBusDevice. interfaceName is the network/CAN interface name. The caller must take ownership of the returned pointer.</para>
+            <para>If the factory cannot create a backend, it returns 0.</para>
+            </summary>
+        </member>
+        <member name="T:QtSerialBus.QModbusDataUnit">
+            <summary>
+            <para>QModbusDataUnit is a container class representing single bit and 16 bit word entries in the Modbus register.</para>
+            </summary>
+            <remarks>
+            <para>QModbusDataUnit can be used for read and write operations. The entries are addressed via startAddress() and the valueCount() number of contiguous entries. registerType() determines which register is used for the operations. Note that some registers are read-only registers.</para>
+            <para>The actual values() are either single bit or 16 bit based. QModbusDataUnit::DiscreteInputs and QModbusDataUnit::Coils only accept single bits. Therefore 0 is interpreted as 0 and anything else 1.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSerialBus.QModbusDataUnit.#ctor(QtSerialBus.QModbusDataUnit.RegisterType)">
+            <summary>
+            <para>Constructs a unit of data for register type. Start address is set to 0, data range and data values are empty.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusDataUnit.#ctor(QtSerialBus.QModbusDataUnit.RegisterType,System.Int32,System.UInt16)">
+            <summary>
+            <para>Constructs a unit of data for registertype. Start address of the data is set to address and the size of the unit to size. The entries of values() are initialized with 0.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusDataUnit.SetValue(System.Int32,System.UInt16)">
+            <summary>
+            <para>Sets the register at position index to value.</para>
+            <para>See also value().</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusDataUnit.Value(System.Int32)">
+            <summary>
+            <para>Return the value at position index.</para>
+            <para>See also setValue().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QModbusDataUnit.registerType">
+            <summary>
+            <para>Returns the type of the register.</para>
+            <para>See also setRegisterType() and QModbusDataUnit::RegisterType.</para>
+            <para></para>
+            <para>Sets the register type.</para>
+            <para>See also registerType() and QModbusDataUnit::RegisterType.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QModbusDataUnit.StartAddress">
+            <summary>
+            <para>Returns the start address of data unit in the register.</para>
+            <para>See also setStartAddress().</para>
+            <para></para>
+            <para>Sets the start address of the data unit.</para>
+            <para>See also startAddress().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QModbusDataUnit.ValueCount">
+            <summary>
+            <para>Returns the size of the requested register's data block or the size of data read from the device.</para>
+            <para>This function may not always return a count that equals values() size. Since this class is used to request data from the remote data register, the valueCount() can be used to indicate the size of the requested register's data block. Once the request has been processed, the valueCount() is equal to the size of values().</para>
+            <para>See also setValueCount().</para>
+            <para></para>
+            <para>Sets the size of the requested register's data block to newCount.</para>
+            <para>This may be different from values() size as this function is used to indicated the size of a data request. Only once the data request has been processed valueCount() is equal to the size of values().</para>
+            <para>See also valueCount().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QModbusDataUnit.IsValid">
+            <summary>
+            <para>Returns true if the QModbusDataUnit is valid; otherwise false. A QModbusDataUnit is considered valid if the registerType() is not QModbusDataUnit::Invalid and the startAddress() is greater than or equal to 0.</para>
+            </summary>
+        </member>
+        <member name="T:QtSerialBus.QModbusDataUnit.RegisterType">
+            <summary>
+            <para>This enum describes all supported register types.</para>
+            </summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDataUnit.RegisterType.Invalid">
+            <summary>Set by the default constructor, do not use.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDataUnit.RegisterType.DiscreteInputs">
+            <summary>This type of data can be provided by an I/O system.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDataUnit.RegisterType.Coils">
+            <summary>This type of data can be alterable by an application program.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDataUnit.RegisterType.InputRegisters">
+            <summary>This type of data can be provided by an I/O system.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDataUnit.RegisterType.HoldingRegisters">
+            <summary>This type of data can be alterable by an application program.</summary>
+        </member>
+        <member name="T:QtSerialBus.QModbusDevice">
+            <summary>
+            <para>The QModbusDevice class is the base class for Modbus classes, QModbusServer and QModbusClient.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusDevice.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs a Modbus device with the specified parent.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusDevice.connectionParameter(System.Int32)">
+            <summary>
+            <para>Returns the value associated with the given connection parameter. The returned value can be empty.</para>
+            <para>By default the QModbusDevice is initialized with some common values. The serial port settings are even parity, a baud rate of 19200 bits per second, eight data bits and one stop bit. The network settings for the host address is set to local host and port to 502.</para>
+            <para>Note: For a serial connection to succeed, the SerialPortNameParameter needs to be set to a valid communication port. The information about valid serial ports can be obtained from QSerialPortInfo.</para>
+            <para>Note: If the device is already connected, the settings are taken into account after reconnecting the device.</para>
+            <para>See also setConnectionParameter() and ConnectionParameter.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusDevice.SetConnectionParameter(System.Int32,QtCore.QVariant)">
+            <summary>
+            <para>Sets the value of parameter to value. If the parameter already exists, the previous value is overwritten. A active or running connection is not affected by such parameter changes.</para>
+            <para>See also ConnectionParameter and connectionParameter().</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusDevice.ConnectDevice">
+            <summary>
+            <para>Connects the device to the Modbus network. Returns true on success; otherwise false.</para>
+            <para>This function calls open() as part of its implementation.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusDevice.DisconnectDevice">
+            <summary>
+            <para>Disconnects the device.</para>
+            <para>This function calls close() as part of its implementation.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusDevice.SetError(System.String,QtSerialBus.QModbusDevice.Error)">
+            <summary>
+            <para>Sets the error state of the device. ModBus device implementations must use this function in case of an error to set the error type and a descriptive errorText.</para>
+            <para>See also error() and QModbusDevice::Error.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusDevice.Open">
+            <summary>
+            <para>This function is called by connectDevice(). Subclasses must provide an implementation that returns true on successful Modbus connection or false otherwise.</para>
+            <para>The implementation must ensure that the instance's state() is set to QModbusDevice::ConnectedState upon success; otherwise QModbusDevice::UnconnectedState.</para>
+            <para>See also connectDevice().</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusDevice.Close">
+            <summary>
+            <para>This function is responsible for closing the Modbus connection. The implementation must ensure that the instance's state() is set to QModbusDevice::UnconnectedState.</para>
+            <para>See also disconnectDevice().</para>
+            </summary>
+        </member>
+        <member name="E:QtSerialBus.QModbusDevice.ErrorOccurred">
+            <summary>
+            <para>This signal is emitted when an error of the type, error, occurs.</para>
+            </summary>
+        </member>
+        <member name="E:QtSerialBus.QModbusDevice.StateChanged">
+            <summary>
+            <para>This signal is emitted every time the state of the device changes. The new state is represented by state.</para>
+            <para>See also setState() and state().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QModbusDevice.state">
+            <summary>
+            <para>Returns the current state of the device.</para>
+            <para>See also setState() and stateChanged().</para>
+            <para></para>
+            <para>Sets the state of the device to newState. Modbus device implementations must use this function to update the device state.</para>
+            <para>See also state().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QModbusDevice.error">
+            <summary>
+            <para>Returns the error state of the device.</para>
+            <para>See also setError() and QModbusDevice::Error.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QModbusDevice.ErrorString">
+            <summary>
+            <para>Returns descriptive error text for the device error.</para>
+            <para>See also QModbusDevice::Error.</para>
+            </summary>
+        </member>
+        <member name="T:QtSerialBus.QModbusDevice.Error">
+            <summary>
+            <para>This enum describes all the possible error conditions.</para>
+            </summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDevice.Error.NoError">
+            <summary>No errors have occurred.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDevice.Error.ReadError">
+            <summary>An error occurred during a read operation.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDevice.Error.WriteError">
+            <summary>An error occurred during a write operation.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDevice.Error.ConnectionError">
+            <summary>An error occurred when attempting to open the backend.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDevice.Error.ConfigurationError">
+            <summary>An error occurred when attempting to set a configuration parameter.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDevice.Error.TimeoutError">
+            <summary>A timeout occurred during I/O. An I/O operation did not finish within a given time frame.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDevice.Error.ProtocolError">
+            <summary>A Modbus specific protocol error occurred.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDevice.Error.ReplyAbortedError">
+            <summary>The reply was aborted due to a disconnection of the device.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDevice.Error.UnknownError">
+            <summary>An unknown error occurred.</summary>
+        </member>
+        <member name="T:QtSerialBus.QModbusDevice.State">
+            <summary>
+            <para>This enum describes all possible device states.</para>
+            </summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDevice.State.UnconnectedState">
+            <summary>The device is disconnected.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDevice.State.ConnectingState">
+            <summary>The device is being connected.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDevice.State.ConnectedState">
+            <summary>The device is connected to the Modbus network.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDevice.State.ClosingState">
+            <summary>The device is being closed.</summary>
+        </member>
+        <member name="T:QtSerialBus.QModbusDevice.ConnectionParameter">
+            <summary>
+            <para>This enum describes the possible values that can be set for a Modbus device connection.</para>
+            <para>The general purpose value (and the associated types) are:</para>
+            <para>User options:</para>
+            </summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDevice.ConnectionParameter.SerialPortNameParameter">
+            <summary>This parameter holds the serial port used for device communication, e.g. COM1. QString</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDevice.ConnectionParameter.SerialParityParameter">
+            <summary>This parameter holds the parity checking mode. QSerialPort::Parity</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDevice.ConnectionParameter.SerialBaudRateParameter">
+            <summary>This parameter holds the data baud rate for the communication. QSerialPort::BaudRate</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDevice.ConnectionParameter.SerialDataBitsParameter">
+            <summary>This parameter holds the data bits in a frame. QSerialPort::DataBits</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDevice.ConnectionParameter.SerialStopBitsParameter">
+            <summary>This parameter holds the number of stop bits in a frame. QSerialPort::StopBits</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDevice.ConnectionParameter.NetworkPortParameter">
+            <summary>This parameter holds the network port. int</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDevice.ConnectionParameter.NetworkAddressParameter">
+            <summary>This parameter holds the host address for network communication. QString</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDevice.ConnectionParameter.UserParameter">
+            <summary>The first parameter that can be used for user-specific purposes. QVariant</summary>
+        </member>
+        <member name="T:QtSerialBus.QModbusPdu">
+            <summary>
+            <para>QModbusPdu is a abstract container class containing the function code and payload that is stored inside a Modbus ADU.</para>
+            </summary>
+            <remarks>
+            <para>The class provides access to the raw Modbus protocol packets as defined by the Modbus Application Protocol Specification 1.1b.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSerialBus.QModbusPdu.#ctor(QtSerialBus.QModbusPdu.FunctionCode,QtCore.QByteArray)">
+            <summary>
+            <para>Constructs a QModbusPdu with function code set to code and payload set to data. The data is expected to be stored in big-endian byte order already.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusPdu.#ctor(QtSerialBus.QModbusPdu)">
+            <summary>
+            <para>Constructs a QModbusPdu that is a copy of other.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QModbusPdu.functionCode">
+            <summary>
+            <para>Returns the PDU's function code.</para>
+            <para>See also setFunctionCode().</para>
+            <para></para>
+            <para>Sets the PDU's function code to code.</para>
+            <para>See also functionCode().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QModbusPdu.Data">
+            <summary>
+            <para>Returns the PDU's payload, excluding the function code. The payload is stored in big-endian byte order.</para>
+            <para>See also setData().</para>
+            <para></para>
+            <para>Sets the PDU's function payload to data. The data is expected to be stored in big-endian byte order already.</para>
+            <para>See also data().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QModbusPdu.IsValid">
+            <summary>
+            <para>Returns true if the PDU is valid; otherwise false.</para>
+            <para>A PDU is considered valid if the message code is in the range of 1 to 255 decimal and the PDU's compound size (function code + data) does not exceed 253 bytes. A default constructed PDU is invalid.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QModbusPdu.exceptionCode">
+            <summary>
+            <para>Returns the response's exception code.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QModbusPdu.IsException">
+            <summary>
+            <para>Returns true if the PDU contains an exception code; otherwise false.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QModbusPdu.Size">
+            <summary>
+            <para>Returns the PDU's full size, including function code and data size.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QModbusPdu.DataSize">
+            <summary>
+            <para>Returns the PDU's data size, excluding the function code.</para>
+            </summary>
+        </member>
+        <member name="T:QtSerialBus.QModbusPdu.FunctionCode">
+            <summary>
+            <para>Defines the function code and the implicit type of action required by the server. Not all Modbus devices can handle the same set of function codes.</para>
+            </summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusPdu.FunctionCode.Invalid">
+            <summary>Set by the default constructor, do not use.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusPdu.FunctionCode.ReadCoils">
+            <summary>Requests the status of one or more coils from a device.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusPdu.FunctionCode.ReadDiscreteInputs">
+            <summary>Requests the status of one or more input registers from a device.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusPdu.FunctionCode.ReadHoldingRegisters">
+            <summary>Requests the status of one or more holding register values from a device.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusPdu.FunctionCode.ReadInputRegisters">
+            <summary>Requests the status of one or more input register values from a device.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusPdu.FunctionCode.WriteSingleCoil">
+            <summary>Requests to write a single coil on a device.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusPdu.FunctionCode.WriteSingleRegister">
+            <summary>Requests to write a single holding register on a device.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusPdu.FunctionCode.ReadExceptionStatus">
+            <summary>Requests the status of the eight Exception Status outputs on a device.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusPdu.FunctionCode.Diagnostics">
+            <summary>Used to provide a series of tests for checking the client server communication system, or checking internal</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusPdu.FunctionCode.GetCommEventCounter">
+            <summary>Requests a status word and an event count from the device's communication event counter.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusPdu.FunctionCode.GetCommEventLog">
+            <summary>Requests a status word, event count, message count, and a field of event bytes from a device.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusPdu.FunctionCode.WriteMultipleCoils">
+            <summary>Requests to write one or more coils on a device.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusPdu.FunctionCode.WriteMultipleRegisters">
+            <summary>Requests to write one or more holding registers on a device.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusPdu.FunctionCode.ReportServerId">
+            <summary>Requests the description of the type, the current status, and other information specific to a device.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusPdu.FunctionCode.ReadFileRecord">
+            <summary>Requests a file record read.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusPdu.FunctionCode.WriteFileRecord">
+            <summary>Requests a file record write.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusPdu.FunctionCode.MaskWriteRegister">
+            <summary>Requests to modify the contents of a specified holding register using a combination of an AND or OR mask, and the register's current contents.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusPdu.FunctionCode.ReadWriteMultipleRegisters">
+            <summary>Requests the status of one or more holding register and at the same time to write one or more holding registers on a device.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusPdu.FunctionCode.ReadFifoQueue">
+            <summary>Requests to read the contents of a First-In-First-Out (FIFO) queue of register in a remote device.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusPdu.FunctionCode.EncapsulatedInterfaceTransport">
+            <summary>Please refer to Annex A of the Modbus specification.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusPdu.FunctionCode.UndefinedFunctionCode">
+            <summary>Do not use.</summary>
+        </member>
+        <member name="T:QtSerialBus.QModbusPdu.ExceptionCode">
+            <summary>
+            <para>This enum describes all the possible error conditions as defined by Modbus Exception Codes. They are set by the server after checking the appropriate error conditions in the reply to a request and must be decoded by the client to operate on the exception code.</para>
+            </summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusPdu.ExceptionCode.IllegalFunction">
+            <summary>Function code is not supported by device.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusPdu.ExceptionCode.IllegalDataAddress">
+            <summary>The received data address in the query is not an allowable address for the Modbus server.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusPdu.ExceptionCode.IllegalDataValue">
+            <summary>The contained value in the request data field is not an allowable value for the Modbus server.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusPdu.ExceptionCode.ServerDeviceFailure">
+            <summary>An irrecoverable error occurred while the server was attempting to perform the requested action.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusPdu.ExceptionCode.Acknowledge">
+            <summary>Specialized use in conjunction with programming commands.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusPdu.ExceptionCode.ServerDeviceBusy">
+            <summary>The server is engaged in processing a long duration program command.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusPdu.ExceptionCode.NegativeAcknowledge">
+            <summary>The server cannot perform the program function received in the query. This code is returned for an unsuccessful programming request. The client should request diagnostic or error information from the server.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusPdu.ExceptionCode.MemoryParityError">
+            <summary>Indicates that the extended file area failed to pass a consistency check. Used in conjunction with function codes 20 and 21. The exception code does not refer to any parity settings of the transmission line but only to the servers' internal memory of file records.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusPdu.ExceptionCode.GatewayPathUnavailable">
+            <summary>Indicates that the gateway was unable to allocate an internal communication path from the input port to the output port for processing the request.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusPdu.ExceptionCode.GatewayTargetDeviceFailedToRespond">
+            <summary>Indicates that no response was obtained from the target device behind a gateway. Usually this means the target device is not online on the network.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusPdu.ExceptionCode.ExtendedException">
+            <summary>This is an extended exception as per Modbus specification. Generally this code is used to describe an exception that is otherwise further described.</summary>
+        </member>
+        <member name="T:QtSerialBus.QModbusRequest">
+            <summary>
+            <para>QModbusRequest is a container class containing the function code and payload that is stored inside a Modbus ADU.</para>
+            </summary>
+            <remarks>
+            <para>A Modbus request usually consists of a single byte describing the FunctionCode and N bytes of payload</para>
+            <para>A typical Modbus request can looks like this:</para>
+            <para></para>
+            <para></para>
+            <para>  QModbusRequest request(QModbusRequest::WriteMultipleCoils,</para>
+            <para>      QByteArray::fromHex(&quot;0013000a02cd01&quot;));</para>
+            <para></para>
+            <para></para>
+            <para>Note: When using the constructor taking the QByteArray, please make sure to convert the containing data to big-endian byte order before creating the request.</para>
+            <para>The same request can be created like this, if the values are know at compile time:</para>
+            <para></para>
+            <para></para>
+            <para>  quint16 startAddress = 19, numberOfCoils = 10;</para>
+            <para>  quint8 payloadInBytes = 2, outputHigh = 0xcd, outputLow = 0x01;</para>
+            <para>  QModbusRequest request(QModbusRequest::WriteMultipleCoils, startAddress, numberOfCoils,</para>
+            <para>      payloadInBytes, outputHigh, outputLow);</para>
+            </remarks>
+        </member>
+        <member name="M:QtSerialBus.QModbusRequest.#ctor(QtSerialBus.QModbusPdu)">
+            <summary>
+            <para>Constructs a copy of pdu.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusRequest.#ctor(QtSerialBus.QModbusPdu.FunctionCode,QtCore.QByteArray)">
+            <summary>
+            <para>Constructs a QModbusResponse with function code set to code and payload set to data. The data is expected to be stored in big-endian byte order already.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusRequest.#ctor(QtSerialBus.QModbusPdu.FunctionCode)">
+            <summary>
+            <para>Constructs a QModbusResponse with function code set to code and payload set to data. The data is expected to be stored in big-endian byte order already.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusRequest.MinimumDataSize(QtSerialBus.QModbusRequest)">
+            <summary>
+            <para>Returns the expected minimum data size for request based on the request's function code; -1 if the function code is not known.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusRequest.CalculateDataSize(QtSerialBus.QModbusRequest)">
+            <summary>
+            <para>Calculates the expected data size for request based on the request's function code and data. Returns the full size of the request's data part; -1 if the size could not be properly calculated.</para>
+            <para>See also minimumDataSize and registerDataSizeCalculator.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusRequest.RegisterDataSizeCalculator(QtSerialBus.QModbusPdu.FunctionCode,QtSerialBus.QModbusRequest.CalcFuncPtr)">
+            <summary>
+            <para>This function registers a user-defined implementation to calculate the request data size for function code fc. It can be used to extend or override the implementation inside QModbusRequest::calculateDataSize().</para>
+            <para>The CalcFuncPtr is a typedef for a pointer to a custom calculator function with the following signature:</para>
+            <para></para>
+            <para></para>
+            <para>  int myCalculateDataSize(const QModbusRequest &amp;pdu);</para>
+            <para></para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="T:QtSerialBus.QModbusResponse">
+            <summary>
+            <para>QModbusResponse is a container class containing the function code and payload that is stored inside a Modbus ADU.</para>
+            </summary>
+            <remarks>
+            <para>A typical Modbus response can looks like this:</para>
+            <para></para>
+            <para></para>
+            <para>  QModbusResponse response(QModbusResponse::ReadCoils, QByteArray::fromHex(&quot;02cd01&quot;));</para>
+            <para></para>
+            <para></para>
+            <para>Note: When using the constructor taking the QByteArray, please make sure to convert the containing data to big-endian byte order before creating the request.</para>
+            <para>The same response can be created like this, if the values are know at compile time:</para>
+            <para></para>
+            <para></para>
+            <para>  quint8 payloadInBytes = 2, outputHigh = 0xcd, outputLow = 0x01;</para>
+            <para>  QModbusResponse response(QModbusResponse::ReadCoils, payloadInBytes, outputHigh, outputLow);</para>
+            </remarks>
+        </member>
+        <member name="M:QtSerialBus.QModbusResponse.#ctor(QtSerialBus.QModbusPdu)">
+            <summary>
+            <para>Constructs a copy of pdu.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusResponse.#ctor(QtSerialBus.QModbusPdu.FunctionCode,QtCore.QByteArray)">
+            <summary>
+            <para>Constructs a QModbusResponse with function code set to code and payload set to data. The data is expected to be stored in big-endian byte order already.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusResponse.#ctor(QtSerialBus.QModbusPdu.FunctionCode)">
+            <summary>
+            <para>Constructs a QModbusResponse with function code set to code and payload set to data. The data is expected to be stored in big-endian byte order already.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusResponse.MinimumDataSize(QtSerialBus.QModbusResponse)">
+            <summary>
+            <para>Returns the expected minimum data size for response based on the response's function code; -1 if the function code is not known.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusResponse.CalculateDataSize(QtSerialBus.QModbusResponse)">
+            <summary>
+            <para>Calculates the expected data size for response, based on the response's function code and data. Returns the full size of the response's data part; -1 if the size could not be properly calculated.</para>
+            <para>See also minimumDataSize and registerDataSizeCalculator.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusResponse.RegisterDataSizeCalculator(QtSerialBus.QModbusPdu.FunctionCode,QtSerialBus.QModbusResponse.CalcFuncPtr)">
+            <summary>
+            <para>This function registers a user-defined implementation to calculate the response data size for function code fc. It can be used to extend or override the implementation inside QModbusResponse::calculateDataSize().</para>
+            <para>The CalcFuncPtr is a typedef for a pointer to a custom calculator function with the following signature:</para>
+            <para></para>
+            <para></para>
+            <para>  int myCalculateDataSize(const QModbusResponse &amp;pdu);</para>
+            <para></para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="T:QtSerialBus.QModbusExceptionResponse">
+            <summary>
+            <para>QModbusExceptionResponse is a container class containing the function and error code inside a Modbus ADU.</para>
+            </summary>
+            <remarks>
+            <para>A typical QModbusExceptionResponse response can looks like this:</para>
+            <para></para>
+            <para></para>
+            <para>  QModbusExceptionResponse exception(QModbusExceptionResponse::ReportServerId,</para>
+            <para>      QModbusExceptionResponse::ServerDeviceFailure);</para>
+            </remarks>
+        </member>
+        <member name="M:QtSerialBus.QModbusExceptionResponse.#ctor(QtSerialBus.QModbusPdu)">
+            <summary>
+            <para>Constructs a copy of pdu.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusExceptionResponse.#ctor(QtSerialBus.QModbusPdu.FunctionCode,QtSerialBus.QModbusPdu.ExceptionCode)">
+            <summary>
+            <para>Constructs a QModbusExceptionResponse with function code set to code and exception error code set to ec.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusExceptionResponse.SetExceptionCode(QtSerialBus.QModbusPdu.ExceptionCode)">
+            <summary>
+            <para>Sets the response's exception code to ec.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QModbusExceptionResponse.functionCode">
+            <summary>
+            <para>Returns the PDU's function code.</para>
+            <para>See also setFunctionCode().</para>
+            <para></para>
+            <para>Sets the PDU's function code to code.</para>
+            <para>See also functionCode().</para>
+            <para></para>
+            <para>Reimplemented from QModbusPdu::setFunctionCode().</para>
+            <para>Sets the response's function code to c.</para>
+            </summary>
+        </member>
+        <member name="T:QtSerialBus.QModbusReply">
+            <summary>
+            <para>The QModbusReply class contains the data for a request sent with a QModbusClient derived class.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusReply.#ctor(QtSerialBus.QModbusReply.ReplyType,System.Int32,QtCore.QObject)">
+            <summary>
+            <para>Constructs a QModbusReply object with a given type and the specified parent.</para>
+            <para>The reply will be send to the Modbus client represented by serverAddress.</para>
+            </summary>
+        </member>
+        <member name="E:QtSerialBus.QModbusReply.OnFinished">
+            <summary>
+            <para>This signal is emitted when the reply has finished processing. The reply may still have returned with an error.</para>
+            <para>After this signal is emitted, there will be no more updates to the reply's data.</para>
+            <para>Note: Do not delete the object in the slot connected to this signal. Use deleteLater().</para>
+            <para>You can also use isFinished() to check if a QNetworkReply has finished even before you receive the finished() signal.</para>
+            <para>See also isFinished() and error().</para>
+            </summary>
+        </member>
+        <member name="E:QtSerialBus.QModbusReply.ErrorOccurred">
+            <summary>
+            <para>This signal is emitted when an error has been detected in the processing of this reply. The finished() signal will probably follow.</para>
+            <para>The error will be described by the error code error. If errorString is not empty it will contain a textual description of the error. In case of a QModbusDevice::ProtocolError the rawResult() function can be used to obtain the original Modbus exception response to get the exception code.</para>
+            <para>Note: Do not delete this reply object in the slot connected to this signal. Use deleteLater() instead.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QModbusReply.Result">
+            <summary>
+            <para>Returns the preprocessed result of a Modbus request.</para>
+            <para>For read requests as well as combined read/write requests send via QModbusClient::sendReadWriteRequest() it contains the values read from the server instance.</para>
+            <para>If the request has not finished, has failed with an error or was a write request then the returned QModbusDataUnit instance is invalid.</para>
+            <para>Note: If the type() of the reply is QModbusReply::Raw, the return value will always be invalid.</para>
+            <para>See also type() and rawResult().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QModbusReply.RawResult">
+            <summary>
+            <para>Returns the raw response of a Modbus request.</para>
+            <para>If the request has not finished then the returned QModbusResponse instance is invalid.</para>
+            <para>See also type() and result().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QModbusReply.Finished">
+            <summary>
+            <para>Returns true when the reply has finished or was aborted.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QModbusReply.Error">
+            <summary>
+            <para>Returns the error state of this reply.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QModbusReply.Type">
+            <summary>
+            <para>Returns the type of the reply.</para>
+            <para>Note: If the type of the reply is QModbusReply::Raw, the return value of result() will always be invalid.</para>
+            <para>See also result() and rawResult().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QModbusReply.ServerAddress">
+            <summary>
+            <para>Returns the server address that this reply object targets.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QModbusReply.ErrorString">
+            <summary>
+            <para>Returns the textual representation of the error state of this reply.</para>
+            <para>If no error has occurred this will return an empty string. It is possible that an error occurred which has no associated textual representation, in which case this will also return an empty string.</para>
+            <para>See also error() and errorOccurred().</para>
+            </summary>
+        </member>
+        <member name="T:QtSerialBus.QModbusReply.ReplyType">
+            <summary>
+            <para>This enum describes the possible reply type.</para>
+            </summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusReply.ReplyType.Raw">
+            <summary>The reply originates from a raw Modbus request. See QModbusClient::sendRawRequest</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusReply.ReplyType.Common">
+            <summary>The reply originates from a common read, write or read/write request. See QModbusClient::sendReadRequest, QModbusClient::sendWriteRequest and QModbusClient::sendReadWriteRequest</summary>
+        </member>
+        <member name="T:QtSerialBus.QModbusClient">
+            <summary>
+            <para>The QModbusClient class is the interface to send Modbus requests.</para>
+            </summary>
+            <remarks>
+            <para>The QModbusClient API is constructed around one QModbusClient object, which holds the common configuration and settings for the requests it sends. One QModbusClient should be enough for the whole Qt application.</para>
+            <para>Once a QModbusClient object has been created, the application can use it to send requests. The returned object is used to obtain any data returned in response to the corresponding request.</para>
+            <para>QModbusClient has an asynchronous API. When the finished slot is called, the parameter it takes is the QModbusReply object containing the PDU as well as meta-data (Addressing, etc.).</para>
+            <para>Note: QModbusClient queues the requests it receives. The number of requests executed in parallel is dependent on the protocol. For example, the HTTP protocol on desktop platforms issues 6 requests in parallel for one host/port combination.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSerialBus.QModbusClient.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs a Modbus client device with the specified parent.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusClient.SendReadRequest(QtSerialBus.QModbusDataUnit,System.Int32)">
+            <summary>
+            <para>Sends a request to read the contents of the data pointed by read. Returns a new valid QModbusReply object if no error occurred, otherwise nullptr. Modbus network may have multiple servers, each server has unique serverAddress.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusClient.SendWriteRequest(QtSerialBus.QModbusDataUnit,System.Int32)">
+            <summary>
+            <para>Sends a request to modify the contents of the data pointed by write. Returns a new valid QModbusReply object if no error occurred, otherwise nullptr. Modbus network may have multiple servers, each server has unique serverAddress.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusClient.SendReadWriteRequest(QtSerialBus.QModbusDataUnit,QtSerialBus.QModbusDataUnit,System.Int32)">
+            <summary>
+            <para>Sends a request to read the contents of the data pointed by read and to modify the contents of the data pointed by write using Modbus function code QModbusPdu::ReadWriteMultipleRegisters. Returns a new valid QModbusReply object if no error occurred, otherwise nullptr. Modbus network may have multiple servers, each server has unique serverAddress.</para>
+            <para>Note: : Sending this kind of request is only valid of both read and write are of type QModbusDataUnit::HoldingRegisters.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusClient.SendRawRequest(QtSerialBus.QModbusRequest,System.Int32)">
+            <summary>
+            <para>Sends a raw Modbus request. A raw request can contain anything that fits inside the Modbus PDU data section and has a valid function code. The only check performed before sending is therefore the validity check, see QModbusPdu::isValid. If no error occurred the function returns a a new valid QModbusReply; nullptr otherwise. Modbus networks may have multiple servers, each server has a unique serverAddress.</para>
+            <para>See also QModbusReply::rawResult().</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusClient.ProcessResponse(QtSerialBus.QModbusResponse,QtSerialBus.QModbusDataUnit)">
+            <summary>
+            <para>Processes a Modbus server response and stores the decoded information in data. Returns true on success; otherwise false.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusClient.ProcessPrivateResponse(QtSerialBus.QModbusResponse,QtSerialBus.QModbusDataUnit)">
+            <summary>
+            <para>To be implemented by custom Modbus client implementation. The default implementation ignores response and data. It always returns false to indicate error.</para>
+            </summary>
+        </member>
+        <member name="E:QtSerialBus.QModbusClient.TimeoutChanged">
+            <summary>
+            <para>This signal is emitted if the response is not received within the required timeout. The new response timeout for the device is passed as newTimeout.</para>
+            <para>Note: Notifier signal for property timeout. </para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QModbusClient.Timeout">
+            <summary>
+            <para>This property holds the timeout value used by this client.</para>
+            <para>Returns the timeout value used by this QModbusClient instance in ms. A timeout is indicated by a TimeoutError. The default value is 1000 ms.</para>
+            <para>See also setTimeout.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QModbusClient.NumberOfRetries">
+            <summary>
+            <para>Returns the number of retries a client will perform before a request fails. The default value is set to 3.</para>
+            <para>See also setNumberOfRetries().</para>
+            <para></para>
+            <para>Sets the number of retries a client will perform before a request fails. The default value is set to 3.</para>
+            <para>Note: The new value must be greater than or equal to 0. Changing this property will only effect new requests, not already scheduled ones.</para>
+            <para>See also numberOfRetries().</para>
+            </summary>
+        </member>
+        <member name="T:QtSerialBus.QModbusDeviceIdentification">
+            <summary>
+            <para>The QModbusDeviceIdentification is a container class representing the physical and functional description of a Modbus server.</para>
+            </summary>
+            <remarks>
+            <para>The Device Identification interface is modeled as an address space composed of a set of addressable data elements. The data elements are called objects and an ObjectId identifies them.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSerialBus.QModbusDeviceIdentification.#ctor">
+            <summary>
+            <para>Constructs an invalid QModbusDeviceIdentification object.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusDeviceIdentification.Remove(System.UInt32)">
+            <summary>
+            <para>Removes the item for the given objectId.</para>
+            <para>See also ObjectId.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusDeviceIdentification.Contains(System.UInt32)">
+            <summary>
+            <para>Returns true if there is an item for the given objectId; otherwise false.</para>
+            <para>See also ObjectId.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusDeviceIdentification.Insert(System.UInt32,QtCore.QByteArray)">
+            <summary>
+            <para>Inserts a new item with the objectId and a value of value. If there is already an item with the objectId, that item's value is replaced with value.</para>
+            <para>Returns true if the size of value is less than 245 bytes and the objectId is less then QModbusDeviceIdentification::UndefinedObjectId.</para>
+            <para>See also ObjectId.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusDeviceIdentification.Value(System.UInt32)">
+            <summary>
+            <para>Returns the value associated with the objectId. If there is no item with the objectId, the function returns a default-constructed value.</para>
+            <para>See also ObjectId.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusDeviceIdentification.FromByteArray(QtCore.QByteArray)">
+            <summary>
+            <para>Converts the byte array ba to a QModbusDeviceIdentification object.</para>
+            <para>Note: : The returned object might be empty or even invalid if some error occurs while processing the byte array.</para>
+            <para>See also isValid().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QModbusDeviceIdentification.conformityLevel">
+            <summary>
+            <para>Returns the identification conformity level of the device and type of supported access.</para>
+            <para>See also setConformityLevel().</para>
+            <para></para>
+            <para>Sets the identification conformity level of the device and type of supported access to level.</para>
+            <para>See also conformityLevel().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QModbusDeviceIdentification.IsValid">
+            <summary>
+            <para>Returns true if the device identification object is valid; otherwise false.</para>
+            <para>A device identification object is considered valid if ProductNameObjectId, ProductCodeObjectId and MajorMinorRevisionObjectId are set to a non-empty value. Still the object can contain valid object id's and associated data.</para>
+            <para>Note: A default constructed device identification object is invalid.</para>
+            </summary>
+        </member>
+        <member name="T:QtSerialBus.QModbusDeviceIdentification.ConformityLevel">
+            <summary>
+            <para>Defines the identification conformity level of the device and type of supported access.</para>
+            <para>See also ReadDeviceIdCode.</para>
+            </summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDeviceIdentification.ConformityLevel.BasicConformityLevel">
+            <summary>Basic identification (stream access).</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDeviceIdentification.ConformityLevel.RegularConformityLevel">
+            <summary>Regular identification (stream access).</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDeviceIdentification.ConformityLevel.ExtendedConformityLevel">
+            <summary>Extended identification (stream access).</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDeviceIdentification.ConformityLevel.BasicIndividualConformityLevel">
+            <summary>Basic identification (stream access and individual access).</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDeviceIdentification.ConformityLevel.RegularIndividualConformityLevel">
+            <summary>Regular identification (stream access and individual access).</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDeviceIdentification.ConformityLevel.ExtendedIndividualConformityLevel">
+            <summary>Extended identification (stream access and individual access).</summary>
+        </member>
+        <member name="T:QtSerialBus.QModbusDeviceIdentification.ObjectId">
+            <summary>
+            <para>This enum describes the possible server objects. The interface consists of three categories of objects:</para>
+            <para>Basic Device Identification. All objects of this category are mandatory.</para>
+            <para>Regular Device Identification. All objects of this category are standard defined and optional.</para>
+            <para>Reserved range (i.e., ReservedObjectId &gt;= ObjectId &lt; ProductDependentObjectId). Do not use.</para>
+            <para>Extended Device Identification. All of these data are device dependent and optional.</para>
+            </summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDeviceIdentification.ObjectId.VendorNameObjectId">
+            <summary>The vendor name of the device.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDeviceIdentification.ObjectId.ProductCodeObjectId">
+            <summary>The product code of the device.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDeviceIdentification.ObjectId.MajorMinorRevisionObjectId">
+            <summary>The product version numbering.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDeviceIdentification.ObjectId.VendorUrlObjectId">
+            <summary>The vendor URL of the device.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDeviceIdentification.ObjectId.ProductNameObjectId">
+            <summary>The product name of the device.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDeviceIdentification.ObjectId.ModelNameObjectId">
+            <summary>The model name of the device.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDeviceIdentification.ObjectId.UserApplicationNameObjectId">
+            <summary>The user application name of the device.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDeviceIdentification.ObjectId.ReservedObjectId">
+            <summary>First value of reserved object Ids.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDeviceIdentification.ObjectId.ProductDependentObjectId">
+            <summary>First possible value of product dependent identifiers.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDeviceIdentification.ObjectId.UndefinedObjectId">
+            <summary>Do not use.</summary>
+        </member>
+        <member name="T:QtSerialBus.QModbusDeviceIdentification.ReadDeviceIdCode">
+            <summary>
+            <para>Defines the access type of the read identification request.</para>
+            <para>Stream access:</para>
+            <para>Individual access:</para>
+            </summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDeviceIdentification.ReadDeviceIdCode.BasicReadDeviceIdCode">
+            <summary>Request to get the basic device identification.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDeviceIdentification.ReadDeviceIdCode.RegularReadDeviceIdCode">
+            <summary>Request to get the regular device identification.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDeviceIdentification.ReadDeviceIdCode.ExtendedReadDeviceIdCode">
+            <summary>Request to get the extended device identification.</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusDeviceIdentification.ReadDeviceIdCode.IndividualReadDeviceIdCode">
+            <summary>Request to get one specific identification object.</summary>
+        </member>
+        <member name="T:QtSerialBus.QModbusRtuSerialMaster">
+            <summary>
+            <para>The QModbusRtuSerialMaster class represents a Modbus client that uses a serial bus for its communication with the Modbus server.</para>
+            </summary>
+            <remarks>
+            <para>Communication via Modbus requires the interaction between a single Modbus client instance and multiple Modbus servers. This class provides the client implementation via a serial port.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSerialBus.QModbusRtuSerialMaster.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs a serial Modbus master with the specified parent.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QModbusRtuSerialMaster.InterFrameDelay">
+            <summary>
+            <para>Returns the amount of microseconds for the silent interval between two consecutive Modbus messages.</para>
+            <para>This function was introduced in  Qt 5.7.</para>
+            <para>See also setInterFrameDelay().</para>
+            <para></para>
+            <para>Sets the amount of microseconds for the silent interval between two consecutive Modbus messages. By default, the class implementation will use a pre-calculated value according to the Modbus specification. A active or running connection is not affected by such delay changes.</para>
+            <para>Note: If microseconds is set to -1 or microseconds is less than the pre-calculated delay then this pre-calculated value is used as frame delay.</para>
+            <para>This function was introduced in  Qt 5.7.</para>
+            <para>See also interFrameDelay().</para>
+            </summary>
+        </member>
+        <member name="T:QtSerialBus.QModbusServer">
+            <summary>
+            <para>The QModbusServer class is the interface to receive and process Modbus requests.</para>
+            </summary>
+            <remarks>
+            <para>Modbus networks can have multiple Modbus servers. Modbus Servers are read/written by a Modbus client represented by QModbusClient. QModbusServer communicates with a Modbus backend, providing users with a convenient API.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSerialBus.QModbusServer.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs a Modbus server with the specified parent.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusServer.Value(System.Int32)">
+            <summary>
+            <para>Returns the value for option or an invalid QVariant if the option is not set.</para>
+            <para></para>
+            <para> OptionDescription</para>
+            <para>QModbusServer::DiagnosticRegister	Returns the diagnostic register value of the server. The diagnostic register contains device specific contents where each bit has a specific meaning.</para>
+            <para>QModbusServer::ExceptionStatusOffset	Returns the offset address of the exception status byte location in the coils register.</para>
+            <para>QModbusServer::DeviceBusy	Returns a flag that signals if the server is engaged in processing a long-duration program command.</para>
+            <para>QModbusServer::AsciiInputDelimiter	Returns a end of message delimiter of Modbus ASCII messages.</para>
+            <para>QModbusServer::ListenOnlyMode	Returns the server's listen only state. Messages are monitored but no response will be sent.</para>
+            <para>QModbusServer::ServerIdentifier	Returns the server manufacturer's identifier code. This can be an arbitrary value in the range of 0x00 to 0xff.</para>
+            <para>QModbusServer::RunIndicatorStatus	Returns the server's run indicator status. This data is used as addendum by the QModbusPdu::ReportServerId function code.</para>
+            <para>QModbusServer::AdditionalData	Returns the server's additional data. This data is used as addendum by the QModbusPdu::ReportServerId function code.</para>
+            <para>QModbusServer::DeviceIdentification	Returns the server's physical and functional description.</para>
+            <para>QModbusServer::UserOption	Returns the value of a user option.Note: For user options, it is up to the developer to decide which types to use and ensure that components use the correct types when accessing and setting values.</para>
+            <para></para>
+            <para>See also setValue().</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusServer.SetValue(System.Int32,QtCore.QVariant)">
+            <summary>
+            <para>Sets the newValue for option and returns true on success; false otherwise.</para>
+            <para>Note: If the option's associated type is quint8 or quint16 and the type of newValue is larger, the data will be truncated or conversation will fail.</para>
+            <para></para>
+            <para> KeyDescription</para>
+            <para>QModbusServer::DiagnosticRegister	Sets the diagnostic register of the server in a device specific encoding to newValue. The default value preset is 0x0000. The bit values of the register need device specific documentation.</para>
+            <para>QModbusServer::ExceptionStatusOffset	Sets the exception status byte offset of the server to newValue which is the absolute offset address in the coils (0x register). Modbus register table starting with 0x0000h. The default value preset is 0x0000, using the exception status coils similar to Modicon 984 CPUs (coils 1-8).The function returns true if the coils register contains the 8 bits required for storing and retrieving the status coils, otherwise false.</para>
+            <para></para>
+            <para>QModbusServer::DeviceBusy	Sets a flag that signals that the server is engaged in processing a long-duration program command. Valid values are 0x0000 (not busy) and 0xffff (busy). The default value preset is 0x0000.</para>
+            <para>QModbusServer::AsciiInputDelimiter	The newValue becomes the end of message delimiter for future Modbus ASCII messages. The default value preset is \n.</para>
+            <para>QModbusServer::ListenOnlyMode	Ss the server's listen only state to newValue. If listen only mode is set to true, messages are monitored but no response will be sent. The default value preset is false.</para>
+            <para>QModbusServer::ServerIdentifier	Sets the server's manufacturer identifier to newValue. Possible values are in the range of 0x00 to 0xff. The default value preset is 0x0a.</para>
+            <para>QModbusServer::RunIndicatorStatus	Sets the servers' run indicator status to newValue. This data is used as addendum by the QModbusPdu::ReportServerId function code. Valid values are 0x00 (OFF) and 0xff (ON). The default value preset is 0xff (ON).</para>
+            <para>QModbusServer::AdditionalData	Sets the server's additional data to newValue. This data is used as addendum by the QModbusPdu::ReportServerId function code. The maximum data size cannot exceed 249 bytes to match response message size restrictions. The default value preset is Qt Modbus Server.</para>
+            <para>QModbusServer::DeviceIdentification	Sets the server's physical and functional description. By default there is no additional device identification data set.</para>
+            <para>QModbusServer::UserOption	Sets the value of a user option to newValue.Note: For user options, it is up to the developer to decide which types to use and ensure that components use the correct types when accessing and setting values.</para>
+            <para></para>
+            <para>See also value().</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusServer.Data(QtSerialBus.QModbusDataUnit)">
+            <summary>
+            <para>Returns the values in the register range given by newData.</para>
+            <para>newData must provide a valid register type, start address and valueCount. The returned newData will contain the register values associated with the given range.</para>
+            <para>If newData contains a valid register type but a negative start address the entire register map is returned and newData appropriately sized.</para>
+            <para>See also setData().</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusServer.SetData(QtSerialBus.QModbusDataUnit)">
+            <summary>
+            <para>Writes newData to the Modbus server map. Returns false if the newData range is outside of the map range.</para>
+            <para>If the call was successful the dataWritten() signal is emitted. Note that the signal is not emitted when the addressed register has not changed. This may happen when newData contains exactly the same values as the register already. Nevertheless this function returns true in such cases.</para>
+            <para>See also data().</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusServer.SetData(QtSerialBus.QModbusDataUnit.RegisterType,System.UInt16,System.UInt16)">
+            <summary>
+            <para>Writes data to the Modbus server. A Modbus server has four tables (table) and each have a unique address field, which is used to write data to the desired field. Returns false if address outside of the map range.</para>
+            <para>If the call was successful the dataWritten() signal is emitted. Note that the signal is not emitted when data has not changed. Nevertheless this function returns true in such cases.</para>
+            <para>See also QModbusDataUnit::RegisterType, data(), and dataWritten().</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusServer.Data(QtSerialBus.QModbusDataUnit.RegisterType,System.UInt16,System.UInt16@)">
+            <summary>
+            <para>Reads data stored in the Modbus server. A Modbus server has four tables (table) and each have a unique address field, which is used to read data from the desired field. See QModbusDataUnit::RegisterType for more information about the different tables. Returns false if address is outside of the map range or the register type is not even defined.</para>
+            <para>See also QModbusDataUnit::RegisterType and setData().</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusServer.WriteData(QtSerialBus.QModbusDataUnit)">
+            <summary>
+            <para>Writes newData to the Modbus server map. Returns true on success, or false if the newData range is outside of the map range or the registerType() does not exist.</para>
+            <para>Note: Sub-classes that implement writing to a different backing store then default one, also need to implement setMap() and readData(). The dataWritten() signal needs to be emitted from within the functions implementation as well.</para>
+            <para>See also setMap(), readData(), and dataWritten().</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusServer.ReadData(QtSerialBus.QModbusDataUnit)">
+            <summary>
+            <para>Reads the values in the register range given by newData and writes the data back to newData. Returns true on success or false if newData is 0, the newData range is outside of the map range or the registerType() does not exist.</para>
+            <para>Note: Sub-classes that implement reading from a different backing store then default one, also need to implement setMap() and writeData().</para>
+            <para>See also setMap() and writeData().</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusServer.ProcessRequest(QtSerialBus.QModbusPdu)">
+            <summary>
+            <para>Processes a Modbus client request and returns a Modbus response. This function returns a QModbusResponse or QModbusExceptionResponse depending on the nature of the request.</para>
+            <para>The default implementation of this function handles all standard Modbus function codes as defined by the Modbus Application Protocol Specification 1.1b. All other Modbus function codes not included in the specification are forwarded to processPrivateRequest().</para>
+            <para>The default handling of the standard Modbus function code requests can be overwritten by reimplementing this function. The override must handle the request type in question and return the appropriate QModbusResponse. A common reason might be to filter out function code requests for data values to limit read/write access and function codes not desired in particular implementations such as serial line diagnostics on ethernet or Modbus Plus transport layers. Every other request type should be forwarded to this default implementation.</para>
+            <para>Note: This function should not be overridden to provide a custom implementation for non-standard Modbus request types.</para>
+            <para>See also processPrivateRequest().</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialBus.QModbusServer.ProcessPrivateRequest(QtSerialBus.QModbusPdu)">
+            <summary>
+            <para>This function should be implemented by custom Modbus servers. It is called by processRequest() if the given request is not a standard Modbus request.</para>
+            <para>Overwriting this function allows handling of additional function codes and subfunction-codes not specified in the Modbus Application Protocol Specification 1.1b. Reimplementations should call this function again to ensure an exception response is returned for all unknown function codes the custom Modbus implementation does not handle.</para>
+            <para>This default implementation returns a QModbusExceptionResponse with the request function code and error code set to illegal function.</para>
+            <para>See also processRequest().</para>
+            </summary>
+        </member>
+        <member name="E:QtSerialBus.QModbusServer.DataWritten">
+            <summary>
+            <para>This signal is emitted when a Modbus client has written one or more fields of data to the Modbus server. The signal contains information about the fields that were written:</para>
+            <para></para>
+            <para>register type that was written,</para>
+            <para>address of the first field that was written,</para>
+            <para>and size of consecutive fields that were written starting from address.</para>
+            <para></para>
+            <para>The signal is not emitted when the to-be-written fields have not changed due to no change in value.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QModbusServer.ServerAddress">
+            <summary>
+            <para>Returns the address of this Mobus server instance.</para>
+            <para>See also setServerAddress().</para>
+            <para></para>
+            <para>Sets the address for this Modbus server instance to serverAddress.</para>
+            <para>See also serverAddress().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialBus.QModbusServer.ProcessesBroadcast">
+            <summary>
+            <para>Subclasses should implement this function if the transport layer shall handle broadcasts. The implementation then should return true if the currently processed request is a broadcast request; otherwise false. The default implementation returns always false.</para>
+            <para>Note: The return value of this function only makes sense from within processRequest() or processPrivateRequest(), otherwise it can only tell that the last request processed was a broadcast request.</para>
+            </summary>
+        </member>
+        <member name="T:QtSerialBus.QModbusServer.Option">
+            <summary>
+            <para>Each Modbus server has a set of values associated with it, each with its own option.</para>
+            <para>The general purpose options (and the associated types) are:</para>
+            <para>User options:</para>
+            <para>For user options, it is up to the developer to decide which types to use and ensure that components use the correct types when accessing and setting values.</para>
+            </summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusServer.Option.DiagnosticRegister">
+            <summary>The diagnostic register of the server. quint16</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusServer.Option.ExceptionStatusOffset">
+            <summary>The exception status byte offset of the server. quint16</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusServer.Option.DeviceBusy">
+            <summary>Flag to signal the server is engaged in processing a long-duration program command. quint16</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusServer.Option.AsciiInputDelimiter">
+            <summary>The Modbus ASCII end of message delimiter. char</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusServer.Option.ListenOnlyMode">
+            <summary>Flag to set listen only mode of the server. This function is typically supported only by Modbus serial devices. bool</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusServer.Option.ServerIdentifier">
+            <summary>The identifier of the server, not the server address. quint8</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusServer.Option.RunIndicatorStatus">
+            <summary>The run indicator of the server. quint8</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusServer.Option.AdditionalData">
+            <summary>The additional data of the server. QByteArray</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusServer.Option.DeviceIdentification">
+            <summary>The physical and functional description of the server. QModbusDeviceIdentification</summary>
+        </member>
+        <member name="F:QtSerialBus.QModbusServer.Option.UserOption">
+            <summary>The first option that can be used for user-specific purposes.</summary>
+        </member>
+        <member name="T:QtSerialBus.QModbusRtuSerialSlave">
+            <summary>
+            <para>The QModbusRtuSerialSlave class represents a Modbus server that uses a serial port for its communication with the Modbus client.</para>
+            </summary>
+            <remarks>
+            <para>Communication via Modbus requires the interaction between a single Modbus client instance and multiple Modbus server. This class provides the Modbus server implementation via a serial port.</para>
+            <para>Since multiple Modbus server instances can interact with a Modbus client at the same time (using a serial bus), servers are identified by their serverAddress().</para>
+            </remarks>
+        </member>
+        <member name="M:QtSerialBus.QModbusRtuSerialSlave.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs a QModbusRtuSerialSlave with the specified parent. The serverAddress preset is 1.</para>
+            </summary>
+        </member>
+        <member name="T:QtSerialBus.QModbusTcpClient">
+            <summary>
+            <para>The QModbusTcpClient class is the interface class for Modbus TCP client device.</para>
+            </summary>
+            <remarks>
+            <para>QModbusTcpClient communicates with the Modbus backend providing users with a convenient API.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSerialBus.QModbusTcpClient.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs a QModbusTcpClient with the specified parent.</para>
+            </summary>
+        </member>
+        <member name="T:QtSerialBus.QModbusTcpServer">
+            <summary>
+            <para>The QModbusTcpServer class represents a Modbus server that uses a TCP server for its communication with the Modbus client.</para>
+            </summary>
+            <remarks>
+            <para>Communication via Modbus requires the interaction between a single Modbus client instance and single Modbus server. This class provides the Modbus server implementation via a TCP server.</para>
+            <para>Modbus TCP networks can have multiple servers. Servers are read/written by a client device represented by QModbusTcpClient.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSerialBus.QModbusTcpServer.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs a QModbusTcpServer with the specified parent. The serverAddress preset is 255.</para>
+            </summary>
+        </member>
+    </members>
+</doc>

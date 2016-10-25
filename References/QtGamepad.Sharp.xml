@@ -1,0 +1,472 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>QtGamepad.Sharp</name>
+    </assembly>
+    <members>
+        <member name="T:QtGamepad.QGamepad">
+            <summary>
+            <para>A gamepad device connected to a system</para>
+            </summary>
+            <remarks>
+            <para>QGamepad is used to access the current state of gamepad hardware connected to a system.</para>
+            </remarks>
+        </member>
+        <member name="M:QtGamepad.QGamepad.#ctor(System.Int32,QtCore.QObject)">
+            <summary>
+            <para>Constructs a QGamepad for deviceId. deviceId is the id of the gamepad you wish to see the state of parent</para>
+            </summary>
+        </member>
+        <member name="E:QtGamepad.QGamepad.DeviceIdChanged">
+            <summary>
+            <para>This property holds the deviceId of the gamepad device. It is possible for there to be multiple gamepad devices connected at any given time, so setting this property defines which gamepad to use.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> int 	deviceId() const</para>
+            <para> void 	setDeviceId(int number)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	deviceIdChanged(int value)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:QtGamepad.QGamepad.ConnectedChanged">
+            <summary>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	isConnected() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	connectedChanged(bool value)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:QtGamepad.QGamepad.NameChanged">
+            <summary>
+            <para>This property holds the reported name of the gamepad if one is available.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QString 	name() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	nameChanged(QString value)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:QtGamepad.QGamepad.AxisLeftXChanged">
+            <summary>
+            <para>This property holds the value of the left thumbstick's X axis. The range of axis values are from -1.0 to 1.0</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> double 	axisLeftX() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	axisLeftXChanged(double value)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:QtGamepad.QGamepad.AxisLeftYChanged">
+            <summary>
+            <para>This property holds the value of the left thumbstick's Y axis. The range of axis values are from -1.0 to 1.0</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> double 	axisLeftY() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	axisLeftYChanged(double value)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:QtGamepad.QGamepad.AxisRightXChanged">
+            <summary>
+            <para>This property holds the value of the right thumbstick's X axis. The range of axis values are from -1.0 to 1.0</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> double 	axisRightX() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	axisRightXChanged(double value)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:QtGamepad.QGamepad.AxisRightYChanged">
+            <summary>
+            <para>This property holds the value of the right thumbstick's Y axis. The range of axis values are from -1.0 to 1.0</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> double 	axisRightY() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	axisRightYChanged(double value)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:QtGamepad.QGamepad.ButtonAChanged">
+            <summary>
+            <para>This property holds the state of the A button. True when pressed, false when not pressed.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	buttonA() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	buttonAChanged(bool value)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:QtGamepad.QGamepad.ButtonBChanged">
+            <summary>
+            <para>This property holds the state of the B button. True when pressed, false when not pressed.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	buttonB() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	buttonBChanged(bool value)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:QtGamepad.QGamepad.ButtonXChanged">
+            <summary>
+            <para>This property holds the state of the X button. True when pressed, false when not pressed.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	buttonX() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	buttonXChanged(bool value)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:QtGamepad.QGamepad.ButtonYChanged">
+            <summary>
+            <para>This property holds the state of the Y button. True when pressed, false when not pressed.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	buttonY() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	buttonYChanged(bool value)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:QtGamepad.QGamepad.ButtonL1Changed">
+            <summary>
+            <para>This property holds the state of the left shoulder button. True when pressed, false when not pressed.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	buttonL1() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	buttonL1Changed(bool value)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:QtGamepad.QGamepad.ButtonR1Changed">
+            <summary>
+            <para>This property holds the state of the right shoulder button. True when pressed, false when not pressed.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	buttonR1() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	buttonR1Changed(bool value)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:QtGamepad.QGamepad.ButtonL2Changed">
+            <summary>
+            <para>This property holds the value of the left trigger button. This trigger value ranges from 0.0 when not pressed to 1.0 when pressed completely.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> double 	buttonL2() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	buttonL2Changed(double value)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:QtGamepad.QGamepad.ButtonR2Changed">
+            <summary>
+            <para>This property holds the value of the right trigger button. This trigger value ranges from 0.0 when not pressed to 1.0 when pressed completely.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> double 	buttonR2() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	buttonR2Changed(double value)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:QtGamepad.QGamepad.ButtonSelectChanged">
+            <summary>
+            <para>This property holds the state of the Select button. True when pressed, false when not pressed. This button can sometimes be labled as the Back button on some gamepads.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	buttonSelect() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	buttonSelectChanged(bool value)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:QtGamepad.QGamepad.ButtonStartChanged">
+            <summary>
+            <para>This property holds the state of the Start button. True when pressed, false when not pressed. This button can sometimes be labled as the Forward button on some gamepads.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	buttonStart() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	buttonStartChanged(bool value)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:QtGamepad.QGamepad.ButtonL3Changed">
+            <summary>
+            <para>This property holds the state of the left stick button. True when pressed, false when not pressed. This button is usually triggered by pressing the left joystick itself.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	buttonL3() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	buttonL3Changed(bool value)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:QtGamepad.QGamepad.ButtonR3Changed">
+            <summary>
+            <para>This property holds the state of the right stick button. True when pressed, false when not pressed. This button is usually triggered by pressing the right joystick itself.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	buttonR3() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	buttonR3Changed(bool value)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:QtGamepad.QGamepad.ButtonUpChanged">
+            <summary>
+            <para>This property holds the state of the direction pad up button. True when pressed, false when not pressed.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	buttonUp() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	buttonUpChanged(bool value)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:QtGamepad.QGamepad.ButtonDownChanged">
+            <summary>
+            <para>This property holds the state of the direction pad down button. True when pressed, false when not pressed.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	buttonDown() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	buttonDownChanged(bool value)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:QtGamepad.QGamepad.ButtonLeftChanged">
+            <summary>
+            <para>This property holds the state of the direction pad left button. True when pressed, false when not pressed.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	buttonLeft() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	buttonLeftChanged(bool value)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:QtGamepad.QGamepad.ButtonRightChanged">
+            <summary>
+            <para>This property holds the state of the direction pad right button. True when pressed, false when not pressed.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	buttonRight() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	buttonRightChanged(bool value)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:QtGamepad.QGamepad.ButtonCenterChanged">
+            <summary>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	buttonCenter() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	buttonCenterChanged(bool value)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:QtGamepad.QGamepad.ButtonGuideChanged">
+            <summary>
+            <para>This property holds the state of the guide button. True when pressed, false when not pressed. This button is typically the one in the center of the gamepad with a logo. Some gamepads will not have a guide button.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	buttonGuide() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	buttonGuideChanged(bool value)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:QtGamepad.QGamepad.DeviceId">
+            <summary>
+            <para>This property holds the deviceId of the gamepad device. It is possible for there to be multiple gamepad devices connected at any given time, so setting this property defines which gamepad to use.</para>
+            </summary>
+        </member>
+        <member name="P:QtGamepad.QGamepad.IsConnected">
+            <summary>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	isConnected() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	connectedChanged(bool value)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:QtGamepad.QGamepad.Name">
+            <summary>
+            <para>This property holds the reported name of the gamepad if one is available.</para>
+            </summary>
+        </member>
+        <member name="P:QtGamepad.QGamepad.AxisLeftX">
+            <summary>
+            <para>This property holds the value of the left thumbstick's X axis. The range of axis values are from -1.0 to 1.0</para>
+            </summary>
+        </member>
+        <member name="P:QtGamepad.QGamepad.AxisLeftY">
+            <summary>
+            <para>This property holds the value of the left thumbstick's Y axis. The range of axis values are from -1.0 to 1.0</para>
+            </summary>
+        </member>
+        <member name="P:QtGamepad.QGamepad.AxisRightX">
+            <summary>
+            <para>This property holds the value of the right thumbstick's X axis. The range of axis values are from -1.0 to 1.0</para>
+            </summary>
+        </member>
+        <member name="P:QtGamepad.QGamepad.AxisRightY">
+            <summary>
+            <para>This property holds the value of the right thumbstick's Y axis. The range of axis values are from -1.0 to 1.0</para>
+            </summary>
+        </member>
+        <member name="P:QtGamepad.QGamepad.ButtonA">
+            <summary>
+            <para>This property holds the state of the A button. True when pressed, false when not pressed.</para>
+            </summary>
+        </member>
+        <member name="P:QtGamepad.QGamepad.ButtonB">
+            <summary>
+            <para>This property holds the state of the B button. True when pressed, false when not pressed.</para>
+            </summary>
+        </member>
+        <member name="P:QtGamepad.QGamepad.ButtonX">
+            <summary>
+            <para>This property holds the state of the X button. True when pressed, false when not pressed.</para>
+            </summary>
+        </member>
+        <member name="P:QtGamepad.QGamepad.ButtonY">
+            <summary>
+            <para>This property holds the state of the Y button. True when pressed, false when not pressed.</para>
+            </summary>
+        </member>
+        <member name="P:QtGamepad.QGamepad.ButtonL1">
+            <summary>
+            <para>This property holds the state of the left shoulder button. True when pressed, false when not pressed.</para>
+            </summary>
+        </member>
+        <member name="P:QtGamepad.QGamepad.ButtonR1">
+            <summary>
+            <para>This property holds the state of the right shoulder button. True when pressed, false when not pressed.</para>
+            </summary>
+        </member>
+        <member name="P:QtGamepad.QGamepad.ButtonL2">
+            <summary>
+            <para>This property holds the value of the left trigger button. This trigger value ranges from 0.0 when not pressed to 1.0 when pressed completely.</para>
+            </summary>
+        </member>
+        <member name="P:QtGamepad.QGamepad.ButtonR2">
+            <summary>
+            <para>This property holds the value of the right trigger button. This trigger value ranges from 0.0 when not pressed to 1.0 when pressed completely.</para>
+            </summary>
+        </member>
+        <member name="P:QtGamepad.QGamepad.ButtonSelect">
+            <summary>
+            <para>This property holds the state of the Select button. True when pressed, false when not pressed. This button can sometimes be labled as the Back button on some gamepads.</para>
+            </summary>
+        </member>
+        <member name="P:QtGamepad.QGamepad.ButtonStart">
+            <summary>
+            <para>This property holds the state of the Start button. True when pressed, false when not pressed. This button can sometimes be labled as the Forward button on some gamepads.</para>
+            </summary>
+        </member>
+        <member name="P:QtGamepad.QGamepad.ButtonL3">
+            <summary>
+            <para>This property holds the state of the left stick button. True when pressed, false when not pressed. This button is usually triggered by pressing the left joystick itself.</para>
+            </summary>
+        </member>
+        <member name="P:QtGamepad.QGamepad.ButtonR3">
+            <summary>
+            <para>This property holds the state of the right stick button. True when pressed, false when not pressed. This button is usually triggered by pressing the right joystick itself.</para>
+            </summary>
+        </member>
+        <member name="P:QtGamepad.QGamepad.ButtonUp">
+            <summary>
+            <para>This property holds the state of the direction pad up button. True when pressed, false when not pressed.</para>
+            </summary>
+        </member>
+        <member name="P:QtGamepad.QGamepad.ButtonDown">
+            <summary>
+            <para>This property holds the state of the direction pad down button. True when pressed, false when not pressed.</para>
+            </summary>
+        </member>
+        <member name="P:QtGamepad.QGamepad.ButtonLeft">
+            <summary>
+            <para>This property holds the state of the direction pad left button. True when pressed, false when not pressed.</para>
+            </summary>
+        </member>
+        <member name="P:QtGamepad.QGamepad.ButtonRight">
+            <summary>
+            <para>This property holds the state of the direction pad right button. True when pressed, false when not pressed.</para>
+            </summary>
+        </member>
+        <member name="P:QtGamepad.QGamepad.ButtonGuide">
+            <summary>
+            <para>This property holds the state of the guide button. True when pressed, false when not pressed. This button is typically the one in the center of the gamepad with a logo. Some gamepads will not have a guide button.</para>
+            </summary>
+        </member>
+    </members>
+</doc>

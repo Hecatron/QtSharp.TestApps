@@ -1,0 +1,2268 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>QtSensors.Sharp</name>
+    </assembly>
+    <members>
+        <member name="T:QtSensors.Qoutputrange">
+            <summary>
+            <para>The QSensor class represents a single hardware sensor.</para>
+            </summary>
+            <remarks>
+            <para>The life cycle of a sensor is typically:</para>
+            <para></para>
+            <para>Create a sub-class of QSensor on the stack or heap.</para>
+            <para>Setup as required by the application.</para>
+            <para>Start receiving values.</para>
+            <para>Sensor data is used by the application.</para>
+            <para>Stop receiving values.</para>
+            <para></para>
+            <para>The sensor data is delivered via QSensorReading and its sub-classes.</para>
+            <para></para>
+            <para>Orientation</para>
+            <para>Some sensors react to screen orientation changes, such as QAccelerometer, QMagnetometer and QRotationSensor. These are so called orientable sensors. For orientable sensors, QSensor supports changing the reporting of the reading values based on the orientation of the screen.</para>
+            <para>For orientable sensors, the axesOrientationMode property controls how the orientation affects the reading values.</para>
+            <para>In the default mode, QSensor::FixedOrientation, the reading values remain unaffected by the orientation. In the QSensor::AutomaticOrientation mode, the reading values are automatically rotated by taking the current screen orientation into account. And finally, in the QSensor::UserOrientation mode, the reading values are rotated according to a user-specified orientation.</para>
+            <para>The functionality of this is only available if it is supported by the backend and if the sensor is orientable, which can be checked by calling QSensor::isFeatureSupported() with the QSensor::AxesOrientation flag.</para>
+            <para>The orientation values here are always of the screen orientation, not the device orientation. The screen orientation is the orientation of the GUI. For example when rotating a device by 90 degrees counter-clockwise, the screen orientation compensates for that by rotating 90 degrees clockwise, to the effect that the GUI is still facing upright after the device has been rotated. Note that applications can lock the screen orientation, for example to force portrait or landscape mode. For locked orientations, orientable sensors will not react with reading changes if the device orientation is changed, as orientable sensors react to screen orientation changes only. This makes sense, as the purpose of orientable sensors is to keep the sensor orientation in sync with the screen orientation.</para>
+            <para>The orientation values range from 0 to 270 degrees. The orientation is applied in clockwise direction, e.g. an orientation value of 90 degrees means that the screen has been rotated 90 degress to the right from its origin position, to compensate a device rotation of 90 degrees to the left.</para>
+            <para></para>
+            <para>See also QSensorReading.</para>
+            </remarks>
+        </member>
+        <member name="T:QtSensors.QSensor">
+            <summary>
+            <para>The QSensor class represents a single hardware sensor.</para>
+            </summary>
+            <remarks>
+            <para>The life cycle of a sensor is typically:</para>
+            <para></para>
+            <para>Create a sub-class of QSensor on the stack or heap.</para>
+            <para>Setup as required by the application.</para>
+            <para>Start receiving values.</para>
+            <para>Sensor data is used by the application.</para>
+            <para>Stop receiving values.</para>
+            <para></para>
+            <para>The sensor data is delivered via QSensorReading and its sub-classes.</para>
+            <para></para>
+            <para>Orientation</para>
+            <para>Some sensors react to screen orientation changes, such as QAccelerometer, QMagnetometer and QRotationSensor. These are so called orientable sensors. For orientable sensors, QSensor supports changing the reporting of the reading values based on the orientation of the screen.</para>
+            <para>For orientable sensors, the axesOrientationMode property controls how the orientation affects the reading values.</para>
+            <para>In the default mode, QSensor::FixedOrientation, the reading values remain unaffected by the orientation. In the QSensor::AutomaticOrientation mode, the reading values are automatically rotated by taking the current screen orientation into account. And finally, in the QSensor::UserOrientation mode, the reading values are rotated according to a user-specified orientation.</para>
+            <para>The functionality of this is only available if it is supported by the backend and if the sensor is orientable, which can be checked by calling QSensor::isFeatureSupported() with the QSensor::AxesOrientation flag.</para>
+            <para>The orientation values here are always of the screen orientation, not the device orientation. The screen orientation is the orientation of the GUI. For example when rotating a device by 90 degrees counter-clockwise, the screen orientation compensates for that by rotating 90 degrees clockwise, to the effect that the GUI is still facing upright after the device has been rotated. Note that applications can lock the screen orientation, for example to force portrait or landscape mode. For locked orientations, orientable sensors will not react with reading changes if the device orientation is changed, as orientable sensors react to screen orientation changes only. This makes sense, as the purpose of orientable sensors is to keep the sensor orientation in sync with the screen orientation.</para>
+            <para>The orientation values range from 0 to 270 degrees. The orientation is applied in clockwise direction, e.g. an orientation value of 90 degrees means that the screen has been rotated 90 degress to the right from its origin position, to compensate a device rotation of 90 degrees to the left.</para>
+            <para></para>
+            <para>See also QSensorReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QSensor.#ctor(QtCore.QByteArray,QtCore.QObject)">
+            <summary>
+            <para>Construct the type sensor as a child of parent.</para>
+            <para>Do not use this constructor if a derived class exists for the specific sensor type.</para>
+            <para>The wrong way is to use the base class constructor:</para>
+            <para></para>
+            <para></para>
+            <para>  QSensor *magnetometer = new QSensor(QMagnetometer::type, this);</para>
+            <para></para>
+            <para></para>
+            <para>The right way is to create an instance of the derived class:</para>
+            <para></para>
+            <para></para>
+            <para>  QMagnetometer *magnetometer = new QMagnetometer(this);</para>
+            <para></para>
+            <para></para>
+            <para>The derived classes have additional properties and data members which are needed for certain features such as geo value support in QMagnetometer or acceleration mode support in QAccelerometer. These features will only work properly when creating a sensor instance from a QSensor subclass.</para>
+            <para>Only use this constructor if there is no derived sensor class available. Note that all built-in sensors have a derived class, so using this constructor should only be necessary when implementing custom sensors, like in the Grue sensor example.</para>
+            </summary>
+        </member>
+        <member name="M:QtSensors.QSensor.ConnectToBackend">
+            <summary>
+            <para>Try to connect to a sensor backend.</para>
+            <para>Returns true if a suitable backend could be found, false otherwise.</para>
+            <para>The type must be set before calling this method if you are using QSensor directly.</para>
+            <para>See also isConnectedToBackend().</para>
+            </summary>
+        </member>
+        <member name="M:QtSensors.QSensor.AddFilter(QtSensors.QSensorFilter)">
+            <summary>
+            <para>Add a filter to the sensor.</para>
+            <para>The sensor does not take ownership of the filter. QSensorFilter will inform the sensor if it is destroyed.</para>
+            <para>See also QSensorFilter.</para>
+            </summary>
+        </member>
+        <member name="M:QtSensors.QSensor.RemoveFilter(QtSensors.QSensorFilter)">
+            <summary>
+            <para>Remove filter from the sensor.</para>
+            <para>See also QSensorFilter.</para>
+            </summary>
+        </member>
+        <member name="M:QtSensors.QSensor.IsFeatureSupported(QtSensors.QSensor.Feature)">
+            <summary>
+            <para>Checks if a specific feature is supported by the backend.</para>
+            <para>QtSensors supports a rich API for controlling and providing information about sensors. Naturally, not all of this functionality can be supported by all of the backends.</para>
+            <para>To check if the current backend supports the feature feature, call this function.</para>
+            <para>The backend needs to be connected, otherwise false will be returned. Calling connectToBackend() or start() will create a connection to the backend.</para>
+            <para>Backends have to implement QSensorBackend::isFeatureSupported() to make this work.</para>
+            <para>Returns whether or not the feature is supported if the backend is connected, or false if the backend is not connected.</para>
+            <para>This function was introduced in  Qt 5.0.</para>
+            </summary>
+        </member>
+        <member name="M:QtSensors.QSensor.Start">
+            <summary>
+            <para>Start retrieving values from the sensor. Returns true if the sensor was started, false otherwise.</para>
+            <para>The sensor may fail to start for several reasons.</para>
+            <para>Once an application has started a sensor it must wait until the sensor receives a new value before it can query the sensor's values. This is due to how the sensor receives values from the system. Sensors do not (in general) poll for new values, rather new values are pushed to the sensors as they happen.</para>
+            <para>For example, this code will not work as intended.</para>
+            <para></para>
+            <para></para>
+            <para>  sensor-&gt;start();</para>
+            <para>  sensor-&gt;reading()-&gt;x(); // no data available</para>
+            <para></para>
+            <para></para>
+            <para>To work correctly, the code that accesses the reading should ensure the readingChanged() signal has been emitted.</para>
+            <para></para>
+            <para></para>
+            <para>      connect(sensor, SIGNAL(readingChanged()), this, SLOT(checkReading()));</para>
+            <para>      sensor-&gt;start();</para>
+            <para>  }</para>
+            <para>  void MyClass::checkReading() {</para>
+            <para>      sensor-&gt;reading()-&gt;x();</para>
+            <para></para>
+            <para></para>
+            <para>See also QSensor::busy.</para>
+            </summary>
+        </member>
+        <member name="M:QtSensors.QSensor.Stop">
+            <summary>
+            <para>Stop retrieving values from the sensor.</para>
+            <para>This releases the sensor so that other processes can use it.</para>
+            <para>See also QSensor::busy.</para>
+            </summary>
+        </member>
+        <member name="M:QtSensors.QSensor.DefaultSensorForType(QtCore.QByteArray)">
+            <summary>
+            <para>Returns the default sensor identifier for type. This is set in a config file and can be overridden if required. If no default is available the system will return the first registered sensor for type.</para>
+            <para>Note that there is special case logic to prevent the generic plugin's backends from becoming the default when another backend is registered for the same type. This logic means that a backend identifier starting with generic. will only be the default if no other backends have been registered for that type or if it is specified in Sensors.conf.</para>
+            <para>See also Determining the default sensor for a type.</para>
+            </summary>
+        </member>
+        <member name="E:QtSensors.QSensor.BusyChanged">
+            <summary>
+            <para>This signal is emitted when the sensor is no longer busy. This can be used to grab a sensor when it becomes available.</para>
+            <para></para>
+            <para></para>
+            <para>  sensor.start();</para>
+            <para>  if (sensor.isBusy()) {</para>
+            <para>      // need to wait for busyChanged signal and try again</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:QtSensors.QSensor.ActiveChanged">
+            <summary>
+            <para>This signal is emitted when the QSensor::active property has changed.</para>
+            <para>Note: Notifier signal for property active. </para>
+            <para>See also QSensor::active.</para>
+            </summary>
+        </member>
+        <member name="E:QtSensors.QSensor.ReadingChanged">
+            <summary>
+            <para>This signal is emitted when a new sensor reading is received.</para>
+            <para>The sensor reading can be found in the QSensor::reading property. Note that the reading object is a volatile cache of the most recent sensor reading that has been received so the application should process the reading immediately or save the values somewhere for later processing.</para>
+            <para>Before this signal has been emitted for the first time, the reading object will have uninitialized data.</para>
+            <para>Note: Notifier signal for property reading. </para>
+            <para>See also start().</para>
+            </summary>
+        </member>
+        <member name="E:QtSensors.QSensor.SensorError">
+            <summary>
+            <para>This signal is emitted when an error code is set on the sensor. Note that some errors will cause the sensor to stop working. You should call isActive() to determine if the sensor is still running.</para>
+            <para>Note: Notifier signal for property error. </para>
+            </summary>
+        </member>
+        <member name="E:QtSensors.QSensor.AvailableSensorsChanged">
+            <summary>
+            <para>This signal is emitted when the list of available sensors has changed. The sensors available to a program will not generally change over time however some of the available sensors may represent hardware that is not permanently connected. For example, a game controller that is connected via bluetooth would become available when it was on and would become unavailable when it was off.</para>
+            <para>See also QSensor::sensorTypes() and QSensor::sensorsForType().</para>
+            </summary>
+        </member>
+        <member name="E:QtSensors.QSensor.AlwaysOnChanged">
+            <summary>
+            <para>This signal is emitted when the alwaysOn property changes.</para>
+            <para>Note: Notifier signal for property alwaysOn. </para>
+            </summary>
+        </member>
+        <member name="E:QtSensors.QSensor.DataRateChanged">
+            <summary>
+            <para>This property holds the data rate that the sensor should be run at.</para>
+            <para>Measured in Hertz.</para>
+            <para>The data rate is the maximum frequency at which the sensor can detect changes.</para>
+            <para>Setting this property is not portable and can cause conflicts with other applications. Check with the sensor backend and platform documentation for any policy regarding multiple applications requesting a data rate.</para>
+            <para>The default value (0) means that the app does not care what the data rate is. Applications should consider using a timer-based poll of the current value or ensure that the code that processes values can run very quickly as the platform may provide updates hundreds of times each second.</para>
+            <para>This should be set before calling start() because the sensor may not notice changes to this value while it is running.</para>
+            <para>Note that there is no mechanism to determine the current data rate in use by the platform.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> int 	dataRate() const</para>
+            <para> void 	setDataRate(int rate)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	dataRateChanged()</para>
+            <para></para>
+            <para>See also QSensor::availableDataRates.</para>
+            </summary>
+        </member>
+        <member name="E:QtSensors.QSensor.SkipDuplicatesChanged">
+            <summary>
+            <para>This signal is emitted when the skipDuplicates property changes.</para>
+            <para>This function was introduced in  Qt 5.1.</para>
+            <para>Note: Notifier signal for property skipDuplicates. </para>
+            </summary>
+        </member>
+        <member name="E:QtSensors.QSensor.AxesOrientationModeChanged">
+            <summary>
+            <para>This property holds the mode that affects how the screen orientation changes reading values.</para>
+            <para>When set to FixedOrientation, which is the default mode, no automatic rotation is applied to the reading. This is the only mode available for backends that do not support the QSensor::AxesOrientation feature.</para>
+            <para>When set to AutomaticOrientation, the reading values are automatically rotated when the screen orientation changes. In effect, the screen orientation is canceled out.</para>
+            <para>As an example, assume the device is rotated by 180 degrees and therefore the screen orientation also is rotated by 180 degrees from the native orientation. Without automatic axes orientation, the reading values would now be changed: Both the X and the Y values would be negated, forcing an application developer to manually cancel out the negation in application code. Automatic axes orientation does this automatically, in this mode the X and Y values would be the same as with the default screen orientation.</para>
+            <para>This automatic rotation of the axes is handy is some usecases, for example in a bubble level application that measures how level a surface is by looking at the X axis value of an accelerometer. When the device and screen orientation change by 90 degrees, an application developer does not need to change anything, he can continue using the X axis value even though the device is rotated. Without automatic axes orientation, the application developer would need to look at the Y values instead, thereby adding code to the application that reads from a different axis depending on the screen orientation.</para>
+            <para>The UserOrientation mode is quite similar to AutomaticOrientation, only that the screen orientation is manually controlled instead of automatically determined. The angle of the userOrientation property is then used for rotating the reading values.</para>
+            <para>Since the rotation of the reading values is based on the screen orientation, Z values will never change, as the Z axis is perpendicular to the screen. As screen orientation changes in 90 degree steps, rotating the reading values is also done in steps of 90 degrees.</para>
+            <para>This property is only used for orientable sensors.</para>
+            <para>This property was introduced in  Qt 5.1.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> AxesOrientationMode 	axesOrientationMode() const</para>
+            <para> void 	setAxesOrientationMode(AxesOrientationMode axesOrientationMode)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	axesOrientationModeChanged(AxesOrientationMode axesOrientationMode)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:QtSensors.QSensor.CurrentOrientationChanged">
+            <summary>
+            <para>This property holds the current orientation that is used for rotating the reading values.</para>
+            <para>This might not be the same as the screen orientation. For example, in the FixedOrientation mode, the reading values are not rotated, and therefore the property is 0.</para>
+            <para>In the UserOrientation mode, the readings are rotated based on the userOrientation property, and therefore this property is equal to the userOrientation property.</para>
+            <para>In the AutomaticOrientation mode, the readings are rotated based on the screen orientation, and therefore this property will be equal to the current screen orientation.</para>
+            <para>This property is set by the backend and only valid for orientable sensors.</para>
+            <para>This property was introduced in  Qt 5.1.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> int 	currentOrientation() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	currentOrientationChanged(int currentOrientation)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:QtSensors.QSensor.UserOrientationChanged">
+            <summary>
+            <para>This property holds the angle used for rotating the reading values in the UserOrientation mode.</para>
+            <para>When the axesOrientationMode property is set to UserOrientation, the angle for rotating the reading values is taken from this property. In other modes, the property has no effect.</para>
+            <para>The default is 0. The only valid values are 0, 90, 180 and 270, as those are the only possible screen orientations.</para>
+            <para>This property is only valid for orientable sensors.</para>
+            <para>This property was introduced in  Qt 5.1.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> int 	userOrientation() const</para>
+            <para> void 	setUserOrientation(int userOrientation)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	userOrientationChanged(int userOrientation)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:QtSensors.QSensor.MaxBufferSizeChanged">
+            <summary>
+            <para>The property holds the maximum buffer size.</para>
+            <para>Note that this may be 1, in which case the sensor does not support any form of buffering. In that case, isFeatureSupported(QSensor::Buffering) will also return false.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> int 	maxBufferSize() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	maxBufferSizeChanged(int maxBufferSize)</para>
+            <para></para>
+            <para>See also QSensor::bufferSize and QSensor::efficientBufferSize.</para>
+            </summary>
+        </member>
+        <member name="E:QtSensors.QSensor.EfficientBufferSizeChanged">
+            <summary>
+            <para>The property holds the most efficient buffer size. Normally this is 1 (which means no particular size is most efficient). Some sensor drivers have a FIFO buffer which makes it more efficient to deliver the FIFO's size worth of readings at one time.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> int 	efficientBufferSize() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	efficientBufferSizeChanged(int efficientBufferSize)</para>
+            <para></para>
+            <para>See also QSensor::bufferSize and QSensor::maxBufferSize.</para>
+            </summary>
+        </member>
+        <member name="E:QtSensors.QSensor.BufferSizeChanged">
+            <summary>
+            <para>This property holds the size of the buffer. By default, the buffer size is 1, which means no buffering. If the maximum buffer size is 1, then buffering is not supported by the sensor.</para>
+            <para>Setting bufferSize greater than maxBufferSize will cause maxBufferSize to be used.</para>
+            <para>Buffering is turned on when bufferSize is greater than 1. The sensor will collect the requested number of samples and deliver them all to the application at one time. They will be delivered to the application as a burst of changed readings so it is particularly important that the application processes each reading immediately or saves the values somewhere else.</para>
+            <para>If stop() is called when buffering is on-going, the partial buffer is not delivered.</para>
+            <para>When the sensor is started with buffering option, values are collected from that moment onwards. There is no pre-existing buffer that can be utilized.</para>
+            <para>Some backends only support enabling or disabling the buffer and do not give control over the size. In this case, the maxBufferSize and efficientBufferSize properties might not be set at all, even though buffering is supported. Setting the bufferSize property to any value greater than 1 will enable buffering. After the sensor has been started, the bufferSize property will be set to the actual value by the backend.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> int 	bufferSize() const</para>
+            <para> void 	setBufferSize(int bufferSize)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	bufferSizeChanged(int bufferSize)</para>
+            <para></para>
+            <para>See also QSensor::maxBufferSize and QSensor::efficientBufferSize.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensor.Identifier">
+            <summary>
+            <para>This property holds the backend identifier for the sensor.</para>
+            <para>Note that the identifier is filled out automatically when the sensor is connected to a backend. If you want to connect a specific backend, you should call setIdentifier() before connectToBackend().</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensor.Active">
+            <summary>
+            <para>This property holds a value to indicate if the sensor is active.</para>
+            <para>This is true if the sensor is active (returning values). This is false otherwise.</para>
+            <para>Note that setting this value to true will not have an immediate effect. Instead, the sensor will be started once the event loop has been reached.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensor.AlwaysOn">
+            <summary>
+            <para>This property holds a value to indicate if the sensor should remain running when the screen is off.</para>
+            <para>Some platforms have a policy of suspending sensors when the screen turns off. Setting this property to true will ensure the sensor continues to run.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensor.SkipDuplicates">
+            <summary>
+            <para>This property holds indicates whether duplicate reading values should be omitted.</para>
+            <para>When duplicate skipping is enabled, successive readings with the same or very similar values are omitted. This helps reducing the amount of processing done, as less sensor readings are made available. As a consequence, readings arrive at an irregular interval.</para>
+            <para>Duplicate skipping is not just enabled for readings that are exactly the same, but also for readings that are quite similar, as each sensor has a bit of jitter even if the device is not moved.</para>
+            <para>Support for this property depends on the backend. Use isFeatureSupported() to check if it is supported on the current platform.</para>
+            <para>Duplicate skipping is disabled by default.</para>
+            <para>Duplicate skipping takes effect when the sensor is started, changing the property while the sensor is active has no immediate effect.</para>
+            <para>This property was introduced in  Qt 5.1.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensor.DataRate">
+            <summary>
+            <para>This property holds the data rate that the sensor should be run at.</para>
+            <para>Measured in Hertz.</para>
+            <para>The data rate is the maximum frequency at which the sensor can detect changes.</para>
+            <para>Setting this property is not portable and can cause conflicts with other applications. Check with the sensor backend and platform documentation for any policy regarding multiple applications requesting a data rate.</para>
+            <para>The default value (0) means that the app does not care what the data rate is. Applications should consider using a timer-based poll of the current value or ensure that the code that processes values can run very quickly as the platform may provide updates hundreds of times each second.</para>
+            <para>This should be set before calling start() because the sensor may not notice changes to this value while it is running.</para>
+            <para>Note that there is no mechanism to determine the current data rate in use by the platform.</para>
+            <para>See also QSensor::availableDataRates.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensor.OutputRange">
+            <summary>
+            <para>This property holds the output range in use by the sensor.</para>
+            <para>This value represents the index in the QSensor::outputRanges list to use.</para>
+            <para>Setting this property is not portable and can cause conflicts with other applications. Check with the sensor backend and platform documentation for any policy regarding multiple applications requesting an output range.</para>
+            <para>The default value (-1) means that the app does not care what the output range is.</para>
+            <para>Note that there is no mechanism to determine the current output range in use by the platform.</para>
+            <para>See also QSensor::outputRanges.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensor.axesOrientationMode">
+            <summary>
+            <para>This property holds the mode that affects how the screen orientation changes reading values.</para>
+            <para>When set to FixedOrientation, which is the default mode, no automatic rotation is applied to the reading. This is the only mode available for backends that do not support the QSensor::AxesOrientation feature.</para>
+            <para>When set to AutomaticOrientation, the reading values are automatically rotated when the screen orientation changes. In effect, the screen orientation is canceled out.</para>
+            <para>As an example, assume the device is rotated by 180 degrees and therefore the screen orientation also is rotated by 180 degrees from the native orientation. Without automatic axes orientation, the reading values would now be changed: Both the X and the Y values would be negated, forcing an application developer to manually cancel out the negation in application code. Automatic axes orientation does this automatically, in this mode the X and Y values would be the same as with the default screen orientation.</para>
+            <para>This automatic rotation of the axes is handy is some usecases, for example in a bubble level application that measures how level a surface is by looking at the X axis value of an accelerometer. When the device and screen orientation change by 90 degrees, an application developer does not need to change anything, he can continue using the X axis value even though the device is rotated. Without automatic axes orientation, the application developer would need to look at the Y values instead, thereby adding code to the application that reads from a different axis depending on the screen orientation.</para>
+            <para>The UserOrientation mode is quite similar to AutomaticOrientation, only that the screen orientation is manually controlled instead of automatically determined. The angle of the userOrientation property is then used for rotating the reading values.</para>
+            <para>Since the rotation of the reading values is based on the screen orientation, Z values will never change, as the Z axis is perpendicular to the screen. As screen orientation changes in 90 degree steps, rotating the reading values is also done in steps of 90 degrees.</para>
+            <para>This property is only used for orientable sensors.</para>
+            <para>This property was introduced in  Qt 5.1.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensor.CurrentOrientation">
+            <summary>
+            <para>This property holds the current orientation that is used for rotating the reading values.</para>
+            <para>This might not be the same as the screen orientation. For example, in the FixedOrientation mode, the reading values are not rotated, and therefore the property is 0.</para>
+            <para>In the UserOrientation mode, the readings are rotated based on the userOrientation property, and therefore this property is equal to the userOrientation property.</para>
+            <para>In the AutomaticOrientation mode, the readings are rotated based on the screen orientation, and therefore this property will be equal to the current screen orientation.</para>
+            <para>This property is set by the backend and only valid for orientable sensors.</para>
+            <para>This property was introduced in  Qt 5.1.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensor.UserOrientation">
+            <summary>
+            <para>This property holds the angle used for rotating the reading values in the UserOrientation mode.</para>
+            <para>When the axesOrientationMode property is set to UserOrientation, the angle for rotating the reading values is taken from this property. In other modes, the property has no effect.</para>
+            <para>The default is 0. The only valid values are 0, 90, 180 and 270, as those are the only possible screen orientations.</para>
+            <para>This property is only valid for orientable sensors.</para>
+            <para>This property was introduced in  Qt 5.1.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensor.MaxBufferSize">
+            <summary>
+            <para>The property holds the maximum buffer size.</para>
+            <para>Note that this may be 1, in which case the sensor does not support any form of buffering. In that case, isFeatureSupported(QSensor::Buffering) will also return false.</para>
+            <para>See also QSensor::bufferSize and QSensor::efficientBufferSize.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensor.EfficientBufferSize">
+            <summary>
+            <para>The property holds the most efficient buffer size. Normally this is 1 (which means no particular size is most efficient). Some sensor drivers have a FIFO buffer which makes it more efficient to deliver the FIFO's size worth of readings at one time.</para>
+            <para>See also QSensor::bufferSize and QSensor::maxBufferSize.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensor.BufferSize">
+            <summary>
+            <para>This property holds the size of the buffer. By default, the buffer size is 1, which means no buffering. If the maximum buffer size is 1, then buffering is not supported by the sensor.</para>
+            <para>Setting bufferSize greater than maxBufferSize will cause maxBufferSize to be used.</para>
+            <para>Buffering is turned on when bufferSize is greater than 1. The sensor will collect the requested number of samples and deliver them all to the application at one time. They will be delivered to the application as a burst of changed readings so it is particularly important that the application processes each reading immediately or saves the values somewhere else.</para>
+            <para>If stop() is called when buffering is on-going, the partial buffer is not delivered.</para>
+            <para>When the sensor is started with buffering option, values are collected from that moment onwards. There is no pre-existing buffer that can be utilized.</para>
+            <para>Some backends only support enabling or disabling the buffer and do not give control over the size. In this case, the maxBufferSize and efficientBufferSize properties might not be set at all, even though buffering is supported. Setting the bufferSize property to any value greater than 1 will enable buffering. After the sensor has been started, the bufferSize property will be set to the actual value by the backend.</para>
+            <para>See also QSensor::maxBufferSize and QSensor::efficientBufferSize.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensor.Type">
+            <summary>
+            <para>This property holds the type of the sensor.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensor.IsConnectedToBackend">
+            <summary>
+            <para>This property holds a value indicating if the sensor has connected to a backend.</para>
+            <para>A sensor that has not been connected to a backend cannot do anything useful.</para>
+            <para>Call the connectToBackend() method to force the sensor to connect to a backend immediately. This is automatically called if you call start() so you only need to do this if you need access to sensor properties (ie. to poll the sensor's meta-data before you use it).</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	isConnectedToBackend() const</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensor.IsBusy">
+            <summary>
+            <para>This property holds a value to indicate if the sensor is busy.</para>
+            <para>Some sensors may be on the system but unavailable for use. This function will return true if the sensor is busy. You will not be able to start() the sensor.</para>
+            <para>Note that this function does not return true if you are using the sensor, only if another process is using the sensor.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	isBusy() const</para>
+            <para></para>
+            <para>See also busyChanged().</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensor.Description">
+            <summary>
+            <para>This property holds a descriptive string for the sensor.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensor.Error">
+            <summary>
+            <para>This property holds the last error code set on the sensor.</para>
+            <para>Note that error codes are sensor-specific.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensor.Reading">
+            <summary>
+            <para>This property holds the reading class.</para>
+            <para>The reading class provides access to sensor readings. The reading object is a volatile cache of the most recent sensor reading that has been received so the application should process readings immediately or save the values somewhere for later processing.</para>
+            <para>Note that this will return 0 until a sensor backend is connected to a backend.</para>
+            <para>Also note that readings are not immediately available after start() is called. Applications must wait for the readingChanged() signal to be emitted.</para>
+            <para>See also isConnectedToBackend() and start().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QSensor.Feature">
+            <summary>
+            <para>Lists optional features a backend might support.</para>
+            <para>The features common to all sensor types are:</para>
+            <para>The features of QMagnetometer are:</para>
+            <para>The features of QLightSensor are:</para>
+            <para>The features of QAccelerometer are:</para>
+            <para>The features of QPressureSensor are:</para>
+            <para>The features of all orientable sensors are:</para>
+            <para>This enum was introduced or modified in  Qt 5.0.</para>
+            <para>See also QSensor::isFeatureSupported().</para>
+            </summary>
+        </member>
+        <member name="F:QtSensors.QSensor.Feature.Buffering">
+            <summary>The backend supports buffering of readings, controlled by the QSensor::bufferSize property.</summary>
+        </member>
+        <member name="F:QtSensors.QSensor.Feature.AlwaysOn">
+            <summary>The backend supports changing the policy on whether to suspend when idle, controlled by the QSensor::alwaysOn property.</summary>
+        </member>
+        <member name="F:QtSensors.QSensor.Feature.GeoValues">
+            <summary>The backend supports returning geo values, which can be controlled with the QMagnetometer::returnGeoValues property.</summary>
+        </member>
+        <member name="F:QtSensors.QSensor.Feature.FieldOfView">
+            <summary>The backend specifies its field of view, which can be read from the QLightSensor::fieldOfView property.</summary>
+        </member>
+        <member name="F:QtSensors.QSensor.Feature.AccelerationMode">
+            <summary>The backend supports switching the acceleration mode of the acceleromter with the QAccelerometer::accelerationMode property.</summary>
+        </member>
+        <member name="F:QtSensors.QSensor.Feature.SkipDuplicates">
+            <summary>The backend supports skipping of same or very similar successive readings. This can be enabled by setting the QSensor::skipDuplicates property to true.</summary>
+        </member>
+        <member name="F:QtSensors.QSensor.Feature.AxesOrientation">
+            <summary>The backend supports changing the axes orientation from the default of QSensor::FixedOrientation to something else.</summary>
+        </member>
+        <member name="F:QtSensors.QSensor.Feature.PressureSensorTemperature">
+            <summary>The backend provides the pressure sensor's die temperature</summary>
+        </member>
+        <member name="T:QtSensors.QSensor.AxesOrientationMode">
+            <summary>
+            <para>Describes how reading values are affected by the screen orientation.</para>
+            <para>This enum was introduced or modified in  Qt 5.1.</para>
+            <para>See also QSensor::axesOrientationMode.</para>
+            </summary>
+        </member>
+        <member name="F:QtSensors.QSensor.AxesOrientationMode.FixedOrientation">
+            <summary>No automatic rotation is applied to the reading values.</summary>
+        </member>
+        <member name="F:QtSensors.QSensor.AxesOrientationMode.AutomaticOrientation">
+            <summary>The reading values are automatically rotated based on the screen orientation.</summary>
+        </member>
+        <member name="F:QtSensors.QSensor.AxesOrientationMode.UserOrientation">
+            <summary>The reading values are rotated based on the angle of the userOrientation property.</summary>
+        </member>
+        <member name="T:QtSensors.QSensorFilter">
+            <summary>
+            <para>The QSensorFilter class provides an efficient callback facility for asynchronous notifications of sensor changes.</para>
+            </summary>
+            <remarks>
+            <para>Some sensors (eg. the accelerometer) are often accessed very frequently. This may be slowed down by the use of signals and slots. The QSensorFilter interface provides a more efficient way for the sensor to notify your class that the sensor has changed.</para>
+            <para>Additionally, multiple filters can be added to a sensor. They are called in order and each filter has the option to modify the values in the reading or to suppress the reading altogether.</para>
+            <para>Note that the values in the class returned by QSensor::reading() will not be updated until after the filters have been run.</para>
+            <para></para>
+            <para>See also filter().</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QSensorFilter.Filter(QtSensors.QSensorReading)">
+            <summary>
+            <para>This function is called when the sensor reading changes.</para>
+            <para>The filter can modify the reading.</para>
+            <para>Returns true to allow the next filter to receive the value. If this is the last filter, returning true causes the signal to be emitted and the value is stored in the sensor.</para>
+            <para>Returns false to drop the reading.</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QSensorReading">
+            <summary>
+            <para>The QSensorReading class holds the readings from the sensor.</para>
+            </summary>
+            <remarks>
+            <para>Note that QSensorReading is not particularly useful by itself. The interesting data for each sensor is defined in a sub-class of QSensorReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QSensorReading.Value(System.Int32)">
+            <summary>
+            <para>Returns the value of the property at index.</para>
+            <para>Note that this function is slower than calling the data function directly.</para>
+            <para>Here is an example of getting a property via the different mechanisms available.</para>
+            <para>Accessing directly provides the best performance but requires compile-time knowledge of the data you are accessing.</para>
+            <para></para>
+            <para></para>
+            <para>  QAccelerometerReading *reading = ...;</para>
+            <para>  qreal x = reading-&gt;x();</para>
+            <para></para>
+            <para></para>
+            <para>You can also access a property by name. To do this you must call QObject::property().</para>
+            <para></para>
+            <para></para>
+            <para>  qreal x = reading-&gt;property(&quot;x&quot;).value&lt;qreal&gt;();</para>
+            <para></para>
+            <para></para>
+            <para>Finally, you can access values via numeric index.</para>
+            <para></para>
+            <para></para>
+            <para>  qreal x = reading-&gt;value(0).value&lt;qreal&gt;();</para>
+            <para></para>
+            <para></para>
+            <para>Note that value() can only access properties declared with Q_PROPERTY() in sub-classes of QSensorReading.</para>
+            <para>See also valueCount() and QObject::property().</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensorReading.Timestamp">
+            <summary>
+            <para>This property holds the timestamp of the reading.</para>
+            <para>Timestamps values are microseconds since a fixed point. You can use timestamps to see how far apart two sensor readings are.</para>
+            <para>Note that sensor timestamps from different sensors may not be directly comparable (as they may choose different fixed points for their reference).</para>
+            <para>Note that some platforms do not deliver timestamps correctly. Applications should be prepared for occasional issues that cause timestamps to jump backwards.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensorReading.ValueCount">
+            <summary>
+            <para>Returns the number of extra properties that the reading has.</para>
+            <para>Note that this does not count properties declared in QSensorReading.</para>
+            <para>As an example, this returns 3 for QAccelerometerReading because there are 3 properties defined in that class.</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QAccelerometerReading">
+            <summary>
+            <para>The QAccelerometerReading class reports on linear acceleration along the X, Y and Z axes.</para>
+            </summary>
+            <remarks>
+            <para>QAccelerometerReading Units</para>
+            <para>The scale of the values is meters per second squared. The axes are arranged as follows.</para>
+            <para></para>
+            <para>A monoblock device sitting at rest, face up on a desk will experience a force of approximately 9.8 on the Z axis (ie. towards the roof). This is the proper acceleration the device experiences relative to freefall.</para>
+            </remarks>
+        </member>
+        <member name="P:QtSensors.QAccelerometerReading.X">
+            <summary>
+            <para>This property holds the acceleration on the X axis.</para>
+            <para>The scale of the values is meters per second squared.</para>
+            <para>See also QAccelerometerReading Units.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QAccelerometerReading.Y">
+            <summary>
+            <para>This property holds the acceleration on the Y axis.</para>
+            <para>The scale of the values is meters per second squared.</para>
+            <para>See also QAccelerometerReading Units.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QAccelerometerReading.Z">
+            <summary>
+            <para>This property holds the acceleration on the Z axis.</para>
+            <para>The scale of the values is meters per second squared.</para>
+            <para>See also QAccelerometerReading Units.</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QAccelerometerFilter">
+            <summary>
+            <para>The QAccelerometerFilter class is a convenience wrapper around QSensorFilter.</para>
+            </summary>
+            <remarks>
+            <para>The only difference is that the filter() method features a pointer to QAccelerometerReading instead of QSensorReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QAccelerometerFilter.Filter(QtSensors.QAccelerometerReading)">
+            <summary>
+            <para>Called when reading changes. Returns false to prevent the reading from propagating.</para>
+            <para>See also QSensorFilter::filter().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QAccelerometer">
+            <summary>
+            <para>The QAccelerometer class is a convenience wrapper around QSensor.</para>
+            </summary>
+            <remarks>
+            <para>The only behavioural difference is that this class sets the type properly.</para>
+            <para>It also supports changing the acceleration mode, which controls whether the force of gravity is included in the accelerometer values or not.</para>
+            <para>Furthermore, this class features a reading() function that returns a QAccelerometerReading instead of a QSensorReading.</para>
+            <para>For details about how the sensor works, see QAccelerometerReading.</para>
+            <para></para>
+            <para>See also QAccelerometerReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QAccelerometer.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Construct the sensor as a child of parent.</para>
+            </summary>
+        </member>
+        <member name="E:QtSensors.QAccelerometer.AccelerationModeChanged">
+            <summary>
+            <para>Emitted when the acceleration mode was changed.</para>
+            <para>This function was introduced in  Qt 5.1.</para>
+            <para>Note: Notifier signal for property accelerationMode. </para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QAccelerometer.accelerationMode">
+            <summary>
+            <para>This property holds the acceleration mode controls how acceleration values are reported.</para>
+            <para>The acceleration mode controls how the acceleration sensor reports its values. The default mode is QAccelerometer::Combined, which means the acceleration caused by gravity is included in the reported values.</para>
+            <para>Acceleration caused by gravity and acceleration caused by the user moving the device are physically impossible to distinguish because of general relativity. Most devices use sensor fusion to figure out which parts of the acceleration is caused by gravity, for example by using a rotation sensor to calculate the gravity direction and assuming a fixed magnitude for gravity. Therefore the result is only an approximation and may be inaccurate. The QAccelerometer::Combined mode is the most accurate one, as it does not involve approximating the gravity.</para>
+            <para>Not all backends and devices might support setting the acceleration mode. For those cases, the default mode QAccelerometer::Combined is used, changing it has no effect.</para>
+            <para>This property was introduced in  Qt 5.1.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QAccelerometer.Reading">
+            <summary>
+            <para>Returns the reading class for this sensor.</para>
+            <para>See also QSensor::reading().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QAccelerometer.AccelerationMode">
+            <summary>
+            <para>This enum represents the acceleration mode of an acceleration sensor.</para>
+            <para>The acceleration mode controls how the sensor reports acceleration. QAccelerometer::Combined is the only mode in which the values can be directly physically measured, the others are an approximation.</para>
+            <para>This enum was introduced or modified in  Qt 5.1.</para>
+            <para>See also QAccelerometer::accelerationMode.</para>
+            </summary>
+        </member>
+        <member name="F:QtSensors.QAccelerometer.AccelerationMode.Combined">
+            <summary>Both the acceleration caused by gravity and the acceleration caused by the user moving the device is reported combined.</summary>
+        </member>
+        <member name="F:QtSensors.QAccelerometer.AccelerationMode.Gravity">
+            <summary>Only the acceleration caused by gravity is reported. Movements of the device caused by the user have no effect other than changing the direction when the device is rotated.</summary>
+        </member>
+        <member name="F:QtSensors.QAccelerometer.AccelerationMode.User">
+            <summary>Only the acceleration caused by the user moving the device is reported, the effect of gravity is canceled out. A device at rest therefore should report values of, or close to, zero. In other APIs, this mode might be known as linear acceleration.</summary>
+        </member>
+        <member name="T:QtSensors.QAltimeterReading">
+            <summary>
+            <para>The QAltimeterReading class holds readings from the altimeter sensor.</para>
+            </summary>
+            <remarks>
+            <para>The altitude is reported in meters relative to mean sea level.</para>
+            </remarks>
+        </member>
+        <member name="P:QtSensors.QAltimeterReading.Altitude">
+            <summary>
+            <para>This property holds the altitude in meters relative to mean sea level.</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QAltimeterFilter">
+            <summary>
+            <para>The QAltimeterFilter class is a convenience wrapper around QSensorFilter.</para>
+            </summary>
+            <remarks>
+            <para>The only difference is that the filter() method features a pointer to QAltimeterReading instead of QSensorReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QAltimeterFilter.Filter(QtSensors.QAltimeterReading)">
+            <summary>
+            <para>Called when reading changes. Returns false to prevent the reading from propagating.</para>
+            <para>See also QSensorFilter::filter().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QAltimeter">
+            <summary>
+            <para>The QAltimeter class is a convenience wrapper around QSensor.</para>
+            </summary>
+            <remarks>
+            <para>The only behavioural difference is that this class sets the type properly.</para>
+            <para>This class also features a reading() function that returns a QAltimeterReading instead of a QSensorReading.</para>
+            <para>For details about how the sensor works, see QAltimeterReading.</para>
+            <para></para>
+            <para>See also QAltimeterReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QAltimeter.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Construct the sensor as a child of parent.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QAltimeter.Reading">
+            <summary>
+            <para>Returns the reading class for this sensor.</para>
+            <para>See also QSensor::reading().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QAmbientLightReading">
+            <summary>
+            <para>The QAmbientLightReading class represents one reading from the ambient light sensor.</para>
+            </summary>
+            <remarks>
+            <para>QAmbientLightReading Units</para>
+            <para>The ambient light sensor returns the intensity of the ambient light using the pre-defined values found in the QAmbientLightReading::LightLevel enum.</para>
+            </remarks>
+        </member>
+        <member name="P:QtSensors.QAmbientLightReading.lightLevel">
+            <summary>
+            <para>This property holds the ambient light level.</para>
+            <para>The value represents the ambient light and comes from QAmbientLightReading::LightLevel.</para>
+            <para>See also QAmbientLightReading Units.</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QAmbientLightReading.LightLevel">
+            <summary>
+            <para>This enum represents the ambient light level.</para>
+            </summary>
+        </member>
+        <member name="F:QtSensors.QAmbientLightReading.LightLevel.Undefined">
+            <summary>The light level is unknown.</summary>
+        </member>
+        <member name="F:QtSensors.QAmbientLightReading.LightLevel.Dark">
+            <summary>It is dark.</summary>
+        </member>
+        <member name="F:QtSensors.QAmbientLightReading.LightLevel.Twilight">
+            <summary>It is moderately dark.</summary>
+        </member>
+        <member name="F:QtSensors.QAmbientLightReading.LightLevel.Light">
+            <summary>It is light (eg. internal lights).</summary>
+        </member>
+        <member name="F:QtSensors.QAmbientLightReading.LightLevel.Bright">
+            <summary>It is bright (eg. shade).</summary>
+        </member>
+        <member name="F:QtSensors.QAmbientLightReading.LightLevel.Sunny">
+            <summary>It is very bright (eg. direct sunlight).</summary>
+        </member>
+        <member name="T:QtSensors.QAmbientLightFilter">
+            <summary>
+            <para>The QAmbientLightFilter class is a convenience wrapper around QSensorFilter.</para>
+            </summary>
+            <remarks>
+            <para>The only difference is that the filter() method features a pointer to QAmbientLightReading instead of QSensorReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QAmbientLightFilter.Filter(QtSensors.QAmbientLightReading)">
+            <summary>
+            <para>Called when reading changes. Returns false to prevent the reading from propagating.</para>
+            <para>See also QSensorFilter::filter().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QAmbientLightSensor">
+            <summary>
+            <para>The QAmbientLightSensor class is a convenience wrapper around QSensor.</para>
+            </summary>
+            <remarks>
+            <para>The only behavioural difference is that this class sets the type properly.</para>
+            <para>This class also features a reading() function that returns a QAmbientLightReading instead of a QSensorReading.</para>
+            <para>For details about how the sensor works, see QAmbientLightReading.</para>
+            <para></para>
+            <para>See also QAmbientLightReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QAmbientLightSensor.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Construct the sensor as a child of parent.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QAmbientLightSensor.Reading">
+            <summary>
+            <para>Returns the reading class for this sensor.</para>
+            <para>See also QSensor::reading().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QAmbientTemperatureReading">
+            <summary>
+            <para>The QAmbientTemperatureReading class holds readings of the ambient temperature.</para>
+            </summary>
+            <remarks>
+            <para>The ambient (room) temperature is the temperature in degree Celsius.</para>
+            </remarks>
+        </member>
+        <member name="P:QtSensors.QAmbientTemperatureReading.Temperature">
+            <summary>
+            <para>This property holds the ambient temperature.</para>
+            <para>Measured in degree Celsius.</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QAmbientTemperatureFilter">
+            <summary>
+            <para>The QAmbientTemperatureFilter class is a convenience wrapper around QSensorFilter.</para>
+            </summary>
+            <remarks>
+            <para>The only difference is that the filter() method features a pointer to QAmbientTemperatureReading instead of QSensorReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QAmbientTemperatureFilter.Filter(QtSensors.QAmbientTemperatureReading)">
+            <summary>
+            <para>Called when reading changes. Returns false to prevent the reading from propagating.</para>
+            <para>See also QSensorFilter::filter().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QAmbientTemperatureSensor">
+            <summary>
+            <para>The QAmbientTemperatureSensor class is a convenience wrapper around QSensor.</para>
+            </summary>
+            <remarks>
+            <para>The only behavioural difference is that this class sets the type properly.</para>
+            <para>This class also features a reading() function that returns a QAmbientTemperatureReading instead of a QSensorReading.</para>
+            <para>For details about how the sensor works, see QAmbientTemperatureReading.</para>
+            <para></para>
+            <para>See also QAmbientTemperatureReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QAmbientTemperatureSensor.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Construct the sensor as a child of parent.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QAmbientTemperatureSensor.Reading">
+            <summary>
+            <para>Returns the reading class for this sensor.</para>
+            <para>See also QSensor::reading().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QCompassReading">
+            <summary>
+            <para>The QCompassReading class represents one reading from a compass.</para>
+            </summary>
+            <remarks>
+            <para>QCompassReading Units</para>
+            <para>The compass returns the azimuth of the device as degrees from magnetic north in a clockwise direction based on the top of the device, as defined by QScreen::nativeOrientation. There is also a value to indicate the calibration status of the device. If the device is not calibrated the azimuth may not be accurate.</para>
+            <para>Digital compasses are susceptible to magnetic interference and may need calibration after being placed near anything that emits a magnetic force. Accuracy of the compass can be affected by any ferrous materials that are nearby.</para>
+            <para>The calibration status of the device is measured as a number from 0 to 1. A value of 1 is the highest level that the device can support and 0 is the worst.</para>
+            </remarks>
+        </member>
+        <member name="P:QtSensors.QCompassReading.Azimuth">
+            <summary>
+            <para>This property holds the azimuth of the device.</para>
+            <para>Measured in degrees from magnetic north in a clockwise direction based on the top of the device, as defined by QPlatformScreen::nativeOrientation.</para>
+            <para>See also QCompassReading Units.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QCompassReading.CalibrationLevel">
+            <summary>
+            <para>This property holds the calibration level of the reading.</para>
+            <para>Measured as a value from 0 to 1 with higher values being better.</para>
+            <para>See also QCompassReading Units.</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QCompassFilter">
+            <summary>
+            <para>The QCompassFilter class is a convenience wrapper around QSensorFilter.</para>
+            </summary>
+            <remarks>
+            <para>The only difference is that the filter() method features a pointer to QCompassReading instead of QSensorReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QCompassFilter.Filter(QtSensors.QCompassReading)">
+            <summary>
+            <para>Called when reading changes. Returns false to prevent the reading from propagating.</para>
+            <para>See also QSensorFilter::filter().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QCompass">
+            <summary>
+            <para>The QCompass class is a convenience wrapper around QSensor.</para>
+            </summary>
+            <remarks>
+            <para>The only behavioural difference is that this class sets the type properly.</para>
+            <para>This class also features a reading() function that returns a QCompassReading instead of a QSensorReading.</para>
+            <para>For details about how the sensor works, see QCompassReading.</para>
+            <para></para>
+            <para>See also QCompassReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QCompass.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Construct the sensor as a child of parent.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QCompass.Reading">
+            <summary>
+            <para>Returns the reading class for this sensor.</para>
+            <para>See also QSensor::reading().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QDistanceReading">
+            <summary>
+            <para>The QDistanceReading class holds distance reading in cm from the proximity sensor.</para>
+            </summary>
+            <remarks>
+            <para>The QDistanceReading class holds distance reading in cm from the proximity sensor. Note: Some proximity sensor only support two values for distance, a near and far value. In this case, the sensor should report its maximum range value to represent the far state, and a lesser value to represent the near state.</para>
+            <para></para>
+            <para>QDistanceReading Units</para>
+            <para>The distance is measured in cm</para>
+            <para>The distance sensor is typically located in the front face of a device, and thus will measure the distance of an object from the device's front face.</para>
+            </remarks>
+        </member>
+        <member name="P:QtSensors.QDistanceReading.Distance">
+            <summary>
+            <para>This property holds distance of object from front face of device.</para>
+            <para>See also QDistanceReading Units.</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QDistanceFilter">
+            <summary>
+            <para>The QDistanceFilter class is a convenience wrapper around QSensorFilter.</para>
+            </summary>
+            <remarks>
+            <para>The only difference is that the filter() method features a pointer to QDistanceReading instead of QSensorReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QDistanceFilter.Filter(QtSensors.QDistanceReading)">
+            <summary>
+            <para>Called when reading changes. Returns false to prevent the reading from propagating.</para>
+            <para>See also QSensorFilter::filter().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QDistanceSensor">
+            <summary>
+            <para>The QDistanceSensor class is a convenience wrapper around QSensor.</para>
+            </summary>
+            <remarks>
+            <para>The only behavioral difference is that this class sets the type properly.</para>
+            <para>This class also features a reading() function that returns a QDistanceReading instead of a QSensorReading.</para>
+            <para>For details about how the sensor works, see QDistanceReading.</para>
+            <para></para>
+            <para>See also QDistanceReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QDistanceSensor.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Construct the sensor as a child of parent.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QDistanceSensor.Reading">
+            <summary>
+            <para>Returns the reading class for this sensor.</para>
+            <para>See also QSensor::reading().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QGyroscopeReading">
+            <summary>
+            <para>The QGyroscopeReading class represents one reading from the gyroscope sensor.</para>
+            </summary>
+            <remarks>
+            <para>QGyroscopeReading Units</para>
+            <para>The reading contains 3 values, measured in degrees per second that define the movement of the device around the x, y and z axes. Unlike QRotationReading, the values represent the current angular velocity rather than a fixed rotation. The measurements are in degrees per second.</para>
+            </remarks>
+        </member>
+        <member name="P:QtSensors.QGyroscopeReading.X">
+            <summary>
+            <para>This property holds the angular velocity around the x axis.</para>
+            <para>Measured as degrees per second.</para>
+            <para>See also QGyroscopeReading Units.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QGyroscopeReading.Y">
+            <summary>
+            <para>This property holds the angular velocity around the y axis.</para>
+            <para>Measured as degrees per second.</para>
+            <para>See also QGyroscopeReading Units.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QGyroscopeReading.Z">
+            <summary>
+            <para>This property holds the angular velocity around the z axis.</para>
+            <para>Measured as degrees per second.</para>
+            <para>See also QGyroscopeReading Units.</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QGyroscopeFilter">
+            <summary>
+            <para>The QGyroscopeFilter class is a convenience wrapper around QSensorFilter.</para>
+            </summary>
+            <remarks>
+            <para>The only difference is that the filter() method features a pointer to QGyroscopeReading instead of QSensorReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QGyroscopeFilter.Filter(QtSensors.QGyroscopeReading)">
+            <summary>
+            <para>Called when reading changes. Returns false to prevent the reading from propagating.</para>
+            <para>See also QSensorFilter::filter().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QGyroscope">
+            <summary>
+            <para>The QGyroscope class is a convenience wrapper around QSensor.</para>
+            </summary>
+            <remarks>
+            <para>The only behavioural difference is that this class sets the type properly.</para>
+            <para>This class also features a reading() function that returns a QGyroscopeReading instead of a QSensorReading.</para>
+            <para>For details about how the sensor works, see QGyroscopeReading.</para>
+            <para></para>
+            <para>See also QGyroscopeReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QGyroscope.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Construct the sensor as a child of parent.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QGyroscope.Reading">
+            <summary>
+            <para>Returns the reading class for this sensor.</para>
+            <para>See also QSensor::reading().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QHolsterReading">
+            <summary>
+            <para>The QHolsterReading class holds readings from the holster sensor.</para>
+            </summary>
+            <remarks>
+            <para>QHolsterReading Units</para>
+            <para>The holster sensor can detect if a device is holstered or not. A holster is a pocket, similar to a gun holster, specifically made for the device. If the device is inside of this pocket, it is holstered. The holster supports the device in detecting whether the device is holstered or not.</para>
+            </remarks>
+        </member>
+        <member name="P:QtSensors.QHolsterReading.Holstered">
+            <summary>
+            <para>This property holds a value indicating whether the device is holstered.</para>
+            <para>See also QHolsterReading Units.</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QHolsterFilter">
+            <summary>
+            <para>The QHolsterFilter class is a convenience wrapper around QSensorFilter.</para>
+            </summary>
+            <remarks>
+            <para>The only difference is that the filter() method features a pointer to QHolsterReading instead of QSensorReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QHolsterFilter.Filter(QtSensors.QHolsterReading)">
+            <summary>
+            <para>Called when reading changes. Returns false to prevent the reading from propagating.</para>
+            <para>See also QSensorFilter::filter().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QHolsterSensor">
+            <summary>
+            <para>The QHolsterSensor class is a convenience wrapper around QSensor.</para>
+            </summary>
+            <remarks>
+            <para>The only behavioural difference is that this class sets the type properly.</para>
+            <para>This class also features a reading() function that returns a QHolsterReading instead of a QSensorReading.</para>
+            <para>For details about how the sensor works, see QHolsterReading.</para>
+            <para></para>
+            <para>See also QHolsterReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QHolsterSensor.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Construct the sensor as a child of parent.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QHolsterSensor.Reading">
+            <summary>
+            <para>Returns the reading class for this sensor.</para>
+            <para>See also QSensor::reading().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QIRProximityReading">
+            <summary>
+            <para>The QIRProximityReading class holds readings from the IR proximity sensor.</para>
+            </summary>
+            <remarks>
+            <para>The IR (infra-red) proximity sensor detects proximity by beaming out infra-red light and detecting how much of the light returns.</para>
+            <para>The biggest limitation of this technology is that there is no reliable way to turn the reflectance values into distances unless both the item being detected and the ambient conditions are known.</para>
+            <para></para>
+            <para>QIRProximityReading Units</para>
+            <para>The sensor reports reflectance as a decimal fraction in the range of 0 - 1. That is, 0 indicates nothing was detected within the range of the sensor and 1 indicates the infra-red signal returned at the full power level that it was sent at.</para>
+            <para>With some IR sensors, it is quite uncommon to reach the top and the bottom of the value range, and some parts of the range ends might not be obtainable at all. This is due to the behavior of the sensor hardware. With these sensors, the absolute value of reflectance should never be used directly. Instead, applications should react to the relative change of the reading values. Use QProximitySensor if it is only necessary to check if something is close to the device or not.</para>
+            </remarks>
+        </member>
+        <member name="P:QtSensors.QIRProximityReading.Reflectance">
+            <summary>
+            <para>This property holds the reflectance value.</para>
+            <para>The reflectance is a decimal fraction (from 0 to 1) indicating how much of the transmitted infra-red light was returned.</para>
+            <para>See also QIRProximityReading Units.</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QIRProximityFilter">
+            <summary>
+            <para>The QIRProximityFilter class is a convenience wrapper around QSensorFilter.</para>
+            </summary>
+            <remarks>
+            <para>The only difference is that the filter() method features a pointer to QIRProximityReading instead of QSensorReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QIRProximityFilter.Filter(QtSensors.QIRProximityReading)">
+            <summary>
+            <para>Called when reading changes. Returns false to prevent the reading from propagating.</para>
+            <para>See also QSensorFilter::filter().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QIRProximitySensor">
+            <summary>
+            <para>The QIRProximitySensor class is a convenience wrapper around QSensor.</para>
+            </summary>
+            <remarks>
+            <para>The only behavioural difference is that this class sets the type properly.</para>
+            <para>This class also features a reading() function that returns a QIRProximityReading instead of a QSensorReading.</para>
+            <para>For details about how the sensor works, see QIRProximityReading.</para>
+            <para></para>
+            <para>See also QIRProximityReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QIRProximitySensor.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Construct the sensor as a child of parent.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QIRProximitySensor.Reading">
+            <summary>
+            <para>Returns the reading class for this sensor.</para>
+            <para>See also QSensor::reading().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QLightReading">
+            <summary>
+            <para>The QLightReading class represents one reading from the light sensor.</para>
+            </summary>
+            <remarks>
+            <para>QLightReading Units</para>
+            <para>The light sensor returns the intensity of the light in lux.</para>
+            </remarks>
+        </member>
+        <member name="P:QtSensors.QLightReading.Lux">
+            <summary>
+            <para>This property holds the light level.</para>
+            <para>Measured as lux.</para>
+            <para>See also QLightReading Units.</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QLightFilter">
+            <summary>
+            <para>The QLightFilter class is a convenience wrapper around QSensorFilter.</para>
+            </summary>
+            <remarks>
+            <para>The only difference is that the filter() method features a pointer to QLightReading instead of QSensorReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QLightFilter.Filter(QtSensors.QLightReading)">
+            <summary>
+            <para>Called when reading changes. Returns false to prevent the reading from propagating.</para>
+            <para>See also QSensorFilter::filter().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QLightSensor">
+            <summary>
+            <para>The QLightSensor class is a convenience wrapper around QSensor.</para>
+            </summary>
+            <remarks>
+            <para>The only behavioural difference is that this class sets the type properly.</para>
+            <para>This class also features a reading() function that returns a QLightReading instead of a QSensorReading.</para>
+            <para>For details about how the sensor works, see QLightReading.</para>
+            <para></para>
+            <para>See also QLightReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QLightSensor.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Construct the sensor as a child of parent.</para>
+            </summary>
+        </member>
+        <member name="E:QtSensors.QLightSensor.FieldOfViewChanged">
+            <summary>
+            <para>This property holds a value indicating the field of view.</para>
+            <para>This is an angle that represents the field of view of the sensor.</para>
+            <para>Not all light sensor support retrieving their field of view. For sensors that don't support this property, the value will be 0. Whether the field of view is supported can be checked with QSensor::isFeatureSupported() and the QSensor::FieldOfView flag.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> qreal 	fieldOfView() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	fieldOfViewChanged(qreal fieldOfView)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QLightSensor.FieldOfView">
+            <summary>
+            <para>This property holds a value indicating the field of view.</para>
+            <para>This is an angle that represents the field of view of the sensor.</para>
+            <para>Not all light sensor support retrieving their field of view. For sensors that don't support this property, the value will be 0. Whether the field of view is supported can be checked with QSensor::isFeatureSupported() and the QSensor::FieldOfView flag.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QLightSensor.Reading">
+            <summary>
+            <para>Returns the reading class for this sensor.</para>
+            <para>See also QSensor::reading().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QMagnetometerReading">
+            <summary>
+            <para>The QMagnetometerReading class represents one reading from the magnetometer.</para>
+            </summary>
+            <remarks>
+            <para>QMagnetometerReading Units</para>
+            <para>The magnetometer returns magnetic flux density values along 3 axes. The scale of the values is teslas. The axes are arranged as follows.</para>
+            <para></para>
+            <para>The magnetometer can report on either raw magnetic flux values or geomagnetic flux values. By default it returns raw magnetic flux values. The QMagnetometer::returnGeoValues property must be set to return geomagnetic flux values.</para>
+            <para>The primary difference between raw and geomagnetic values is that extra processing is done to eliminate local magnetic interference from the geomagnetic values so they represent only the effect of the Earth's magnetic field. This process is not perfect and the accuracy of each reading may change.</para>
+            <para>The image below shows the difference between geomagnetic (on the left) and raw (on the right) readings for a phone that is being subjected to magnetic interference.</para>
+            <para></para>
+            <para>The accuracy of each reading is measured as a number from 0 to 1. A value of 1 is the highest level that the device can support and 0 is the worst.</para>
+            <para></para>
+            <para>See also CS001671 - Calibrating the magnetometer sensor.</para>
+            </remarks>
+        </member>
+        <member name="P:QtSensors.QMagnetometerReading.X">
+            <summary>
+            <para>This property holds the raw magnetic flux density on the X axis.</para>
+            <para>Measured as teslas.</para>
+            <para>See also QMagnetometerReading Units.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QMagnetometerReading.Y">
+            <summary>
+            <para>This property holds the raw magnetic flux density on the Y axis.</para>
+            <para>Measured as teslas.</para>
+            <para>See also QMagnetometerReading Units.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QMagnetometerReading.Z">
+            <summary>
+            <para>This property holds the raw magnetic flux density on the Z axis.</para>
+            <para>Measured as teslas.</para>
+            <para>See also QMagnetometerReading Units.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QMagnetometerReading.CalibrationLevel">
+            <summary>
+            <para>This property holds the accuracy of the reading.</para>
+            <para>Measured as a value from 0 to 1 with higher values being better.</para>
+            <para>Note that this only changes when measuring geomagnetic flux density. Raw magnetic flux readings will always have a value of 1.</para>
+            <para>See also QMagnetometerReading Units and CS001671 - Calibrating the magnetometer sensor.</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QMagnetometerFilter">
+            <summary>
+            <para>The QMagnetometerFilter class is a convenience wrapper around QSensorFilter.</para>
+            </summary>
+            <remarks>
+            <para>The only difference is that the filter() method features a pointer to QMagnetometerReading instead of QSensorReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QMagnetometerFilter.Filter(QtSensors.QMagnetometerReading)">
+            <summary>
+            <para>Called when reading changes. Returns false to prevent the reading from propagating.</para>
+            <para>See also QSensorFilter::filter().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QMagnetometer">
+            <summary>
+            <para>The QMagnetometer class is a convenience wrapper around QSensor.</para>
+            </summary>
+            <remarks>
+            <para>The only behavioural difference is that this class sets the type properly.</para>
+            <para>This class also features a reading() function that returns a QMagnetometerReading instead of a QSensorReading.</para>
+            <para>For details about how the sensor works, see QMagnetometerReading.</para>
+            <para></para>
+            <para>See also QMagnetometerReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QMagnetometer.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Construct the sensor as a child of parent.</para>
+            </summary>
+        </member>
+        <member name="E:QtSensors.QMagnetometer.ReturnGeoValuesChanged">
+            <summary>
+            <para>This property holds a value indicating if geomagnetic values should be returned.</para>
+            <para>Set to true to return geomagnetic flux density. Set to false (the default) to return raw magnetic flux density.</para>
+            <para>The property must be set before calling start().</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	returnGeoValues() const</para>
+            <para> void 	setReturnGeoValues(bool returnGeoValues)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	returnGeoValuesChanged(bool returnGeoValues)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QMagnetometer.ReturnGeoValues">
+            <summary>
+            <para>This property holds a value indicating if geomagnetic values should be returned.</para>
+            <para>Set to true to return geomagnetic flux density. Set to false (the default) to return raw magnetic flux density.</para>
+            <para>The property must be set before calling start().</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QMagnetometer.Reading">
+            <summary>
+            <para>Returns the reading class for this sensor.</para>
+            <para>See also QSensor::reading().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QOrientationReading">
+            <summary>
+            <para>The QOrientationReading class represents one reading from the orientation sensor.</para>
+            </summary>
+            <remarks>
+            <para>The orientation sensor reports the orientation of the device. As it operates below the UI level it does not report on or even know how the UI is rotated. Most importantly this means that this sensor cannot be used to detect if a device is in portrait or landscape mode.</para>
+            <para>This sensor is useful to detect that a particular side of the device is pointing up.</para>
+            <para></para>
+            <para>QOrientationReading Units</para>
+            <para>The orientation sensor returns the orientation of the device using the pre-defined values found in the QOrientationReading::Orientation enum.</para>
+            </remarks>
+        </member>
+        <member name="P:QtSensors.QOrientationReading.orientation">
+            <summary>
+            <para>This property holds the orientation of the device.</para>
+            <para>The unit is an enumeration describing the orientation of the device.</para>
+            <para>See also QOrientationReading Units.</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QOrientationReading.Orientation">
+            <summary>
+            <para>This enum represents the orientation of the device.</para>
+            <para>To explain the meaning of each value it is helpful to refer to the following diagram.</para>
+            <para></para>
+            <para>The orientations are shown here in order: TopUp, TopDown, LeftUp, RightUp, FaceUp, FaceDown.</para>
+            <para>It should be noted that the orientation sensor reports the orientation of the device and not the UI. The orientation of the device will not change just because the UI is rotated. This means this sensor cannot be used to detect if a device is in portrait or landscape mode.</para>
+            </summary>
+        </member>
+        <member name="F:QtSensors.QOrientationReading.Orientation.Undefined">
+            <summary>The orientation is unknown.</summary>
+        </member>
+        <member name="F:QtSensors.QOrientationReading.Orientation.TopUp">
+            <summary>The Top edge of the device is pointing up.</summary>
+        </member>
+        <member name="F:QtSensors.QOrientationReading.Orientation.TopDown">
+            <summary>The Top edge of the device is pointing down.</summary>
+        </member>
+        <member name="F:QtSensors.QOrientationReading.Orientation.LeftUp">
+            <summary>The Left edge of the device is pointing up.</summary>
+        </member>
+        <member name="F:QtSensors.QOrientationReading.Orientation.RightUp">
+            <summary>The Right edge of the device is pointing up.</summary>
+        </member>
+        <member name="F:QtSensors.QOrientationReading.Orientation.FaceUp">
+            <summary>The Face of the device is pointing up.</summary>
+        </member>
+        <member name="F:QtSensors.QOrientationReading.Orientation.FaceDown">
+            <summary>The Face of the device is pointing down.</summary>
+        </member>
+        <member name="T:QtSensors.QOrientationFilter">
+            <summary>
+            <para>The QOrientationFilter class is a convenience wrapper around QSensorFilter.</para>
+            </summary>
+            <remarks>
+            <para>The only difference is that the filter() method features a pointer to QOrientationReading instead of QSensorReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QOrientationFilter.Filter(QtSensors.QOrientationReading)">
+            <summary>
+            <para>Called when reading changes. Returns false to prevent the reading from propagating.</para>
+            <para>See also QSensorFilter::filter().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QOrientationSensor">
+            <summary>
+            <para>The QOrientationSensor class is a convenience wrapper around QSensor.</para>
+            </summary>
+            <remarks>
+            <para>The only behavioural difference is that this class sets the type properly.</para>
+            <para>This class also features a reading() function that returns a QOrientationReading instead of a QSensorReading.</para>
+            <para>For details about how the sensor works, see QOrientationReading.</para>
+            <para></para>
+            <para>See also QOrientationReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QOrientationSensor.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Construct the sensor as a child of parent.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QOrientationSensor.Reading">
+            <summary>
+            <para>Returns the reading class for this sensor.</para>
+            <para>See also QSensor::reading().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QPressureReading">
+            <summary>
+            <para>The QPressureReading class holds readings from the pressure sensor.</para>
+            </summary>
+            <remarks>
+            <para>QPressureReading Units</para>
+            <para>The pressure sensor returns atmospheric pressure values in Pascals.</para>
+            </remarks>
+        </member>
+        <member name="P:QtSensors.QPressureReading.Pressure">
+            <summary>
+            <para>This property holds the measured atmospheric pressure.</para>
+            <para>Returned as Pascals.</para>
+            <para>See also QPressureReading Units.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QPressureReading.Temperature">
+            <summary>
+            <para>This property holds the pressure sensor's temperature.</para>
+            <para>The temperature is returned in degree Celsius. This property, if supported, provides the pressure sensor die temperature. Note that this temperature may be (and usually is) different than the temperature reported from QAmbientTemperatureSensor. Use QSensor::isFeatureSupported() with the QSensor::PressureSensorTemperature flag to determine its availability.</para>
+            <para>This property was introduced in  Qt 5.2.</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QPressureFilter">
+            <summary>
+            <para>The QPressureFilter class is a convenience wrapper around QSensorFilter.</para>
+            </summary>
+            <remarks>
+            <para>The only difference is that the filter() method features a pointer to QPressureReading instead of QSensorReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QPressureFilter.Filter(QtSensors.QPressureReading)">
+            <summary>
+            <para>Called when reading changes. Returns false to prevent the reading from propagating.</para>
+            <para>See also QSensorFilter::filter().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QPressureSensor">
+            <summary>
+            <para>The QPressureSensor class is a convenience wrapper around QSensor.</para>
+            </summary>
+            <remarks>
+            <para>The only behavioural difference is that this class sets the type properly.</para>
+            <para>This class also features a reading() function that returns a QPressureReading instead of a QSensorReading.</para>
+            <para>For details about how the sensor works, see QPressureReading.</para>
+            <para></para>
+            <para>See also QPressureReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QPressureSensor.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Construct the sensor as a child of parent.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QPressureSensor.Reading">
+            <summary>
+            <para>Returns the reading class for this sensor.</para>
+            <para>See also QSensor::reading().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QProximityReading">
+            <summary>
+            <para>The QProximityReading class represents one reading from the proximity sensor.</para>
+            </summary>
+            <remarks>
+            <para>The proximity sensor can only indicate if an object is close or not.</para>
+            <para>The distance at which an object is considered close is device-specific. This distance may be available in the QSensor::outputRanges property.</para>
+            </remarks>
+        </member>
+        <member name="P:QtSensors.QProximityReading.Close">
+            <summary>
+            <para>This property holds a value indicating if something is close.</para>
+            <para>Set to true if something is close. Set to false is nothing is close.</para>
+            <para>See also QProximityReading_Units.</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QProximityFilter">
+            <summary>
+            <para>The QProximityFilter class is a convenience wrapper around QSensorFilter.</para>
+            </summary>
+            <remarks>
+            <para>The only difference is that the filter() method features a pointer to QProximityReading instead of QSensorReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QProximityFilter.Filter(QtSensors.QProximityReading)">
+            <summary>
+            <para>Called when reading changes. Returns false to prevent the reading from propagating.</para>
+            <para>See also QSensorFilter::filter().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QProximitySensor">
+            <summary>
+            <para>The QProximitySensor class is a convenience wrapper around QSensor.</para>
+            </summary>
+            <remarks>
+            <para>The only behavioural difference is that this class sets the type properly.</para>
+            <para>This class also features a reading() function that returns a QProximityReading instead of a QSensorReading.</para>
+            <para>For details about how the sensor works, see QProximityReading.</para>
+            <para></para>
+            <para>See also QProximityReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QProximitySensor.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Construct the sensor as a child of parent.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QProximitySensor.Reading">
+            <summary>
+            <para>Returns the reading class for this sensor.</para>
+            <para>See also QSensor::reading().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QRotationReading">
+            <summary>
+            <para>The QRotationReading class represents one reading from the rotation sensor.</para>
+            </summary>
+            <remarks>
+            <para>QRotationReading Units</para>
+            <para>The rotation reading contains 3 angles, measured in degrees that define the orientation of the device in three-dimensional space. These angles are similar to yaw, pitch and roll but are defined using only right hand rotation with axes as defined by the right hand cartesian coordinate system.</para>
+            <para></para>
+            <para>The three angles are applied to the device in the following order.</para>
+            <para></para>
+            <para>Right-handed rotation z (-180, 180]. Starting from the y-axis and incrementing in the counter-clockwise direction.</para>
+            <para>Right-handed rotation x [-90, 90]. Starting from the new (once-rotated) y-axis and incrementing towards the z-axis.</para>
+            <para>Right-handed rotation y (-180, 180]. Starting from the new (twice-rotated) z-axis and incrementing towards the x-axis.</para>
+            <para></para>
+            <para>Here is a visualization showing the order in which angles are applied.</para>
+            <para></para>
+            <para>The 0 point for the z angle is defined as a fixed, external entity and is device-specific. While magnetic North is typically used as this reference point it may not be. Do not attempt to compare values for the z angle between devices or even on the same device if it has moved a significant distance.</para>
+            <para>If the device cannot detect a fixed, external entity the z angle will always be 0 and the QRotationSensor::hasZ property will be set to false.</para>
+            <para>The 0 point for the x and y angles are defined as when the x and y axes of the device are oriented towards the horizon. Here is an example of how the x value will change with device movement.</para>
+            <para></para>
+            <para>Here is an example of how the y value will change with device movement.</para>
+            <para></para>
+            <para>Note that when x is 90 or -90, values for z and y achieve rotation around the same axis (due to the order of operations). In this case the y rotation will be 0.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QRotationReading.SetFromEuler(System.Double,System.Double,System.Double)">
+            <summary>
+            <para>Sets the rotation from three euler angles.</para>
+            <para>This is to be called from the backend.</para>
+            <para>The angles are measured in degrees. The order of the rotations matters, as first the z rotation is applied, then the x rotation and finally the y rotation.</para>
+            <para>This function was introduced in  Qt 5.0.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QRotationReading.X">
+            <summary>
+            <para>This property holds the rotation around the x axis.</para>
+            <para>Measured as degrees.</para>
+            <para>See also QRotationReading Units.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QRotationReading.Y">
+            <summary>
+            <para>This property holds the rotation around the y axis.</para>
+            <para>Measured as degrees.</para>
+            <para>See also QRotationReading Units.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QRotationReading.Z">
+            <summary>
+            <para>This property holds the rotation around the z axis.</para>
+            <para>Measured as degrees.</para>
+            <para>See also QRotationReading Units.</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QRotationFilter">
+            <summary>
+            <para>The QRotationFilter class is a convenience wrapper around QSensorFilter.</para>
+            </summary>
+            <remarks>
+            <para>The only difference is that the filter() method features a pointer to QRotationReading instead of QSensorReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QRotationFilter.Filter(QtSensors.QRotationReading)">
+            <summary>
+            <para>Called when reading changes. Returns false to prevent the reading from propagating.</para>
+            <para>See also QSensorFilter::filter().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QRotationSensor">
+            <summary>
+            <para>The QRotationSensor class is a convenience wrapper around QSensor.</para>
+            </summary>
+            <remarks>
+            <para>The only behavioural difference is that this class sets the type properly.</para>
+            <para>This class also features a reading() function that returns a QRotationReading instead of a QSensorReading.</para>
+            <para>For details about how the sensor works, see QRotationReading.</para>
+            <para></para>
+            <para>See also QRotationReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QRotationSensor.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Construct the sensor as a child of parent.</para>
+            </summary>
+        </member>
+        <member name="E:QtSensors.QRotationSensor.HasZChanged">
+            <summary>
+            <para>This property holds a value indicating if the z angle is available.</para>
+            <para>Returns true if z is available. Returns false if z is not available.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	hasZ() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	hasZChanged(bool hasZ)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QRotationSensor.HasZ">
+            <summary>
+            <para>This property holds a value indicating if the z angle is available.</para>
+            <para>Returns true if z is available. Returns false if z is not available.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QRotationSensor.Reading">
+            <summary>
+            <para>Returns the reading class for this sensor.</para>
+            <para>See also QSensor::reading().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QSensorManager">
+            <summary>
+            <para>The QSensorManager class handles registration and creation of sensor backends.</para>
+            </summary>
+            <remarks>
+            <para>Sensor plugins register backends using the registerBackend() function.</para>
+            <para>When QSensor::connectToBackend() is called, the createBackend() function will be called.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QSensorManager.RegisterBackend(QtCore.QByteArray,QtCore.QByteArray,QtSensors.QSensorBackendFactory)">
+            <summary>
+            <para>Register a sensor for type. The identifier must be unique.</para>
+            <para>The factory will be asked to create instances of the backend.</para>
+            </summary>
+        </member>
+        <member name="M:QtSensors.QSensorManager.UnregisterBackend(QtCore.QByteArray,QtCore.QByteArray)">
+            <summary>
+            <para>Unregister the backend for type with identifier.</para>
+            <para>Note that this only prevents new instance of the backend from being created. It does not invalidate the existing instances of the backend. The backend code should handle the disappearance of the underlying hardware itself.</para>
+            </summary>
+        </member>
+        <member name="M:QtSensors.QSensorManager.IsBackendRegistered(QtCore.QByteArray,QtCore.QByteArray)">
+            <summary>
+            <para>Returns true if the backend identified by type and identifier is registered.</para>
+            <para>This is a convenience method that helps out plugins doing dynamic registration.</para>
+            </summary>
+        </member>
+        <member name="M:QtSensors.QSensorManager.CreateBackend(QtSensors.QSensor)">
+            <summary>
+            <para>Create a backend for sensor. Returns null if no suitable backend exists.</para>
+            </summary>
+        </member>
+        <member name="M:QtSensors.QSensorManager.SetDefaultBackend(QtCore.QByteArray,QtCore.QByteArray)">
+            <summary>
+            <para>Sets or overwrite the sensor type with the backend identifier.</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QSensorBackendFactory">
+            <summary>
+            <para>The QSensorBackendFactory class instantiates instances of QSensorBackend.</para>
+            </summary>
+            <remarks>
+            <para>This interface must be implemented in order to register a sensor backend.</para>
+            <para></para>
+            <para>See also Creating a sensor plugin.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QSensorBackendFactory.CreateBackend(QtSensors.QSensor)">
+            <summary>
+            <para>Instantiate a backend. If the factory handles multiple identifiers it should check with the sensor to see which one is requested.</para>
+            <para>If the factory cannot create a backend it should return 0.</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QSensorBackend">
+            <summary>
+            <para>The QSensorBackend class is a sensor implementation.</para>
+            </summary>
+            <remarks>
+            <para>Sensors on a device will be represented by sub-classes of QSensorBackend.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QSensorBackend.Start">
+            <summary>
+            <para>Start reporting values.</para>
+            </summary>
+        </member>
+        <member name="M:QtSensors.QSensorBackend.Stop">
+            <summary>
+            <para>Stop reporting values.</para>
+            </summary>
+        </member>
+        <member name="M:QtSensors.QSensorBackend.IsFeatureSupported(QtSensors.QSensor.Feature)">
+            <summary>
+            <para>Checks whether a feature is supported by this sensor backend.</para>
+            <para>This is the backend side of QSensor::isFeatureSupported(). Reimplement this function if the backend supports one of the additional sensor features of QSensor::Feature.</para>
+            <para>Returns whether the feature feature is supported by this backend. The default implementation returns false.</para>
+            <para>This function was introduced in  Qt 5.0.</para>
+            </summary>
+        </member>
+        <member name="M:QtSensors.QSensorBackend.AddDataRate(System.Double,System.Double)">
+            <summary>
+            <para>Add a data rate (consisting of min and max values) for the sensor.</para>
+            <para>Note that this function should be called from the constructor so that the information is available immediately.</para>
+            <para>See also QSensor::availableDataRates.</para>
+            </summary>
+        </member>
+        <member name="M:QtSensors.QSensorBackend.SetDataRates(QtSensors.QSensor)">
+            <summary>
+            <para>Set the data rates for the sensor based on otherSensor.</para>
+            <para>This is designed for sensors that are based on other sensors.</para>
+            <para></para>
+            <para></para>
+            <para>  setDataRates(otherSensor);</para>
+            <para></para>
+            <para></para>
+            <para>Note that this function must be called from the constructor.</para>
+            <para>See also QSensor::availableDataRates and addDataRate().</para>
+            </summary>
+        </member>
+        <member name="M:QtSensors.QSensorBackend.AddOutputRange(System.Double,System.Double,System.Double)">
+            <summary>
+            <para>Add an output range (consisting of min, max values and accuracy) for the sensor.</para>
+            <para>Note that this function should be called from the constructor so that the information is available immediately.</para>
+            <para>See also QSensor::outputRange and QSensor::outputRanges.</para>
+            </summary>
+        </member>
+        <member name="M:QtSensors.QSensorBackend.SetDescription(System.String)">
+            <summary>
+            <para>Set the description for the sensor.</para>
+            <para>Note that this function should be called from the constructor so that the information is available immediately.</para>
+            </summary>
+        </member>
+        <member name="M:QtSensors.QSensorBackend.NewReadingAvailable">
+            <summary>
+            <para>Notify the QSensor class that a new reading is available.</para>
+            </summary>
+        </member>
+        <member name="M:QtSensors.QSensorBackend.SensorStopped">
+            <summary>
+            <para>Inform the front end that the sensor has stopped. This can be due to start() failing or for some unexpected reason (eg. hardware failure).</para>
+            <para>Note that the front end must call QSensor::isActive() to see if the sensor has stopped. If the sensor has stopped due to an error the sensorError() function should be called to notify the class of the error condition.</para>
+            </summary>
+        </member>
+        <member name="M:QtSensors.QSensorBackend.SensorBusy">
+            <summary>
+            <para>Inform the front end that the sensor is busy. This implicitly calls sensorStopped() and is typically called from start().</para>
+            <para>Note that the front end must call QSensor::isBusy() to see if the sensor is busy. If the sensor has stopped due to an error the sensorError() function should be called to notify the class of the error condition.</para>
+            </summary>
+        </member>
+        <member name="M:QtSensors.QSensorBackend.SensorError(System.Int32)">
+            <summary>
+            <para>Inform the front end that a sensor error occurred. Note that this only reports an error code. It does not stop the sensor.</para>
+            <para>See also sensorStopped().</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensorBackend.Reading">
+            <summary>
+            <para>If the backend has lost its reference to the reading it can call this method to get the address.</para>
+            <para>Note that you will need to down-cast to the appropriate type.</para>
+            <para>See also setReading().</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensorBackend.Sensor">
+            <summary>
+            <para>Returns the sensor front end associated with this backend.</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QSensorPluginInterface">
+            <summary>
+            <para>The QSensorPluginInterface class is the pure virtual interface to sensor plugins.</para>
+            </summary>
+            <remarks>
+            <para>The QSensorPluginInterface class is implemented in sensor plugins to register sensor backends with QSensorManager.</para>
+            <para></para>
+            <para>See also Creating a sensor plugin.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QSensorPluginInterface.RegisterSensors">
+            <summary>
+            <para>This function is called when the plugin is loaded. The plugin should register sensor backends by calling QSensorManager::registerBackend(). Any backends that utilise other sensors should be registered in the QSensorPluginInterface::sensorsChanged() method instead.</para>
+            <para>See also Creating a sensor plugin.</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QSensorChangesInterface">
+            <summary>
+            <para>The QSensorChangesInterface class is the pure virtual interface to sensor plugins.</para>
+            </summary>
+            <remarks>
+            <para>The QSensorChangesInterface class is implemented in sensor plugins to receive notification that registered sensor backends have changed.</para>
+            <para></para>
+            <para>See also Creating a sensor plugin.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QSensorChangesInterface.SensorsChanged">
+            <summary>
+            <para>This function is called when the registered backends have changed. Any backends that depend on the presence of other sensors should be registered or unregistered in here.</para>
+            <para>See also Creating a sensor plugin.</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QTapReading">
+            <summary>
+            <para>The QTapReading class represents one reading from the tap sensor.</para>
+            </summary>
+            <remarks>
+            <para>QTapReading Units</para>
+            <para>The tap sensor registers tap events along the 3 axes that originate from the phone. The axes are arranged as follows.</para>
+            <para></para>
+            <para>By default it returns only double tap events. The QTapSensor::returnDoubleTapEvents property must be set to false to return individual tap events.</para>
+            </remarks>
+        </member>
+        <member name="P:QtSensors.QTapReading.tapDirection">
+            <summary>
+            <para>This property holds the direction of the tap.</para>
+            <para>See also QTapReading Units.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QTapReading.DoubleTap">
+            <summary>
+            <para>This property holds a value indicating if there was a single or double tap.</para>
+            <para></para>
+            <para>true - double tap</para>
+            <para>false - single tap</para>
+            <para></para>
+            <para>See also QTapReading Units.</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QTapReading.TapDirection">
+            <summary>
+            <para>The tap direction is indicated using flags. Applications should check for the presence of a particular flag as multiple flags may be set at once.</para>
+            <para>The X, Y and Z flags allow an app to check for taps along an axis without caring about the direction.</para>
+            <para></para>
+            <para></para>
+            <para>  if (reading-&gt;tapDirection()&amp;QTapReading::X) {</para>
+            <para>      ...</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
+            <para>The *_Pos and *_Neg flags allow checking for taps in a specific direction. Note that some devices cannot determine the direction of a tap and will set both the _Pos and _Neg flag for the detected axis. Previous versions of the API did not allow this. Applications that check for the _Pos and _Neg flags as values should be updated so they can work with all devices.</para>
+            <para>For example, if you have code like</para>
+            <para></para>
+            <para></para>
+            <para>  if (reading-&gt;tapDirection() == QTapReading::X_Pos) {</para>
+            <para>      ...</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
+            <para>you can rewrite it as</para>
+            <para></para>
+            <para></para>
+            <para>  if (reading-&gt;tapDirection()&amp;QTapReading::X_Pos) {</para>
+            <para>      ...</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="F:QtSensors.QTapReading.TapDirection.Undefined">
+            <summary>This value means that the direction is unknown.</summary>
+        </member>
+        <member name="F:QtSensors.QTapReading.TapDirection.X">
+            <summary>This flag is set if the tap was along the X axis.</summary>
+        </member>
+        <member name="F:QtSensors.QTapReading.TapDirection.Y">
+            <summary>This flag is set if the tap was along the Y axis.</summary>
+        </member>
+        <member name="F:QtSensors.QTapReading.TapDirection.Z">
+            <summary>This flag is set if the tap was along the Z axis.</summary>
+        </member>
+        <member name="F:QtSensors.QTapReading.TapDirection.X_Pos">
+            <summary>This flag is set if the tap was towards the positive X direction.</summary>
+        </member>
+        <member name="F:QtSensors.QTapReading.TapDirection.Y_Pos">
+            <summary>This flag is set if the tap was towards the positive Y direction.</summary>
+        </member>
+        <member name="F:QtSensors.QTapReading.TapDirection.Z_Pos">
+            <summary>This flag is set if the tap was towards the positive Z direction.</summary>
+        </member>
+        <member name="F:QtSensors.QTapReading.TapDirection.X_Neg">
+            <summary>This flag is set if the tap was towards the negative X direction.</summary>
+        </member>
+        <member name="F:QtSensors.QTapReading.TapDirection.Y_Neg">
+            <summary>This flag is set if the tap was towards the negative Y direction.</summary>
+        </member>
+        <member name="F:QtSensors.QTapReading.TapDirection.Z_Neg">
+            <summary>This flag is set if the tap was towards the negative Z direction.</summary>
+        </member>
+        <member name="F:QtSensors.QTapReading.TapDirection.X_Both">
+            <summary>Equivalent to X_Pos|X_Neg. Returned by devices that cannot detect the direction of a tap.</summary>
+        </member>
+        <member name="F:QtSensors.QTapReading.TapDirection.Y_Both">
+            <summary>Equivalent to Y_Pos|Y_Neg. Returned by devices that cannot detect the direction of a tap.</summary>
+        </member>
+        <member name="F:QtSensors.QTapReading.TapDirection.Z_Both">
+            <summary>Equivalent to Z_Pos|Z_Neg. Returned by devices that cannot detect the direction of a tap.</summary>
+        </member>
+        <member name="T:QtSensors.QTapFilter">
+            <summary>
+            <para>The QTapFilter class is a convenience wrapper around QSensorFilter.</para>
+            </summary>
+            <remarks>
+            <para>The only difference is that the filter() method features a pointer to QTapReading instead of QSensorReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QTapFilter.Filter(QtSensors.QTapReading)">
+            <summary>
+            <para>Called when reading changes. Returns false to prevent the reading from propagating.</para>
+            <para>See also QSensorFilter::filter().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QTapSensor">
+            <summary>
+            <para>The QTapSensor class is a convenience wrapper around QSensor.</para>
+            </summary>
+            <remarks>
+            <para>The only behavioural difference is that this class sets the type properly.</para>
+            <para>This class also features a reading() function that returns a QTapReading instead of a QSensorReading.</para>
+            <para>For details about how the sensor works, see QTapReading.</para>
+            <para></para>
+            <para>See also QTapReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QTapSensor.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Construct the sensor as a child of parent.</para>
+            </summary>
+        </member>
+        <member name="E:QtSensors.QTapSensor.ReturnDoubleTapEventsChanged">
+            <summary>
+            <para>This property holds a value indicating if double tap events should be reported.</para>
+            <para>Set to true (the default) to have the sensor report only on double tap events. Set to false to have the sensor report only on individual tap events.</para>
+            <para>It is not possible to have the sensor report both single and double tap events. If both are needed the app should create 2 sensor objects.</para>
+            <para>The property must be set before calling start().</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	returnDoubleTapEvents() const</para>
+            <para> void 	setReturnDoubleTapEvents(bool returnDoubleTapEvents)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	returnDoubleTapEventsChanged(bool returnDoubleTapEvents)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QTapSensor.ReturnDoubleTapEvents">
+            <summary>
+            <para>This property holds a value indicating if double tap events should be reported.</para>
+            <para>Set to true (the default) to have the sensor report only on double tap events. Set to false to have the sensor report only on individual tap events.</para>
+            <para>It is not possible to have the sensor report both single and double tap events. If both are needed the app should create 2 sensor objects.</para>
+            <para>The property must be set before calling start().</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QTapSensor.Reading">
+            <summary>
+            <para>Returns the reading class for this sensor.</para>
+            <para>See also QSensor::reading().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QTiltReading">
+            <summary>
+            <para>The QTiltReading class holds readings from the tilt sensor.</para>
+            </summary>
+            <remarks>
+            <para>The tilt sensor reports the angle of tilt in degrees of the device along the X and Y plane.</para>
+            </remarks>
+        </member>
+        <member name="P:QtSensors.QTiltReading.YRotation">
+            <summary>
+            <para>This property holds this property holds the amount of tilt on the Y axis.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QTiltReading.XRotation">
+            <summary>
+            <para>This property holds this property holds the amount of tilt on the X axis.</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QTiltFilter">
+            <summary>
+            <para>The QTiltFilter class is a convenience wrapper around QSensorFilter.</para>
+            </summary>
+            <remarks>
+            <para>The only difference is that the filter() method features a pointer to QTiltReading instead of QSensorReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QTiltFilter.Filter(QtSensors.QTiltReading)">
+            <summary>
+            <para>Called when reading changes. Returns false to prevent the reading from propagating.</para>
+            <para>See also QSensorFilter::filter().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QTiltSensor">
+            <summary>
+            <para>The QTiltSensor class is a convenience wrapper around QSensor.</para>
+            </summary>
+            <remarks>
+            <para>The only behavioural difference is that this class sets the type properly.QMetaObject::invokeMethod(backend(), &quot;calibrate&quot;);</para>
+            <para>This class also features a reading() function that returns a QTiltReading instead of a QSensorReading.</para>
+            <para>For details about how the sensor works, see QTiltReading.</para>
+            <para></para>
+            <para>See also QTiltReading.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QTiltSensor.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Construct the sensor as a child of parent.</para>
+            </summary>
+        </member>
+        <member name="M:QtSensors.QTiltSensor.Calibrate">
+            <summary>
+            <para>Calibrates the tilt sensor. Uses the current tilt angles as 0.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QTiltSensor.Reading">
+            <summary>
+            <para>Returns the reading class for this sensor.</para>
+            <para>See also QSensor::reading().</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QSensorGesture">
+            <summary>
+            <para>The QSensorGesture class represents one or more sensor gesture recognizers.</para>
+            </summary>
+            <remarks>
+            <para>In addition to the QSensorGesture::detected() signal, Sensor Gesture Recognizers can have their own specific signals, and may be discovered through QSensorGesture::gestureSignals().</para>
+            <para>Note that QSensorGesture uses a custom meta-object in order to provide recognizer-specific signals. This means it is not possible to sub-class QSensorGesture and use Q_OBJECT. Also qobject_cast&lt;QSensorGesture*&gt;(ptr) will not work.</para>
+            <para>You may use QSensorGestureManager to obtain the systems known sensor gesture ids.</para>
+            <para></para>
+            <para>See also QSensorGestureRecognizer and QSensorGestureManager.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QSensorGesture.#ctor(QtCore.QStringList,QtCore.QObject)">
+            <summary>
+            <para>Constructs the sensor gesture, and initializes the ids list of recognizers, with parent parent</para>
+            </summary>
+        </member>
+        <member name="M:QtSensors.QSensorGesture.StartDetection">
+            <summary>
+            <para>Starts the gesture detection routines in the recognizer.</para>
+            </summary>
+        </member>
+        <member name="M:QtSensors.QSensorGesture.StopDetection">
+            <summary>
+            <para>Stops the gesture detection routines.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensorGesture.IsActive">
+            <summary>
+            <para>Returns whether this gesture is active or not.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensorGesture.ValidIds">
+            <summary>
+            <para>Returns the gesture recognizer ids that were found.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensorGesture.InvalidIds">
+            <summary>
+            <para>Returns the gesture recognizer ids that were not found.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensorGesture.GestureSignals">
+            <summary>
+            <para>Returns all the possible gestures signals that may be emitted.</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QSensorGestureRecognizer">
+            <summary>
+            <para>The QSensorGestureRecognizer class is the base class for a sensor gesture recognizer.</para>
+            </summary>
+            <remarks>
+            <para>QSensorGesture recognizer developers should sub-class this to implement their own recognizer.</para>
+            <para>All sensor gesture recognizers have a detected(QString) signal. Implementors can use this and send recognizer specific gestures, such as detected(&quot;shake_left&quot;) or implement custom signals such as shakeLeft().</para>
+            <para>These custom signals will be available in the QSensorGesture object at runtime.</para>
+            <para></para>
+            <para>See also QSensorGestureRecognizer::gestureSignals().</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QSensorGestureRecognizer.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs the QSensorGestureRecognizer with parent as parent.</para>
+            </summary>
+        </member>
+        <member name="M:QtSensors.QSensorGestureRecognizer.StartBackend">
+            <summary>
+            <para>Calls QSensorGestureRecognizer::start() if the recognizer isn't already initialized. This is called by the QSensorGesture object, so please use that instead.</para>
+            <para>See also QSensorGesture::startDetection().</para>
+            </summary>
+        </member>
+        <member name="M:QtSensors.QSensorGestureRecognizer.StopBackend">
+            <summary>
+            <para>Calls QSensorGestureRecognizer::stop() if no other clients are using it. This is called by the QSensorGesture object, so please use that instead.</para>
+            <para>See also QSensorGesture::stopDetection().</para>
+            </summary>
+        </member>
+        <member name="M:QtSensors.QSensorGestureRecognizer.CreateBackend">
+            <summary>
+            <para>Calls QSensorGestureRecognizer::create() if the recognizer is valid.</para>
+            </summary>
+        </member>
+        <member name="M:QtSensors.QSensorGestureRecognizer.Create">
+            <summary>
+            <para>Called by QSensorGesture object constructor to create the recognizers backend.</para>
+            <para>Implementors would use this to instantiate QSensors and connect signals.</para>
+            </summary>
+        </member>
+        <member name="M:QtSensors.QSensorGestureRecognizer.Start">
+            <summary>
+            <para>Called by QSensorGesture::startDetection() to start this recognizer. Implementors should start the sensors. Returns true if the operation is successful.</para>
+            </summary>
+        </member>
+        <member name="E:QtSensors.QSensorGestureRecognizer.Detected">
+            <summary>
+            <para>Signals when the gestureId gesture has been recognized.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensorGestureRecognizer.Id">
+            <summary>
+            <para>Returns the identifier for this recognizer.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensorGestureRecognizer.IsActive">
+            <summary>
+            <para>Returns true if this recognizer is active, otherwise false.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensorGestureRecognizer.GestureSignals">
+            <summary>
+            <para>Returns a list of signals that this recognizer supports.</para>
+            <para>Note that all signals declared will be exported to the QSensorGesture object. If you need to use signals that are not exported, you should use a private class to do so.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensorGestureRecognizer.Stop">
+            <summary>
+            <para>Called by QSensorGesture::stopDetection() to stop this recognizer. Returns true if the call succeeds, otherwise false.</para>
+            <para>Implementors should stop the sensors.</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QSensorGestureManager">
+            <summary>
+            <para>The QSensorGestureManager class manages sensor gestures, registers and creates sensor gesture plugins.</para>
+            </summary>
+            <remarks>
+            <para>Sensor Gesture plugins register their recognizers using the registerSensorGestureRecognizer() function.</para>
+            <para></para>
+            <para></para>
+            <para>  // Create a QSensorGestureManager</para>
+            <para>      QSensorGestureManager gestureManager;</para>
+            <para></para>
+            <para>  // Get a list of known recognizers</para>
+            <para>      QStringList recognizersList = gestureManager.gestureIds();</para>
+            <para></para>
+            <para>  // Create a QSensorGeture object for each of those gesture recognizers</para>
+            <para>          QSensorGesture *gesture = new QSensorGesture( gestureManager.gestureIds(), this);</para>
+            <para>  // Connect the known signals up.</para>
+            <para>          connect(gesture, SIGNAL(detected(QString)), this, SLOT(gestureDetected(QString)));</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QSensorGestureManager.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs the QSensorGestureManager as a child of parent</para>
+            </summary>
+        </member>
+        <member name="M:QtSensors.QSensorGestureManager.RegisterSensorGestureRecognizer(QtSensors.QSensorGestureRecognizer)">
+            <summary>
+            <para>Registers the sensor recognizer recognizer for use. QSensorGestureManager retains ownership of the recognizer object. Returns true unless the gesture has already been registered, in which case the object is deleted.</para>
+            </summary>
+        </member>
+        <member name="M:QtSensors.QSensorGestureManager.RecognizerSignals(System.String)">
+            <summary>
+            <para>Returns the list of all the gesture signals for the registered gestureId gesture recognizer id.</para>
+            </summary>
+        </member>
+        <member name="M:QtSensors.QSensorGestureManager.SensorGestureRecognizer(System.String)">
+            <summary>
+            <para>Returns the sensor gesture object for the recognizer id.</para>
+            </summary>
+        </member>
+        <member name="E:QtSensors.QSensorGestureManager.NewSensorGestureAvailable">
+            <summary>
+            <para>Signals when a new sensor gesture becomes available for use.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensorGestureManager.GestureIds">
+            <summary>
+            <para>Returns the list of the currently registered gestures. Includes all the standard built-ins as well as available plugins.</para>
+            </summary>
+        </member>
+        <member name="T:QtSensors.QSensorGesturePluginInterface">
+            <summary>
+            <para>The QSensorGesturePluginInterface class is the pure virtual interface to sensor gesture plugins.</para>
+            </summary>
+            <remarks>
+            <para>The QSensorGesturePluginInterface class is implemented in sensor gesture plugins to register sensor gesture recognizers with QSensorGestureManager.</para>
+            <para></para>
+            <para>See also QtSensorGestures Plugins.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSensors.QSensorGesturePluginInterface.#ctor">
+            <summary>
+            <para>Construct the QSensorGesturePluginInterface.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensorGesturePluginInterface.SupportedIds">
+            <summary>
+            <para>Returns a list of the recognizer Id's that this plugin supports.</para>
+            </summary>
+        </member>
+        <member name="P:QtSensors.QSensorGesturePluginInterface.Name">
+            <summary>
+            <para>Returns this plugins name.</para>
+            </summary>
+        </member>
+    </members>
+</doc>

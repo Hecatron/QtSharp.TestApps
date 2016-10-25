@@ -35,19 +35,17 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CppSharp.Runtime, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\CppSharp.Runtime.dll</HintPath>
+    <Reference Include="QtCore.Sharp">
+      <HintPath>..\..\References\QtCore.Sharp.dll</HintPath>
     </Reference>
-    <Reference Include="QtCoreSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\QtCoreSharp.dll</HintPath>
+    <Reference Include="QtGui.Sharp">
+      <HintPath>..\..\References\QtGui.Sharp.dll</HintPath>
     </Reference>
-    <Reference Include="QtGuiSharp">
-      <HintPath>..\..\References\QtGuiSharp.dll</HintPath>
+    <Reference Include="QtWidgets.Sharp">
+      <HintPath>..\..\References\QtWidgets.Sharp.dll</HintPath>
     </Reference>
-    <Reference Include="QtWidgetsSharp">
-      <HintPath>..\..\References\QtWidgetsSharp.dll</HintPath>
+    <Reference Include="Std">
+      <HintPath>..\..\References\Std.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -66,16 +64,76 @@
     <Compile Include="Qt\QGuiApp.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\..\References\Qt3DCore-inlines.dll">
+      <Link>Qt3DCore-inlines.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\References\Qt3DExtras-inlines.dll">
+      <Link>Qt3DExtras-inlines.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\References\Qt3DInput-inlines.dll">
+      <Link>Qt3DInput-inlines.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\References\Qt3DLogic-inlines.dll">
+      <Link>Qt3DLogic-inlines.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\References\Qt3DQuick-inlines.dll">
+      <Link>Qt3DQuick-inlines.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\References\Qt3DQuickExtras-inlines.dll">
+      <Link>Qt3DQuickExtras-inlines.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\References\Qt3DRender-inlines.dll">
+      <Link>Qt3DRender-inlines.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\References\QtBluetooth-inlines.dll">
+      <Link>QtBluetooth-inlines.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\References\QtCharts-inlines.dll">
+      <Link>QtCharts-inlines.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\References\QtConcurrent-inlines.dll">
+      <Link>QtConcurrent-inlines.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\..\References\QtCore-inlines.dll">
       <Link>QtCore-inlines.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\References\QtDataVisualization-inlines.dll">
+      <Link>QtDataVisualization-inlines.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\References\QtDBus-inlines.dll">
+      <Link>QtDBus-inlines.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="..\..\References\QtDesigner-inlines.dll">
       <Link>QtDesigner-inlines.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\..\References\QtGamepad-inlines.dll">
+      <Link>QtGamepad-inlines.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\..\References\QtGui-inlines.dll">
       <Link>QtGui-inlines.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\References\QtHelp-inlines.dll">
+      <Link>QtHelp-inlines.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\References\QtLocation-inlines.dll">
+      <Link>QtLocation-inlines.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="..\..\References\QtMultimedia-inlines.dll">
@@ -98,6 +156,18 @@
       <Link>QtOpenGL-inlines.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\..\References\QtPositioning-inlines.dll">
+      <Link>QtPositioning-inlines.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\References\QtPrintSupport-inlines.dll">
+      <Link>QtPrintSupport-inlines.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\References\QtPurchasing-inlines.dll">
+      <Link>QtPurchasing-inlines.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\..\References\QtQml-inlines.dll">
       <Link>QtQml-inlines.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -106,32 +176,76 @@
       <Link>QtQuick-inlines.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\..\References\QtQuickControls2-inlines.dll">
+      <Link>QtQuickControls2-inlines.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\..\References\QtQuickWidgets-inlines.dll">
       <Link>QtQuickWidgets-inlines.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\References\QtScript-inlines.dll">
+      <Link>QtScript-inlines.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="..\..\References\QtScriptTools-inlines.dll">
       <Link>QtScriptTools-inlines.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\..\References\QtScxml-inlines.dll">
+      <Link>QtScxml-inlines.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\..\References\QtSensors-inlines.dll">
       <Link>QtSensors-inlines.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\References\QtSerialBus-inlines.dll">
+      <Link>QtSerialBus-inlines.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="..\..\References\QtSerialPort-inlines.dll">
       <Link>QtSerialPort-inlines.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\..\References\QtSql-inlines.dll">
+      <Link>QtSql-inlines.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\..\References\QtSvg-inlines.dll">
       <Link>QtSvg-inlines.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\References\QtTest-inlines.dll">
+      <Link>QtTest-inlines.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\References\QtWebChannel-inlines.dll">
+      <Link>QtWebChannel-inlines.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\References\QtWebSockets-inlines.dll">
+      <Link>QtWebSockets-inlines.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="..\..\References\QtWidgets-inlines.dll">
       <Link>QtWidgets-inlines.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\..\References\QtWinExtras-inlines.dll">
+      <Link>QtWinExtras-inlines.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\..\References\QtXml-inlines.dll">
       <Link>QtXml-inlines.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\References\QtXmlPatterns-inlines.dll">
+      <Link>QtXmlPatterns-inlines.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\References\Std-inlines.dll">
+      <Link>Std-inlines.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

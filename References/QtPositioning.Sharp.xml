@@ -1,0 +1,1633 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>QtPositioning.Sharp</name>
+    </assembly>
+    <members>
+        <member name="T:QtPositioning.QGeoAddress">
+            <summary>
+            <para>The QGeoAddress class represents an address of a QGeoLocation.</para>
+            </summary>
+            <remarks>
+            <para>The address' attributes are normalized to US feature names and can be mapped to the local feature levels (for example State matches &quot;Bundesland&quot; in Germany).</para>
+            <para>The address contains a text() for displaying purposes and additional properties to access the components of an address:</para>
+            <para></para>
+            <para>QGeoAddress::country()</para>
+            <para>QGeoAddress::countryCode()</para>
+            <para>QGeoAddress::state()</para>
+            <para>QGeoAddress::city()</para>
+            <para>QGeoAddress::district()</para>
+            <para>QGeoAddress::street()</para>
+            <para>QGeoAddress::postalCode()</para>
+            </remarks>
+        </member>
+        <member name="M:QtPositioning.QGeoAddress.#ctor">
+            <summary>
+            <para>Default constructor.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoAddress.#ctor(QtPositioning.QGeoAddress)">
+            <summary>
+            <para>Constructs a copy of other.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoAddress.op_Equality(QtPositioning.QGeoAddress,QtPositioning.QGeoAddress)">
+            <summary>
+            <para>Returns true if this address is equal to other, otherwise returns false.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoAddress.op_Inequality(QtPositioning.QGeoAddress,QtPositioning.QGeoAddress)">
+            <summary>
+            <para>Returns true if this address is not equal to other, otherwise returns false.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoAddress.Clear">
+            <summary>
+            <para>Clears all of the address' data fields.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoAddress.Text">
+            <summary>
+            <para>Returns the address as a single formatted string. It is the recommended string to use to display the address to the user. It typically takes the format of an address as found on an envelope, but this is not always necessarily the case.</para>
+            <para>The address text is either automatically generated or explicitly assigned. This can be determined by checking isTextGenerated.</para>
+            <para>If an empty string is provided to setText(), then isTextGenerated() will be set to true and text() will return a string which is locally formatted according to countryCode() and based on the elements of the address such as street, city and so on. Because the text string is generated from the address elements, a sequence of calls such as text(), setStreet(), text() may return different strings for each invocation of text().</para>
+            <para>If a non-empty string is provided to setText(), then isTextGenerated() will be set to false and text() will always return the explicitly assigned string. Calls to modify other elements such as setStreet(), setCity() and so on will not affect the resultant string from text().</para>
+            <para>See also setText().</para>
+            <para></para>
+            <para>If text is not empty, explicitly assigns text as the string to be returned by text(). isTextGenerated() will return false.</para>
+            <para>If text is empty, indicates that text() should be automatically generated from the address elements. isTextGenerated() will return true.</para>
+            <para>See also text().</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoAddress.Country">
+            <summary>
+            <para>Returns the country name.</para>
+            <para>See also setCountry().</para>
+            <para></para>
+            <para>Sets the country name.</para>
+            <para>See also country().</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoAddress.CountryCode">
+            <summary>
+            <para>Returns the country code according to ISO 3166-1 alpha-3</para>
+            <para>See also setCountryCode().</para>
+            <para></para>
+            <para>Sets the countryCode according to ISO 3166-1 alpha-3</para>
+            <para>See also countryCode().</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoAddress.State">
+            <summary>
+            <para>Returns the state. The state is considered the first subdivision below country.</para>
+            <para>See also setState().</para>
+            <para></para>
+            <para>Sets the state.</para>
+            <para>See also state().</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoAddress.County">
+            <summary>
+            <para>Returns the county. The county is considered the second subdivision below country.</para>
+            <para>See also setCounty().</para>
+            <para></para>
+            <para>Sets the county.</para>
+            <para>See also county().</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoAddress.City">
+            <summary>
+            <para>Returns the city.</para>
+            <para>See also setCity().</para>
+            <para></para>
+            <para>Sets the city.</para>
+            <para>See also city().</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoAddress.District">
+            <summary>
+            <para>Returns the district. The district is considered the subdivison below city.</para>
+            <para>See also setDistrict().</para>
+            <para></para>
+            <para>Sets the district.</para>
+            <para>See also district().</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoAddress.PostalCode">
+            <summary>
+            <para>Returns the postal code.</para>
+            <para>See also setPostalCode().</para>
+            <para></para>
+            <para>Sets the postalCode.</para>
+            <para>See also postalCode().</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoAddress.Street">
+            <summary>
+            <para>Returns the street-level component of the address.</para>
+            <para>This typically includes a street number and street name but may also contain things like a unit number, a building name, or anything else that might be used to distinguish one address from another.</para>
+            <para>See also setStreet().</para>
+            <para></para>
+            <para>Sets the street-level component of the address to street.</para>
+            <para>This typically includes a street number and street name but may also contain things like a unit number, a building name, or anything else that might be used to distinguish one address from another.</para>
+            <para>See also street().</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoAddress.IsEmpty">
+            <summary>
+            <para>Returns whether this address is empty. An address is considered empty if all of its fields are empty.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoAddress.IsTextGenerated">
+            <summary>
+            <para>Returns true if QGeoAddress::text() is automatically generated from address elements, otherwise returns false if text() has been explicitly assigned.</para>
+            <para>See also text() and setText().</para>
+            </summary>
+        </member>
+        <member name="T:QtPositioning.QGeoCoordinate">
+            <summary>
+            <para>The QGeoCoordinate class defines a geographical position on the surface of the Earth.</para>
+            </summary>
+            <remarks>
+            <para>A QGeoCoordinate is defined by latitude, longitude, and optionally, altitude.</para>
+            <para>Use type() to determine whether a coordinate is a 2D coordinate (has latitude and longitude only) or 3D coordinate (has latitude, longitude and altitude). Use distanceTo() and azimuthTo() to calculate the distance and bearing between coordinates.</para>
+            <para>The coordinate values should be specified using the WGS84 datum. For more information on geographical terms see this article on coordinates and another on geodetic systems including WGS84.</para>
+            <para>Azimuth in this context is equivalent to a compass bearing based on true north.</para>
+            <para>This class is a Q_GADGET since Qt 5.5. It can be directly used from C++ and QML.</para>
+            </remarks>
+        </member>
+        <member name="M:QtPositioning.QGeoCoordinate.#ctor">
+            <summary>
+            <para>Constructs a coordinate. The coordinate will be invalid until setLatitude() and setLongitude() have been called.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoCoordinate.#ctor(System.Double,System.Double)">
+            <summary>
+            <para>Constructs a coordinate with the given latitude and longitude.</para>
+            <para>If the latitude is not between -90 to 90 inclusive, or the longitude is not between -180 to 180 inclusive, none of the values are set and the type() will be QGeoCoordinate::InvalidCoordinate.</para>
+            <para>See also isValid().</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoCoordinate.#ctor(System.Double,System.Double,System.Double)">
+            <summary>
+            <para>Constructs a coordinate with the given latitude, longitude and altitude.</para>
+            <para>If the latitude is not between -90 to 90 inclusive, or the longitude is not between -180 to 180 inclusive, none of the values are set and the type() will be QGeoCoordinate::InvalidCoordinate.</para>
+            <para>Note that altitude specifies the meters above sea level.</para>
+            <para>See also isValid().</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoCoordinate.#ctor(QtPositioning.QGeoCoordinate)">
+            <summary>
+            <para>Constructs a coordinate from the contents of other.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoCoordinate.op_Equality(QtPositioning.QGeoCoordinate,QtPositioning.QGeoCoordinate)">
+            <summary>
+            <para>Returns true if the latitude, longitude and altitude of this coordinate are the same as those of other.</para>
+            <para>The longitude will be ignored if the latitude is +/- 90 degrees.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoCoordinate.op_Inequality(QtPositioning.QGeoCoordinate,QtPositioning.QGeoCoordinate)">
+            <summary>
+            <para>Returns true if the latitude, longitude or altitude of this coordinate are not the same as those of other.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoCoordinate.DistanceTo(QtPositioning.QGeoCoordinate)">
+            <summary>
+            <para>Returns the distance (in meters) from this coordinate to the coordinate specified by other. Altitude is not used in the calculation.</para>
+            <para>This calculation returns the great-circle distance between the two coordinates, with an assumption that the Earth is spherical for the purpose of this calculation.</para>
+            <para>Returns 0 if the type of this coordinate or the type of other is QGeoCoordinate::InvalidCoordinate.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoCoordinate.AzimuthTo(QtPositioning.QGeoCoordinate)">
+            <summary>
+            <para>Returns the azimuth (or bearing) in degrees from this coordinate to the coordinate specified by other. Altitude is not used in the calculation.</para>
+            <para>The bearing returned is the bearing from the origin to other along the great-circle between the two coordinates. There is an assumption that the Earth is spherical for the purpose of this calculation.</para>
+            <para>Returns 0 if the type of this coordinate or the type of other is QGeoCoordinate::InvalidCoordinate.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoCoordinate.AtDistanceAndAzimuth(System.Double,System.Double,System.Double)">
+            <summary>
+            <para>Returns the coordinate that is reached by traveling distance meters from the current coordinate at azimuth (or bearing) along a great-circle. There is an assumption that the Earth is spherical for the purpose of this calculation.</para>
+            <para>The altitude will have distanceUp added to it.</para>
+            <para>Returns an invalid coordinate if this coordinate is invalid.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoCoordinate.ToString(QtPositioning.QGeoCoordinate.CoordinateFormat)">
+            <summary>
+            <para>Returns this coordinate as a string in the specified format.</para>
+            <para>For example, if this coordinate has a latitude of -27.46758, a longitude of 153.027892 and an altitude of 28.1, these are the strings returned depending on format:</para>
+            <para></para>
+            <para> format valueReturned string</para>
+            <para>Degrees	-27.46758&#176;, 153.02789&#176;, 28.1m</para>
+            <para>DegreesWithHemisphere	27.46758&#176; S, 153.02789&#176; E, 28.1m</para>
+            <para>DegreesMinutes	-27&#176; 28.054', 153&#176; 1.673', 28.1m</para>
+            <para>DegreesMinutesWithHemisphere	27&#176; 28.054 S', 153&#176; 1.673' E, 28.1m</para>
+            <para>DegreesMinutesSeconds	-27&#176; 28' 3.2&quot;, 153&#176; 1' 40.4&quot;, 28.1m</para>
+            <para>DegreesMinutesSecondsWithHemisphere	27&#176; 28' 3.2&quot; S, 153&#176; 1' 40.4&quot; E, 28.1m</para>
+            <para></para>
+            <para>The altitude field is omitted if no altitude is set.</para>
+            <para>If the coordinate is invalid, an empty string is returned.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoCoordinate.Latitude">
+            <summary>
+            <para>This property holds this property holds the latitude in decimal degrees.</para>
+            <para>The property is undefined (qQNaN()) if the latitude has not been set. A positive latitude indicates the Northern Hemisphere, and a negative latitude indicates the Southern Hemisphere. When setting the latitude the new value should be in the WGS84 datum format.</para>
+            <para>To be valid, the latitude must be between -90 to 90 inclusive.</para>
+            <para>While this property is introduced in Qt 5.5, the related accessor functions exist since the first version of this class.</para>
+            <para>This property was introduced in  Qt 5.5.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoCoordinate.Longitude">
+            <summary>
+            <para>This property holds this property holds the longitude in decimal degrees.</para>
+            <para>The property is undefined (qQNaN()) if the longitude has not been set. A positive longitude indicates the Eastern Hemisphere, and a negative longitude indicates the Western Hemisphere. When setting the longitude the new value should be in the WGS84 datum format.</para>
+            <para>To be valid, the longitude must be between -180 to 180 inclusive.</para>
+            <para>While this property is introduced in Qt 5.5, the related accessor functions exist since the first version of this class.</para>
+            <para>This property was introduced in  Qt 5.5.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoCoordinate.Altitude">
+            <summary>
+            <para>This property holds this property holds the altitude in meters above sea level.</para>
+            <para>The property is undefined (qQNaN()) if the altitude has not been set.</para>
+            <para>While this property is introduced in Qt 5.5, the related accessor functions exist since the first version of this class.</para>
+            <para>This property was introduced in  Qt 5.5.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoCoordinate.IsValid">
+            <summary>
+            <para>This property holds this property holds the validity of this geo coordinate.</para>
+            <para>The geo coordinate is valid if the longitude and latitude properties have been set to valid values.</para>
+            <para>While this property is introduced in Qt 5.5, the related accessor functions exist since the first version of this class.</para>
+            <para>This property was introduced in  Qt 5.5.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoCoordinate.Type">
+            <summary>
+            <para>Returns the type of this coordinate.</para>
+            </summary>
+        </member>
+        <member name="T:QtPositioning.QGeoCoordinate.CoordinateType">
+            <summary>
+            <para>Defines the types of a coordinate.</para>
+            </summary>
+        </member>
+        <member name="F:QtPositioning.QGeoCoordinate.CoordinateType.InvalidCoordinate">
+            <summary>An invalid coordinate. A coordinate is invalid if its latitude or longitude values are invalid.</summary>
+        </member>
+        <member name="F:QtPositioning.QGeoCoordinate.CoordinateType.Coordinate2D">
+            <summary>A coordinate with valid latitude and longitude values.</summary>
+        </member>
+        <member name="F:QtPositioning.QGeoCoordinate.CoordinateType.Coordinate3D">
+            <summary>A coordinate with valid latitude and longitude values, and also an altitude value.</summary>
+        </member>
+        <member name="T:QtPositioning.QGeoCoordinate.CoordinateFormat">
+            <summary>
+            <para>Defines the possible formatting options for toString().</para>
+            <para>See also toString().</para>
+            </summary>
+        </member>
+        <member name="F:QtPositioning.QGeoCoordinate.CoordinateFormat.Degrees">
+            <summary>Returns a string representation of the coordinates in decimal degrees format.</summary>
+        </member>
+        <member name="F:QtPositioning.QGeoCoordinate.CoordinateFormat.DegreesWithHemisphere">
+            <summary>Returns a string representation of the coordinates in decimal degrees format, using 'N', 'S', 'E' or 'W' to indicate the hemispheres of the coordinates.</summary>
+        </member>
+        <member name="F:QtPositioning.QGeoCoordinate.CoordinateFormat.DegreesMinutes">
+            <summary>Returns a string representation of the coordinates in degrees-minutes format.</summary>
+        </member>
+        <member name="F:QtPositioning.QGeoCoordinate.CoordinateFormat.DegreesMinutesWithHemisphere">
+            <summary>Returns a string representation of the coordinates in degrees-minutes format, using 'N', 'S', 'E' or 'W' to indicate the hemispheres of the coordinates.</summary>
+        </member>
+        <member name="F:QtPositioning.QGeoCoordinate.CoordinateFormat.DegreesMinutesSeconds">
+            <summary>Returns a string representation of the coordinates in degrees-minutes-seconds format.</summary>
+        </member>
+        <member name="F:QtPositioning.QGeoCoordinate.CoordinateFormat.DegreesMinutesSecondsWithHemisphere">
+            <summary>Returns a string representation of the coordinates in degrees-minutes-seconds format, using 'N', 'S', 'E' or 'W' to indicate the hemispheres of the coordinates.</summary>
+        </member>
+        <member name="T:QtPositioning.QGeoShape">
+            <summary>
+            <para>The QGeoShape class defines a geographic area.</para>
+            </summary>
+            <remarks>
+            <para>This class is the base class for classes which specify a geographic area.</para>
+            <para>For the sake of consistency, subclasses should describe the specific details of the associated areas in terms of QGeoCoordinate instances and distances in meters.</para>
+            <para>This class is a Q_GADGET since Qt 5.5. It can be directly used from C++ and QML.</para>
+            </remarks>
+        </member>
+        <member name="M:QtPositioning.QGeoShape.#ctor">
+            <summary>
+            <para>Constructs a new invalid geo shape of UnknownType.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoShape.#ctor(QtPositioning.QGeoShape)">
+            <summary>
+            <para>Constructs a new geo shape which is a copy of other.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoShape.Contains(QtPositioning.QGeoCoordinate)">
+            <summary>
+            <para>Returns whether the coordinate coordinate is contained within this geo shape.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoShape.ExtendShape(QtPositioning.QGeoCoordinate)">
+            <summary>
+            <para>Extends the geo shape to also cover the coordinate coordinate</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoShape.op_Equality(QtPositioning.QGeoShape,QtPositioning.QGeoShape)">
+            <summary>
+            <para>Returns true if the other geo shape is equivalent to this geo shape, otherwise returns false.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoShape.op_Inequality(QtPositioning.QGeoShape,QtPositioning.QGeoShape)">
+            <summary>
+            <para>Returns true if the other geo shape is not equivalent to this geo shape, otherwise returns false.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoShape.ToString">
+            <summary>
+            <para>Returns a string representation of this geo shape.</para>
+            <para>This function was introduced in  Qt 5.5.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoShape.Type">
+            <summary>
+            <para>This property holds this property holds the type of this geo shape.</para>
+            <para>While this property is introduced in Qt 5.5, the related accessor functions exist since the first version of this class.</para>
+            <para>This property was introduced in  Qt 5.5.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoShape.IsValid">
+            <summary>
+            <para>This property holds this property holds the validity of the geo shape.</para>
+            <para>A geo shape is considered to be invalid if some of the data that is required to unambiguously describe the geo shape has not been set or has been set to an unsuitable value depending on the subclass of this object. The default constructed objects of this type are invalid.</para>
+            <para>While this property is introduced in Qt 5.5, the related accessor functions exist since the first version of this class.</para>
+            <para>This property was introduced in  Qt 5.5.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoShape.IsEmpty">
+            <summary>
+            <para>This property holds this property defines whether this geo shape is empty.</para>
+            <para>An empty geo shape is a region which has a geometrical area of 0.</para>
+            <para>While this property is introduced in Qt 5.5, the related accessor functions exist since the first version of this class.</para>
+            <para>This property was introduced in  Qt 5.5.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoShape.Center">
+            <summary>
+            <para>Returns the coordinate located at the geometric center of the geo shape.</para>
+            <para>This function was introduced in  Qt 5.5.</para>
+            </summary>
+        </member>
+        <member name="T:QtPositioning.QGeoShape.ShapeType">
+            <summary>
+            <para>Describes the type of the shape.</para>
+            </summary>
+        </member>
+        <member name="F:QtPositioning.QGeoShape.ShapeType.UnknownType">
+            <summary>A shape of unknown type.</summary>
+        </member>
+        <member name="F:QtPositioning.QGeoShape.ShapeType.RectangleType">
+            <summary>A rectangular shape.</summary>
+        </member>
+        <member name="F:QtPositioning.QGeoShape.ShapeType.CircleType">
+            <summary>A circular shape.</summary>
+        </member>
+        <member name="T:QtPositioning.QGeoAreaMonitorInfo">
+            <summary>
+            <para>The QGeoAreaMonitorInfo class describes the parameters of an area or region to be monitored for proximity.</para>
+            </summary>
+            <remarks>
+            <para>The purpose of area monitoring is to inform a user when he/she comes close to an area of interest. In general such an area is described by a QGeoCircle. The circle's center represents the place of interest and the area around it identifies the geographical region within which notifications are sent.</para>
+            <para>A QGeoAreaMonitorInfo object is valid if it has a non-empty name and a valid area(). Such objects must be registered with a QGeoAreaMonitorSource to start and stop the monitoring process. Note that extensive monitoring can be very resource consuming because the positioning engine must remain active and has to match the current position with each QGeoAreaMonitorInfo instance.</para>
+            <para>To further reduce the burden on the system there are optional attributes which can set. Each monitored area can have an expiry date which automatically removes the to-be-monitored area from the monitoring source once the expiry date has been reached. Another option is to adjust the persistence of a monitored area. A QGeoAreaMonitorInfo that isPersistent() will remain active beyond the current applications lifetime. If an area is entered while the monitoring application is not running the application will be started. Note that this feature is not available on all platforms. Its availability can be checked via QGeoAreaMonitorSource::supportedAreaMonitorFeatures().</para>
+            <para></para>
+            <para>See also QGeoAreaMonitorSource.</para>
+            </remarks>
+        </member>
+        <member name="M:QtPositioning.QGeoAreaMonitorInfo.#ctor(System.String)">
+            <summary>
+            <para>Constructs a QGeoAreaMonitorInfo object with the specified name.</para>
+            <para>See also name().</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoAreaMonitorInfo.#ctor(QtPositioning.QGeoAreaMonitorInfo)">
+            <summary>
+            <para>Constructs a QGeoAreaMonitorInfo object as a copy of other.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoAreaMonitorInfo.op_Equality(QtPositioning.QGeoAreaMonitorInfo,QtPositioning.QGeoAreaMonitorInfo)">
+            <summary>
+            <para>Returns true if all of this object's values are the same as those of other.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoAreaMonitorInfo.op_Inequality(QtPositioning.QGeoAreaMonitorInfo,QtPositioning.QGeoAreaMonitorInfo)">
+            <summary>
+            <para>Returns true if any of this object's values are not the same as those of other.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoAreaMonitorInfo.Name">
+            <summary>
+            <para>Returns the name of the QGeoAreaMonitorInfo object. The name should be used to for user-visibility purposes.</para>
+            <para>See also setName().</para>
+            <para></para>
+            <para>Sets the user visibile name.</para>
+            <para>See also name().</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoAreaMonitorInfo.Area">
+            <summary>
+            <para>Returns the boundaries of the to-be-monitored area. This area must not be empty.</para>
+            <para>See also setArea().</para>
+            <para></para>
+            <para>Sets the to-be-monitored area to newShape.</para>
+            <para>See also area().</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoAreaMonitorInfo.Expiration">
+            <summary>
+            <para>Returns the expiry date.</para>
+            <para>After an active QGeoAreaMonitorInfo has expired the region is no longer monitored and the QGeoAreaMonitorInfo object is removed from the list of active monitors.</para>
+            <para>If the expiry QDateTime is invalid the QGeoAreaMonitorInfo object is treated as not having an expiry date. This implies an indefinite monitoring period if the object is persistent or until the current application closes if the object is non-persistent.</para>
+            <para>See also setExpiration() and QGeoAreaMonitorSource::activeMonitors().</para>
+            <para></para>
+            <para>Sets the expiry date and time to expiry.</para>
+            <para>See also expiration().</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoAreaMonitorInfo.Persistent">
+            <summary>
+            <para>Returns true if the QGeoAreaMonitorInfo is persistent. The default value for this property is false.</para>
+            <para>A non-persistent QGeoAreaMonitorInfo will be removed by the system once the application owning the monitor object stops. Persistent objects remain active and can be retrieved once the application restarts.</para>
+            <para>If the system triggers an event associated to a persistent QGeoAreaMonitorInfo the relevant application will be re-started and the appropriate signal emitted.</para>
+            <para>See also setPersistent().</para>
+            <para></para>
+            <para>Sets the QGeoAreaMonitorInfo objects persistence to isPersistent.</para>
+            <para>Note that setting this flag does not imply that QGeoAreaMonitorInfoSource supports persistent monitoring. QGeoAreaMonitorSource::supportedAreaMonitorFeatures() can be used to check for this feature's availability.</para>
+            <para>See also isPersistent().</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoAreaMonitorInfo.Identifier">
+            <summary>
+            <para>Returns the identifier of the QGeoAreaMonitorInfo object. The identifier is automatically generated upon construction of a new QGeoAreaMonitorInfo object.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoAreaMonitorInfo.IsValid">
+            <summary>
+            <para>Returns true, if the monitor is valid. A valid QGeoAreaMonitorInfo has a non-empty name() and the monitored area is not empty(). Otherwise this function returns false.</para>
+            </summary>
+        </member>
+        <member name="T:QtPositioning.QGeoPositionInfo">
+            <summary>
+            <para>The QGeoPositionInfo class contains information gathered on a global position, direction and velocity at a particular point in time.</para>
+            </summary>
+            <remarks>
+            <para>A QGeoPositionInfo contains, at a minimum, a geographical coordinate and a timestamp. It may also have heading and speed measurements as well as estimates of the accuracy of the provided data.</para>
+            <para></para>
+            <para>See also QGeoPositionInfoSource.</para>
+            </remarks>
+        </member>
+        <member name="M:QtPositioning.QGeoPositionInfo.#ctor">
+            <summary>
+            <para>Creates an invalid QGeoPositionInfo object.</para>
+            <para>See also isValid().</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoPositionInfo.#ctor(QtPositioning.QGeoCoordinate,QtCore.QDateTime)">
+            <summary>
+            <para>Creates a QGeoPositionInfo for the given coordinate and timestamp.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoPositionInfo.#ctor(QtPositioning.QGeoPositionInfo)">
+            <summary>
+            <para>Creates a QGeoPositionInfo with the values of other.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoPositionInfo.op_Equality(QtPositioning.QGeoPositionInfo,QtPositioning.QGeoPositionInfo)">
+            <summary>
+            <para>Returns true if all of this object's values are the same as those of other.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoPositionInfo.op_Inequality(QtPositioning.QGeoPositionInfo,QtPositioning.QGeoPositionInfo)">
+            <summary>
+            <para>Returns true if any of this object's values are not the same as those of other.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoPositionInfo.SetAttribute(QtPositioning.QGeoPositionInfo.Attribute,System.Double)">
+            <summary>
+            <para>Sets the value for attribute to value.</para>
+            <para>See also attribute().</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoPositionInfo.attribute(QtPositioning.QGeoPositionInfo.Attribute)">
+            <summary>
+            <para>Returns the value of the specified attribute as a qreal value.</para>
+            <para>Returns NaN if the value has not been set.</para>
+            <para>The function hasAttribute() should be used to determine whether or not a value has been set for an attribute.</para>
+            <para>See also hasAttribute() and setAttribute().</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoPositionInfo.RemoveAttribute(QtPositioning.QGeoPositionInfo.Attribute)">
+            <summary>
+            <para>Removes the specified attribute and its value.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoPositionInfo.HasAttribute(QtPositioning.QGeoPositionInfo.Attribute)">
+            <summary>
+            <para>Returns true if the specified attribute is present for this QGeoPositionInfo object.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoPositionInfo.Timestamp">
+            <summary>
+            <para>Returns the date and time at which this position was reported, in UTC time.</para>
+            <para>Returns an invalid QDateTime if no date/time value has been set.</para>
+            <para>See also setTimestamp().</para>
+            <para></para>
+            <para>Sets the date and time at which this position was reported to timestamp.</para>
+            <para>The timestamp must be in UTC time.</para>
+            <para>See also timestamp().</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoPositionInfo.Coordinate">
+            <summary>
+            <para>Returns the coordinate for this position.</para>
+            <para>Returns an invalid coordinate if no coordinate has been set.</para>
+            <para>See also setCoordinate().</para>
+            <para></para>
+            <para>Sets the coordinate for this position to coordinate.</para>
+            <para>See also coordinate().</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoPositionInfo.IsValid">
+            <summary>
+            <para>Returns true if the timestamp() and coordinate() values are both valid.</para>
+            <para>See also QGeoCoordinate::isValid() and QDateTime::isValid().</para>
+            </summary>
+        </member>
+        <member name="T:QtPositioning.QGeoPositionInfo.Attribute">
+            <summary>
+            <para>Defines the attributes for positional information.</para>
+            </summary>
+        </member>
+        <member name="F:QtPositioning.QGeoPositionInfo.Attribute.Direction">
+            <summary>The bearing measured in degrees clockwise from true north to the direction of travel.</summary>
+        </member>
+        <member name="F:QtPositioning.QGeoPositionInfo.Attribute.GroundSpeed">
+            <summary>The ground speed, in meters/sec.</summary>
+        </member>
+        <member name="F:QtPositioning.QGeoPositionInfo.Attribute.VerticalSpeed">
+            <summary>The vertical speed, in meters/sec.</summary>
+        </member>
+        <member name="F:QtPositioning.QGeoPositionInfo.Attribute.MagneticVariation">
+            <summary>The angle between the horizontal component of the magnetic field and true north, in degrees. Also known as magnetic declination. A positive value indicates a clockwise direction from true north and a negative value indicates a counter-clockwise direction.</summary>
+        </member>
+        <member name="F:QtPositioning.QGeoPositionInfo.Attribute.HorizontalAccuracy">
+            <summary>The accuracy of the provided latitude-longitude value, in meters.</summary>
+        </member>
+        <member name="F:QtPositioning.QGeoPositionInfo.Attribute.VerticalAccuracy">
+            <summary>The accuracy of the provided altitude value, in meters.</summary>
+        </member>
+        <member name="T:QtPositioning.QGeoPositionInfoSource">
+            <summary>
+            <para>The QGeoPositionInfoSource class is an abstract base class for the distribution of positional updates.</para>
+            </summary>
+            <remarks>
+            <para>The static function QGeoPositionInfoSource::createDefaultSource() creates a default position source that is appropriate for the platform, if one is available. Otherwise, QGeoPositionInfoSource will check for available plugins that implement the QGeoPositionInfoSourceFactory interface.</para>
+            <para>Users of a QGeoPositionInfoSource subclass can request the current position using requestUpdate(), or start and stop regular position updates using startUpdates() and stopUpdates(). When an update is available, positionUpdated() is emitted. The last known position can be accessed with lastKnownPosition().</para>
+            <para>If regular position updates are required, setUpdateInterval() can be used to specify how often these updates should be emitted. If no interval is specified, updates are simply provided whenever they are available. For example:</para>
+            <para></para>
+            <para></para>
+            <para>  // Emit updates every 10 seconds if available</para>
+            <para>  QGeoPositionInfoSource *source = QGeoPositionInfoSource::createDefaultSource(0);</para>
+            <para>  if (source)</para>
+            <para>      source-&gt;setUpdateInterval(10000);</para>
+            <para></para>
+            <para></para>
+            <para>To remove an update interval that was previously set, call setUpdateInterval() with a value of 0.</para>
+            <para>Note that the position source may have a minimum value requirement for update intervals, as returned by minimumUpdateInterval().</para>
+            <para>Warning: On Windows CE it is not possible to detect if a device is GPS enabled. The default position source on a Windows CE device without GPS support will never provide any position data.</para>
+            </remarks>
+        </member>
+        <member name="M:QtPositioning.QGeoPositionInfoSource.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Creates a position source with the specified parent.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoPositionInfoSource.LastKnownPosition(System.Boolean)">
+            <summary>
+            <para>Returns an update containing the last known position, or a null update if none is available.</para>
+            <para>If fromSatellitePositioningMethodsOnly is true, this returns the last known position received from a satellite positioning method; if none is available, a null update is returned.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoPositionInfoSource.StartUpdates">
+            <summary>
+            <para>Starts emitting updates at regular intervals as specified by setUpdateInterval().</para>
+            <para>If setUpdateInterval() has not been called, the source will emit updates as soon as they become available.</para>
+            <para>An updateTimeout() signal will be emitted if this QGeoPositionInfoSource subclass determines that it will not be able to provide regular updates. This could happen if a satellite fix is lost or if a hardware error is detected. Position updates will recommence if the data becomes available later on. The updateTimeout() signal will not be emitted again until after the periodic updates resume.</para>
+            <para>On iOS, starting from version 8, Core Location framework requires additional entries in the application's Info.plist with keys NSLocationAlwaysUsageDescription or NSLocationWhenInUseUsageDescription and a string to be displayed in the authorization prompt. The key NSLocationWhenInUseUsageDescription is used when requesting permission to use location services while the app is in the foreground. The key NSLocationAlwaysUsageDescription is used when requesting permission to use location services whenever the app is running (both the foreground and the background). If both entries are defined, NSLocationWhenInUseUsageDescription has a priority in the foreground mode.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoPositionInfoSource.StopUpdates">
+            <summary>
+            <para>Stops emitting updates at regular intervals.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoPositionInfoSource.RequestUpdate(System.Int32)">
+            <summary>
+            <para>Attempts to get the current position and emit positionUpdated() with this information. If the current position cannot be found within the given timeout (in milliseconds) or if timeout is less than the value returned by minimumUpdateInterval(), updateTimeout() is emitted.</para>
+            <para>If the timeout is zero, the timeout defaults to a reasonable timeout period as appropriate for the source.</para>
+            <para>This does nothing if another update request is in progress. However it can be called even if startUpdates() has already been called and regular updates are in progress.</para>
+            <para>If the source uses multiple positioning methods, it tries to get the current position from the most accurate positioning method within the given timeout.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoPositionInfoSource.CreateDefaultSource(QtCore.QObject)">
+            <summary>
+            <para>Creates and returns a position source with the given parent that reads from the system's default sources of location data, or the plugin with the highest available priority.</para>
+            <para>Returns 0 if the system has no default position source, no valid plugins could be found or the user does not have the permission to access the current position.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoPositionInfoSource.CreateSource(System.String,QtCore.QObject)">
+            <summary>
+            <para>Creates and returns a position source with the given parent, by loading the plugin named sourceName.</para>
+            <para>Returns 0 if the plugin cannot be found.</para>
+            </summary>
+        </member>
+        <member name="E:QtPositioning.QGeoPositionInfoSource.PositionUpdated">
+            <summary>
+            <para>If startUpdates() or requestUpdate() is called, this signal is emitted when an update becomes available.</para>
+            <para>The update value holds the value of the new update.</para>
+            </summary>
+        </member>
+        <member name="E:QtPositioning.QGeoPositionInfoSource.UpdateTimeout">
+            <summary>
+            <para>If requestUpdate() was called, this signal will be emitted if the current position could not be retrieved within the specified timeout.</para>
+            <para>If startUpdates() has been called, this signal will be emitted if this QGeoPositionInfoSource subclass determines that it will not be able to provide further regular updates. This signal will not be emitted again until after the regular updates resume.</para>
+            <para>While the triggering of this signal may be considered an error condition, it does not imply the emission of the error() signal. Only the emission of updateTimeout() is required to indicate a timeout.</para>
+            </summary>
+        </member>
+        <member name="E:QtPositioning.QGeoPositionInfoSource.ErrorPositioningError">
+            <summary>
+            <para>This signal is emitted after an error occurred. The positioningError parameter describes the type of error that occurred.</para>
+            <para>This signal is not emitted when an updateTimeout() has occurred.</para>
+            <para></para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>error</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
+            <para></para>
+            <para></para>
+            <para>  connect(geoPositionInfoSource, static_cast&lt;void(QGeoPositionInfoSource::*)(QGeoPositionInfoSource::Error)&gt;(&amp;QGeoPositionInfoSource::error),</para>
+            <para>      [=](QGeoPositionInfoSource::Error positioningError){ /* ... */ });</para>
+            <para></para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoPositionInfoSource.UpdateInterval">
+            <summary>
+            <para>This property holds this property holds the requested interval in milliseconds between each update.</para>
+            <para>If the update interval is not set (or is set to 0) the source will provide updates as often as necessary.</para>
+            <para>If the update interval is set, the source will provide updates at an interval as close to the requested interval as possible. If the requested interval is less than the minimumUpdateInterval(), the minimum interval is used instead.</para>
+            <para>Changes to the update interval will happen as soon as is practical, however the time the change takes may vary between implementations. Whether or not the elapsed time from the previous interval is counted as part of the new interval is also implementation dependent.</para>
+            <para>The default value for this property is 0.</para>
+            <para>Note: Subclass implementations must call the base implementation of setUpdateInterval() so that updateInterval() returns the correct value.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoPositionInfoSource.PreferredPositioningMethods">
+            <summary>
+            <para>Returns the positioning methods set by setPreferredPositioningMethods().</para>
+            <para>See also setPreferredPositioningMethods().</para>
+            <para></para>
+            <para>Sets the preferred positioning methods for this source to methods.</para>
+            <para>If methods includes a method that is not supported by the source, the unsupported method will be ignored.</para>
+            <para>If methods does not include any methods supported by the source, the preferred methods will be set to the set of methods which the source supports.</para>
+            <para>Note: When reimplementing this method, subclasses must call the base method implementation to ensure preferredPositioningMethods() returns the correct value.</para>
+            <para>See also preferredPositioningMethods() and supportedPositioningMethods().</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoPositionInfoSource.SupportedPositioningMethods">
+            <summary>
+            <para>Returns the positioning methods available to this source.</para>
+            <para>See also setPreferredPositioningMethods().</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoPositionInfoSource.MinimumUpdateInterval">
+            <summary>
+            <para>This property holds this property holds the minimum time (in milliseconds) required to retrieve a position update.</para>
+            <para>This is the minimum value accepted by setUpdateInterval() and requestUpdate().</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoPositionInfoSource.SourceName">
+            <summary>
+            <para>This property holds this property holds the unique name of the position source implementation in use.</para>
+            <para>This is the same name that can be passed to createSource() in order to create a new instance of a particular position source implementation.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoPositionInfoSource.AvailableSources">
+            <summary>
+            <para>Returns a list of available source plugins. This includes any default backend plugin for the current platform.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoPositionInfoSource.error">
+            <summary>
+            <para>Returns the type of error that last occurred.</para>
+            </summary>
+        </member>
+        <member name="T:QtPositioning.QGeoPositionInfoSource.Error">
+            <summary>
+            <para>The Error enumeration represents the errors which can occur.</para>
+            </summary>
+        </member>
+        <member name="F:QtPositioning.QGeoPositionInfoSource.Error.AccessError">
+            <summary>The connection setup to the remote positioning backend failed because the application lacked the required privileges.</summary>
+        </member>
+        <member name="F:QtPositioning.QGeoPositionInfoSource.Error.ClosedError">
+            <summary>The remote positioning backend closed the connection, which happens for example in case the user is switching location services to off. As soon as the location service is re-enabled regular updates will resume.</summary>
+        </member>
+        <member name="F:QtPositioning.QGeoPositionInfoSource.Error.UnknownSourceError">
+            <summary>An unidentified error occurred.</summary>
+        </member>
+        <member name="F:QtPositioning.QGeoPositionInfoSource.Error.NoError">
+            <summary>No error has occurred.</summary>
+        </member>
+        <member name="T:QtPositioning.QGeoPositionInfoSource.PositioningMethod">
+            <summary>
+            <para>Defines the types of positioning methods.</para>
+            <para>The PositioningMethods type is a typedef for QFlags&lt;PositioningMethod&gt;. It stores an OR combination of PositioningMethod values.</para>
+            </summary>
+        </member>
+        <member name="F:QtPositioning.QGeoPositionInfoSource.PositioningMethod.NoPositioningMethods">
+            <summary>None of the positioning methods.</summary>
+        </member>
+        <member name="F:QtPositioning.QGeoPositionInfoSource.PositioningMethod.SatellitePositioningMethods">
+            <summary>Satellite-based positioning methods such as GPS or GLONASS.</summary>
+        </member>
+        <member name="F:QtPositioning.QGeoPositionInfoSource.PositioningMethod.NonSatellitePositioningMethods">
+            <summary>Other positioning methods such as 3GPP cell identifier or WiFi based positioning.</summary>
+        </member>
+        <member name="F:QtPositioning.QGeoPositionInfoSource.PositioningMethod.AllPositioningMethods">
+            <summary>Satellite-based positioning methods as soon as available. Otherwise non-satellite based methods.</summary>
+        </member>
+        <member name="T:QtPositioning.QGeoAreaMonitorSource">
+            <summary>
+            <para>The QGeoAreaMonitorSource class enables the detection of proximity changes for a specified set of coordinates.</para>
+            </summary>
+            <remarks>
+            <para>A QGeoAreaMonitorSource emits signals when the current position is in range, or has moved out of range, of a specified area. Each area is specified by a QGeoAreaMonitorInfo object. For example:</para>
+            <para></para>
+            <para></para>
+            <para>  public:</para>
+            <para>      MyClass() : QObject()</para>
+            <para>      {</para>
+            <para>          QGeoAreaMonitorSource *monitor = QGeoAreaMonitorSource::createDefaultSource(this);</para>
+            <para>          if (monitor) {</para>
+            <para>              connect(monitor, SIGNAL(areaEntered(QGeoAreaMonitorInfo,QGeoPositionInfo)),</para>
+            <para>                      this, SLOT(areaEntered(QGeoAreaMonitorInfo,QGeoPositionInfo)));</para>
+            <para>              connect(monitor, SIGNAL(areaExited(QGeoAreaMonitorInfo,QGeoPositionInfo)),</para>
+            <para>                      this, SLOT(areaExited(QGeoAreaMonitorInfo,QGeoPositionInfo)));</para>
+            <para></para>
+            <para>              QGeoAreaMonitorInfo bigBen(&quot;Big Ben&quot;);</para>
+            <para>              QGeoCoordinate position(51.50104, -0.124632);</para>
+            <para>              bigBen.setArea(QGeoCircle(position, 100));</para>
+            <para></para>
+            <para>              monitor-&gt;startMonitoring(bigBen);</para>
+            <para></para>
+            <para>          } else {</para>
+            <para>              qDebug() &lt;&lt; &quot;Could not create default area monitor&quot;;</para>
+            <para>          }</para>
+            <para>      }</para>
+            <para></para>
+            <para>  public Q_SLOTS:</para>
+            <para>      void areaEntered(const QGeoAreaMonitorInfo &amp;mon, const QGeoPositionInfo &amp;update)</para>
+            <para>      {</para>
+            <para>          Q_UNUSED(mon)</para>
+            <para></para>
+            <para>          qDebug() &lt;&lt; &quot;Now within 100 meters, current position is&quot; &lt;&lt; update.coordinate();</para>
+            <para>      }</para>
+            <para></para>
+            <para>      void areaExited(const QGeoAreaMonitorInfo &amp;mon, const QGeoPositionInfo &amp;update)</para>
+            <para>      {</para>
+            <para>          Q_UNUSED(mon)</para>
+            <para></para>
+            <para>          qDebug() &lt;&lt; &quot;No longer within 100 meters, current position is&quot; &lt;&lt; update.coordinate();</para>
+            <para>      }</para>
+            <para></para>
+            <para></para>
+            <para>QGeoAreaMonitorSource follows a singleton pattern. Each instance of the class with the same sourceName() shares the same area monitoring backend. If a new QGeoAreaMonitorInfo object is added via startMonitoring() or requestUpdate() it can be retrieved by another instance of this class (provided that they are sourced from the same area monitor provider plug-in). The same singleton pattern applies to the QGeoPositionInfoSource instance used by this class. The following code snippet emphasizes the behavior:</para>
+            <para></para>
+            <para></para>
+            <para>  QGeoAreaMonitorSource *s1 = QGeoAreaMonitorSource::createSource(&quot;blah&quot;, this);</para>
+            <para>  QGeoAreaMonitorSource *s2 = QGeoAreaMonitorSource::createSource(&quot;blah&quot;, this);</para>
+            <para>  QVERIFY(s1-&gt;positionInfoSource() == s2-&gt;positionInfoSource);</para>
+            </remarks>
+        </member>
+        <member name="M:QtPositioning.QGeoAreaMonitorSource.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Creates a monitor with the given parent.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoAreaMonitorSource.StartMonitoring(QtPositioning.QGeoAreaMonitorInfo)">
+            <summary>
+            <para>Returns true if the monitoring of monitor could be successfully started; otherwise returns false. A reason for not being able to start monitoring could be the unavailability of an appropriate default position info source while no alternative QGeoPositionInfoSource has been set via setPositionInfoSource().</para>
+            <para>If monitor is already active the existing monitor object will be replaced by the new monitor reference. The identification of QGeoAreaMonitorInfo instances happens via QGeoAreaMonitorInfo::identifier(). Therefore this function can also be used to update active monitors.</para>
+            <para>If monitor has an expiry date that has been passed this function returns false. Calling this function for an already via requestUpdate() registered single shot monitor switches the monitor to a permanent monitoring mode.</para>
+            <para>Requesting persistent monitoring on a QGeoAreaMonitorSource instance fails if the area monitoring backend doesn't support QGeoAreaMonitorSource::PersistentAreaMonitorFeature.</para>
+            <para>See also stopMonitoring().</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoAreaMonitorSource.StopMonitoring(QtPositioning.QGeoAreaMonitorInfo)">
+            <summary>
+            <para>Returns true if monitor was successfully removed from the list of activeMonitors(); otherwise returns false. This behavior is independent on whether monitor was registered via startMonitoring() or requestUpdate().</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoAreaMonitorSource.RequestUpdate(QtPositioning.QGeoAreaMonitorInfo,System.String)">
+            <summary>
+            <para>Enables single shot area monitoring. Area monitoring for monitor will be performed until this QGeoAreaMonitorSource instance emits signal for the first time. Once the signal was emitted, monitor is automatically removed from the list of activeMonitors(). If monitor is invalid or has an expiry date that has been passed this function returns false.</para>
+            <para></para>
+            <para></para>
+            <para>  QGeoAreaMonitor singleShotMonitor;</para>
+            <para>  QGeoAreaMonitorSource * source = QGeoAreaMonitorSource::createDefaultSource(this);</para>
+            <para>  //...</para>
+            <para>  bool ret = source-&gt;requestUpdate(singleShotMonitor,</para>
+            <para>                        SIGNAL(areaExited(QGeoAreaMonitor,QGeoPositionInfo)));</para>
+            <para></para>
+            <para></para>
+            <para>The above singleShotMonitor object will cease to send updates once the areaExited() signal was emitted for the first time. Until this point in time any other signal may be emitted zero or more times depending on the area context.</para>
+            <para>It is not possible to simultanously request updates for more than one signal of the same monitor object. The last call to this function determines the signal upon which the updates cease to continue. At this stage only the areaEntered() and areaExited() signals can be used to terminate the monitoring process.</para>
+            <para>Requesting persistent monitoring on a QGeoAreaMonitorSource instance fails if the area monitoring backend doesn't support QGeoAreaMonitorSource::PersistentAreaMonitorFeature.</para>
+            <para>If monitor was already registered via startMonitoring() it is converted to a single shot behavior.</para>
+            <para>See also startMonitoring() and stopMonitoring().</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoAreaMonitorSource.CreateDefaultSource(QtCore.QObject)">
+            <summary>
+            <para>Creates and returns a monitor with the given parent that monitors areas using resources on the underlying system.</para>
+            <para>Returns 0 if the system has no support for position monitoring.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoAreaMonitorSource.CreateSource(System.String,QtCore.QObject)">
+            <summary>
+            <para>Creates and returns a monitor with the given parent, by loading the plugin named sourceName.</para>
+            <para>Returns 0 if the plugin cannot be found.</para>
+            </summary>
+        </member>
+        <member name="E:QtPositioning.QGeoAreaMonitorSource.AreaEntered">
+            <summary>
+            <para>Emitted when the current position has moved from a position outside of the active monitor to a position within the monitored area.</para>
+            <para>The update holds the new position.</para>
+            </summary>
+        </member>
+        <member name="E:QtPositioning.QGeoAreaMonitorSource.AreaExited">
+            <summary>
+            <para>Emitted when the current position has moved from a position within the active monitor to a position outside the monitored area.</para>
+            <para>The update holds the new position.</para>
+            </summary>
+        </member>
+        <member name="E:QtPositioning.QGeoAreaMonitorSource.MonitorExpired">
+            <summary>
+            <para>Emitted when monitor has expired. An expired area monitor is automatically removed from the list of activeMonitors().</para>
+            <para>See also activeMonitors().</para>
+            </summary>
+        </member>
+        <member name="E:QtPositioning.QGeoAreaMonitorSource.ErrorAreaMonitoringError">
+            <summary>
+            <para>This signal is emitted after an error occurred. The areaMonitoringError parameter describes the type of error that occurred.</para>
+            <para></para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>error</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
+            <para></para>
+            <para></para>
+            <para>  connect(geoAreaMonitorSource, static_cast&lt;void(QGeoAreaMonitorSource::*)(QGeoAreaMonitorSource::Error)&gt;(&amp;QGeoAreaMonitorSource::error),</para>
+            <para>      [=](QGeoAreaMonitorSource::Error areaMonitoringError){ /* ... */ });</para>
+            <para></para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoAreaMonitorSource.PositionInfoSource">
+            <summary>
+            <para>Returns the current QGeoPositionInfoSource used by this QGeoAreaMonitorSource object. The function will return QGeoPositionInfoSource::createDefaultSource() if no other object has been set.</para>
+            <para>The function returns 0 if not even a default QGeoPositionInfoSource exists.</para>
+            <para>Any usage of the returned QGeoPositionInfoSource instance should account for the fact that it may reside in a different thread.</para>
+            <para>See also QGeoPositionInfoSource and setPositionInfoSource().</para>
+            <para></para>
+            <para>Sets the new QGeoPositionInfoSource to be used by this QGeoAreaMonitorSource object. The area monitoring backend becomes the new QObject parent for newSource. The previous QGeoPositionInfoSource object will be deleted. All QGeoAreaMonitorSource instances based on the same sourceName() share the same QGeoPositionInfoSource instance.</para>
+            <para>This may be useful when it is desirable to manipulate the positioning system used by the area monitoring engine.</para>
+            <para>Note that ownership must be taken care of by subclasses of QGeoAreaMonitorSource. Due to the singleton pattern behind this class newSource may be moved to a new thread.</para>
+            <para>See also positionInfoSource().</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoAreaMonitorSource.AvailableSources">
+            <summary>
+            <para>Returns a list of available monitor plugins, including the default system backend if one is available.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoAreaMonitorSource.SourceName">
+            <summary>
+            <para>Returns the unique name of the area monitor source implementation in use.</para>
+            <para>This is the same name that can be passed to createSource() in order to create a new instance of a particular area monitor source implementation.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoAreaMonitorSource.error">
+            <summary>
+            <para>Returns the type of error that last occurred.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoAreaMonitorSource.SupportedAreaMonitorFeatures">
+            <summary>
+            <para>Returns the area monitoring features available to this source.</para>
+            </summary>
+        </member>
+        <member name="T:QtPositioning.QGeoAreaMonitorSource.Error">
+            <summary>
+            <para>Defines the types of positioning methods.</para>
+            <para>The Error enumeration represents the errors which can occur.</para>
+            </summary>
+        </member>
+        <member name="F:QtPositioning.QGeoAreaMonitorSource.Error.AccessError">
+            <summary>The connection setup to the remote area monitoring backend failed because the application lacked the required privileges.</summary>
+        </member>
+        <member name="F:QtPositioning.QGeoAreaMonitorSource.Error.InsufficientPositionInfo">
+            <summary>The area monitoring source could not retrieve a location fix or the accuracy of the fix is not high enough to provide an effective area monitoring.</summary>
+        </member>
+        <member name="F:QtPositioning.QGeoAreaMonitorSource.Error.UnknownSourceError">
+            <summary>An unidentified error occurred.</summary>
+        </member>
+        <member name="F:QtPositioning.QGeoAreaMonitorSource.Error.NoError">
+            <summary>No error has occurred.</summary>
+        </member>
+        <member name="T:QtPositioning.QGeoAreaMonitorSource.AreaMonitorFeature">
+            <summary>
+            <para>Defines the types of area monitoring capabilities.</para>
+            <para>The AreaMonitorFeatures type is a typedef for QFlags&lt;AreaMonitorFeature&gt;. It stores an OR combination of AreaMonitorFeature values.</para>
+            </summary>
+        </member>
+        <member name="F:QtPositioning.QGeoAreaMonitorSource.AreaMonitorFeature.PersistentAreaMonitorFeature">
+            <summary>QGeoAreaMonitorInfo instances can be made persistent. A persistent monitor continues to be active even when the application managing the monitor is not running.</summary>
+        </member>
+        <member name="F:QtPositioning.QGeoAreaMonitorSource.AreaMonitorFeature.AnyAreaMonitorFeature">
+            <summary>Matches all possible area monitoring features.</summary>
+        </member>
+        <member name="T:QtPositioning.QGeoCircle">
+            <summary>
+            <para>The QGeoCircle class defines a circular geographic area.</para>
+            </summary>
+            <remarks>
+            <para>The circle is defined in terms of a QGeoCoordinate which specifies the center of the circle and a qreal which specifies the radius of the circle in meters.</para>
+            <para>The circle is considered invalid if the center coordinate is invalid or if the radius is less than zero.</para>
+            <para>This class is a Q_GADGET since Qt 5.5. It can be directly used from C++ and QML.</para>
+            </remarks>
+        </member>
+        <member name="M:QtPositioning.QGeoCircle.#ctor">
+            <summary>
+            <para>Constructs a new, invalid geo circle.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoCircle.#ctor(QtPositioning.QGeoCoordinate,System.Double)">
+            <summary>
+            <para>Constructs a new geo circle centered at center and with a radius of radius meters.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoCircle.#ctor(QtPositioning.QGeoCircle)">
+            <summary>
+            <para>Constructs a new geo circle from the contents of other.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoCircle.#ctor(QtPositioning.QGeoShape)">
+            <summary>
+            <para>Constructs a new geo circle from the contents of other.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoCircle.op_Equality(QtPositioning.QGeoCircle,QtPositioning.QGeoCircle)">
+            <summary>
+            <para>Returns whether this geo circle is equal to other.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoCircle.op_Inequality(QtPositioning.QGeoCircle,QtPositioning.QGeoCircle)">
+            <summary>
+            <para>Returns whether this geo circle is not equal to other.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoCircle.Translate(System.Double,System.Double)">
+            <summary>
+            <para>Translates this geo circle by degreesLatitude northwards and degreesLongitude eastwards.</para>
+            <para>Negative values of degreesLatitude and degreesLongitude correspond to southward and westward translation respectively.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoCircle.Translated(System.Double,System.Double)">
+            <summary>
+            <para>Returns a copy of this geo circle translated by degreesLatitude northwards and degreesLongitude eastwards.</para>
+            <para>Negative values of degreesLatitude and degreesLongitude correspond to southward and westward translation respectively.</para>
+            <para>See also translate().</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoCircle.ToString">
+            <summary>
+            <para>Returns the geo circle properties as a string.</para>
+            <para>This function was introduced in  Qt 5.5.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoCircle.Center">
+            <summary>
+            <para>This property holds this property holds the center coordinate for the geo circle.</para>
+            <para>The circle is considered invalid if this property contains an invalid coordinate.</para>
+            <para>A default constructed QGeoCircle uses an invalid QGeoCoordinate as center.</para>
+            <para>While this property is introduced in Qt 5.5, the related accessor functions exist since the first version of this class.</para>
+            <para>This property was introduced in  Qt 5.5.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoCircle.Radius">
+            <summary>
+            <para>This property holds this property holds the circle radius in meters.</para>
+            <para>The circle is considered invalid if this property is negative.</para>
+            <para>By default, the radius is initialized with -1.</para>
+            <para>While this property is introduced in Qt 5.5, the related accessor functions exist since the first version of this class.</para>
+            <para>This property was introduced in  Qt 5.5.</para>
+            </summary>
+        </member>
+        <member name="T:QtPositioning.QGeoLocation">
+            <summary>
+            <para>The QGeoLocation class represents basic information about a location.</para>
+            </summary>
+            <remarks>
+            <para>A QGeoLocation consists of a coordinate and corresponding address, along with an optional bounding box which is the recommended region to be displayed when viewing the location.</para>
+            </remarks>
+        </member>
+        <member name="M:QtPositioning.QGeoLocation.#ctor">
+            <summary>
+            <para>Constructs an new location object.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoLocation.#ctor(QtPositioning.QGeoLocation)">
+            <summary>
+            <para>Constructs a copy of other</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoLocation.op_Equality(QtPositioning.QGeoLocation,QtPositioning.QGeoLocation)">
+            <summary>
+            <para>Returns true if this location is equal to other, otherwise returns false.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoLocation.op_Inequality(QtPositioning.QGeoLocation,QtPositioning.QGeoLocation)">
+            <summary>
+            <para>Returns true if this location is not equal to other, otherwise returns false.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoLocation.Address">
+            <summary>
+            <para>Returns the address of the location.</para>
+            <para>See also setAddress().</para>
+            <para></para>
+            <para>Sets the address of the location.</para>
+            <para>See also address().</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoLocation.Coordinate">
+            <summary>
+            <para>Returns the coordinate of the location.</para>
+            <para>See also setCoordinate().</para>
+            <para></para>
+            <para>Sets the coordinate of the location.</para>
+            <para>See also coordinate().</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoLocation.BoundingBox">
+            <summary>
+            <para>Returns a bounding box which represents the recommended region to display when viewing this location.</para>
+            <para>For example, a building's location may have a region centered around the building, but the region is large enough to show it's immediate surrounding geographical context.</para>
+            <para>See also setBoundingBox().</para>
+            <para></para>
+            <para>Sets the boundingBox of the location.</para>
+            <para>See also boundingBox().</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoLocation.IsEmpty">
+            <summary>
+            <para>Returns true if all fields of the location are 0; otherwise returns false.</para>
+            </summary>
+        </member>
+        <member name="T:QtPositioning.QGeoSatelliteInfo">
+            <summary>
+            <para>The QGeoSatelliteInfo class contains basic information about a satellite.</para>
+            </summary>
+            <remarks>
+            <para>See also QGeoSatelliteInfoSource.</para>
+            </remarks>
+        </member>
+        <member name="M:QtPositioning.QGeoSatelliteInfo.#ctor">
+            <summary>
+            <para>Creates a satellite information object.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoSatelliteInfo.#ctor(QtPositioning.QGeoSatelliteInfo)">
+            <summary>
+            <para>Creates a satellite information object with the values of other.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoSatelliteInfo.op_Equality(QtPositioning.QGeoSatelliteInfo,QtPositioning.QGeoSatelliteInfo)">
+            <summary>
+            <para>Returns true if all the information for this satellite are the same as those of other.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoSatelliteInfo.op_Inequality(QtPositioning.QGeoSatelliteInfo,QtPositioning.QGeoSatelliteInfo)">
+            <summary>
+            <para>Returns true if any of the information for this satellite are not the same as those of other.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoSatelliteInfo.SetAttribute(QtPositioning.QGeoSatelliteInfo.Attribute,System.Double)">
+            <summary>
+            <para>Sets the value for attribute to value.</para>
+            <para>See also attribute().</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoSatelliteInfo.attribute(QtPositioning.QGeoSatelliteInfo.Attribute)">
+            <summary>
+            <para>Returns the value of the specified attribute as a qreal value.</para>
+            <para>Returns -1 if the value has not been set.</para>
+            <para>See also hasAttribute() and setAttribute().</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoSatelliteInfo.RemoveAttribute(QtPositioning.QGeoSatelliteInfo.Attribute)">
+            <summary>
+            <para>Removes the specified attribute and its value.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoSatelliteInfo.HasAttribute(QtPositioning.QGeoSatelliteInfo.Attribute)">
+            <summary>
+            <para>Returns true if the specified attribute is present in this update.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoSatelliteInfo.satelliteSystem">
+            <summary>
+            <para>Returns the Satellite System (GPS, GLONASS, ...)</para>
+            <para>See also setSatelliteSystem().</para>
+            <para></para>
+            <para>Sets the Satellite System (GPS, GLONASS, ...) to system.</para>
+            <para>See also satelliteSystem().</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoSatelliteInfo.SatelliteIdentifier">
+            <summary>
+            <para>Returns the satellite identifier number.</para>
+            <para>The satellite identifier number can be used to identify a satellite inside the satellite system. For satellite system GPS the satellite identifier number represents the PRN (Pseudo-random noise) number. For satellite system GLONASS the satellite identifier number represents the slot number.</para>
+            <para>See also setSatelliteIdentifier().</para>
+            <para></para>
+            <para>Sets the satellite identifier number to satId.</para>
+            <para>The satellite identifier number can be used to identify a satellite inside the satellite system. For satellite system GPS the satellite identifier number represents the PRN (Pseudo-random noise) number. For satellite system GLONASS the satellite identifier number represents the slot number.</para>
+            <para>See also satelliteIdentifier().</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoSatelliteInfo.SignalStrength">
+            <summary>
+            <para>Returns the signal strength, or -1 if the value has not been set.</para>
+            <para>See also setSignalStrength().</para>
+            <para></para>
+            <para>Sets the signal strength to signalStrength, in decibels.</para>
+            <para>See also signalStrength().</para>
+            </summary>
+        </member>
+        <member name="T:QtPositioning.QGeoSatelliteInfo.Attribute">
+            <summary>
+            <para>Defines the attributes for the satellite information.</para>
+            </summary>
+        </member>
+        <member name="F:QtPositioning.QGeoSatelliteInfo.Attribute.Elevation">
+            <summary>The elevation of the satellite, in degrees.</summary>
+        </member>
+        <member name="F:QtPositioning.QGeoSatelliteInfo.Attribute.Azimuth">
+            <summary>The azimuth to true north, in degrees.</summary>
+        </member>
+        <member name="T:QtPositioning.QGeoSatelliteInfo.SatelliteSystem">
+            <summary>
+            <para>Defines the GNSS system of the satellite.</para>
+            </summary>
+        </member>
+        <member name="F:QtPositioning.QGeoSatelliteInfo.SatelliteSystem.Undefined">
+            <summary>Not defined.</summary>
+        </member>
+        <member name="F:QtPositioning.QGeoSatelliteInfo.SatelliteSystem.GPS">
+            <summary>Global Positioning System (USA).</summary>
+        </member>
+        <member name="F:QtPositioning.QGeoSatelliteInfo.SatelliteSystem.GLONASS">
+            <summary>Global Positioning System (Russia).</summary>
+        </member>
+        <member name="T:QtPositioning.QGeoSatelliteInfoSource">
+            <summary>
+            <para>The QGeoSatelliteInfoSource class is an abstract base class for the distribution of satellite information updates.</para>
+            </summary>
+            <remarks>
+            <para>The static function QGeoSatelliteInfoSource::createDefaultSource() creates a default satellite data source that is appropriate for the platform, if one is available. Otherwise, available QGeoPositionInfoSourceFactory plugins will be checked for one that has a satellite data source available.</para>
+            <para>Call startUpdates() and stopUpdates() to start and stop regular updates, or requestUpdate() to request a single update. When an update is available, satellitesInViewUpdated() and/or satellitesInUseUpdated() will be emitted.</para>
+            <para>If regular satellite updates are required, setUpdateInterval() can be used to specify how often these updates should be emitted. If no interval is specified, updates are simply provided whenever they are available. For example:</para>
+            <para></para>
+            <para></para>
+            <para>  // Emit updates every 10 seconds if available</para>
+            <para>  QGeoSatelliteInfoSource *source = QGeoSatelliteInfoSource::createDefaultSource(0);</para>
+            <para>  if (source)</para>
+            <para>      source-&gt;setUpdateInterval(10000);</para>
+            <para></para>
+            <para></para>
+            <para>To remove an update interval that was previously set, call setUpdateInterval() with a value of 0.</para>
+            <para>Note that the satellite source may have a minimum value requirement for update intervals, as returned by minimumUpdateInterval().</para>
+            <para>Warning: On Windows CE it is not possible to detect if a device is GPS enabled. The default satellite source on a Windows CE device without GPS support will never provide any satellite data.</para>
+            </remarks>
+        </member>
+        <member name="M:QtPositioning.QGeoSatelliteInfoSource.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Creates a satellite source with the specified parent.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoSatelliteInfoSource.StartUpdates">
+            <summary>
+            <para>Starts emitting updates at regular intervals. The updates will be provided whenever new satellite information becomes available.</para>
+            <para>If satellite information cannot be retrieved or some other form of timeout has occurred the satellitesInViewUpdated() and satellitesInUseUpdated() signals may be emitted with empty parameter lists.</para>
+            <para>See also satellitesInViewUpdated() and satellitesInUseUpdated().</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoSatelliteInfoSource.StopUpdates">
+            <summary>
+            <para>Stops emitting updates at regular intervals.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoSatelliteInfoSource.RequestUpdate(System.Int32)">
+            <summary>
+            <para>Attempts to get the current satellite information and emit satellitesInViewUpdated() and satellitesInUseUpdated() with this information. If the current satellite information cannot be found within the given timeout (in milliseconds) or if timeout is less than the value returned by minimumUpdateInterval(), requestTimeout() is emitted.</para>
+            <para>If the timeout is zero, the timeout defaults to a reasonable timeout period as appropriate for the source.</para>
+            <para>This does nothing if another update request is in progress. However it can be called even if startUpdates() has already been called and regular updates are in progress.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoSatelliteInfoSource.CreateDefaultSource(QtCore.QObject)">
+            <summary>
+            <para>Creates and returns a source with the specified parent that reads from the system's default source of satellite update information, or the highest priority available plugin.</para>
+            <para>Returns 0 if the system has no default satellite source, no valid plugins could be found or the user does not have the permission to access the satellite data.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoSatelliteInfoSource.CreateSource(System.String,QtCore.QObject)">
+            <summary>
+            <para>Creates and returns a source with the given parent, by loading the plugin named sourceName.</para>
+            <para>Returns 0 if the plugin cannot be found.</para>
+            </summary>
+        </member>
+        <member name="E:QtPositioning.QGeoSatelliteInfoSource.RequestTimeout">
+            <summary>
+            <para>Emitted if requestUpdate() was called and the current satellite information could not be retrieved within the specified timeout.</para>
+            <para>While the triggering of this signal may be considered an error condition, it does not imply the emission of the error() signal. Only the emission of requestTimeout() is required to indicate a timeout.</para>
+            </summary>
+        </member>
+        <member name="E:QtPositioning.QGeoSatelliteInfoSource.ErrorSatelliteError">
+            <summary>
+            <para>This signal is emitted after an error occurred. The satelliteError parameter describes the type of error that occurred.</para>
+            <para></para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>error</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
+            <para></para>
+            <para></para>
+            <para>  connect(geoSatelliteInfoSource, static_cast&lt;void(QGeoSatelliteInfoSource::*)(QGeoSatelliteInfoSource::Error)&gt;(&amp;QGeoSatelliteInfoSource::error),</para>
+            <para>      [=](QGeoSatelliteInfoSource::Error satelliteError){ /* ... */ });</para>
+            <para></para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoSatelliteInfoSource.UpdateInterval">
+            <summary>
+            <para>This property holds this property holds the requested interval in milliseconds between each update.</para>
+            <para>If the update interval is not set (or is set to 0) the source will provide updates as often as necessary.</para>
+            <para>If the update interval is set, the source will provide updates at an interval as close to the requested interval as possible. If the requested interval is less than the minimumUpdateInterval(), the minimum interval is used instead.</para>
+            <para>Changes to the update interval will happen as soon as is practical, however the time the change takes may vary between implementations. Whether or not the elapsed time from the previous interval is counted as part of the new interval is also implementation dependent.</para>
+            <para>The default value for this property is 0.</para>
+            <para>Note: Subclass implementations must call the base implementation of setUpdateInterval() so that updateInterval() returns the correct value.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoSatelliteInfoSource.AvailableSources">
+            <summary>
+            <para>Returns a list of available source plugins, including the default system backend if one is available.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoSatelliteInfoSource.SourceName">
+            <summary>
+            <para>Returns the unique name of the satellite source implementation in use.</para>
+            <para>This is the same name that can be passed to createSource() in order to create a new instance of a particular satellite source implementation.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoSatelliteInfoSource.MinimumUpdateInterval">
+            <summary>
+            <para>This property holds this property holds the minimum time (in milliseconds) required to retrieve a satellite update.</para>
+            <para>This is the minimum value accepted by setUpdateInterval() and requestUpdate().</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoSatelliteInfoSource.error">
+            <summary>
+            <para>Returns the last error that occurred.</para>
+            <para>This signal is not emitted when a requestTimeout() has occurred.</para>
+            </summary>
+        </member>
+        <member name="T:QtPositioning.QGeoSatelliteInfoSource.Error">
+            <summary>
+            <para>The Error enumeration represents the errors which can occur.</para>
+            </summary>
+        </member>
+        <member name="F:QtPositioning.QGeoSatelliteInfoSource.Error.AccessError">
+            <summary>The connection setup to the satellite backend failed because the application lacked the required privileges.</summary>
+        </member>
+        <member name="F:QtPositioning.QGeoSatelliteInfoSource.Error.ClosedError">
+            <summary>The satellite backend closed the connection, which happens for example in case the user is switching location services to off. This object becomes invalid and should be deleted. A new satellite source can be created by calling createDefaultSource() later on.</summary>
+        </member>
+        <member name="F:QtPositioning.QGeoSatelliteInfoSource.Error.NoError">
+            <summary>No error has occurred.</summary>
+        </member>
+        <member name="F:QtPositioning.QGeoSatelliteInfoSource.Error.UnknownSourceError">
+            <summary>An unidentified error occurred.</summary>
+        </member>
+        <member name="T:QtPositioning.QGeoPositionInfoSourceFactory">
+            <summary>
+            <para>The QGeoPositionInfoSourceFactory class is a factory class used as the plugin interface for external providers of positioning data.</para>
+            </summary>
+            <remarks>
+            <para>The other functions must be overridden by all plugins, other than sourcePriority() which defaults to returning 0. Higher values of priority will be preferred to lower ones.</para>
+            </remarks>
+        </member>
+        <member name="M:QtPositioning.QGeoPositionInfoSourceFactory.PositionInfoSource(QtCore.QObject)">
+            <summary>
+            <para>Returns a new QGeoPositionInfoSource associated with this plugin with parent parent. Can also return 0, in which case the plugin loader will use the factory with the next highest priority.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoPositionInfoSourceFactory.SatelliteInfoSource(QtCore.QObject)">
+            <summary>
+            <para>Returns a new QGeoSatelliteInfoSource associated with this plugin with parent parent. Can also return 0, in which case the plugin loader will use the factory with the next highest priority.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoPositionInfoSourceFactory.AreaMonitor(QtCore.QObject)">
+            <summary>
+            <para>Returns a new QGeoAreaMonitorSource associated with this plugin with parent parent. Can also return 0, in which case the plugin loader will use the factory with the next highest priority.</para>
+            </summary>
+        </member>
+        <member name="T:QtPositioning.QGeoRectangle">
+            <summary>
+            <para>The QGeoRectangle class defines a rectangular geographic area.</para>
+            </summary>
+            <remarks>
+            <para>The rectangle is defined in terms of a QGeoCoordinate which specifies the top left coordinate of the rectangle and a QGeoCoordinate which specifies the bottom right coordinate of the rectangle.</para>
+            <para>A geo rectangle is considered invalid if the top left or bottom right coordinates are invalid or if the top left coordinate is south of the bottom right coordinate.</para>
+            <para>Geo rectangles can never cross the poles.</para>
+            <para>Several methods behave as though the geo rectangle is defined in terms of a center coordinate, the width of the geo rectangle in degrees and the height of the geo rectangle in degrees.</para>
+            <para>If the height or center of a geo rectangle is adjusted such that it would cross one of the poles the height is modified such that the geo rectangle touches but does not cross the pole and that the center coordinate is still in the center of the geo rectangle.</para>
+            <para>This class is a Q_GADGET since Qt 5.5. It can be directly used from C++ and QML.</para>
+            </remarks>
+        </member>
+        <member name="M:QtPositioning.QGeoRectangle.#ctor">
+            <summary>
+            <para>Constructs a new, invalid geo rectangle.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoRectangle.#ctor(QtPositioning.QGeoCoordinate,System.Double,System.Double)">
+            <summary>
+            <para>Constructs a new geo rectangle centered at center with a width in degrees of degreesWidth and a height in degrees of degreesHeight.</para>
+            <para>If degreesHeight would take the geo rectangle beyond one of the poles, the height of the geo rectangle will be truncated such that the geo rectangle only extends up to the pole. The center of the geo rectangle will be unchanged, and the height will be adjusted such that the center point is at the center of the truncated geo rectangle.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoRectangle.#ctor(QtPositioning.QGeoCoordinate,QtPositioning.QGeoCoordinate)">
+            <summary>
+            <para>Constructs a new geo rectangle with a top left coordinate topLeft and a bottom right coordinate bottomRight.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoRectangle.#ctor(QtPositioning.QGeoRectangle)">
+            <summary>
+            <para>Constructs a geo rectangle from the contents of other.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoRectangle.#ctor(QtPositioning.QGeoShape)">
+            <summary>
+            <para>Constructs a geo rectangle from the contents of other.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoRectangle.op_Equality(QtPositioning.QGeoRectangle,QtPositioning.QGeoRectangle)">
+            <summary>
+            <para>Returns whether this geo rectangle is equal to other.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoRectangle.op_Inequality(QtPositioning.QGeoRectangle,QtPositioning.QGeoRectangle)">
+            <summary>
+            <para>Returns whether this geo rectangle is not equal to other.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoRectangle.Contains(QtPositioning.QGeoRectangle)">
+            <summary>
+            <para>Returns whether the geo rectangle rectangle is contained within this geo rectangle.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoRectangle.Intersects(QtPositioning.QGeoRectangle)">
+            <summary>
+            <para>Returns whether the geo rectangle rectangle intersects this geo rectangle.</para>
+            <para>If the top or bottom edges of both geo rectangles are at one of the poles the geo rectangles are considered to be intersecting, since the longitude is irrelevant when the edges are at the pole.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoRectangle.Translate(System.Double,System.Double)">
+            <summary>
+            <para>Translates this geo rectangle by degreesLatitude northwards and degreesLongitude eastwards.</para>
+            <para>Negative values of degreesLatitude and degreesLongitude correspond to southward and westward translation respectively.</para>
+            <para>If the translation would have caused the geo rectangle to cross a pole the geo rectangle will be translated until the top or bottom edge of the geo rectangle touches the pole but not further.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoRectangle.Translated(System.Double,System.Double)">
+            <summary>
+            <para>Returns a copy of this geo rectangle translated by degreesLatitude northwards and degreesLongitude eastwards.</para>
+            <para>Negative values of degreesLatitude and degreesLongitude correspond to southward and westward translation respectively.</para>
+            <para>See also translate().</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoRectangle.United(QtPositioning.QGeoRectangle)">
+            <summary>
+            <para>Returns the smallest geo rectangle which contains both this geo rectangle and rectangle.</para>
+            <para>If the centers of the two geo rectangles are separated by exactly 180.0 degrees then the width is set to 360.0 degrees with the leftmost longitude set to -180.0 degrees and the rightmost longitude set to 180.0 degrees. This is done to ensure that the result is independent of the order of the operands.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoRectangle.op_BitwiseOr(QtPositioning.QGeoRectangle,QtPositioning.QGeoRectangle)">
+            <summary>
+            <para>Returns the smallest geo rectangle which contains both this geo rectangle and rectangle.</para>
+            <para>If the centers of the two geo rectangles are separated by exactly 180.0 degrees then the width is set to 360.0 degrees with the leftmost longitude set to -180.0 degrees and the rightmost longitude set to 180.0 degrees. This is done to ensure that the result is independent of the order of the operands.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QGeoRectangle.ToString">
+            <summary>
+            <para>Returns the geo rectangle properties as a string.</para>
+            <para>This function was introduced in  Qt 5.5.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoRectangle.TopLeft">
+            <summary>
+            <para>This property holds this property holds the top left coordinate of this geo rectangle.</para>
+            <para>While this property is introduced in Qt 5.5, the related accessor functions exist since the first version of this class.</para>
+            <para>This property was introduced in  Qt 5.5.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoRectangle.TopRight">
+            <summary>
+            <para>This property holds this property holds the top right coordinate of this geo rectangle.</para>
+            <para>While this property is introduced in Qt 5.5, the related accessor functions exist since the first version of this class.</para>
+            <para>This property was introduced in  Qt 5.5.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoRectangle.BottomLeft">
+            <summary>
+            <para>This property holds this property holds the bottom left coorindate of this geo rectangle.</para>
+            <para>While this property is introduced in Qt 5.5, the related accessor functions exist since the first version of this class.</para>
+            <para>This property was introduced in  Qt 5.5.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoRectangle.BottomRight">
+            <summary>
+            <para>This property holds this property holds the bottom right coordinate of this geo rectangle.</para>
+            <para>While this property is introduced in Qt 5.5, the related accessor functions exist since the first version of this class.</para>
+            <para>This property was introduced in  Qt 5.5.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoRectangle.Center">
+            <summary>
+            <para>This property holds this property holds the center of this geo rectangle.</para>
+            <para>While this property is introduced in Qt 5.5, the related accessor functions exist since the first version of this class.</para>
+            <para>This property was introduced in  Qt 5.5.</para>
+            <para>See also QGeoShape::center.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoRectangle.Width">
+            <summary>
+            <para>This property holds this property holds the width of this geo rectangle in degrees.</para>
+            <para>The property value is undefined if this geo rectangle is invalid.</para>
+            <para>If the new width is less than 0.0 or if this geo rectangle is invalid, this function does nothing. To set up the values of an invalid geo rectangle based on the center, width, and height, you should use setCenter() first to make the geo rectangle valid.</para>
+            <para>360.0 is the width used only if the new width is equal or greater than 360. In such cases the leftmost longitude of the geo rectangle is set to -180.0 degrees and the rightmost longitude of the geo rectangle is set to 180.0 degrees.</para>
+            <para>While this property is introduced in Qt 5.5, the related accessor functions exist since the first version of this class.</para>
+            <para>This property was introduced in  Qt 5.5.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QGeoRectangle.Height">
+            <summary>
+            <para>This property holds this property holds the height of this geo rectangle in degrees.</para>
+            <para>The property value is undefined if this geo rectangle is invalid.</para>
+            <para>If the new height is less than 0.0 or if this geo rectangle is invalid, the property is not changed. To set up the values of an invalid geo rectangle based on the center, width, and height, you should use setCenter() first to make the geo rectangle valid.</para>
+            <para>If the change in height would cause the geo rectangle to cross a pole, the height is adjusted such that the geo rectangle only touches the pole.</para>
+            <para>This change is done such that the center coordinate is still at the center of the geo rectangle, which may result in a geo rectangle with a smaller height than expected.</para>
+            <para>180.0 is the height used only if the new height is greater or equal than 180.</para>
+            <para>While this property is introduced in Qt 5.5, the related accessor functions exist since the first version of this class.</para>
+            <para>This property was introduced in  Qt 5.5.</para>
+            </summary>
+        </member>
+        <member name="T:QtPositioning.QNmeaPositionInfoSource">
+            <summary>
+            <para>The QNmeaPositionInfoSource class provides positional information using a NMEA data source.</para>
+            </summary>
+            <remarks>
+            <para>NMEA is a commonly used protocol for the specification of one's global position at a certain point in time. The QNmeaPositionInfoSource class reads NMEA data and uses it to provide positional data in the form of QGeoPositionInfo objects.</para>
+            <para>A QNmeaPositionInfoSource instance operates in either RealTimeMode or SimulationMode. These modes allow NMEA data to be read from either a live source of positional data, or replayed for simulation purposes from previously recorded NMEA data.</para>
+            <para>The source of NMEA data is set with setDevice().</para>
+            <para>Use startUpdates() to start receiving regular position updates and stopUpdates() to stop these updates. If you only require updates occasionally, you can call requestUpdate() to request a single update.</para>
+            <para>In both cases the position information is received via the positionUpdated() signal and the last known position can be accessed with lastKnownPosition().</para>
+            <para>QNmeaPositionInfoSource supports reporting the accuracy of the horizontal and vertical position. To enable position accuracy reporting an estimate of the User Equivalent Range Error associated with the NMEA source must be set with setUserEquivalentRangeError().</para>
+            </remarks>
+        </member>
+        <member name="M:QtPositioning.QNmeaPositionInfoSource.#ctor(QtPositioning.QNmeaPositionInfoSource.UpdateMode,QtCore.QObject)">
+            <summary>
+            <para>Constructs a QNmeaPositionInfoSource instance with the given parent and updateMode.</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QNmeaPositionInfoSource.LastKnownPosition(System.Boolean)">
+            <summary>
+            <para>Reimplemented from QGeoPositionInfoSource::lastKnownPosition().</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QNmeaPositionInfoSource.StartUpdates">
+            <summary>
+            <para>Reimplemented from QGeoPositionInfoSource::startUpdates().</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QNmeaPositionInfoSource.StopUpdates">
+            <summary>
+            <para>Reimplemented from QGeoPositionInfoSource::stopUpdates().</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QNmeaPositionInfoSource.RequestUpdate(System.Int32)">
+            <summary>
+            <para>Reimplemented from QGeoPositionInfoSource::requestUpdate().</para>
+            </summary>
+        </member>
+        <member name="M:QtPositioning.QNmeaPositionInfoSource.ParsePosInfoFromNmeaData(System.String,System.Int32,QtPositioning.QGeoPositionInfo,System.Boolean@)">
+            <summary>
+            <para>Parses an NMEA sentence string into a QGeoPositionInfo.</para>
+            <para>The default implementation will parse standard NMEA sentences. This method should be reimplemented in a subclass whenever the need to deal with non-standard NMEA sentences arises.</para>
+            <para>The parser reads size bytes from data and uses that information to setup posInfo and hasFix. If hasFix is set to false then posInfo may contain only the time or the date and the time.</para>
+            <para>Returns true if the sentence was succsesfully parsed, otherwise returns false and should not modifiy posInfo or hasFix.</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QNmeaPositionInfoSource.UserEquivalentRangeError">
+            <summary>
+            <para>Returns the current User Equivalent Range Error (UERE). The UERE is used in calculating an estimate of the accuracy of the position information reported by the position info source. The default value is NaN which means no accuracy information will be provided.</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            <para>See also setUserEquivalentRangeError().</para>
+            <para></para>
+            <para>Sets the User Equivalent Range Error (UERE) to uere. The UERE is used in calculating an estimate of the accuracy of the position information reported by the position info source. The UERE should be set to a value appropriate for the GPS device which generated the NMEA stream.</para>
+            <para>The true UERE value is calculated from multiple error sources including errors introduced by the satellites and signal propogation delays through the atmosphere as well as errors introduced by the receiving GPS equipment. For details on GPS accuracy see http://edu-observatory.org/gps/gps_accuracy.html.</para>
+            <para>A typical value for UERE is approximately 5.1.</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            <para>See also userEquivalentRangeError().</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QNmeaPositionInfoSource.Device">
+            <summary>
+            <para>Returns the NMEA data source.</para>
+            <para>See also setDevice().</para>
+            <para></para>
+            <para>Sets the NMEA data source to device. If the device is not open, it will be opened in QIODevice::ReadOnly mode.</para>
+            <para>The source device can only be set once and must be set before calling startUpdates() or requestUpdate().</para>
+            <para>Note: The device must emit QIODevice::readyRead() for the source to be notified when data is available for reading. QNmeaPositionInfoSource does not assume the ownership of the device, and hence does not deallocate it upon destruction.</para>
+            <para>See also device().</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QNmeaPositionInfoSource.UpdateInterval">
+            <summary>
+            <para>This property holds this property holds the requested interval in milliseconds between each update.</para>
+            <para>If the update interval is not set (or is set to 0) the source will provide updates as often as necessary.</para>
+            <para>If the update interval is set, the source will provide updates at an interval as close to the requested interval as possible. If the requested interval is less than the minimumUpdateInterval(), the minimum interval is used instead.</para>
+            <para>Changes to the update interval will happen as soon as is practical, however the time the change takes may vary between implementations. Whether or not the elapsed time from the previous interval is counted as part of the new interval is also implementation dependent.</para>
+            <para>The default value for this property is 0.</para>
+            <para>Note: Subclass implementations must call the base implementation of setUpdateInterval() so that updateInterval() returns the correct value.</para>
+            <para></para>
+            <para>Reimplemented from QGeoPositionInfoSource::setUpdateInterval().</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QNmeaPositionInfoSource.SupportedPositioningMethods">
+            <summary>
+            <para>Reimplemented from QGeoPositionInfoSource::supportedPositioningMethods().</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QNmeaPositionInfoSource.MinimumUpdateInterval">
+            <summary>
+            <para>Reimplemented from QGeoPositionInfoSource::minimumUpdateInterval().</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QNmeaPositionInfoSource.error">
+            <summary>
+            <para>Reimplemented from QGeoPositionInfoSource::error().</para>
+            </summary>
+        </member>
+        <member name="P:QtPositioning.QNmeaPositionInfoSource.updateMode">
+            <summary>
+            <para>Returns the update mode.</para>
+            </summary>
+        </member>
+        <member name="T:QtPositioning.QNmeaPositionInfoSource.UpdateMode">
+            <summary>
+            <para>Defines the available update modes.</para>
+            </summary>
+        </member>
+        <member name="F:QtPositioning.QNmeaPositionInfoSource.UpdateMode.RealTimeMode">
+            <summary>Positional data is read and distributed from the data source as it becomes available. Use this mode if you are using a live source of positional data (for example, a GPS hardware device).</summary>
+        </member>
+        <member name="F:QtPositioning.QNmeaPositionInfoSource.UpdateMode.SimulationMode">
+            <summary>The data and time information in the NMEA source data is used to provide positional updates at the rate at which the data was originally recorded. Use this mode if the data source contains previously recorded NMEA data and you want to replay the data for simulation purposes.</summary>
+        </member>
+    </members>
+</doc>

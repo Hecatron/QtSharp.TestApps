@@ -52,29 +52,23 @@
     <Reference Include="CppSharp.Runtime">
       <HintPath>..\..\..\References\CppSharp.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="QtCoreSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References\QtCoreSharp.dll</HintPath>
+    <Reference Include="QtCore.Sharp">
+      <HintPath>..\..\..\References\QtCore.Sharp.dll</HintPath>
     </Reference>
-    <Reference Include="QtGuiSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References\QtGuiSharp.dll</HintPath>
+    <Reference Include="QtGui.Sharp">
+      <HintPath>..\..\..\References\QtGui.Sharp.dll</HintPath>
     </Reference>
-    <Reference Include="QtQmlSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References\QtQmlSharp.dll</HintPath>
+    <Reference Include="QtQml.Sharp">
+      <HintPath>..\..\..\References\QtQml.Sharp.dll</HintPath>
     </Reference>
-    <Reference Include="QtQuickSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References\QtQuickSharp.dll</HintPath>
+    <Reference Include="QtQuick.Sharp">
+      <HintPath>..\..\..\References\QtQuick.Sharp.dll</HintPath>
     </Reference>
-    <Reference Include="QtQuickWidgetsSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References\QtQuickWidgetsSharp.dll</HintPath>
+    <Reference Include="QtQuickWidgets.Sharp">
+      <HintPath>..\..\..\References\QtQuickWidgets.Sharp.dll</HintPath>
     </Reference>
-    <Reference Include="QtWidgetsSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References\QtWidgetsSharp.dll</HintPath>
+    <Reference Include="QtWidgets.Sharp">
+      <HintPath>..\..\..\References\QtWidgets.Sharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

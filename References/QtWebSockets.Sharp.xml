@@ -1,0 +1,682 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>QtWebSockets.Sharp</name>
+    </assembly>
+    <members>
+        <member name="T:QtWebSockets.QMaskGenerator">
+            <summary>
+            <para>The QMaskGenerator class provides an abstract base for custom 32-bit mask generators.</para>
+            </summary>
+            <remarks>
+            <para>The WebSockets specification as outlined in RFC 6455 requires that all communication from client to server be masked. This is to prevent malicious scripts from attacking badly behaving proxies. For more information about the importance of good masking, see &quot;Talking to Yourself for Fun and Profit&quot; by Lin-Shung Huang et al. By default QWebSocket uses the cryptographically insecure qrand() function. The best measure against attacks mentioned in the document above, is to use QWebSocket over a secure connection (wss://). In general, always be careful to not have 3rd party script access to a QWebSocket in your application.</para>
+            </remarks>
+        </member>
+        <member name="M:QtWebSockets.QMaskGenerator.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Creates a new QMaskGenerator object with the given optional QObject parent.</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QMaskGenerator.Seed">
+            <summary>
+            <para>Initializes the QMaskGenerator by seeding the randomizer. When seed() is not called, it depends on the specific implementation of a subclass if a default seed is used or no seed is used at all. Returns true if seeding succeeds, otherwise false.</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QMaskGenerator.NextMask">
+            <summary>
+            <para>Returns a new random 32-bit mask. The randomness depends on the RNG used to created the mask.</para>
+            </summary>
+        </member>
+        <member name="T:QtWebSockets.QWebSocketProtocol.Version">
+            <summary>
+            <para>The different defined versions of the WebSocket protocol.</para>
+            <para>For an overview of the differences between the different protocols, see pywebsocket's WebSocketProtocolSpec.</para>
+            </summary>
+        </member>
+        <member name="F:QtWebSockets.QWebSocketProtocol.Version.VersionUnknown">
+            <summary>Unknown or unspecified version.</summary>
+        </member>
+        <member name="F:QtWebSockets.QWebSocketProtocol.Version.Version0">
+            <summary>hixie76 and hybi-00. Works with key1, key2 and a key in the payload. Attribute: Sec-WebSocket-Draft value 0. Not supported by QtWebSockets.</summary>
+        </member>
+        <member name="F:QtWebSockets.QWebSocketProtocol.Version.Version4">
+            <summary>hybi-04. Changed handshake: key1, key2, key3 ==> Sec-WebSocket-Key, Sec-WebSocket-Nonce, Sec-WebSocket-Accept Sec-WebSocket-Draft renamed to Sec-WebSocket-Version Sec-WebSocket-Version = 4. Not supported by QtWebSockets.</summary>
+        </member>
+        <member name="F:QtWebSockets.QWebSocketProtocol.Version.Version5">
+            <summary>hybi-05. Sec-WebSocket-Version = 5 Removed Sec-WebSocket-Nonce Added Sec-WebSocket-Accept. Not supported by QtWebSockets.</summary>
+        </member>
+        <member name="F:QtWebSockets.QWebSocketProtocol.Version.Version6">
+            <summary>Sec-WebSocket-Version = 6. Not supported by QtWebSockets.</summary>
+        </member>
+        <member name="F:QtWebSockets.QWebSocketProtocol.Version.Version7">
+            <summary>hybi-07. Sec-WebSocket-Version = 7. Not supported by QtWebSockets.</summary>
+        </member>
+        <member name="F:QtWebSockets.QWebSocketProtocol.Version.Version8">
+            <summary>hybi-8, hybi-9, hybi-10, hybi-11 and hybi-12. Status codes 1005 and 1006 are added and all codes are now unsigned Internal error results in 1006. Not supported by QtWebSockets.</summary>
+        </member>
+        <member name="F:QtWebSockets.QWebSocketProtocol.Version.Version13">
+            <summary>hybi-13, hybi14, hybi-15, hybi-16, hybi-17 and RFC 6455. Sec-WebSocket-Version = 13 Status code 1004 is now reserved Added 1008, 1009 and 1010 Must support TLS Clarify multiple version support. Supported by QtWebSockets.</summary>
+        </member>
+        <member name="F:QtWebSockets.QWebSocketProtocol.Version.VersionLatest">
+            <summary>Refers to the latest known version to QtWebSockets.</summary>
+        </member>
+        <member name="T:QtWebSockets.QWebSocketProtocol.CloseCode">
+            <summary>
+            <para>The close codes supported by WebSockets V13</para>
+            <para>See also QWebSocket::close().</para>
+            </summary>
+        </member>
+        <member name="F:QtWebSockets.QWebSocketProtocol.CloseCode.CloseCodeNormal">
+            <summary>Normal closure</summary>
+        </member>
+        <member name="F:QtWebSockets.QWebSocketProtocol.CloseCode.CloseCodeGoingAway">
+            <summary>Going away</summary>
+        </member>
+        <member name="F:QtWebSockets.QWebSocketProtocol.CloseCode.CloseCodeProtocolError">
+            <summary>Protocol error</summary>
+        </member>
+        <member name="F:QtWebSockets.QWebSocketProtocol.CloseCode.CloseCodeDatatypeNotSupported">
+            <summary>Unsupported data</summary>
+        </member>
+        <member name="F:QtWebSockets.QWebSocketProtocol.CloseCode.CloseCodeReserved1004">
+            <summary>Reserved</summary>
+        </member>
+        <member name="F:QtWebSockets.QWebSocketProtocol.CloseCode.CloseCodeMissingStatusCode">
+            <summary>No status received</summary>
+        </member>
+        <member name="F:QtWebSockets.QWebSocketProtocol.CloseCode.CloseCodeAbnormalDisconnection">
+            <summary>Abnormal closure</summary>
+        </member>
+        <member name="F:QtWebSockets.QWebSocketProtocol.CloseCode.CloseCodeWrongDatatype">
+            <summary>Invalid frame payload data</summary>
+        </member>
+        <member name="F:QtWebSockets.QWebSocketProtocol.CloseCode.CloseCodePolicyViolated">
+            <summary>Policy violation</summary>
+        </member>
+        <member name="F:QtWebSockets.QWebSocketProtocol.CloseCode.CloseCodeTooMuchData">
+            <summary>Message too big</summary>
+        </member>
+        <member name="F:QtWebSockets.QWebSocketProtocol.CloseCode.CloseCodeMissingExtension">
+            <summary>Mandatory extension missing</summary>
+        </member>
+        <member name="F:QtWebSockets.QWebSocketProtocol.CloseCode.CloseCodeBadOperation">
+            <summary>Internal server error</summary>
+        </member>
+        <member name="F:QtWebSockets.QWebSocketProtocol.CloseCode.CloseCodeTlsHandshakeFailed">
+            <summary>TLS handshake failed</summary>
+        </member>
+        <member name="T:QtWebSockets.QWebSocket">
+            <summary>
+            <para>Implements a TCP socket that talks the WebSocket protocol.</para>
+            </summary>
+            <remarks>
+            <para>WebSockets is a web technology providing full-duplex communications channels over a single TCP connection. The WebSocket protocol was standardized by the IETF as RFC 6455 in 2011. QWebSocket can both be used in a client application and server application.</para>
+            <para>This class was modeled after QAbstractSocket.</para>
+            <para>QWebSocket currently does not support WebSocket Extensions and WebSocket Subprotocols.</para>
+            <para>QWebSocket only supports version 13 of the WebSocket protocol, as outlined in RFC 6455.</para>
+            <para>Note: Some proxies do not understand certain HTTP headers used during a WebSocket handshake. In that case, non-secure WebSocket connections fail. The best way to mitigate against this problem is to use WebSocket over a secure connection.</para>
+            <para>Warning: To generate masks, this implementation of WebSockets uses the cryptographically insecure qrand() function. For more information about the importance of good masking, see &quot;Talking to Yourself for Fun and Profit&quot; by Lin-Shung Huang et al. The best measure against attacks mentioned in the document above, is to use QWebSocket over a secure connection (wss://). In general, always be careful to not have 3rd party script access to a QWebSocket in your application.</para>
+            <para></para>
+            <para>See also QAbstractSocket, QTcpSocket, and QWebSocket client example.</para>
+            </remarks>
+        </member>
+        <member name="M:QtWebSockets.QWebSocket.#ctor(System.String,QtWebSockets.QWebSocketProtocol.Version,QtCore.QObject)">
+            <summary>
+            <para>Creates a new QWebSocket with the given origin, the version of the protocol to use and parent.</para>
+            <para>The origin of the client is as specified in RFC 6454. (The origin is not required for non-web browser clients (see RFC 6455)). The origin may not contain new line characters, otherwise the connection will be aborted immediately during the handshake phase.</para>
+            <para>Note: Currently only V13 (RFC 6455) is supported</para>
+            </summary>
+        </member>
+        <member name="M:QtWebSockets.QWebSocket.Abort">
+            <summary>
+            <para>Aborts the current socket and resets the socket. Unlike close(), this function immediately closes the socket, discarding any pending data in the write buffer.</para>
+            </summary>
+        </member>
+        <member name="M:QtWebSockets.QWebSocket.Resume">
+            <summary>
+            <para>Continues data transfer on the socket. This method should only be used after the socket has been set to pause upon notifications and a notification has been received. The only notification currently supported is sslErrors(). Calling this method if the socket is not paused results in undefined behavior.</para>
+            <para>See also pauseMode() and setPauseMode().</para>
+            </summary>
+        </member>
+        <member name="M:QtWebSockets.QWebSocket.CloseCode">
+            <summary>
+            <para>Returns the code indicating why the socket was closed.</para>
+            <para>See also QWebSocketProtocol::CloseCode and closeReason().</para>
+            </summary>
+        </member>
+        <member name="M:QtWebSockets.QWebSocket.CloseReason">
+            <summary>
+            <para>Returns the reason why the socket was closed.</para>
+            <para>See also closeCode().</para>
+            </summary>
+        </member>
+        <member name="M:QtWebSockets.QWebSocket.SendTextMessage(System.String)">
+            <summary>
+            <para>Sends the given message over the socket as a text message and returns the number of bytes actually sent.</para>
+            <para>See also sendBinaryMessage().</para>
+            </summary>
+        </member>
+        <member name="M:QtWebSockets.QWebSocket.SendBinaryMessage(QtCore.QByteArray)">
+            <summary>
+            <para>Sends the given data over the socket as a binary message and returns the number of bytes actually sent.</para>
+            <para>See also sendTextMessage().</para>
+            </summary>
+        </member>
+        <member name="M:QtWebSockets.QWebSocket.Close(QtWebSockets.QWebSocketProtocol.CloseCode,System.String)">
+            <summary>
+            <para>Gracefully closes the socket with the given closeCode and reason.</para>
+            <para>Any data in the write buffer is flushed before the socket is closed. The closeCode is a QWebSocketProtocol::CloseCode indicating the reason to close, and reason describes the reason of the closure more in detail</para>
+            </summary>
+        </member>
+        <member name="M:QtWebSockets.QWebSocket.Open(QtCore.QUrl)">
+            <summary>
+            <para>Opens a WebSocket connection using the given url.</para>
+            <para>If the url contains newline characters (\r\n), then the error signal will be emitted with QAbstractSocket::ConnectionRefusedError as error type.</para>
+            </summary>
+        </member>
+        <member name="M:QtWebSockets.QWebSocket.Open(QtNetwork.QNetworkRequest)">
+            <summary>
+            <para>Opens a WebSocket connection using the given request.</para>
+            <para>The request url will be used to open the WebSocket connection. Headers present in the request will be sent to the server in the upgrade request, together with the ones needed for the websocket handshake.</para>
+            <para>This function was introduced in  Qt 5.6.</para>
+            </summary>
+        </member>
+        <member name="M:QtWebSockets.QWebSocket.Ping(QtCore.QByteArray)">
+            <summary>
+            <para>Pings the server to indicate that the connection is still alive. Additional payload can be sent along the ping message.</para>
+            <para>The size of the payload cannot be bigger than 125. If it is larger, the payload is clipped to 125 bytes.</para>
+            <para>See also pong().</para>
+            </summary>
+        </member>
+        <member name="M:QtWebSockets.QWebSocket.IgnoreSslErrors">
+            <summary>
+            <para>This slot tells QWebSocket to ignore errors during QWebSocket's handshake phase and continue connecting. If you want to continue with the connection even if errors occur during the handshake phase, then you must call this slot, either from a slot connected to sslErrors(), or before the handshake phase. If you don't call this slot, either in response to errors or before the handshake, the connection will be dropped after the sslErrors() signal has been emitted.</para>
+            <para>Warning: Be sure to always let the user inspect the errors reported by the sslErrors() signal, and only call this method upon confirmation from the user that proceeding is ok. If there are unexpected errors, the connection should be aborted. Calling this method without inspecting the actual errors will most likely pose a security risk for your application. Use it with great care!</para>
+            <para>See also sslErrors(), QSslSocket::ignoreSslErrors(), and QNetworkReply::ignoreSslErrors().</para>
+            </summary>
+        </member>
+        <member name="M:QtWebSockets.QWebSocket.Ping">
+            <summary>
+            <para>Pings the server to indicate that the connection is still alive. Additional payload can be sent along the ping message.</para>
+            <para>The size of the payload cannot be bigger than 125. If it is larger, the payload is clipped to 125 bytes.</para>
+            <para>See also pong().</para>
+            </summary>
+        </member>
+        <member name="E:QtWebSockets.QWebSocket.AboutToClose">
+            <summary>
+            <para>This signal is emitted when the socket is about to close. Connect this signal if you have operations that need to be performed before the socket closes (e.g., if you have data in a separate buffer that needs to be written to the device).</para>
+            <para>See also close().</para>
+            </summary>
+        </member>
+        <member name="E:QtWebSockets.QWebSocket.Connected">
+            <summary>
+            <para>Emitted when a connection is successfully established. A connection is successfully established when the socket is connected and the handshake was successful.</para>
+            <para>See also open() and disconnected().</para>
+            </summary>
+        </member>
+        <member name="E:QtWebSockets.QWebSocket.Disconnected">
+            <summary>
+            <para>Emitted when the socket is disconnected.</para>
+            <para>See also close() and connected().</para>
+            </summary>
+        </member>
+        <member name="E:QtWebSockets.QWebSocket.StateChanged">
+            <summary>
+            <para>This signal is emitted whenever QWebSocket's state changes. The state parameter is the new state.</para>
+            <para>Note: QAbstractSocket::ConnectedState is emitted after the handshake with the server has succeeded.</para>
+            <para>QAbstractSocket::SocketState is not a registered metatype, so for queued connections, you will have to register it with Q_REGISTER_METATYPE() and qRegisterMetaType().</para>
+            <para>See also state().</para>
+            </summary>
+        </member>
+        <member name="E:QtWebSockets.QWebSocket.ProxyAuthenticationRequired">
+            <summary>
+            <para>This signal can be emitted when a proxy that requires authentication is used. The authenticator object can then be filled in with the required details to allow authentication and continue the connection.</para>
+            <para>Note: It is not possible to use a QueuedConnection to connect to this signal, as the connection will fail if the authenticator has not been filled in with new information when the signal returns.</para>
+            <para>See also QAuthenticator and QNetworkProxy.</para>
+            </summary>
+        </member>
+        <member name="E:QtWebSockets.QWebSocket.ReadChannelFinished">
+            <summary>
+            <para>This signal is emitted when the input (reading) stream is closed in this device. It is emitted as soon as the closing is detected.</para>
+            <para>See also close().</para>
+            </summary>
+        </member>
+        <member name="E:QtWebSockets.QWebSocket.TextFrameReceived">
+            <summary>
+            <para>This signal is emitted whenever a text frame is received. The frame contains the data and isLastFrame indicates whether this is the last frame of the complete message.</para>
+            <para>This signal can be used to process large messages frame by frame, instead of waiting for the complete message to arrive.</para>
+            <para>See also binaryFrameReceived().</para>
+            </summary>
+        </member>
+        <member name="E:QtWebSockets.QWebSocket.BinaryFrameReceived">
+            <summary>
+            <para>This signal is emitted whenever a binary frame is received. The frame contains the data and isLastFrame indicates whether this is the last frame of the complete message.</para>
+            <para>This signal can be used to process large messages frame by frame, instead of waiting for the complete message to arrive.</para>
+            <para>See also textFrameReceived().</para>
+            </summary>
+        </member>
+        <member name="E:QtWebSockets.QWebSocket.TextMessageReceived">
+            <summary>
+            <para>This signal is emitted whenever a text message is received. The message contains the received text.</para>
+            <para>See also binaryMessageReceived().</para>
+            </summary>
+        </member>
+        <member name="E:QtWebSockets.QWebSocket.BinaryMessageReceived">
+            <summary>
+            <para>This signal is emitted whenever a binary message is received. The message contains the received bytes.</para>
+            <para>See also textMessageReceived().</para>
+            </summary>
+        </member>
+        <member name="E:QtWebSockets.QWebSocket.ErrorError">
+            <summary>
+            <para>This signal is emitted after an error occurred. The error parameter describes the type of error that occurred.</para>
+            <para>QAbstractSocket::SocketError is not a registered metatype, so for queued connections, you will have to register it with Q_DECLARE_METATYPE() and qRegisterMetaType().</para>
+            <para></para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>error</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
+            <para></para>
+            <para></para>
+            <para>  connect(webSocket, static_cast&lt;void(QWebSocket::*)(QAbstractSocket::SocketError)&gt;(&amp;QWebSocket::error),</para>
+            <para>      [=](QAbstractSocket::SocketError error){ /* ... */ });</para>
+            <para></para>
+            <para></para>
+            <para>See also error() and errorString().</para>
+            </summary>
+        </member>
+        <member name="E:QtWebSockets.QWebSocket.Pong">
+            <summary>
+            <para>Emitted when a pong message is received in reply to a previous ping. elapsedTime contains the roundtrip time in milliseconds and payload contains an optional payload that was sent with the ping.</para>
+            <para>See also ping().</para>
+            </summary>
+        </member>
+        <member name="E:QtWebSockets.QWebSocket.BytesWritten">
+            <summary>
+            <para>This signal is emitted every time a payload of data has been written to the socket. The bytes argument is set to the number of bytes that were written in this payload.</para>
+            <para>Note: This signal has the same meaning both for secure and non-secure WebSockets. As opposed to QSslSocket, bytesWritten() is only emitted when encrypted data is effectively written (see QSslSocket::encryptedBytesWritten()).</para>
+            <para>See also close().</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocket.Proxy">
+            <summary>
+            <para>Returns the currently configured proxy</para>
+            <para>See also setProxy().</para>
+            <para></para>
+            <para>Sets the proxy to networkProxy</para>
+            <para>See also proxy().</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocket.MaskGenerator">
+            <summary>
+            <para>Returns the mask generator that is currently used by this QWebSocket.</para>
+            <para>See also setMaskGenerator().</para>
+            <para></para>
+            <para>Sets the generator to use for creating masks to maskGenerator. The default QWebSocket generator can be reset by supplying a Q_NULLPTR. The mask generator can be changed at any time, even while the connection is open.</para>
+            <para>See also maskGenerator().</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocket.ReadBufferSize">
+            <summary>
+            <para>Returns the size in bytes of the readbuffer that is used by the socket.</para>
+            <para>See also setReadBufferSize().</para>
+            <para></para>
+            <para>Sets the size of QWebSocket's internal read buffer to be size bytes.</para>
+            <para>If the buffer size is limited to a certain size, QWebSocket won't buffer more than this size of data. Exceptionally, a buffer size of 0 means that the read buffer is unlimited and all incoming data is buffered. This is the default. This option is useful if you only read the data at certain points in time (for example, in a real-time streaming application) or if you want to protect your socket against receiving too much data, which may eventually cause your application to run out of memory.</para>
+            <para>See also readBufferSize().</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocket.PauseMode">
+            <summary>
+            <para>Returns the pause mode of this socket</para>
+            <para>See also setPauseMode().</para>
+            <para></para>
+            <para>Controls whether to pause upon receiving a notification. The pauseMode parameter specifies the conditions in which the socket should be paused.</para>
+            <para>The only notification currently supported is sslErrors(). If set to PauseOnSslErrors, data transfer on the socket will be paused and needs to be enabled explicitly again by calling resume(). By default, this option is set to PauseNever. This option must be called before connecting to the server, otherwise it will result in undefined behavior.</para>
+            <para>See also pauseMode() and resume().</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocket.SslConfiguration">
+            <summary>
+            <para>Returns the socket's SSL configuration state. The default SSL configuration of a socket is to use the default ciphers, default CA certificates, no local private key or certificate. The SSL configuration also contains fields that can change with time without notice.</para>
+            <para>See also setSslConfiguration().</para>
+            <para></para>
+            <para>Sets the socket's SSL configuration to be the contents of sslConfiguration.</para>
+            <para>This function sets the local certificate, the ciphers, the private key and the CA certificates to those stored in sslConfiguration. It is not possible to set the SSL-state related fields.</para>
+            <para>See also sslConfiguration().</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocket.Error">
+            <summary>
+            <para>Returns the type of error that last occurred</para>
+            <para>See also errorString().</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocket.ErrorString">
+            <summary>
+            <para>Returns a human-readable description of the last error that occurred</para>
+            <para>See also error().</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocket.Flush">
+            <summary>
+            <para>This function writes as much as possible from the internal write buffer to the underlying network socket, without blocking. If any data was written, this function returns true; otherwise false is returned. Call this function if you need QWebSocket to start sending buffered data immediately. The number of bytes successfully written depends on the operating system. In most cases, you do not need to call this function, because QWebSocket will start sending data automatically once control goes back to the event loop.</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocket.IsValid">
+            <summary>
+            <para>Returns true if the socket is ready for reading and writing; otherwise returns false.</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocket.LocalAddress">
+            <summary>
+            <para>Returns the local address</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocket.LocalPort">
+            <summary>
+            <para>Returns the local port</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocket.PeerAddress">
+            <summary>
+            <para>Returns the peer address</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocket.PeerName">
+            <summary>
+            <para>Returns the peerName</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocket.PeerPort">
+            <summary>
+            <para>Returns the peerport</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocket.State">
+            <summary>
+            <para>Returns the current state of the socket.</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocket.Version">
+            <summary>
+            <para>Returns the version the socket is currently using.</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocket.ResourceName">
+            <summary>
+            <para>Returns the name of the resource currently accessed.</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocket.RequestUrl">
+            <summary>
+            <para>Returns the url the socket is connected to or will connect to.</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocket.Request">
+            <summary>
+            <para>Returns the request that was or will be used to open this socket.</para>
+            <para>This function was introduced in  Qt 5.6.</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocket.Origin">
+            <summary>
+            <para>Returns the current origin.</para>
+            </summary>
+        </member>
+        <member name="T:QtWebSockets.QWebSocketCorsAuthenticator">
+            <summary>
+            <para>The QWebSocketCorsAuthenticator class provides an authenticator object for Cross Origin Requests (CORS).</para>
+            </summary>
+            <remarks>
+            <para>The QWebSocketCorsAuthenticator class is used in the originAuthenticationRequired() signal. The class provides a way to pass back the required information to the QWebSocketServer. It provides applications with fine-grained control over which origin URLs are allowed and which aren't. By default, every origin is accepted. To get fine-grained control, an application connects the originAuthenticationRequired() signal to a slot. When the origin (QWebSocketCorsAuthenticator::origin()) is accepted, it calls QWebSocketCorsAuthenticator::setAllowed(true)</para>
+            <para>Note: Checking on the origin does not make much sense when the server is accessed via a non-browser client, as that client can set whatever origin header it likes. In case of a browser client, the server SHOULD check the validity of the origin.</para>
+            <para></para>
+            <para>See also WebSocket Security Considerations and QWebSocketServer.</para>
+            </remarks>
+        </member>
+        <member name="M:QtWebSockets.QWebSocketCorsAuthenticator.#ctor(System.String)">
+            <summary>
+            <para>Constructs a new QCorsAuthencator object with the given origin.</para>
+            <para>Note: By default, allowed() returns true. This means that per default every origin is accepted.</para>
+            </summary>
+        </member>
+        <member name="M:QtWebSockets.QWebSocketCorsAuthenticator.Swap(QtWebSockets.QWebSocketCorsAuthenticator)">
+            <summary>
+            <para>Swaps other with this authenticator.</para>
+            <para>This operation is very fast and never fails.</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocketCorsAuthenticator.Allowed">
+            <summary>
+            <para>Returns true if the origin is allowed, otherwise returns false.</para>
+            <para>Note: By default, all origins are accepted.</para>
+            <para>See also setAllowed().</para>
+            <para></para>
+            <para>Allows or disallows the origin. Setting allowed to true, will accept the connection request for the given origin.</para>
+            <para>Setting allowed to false, will reject the connection request.</para>
+            <para>Note: By default, all origins are accepted.</para>
+            <para>See also allowed().</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocketCorsAuthenticator.Origin">
+            <summary>
+            <para>Returns the origin this autenticator is handling about.</para>
+            </summary>
+        </member>
+        <member name="T:QtWebSockets.QWebSocketServer">
+            <summary>
+            <para>Implements a WebSocket-based server.</para>
+            </summary>
+            <remarks>
+            <para>It is modeled after QTcpServer, and behaves the same. So, if you know how to use QTcpServer, you know how to use QWebSocketServer. This class makes it possible to accept incoming WebSocket connections. You can specify the port or have QWebSocketServer pick one automatically. You can listen on a specific address or on all the machine's addresses. Call listen() to have the server listen for incoming connections.</para>
+            <para>The newConnection() signal is then emitted each time a client connects to the server. Call nextPendingConnection() to accept the pending connection as a connected QWebSocket. The function returns a pointer to a QWebSocket in QAbstractSocket::ConnectedState that you can use for communicating with the client.</para>
+            <para>If an error occurs, serverError() returns the type of error, and errorString() can be called to get a human readable description of what happened.</para>
+            <para>When listening for connections, the address and port on which the server is listening are available as serverAddress() and serverPort().</para>
+            <para>Calling close() makes QWebSocketServer stop listening for incoming connections.</para>
+            <para>QWebSocketServer currently does not support WebSocket Extensions and WebSocket Subprotocols.</para>
+            <para>Note: When working with self-signed certificates, Firefox bug 594502 prevents Firefox to connect to a secure WebSocket server. To work around this problem, first browse to the secure WebSocket server using HTTPS. FireFox will indicate that the certificate is invalid. From here on, the certificate can be added to the exceptions. After this, the secure WebSockets connection should work.</para>
+            <para>QWebSocketServer only supports version 13 of the WebSocket protocol, as outlined in RFC 6455.</para>
+            <para></para>
+            <para>See also WebSocket Server Example and QWebSocket.</para>
+            </remarks>
+        </member>
+        <member name="M:QtWebSockets.QWebSocketServer.#ctor(System.String,QtWebSockets.QWebSocketServer.SslMode,QtCore.QObject)">
+            <summary>
+            <para>Constructs a new QWebSocketServer with the given serverName. The serverName will be used in the HTTP handshake phase to identify the server. It can be empty, in which case an empty server name will be sent to the client. The secureMode parameter indicates whether the server operates over wss (SecureMode) or over ws (NonSecureMode).</para>
+            <para>parent is passed to the QObject constructor.</para>
+            </summary>
+        </member>
+        <member name="M:QtWebSockets.QWebSocketServer.Listen(QtNetwork.QHostAddress,System.UInt16)">
+            <summary>
+            <para>Tells the server to listen for incoming connections on address address and port port. If port is 0, a port is chosen automatically. If address is QHostAddress::Any, the server will listen on all network interfaces.</para>
+            <para>Returns true on success; otherwise returns false.</para>
+            <para>See also isListening().</para>
+            </summary>
+        </member>
+        <member name="M:QtWebSockets.QWebSocketServer.Close">
+            <summary>
+            <para>Closes the server. The server will no longer listen for incoming connections.</para>
+            </summary>
+        </member>
+        <member name="M:QtWebSockets.QWebSocketServer.SecureMode">
+            <summary>
+            <para>Returns the secure mode the server is running in.</para>
+            <para>See also QWebSocketServer() and SslMode.</para>
+            </summary>
+        </member>
+        <member name="M:QtWebSockets.QWebSocketServer.SetSocketDescriptor(System.Int32)">
+            <summary>
+            <para>Sets the socket descriptor this server should use when listening for incoming connections to socketDescriptor.</para>
+            <para>Returns true if the socket is set successfully; otherwise returns false. The socket is assumed to be in listening state.</para>
+            <para>See also socketDescriptor() and isListening().</para>
+            </summary>
+        </member>
+        <member name="M:QtWebSockets.QWebSocketServer.PauseAccepting">
+            <summary>
+            <para>Pauses incoming new connections. Queued connections will remain in queue.</para>
+            <para>See also resumeAccepting().</para>
+            </summary>
+        </member>
+        <member name="M:QtWebSockets.QWebSocketServer.ResumeAccepting">
+            <summary>
+            <para>Resumes accepting new connections.</para>
+            <para>See also pauseAccepting().</para>
+            </summary>
+        </member>
+        <member name="M:QtWebSockets.QWebSocketServer.Listen">
+            <summary>
+            <para>Tells the server to listen for incoming connections on address address and port port. If port is 0, a port is chosen automatically. If address is QHostAddress::Any, the server will listen on all network interfaces.</para>
+            <para>Returns true on success; otherwise returns false.</para>
+            <para>See also isListening().</para>
+            </summary>
+        </member>
+        <member name="E:QtWebSockets.QWebSocketServer.AcceptError">
+            <summary>
+            <para>This signal is emitted when the acceptance of a new connection results in an error. The socketError parameter describes the type of error that occurred.</para>
+            <para>See also pauseAccepting() and resumeAccepting().</para>
+            </summary>
+        </member>
+        <member name="E:QtWebSockets.QWebSocketServer.ServerError">
+            <summary>
+            <para>This signal is emitted when an error occurs during the setup of a WebSocket connection. The closeCode parameter describes the type of error that occurred</para>
+            <para>See also errorString().</para>
+            </summary>
+        </member>
+        <member name="E:QtWebSockets.QWebSocketServer.OriginAuthenticationRequired">
+            <summary>
+            <para>This signal is emitted when a new connection is requested. The slot connected to this signal should indicate whether the origin (which can be determined by the origin() call) is allowed in the authenticator object (by issuing setAllowed()).</para>
+            <para>If no slot is connected to this signal, all origins will be accepted by default.</para>
+            <para>Note: It is not possible to use a QueuedConnection to connect to this signal, as the connection will always succeed.</para>
+            </summary>
+        </member>
+        <member name="E:QtWebSockets.QWebSocketServer.NewConnection">
+            <summary>
+            <para>This signal is emitted every time a new connection is available.</para>
+            <para>See also hasPendingConnections() and nextPendingConnection().</para>
+            </summary>
+        </member>
+        <member name="E:QtWebSockets.QWebSocketServer.PeerVerifyError">
+            <summary>
+            <para>QWebSocketServer can emit this signal several times during the SSL handshake, before encryption has been established, to indicate that an error has occurred while establishing the identity of the peer. The error is usually an indication that QWebSocketServer is unable to securely identify the peer.</para>
+            <para>This signal provides you with an early indication when something is wrong. By connecting to this signal, you can manually choose to tear down the connection from inside the connected slot before the handshake has completed. If no action is taken, QWebSocketServer will proceed to emitting QWebSocketServer::sslErrors().</para>
+            <para>See also sslErrors().</para>
+            </summary>
+        </member>
+        <member name="E:QtWebSockets.QWebSocketServer.Closed">
+            <summary>
+            <para>This signal is emitted when the server closed its connection.</para>
+            <para>See also close().</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocketServer.MaxPendingConnections">
+            <summary>
+            <para>Returns the maximum number of pending accepted connections. The default is 30.</para>
+            <para>See also setMaxPendingConnections() and hasPendingConnections().</para>
+            <para></para>
+            <para>Sets the maximum number of pending accepted connections to numConnections. WebSocketServer will accept no more than numConnections incoming connections before nextPendingConnection() is called. By default, the limit is 30 pending connections.</para>
+            <para>QWebSocketServer will emit the error() signal with the QWebSocketProtocol::CloseCodeAbnormalDisconnection close code when the maximum of connections has been reached. The WebSocket handshake will fail and the socket will be closed.</para>
+            <para>See also maxPendingConnections() and hasPendingConnections().</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocketServer.ServerName">
+            <summary>
+            <para>Returns the server name that is used during the http handshake phase.</para>
+            <para>See also setServerName().</para>
+            <para></para>
+            <para>Sets the server name that will be used during the HTTP handshake phase to the given serverName. The serverName can be empty, in which case an empty server name will be sent to the client. Existing connected clients will not be notified of this change, only newly connecting clients will see this new name.</para>
+            <para>See also serverName().</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocketServer.Proxy">
+            <summary>
+            <para>Returns the network proxy for this server. By default QNetworkProxy::DefaultProxy is used.</para>
+            <para>See also setProxy().</para>
+            <para></para>
+            <para>Sets the explicit network proxy for this server to networkProxy.</para>
+            <para>To disable the use of a proxy, use the QNetworkProxy::NoProxy proxy type:</para>
+            <para></para>
+            <para></para>
+            <para>  server-&gt;setProxy(QNetworkProxy::NoProxy);</para>
+            <para></para>
+            <para></para>
+            <para>See also proxy().</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocketServer.SslConfiguration">
+            <summary>
+            <para>Returns the SSL configuration used by the QWebSocketServer. If the server is not running in secure mode (QWebSocketServer::SecureMode), this method returns QSslConfiguration::defaultConfiguration().</para>
+            <para>See also setSslConfiguration(), SslMode, and QSslConfiguration::defaultConfiguration().</para>
+            <para></para>
+            <para>Sets the SSL configuration for the QWebSocketServer to sslConfiguration. This method has no effect if QWebSocketServer runs in non-secure mode (QWebSocketServer::NonSecureMode).</para>
+            <para>See also sslConfiguration() and SslMode.</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocketServer.IsListening">
+            <summary>
+            <para>Returns true if the server is currently listening for incoming connections; otherwise returns false. If listening fails, error() will return the reason.</para>
+            <para>See also listen() and error().</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocketServer.ServerPort">
+            <summary>
+            <para>Returns the server's port if the server is listening for connections; otherwise returns 0.</para>
+            <para>See also serverAddress() and listen().</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocketServer.ServerAddress">
+            <summary>
+            <para>Returns the server's address if the server is listening for connections; otherwise returns QHostAddress::Null.</para>
+            <para>See also serverPort() and listen().</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocketServer.ServerUrl">
+            <summary>
+            <para>Returns a URL clients can use to connect to this server if the server is listening for connections. Otherwise an invalid URL is returned.</para>
+            <para>See also serverPort(), serverAddress(), and listen().</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocketServer.SocketDescriptor">
+            <summary>
+            <para>Returns the native socket descriptor the server uses to listen for incoming instructions, or -1 if the server is not listening. If the server is using QNetworkProxy, the returned descriptor may not be usable with native socket functions.</para>
+            <para>See also setSocketDescriptor() and isListening().</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocketServer.HasPendingConnections">
+            <summary>
+            <para>Returns true if the server has pending connections; otherwise returns false.</para>
+            <para>See also nextPendingConnection() and setMaxPendingConnections().</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocketServer.NextPendingConnection">
+            <summary>
+            <para>Returns the next pending connection as a connected QWebSocket object. QWebSocketServer does not take ownership of the returned QWebSocket object. It is up to the caller to delete the object explicitly when it will no longer be used, otherwise a memory leak will occur. Q_NULLPTR is returned if this function is called when there are no pending connections.</para>
+            <para>Note: The returned QWebSocket object cannot be used from another thread.</para>
+            <para>See also hasPendingConnections().</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocketServer.Error">
+            <summary>
+            <para>Returns an error code for the last error that occurred. If no error occurred, QWebSocketProtocol::CloseCodeNormal is returned.</para>
+            <para>See also errorString().</para>
+            </summary>
+        </member>
+        <member name="P:QtWebSockets.QWebSocketServer.ErrorString">
+            <summary>
+            <para>Returns a human readable description of the last error that occurred. If no error occurred, an empty string is returned.</para>
+            <para>See also serverError().</para>
+            </summary>
+        </member>
+        <member name="T:QtWebSockets.QWebSocketServer.SslMode">
+            <summary>
+            <para>Indicates whether the server operates over wss (SecureMode) or ws (NonSecureMode)</para>
+            </summary>
+        </member>
+        <member name="F:QtWebSockets.QWebSocketServer.SslMode.SecureMode">
+            <summary>The server operates in secure mode (over wss)</summary>
+        </member>
+        <member name="F:QtWebSockets.QWebSocketServer.SslMode.NonSecureMode">
+            <summary>The server operates in non-secure mode (over ws)</summary>
+        </member>
+    </members>
+</doc>

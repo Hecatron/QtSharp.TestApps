@@ -3,21 +3,12 @@ using System.Collections.Generic;
 using QtGui;
 using QtSharpHelper.CHelper;
 
-// QTGuiApplication should be used where widgets are not required, to avoid dependencies on QtWidget
-
-namespace QtSharpHelper.Qt
-{
-    public class QGuiApp : IDisposable
-    {
-
-        #region "Properties"
-
+namespace QtSharpHelper.Qt {
+    /// <summary> QTGuiApplication should be used where widgets are not required, to avoid dependencies on QtWidget. </summary>
+    public class QGuiApp : IDisposable {
         /// <summary> Readonly QGuiApplication object. </summary>
         /// <value> QGuiApplication object. </value>
-        public QGuiApplication QGuiApplication
-        {
-            get { return _QGuiApplication; }
-        }
+        public QGuiApplication QGuiApplication => _QGuiApplication;
 
         /// <summary> QGuiApplication object. </summary>
         /// <value> QGuiApplication object. </value>
@@ -27,86 +18,66 @@ namespace QtSharpHelper.Qt
         /// <value> C Array for options passed to QGuiApplication. </value>
         protected CStringArray COpts { get; set; }
 
-        protected bool disposed = false;
+        protected bool disposed;
         protected int argc;
 
-        #endregion
-
-        #region "Constructors"
-
         /// <summary> Specialised default constructor for use only by derived class. </summary>
-        protected unsafe QGuiApp(List<String> opts)
-        {
+        protected unsafe QGuiApp(IReadOnlyCollection<string> opts) {
             argc = opts.Count;
             char** argv = null;
 
-            if (opts.Count > 0)
-            {
+            if (opts.Count > 0) {
                 // Convert the string list to a C String Array
                 COpts = new CStringArray(opts);
                 COpts.Alloc();
-                argv = (char**)COpts.Address();
+                argv = (char**) COpts.Address();
             }
             _QGuiApplication = new QGuiApplication(ref argc, argv);
         }
 
         /// <summary> Creates QGuiApp object. </summary>
         /// <returns> The new QGuiApp object. </returns>
-        public static QGuiApp CreateQGuiApp()
-        {
-            if (_QGuiApplication != null) throw new Exception("Only one QGuiApplication class may be created at a time");
-            List<String> opts = new List<String>();
+        public static QGuiApp CreateQGuiApp() {
+            if (_QGuiApplication != null)
+                throw new System.Exception("Only one QGuiApplication class may be created at a time");
+            var opts = new List<string>();
             //opts.Add("");
-            QGuiApp ret = new QGuiApp(opts);
+            var ret = new QGuiApp(opts);
             return ret;
         }
 
         /// <summary> Creates QGuiApp object. </summary>
         /// <returns> The new QGuiApp object. </returns>
-        public static QGuiApp CreateQGuiApp(List<String> opts)
-        {
-            if (_QGuiApplication != null) throw new Exception("Only one QGuiApplication class may be created at a time");
-            QGuiApp ret = new QGuiApp(opts);
+        public static QGuiApp CreateQGuiApp(List<string> opts) {
+            if (_QGuiApplication != null)
+                throw new System.Exception("Only one QGuiApplication class may be created at a time");
+            var ret = new QGuiApp(opts);
             return ret;
         }
 
-        #endregion
-
-        #region "Destructors"
-
         /// <summary> Finaliser. </summary>
-        ~QGuiApp()
-        {
+        ~QGuiApp() {
             Dispose(false);
         }
 
         /// <summary> Dispose / close the class. </summary>
-        public void Dispose()
-        {
+        public void Dispose() {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposed)
-            {
-                if (disposing)
-                {
-                    // Free other state (managed objects).
-                    _QGuiApplication.Dispose();
-                }
+        protected virtual void Dispose(bool disposing) {
+            if (disposed) return;
+            if (disposing)
+                // Free other state (managed objects).
+                _QGuiApplication.Dispose();
 
-                // Free your own state (unmanaged objects).
-                // Set large fields to null.
-                //COpts.DeAlloc();
-                COpts = null;
-                _QGuiApplication = null;
-                disposed = true;
-            }
+            // Free your own state (unmanaged objects).
+            // Set large fields to null.
+            //COpts.DeAlloc();
+            COpts = null;
+            _QGuiApplication = null;
+            disposed = true;
         }
-
-        #endregion
-
     }
 }

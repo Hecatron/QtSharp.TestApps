@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>QtQuickControls2.Sharp</name>
+    </assembly>
+    <members>
+        <member name="T:QtQuickControls2.QQuickStyle">
+            <summary>
+            <para>The QQQuickStyle class allows configuring the application style.</para>
+            </summary>
+            <remarks>
+            <para>QQuickStyle provides API for querying and configuring the application styles of Qt Quick Controls 2.</para>
+            <para></para>
+            <para></para>
+            <para>  #include &lt;QGuiApplication&gt;</para>
+            <para>  #include &lt;QQmlApplicationEngine&gt;</para>
+            <para>  #include &lt;QQuickStyle&gt;</para>
+            <para></para>
+            <para>  int main(int argc, char *argv[])</para>
+            <para>  {</para>
+            <para>      QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);</para>
+            <para>      QGuiApplication app(argc, argv);</para>
+            <para></para>
+            <para>      QQuickStyle::setStyle(&quot;Material&quot;);</para>
+            <para></para>
+            <para>      QQmlApplicationEngine engine;</para>
+            <para>      engine.load(QUrl(&quot;qrc:/main.qml&quot;));</para>
+            <para></para>
+            <para>      return app.exec();</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
+            <para>Note: The style must be configured before loading QML that imports Qt Quick Controls 2. It is not possible to change the style after the QML types have been registered.</para>
+            <para></para>
+            <para>See also Styling Qt Quick Controls 2.</para>
+            </remarks>
+        </member>
+        <member name="M:QtQuickControls2.QQuickStyle.SetStyle(System.String)">
+            <summary>
+            <para>Sets the application style to style.</para>
+            <para>Note: The style must be configured before loading QML that imports Qt Quick Controls 2. It is not possible to change the style after the QML types have been registered.</para>
+            </summary>
+        </member>
+        <member name="P:QtQuickControls2.QQuickStyle.Name">
+            <summary>
+            <para>Returns the name of the application style.</para>
+            <para>Note: The application style can be specified by passing a -style command line argument. Therefore name() may not return a fully resolved value if called before constructing a QGuiApplication.</para>
+            </summary>
+        </member>
+        <member name="P:QtQuickControls2.QQuickStyle.Path">
+            <summary>
+            <para>Returns the path of an overridden application style, or an empty string if the style is one of the built-in Qt Quick Controls 2 styles.</para>
+            <para>Note: The application style can be specified by passing a -style command line argument. Therefore path() may not return a fully resolved value if called before constructing a QGuiApplication.</para>
+            </summary>
+        </member>
+    </members>
+</doc>

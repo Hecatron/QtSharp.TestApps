@@ -6,34 +6,24 @@ using System.Runtime.InteropServices;
 //TODO string formatting is ascii only
 //http://stackoverflow.com/questions/721201/whats-the-equivalent-of-vbs-asc-and-chr-functions-in-c
 
-namespace QtSharpHelper.CHelper
-{
-
+namespace QtSharpHelper.CHelper {
     /// <summary> Helper Code for Low Level C Unmanaged structures. </summary>
-    public class CHelper
-    {
-
-        #region Methods - Managed
-
+    public class CHelper {
         /// <summary> Return True if we're on a 64 bit Operating system. </summary>
         /// <returns> true if 64bit, false if not. </returns>
-        public static bool Is64bit()
-        {
-            return (Marshal.SizeOf(typeof(IntPtr)) * 8) == 64;
+        public static bool Is64bit() {
+            return (Marshal.SizeOf(typeof (IntPtr))*8) == 64;
         }
-
 
         /// <summary> Convert a C Byte Array to a String. </summary>
         /// <param name="ByteArr"> Array of bytes. </param>
         /// <returns> A String. </returns>
-        public static string CByteArrToString(byte[] ByteArr)
-        {
-            string retval = "";
+        public static string CByteArrToString(byte[] ByteArr) {
+            var retval = "";
             if (ByteArr == null)
                 return retval;
-            foreach (byte item in ByteArr)
-            {
-                retval += ((char)item).ToString();
+            foreach (var item in ByteArr) {
+                retval += ((char) item).ToString();
             }
             retval = retval.TrimEnd(' ');
             return retval;
@@ -42,16 +32,12 @@ namespace QtSharpHelper.CHelper
         /// <summary> Convert a String to a C Byte Array, Terminated with a Null (0) value. </summary>
         /// <param name="input"> The input. </param>
         /// <returns> A Byte() </returns>
-        public static byte[] StringToCByteArr(string input)
-        {
+        public static byte[] StringToCByteArr(string input) {
             if (string.IsNullOrEmpty(input))
-            {
                 return null;
-            }
-            byte[] retval = new byte[input.Length + 1];
-            int tempVar = input.Length - 1;
-            for (int count1 = 0; count1 <= tempVar; count1++)
-            {
+            var retval = new byte[input.Length + 1];
+            var tempVar = input.Length - 1;
+            for (var count1 = 0; count1 <= tempVar; count1++) {
                 retval[count1] = Convert.ToByte((input.Substring(count1, 1)[0]));
             }
             return retval;
@@ -65,17 +51,16 @@ namespace QtSharpHelper.CHelper
         /// <param name="src">    Source for the. </param>
         /// <param name="offset"> The offset. </param>
         /// <returns> An IntPtr. </returns>
-        public static IntPtr MemOffset(IntPtr src, int offset)
-        {
-            int bitsize = Marshal.SizeOf(typeof(IntPtr)) * 8;
-            switch (bitsize)
-            {
+        public static IntPtr MemOffset(IntPtr src, int offset) {
+            var bitsize = Marshal.SizeOf(typeof (IntPtr))*8;
+            switch (bitsize) {
                 case 64:
                     return new IntPtr(src.ToInt64() + offset);
                 case 32:
                     return new IntPtr(src.ToInt32() + offset);
                 default:
-                    throw new NotSupportedException("This is running on a machine where pointers are " + IntPtr.Size + " bytes which is currently unsupported");
+                    throw new NotSupportedException("This is running on a machine where pointers are " + IntPtr.Size +
+                                                    " bytes which is currently unsupported");
             }
         }
 
@@ -87,11 +72,9 @@ namespace QtSharpHelper.CHelper
         /// <param name="src">    Source for the. </param>
         /// <param name="offset"> The offset. </param>
         /// <returns> An IntPtr. </returns>
-        public static IntPtr MemOffset(IntPtr src, long offset)
-        {
-            int bitsize = Marshal.SizeOf(typeof(IntPtr)) * 8;
-            switch (bitsize)
-            {
+        public static IntPtr MemOffset(IntPtr src, long offset) {
+            var bitsize = Marshal.SizeOf(typeof (IntPtr))*8;
+            switch (bitsize) {
                 case 64:
                     return new IntPtr(src.ToInt64() + offset);
                 case 32:
@@ -99,20 +82,16 @@ namespace QtSharpHelper.CHelper
                     // And Not the "funny ha ha" kind
                     return new IntPtr(src.ToInt32() + offset);
                 default:
-                    throw new NotSupportedException("This is running on a machine where pointers are " + IntPtr.Size + " bytes which is currently unsupported");
+                    throw new NotSupportedException("This is running on a machine where pointers are " + IntPtr.Size +
+                                                    " bytes which is currently unsupported");
             }
         }
-
-        #endregion
-
-        #region Methods - UnManaged Conversion
 
         /// <summary> Convert an InPtr to a String. </summary>
         /// <param name="Pointer"> The pointer. </param>
         /// <returns> A String. </returns>
-        public static string Umg_PtrToString(IntPtr Pointer)
-        {
-            string retval = "";
+        public static string Umg_PtrToString(IntPtr Pointer) {
+            var retval = "";
             if (Pointer.ToInt64() != 0)
                 retval = Marshal.PtrToStringAnsi(Pointer);
             return retval;
@@ -128,11 +107,10 @@ namespace QtSharpHelper.CHelper
         /// </remarks>
         /// <param name="Pointer"> The pointer. </param>
         /// <returns> A customtype. </returns>
-        public static TCustomtype Umg_PtrToStructure<TCustomtype>(IntPtr Pointer)
-        {
+        public static TCustomtype Umg_PtrToStructure<TCustomtype>(IntPtr Pointer) {
             if (Pointer.ToInt64() == 0)
                 return default(TCustomtype);
-            var retval = (TCustomtype)Marshal.PtrToStructure(Pointer, typeof(TCustomtype));
+            var retval = (TCustomtype) Marshal.PtrToStructure(Pointer, typeof (TCustomtype));
             return retval;
         }
 
@@ -147,9 +125,8 @@ namespace QtSharpHelper.CHelper
         /// <param name="ptr">   The pointer. </param>
         /// <param name="Struc"> [in,out] The struc. </param>
         /// <returns> An IntPtr. </returns>
-        public static IntPtr Umg_StructureToPtr<TCustomtype>(IntPtr ptr, ref TCustomtype Struc)
-        {
-            IntPtr retval = ptr;
+        public static IntPtr Umg_StructureToPtr<TCustomtype>(IntPtr ptr, ref TCustomtype Struc) {
+            var retval = ptr;
             if (Struc == null)
                 return retval;
             Marshal.StructureToPtr(Struc, retval, false);
@@ -167,11 +144,10 @@ namespace QtSharpHelper.CHelper
         /// <param name="pointer"> The pointer. </param>
         /// <param name="input">   The input. </param>
         /// <returns> An IntPtr. </returns>
-        public static IntPtr Umg_CByteArrToPtr(IntPtr pointer, byte[] input)
-        {
-            IntPtr retval = pointer;
+        public static IntPtr Umg_CByteArrToPtr(IntPtr pointer, byte[] input) {
+            var retval = pointer;
             if (input == null)
-                throw (new Exception("Byte Array conversion Error"));
+                throw (new System.Exception("Byte Array conversion Error"));
             Marshal.Copy(input, 0, retval, input.Length);
             return retval;
         }
@@ -181,9 +157,8 @@ namespace QtSharpHelper.CHelper
         /// <param name="length">  The length. </param>
         /// <param name="Offset">  The offset. </param>
         /// <returns> A Byte() </returns>
-        public static byte[] Umg_PtrToCByteArr(IntPtr pointer, int length, int Offset = 0)
-        {
-            byte[] ret = new byte[length + 1];
+        public static byte[] Umg_PtrToCByteArr(IntPtr pointer, int length, int Offset = 0) {
+            var ret = new byte[length + 1];
             Marshal.Copy(pointer, ret, Offset, length);
             return ret;
         }
@@ -192,24 +167,23 @@ namespace QtSharpHelper.CHelper
         /// <param name="Pointer">  The pointer. </param>
         /// <param name="MaxCount"> Number of maximums. </param>
         /// <returns> A list of. </returns>
-        public static ReadOnlyCollection<TCustomtype> Umg_PtrToList<TCustomtype>(IntPtr Pointer, int MaxCount = int.MaxValue)
-        {
-            List<TCustomtype> retval = new List<TCustomtype>();
+        public static ReadOnlyCollection<TCustomtype> Umg_PtrToList<TCustomtype>(IntPtr Pointer,
+            int MaxCount = int.MaxValue) {
+            var retval = new List<TCustomtype>();
 
             // Set the Value Pointer to the First Item in the List
-            IntPtr arrayPtr = Pointer;
-            IntPtr valPtr = Umg_PtrToStructure<IntPtr>(arrayPtr);
+            var arrayPtr = Pointer;
+            var valPtr = Umg_PtrToStructure<IntPtr>(arrayPtr);
 
             // Loop Until no more items are left
-            while (valPtr.ToInt64() != 0 && MaxCount > 0)
-            {
+            while (valPtr.ToInt64() != 0 && MaxCount > 0) {
                 // Pull the Next value from the Array
                 object tmpobj;
-                if (typeof(TCustomtype) == typeof(string))
+                if (typeof (TCustomtype) == typeof (string))
                     tmpobj = Umg_PtrToString(valPtr);
                 else
                     tmpobj = Umg_PtrToStructure<TCustomtype>(valPtr);
-                retval.Add((TCustomtype)tmpobj);
+                retval.Add((TCustomtype) tmpobj);
                 // Increment the Array Pointer to the next value in the array
                 arrayPtr = new IntPtr(arrayPtr.ToInt64() + IntPtr.Size);
                 valPtr = Umg_PtrToStructure<IntPtr>(arrayPtr);
@@ -219,10 +193,6 @@ namespace QtSharpHelper.CHelper
             return retval.AsReadOnly();
         }
 
-        #endregion
-
-        #region Methods - UnManaged Memory Allocation
-
         /// <summary>
         ///  Allocates unmanaged memory, and returns a pointer This form just allocates the memory block,
         ///  without copying data in A memory Pointer of the type IntPtr is returned Note this memory must
@@ -230,10 +200,9 @@ namespace QtSharpHelper.CHelper
         /// </summary>
         /// <param name="length"> The length. </param>
         /// <returns> An IntPtr. </returns>
-        public static IntPtr UmgMem_Alloc(int length)
-        {
+        public static IntPtr UmgMem_Alloc(int length) {
             if (length < 1)
-                throw (new Exception("Memory Length conversion Error"));
+                throw new System.Exception("Memory Length conversion Error");
             var retval = Marshal.AllocHGlobal(length);
             return retval;
         }
@@ -245,10 +214,9 @@ namespace QtSharpHelper.CHelper
         /// </summary>
         /// <param name="Struc"> The struc. </param>
         /// <returns> An IntPtr. </returns>
-        public static IntPtr UmgMem_Alloc<TCustomtype>(TCustomtype Struc)
-        {
+        public static IntPtr UmgMem_Alloc<TCustomtype>(TCustomtype Struc) {
             if (Struc == null)
-                throw (new Exception("Structure conversion Error"));
+                throw new System.Exception("Structure conversion Error");
             var retval = Marshal.AllocHGlobal(Marshal.SizeOf(Struc));
             Marshal.StructureToPtr(Struc, retval, false);
             return retval;
@@ -261,10 +229,9 @@ namespace QtSharpHelper.CHelper
         /// </summary>
         /// <param name="input"> The input. </param>
         /// <returns> An IntPtr. </returns>
-        public static IntPtr UmgMem_Alloc(byte[] input)
-        {
+        public static IntPtr UmgMem_Alloc(byte[] input) {
             if (input == null)
-                throw (new Exception("Byte Array conversion Error"));
+                throw new System.Exception("Byte Array conversion Error");
             var retval = Marshal.AllocHGlobal(input.Length);
             Marshal.Copy(input, 0, retval, input.Length);
             return retval;
@@ -272,13 +239,8 @@ namespace QtSharpHelper.CHelper
 
         /// <summary> De-Allocate / Free memory allocated via the above. </summary>
         /// <param name="pointer"> The pointer. </param>
-        public static void UmgMem_DeAlloc(IntPtr pointer)
-        {
+        public static void UmgMem_DeAlloc(IntPtr pointer) {
             Marshal.FreeHGlobal(pointer);
         }
-
-        #endregion
-
     }
-
 }

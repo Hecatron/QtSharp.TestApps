@@ -1,0 +1,913 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>QtSerialPort.Sharp</name>
+    </assembly>
+    <members>
+        <member name="T:QtSerialPort.QSerialPort">
+            <summary>
+            <para>Provides functions to access serial ports.</para>
+            </summary>
+            <remarks>
+            <para>You can get information about the available serial ports using the QSerialPortInfo helper class, which allows an enumeration of all the serial ports in the system. This is useful to obtain the correct name of the serial port you want to use. You can pass an object of the helper class as an argument to the setPort() or setPortName() methods to assign the desired serial device.</para>
+            <para>After setting the port, you can open it in read-only (r/o), write-only (w/o), or read-write (r/w) mode using the open() method.</para>
+            <para>Note: The serial port is always opened with exclusive access (that is, no other process or thread can access an already opened serial port).</para>
+            <para>Having successfully opened, QSerialPort tries to determine the current configuration of the port and initializes itself. You can reconfigure the port to the desired setting using the setBaudRate(), setDataBits(), setParity(), setStopBits(), and setFlowControl() methods.</para>
+            <para>There are a couple of properties to work with the pinout signals namely: QSerialPort::dataTerminalReady, QSerialPort::requestToSend. It is also possible to use the pinoutSignals() method to query the current pinout signals set.</para>
+            <para>Once you know that the ports are ready to read or write, you can use the read() or write() methods. Alternatively the readLine() and readAll() convenience methods can also be invoked. If not all the data is read at once, the remaining data will be available for later as new incoming data is appended to the QSerialPort's internal read buffer. You can limit the size of the read buffer using setReadBufferSize().</para>
+            <para>Use the close() method to close the port and cancel the I/O operations.</para>
+            <para>See the following example:</para>
+            <para></para>
+            <para></para>
+            <para>  int numRead = 0, numReadTotal = 0;</para>
+            <para>  char buffer[50];</para>
+            <para></para>
+            <para>  for (;;) {</para>
+            <para>      numRead  = serial.read(buffer, 50);</para>
+            <para></para>
+            <para>      // Do whatever with the array</para>
+            <para></para>
+            <para>      numReadTotal += numRead;</para>
+            <para>      if (numRead == 0 &amp;&amp; !serial.waitForReadyRead())</para>
+            <para>          break;</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
+            <para>If waitForReadyRead() returns false, the connection has been closed or an error has occurred.</para>
+            <para>Programming with a blocking serial port is radically different from programming with a non-blocking serial port. A blocking serial port does not require an event loop and typically leads to simpler code. However, in a GUI application, blocking serial port should only be used in non-GUI threads, to avoid freezing the user interface.</para>
+            <para>For more details about these approaches, refer to the example applications.</para>
+            <para>The QSerialPort class can also be used with QTextStream and QDataStream's stream operators (operator&lt;&lt;() and operator&gt;&gt;()). There is one issue to be aware of, though: make sure that enough data is available before attempting to read by using the operator&gt;&gt;() overloaded operator.</para>
+            <para></para>
+            <para>See also QSerialPortInfo.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSerialPort.QSerialPort.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs a new serial port object with the given parent.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialPort.QSerialPort.#ctor(System.String,QtCore.QObject)">
+            <summary>
+            <para>Constructs a new serial port object with the given parent to represent the serial port with the specified name.</para>
+            <para>The name should have a specific format; see the setPort() method.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialPort.QSerialPort.#ctor(QtSerialPort.QSerialPortInfo,QtCore.QObject)">
+            <summary>
+            <para>Constructs a new serial port object with the given parent to represent the serial port with the specified helper class serialPortInfo.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialPort.QSerialPort.SetPort(QtSerialPort.QSerialPortInfo)">
+            <summary>
+            <para>Sets the port stored in the serial port info instance serialPortInfo.</para>
+            <para>See also portName() and QSerialPortInfo.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialPort.QSerialPort.Open(QtCore.QIODevice.OpenModeFlag)">
+            <summary>
+            <para>Reimplemented from QIODevice::open().</para>
+            <para>Opens the serial port using OpenMode mode, and then returns true if successful; otherwise returns false and sets an error code which can be obtained by calling the error() method.</para>
+            <para>Note: The method returns false if opening the port is successful, but could not set any of the port settings successfully. In that case, the port is closed automatically not to leave the port around with incorrect settings.</para>
+            <para>Warning: The mode has to be QIODevice::ReadOnly, QIODevice::WriteOnly, or QIODevice::ReadWrite. Other modes are unsupported.</para>
+            <para>See also QIODevice::OpenMode and setPort().</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialPort.QSerialPort.Close">
+            <summary>
+            <para>Reimplemented from QIODevice::close().</para>
+            <para>Note: The serial port has to be open before trying to close it; otherwise sets the NotOpenError error code.</para>
+            <para>See also QIODevice::close().</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialPort.QSerialPort.SetBaudRate(System.Int32,QtSerialPort.QSerialPort.Direction)">
+            <summary>
+            <para>This property holds the data baud rate for the desired direction.</para>
+            <para>If the setting is successful or set before opening the port, returns true; otherwise returns false and sets an error code which can be obtained by accessing the value of the QSerialPort::error property. To set the baud rate, use the enumeration QSerialPort::BaudRate or any positive qint32 value.</para>
+            <para>Note: If the setting is set before opening the port, the actual serial port setting is done automatically in the QSerialPort::open() method right after that the opening of the port succeeds.</para>
+            <para>Warning: Setting the AllDirections flag is supported on all platforms. Windows and Windows CE support only this mode.</para>
+            <para>Warning: Returns equal baud rate in any direction on Windows, Windows CE.</para>
+            <para>The default value is Baud9600, i.e. 9600 bits per second.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> qint32 	baudRate(Directions directions = AllDirections) const</para>
+            <para> bool 	setBaudRate(qint32 baudRate, Directions directions = AllDirections)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	baudRateChanged(qint32 baudRate, QSerialPort::Directions directions)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="M:QtSerialPort.QSerialPort.baudRate(QtSerialPort.QSerialPort.Direction)">
+            <summary>
+            <para>This property holds the data baud rate for the desired direction.</para>
+            <para>If the setting is successful or set before opening the port, returns true; otherwise returns false and sets an error code which can be obtained by accessing the value of the QSerialPort::error property. To set the baud rate, use the enumeration QSerialPort::BaudRate or any positive qint32 value.</para>
+            <para>Note: If the setting is set before opening the port, the actual serial port setting is done automatically in the QSerialPort::open() method right after that the opening of the port succeeds.</para>
+            <para>Warning: Setting the AllDirections flag is supported on all platforms. Windows and Windows CE support only this mode.</para>
+            <para>Warning: Returns equal baud rate in any direction on Windows, Windows CE.</para>
+            <para>The default value is Baud9600, i.e. 9600 bits per second.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> qint32 	baudRate(Directions directions = AllDirections) const</para>
+            <para> bool 	setBaudRate(qint32 baudRate, Directions directions = AllDirections)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	baudRateChanged(qint32 baudRate, QSerialPort::Directions directions)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="M:QtSerialPort.QSerialPort.SetDataBits(QtSerialPort.QSerialPort.DataBits)">
+            <summary>
+            <para>This property holds the data bits in a frame.</para>
+            <para>If the setting is successful or set before opening the port, returns true; otherwise returns false and sets an error code which can be obtained by accessing the value of the QSerialPort::error property.</para>
+            <para>Note: If the setting is set before opening the port, the actual serial port setting is done automatically in the QSerialPort::open() method right after that the opening of the port succeeds.</para>
+            <para>The default value is Data8, i.e. 8 data bits.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialPort.QSerialPort.SetParity(QtSerialPort.QSerialPort.Parity)">
+            <summary>
+            <para>This property holds the parity checking mode.</para>
+            <para>If the setting is successful or set before opening the port, returns true; otherwise returns false and sets an error code which can be obtained by accessing the value of the QSerialPort::error property.</para>
+            <para>Note: If the setting is set before opening the port, the actual serial port setting is done automatically in the QSerialPort::open() method right after that the opening of the port succeeds.</para>
+            <para>The default value is NoParity, i.e. no parity.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialPort.QSerialPort.SetStopBits(QtSerialPort.QSerialPort.StopBits)">
+            <summary>
+            <para>This property holds the number of stop bits in a frame.</para>
+            <para>If the setting is successful or set before opening the port, returns true; otherwise returns false and sets an error code which can be obtained by accessing the value of the QSerialPort::error property.</para>
+            <para>Note: If the setting is set before opening the port, the actual serial port setting is done automatically in the QSerialPort::open() method right after that the opening of the port succeeds.</para>
+            <para>The default value is OneStop, i.e. 1 stop bit.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialPort.QSerialPort.SetFlowControl(QtSerialPort.QSerialPort.FlowControl)">
+            <summary>
+            <para>This property holds the desired flow control mode.</para>
+            <para>If the setting is successful or set before opening the port, returns true; otherwise returns false and sets an error code which can be obtained by accessing the value of the QSerialPort::error property.</para>
+            <para>Note: If the setting is set before opening the port, the actual serial port setting is done automatically in the QSerialPort::open() method right after that the opening of the port succeeds.</para>
+            <para>The default value is NoFlowControl, i.e. no flow control.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialPort.QSerialPort.SetDataTerminalReady(System.Boolean)">
+            <summary>
+            <para>This property holds the state (high or low) of the line signal DTR.</para>
+            <para>Returns true on success, false otherwise. If the flag is true then the DTR signal is set to high; otherwise low.</para>
+            <para>Note: The serial port has to be open before trying to set or get this property; otherwise false is returned and the error code is set to NotOpenError.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	isDataTerminalReady()</para>
+            <para> bool 	setDataTerminalReady(bool set)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	dataTerminalReadyChanged(bool set)</para>
+            <para></para>
+            <para>See also pinoutSignals().</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialPort.QSerialPort.SetRequestToSend(System.Boolean)">
+            <summary>
+            <para>This property holds the state (high or low) of the line signal RTS.</para>
+            <para>Returns true on success, false otherwise. If the flag is true then the RTS signal is set to high; otherwise low.</para>
+            <para>Note: The serial port has to be open before trying to set or get this property; otherwise false is returned and the error code is set to NotOpenError.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	isRequestToSend()</para>
+            <para> bool 	setRequestToSend(bool set)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	requestToSendChanged(bool set)</para>
+            <para></para>
+            <para>See also pinoutSignals().</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialPort.QSerialPort.Clear(QtSerialPort.QSerialPort.Direction)">
+            <summary>
+            <para>Discards all characters from the output or input buffer, depending on given directions directions. This includes clearing the internal class buffers and the UART (driver) buffers. Also terminate pending read or write operations. If successful, returns true; otherwise returns false.</para>
+            <para>Note: The serial port has to be open before trying to clear any buffered data; otherwise returns false and sets the NotOpenError error code.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialPort.QSerialPort.SetDataErrorPolicy(QtSerialPort.QSerialPort.DataErrorPolicy)">
+            <summary>
+            <para>This property holds the error policy for how the process receives characters in the case where a parity error is detected.</para>
+            <para>If the setting is successful, returns true; otherwise returns false. The default policy set is IgnorePolicy.</para>
+            <para>Note: The serial port has to be open before trying to set this property; otherwise returns false and sets the NotOpenError error code. This is a bit unusual as opposed to the regular Qt property settings of a class. However, this is a special use case since the property is set through the interaction with the kernel and hardware. Hence, the two scenarios cannot be completely compared to each other.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialPort.QSerialPort.ClearError">
+            <summary>
+            <para>This property holds the error status of the serial port.</para>
+            <para>The I/O device status returns an error code. For example, if open() returns false, or a read/write operation returns -1, this property can be used to figure out the reason why the operation failed.</para>
+            <para>The error code is set to the default QSerialPort::NoError after a call to clearError()</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialPort.QSerialPort.CanReadLine">
+            <summary>
+            <para>Reimplemented from QIODevice::canReadLine().</para>
+            <para>Returns true if a line of data can be read from the serial port; otherwise returns false.</para>
+            <para>See also readLine().</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialPort.QSerialPort.WaitForReadyRead(System.Int32)">
+            <summary>
+            <para>Reimplemented from QIODevice::waitForReadyRead().</para>
+            <para>This function blocks until new data is available for reading and the readyRead() signal has been emitted. The function will timeout after msecs milliseconds.</para>
+            <para>The function returns true if the readyRead() signal is emitted and there is new data available for reading; otherwise it returns false (if an error occurred or the operation timed out).</para>
+            <para>See also waitForBytesWritten().</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialPort.QSerialPort.WaitForBytesWritten(System.Int32)">
+            <summary>
+            <para>Reimplemented from QIODevice::waitForBytesWritten().</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialPort.QSerialPort.SendBreak(System.Int32)">
+            <summary>
+            <para>This function is deprecated.</para>
+            <para>Sends a continuous stream of zero bits during a specified period of time duration in msec if the terminal is using asynchronous serial data. If successful, returns true; otherwise returns false.</para>
+            <para>If the duration is zero then zero bits are transmitted by at least 0.25 seconds, but no more than 0.5 seconds.</para>
+            <para>If the duration is non zero then zero bits are transmitted within a certain period of time depending on the implementation.</para>
+            <para>Note: The serial port has to be open before trying to send a break duration; otherwise returns false and sets the NotOpenError error code.</para>
+            <para>See also setBreakEnabled().</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialPort.QSerialPort.SetBreakEnabled(System.Boolean)">
+            <summary>
+            <para>This property holds the state of the transmission line in break.</para>
+            <para>Returns true on success, false otherwise. If the flag is true then the transmission line is in break state; otherwise is in non-break state.</para>
+            <para>Note: The serial port has to be open before trying to set or get this property; otherwise returns false and sets the NotOpenError error code. This is a bit unusual as opposed to the regular Qt property settings of a class. However, this is a special use case since the property is set through the interaction with the kernel and hardware. Hence, the two scenarios cannot be completely compared to each other.</para>
+            <para>This property was introduced in  Qt 5.5.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	isBreakEnabled() const</para>
+            <para> bool 	setBreakEnabled(bool set = true)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	breakEnabledChanged(bool set)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="M:QtSerialPort.QSerialPort.ReadData(System.Char*,System.Int64)">
+            <summary>
+            <para>Reimplemented from QIODevice::readData().</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialPort.QSerialPort.ReadLineData(System.Char*,System.Int64)">
+            <summary>
+            <para>Reimplemented from QIODevice::readLineData().</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialPort.QSerialPort.WriteData(System.String,System.Int64)">
+            <summary>
+            <para>Reimplemented from QIODevice::writeData().</para>
+            </summary>
+        </member>
+        <member name="E:QtSerialPort.QSerialPort.BaudRateChanged">
+            <summary>
+            <para>This signal is emitted after the baud rate has been changed. The new baud rate is passed as baudRate and directions as directions.</para>
+            <para>Note: Notifier signal for property baudRate. </para>
+            <para>See also QSerialPort::baudRate.</para>
+            </summary>
+        </member>
+        <member name="E:QtSerialPort.QSerialPort.DataBitsChanged">
+            <summary>
+            <para>This signal is emitted after the data bits in a frame has been changed. The new data bits in a frame is passed as dataBits.</para>
+            <para>Note: Notifier signal for property dataBits. </para>
+            <para>See also QSerialPort::dataBits.</para>
+            </summary>
+        </member>
+        <member name="E:QtSerialPort.QSerialPort.ParityChanged">
+            <summary>
+            <para>This signal is emitted after the parity checking mode has been changed. The new parity checking mode is passed as parity.</para>
+            <para>Note: Notifier signal for property parity. </para>
+            <para>See also QSerialPort::parity.</para>
+            </summary>
+        </member>
+        <member name="E:QtSerialPort.QSerialPort.StopBitsChanged">
+            <summary>
+            <para>This signal is emitted after the number of stop bits in a frame has been changed. The new number of stop bits in a frame is passed as stopBits.</para>
+            <para>Note: Notifier signal for property stopBits. </para>
+            <para>See also QSerialPort::stopBits.</para>
+            </summary>
+        </member>
+        <member name="E:QtSerialPort.QSerialPort.FlowControlChanged">
+            <summary>
+            <para>This signal is emitted after the flow control mode has been changed. The new flow control mode is passed as flow.</para>
+            <para>Note: Notifier signal for property flowControl. </para>
+            <para>See also QSerialPort::flowControl.</para>
+            </summary>
+        </member>
+        <member name="E:QtSerialPort.QSerialPort.DataErrorPolicyChanged">
+            <summary>
+            <para>This signal is emitted after the error policy for how the process receives characters in case of parity error detection has been changed. The new error policy for how the process receives the character in case of parity error detection is passed as policy.</para>
+            <para>Note: Notifier signal for property dataErrorPolicy. </para>
+            <para>See also QSerialPort::dataErrorPolicy.</para>
+            </summary>
+        </member>
+        <member name="E:QtSerialPort.QSerialPort.DataTerminalReadyChanged">
+            <summary>
+            <para>This signal is emitted after the state (high or low) of the line signal DTR has been changed. The new the state (high or low) of the line signal DTR is passed as set.</para>
+            <para>Note: Notifier signal for property dataTerminalReady. </para>
+            <para>See also QSerialPort::dataTerminalReady.</para>
+            </summary>
+        </member>
+        <member name="E:QtSerialPort.QSerialPort.RequestToSendChanged">
+            <summary>
+            <para>This signal is emitted after the state (high or low) of the line signal RTS has been changed. The new the state (high or low) of the line signal RTS is passed as set.</para>
+            <para>Note: Notifier signal for property requestToSend. </para>
+            <para>See also QSerialPort::requestToSend.</para>
+            </summary>
+        </member>
+        <member name="E:QtSerialPort.QSerialPort.ErrorError">
+            <summary>
+            <para>This signal is emitted after the error has been changed. The new error is passed as error.</para>
+            <para></para>
+            <para>Note:</para>
+            <para> Signal </para>
+            <para>error</para>
+            <para> is overloaded in this class. To connect to this one using the function pointer syntax, you must specify the signal type in a static cast, as shown in this example:</para>
+            <para></para>
+            <para></para>
+            <para>  connect(serialPort, static_cast&lt;void(QSerialPort::*)(QSerialPort::SerialPortError)&gt;(&amp;QSerialPort::error),</para>
+            <para>      [=](QSerialPort::SerialPortError error){ /* ... */ });</para>
+            <para></para>
+            <para></para>
+            <para>Note: Getter function for property error. </para>
+            <para>See also QSerialPort::error.</para>
+            </summary>
+        </member>
+        <member name="E:QtSerialPort.QSerialPort.SettingsRestoredOnCloseChanged">
+            <summary>
+            <para>This signal is emitted after the flag which specifies to restore the previous settings while closing the serial port has been changed. The new flag which specifies to restore the previous settings while closing the serial port is passed as restore.</para>
+            <para>Note: Notifier signal for property settingsRestoredOnClose. </para>
+            <para>See also QSerialPort::settingsRestoredOnClose.</para>
+            </summary>
+        </member>
+        <member name="E:QtSerialPort.QSerialPort.BreakEnabledChanged">
+            <summary>
+            <para>This property holds the state of the transmission line in break.</para>
+            <para>Returns true on success, false otherwise. If the flag is true then the transmission line is in break state; otherwise is in non-break state.</para>
+            <para>Note: The serial port has to be open before trying to set or get this property; otherwise returns false and sets the NotOpenError error code. This is a bit unusual as opposed to the regular Qt property settings of a class. However, this is a special use case since the property is set through the interaction with the kernel and hardware. Hence, the two scenarios cannot be completely compared to each other.</para>
+            <para>This property was introduced in  Qt 5.5.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	isBreakEnabled() const</para>
+            <para> bool 	setBreakEnabled(bool set = true)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	breakEnabledChanged(bool set)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:QtSerialPort.QSerialPort.PortName">
+            <summary>
+            <para>Returns the name set by setPort() or passed to the QSerialPort constructor. This name is short, i.e. it is extracted and converted from the internal variable system location of the device. The conversion algorithm is platform specific:</para>
+            <para></para>
+            <para> PlatformBrief Description</para>
+            <para>Windows	Removes the prefix &quot;\\.\&quot; or &quot;//./&quot; from the system location and returns the remainder of the string.</para>
+            <para>Windows CE	Removes the suffix &quot;:&quot; from the system location and returns the remainder of the string.</para>
+            <para>Unix, BSD	Removes the prefix &quot;/dev/&quot; from the system location and returns the remainder of the string.</para>
+            <para></para>
+            <para>See also setPortName(), setPort(), and QSerialPortInfo::portName().</para>
+            <para></para>
+            <para>Sets the name of the serial port.</para>
+            <para>The name of the serial port can be passed as either a short name or the long system location if necessary.</para>
+            <para>See also portName() and QSerialPortInfo.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialPort.QSerialPort.SettingsRestoredOnClose">
+            <summary>
+            <para>This property holds the flag which specifies to restore the previous settings when closing the serial port.</para>
+            <para>If this flag is true, the settings will be restored; otherwise not. The default state of the QSerialPort class is to restore the settings.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialPort.QSerialPort.ReadBufferSize">
+            <summary>
+            <para>Returns the size of the internal read buffer. This limits the amount of data that the client can receive before calling the read() or readAll() methods.</para>
+            <para>A read buffer size of 0 (the default) means that the buffer has no size limit, ensuring that no data is lost.</para>
+            <para>See also setReadBufferSize() and read().</para>
+            <para></para>
+            <para>Sets the size of QSerialPort's internal read buffer to be size bytes.</para>
+            <para>If the buffer size is limited to a certain size, QSerialPort will not buffer more than this size of data. The special case of a buffer size of 0 means that the read buffer is unlimited and all incoming data is buffered. This is the default.</para>
+            <para>This option is useful if the data is only read at certain points in time (for instance in a real-time streaming application) or if the serial port should be protected against receiving too much data, which may eventually cause the application to run out of memory.</para>
+            <para>See also readBufferSize() and read().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialPort.QSerialPort.AtEnd">
+            <summary>
+            <para>Reimplemented from QIODevice::atEnd().</para>
+            <para>Returns true if no more data is currently available for reading; otherwise returns false.</para>
+            <para>This function is most commonly used when reading data from the serial port in a loop. For example:</para>
+            <para></para>
+            <para></para>
+            <para>  // This slot is connected to QSerialPort::readyRead()</para>
+            <para>  void QSerialPortClass::readyReadSlot()</para>
+            <para>  {</para>
+            <para>      while (!port.atEnd()) {</para>
+            <para>          QByteArray data = port.read(100);</para>
+            <para>          ....</para>
+            <para>      }</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
+            <para>See also bytesAvailable() and readyRead().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialPort.QSerialPort.IsSequential">
+            <summary>
+            <para>Reimplemented from QIODevice::isSequential().</para>
+            <para>Always returns true. The serial port is a sequential device.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialPort.QSerialPort.BytesAvailable">
+            <summary>
+            <para>Reimplemented from QIODevice::bytesAvailable().</para>
+            <para>Returns the number of incoming bytes that are waiting to be read.</para>
+            <para>See also bytesToWrite() and read().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialPort.QSerialPort.BytesToWrite">
+            <summary>
+            <para>Reimplemented from QIODevice::bytesToWrite().</para>
+            <para>Returns the number of bytes that are waiting to be written. The bytes are written when control goes back to the event loop or when flush() is called.</para>
+            <para>See also bytesAvailable() and flush().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialPort.QSerialPort.dataBits">
+            <summary>
+            <para>This property holds the data bits in a frame.</para>
+            <para>If the setting is successful or set before opening the port, returns true; otherwise returns false and sets an error code which can be obtained by accessing the value of the QSerialPort::error property.</para>
+            <para>Note: If the setting is set before opening the port, the actual serial port setting is done automatically in the QSerialPort::open() method right after that the opening of the port succeeds.</para>
+            <para>The default value is Data8, i.e. 8 data bits.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialPort.QSerialPort.parity">
+            <summary>
+            <para>This property holds the parity checking mode.</para>
+            <para>If the setting is successful or set before opening the port, returns true; otherwise returns false and sets an error code which can be obtained by accessing the value of the QSerialPort::error property.</para>
+            <para>Note: If the setting is set before opening the port, the actual serial port setting is done automatically in the QSerialPort::open() method right after that the opening of the port succeeds.</para>
+            <para>The default value is NoParity, i.e. no parity.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialPort.QSerialPort.stopBits">
+            <summary>
+            <para>This property holds the number of stop bits in a frame.</para>
+            <para>If the setting is successful or set before opening the port, returns true; otherwise returns false and sets an error code which can be obtained by accessing the value of the QSerialPort::error property.</para>
+            <para>Note: If the setting is set before opening the port, the actual serial port setting is done automatically in the QSerialPort::open() method right after that the opening of the port succeeds.</para>
+            <para>The default value is OneStop, i.e. 1 stop bit.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialPort.QSerialPort.flowControl">
+            <summary>
+            <para>This property holds the desired flow control mode.</para>
+            <para>If the setting is successful or set before opening the port, returns true; otherwise returns false and sets an error code which can be obtained by accessing the value of the QSerialPort::error property.</para>
+            <para>Note: If the setting is set before opening the port, the actual serial port setting is done automatically in the QSerialPort::open() method right after that the opening of the port succeeds.</para>
+            <para>The default value is NoFlowControl, i.e. no flow control.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialPort.QSerialPort.IsDataTerminalReady">
+            <summary>
+            <para>This property holds the state (high or low) of the line signal DTR.</para>
+            <para>Returns true on success, false otherwise. If the flag is true then the DTR signal is set to high; otherwise low.</para>
+            <para>Note: The serial port has to be open before trying to set or get this property; otherwise false is returned and the error code is set to NotOpenError.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	isDataTerminalReady()</para>
+            <para> bool 	setDataTerminalReady(bool set)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	dataTerminalReadyChanged(bool set)</para>
+            <para></para>
+            <para>See also pinoutSignals().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialPort.QSerialPort.IsRequestToSend">
+            <summary>
+            <para>This property holds the state (high or low) of the line signal RTS.</para>
+            <para>Returns true on success, false otherwise. If the flag is true then the RTS signal is set to high; otherwise low.</para>
+            <para>Note: The serial port has to be open before trying to set or get this property; otherwise false is returned and the error code is set to NotOpenError.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	isRequestToSend()</para>
+            <para> bool 	setRequestToSend(bool set)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	requestToSendChanged(bool set)</para>
+            <para></para>
+            <para>See also pinoutSignals().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialPort.QSerialPort.PinoutSignals">
+            <summary>
+            <para>Returns the state of the line signals in a bitmap format.</para>
+            <para>From this result, it is possible to allocate the state of the desired signal by applying a mask &quot;AND&quot;, where the mask is the desired enumeration value from QSerialPort::PinoutSignals.</para>
+            <para>Note: This method performs a system call, thus ensuring that the line signal states are returned properly. This is necessary when the underlying operating systems cannot provide proper notifications about the changes.</para>
+            <para>Note: The serial port has to be open before trying to get the pinout signals; otherwise returns NoSignal and sets the NotOpenError error code.</para>
+            <para>See also QSerialPort::dataTerminalReady and QSerialPort::requestToSend.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialPort.QSerialPort.Flush">
+            <summary>
+            <para>This function writes as much as possible from the internal write buffer to the underlying serial port without blocking. If any data was written, this function returns true; otherwise returns false.</para>
+            <para>Call this function for sending the buffered data immediately to the serial port. The number of bytes successfully written depends on the operating system. In most cases, this function does not need to be called, because the QSerialPort class will start sending data automatically once control is returned to the event loop. In the absence of an event loop, call waitForBytesWritten() instead.</para>
+            <para>Note: The serial port has to be open before trying to flush any buffered data; otherwise returns false and sets the NotOpenError error code.</para>
+            <para>See also write() and waitForBytesWritten().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialPort.QSerialPort.dataErrorPolicy">
+            <summary>
+            <para>This property holds the error policy for how the process receives characters in the case where a parity error is detected.</para>
+            <para>If the setting is successful, returns true; otherwise returns false. The default policy set is IgnorePolicy.</para>
+            <para>Note: The serial port has to be open before trying to set this property; otherwise returns false and sets the NotOpenError error code. This is a bit unusual as opposed to the regular Qt property settings of a class. However, this is a special use case since the property is set through the interaction with the kernel and hardware. Hence, the two scenarios cannot be completely compared to each other.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialPort.QSerialPort.Error">
+            <summary>
+            <para>This property holds the error status of the serial port.</para>
+            <para>The I/O device status returns an error code. For example, if open() returns false, or a read/write operation returns -1, this property can be used to figure out the reason why the operation failed.</para>
+            <para>The error code is set to the default QSerialPort::NoError after a call to clearError()</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialPort.QSerialPort.IsBreakEnabled">
+            <summary>
+            <para>This property holds the state of the transmission line in break.</para>
+            <para>Returns true on success, false otherwise. If the flag is true then the transmission line is in break state; otherwise is in non-break state.</para>
+            <para>Note: The serial port has to be open before trying to set or get this property; otherwise returns false and sets the NotOpenError error code. This is a bit unusual as opposed to the regular Qt property settings of a class. However, this is a special use case since the property is set through the interaction with the kernel and hardware. Hence, the two scenarios cannot be completely compared to each other.</para>
+            <para>This property was introduced in  Qt 5.5.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	isBreakEnabled() const</para>
+            <para> bool 	setBreakEnabled(bool set = true)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	breakEnabledChanged(bool set)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:QtSerialPort.QSerialPort.Handle">
+            <summary>
+            <para>If the platform is supported and the serial port is open, returns the native serial port handle; otherwise returns -1.</para>
+            <para>Warning: This function is for expert use only; use it at your own risk. Furthermore, this function carries no compatibility promise between minor Qt releases.</para>
+            <para>This function was introduced in  Qt 5.2.</para>
+            </summary>
+        </member>
+        <member name="T:QtSerialPort.QSerialPort.Direction">
+            <summary>
+            <para>This enum describes the possible directions of the data transmission.</para>
+            <para>Note: This enumeration is used for setting the baud rate of the device separately for each direction on some operating systems (for example, POSIX-like).</para>
+            <para>The Directions type is a typedef for QFlags&lt;Direction&gt;. It stores an OR combination of Direction values.</para>
+            </summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.Direction.Input">
+            <summary>Input direction.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.Direction.Output">
+            <summary>Output direction.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.Direction.AllDirections">
+            <summary>Simultaneously in two directions.</summary>
+        </member>
+        <member name="T:QtSerialPort.QSerialPort.BaudRate">
+            <summary>
+            <para>This enum describes the baud rate which the communication device operates with.</para>
+            <para>Note: Only the most common standard baud rates are listed in this enum.</para>
+            <para>See also QSerialPort::baudRate.</para>
+            </summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.BaudRate.Baud1200">
+            <summary>1200 baud.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.BaudRate.Baud2400">
+            <summary>2400 baud.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.BaudRate.Baud4800">
+            <summary>4800 baud.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.BaudRate.Baud9600">
+            <summary>9600 baud.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.BaudRate.Baud19200">
+            <summary>19200 baud.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.BaudRate.Baud38400">
+            <summary>38400 baud.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.BaudRate.Baud57600">
+            <summary>57600 baud.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.BaudRate.Baud115200">
+            <summary>115200 baud.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.BaudRate.UnknownBaud">
+            <summary>Unknown baud. This value is obsolete. It is provided to keep old source code working. We strongly advise against using it in new code.</summary>
+        </member>
+        <member name="T:QtSerialPort.QSerialPort.DataBits">
+            <summary>
+            <para>This enum describes the number of data bits used.</para>
+            <para>See also QSerialPort::dataBits.</para>
+            </summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.DataBits.Data5">
+            <summary>The number of data bits in each character is 5. It is used for Baudot code. It generally only makes sense with older equipment such as teleprinters.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.DataBits.Data6">
+            <summary>The number of data bits in each character is 6. It is rarely used.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.DataBits.Data7">
+            <summary>The number of data bits in each character is 7. It is used for true ASCII. It generally only makes sense with older equipment such as teleprinters.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.DataBits.Data8">
+            <summary>The number of data bits in each character is 8. It is used for most kinds of data, as this size matches the size of a byte. It is almost universally used in newer applications.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.DataBits.UnknownDataBits">
+            <summary>Unknown number of bits. This value is obsolete. It is provided to keep old source code working. We strongly advise against using it in new code.</summary>
+        </member>
+        <member name="T:QtSerialPort.QSerialPort.Parity">
+            <summary>
+            <para>This enum describes the parity scheme used.</para>
+            <para>See also QSerialPort::parity.</para>
+            </summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.Parity.NoParity">
+            <summary>No parity bit it sent. This is the most common parity setting. Error detection is handled by the communication protocol.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.Parity.EvenParity">
+            <summary>The number of 1 bits in each character, including the parity bit, is always even.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.Parity.OddParity">
+            <summary>The number of 1 bits in each character, including the parity bit, is always odd. It ensures that at least one state transition occurs in each character.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.Parity.SpaceParity">
+            <summary>Space parity. The parity bit is sent in the space signal condition. It does not provide error detection information.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.Parity.MarkParity">
+            <summary>Mark parity. The parity bit is always set to the mark signal condition (logical 1). It does not provide error detection information.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.Parity.UnknownParity">
+            <summary>Unknown parity. This value is obsolete. It is provided to keep old source code working. We strongly advise against using it in new code.</summary>
+        </member>
+        <member name="T:QtSerialPort.QSerialPort.StopBits">
+            <summary>
+            <para>This enum describes the number of stop bits used.</para>
+            <para>See also QSerialPort::stopBits.</para>
+            </summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.StopBits.OneStop">
+            <summary>1 stop bit.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.StopBits.OneAndHalfStop">
+            <summary>1.5 stop bits. This is only for the Windows platform.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.StopBits.TwoStop">
+            <summary>2 stop bits.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.StopBits.UnknownStopBits">
+            <summary>Unknown number of stop bits. This value is obsolete. It is provided to keep old source code working. We strongly advise against using it in new code.</summary>
+        </member>
+        <member name="T:QtSerialPort.QSerialPort.FlowControl">
+            <summary>
+            <para>This enum describes the flow control used.</para>
+            <para>See also QSerialPort::flowControl.</para>
+            </summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.FlowControl.NoFlowControl">
+            <summary>No flow control.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.FlowControl.HardwareControl">
+            <summary>Hardware flow control (RTS/CTS).</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.FlowControl.SoftwareControl">
+            <summary>Software flow control (XON/XOFF).</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.FlowControl.UnknownFlowControl">
+            <summary>Unknown flow control. This value is obsolete. It is provided to keep old source code working. We strongly advise against using it in new code.</summary>
+        </member>
+        <member name="T:QtSerialPort.QSerialPort.PinoutSignal">
+            <summary>
+            <para>This enum describes the possible RS-232 pinout signals.</para>
+            <para>The PinoutSignals type is a typedef for QFlags&lt;PinoutSignal&gt;. It stores an OR combination of PinoutSignal values.</para>
+            <para>See also pinoutSignals(), QSerialPort::dataTerminalReady, and QSerialPort::requestToSend.</para>
+            </summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.PinoutSignal.NoSignal">
+            <summary>No line active</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.PinoutSignal.TransmittedDataSignal">
+            <summary>TxD (Transmitted Data). This value is obsolete. It is provided to keep old source code working. We strongly advise against using it in new code.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.PinoutSignal.ReceivedDataSignal">
+            <summary>RxD (Received Data). This value is obsolete. It is provided to keep old source code working. We strongly advise against using it in new code.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.PinoutSignal.DataTerminalReadySignal">
+            <summary>DTR (Data Terminal Ready).</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.PinoutSignal.DataCarrierDetectSignal">
+            <summary>DCD (Data Carrier Detect).</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.PinoutSignal.DataSetReadySignal">
+            <summary>DSR (Data Set Ready).</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.PinoutSignal.RingIndicatorSignal">
+            <summary>RNG (Ring Indicator).</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.PinoutSignal.RequestToSendSignal">
+            <summary>RTS (Request To Send).</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.PinoutSignal.ClearToSendSignal">
+            <summary>CTS (Clear To Send).</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.PinoutSignal.SecondaryTransmittedDataSignal">
+            <summary>STD (Secondary Transmitted Data).</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.PinoutSignal.SecondaryReceivedDataSignal">
+            <summary>SRD (Secondary Received Data).</summary>
+        </member>
+        <member name="T:QtSerialPort.QSerialPort.DataErrorPolicy">
+            <summary>
+            <para>This enum describes the policies for the received symbols while parity errors were detected.</para>
+            <para>See also QSerialPort::dataErrorPolicy.</para>
+            </summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.DataErrorPolicy.SkipPolicy">
+            <summary>Skips the bad character.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.DataErrorPolicy.PassZeroPolicy">
+            <summary>Replaces bad character with zero.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.DataErrorPolicy.IgnorePolicy">
+            <summary>Ignores the error for a bad character.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.DataErrorPolicy.StopReceivingPolicy">
+            <summary>Stops data reception on error.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.DataErrorPolicy.UnknownPolicy">
+            <summary>Unknown policy.</summary>
+        </member>
+        <member name="T:QtSerialPort.QSerialPort.SerialPortError">
+            <summary>
+            <para>This enum describes the errors that may be contained by the QSerialPort::error property.</para>
+            <para>See also QSerialPort::error.</para>
+            </summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.SerialPortError.NoError">
+            <summary>No error occurred.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.SerialPortError.DeviceNotFoundError">
+            <summary>An error occurred while attempting to open an non-existing device.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.SerialPortError.PermissionError">
+            <summary>An error occurred while attempting to open an already opened device by another process or a user not having enough permission and credentials to open.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.SerialPortError.OpenError">
+            <summary>An error occurred while attempting to open an already opened device in this object.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.SerialPortError.ParityError">
+            <summary>Parity error detected by the hardware while reading data. This value is obsolete. We strongly advise against using it in new code.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.SerialPortError.FramingError">
+            <summary>Framing error detected by the hardware while reading data. This value is obsolete. We strongly advise against using it in new code.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.SerialPortError.BreakConditionError">
+            <summary>Break condition detected by the hardware on the input line. This value is obsolete. We strongly advise against using it in new code.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.SerialPortError.WriteError">
+            <summary>An I/O error occurred while writing the data.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.SerialPortError.ReadError">
+            <summary>An I/O error occurred while reading the data.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.SerialPortError.ResourceError">
+            <summary>An I/O error occurred when a resource becomes unavailable, e.g. when the device is unexpectedly removed from the system.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.SerialPortError.UnsupportedOperationError">
+            <summary>The requested device operation is not supported or prohibited by the running operating system.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.SerialPortError.UnknownError">
+            <summary>An unidentified error occurred.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.SerialPortError.TimeoutError">
+            <summary>A timeout error occurred. This value was introduced in QtSerialPort 5.2.</summary>
+        </member>
+        <member name="F:QtSerialPort.QSerialPort.SerialPortError.NotOpenError">
+            <summary>This error occurs when an operation is executed that can only be successfully performed if the device is open. This value was introduced in QtSerialPort 5.2.</summary>
+        </member>
+        <member name="T:QtSerialPort.QSerialPortInfo">
+            <summary>
+            <para>Provides information about existing serial ports.</para>
+            </summary>
+            <remarks>
+            <para>Use the static functions to generate a list of QSerialPortInfo objects. Each QSerialPortInfo object in the list represents a single serial port and can be queried for the port name, system location, description, and manufacturer. The QSerialPortInfo class can also be used as an input parameter for the setPort() method of the QSerialPort class.</para>
+            <para></para>
+            <para>See also QSerialPort.</para>
+            </remarks>
+        </member>
+        <member name="M:QtSerialPort.QSerialPortInfo.#ctor">
+            <summary>
+            <para>Constructs an empty QSerialPortInfo object.</para>
+            <para>See also isNull().</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialPort.QSerialPortInfo.#ctor(QtSerialPort.QSerialPort)">
+            <summary>
+            <para>Constructs a QSerialPortInfo object from serial port.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialPort.QSerialPortInfo.#ctor(System.String)">
+            <summary>
+            <para>Constructs a QSerialPortInfo object from serial port name.</para>
+            <para>This constructor finds the relevant serial port among the available ones according to the port name name, and constructs the serial port info instance for that port.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialPort.QSerialPortInfo.#ctor(QtSerialPort.QSerialPortInfo)">
+            <summary>
+            <para>Constructs a copy of other.</para>
+            </summary>
+        </member>
+        <member name="M:QtSerialPort.QSerialPortInfo.Swap(QtSerialPort.QSerialPortInfo)">
+            <summary>
+            <para>Swaps QSerialPortInfo other with this QSerialPortInfo. This operation is very fast and never fails.</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialPort.QSerialPortInfo.PortName">
+            <summary>
+            <para>Returns the name of the serial port.</para>
+            <para>See also systemLocation().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialPort.QSerialPortInfo.SystemLocation">
+            <summary>
+            <para>Returns the system location of the serial port.</para>
+            <para>See also portName().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialPort.QSerialPortInfo.Description">
+            <summary>
+            <para>Returns the description string of the serial port, if available; otherwise returns an empty string.</para>
+            <para>See also manufacturer() and serialNumber().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialPort.QSerialPortInfo.Manufacturer">
+            <summary>
+            <para>Returns the manufacturer string of the serial port, if available; otherwise returns an empty string.</para>
+            <para>See also description() and serialNumber().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialPort.QSerialPortInfo.SerialNumber">
+            <summary>
+            <para>Returns the serial number string of the serial port, if available; otherwise returns an empty string.</para>
+            <para>Note: The serial number may include letters.</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            <para>See also description() and manufacturer().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialPort.QSerialPortInfo.VendorIdentifier">
+            <summary>
+            <para>Returns the 16-bit vendor number for the serial port, if available; otherwise returns zero.</para>
+            <para>See also hasVendorIdentifier(), productIdentifier(), and hasProductIdentifier().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialPort.QSerialPortInfo.ProductIdentifier">
+            <summary>
+            <para>Returns the 16-bit product number for the serial port, if available; otherwise returns zero.</para>
+            <para>See also hasProductIdentifier(), vendorIdentifier(), and hasVendorIdentifier().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialPort.QSerialPortInfo.HasVendorIdentifier">
+            <summary>
+            <para>Returns true if there is a valid 16-bit vendor number present; otherwise returns false.</para>
+            <para>See also vendorIdentifier(), productIdentifier(), and hasProductIdentifier().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialPort.QSerialPortInfo.HasProductIdentifier">
+            <summary>
+            <para>Returns true if there is a valid 16-bit product number present; otherwise returns false.</para>
+            <para>See also productIdentifier(), vendorIdentifier(), and hasVendorIdentifier().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialPort.QSerialPortInfo.IsNull">
+            <summary>
+            <para>Returns whether this QSerialPortInfo object holds a serial port definition.</para>
+            <para>See also isBusy().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialPort.QSerialPortInfo.IsBusy">
+            <summary>
+            <para>Returns true if serial port is busy; otherwise returns false.</para>
+            <para>See also isNull().</para>
+            </summary>
+        </member>
+        <member name="P:QtSerialPort.QSerialPortInfo.IsValid">
+            <summary>
+            <para>Returns true if serial port is present on system; otherwise returns false.</para>
+            <para>See also isNull() and isBusy().</para>
+            </summary>
+        </member>
+    </members>
+</doc>

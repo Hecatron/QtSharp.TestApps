@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Qt3DLogic.Sharp</name>
+    </assembly>
+    <members>
+        <member name="T:Qt3DLogic.QFrameAction">
+            <summary>
+            <para>Provides a way to have a synchronous function executed each frame.</para>
+            </summary>
+            <remarks>
+            <para>The QFrameAction provides a way to perform tasks each frame in synchronized with the Qt3D backend. This is useful to implement some aspects of application logic and to prototype functionality that can later be folded into an additional Qt3D aspect.</para>
+            <para>For example, the QFrameAction can be used to animate a property in sync with the Qt3D engine where a Qt Quick animation element is not perfectly synchronized and may lead to stutters in some cases.</para>
+            <para>To execute your own code each frame override the onTriggered function.</para>
+            </remarks>
+        </member>
+        <member name="M:Qt3DLogic.QFrameAction.#ctor(Qt3DCore.QNode)">
+            <summary>
+            <para>Default constructs an instance of QFrameAction.</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DLogic.QFrameAction.Triggered">
+            <summary>
+            <para>This signal is emitted each frame with dt being the time since the last triggering.</para>
+            </summary>
+        </member>
+        <member name="T:Qt3DLogic.QLogicAspect">
+            <summary>
+            <para>Responsible for handling frame synchronization jobs.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DLogic.QLogicAspect.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs a new Qt3DLogic::QLogicAspect instance with parent.</para>
+            </summary>
+        </member>
+    </members>
+</doc>

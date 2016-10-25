@@ -1,0 +1,988 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>QtDataVisualization.Sharp</name>
+    </assembly>
+    <members>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.OpenGLFeatures">
+            <summary>
+            <para>Returns the set of features that are present on this system's OpenGL implementation.</para>
+            <para>It is assumed that the QOpenGLContext associated with this function resolver is current.</para>
+            <para>See also hasOpenGLFeature().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.HasOpenGLFeature(QtGui.QOpenGLFunctions.OpenGLFeature)">
+            <summary>
+            <para>Returns true if feature is present on this system's OpenGL implementation; false otherwise.</para>
+            <para>It is assumed that the QOpenGLContext associated with this function resolver is current.</para>
+            <para>See also openGLFeatures().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.InitializeOpenGLFunctions">
+            <summary>
+            <para>Initializes OpenGL function resolution for the current context.</para>
+            <para>After calling this function, the QOpenGLFunctions object can only be used with the current context and other contexts that share with it. Call initializeOpenGLFunctions() again to change the object's context association.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlBindTexture(System.UInt32,System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glBindTexture(target, texture).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glBindTexture().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlBlendFunc(System.UInt32,System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glBlendFunc(sfactor, dfactor).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glBlendFunc().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlClear(System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glClear(mask).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glClear().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlClearColor(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            <para>Convenience function that calls glClearColor(red, green, blue, alpha).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glClearColor().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlClearStencil(System.Int32)">
+            <summary>
+            <para>Convenience function that calls glClearStencil(s).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glClearStencil().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlColorMask(System.Byte,System.Byte,System.Byte,System.Byte)">
+            <summary>
+            <para>Convenience function that calls glColorMask(red, green, blue, alpha).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glColorMask().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlCopyTexImage2D(System.UInt32,System.Int32,System.UInt32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            <para>Convenience function that calls glCopyTexImage2D(target, level, internalformat, x, y, width, height, border).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glCopyTexImage2D().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlCopyTexSubImage2D(System.UInt32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            <para>Convenience function that calls glCopyTexSubImage2D(target, level, xoffset, yoffset, x, y, width, height).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glCopyTexSubImage2D().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlCullFace(System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glCullFace(mode).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glCullFace().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlDeleteTextures(System.Int32,System.UInt32@)">
+            <summary>
+            <para>Convenience function that calls glDeleteTextures(n, textures).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glDeleteTextures().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlDepthFunc(System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glDepthFunc(func).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glDepthFunc().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlDepthMask(System.Byte)">
+            <summary>
+            <para>Convenience function that calls glDepthMask(flag).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glDepthMask().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlDisable(System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glDisable(cap).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glDisable().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlDrawArrays(System.UInt32,System.Int32,System.Int32)">
+            <summary>
+            <para>Convenience function that calls glDrawArrays(mode, first, count).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glDrawArrays().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlDrawElements(System.UInt32,System.Int32,System.UInt32,System.IntPtr)">
+            <summary>
+            <para>Convenience function that calls glDrawElements(mode, count, type, indices).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glDrawElements().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlEnable(System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glEnable(cap).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glEnable().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlFinish">
+            <summary>
+            <para>Convenience function that calls glFinish().</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glFinish().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlFlush">
+            <summary>
+            <para>Convenience function that calls glFlush().</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glFlush().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlFrontFace(System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glFrontFace(mode).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glFrontFace().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlGenTextures(System.Int32,System.UInt32@)">
+            <summary>
+            <para>Convenience function that calls glGenTextures(n, textures).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glGenTextures().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlGetBooleanv(System.UInt32,System.Byte*)">
+            <summary>
+            <para>Convenience function that calls glGetBooleanv(pname, params).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glGetBooleanv().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlGetFloatv(System.UInt32,System.Single@)">
+            <summary>
+            <para>Convenience function that calls glGetFloatv(pname, params).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glGetFloatv().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlGetIntegerv(System.UInt32,System.Int32@)">
+            <summary>
+            <para>Convenience function that calls glGetIntegerv(pname, params).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glGetIntegerv().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlGetString(System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glGetString(name).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glGetString().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlGetTexParameterfv(System.UInt32,System.UInt32,System.Single@)">
+            <summary>
+            <para>Convenience function that calls glGetTexParameterfv(target, pname, params).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glGetTexParameterfv().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlGetTexParameteriv(System.UInt32,System.UInt32,System.Int32@)">
+            <summary>
+            <para>Convenience function that calls glGetTexParameteriv(target, pname, params).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glGetTexParameteriv().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlHint(System.UInt32,System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glHint(target, mode).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glHint().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlIsEnabled(System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glIsEnabled(cap).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glIsEnabled().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlIsTexture(System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glIsTexture(texture).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glIsTexture().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlLineWidth(System.Single)">
+            <summary>
+            <para>Convenience function that calls glLineWidth(width).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glLineWidth().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlPixelStorei(System.UInt32,System.Int32)">
+            <summary>
+            <para>Convenience function that calls glPixelStorei(pname, param).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glPixelStorei().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlPolygonOffset(System.Single,System.Single)">
+            <summary>
+            <para>Convenience function that calls glPolygonOffset(factor, units).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glPolygonOffset().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlReadPixels(System.Int32,System.Int32,System.Int32,System.Int32,System.UInt32,System.UInt32,System.IntPtr)">
+            <summary>
+            <para>Convenience function that calls glReadPixels(x, y, width, height, format, type, pixels).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glReadPixels().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlScissor(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            <para>Convenience function that calls glScissor(x, y, width, height).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glScissor().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlStencilFunc(System.UInt32,System.Int32,System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glStencilFunc(func, ref, mask).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glStencilFunc().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlStencilMask(System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glStencilMask(mask).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glStencilMask().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlStencilOp(System.UInt32,System.UInt32,System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glStencilOp(fail, zfail, zpass).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glStencilOp().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlTexImage2D(System.UInt32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.UInt32,System.UInt32,System.IntPtr)">
+            <summary>
+            <para>Convenience function that calls glTexImage2D(target, level, internalformat, width, height, border, format, type, pixels).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glTexImage2D().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlTexParameterf(System.UInt32,System.UInt32,System.Single)">
+            <summary>
+            <para>Convenience function that calls glTexParameterf(target, pname, param).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glTexParameterf().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlTexParameterfv(System.UInt32,System.UInt32,System.Single@)">
+            <summary>
+            <para>Convenience function that calls glTexParameterfv(target, pname, params).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glTexParameterfv().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlTexParameteri(System.UInt32,System.UInt32,System.Int32)">
+            <summary>
+            <para>Convenience function that calls glTexParameteri(target, pname, param).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glTexParameteri().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlTexParameteriv(System.UInt32,System.UInt32,System.Int32@)">
+            <summary>
+            <para>Convenience function that calls glTexParameteriv(target, pname, params).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glTexParameteriv().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlTexSubImage2D(System.UInt32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.UInt32,System.UInt32,System.IntPtr)">
+            <summary>
+            <para>Convenience function that calls glTexSubImage2D(target, level, xoffset, yoffset, width, height, format, type, pixels).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glTexSubImage2D().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlViewport(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            <para>Convenience function that calls glViewport(x, y, width, height).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glViewport().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlActiveTexture(System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glActiveTexture(texture).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glActiveTexture().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlAttachShader(System.UInt32,System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glAttachShader(program, shader).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glAttachShader().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlBindAttribLocation(System.UInt32,System.UInt32,System.String)">
+            <summary>
+            <para>Convenience function that calls glBindAttribLocation(program, index, name).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glBindAttribLocation().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlBindBuffer(System.UInt32,System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glBindBuffer(target, buffer).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glBindBuffer().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlBindFramebuffer(System.UInt32,System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glBindFramebuffer(target, framebuffer).</para>
+            <para>Note that Qt will translate a framebuffer argument of 0 to the currently bound QOpenGLContext's defaultFramebufferObject().</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glBindFramebuffer().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlBindRenderbuffer(System.UInt32,System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glBindRenderbuffer(target, renderbuffer).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glBindRenderbuffer().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlBlendColor(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            <para>Convenience function that calls glBlendColor(red, green, blue, alpha).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glBlendColor().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlBlendEquation(System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glBlendEquation(mode).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glBlendEquation().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlBlendEquationSeparate(System.UInt32,System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glBlendEquationSeparate(modeRGB, modeAlpha).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glBlendEquationSeparate().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlBlendFuncSeparate(System.UInt32,System.UInt32,System.UInt32,System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glBlendFuncSeparate(srcRGB, dstRGB, srcAlpha, dstAlpha).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glBlendFuncSeparate().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlBufferData(System.UInt32,System.Int32,System.IntPtr,System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glBufferData(target, size, data, usage).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glBufferData().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlBufferSubData(System.UInt32,System.Int32,System.Int32,System.IntPtr)">
+            <summary>
+            <para>Convenience function that calls glBufferSubData(target, offset, size, data).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glBufferSubData().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlCheckFramebufferStatus(System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glCheckFramebufferStatus(target).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glCheckFramebufferStatus().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlClearDepthf(System.Single)">
+            <summary>
+            <para>Convenience function that calls glClearDepth(depth) on desktop OpenGL systems and glClearDepthf(depth) on embedded OpenGL ES systems.</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glClearDepthf().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlCompileShader(System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glCompileShader(shader).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glCompileShader().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlCompressedTexImage2D(System.UInt32,System.Int32,System.UInt32,System.Int32,System.Int32,System.Int32,System.Int32,System.IntPtr)">
+            <summary>
+            <para>Convenience function that calls glCompressedTexImage2D(target, level, internalformat, width, height, border, imageSize, data).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glCompressedTexImage2D().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlCompressedTexSubImage2D(System.UInt32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.UInt32,System.Int32,System.IntPtr)">
+            <summary>
+            <para>Convenience function that calls glCompressedTexSubImage2D(target, level, xoffset, yoffset, width, height, format, imageSize, data).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glCompressedTexSubImage2D().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlCreateShader(System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glCreateShader(type).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glCreateShader().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlDeleteBuffers(System.Int32,System.UInt32@)">
+            <summary>
+            <para>Convenience function that calls glDeleteBuffers(n, buffers).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glDeleteBuffers().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlDeleteFramebuffers(System.Int32,System.UInt32@)">
+            <summary>
+            <para>Convenience function that calls glDeleteFramebuffers(n, framebuffers).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glDeleteFramebuffers().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlDeleteProgram(System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glDeleteProgram(program).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glDeleteProgram().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlDeleteRenderbuffers(System.Int32,System.UInt32@)">
+            <summary>
+            <para>Convenience function that calls glDeleteRenderbuffers(n, renderbuffers).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glDeleteRenderbuffers().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlDeleteShader(System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glDeleteShader(shader).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glDeleteShader().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlDepthRangef(System.Single,System.Single)">
+            <summary>
+            <para>Convenience function that calls glDepthRange(zNear, zFar) on desktop OpenGL systems and glDepthRangef(zNear, zFar) on embedded OpenGL ES systems.</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glDepthRangef().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlDetachShader(System.UInt32,System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glDetachShader(program, shader).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glDetachShader().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlDisableVertexAttribArray(System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glDisableVertexAttribArray(index).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glDisableVertexAttribArray().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlEnableVertexAttribArray(System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glEnableVertexAttribArray(index).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glEnableVertexAttribArray().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlFramebufferRenderbuffer(System.UInt32,System.UInt32,System.UInt32,System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glFramebufferRenderbuffer(target, attachment, renderbuffertarget, renderbuffer).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glFramebufferRenderbuffer().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlFramebufferTexture2D(System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.Int32)">
+            <summary>
+            <para>Convenience function that calls glFramebufferTexture2D(target, attachment, textarget, texture, level).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glFramebufferTexture2D().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlGenBuffers(System.Int32,System.UInt32@)">
+            <summary>
+            <para>Convenience function that calls glGenBuffers(n, buffers).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glGenBuffers().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlGenerateMipmap(System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glGenerateMipmap(target).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glGenerateMipmap().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlGenFramebuffers(System.Int32,System.UInt32@)">
+            <summary>
+            <para>Convenience function that calls glGenFramebuffers(n, framebuffers).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glGenFramebuffers().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlGenRenderbuffers(System.Int32,System.UInt32@)">
+            <summary>
+            <para>Convenience function that calls glGenRenderbuffers(n, renderbuffers).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glGenRenderbuffers().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlGetActiveAttrib(System.UInt32,System.UInt32,System.Int32,System.Int32@,System.Int32@,System.UInt32@,System.Char*)">
+            <summary>
+            <para>Convenience function that calls glGetActiveAttrib(program, index, bufsize, length, size, type, name).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glGetActiveAttrib().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlGetActiveUniform(System.UInt32,System.UInt32,System.Int32,System.Int32@,System.Int32@,System.UInt32@,System.Char*)">
+            <summary>
+            <para>Convenience function that calls glGetActiveUniform(program, index, bufsize, length, size, type, name).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glGetActiveUniform().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlGetAttachedShaders(System.UInt32,System.Int32,System.Int32@,System.UInt32@)">
+            <summary>
+            <para>Convenience function that calls glGetAttachedShaders(program, maxcount, count, shaders).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glGetAttachedShaders().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlGetAttribLocation(System.UInt32,System.String)">
+            <summary>
+            <para>Convenience function that calls glGetAttribLocation(program, name).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glGetAttribLocation().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlGetBufferParameteriv(System.UInt32,System.UInt32,System.Int32@)">
+            <summary>
+            <para>Convenience function that calls glGetBufferParameteriv(target, pname, params).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glGetBufferParameteriv().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlGetFramebufferAttachmentParameteriv(System.UInt32,System.UInt32,System.UInt32,System.Int32@)">
+            <summary>
+            <para>Convenience function that calls glGetFramebufferAttachmentParameteriv(target, attachment, pname, params).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glGetFramebufferAttachmentParameteriv().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlGetProgramiv(System.UInt32,System.UInt32,System.Int32@)">
+            <summary>
+            <para>Convenience function that calls glGetProgramiv(program, pname, params).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glGetProgramiv().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlGetProgramInfoLog(System.UInt32,System.Int32,System.Int32@,System.Char*)">
+            <summary>
+            <para>Convenience function that calls glGetProgramInfoLog(program, bufsize, length, infolog).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glGetProgramInfoLog().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlGetRenderbufferParameteriv(System.UInt32,System.UInt32,System.Int32@)">
+            <summary>
+            <para>Convenience function that calls glGetRenderbufferParameteriv(target, pname, params).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glGetRenderbufferParameteriv().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlGetShaderiv(System.UInt32,System.UInt32,System.Int32@)">
+            <summary>
+            <para>Convenience function that calls glGetShaderiv(shader, pname, params).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glGetShaderiv().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlGetShaderInfoLog(System.UInt32,System.Int32,System.Int32@,System.Char*)">
+            <summary>
+            <para>Convenience function that calls glGetShaderInfoLog(shader, bufsize, length, infolog).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glGetShaderInfoLog().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlGetShaderPrecisionFormat(System.UInt32,System.UInt32,System.Int32@,System.Int32@)">
+            <summary>
+            <para>Convenience function that calls glGetShaderPrecisionFormat(shadertype, precisiontype, range, precision).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glGetShaderPrecisionFormat().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlGetShaderSource(System.UInt32,System.Int32,System.Int32@,System.Char*)">
+            <summary>
+            <para>Convenience function that calls glGetShaderSource(shader, bufsize, length, source).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glGetShaderSource().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlGetUniformfv(System.UInt32,System.Int32,System.Single@)">
+            <summary>
+            <para>Convenience function that calls glGetUniformfv(program, location, params).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glGetUniformfv().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlGetUniformiv(System.UInt32,System.Int32,System.Int32@)">
+            <summary>
+            <para>Convenience function that calls glGetUniformiv(program, location, params).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glGetUniformiv().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlGetUniformLocation(System.UInt32,System.String)">
+            <summary>
+            <para>Convenience function that calls glGetUniformLocation(program, name).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glGetUniformLocation().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlGetVertexAttribfv(System.UInt32,System.UInt32,System.Single@)">
+            <summary>
+            <para>Convenience function that calls glGetVertexAttribfv(index, pname, params).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glGetVertexAttribfv().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlGetVertexAttribiv(System.UInt32,System.UInt32,System.Int32@)">
+            <summary>
+            <para>Convenience function that calls glGetVertexAttribiv(index, pname, params).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glGetVertexAttribiv().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlGetVertexAttribPointerv(System.UInt32,System.UInt32,System.Void**)">
+            <summary>
+            <para>Convenience function that calls glGetVertexAttribPointerv(index, pname, pointer).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glGetVertexAttribPointerv().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlIsBuffer(System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glIsBuffer(buffer).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glIsBuffer().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlIsFramebuffer(System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glIsFramebuffer(framebuffer).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glIsFramebuffer().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlIsProgram(System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glIsProgram(program).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glIsProgram().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlIsRenderbuffer(System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glIsRenderbuffer(renderbuffer).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glIsRenderbuffer().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlIsShader(System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glIsShader(shader).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glIsShader().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlLinkProgram(System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glLinkProgram(program).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glLinkProgram().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlReleaseShaderCompiler">
+            <summary>
+            <para>Convenience function that calls glReleaseShaderCompiler().</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glReleaseShaderCompiler().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlRenderbufferStorage(System.UInt32,System.UInt32,System.Int32,System.Int32)">
+            <summary>
+            <para>Convenience function that calls glRenderbufferStorage(target, internalformat, width, height).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glRenderbufferStorage().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlSampleCoverage(System.Single,System.Byte)">
+            <summary>
+            <para>Convenience function that calls glSampleCoverage(value, invert).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glSampleCoverage().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlShaderBinary(System.Int32,System.UInt32@,System.UInt32,System.IntPtr,System.Int32)">
+            <summary>
+            <para>Convenience function that calls glShaderBinary(n, shaders, binaryformat, binary, length).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glShaderBinary().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlShaderSource(System.UInt32,System.Int32,System.Char**,System.Int32@)">
+            <summary>
+            <para>Convenience function that calls glShaderSource(shader, count, string, length).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glShaderSource().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlStencilFuncSeparate(System.UInt32,System.UInt32,System.Int32,System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glStencilFuncSeparate(face, func, ref, mask).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glStencilFuncSeparate().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlStencilMaskSeparate(System.UInt32,System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glStencilMaskSeparate(face, mask).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glStencilMaskSeparate().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlStencilOpSeparate(System.UInt32,System.UInt32,System.UInt32,System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glStencilOpSeparate(face, fail, zfail, zpass).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glStencilOpSeparate().</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlUniform1f(System.Int32,System.Single)">
+            <summary>
+            <para>Convenience function that calls glUniform1f(location, x).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glUniform1f().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlUniform1fv(System.Int32,System.Int32,System.Single@)">
+            <summary>
+            <para>Convenience function that calls glUniform1fv(location, count, v).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glUniform1fv().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlUniform1i(System.Int32,System.Int32)">
+            <summary>
+            <para>Convenience function that calls glUniform1i(location, x).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glUniform1i().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlUniform1iv(System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            <para>Convenience function that calls glUniform1iv(location, count, v).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glUniform1iv().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlUniform2f(System.Int32,System.Single,System.Single)">
+            <summary>
+            <para>Convenience function that calls glUniform2f(location, x, y).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glUniform2f().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlUniform2fv(System.Int32,System.Int32,System.Single@)">
+            <summary>
+            <para>Convenience function that calls glUniform2fv(location, count, v).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glUniform2fv().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlUniform2i(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            <para>Convenience function that calls glUniform2i(location, x, y).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glUniform2i().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlUniform2iv(System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            <para>Convenience function that calls glUniform2iv(location, count, v).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glUniform2iv().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlUniform3f(System.Int32,System.Single,System.Single,System.Single)">
+            <summary>
+            <para>Convenience function that calls glUniform3f(location, x, y, z).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glUniform3f().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlUniform3fv(System.Int32,System.Int32,System.Single@)">
+            <summary>
+            <para>Convenience function that calls glUniform3fv(location, count, v).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glUniform3fv().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlUniform3i(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            <para>Convenience function that calls glUniform3i(location, x, y, z).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glUniform3i().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlUniform3iv(System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            <para>Convenience function that calls glUniform3iv(location, count, v).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glUniform3iv().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlUniform4f(System.Int32,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            <para>Convenience function that calls glUniform4f(location, x, y, z, w).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glUniform4f().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlUniform4fv(System.Int32,System.Int32,System.Single@)">
+            <summary>
+            <para>Convenience function that calls glUniform4fv(location, count, v).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glUniform4fv().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlUniform4i(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            <para>Convenience function that calls glUniform4i(location, x, y, z, w).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glUniform4i().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlUniform4iv(System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            <para>Convenience function that calls glUniform4iv(location, count, v).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glUniform4iv().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlUniformMatrix2fv(System.Int32,System.Int32,System.Byte,System.Single@)">
+            <summary>
+            <para>Convenience function that calls glUniformMatrix2fv(location, count, transpose, value).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glUniformMatrix2fv().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlUniformMatrix3fv(System.Int32,System.Int32,System.Byte,System.Single@)">
+            <summary>
+            <para>Convenience function that calls glUniformMatrix3fv(location, count, transpose, value).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glUniformMatrix3fv().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlUniformMatrix4fv(System.Int32,System.Int32,System.Byte,System.Single@)">
+            <summary>
+            <para>Convenience function that calls glUniformMatrix4fv(location, count, transpose, value).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glUniformMatrix4fv().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlUseProgram(System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glUseProgram(program).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glUseProgram().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlValidateProgram(System.UInt32)">
+            <summary>
+            <para>Convenience function that calls glValidateProgram(program).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glValidateProgram().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlVertexAttrib1f(System.UInt32,System.Single)">
+            <summary>
+            <para>Convenience function that calls glVertexAttrib1f(indx, x).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glVertexAttrib1f().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlVertexAttrib1fv(System.UInt32,System.Single@)">
+            <summary>
+            <para>Convenience function that calls glVertexAttrib1fv(indx, values).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glVertexAttrib1fv().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlVertexAttrib2f(System.UInt32,System.Single,System.Single)">
+            <summary>
+            <para>Convenience function that calls glVertexAttrib2f(indx, x, y).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glVertexAttrib2f().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlVertexAttrib2fv(System.UInt32,System.Single@)">
+            <summary>
+            <para>Convenience function that calls glVertexAttrib2fv(indx, values).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glVertexAttrib2fv().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlVertexAttrib3f(System.UInt32,System.Single,System.Single,System.Single)">
+            <summary>
+            <para>Convenience function that calls glVertexAttrib3f(indx, x, y, z).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glVertexAttrib3f().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlVertexAttrib3fv(System.UInt32,System.Single@)">
+            <summary>
+            <para>Convenience function that calls glVertexAttrib3fv(indx, values).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glVertexAttrib3fv().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlVertexAttrib4f(System.UInt32,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            <para>Convenience function that calls glVertexAttrib4f(indx, x, y, z, w).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glVertexAttrib4f().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlVertexAttrib4fv(System.UInt32,System.Single@)">
+            <summary>
+            <para>Convenience function that calls glVertexAttrib4fv(indx, values).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glVertexAttrib4fv().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="M:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlVertexAttribPointer(System.UInt32,System.Int32,System.UInt32,System.Byte,System.Int32,System.IntPtr)">
+            <summary>
+            <para>Convenience function that calls glVertexAttribPointer(indx, size, type, normalized, stride, ptr).</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glVertexAttribPointer().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+        <member name="P:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlGetError">
+            <summary>
+            <para>Convenience function that calls glGetError().</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glGetError().</para>
+            <para>This function was introduced in  Qt 5.3.</para>
+            </summary>
+        </member>
+        <member name="P:QtDataVisualization.QtDataVisualization.QAbstract3DGraph.GlCreateProgram">
+            <summary>
+            <para>Convenience function that calls glCreateProgram().</para>
+            <para>For more information, see the OpenGL ES 2.0 documentation for glCreateProgram().</para>
+            <para>This convenience function will do nothing on OpenGL ES 1.x systems.</para>
+            </summary>
+        </member>
+    </members>
+</doc>

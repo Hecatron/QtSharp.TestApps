@@ -10,11 +10,8 @@ using QtQuick;
 using QtSharpHelper.Qt;
 using QtWidgets;
 
-namespace BasicLayouts1_CS
-{
-    static class Program
-    {
-
+namespace BasicLayouts1_CS {
+    internal static class Program {
         // Using the code from the QtQuick Gallery example included with Qt Creator / Q 5.5.1 as a basis
         // Simple example to load a qml file
 
@@ -29,8 +26,7 @@ namespace BasicLayouts1_CS
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static unsafe void Main()
-        {
+        private static unsafe void Main() {
             QGuiApp = QGuiApp.CreateQGuiApp();
 
             LoadQml();
@@ -39,8 +35,7 @@ namespace BasicLayouts1_CS
             QGuiApplication.Exec();
         }
 
-        static void LoadQml()
-        {
+        private static void LoadQml() {
             // 1. File Access
             QmlEngine = new QQmlApplicationEngine("main.qml");
 

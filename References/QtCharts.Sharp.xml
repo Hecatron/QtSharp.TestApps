@@ -1,0 +1,3609 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>QtCharts.Sharp</name>
+    </assembly>
+    <members>
+        <member name="T:QtCharts.QAbstractAxis">
+            <summary>
+            <para>The QAbstractAxis class is used for manipulating chart's axis.</para>
+            </summary>
+            <remarks>
+            <para>Each series can be bound to one or more horizontal and vertical axes, but mixing axis types that would result in different domains is not supported, such as specifying QValueAxis and QLogValueAxis on the same orientation.</para>
+            <para>Properties and visibility of various axis elements such as axis line, title, labels, grid lines, and shades can be individually controlled.</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QAbstractAxis.Show">
+            <summary>
+            <para>Sets axis, shades, labels and grid lines to be visible.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QAbstractAxis.Hide">
+            <summary>
+            <para>Sets axis, shades, labels and grid lines to not be visible.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QAbstractAxis.SetMin(QtCore.QVariant)">
+            <summary>
+            <para>Sets the minimum value shown on the axis. Depending on the actual axis type the min parameter is converted to appropriate type. If the conversion is impossible then the function call does nothing</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QAbstractAxis.SetMax(QtCore.QVariant)">
+            <summary>
+            <para>Sets the maximum value shown on the axis. Depending on the actual axis type the max parameter is converted to appropriate type. If the conversion is impossible then the function call does nothing</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QAbstractAxis.SetRange(QtCore.QVariant,QtCore.QVariant)">
+            <summary>
+            <para>Sets the range shown on the axis. Depending on the actual axis type the min and max parameters are converted to appropriate types. If the conversion is impossible then the function call does nothing.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractAxis.VisibleChanged">
+            <summary>
+            <para>Visibility of the axis has changed to visible.</para>
+            <para>Note: Notifier signal for property visible. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractAxis.LinePenChanged">
+            <summary>
+            <para>The pen of the line of the axis has changed to pen.</para>
+            <para>Note: Notifier signal for property linePen. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractAxis.LineVisibleChanged">
+            <summary>
+            <para>Visibility of the axis line has changed to visible.</para>
+            <para>Note: Notifier signal for property lineVisible. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractAxis.LabelsVisibleChanged">
+            <summary>
+            <para>Visibility of the labels of the axis has changed to visible.</para>
+            <para>Note: Notifier signal for property labelsVisible. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractAxis.LabelsBrushChanged">
+            <summary>
+            <para>The brush of the axis labels has changed to brush.</para>
+            <para>Note: Notifier signal for property labelsBrush. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractAxis.LabelsFontChanged">
+            <summary>
+            <para>The font of the axis labels has changed to font.</para>
+            <para>Note: Notifier signal for property labelsFont. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractAxis.LabelsAngleChanged">
+            <summary>
+            <para>The angle of the axis labels has changed to angle.</para>
+            <para>Note: Notifier signal for property labelsAngle. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractAxis.GridLinePenChanged">
+            <summary>
+            <para>The pen of the grid line has changed to pen.</para>
+            <para>Note: Notifier signal for property gridLinePen. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractAxis.GridVisibleChanged">
+            <summary>
+            <para>Visibility of the grid lines of the axis has changed to visible.</para>
+            <para>Note: Notifier signal for property gridVisible. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractAxis.MinorGridVisibleChanged">
+            <summary>
+            <para>Visibility of the minor grid lines of the axis has changed to visible.</para>
+            <para>Note: Notifier signal for property minorGridVisible. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractAxis.MinorGridLinePenChanged">
+            <summary>
+            <para>The pen of the minor grid line has changed to pen.</para>
+            <para>Note: Notifier signal for property minorGridLinePen. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractAxis.GridLineColorChanged">
+            <summary>
+            <para>The color of the pen of the grid line has changed to color.</para>
+            <para>Note: Notifier signal for property gridLineColor. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractAxis.MinorGridLineColorChanged">
+            <summary>
+            <para>The color of the pen of the minor grid line has changed to color.</para>
+            <para>Note: Notifier signal for property minorGridLineColor. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractAxis.ColorChanged">
+            <summary>
+            <para>Emitted if the color of the axis is changed.</para>
+            <para>Note: Notifier signal for property color. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractAxis.LabelsColorChanged">
+            <summary>
+            <para>Emitted if the color of the axis labels is changed.</para>
+            <para>Note: Notifier signal for property labelsColor. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractAxis.TitleTextChanged">
+            <summary>
+            <para>The text of the axis title has changed to text.</para>
+            <para>Note: Notifier signal for property titleText. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractAxis.TitleBrushChanged">
+            <summary>
+            <para>The brush of the axis title has changed to brush.</para>
+            <para>Note: Notifier signal for property titleBrush. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractAxis.TitleVisibleChanged">
+            <summary>
+            <para>Visibility of the title text of the axis has changed to visible.</para>
+            <para>Note: Notifier signal for property titleVisible. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractAxis.TitleFontChanged">
+            <summary>
+            <para>The font of the axis title has changed to font.</para>
+            <para>Note: Notifier signal for property titleFont. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractAxis.ShadesVisibleChanged">
+            <summary>
+            <para>Emitted if the visibility of the axis shades is changed to visible.</para>
+            <para>Note: Notifier signal for property shadesVisible. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractAxis.ShadesColorChanged">
+            <summary>
+            <para>Emitted if the color of the axis shades is changed.</para>
+            <para>Note: Notifier signal for property shadesColor. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractAxis.ShadesBorderColorChanged">
+            <summary>
+            <para>Emitted if the border color of the axis shades is changed.</para>
+            <para>Note: Notifier signal for property shadesBorderColor. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractAxis.ShadesPenChanged">
+            <summary>
+            <para>The pen of the axis shades has changed to pen.</para>
+            <para>Note: Notifier signal for property shadesPen. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractAxis.ShadesBrushChanged">
+            <summary>
+            <para>The brush of the axis shades has changed to brush.</para>
+            <para>Note: Notifier signal for property shadesBrush. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractAxis.ReverseChanged">
+            <summary>
+            <para>The reverse property defines if reverse axis is used. By default the value is false.</para>
+            <para>Reverse axis is supported with line, spline, scatter and area series with cartesian chart. All axes of the same orientation attached to same series must be reversed if one is reversed or the behavior is undefined.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	isReverse() const</para>
+            <para> void 	setReverse(bool reverse = true)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	reverseChanged(bool reverse)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QAbstractAxis.LinePenColor">
+            <summary>
+            <para>The color of the axis and ticks.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QColor 	linePenColor() const</para>
+            <para> void 	setLinePenColor(QColor color)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	colorChanged(QColor color)</para>
+            <para></para>
+            <para></para>
+            <para>The color of the axis and ticks.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QColor 	linePenColor() const</para>
+            <para> void 	setLinePenColor(QColor color)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	colorChanged(QColor color)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QAbstractAxis.GridLineVisible">
+            <summary>
+            <para>The visibility of the grid lines.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	isGridLineVisible() const</para>
+            <para> void 	setGridLineVisible(bool visible = true)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	gridVisibleChanged(bool visible)</para>
+            <para></para>
+            <para></para>
+            <para>The visibility of the grid lines.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	isGridLineVisible() const</para>
+            <para> void 	setGridLineVisible(bool visible = true)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	gridVisibleChanged(bool visible)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QAbstractAxis.MinorGridLineVisible">
+            <summary>
+            <para>The visibility of the minor grid lines. Applies only to QValueAxis.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	isMinorGridLineVisible() const</para>
+            <para> void 	setMinorGridLineVisible(bool visible = true)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	minorGridVisibleChanged(bool visible)</para>
+            <para></para>
+            <para></para>
+            <para>The visibility of the minor grid lines. Applies only to QValueAxis.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	isMinorGridLineVisible() const</para>
+            <para> void 	setMinorGridLineVisible(bool visible = true)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	minorGridVisibleChanged(bool visible)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QAbstractAxis.Type">
+            <summary>
+            <para>* Returns the type of the axis</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QAbstractAxis.AxisType">
+            <summary>
+            <para>The type of the axis object.</para>
+            <para>The AxisTypes type is a typedef for QFlags&lt;AxisType&gt;. It stores an OR combination of AxisType values.</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QAbstractSeries">
+            <summary>
+            <para>Base class for all Qt Chart series.</para>
+            </summary>
+            <remarks>
+            <para>Usually you use the series type specific inherited classes instead of the base class.</para>
+            <para></para>
+            <para>See also QXYSeries, QLineSeries, QSplineSeries, QScatterSeries, QAreaSeries, QAbstractBarSeries, QStackedBarSeries, QPercentBarSeries, and QPieSeries.</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QAbstractSeries.AttachAxis(QtCharts.QAbstractAxis)">
+            <summary>
+            <para>Attach axis to the series. Returns true if the axis was attached successfully, false otherwise.</para>
+            <para>Note: If multiple axes of same orientation are attached to same series, they will have same min/max ranges.</para>
+            <para>See also QChart::addAxis() and QChart::createDefaultAxes().</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QAbstractSeries.DetachAxis(QtCharts.QAbstractAxis)">
+            <summary>
+            <para>Detach axis from the series. Returns true if the axis was detached successfully, false otherwise.</para>
+            <para>See also QChart::removeAxis().</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QAbstractSeries.Show">
+            <summary>
+            <para>Sets the visibility of the series to true.</para>
+            <para>See also setVisible() and isVisible().</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QAbstractSeries.Hide">
+            <summary>
+            <para>Sets the visibility of the series to false.</para>
+            <para>See also setVisible() and isVisible().</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractSeries.NameChanged">
+            <summary>
+            <para>This signal is emitted when the series name changes.</para>
+            <para>Note: Notifier signal for property name. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractSeries.VisibleChanged">
+            <summary>
+            <para>Emitted when the series visibility changes.</para>
+            <para>Note: Notifier signal for property visible. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractSeries.OpacityChanged">
+            <summary>
+            <para>Emitted when the opacity of the series changes.</para>
+            <para>Note: Notifier signal for property opacity. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractSeries.UseOpenGLChanged">
+            <summary>
+            <para>Emitted when the useOpenGL property value changes.</para>
+            <para>Note: Notifier signal for property useOpenGL. </para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QAbstractSeries.Chart">
+            <summary>
+            <para>Returns the chart where series belongs to.</para>
+            <para>Set automatically when the series is added to the chart and unset when the series is removed from the chart.</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QAbstractSeries.SeriesType">
+            <summary>
+            <para>The type of the series object.</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QLegend">
+            <summary>
+            <para>Legend object.</para>
+            </summary>
+            <remarks>
+            <para>QLegend is a graphical object for displaying the legend of the chart. Legend state is updated by QChart, when series have been changed. By default, legend is drawn by QChart, but user can set a new parent to legend and handle the drawing manually. User isn't supposed to create or delete legend objects, but can reference it via QChart class.</para>
+            <para></para>
+            <para></para>
+            <para>See also QChart.</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QLegend.DetachFromChart">
+            <summary>
+            <para>Detaches the legend from chart. Chart won't change layout of the legend.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QLegend.AttachToChart">
+            <summary>
+            <para>Attaches the legend to chart. Chart may change layout of the legend.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QLegend.BackgroundVisibleChanged">
+            <summary>
+            <para>The visibility of the legend background changed to visible.</para>
+            <para>Note: Notifier signal for property backgroundVisible. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QLegend.ColorChanged">
+            <summary>
+            <para>The color of the legend background changed to color.</para>
+            <para>Note: Notifier signal for property color. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QLegend.BorderColorChanged">
+            <summary>
+            <para>The border color of the legend background changed to color.</para>
+            <para>Note: Notifier signal for property borderColor. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QLegend.FontChanged">
+            <summary>
+            <para>The font of markers of the legend changed to font.</para>
+            <para>Note: Notifier signal for property font. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QLegend.LabelColorChanged">
+            <summary>
+            <para>This signal is emitted when the color of brush used to draw labels has changed to color.</para>
+            <para>Note: Notifier signal for property labelColor. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QLegend.ReverseMarkersChanged">
+            <summary>
+            <para>The use of reverse order for the markers in legend is changed to reverseMarkers.</para>
+            <para>Note: Notifier signal for property reverseMarkers. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QLegend.ShowToolTipsChanged">
+            <summary>
+            <para>This signal is emitted when the visibility of tooltips is changed to showToolTips.</para>
+            <para>Note: Notifier signal for property showToolTips. </para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QLegend.Brush">
+            <summary>
+            <para>Returns the brush used by legend.</para>
+            <para>See also setBrush().</para>
+            <para></para>
+            <para>Sets the brush of legend. Brush affects the background of legend.</para>
+            <para>See also brush().</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QLegend.Pen">
+            <summary>
+            <para>Returns the pen used by legend.</para>
+            <para>See also setPen().</para>
+            <para></para>
+            <para>Sets the pen of legend. Pen affects the legend borders.</para>
+            <para>See also pen().</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QLegend.LabelBrush">
+            <summary>
+            <para>Brush used to draw labels.</para>
+            <para>See also setLabelBrush().</para>
+            <para></para>
+            <para>Set brush used to draw labels to brush.</para>
+            <para>See also labelBrush().</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QLegend.IsAttachedToChart">
+            <summary>
+            <para>Returns true, if legend is attached to chart.</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QChart">
+            <summary>
+            <para>Main chart API for Qt Charts.</para>
+            </summary>
+            <remarks>
+            <para>QChart is a QGraphicsWidget that you can show in a QGraphicsScene. It manages the graphical representation of different types of series and other chart related objects like legend and axes. If you simply want to show a chart in a layout, you can use the convenience class QChartView instead of QChart.</para>
+            <para></para>
+            <para>See also QChartView and QPolarChart.</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QChart.#ctor(QtWidgets.IQGraphicsItem,QtCore.Qt.WindowType)">
+            <summary>
+            <para>Constructs a chart object which is a child of a parent. Parameter wFlags is passed to the QGraphicsWidget constructor.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QChart.AddSeries(QtCharts.QAbstractSeries)">
+            <summary>
+            <para>Adds the series onto the chart and takes the ownership of it.</para>
+            <para>Note: A newly added series is attached to no axes by default, including any axes that were created for the chart using createDefaultAxes() before the series was added to the chart. If no axes are attached to the newly added series before the chart is shown, the series will get drawn as if it had axes with ranges that exactly fit the series to the plot area of the chart. This can be confusing if the same chart also displays other series that have properly attached axes, so always make sure you either call createDefaultAxes() after a series has been added or explicitly attach axes for the series.</para>
+            <para>See also removeSeries(), removeAllSeries(), createDefaultAxes(), and QAbstractSeries::attachAxis().</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QChart.RemoveSeries(QtCharts.QAbstractSeries)">
+            <summary>
+            <para>Removes the series from the chart. The chart releases its ownership of the specified series object.</para>
+            <para>See also addSeries() and removeAllSeries().</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QChart.RemoveAllSeries">
+            <summary>
+            <para>Removes and deletes all series objects that have been added to the chart.</para>
+            <para>See also addSeries() and removeSeries().</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QChart.SetAxisX(QtCharts.QAbstractAxis,QtCharts.QAbstractSeries)">
+            <summary>
+            <para>Adds the axis to the chart and attaches it to the series as a bottom-aligned horizontal axis. The chart takes ownership of both the axis and the series. Any horizontal axes previously attached to the series are deleted.</para>
+            <para>See also axisX(), axisY(), setAxisY(), createDefaultAxes(), and QAbstractSeries::attachAxis().</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QChart.SetAxisY(QtCharts.QAbstractAxis,QtCharts.QAbstractSeries)">
+            <summary>
+            <para>Adds the axis to the chart and attaches it to the series as a left-aligned vertical axis. The chart takes ownership of both the axis and the series. Any vertical axes previously attached to the series are deleted.</para>
+            <para>See also axisX(), axisY(), setAxisX(), createDefaultAxes(), and QAbstractSeries::attachAxis().</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QChart.AxisX(QtCharts.QAbstractSeries)">
+            <summary>
+            <para>Returns a pointer to the horizontal axis attached to the specified series. If no series is specified, the first horizontal axis added to the chart is returned.</para>
+            <para>See also setAxisX(), addAxis(), and QAbstractSeries::attachAxis().</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QChart.AxisY(QtCharts.QAbstractSeries)">
+            <summary>
+            <para>Returns a pointer to the vertical axis attached to the specified series. If no series is specified, the first vertical axis added to the chart is returned.</para>
+            <para>See also setAxisY(), addAxis(), and QAbstractSeries::attachAxis().</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QChart.AddAxis(QtCharts.QAbstractAxis,QtCore.Qt.AlignmentFlag)">
+            <summary>
+            <para>Adds the axis to the chart with alignment. The chart takes the ownership of the axis.</para>
+            <para>See also removeAxis(), createDefaultAxes(), and QAbstractSeries::attachAxis().</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QChart.RemoveAxis(QtCharts.QAbstractAxis)">
+            <summary>
+            <para>Removes the axis from the chart. The chart releases its ownership of the specified axis object.</para>
+            <para>See also addAxis(), createDefaultAxes(), and QAbstractSeries::detachAxis().</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QChart.CreateDefaultAxes">
+            <summary>
+            <para>Creates axes for the chart based on the series that have already been added to the chart. Any axes previously added to the chart will be deleted.</para>
+            <para>Note: This function has to be called after all series have been added to the chart. The axes created by this function will NOT get automatically attached to any series added to the chart after this function has been called. A series with no axes attached will by default scale to utilize the entire plot area of the chart, which can be confusing if there are other series with properly attached axes also present.</para>
+            <para></para>
+            <para> Series typeX-axisY-axis</para>
+            <para>QXYSeries	QValueAxis	QValueAxis</para>
+            <para>QBarSeries	QBarCategoryAxis	QValueAxis</para>
+            <para>QPieSeries	None	None</para>
+            <para></para>
+            <para>If there are several QXYSeries derived series added to the chart and no series of other types have been added, then only one pair of axes is created. If there are several series of different types added to the chart, then each series gets its own axes pair.</para>
+            <para>The axes specific to the series can be later obtained from the chart by providing the series as the parameter for axes() function call. QPieSeries does not create any axes.</para>
+            <para>See also axisX(), axisY(), axes(), setAxisX(), setAxisY(), and QAbstractSeries::attachAxis().</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QChart.ZoomIn">
+            <summary>
+            <para>Zooms in the view by a factor of two.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QChart.ZoomOut">
+            <summary>
+            <para>Zooms out the view by a factor of two.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QChart.ZoomIn(QtCore.QRectF)">
+            <summary>
+            <para>Zooms in the view to a maximum level at which rect is still fully visible.</para>
+            <para>Note: This is not supported for polar charts.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QChart.Zoom(System.Double)">
+            <summary>
+            <para>Zooms in the view by a custom factor.</para>
+            <para>A factor over 1.0 zooms the view in and factor between 0.0 and 1.0 zooms out.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QChart.ZoomReset">
+            <summary>
+            <para>Resets the series domains to what they were before any zoom method was called. Note that this will also reset any scrolls and explicit axis range settings done between the first zoom operation and calling this method. If no zoom operation has been done, this method does nothing.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QChart.Scroll(System.Double,System.Double)">
+            <summary>
+            <para>Scrolls the visible area of the chart by the distance defined in the dx and dy.</para>
+            <para>For polar charts, dx indicates the angle along angular axis instead of distance.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QChart.MapToValue(QtCore.QPointF,QtCharts.QAbstractSeries)">
+            <summary>
+            <para>Returns the value in the series domain that corresponds to the position relative to chart widget.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QChart.MapToPosition(QtCore.QPointF,QtCharts.QAbstractSeries)">
+            <summary>
+            <para>Returns the position on the chart widget that corresponds to the value in the series domain.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QChart.PlotAreaChanged">
+            <summary>
+            <para>Holds the rectangle within which the drawing of the chart is done. It does not include the area defined by margins.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QRectF 	plotArea() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	plotAreaChanged(const QRectF &amp;plotArea)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QChart.TitleFont">
+            <summary>
+            <para>Gets the font that is used for drawing the chart title.</para>
+            <para>See also setTitleFont().</para>
+            <para></para>
+            <para>Sets the font that is used for drawing the chart title.</para>
+            <para>See also titleFont().</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QChart.TitleBrush">
+            <summary>
+            <para>Returns the brush used for drawing the title text.</para>
+            <para>See also setTitleBrush().</para>
+            <para></para>
+            <para>Sets the brush used for drawing the title text.</para>
+            <para>See also titleBrush().</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QChart.BackgroundBrush">
+            <summary>
+            <para>Gets the brush that is used for painting the background of the chart area.</para>
+            <para>See also setBackgroundBrush().</para>
+            <para></para>
+            <para>Sets the brush that is used for painting the background of the chart area.</para>
+            <para>See also backgroundBrush().</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QChart.BackgroundPen">
+            <summary>
+            <para>Gets the pen that is used for painting the background of the chart area.</para>
+            <para>See also setBackgroundPen().</para>
+            <para></para>
+            <para>Sets the pen that is used for painting the background of the chart area.</para>
+            <para>See also backgroundPen().</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QChart.PlotAreaBackgroundBrush">
+            <summary>
+            <para>Returns the brush for the background of the plot area of the chart.</para>
+            <para>See also plotArea(), plotAreaBackgroundVisible, plotAreaBackgroundPen(), and setPlotAreaBackgroundBrush().</para>
+            <para></para>
+            <para>Sets the brush for the background of the plot area of the chart.</para>
+            <para>See also plotArea(), plotAreaBackgroundVisible, setPlotAreaBackgroundPen(), and plotAreaBackgroundBrush().</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QChart.PlotAreaBackgroundPen">
+            <summary>
+            <para>Returns the pen for the background of the plot area of the chart.</para>
+            <para>See also plotArea(), plotAreaBackgroundVisible, plotAreaBackgroundBrush(), and setPlotAreaBackgroundPen().</para>
+            <para></para>
+            <para>Sets the pen for the background of the plot area of the chart.</para>
+            <para>See also plotArea(), plotAreaBackgroundVisible, setPlotAreaBackgroundBrush(), and plotAreaBackgroundPen().</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QChart.IsZoomed">
+            <summary>
+            <para>Returns true if any series has a zoomed domain.</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QChart.Legend">
+            <summary>
+            <para>Returns the legend object of the chart. Ownership stays with the chart.</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QChart.ChartType">
+            <summary>
+            <para>This enum describes the chart type.</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QChart.ChartTheme">
+            <summary>
+            <para>This enum describes the theme used by the chart.</para>
+            </summary>
+        </member>
+        <member name="F:QtCharts.QChart.ChartTheme.ChartThemeLight">
+            <summary>The default theme</summary>
+        </member>
+        <member name="T:QtCharts.QChart.AnimationOption">
+            <summary>
+            <para>For enabling/disabling animations. Defaults to NoAnimation.</para>
+            <para>The AnimationOptions type is a typedef for QFlags&lt;AnimationOption&gt;. It stores an OR combination of AnimationOption values.</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QChartView">
+            <summary>
+            <para>Standalone charting widget.</para>
+            </summary>
+            <remarks>
+            <para>QChartView is a standalone widget that can display charts. It does not require separate QGraphicsScene to work. If you want to display a chart in your existing QGraphicsScene, you need to use the QChart (or QPolarChart) class instead.</para>
+            <para></para>
+            <para>See also QChart and QPolarChart.</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QChartView.#ctor(QtWidgets.QWidget)">
+            <summary>
+            <para>Constructs a chartView object with parent parent.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QChartView.#ctor(QtCharts.QChart,QtWidgets.QWidget)">
+            <summary>
+            <para>Constructs a chartview object with parent parent to display a chart. Ownership of the chart is passed to chartview.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QChartView.OnResizeEvent(QtGui.QResizeEvent)">
+            <summary>
+            <para>Reimplemented from QWidget::resizeEvent().</para>
+            <para>Resizes and updates the chart area using the event data</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QChartView.OnMousePressEvent(QtGui.QMouseEvent)">
+            <summary>
+            <para>Reimplemented from QWidget::mousePressEvent().</para>
+            <para>If Left mouse button is pressed and the rubber band is enabled the event is accepted and the rubber band is displayed on the screen allowing the user to select the zoom area. If different mouse button is pressed and/or the rubber band is disabled then the event is passed to QGraphicsView::mousePressEvent() implementation.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QChartView.OnMouseMoveEvent(QtGui.QMouseEvent)">
+            <summary>
+            <para>Reimplemented from QWidget::mouseMoveEvent().</para>
+            <para>If the rubber band rectange has been displayed in pressEvent then event data is used to update the rubber band geometry. Otherwise the default QGraphicsView::mouseMoveEvent implementation is called.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QChartView.OnMouseReleaseEvent(QtGui.QMouseEvent)">
+            <summary>
+            <para>Reimplemented from QWidget::mouseReleaseEvent().</para>
+            <para>If left mouse button is released and the rubber band is enabled then event is accepted and the view is zoomed into the rect specified by the rubber band. If it is a right mouse button event then the view is zoomed out.</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QChartView.Chart">
+            <summary>
+            <para>Returns the pointer to the associated chart.</para>
+            <para>See also setChart().</para>
+            <para></para>
+            <para>Sets the current chart to chart. Ownership of the new chart is passed to chartview and ownership of the previous chart is released.</para>
+            <para>To avoid memory leaks users need to make sure the previous chart is deleted.</para>
+            <para>See also chart().</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QChartView.rubberBand">
+            <summary>
+            <para>Returns the rubber band flags that are currently being used by the widget.</para>
+            <para>See also setRubberBand().</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QChartView.RubberBand">
+            <summary>
+            <para>This enum describes the different types of rubber bands that can be used for zoom rect selection</para>
+            <para>The RubberBands type is a typedef for QFlags&lt;RubberBand&gt;. It stores an OR combination of RubberBand values.</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QPolarChart">
+            <summary>
+            <para>Polar chart API for Qt Charts.</para>
+            </summary>
+            <remarks>
+            <para>QPolarChart is a specialization of QChart to show a polar chart.</para>
+            <para>Polar charts support line, spline, area, and scatter series, and all axis types supported by those series.</para>
+            <para>Note: When setting ticks to an angular QValueAxis, keep in mind that the first and last tick are co-located at 0/360 degree angle.</para>
+            <para>Note: If the angular distance between two consecutive points in a series is more than 180 degrees, any line connecting the two points becomes meaningless, so choose the axis ranges accordingly when displaying line, spline, or area series. In such case series don't draw a direct line between the two points, but instead draw a line to and from the center of the chart.</para>
+            <para>Note: Polar charts draw all axes of same orientation in the same position, so using multiple axes of same orientation can be confusing, unless the extra axes are only used to customize the grid (e.g. you can display a highlighted range with a secondary shaded QCategoryAxis or provide unlabeled subticks with a secondary QValueAxis that has its labels hidden).</para>
+            <para></para>
+            <para>See also QChart.</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QPolarChart.#ctor(QtWidgets.IQGraphicsItem,QtCore.Qt.WindowType)">
+            <summary>
+            <para>Constructs a polar chart as a child of the parent. Parameter wFlags is passed to the QChart constructor.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QPolarChart.AddAxis(QtCharts.QAbstractAxis,QtCharts.QPolarChart.PolarOrientation)">
+            <summary>
+            <para>This convenience method adds axis to the polar chart with polarOrientation. The chart takes the ownership of the axis.</para>
+            <para>Note: Axes can be added to a polar chart also with QChart::addAxis() instead of this method. The specified alignment determines the polar orientation: horizontal alignments indicate angular axis and vertical alignments indicate radial axis.</para>
+            <para>See also QChart::removeAxis(), QChart::createDefaultAxes(), QAbstractSeries::attachAxis(), and QChart::addAxis().</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QPolarChart.AxisPolarOrientation(QtCharts.QAbstractAxis)">
+            <summary>
+            <para>Angular axes of a polar chart report horizontal orientation and radial axes report vertical orientation. This function is a convenience function for converting the orientation of an axis to corresponding polar orientation. If the axis is NULL or not added to a polar chart, the return value is meaningless.</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QPolarChart.PolarOrientation">
+            <summary>
+            <para>This type is used to specify the polar orientation of an axis.</para>
+            <para>The PolarOrientations type is a typedef for QFlags&lt;PolarOrientation&gt;. It stores an OR combination of PolarOrientation values.</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QAreaSeries">
+            <summary>
+            <para>The QAreaSeries class is used for making area charts.</para>
+            </summary>
+            <remarks>
+            <para>An area series is used to show quantitative data. It is based on line series, in the way that the area between the boundary lines is emphasized with color. Since the area series is based on line series, QAreaSeries constructor needs a QLineSeries instance, which defines &quot;upper&quot; boundary of the area. The area chart is drawn using the bottom of the plot area as the &quot;lower&quot; boundary by default. Instead of the bottom of the plot area, the &quot;lower&quot; boundary can be specified by another line. In that case QAreaSeries should be initialized with two QLineSeries instances. Please note that the terms &quot;upper&quot; and &quot;lower&quot; boundary can be misleading in cases where the &quot;lower&quot; boundary has bigger values than the &quot;upper&quot; one. The main point is that the area between these two boundary lines will be filled.</para>
+            <para>See the area chart example to learn how to create a simple area chart.</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QAreaSeries.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs area series object without upper or lower series with parent object.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QAreaSeries.#ctor(QtCharts.QLineSeries,QtCharts.QLineSeries)">
+            <summary>
+            <para>Constructs area series object which is a child of upperSeries. Area will be spanned between upperSeries line and lowerSeries line. If no lowerSeries is passed to constructor, area is specified by axis x (y=0) instead. When series object is added to QChartView or QChart instance ownerships is transferred.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAreaSeries.Clicked">
+            <summary>
+            <para>Signal is emitted when user clicks the point on area chart. The point is the point where the press was triggered.</para>
+            <para>See also pressed, released, and doubleClicked.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAreaSeries.Hovered">
+            <summary>
+            <para>This signal is emitted when user has hovered over or away from the series. point shows the origin (coordinate) of the hover event. state is true when user has hovered over the series and false when hover has moved away from the series.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAreaSeries.Pressed">
+            <summary>
+            <para>Signal is emitted when user presses the point on area chart.</para>
+            <para>See also clicked, released, and doubleClicked.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAreaSeries.Released">
+            <summary>
+            <para>Signal is emitted when user releases a press that was triggered on a point on area chart.</para>
+            <para>See also pressed, clicked, and doubleClicked.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAreaSeries.DoubleClicked">
+            <summary>
+            <para>Signal is emitted when user doubleclicks the point on area chart. The point is the point where the first press was triggered.</para>
+            <para>See also pressed, released, and clicked.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAreaSeries.Selected">
+            <summary>
+            <para>The signal is emitted if the user selects/deselects the XY series. The logic for maintaining selections should be implemented by the user of QAreaSeries API.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAreaSeries.ColorChanged">
+            <summary>
+            <para>Signal is emitted when the fill (brush) color has changed to color.</para>
+            <para>Note: Notifier signal for property color. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAreaSeries.BorderColorChanged">
+            <summary>
+            <para>Signal is emitted when the line (pen) color has changed to color.</para>
+            <para>Note: Notifier signal for property borderColor. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAreaSeries.PointLabelsFormatChanged">
+            <summary>
+            <para>Signal is emitted when the format of data point labels is changed.</para>
+            <para>Note: Notifier signal for property pointLabelsFormat. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAreaSeries.PointLabelsVisibilityChanged">
+            <summary>
+            <para>The visibility of the data point labels is changed to visible.</para>
+            <para>Note: Notifier signal for property pointLabelsVisible. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAreaSeries.PointLabelsFontChanged">
+            <summary>
+            <para>The font used for data point labels is changed to font.</para>
+            <para>Note: Notifier signal for property pointLabelsFont. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAreaSeries.PointLabelsColorChanged">
+            <summary>
+            <para>The color used for data point labels is changed to color.</para>
+            <para>Note: Notifier signal for property pointLabelsColor. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAreaSeries.PointLabelsClippingChanged">
+            <summary>
+            <para>The clipping of the data point labels is changed to clipping.</para>
+            <para>Note: Notifier signal for property pointLabelsClipping. </para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QAreaSeries.UpperSeries">
+            <summary>
+            <para>This property holds the upper one of the two line series used to define area series boundaries.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QLineSeries *	upperSeries() const</para>
+            <para></para>
+            <para></para>
+            <para>Sets the series that is to be used as the area chart upper series.</para>
+            <para>See also upperSeries().</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QAreaSeries.LowerSeries">
+            <summary>
+            <para>The lower one of the two line series used to define are series boundaries. Note if QAreaSeries was constructed without a lowerSeries this is null.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QLineSeries *	lowerSeries() const</para>
+            <para></para>
+            <para></para>
+            <para>Sets the series that is to be used as the area chart lower series.</para>
+            <para>See also lowerSeries().</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QAreaSeries.Pen">
+            <summary>
+            <para>Returns the pen used to draw line for this series.</para>
+            <para>See also setPen().</para>
+            <para></para>
+            <para>Sets pen used for drawing area outline.</para>
+            <para>See also pen().</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QAreaSeries.Brush">
+            <summary>
+            <para>Returns the brush used to draw line for this series.</para>
+            <para>See also setBrush().</para>
+            <para></para>
+            <para>Sets brush used for filling the area.</para>
+            <para>See also brush().</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QAreaSeries.PointsVisible">
+            <summary>
+            <para>Returns if the points are drawn for this series.</para>
+            <para>See also setPointsVisible().</para>
+            <para></para>
+            <para>Sets if data points are visible and should be drawn on line.</para>
+            <para>See also pointsVisible().</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QAreaSeries.Type">
+            <summary>
+            <para>Reimplemented from QAbstractSeries::type().</para>
+            <para>Returns QAbstractSeries::SeriesTypeArea.</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QAbstractBarSeries">
+            <summary>
+            <para>Series for creating a bar chart.</para>
+            </summary>
+            <remarks>
+            <para>QAbstractBarSeries represents a series of data shown as bars. The purpose of this class is to draw bars to the position defined by data. Single bar is defined by QPointF, where x value is the x-coordinate of the bar and y-value is the height of the bar. The category names are ignored with this series and x-axis shows the x-values.</para>
+            <para>See the bar chart example to learn how to create a simple bar chart.</para>
+            <para></para>
+            <para></para>
+            <para>See also QBarSet, QStackedBarSeries, and QPercentBarSeries.</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QAbstractBarSeries.Append(QtCharts.QBarSet)">
+            <summary>
+            <para>Adds a set of bars to series. Takes ownership of set. If the set is null or is already in series, it won't be appended. Returns true, if appending succeeded.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QAbstractBarSeries.Remove(QtCharts.QBarSet)">
+            <summary>
+            <para>Removes barset from series. Releases ownership of set. Deletes the set, if remove was successful. Returns true, if set was removed.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QAbstractBarSeries.Take(QtCharts.QBarSet)">
+            <summary>
+            <para>Takes a single set from the series. Does not delete the barset object.</para>
+            <para>NOTE: The series remains as the barset's parent object. You must set the parent object to take full ownership.</para>
+            <para>Returns true if take was successful.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QAbstractBarSeries.Insert(System.Int32,QtCharts.QBarSet)">
+            <summary>
+            <para>Insert a set of bars to series at index postion. Takes ownership of set. If the set is null or is already in series, it won't be appended. Returns true, if inserting succeeded.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QAbstractBarSeries.Clear">
+            <summary>
+            <para>Removes all barsets from the series. Deletes removed sets.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractBarSeries.Clicked">
+            <summary>
+            <para>The signal is emitted if the user clicks with a mouse on top of QBarSet barset. Clicked bar inside set is indexed by index</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractBarSeries.Hovered">
+            <summary>
+            <para>The signal is emitted if mouse is hovered on top of series. Parameter barset is the pointer of barset, where hover happened. Parameter status is true, if mouse entered on top of series, false if mouse left from top of series. Hovered bar inside the set is indexed by index.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractBarSeries.Pressed">
+            <summary>
+            <para>The signal is emitted if the user presses with a mouse on top of QBarSet barset. Pressed bar inside set is indexed by index</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractBarSeries.Released">
+            <summary>
+            <para>The signal is emitted if the user releases with a mouse on top of QBarSet barset. Released bar inside set is indexed by index</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractBarSeries.DoubleClicked">
+            <summary>
+            <para>The signal is emitted if the user doubleclicks with a mouse on top of QBarSet barset. DoubleClicked bar inside set is indexed by index</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractBarSeries.CountChanged">
+            <summary>
+            <para>This signal is emitted when barset count has been changed, for example by append or remove.</para>
+            <para>Note: Notifier signal for property count. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractBarSeries.LabelsVisibleChanged">
+            <summary>
+            <para>This signal is emitted when labels visibility have changed.</para>
+            <para>Note: Notifier signal for property labelsVisible. </para>
+            <para>See also isLabelsVisible() and setLabelsVisible().</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractBarSeries.LabelsFormatChanged">
+            <summary>
+            <para>Signal is emitted when the format of data value labels is changed.</para>
+            <para>Note: Notifier signal for property labelsFormat. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractBarSeries.LabelsPositionChanged">
+            <summary>
+            <para>Signal is emitted when the position of value labels is changed.</para>
+            <para>Note: Notifier signal for property labelsPosition. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QAbstractBarSeries.LabelsAngleChanged">
+            <summary>
+            <para>Signal is emitted when the angle of the value labels is changed.</para>
+            <para>Note: Notifier signal for property labelsAngle. </para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QAbstractBarSeries.LabelsPosition">
+            <summary>
+            <para>This enum describes the position of the data value labels.</para>
+            </summary>
+        </member>
+        <member name="F:QtCharts.QAbstractBarSeries.LabelsPosition.LabelsCenter">
+            <summary>Label is in the center of the bar.</summary>
+        </member>
+        <member name="F:QtCharts.QAbstractBarSeries.LabelsPosition.LabelsInsideEnd">
+            <summary>Label is inside the bar at the high end of it.</summary>
+        </member>
+        <member name="F:QtCharts.QAbstractBarSeries.LabelsPosition.LabelsInsideBase">
+            <summary>Label is inside the bar at the low end of it.</summary>
+        </member>
+        <member name="F:QtCharts.QAbstractBarSeries.LabelsPosition.LabelsOutsideEnd">
+            <summary>Label is outside the bar at the high end of it.</summary>
+        </member>
+        <member name="T:QtCharts.QBarSet">
+            <summary>
+            <para>Building block for different bar charts.</para>
+            </summary>
+            <remarks>
+            <para>QBarSet represents one set of bars. Set of bars contains one data value for each category. First value of set is assumed to belong to first category, second to second category and so on. If set has fewer values than there are categories, then the missing values are assumed to be at the end of set. For missing values in middle of a set, numerical value of zero is used. Labels for zero value sets are not shown.</para>
+            <para></para>
+            <para>See also QAbstractBarSeries, QBarSeries, QStackedBarSeries, and QPercentBarSeries.</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QBarSet.#ctor(System.String,QtCore.QObject)">
+            <summary>
+            <para>Constructs QBarSet with a label of label and with parent of parent.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QBarSet.Append(System.Double)">
+            <summary>
+            <para>Appends new value value to the end of set.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QBarSet.Insert(System.Int32,System.Double)">
+            <summary>
+            <para>Inserts new value on the index position. The value that is currently at this postion is moved to position index + 1</para>
+            <para>See also remove().</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QBarSet.Remove(System.Int32,System.Int32)">
+            <summary>
+            <para>Removes count number of values from the set starting at index.</para>
+            <para>See also insert().</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QBarSet.Replace(System.Int32,System.Double)">
+            <summary>
+            <para>Sets a new value value to set, indexed by index.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QBarSet.At(System.Int32)">
+            <summary>
+            <para>Returns value of set indexed by index. If the index is out of bounds 0.0 is returned.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBarSet.Clicked">
+            <summary>
+            <para>The signal is emitted if the user clicks with a mouse on top of bar set. Clicked bar inside set is indexed by index</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBarSet.Hovered">
+            <summary>
+            <para>The signal is emitted if mouse is hovered on top of bar set. Parameter status is true, if mouse entered on top of bar set, false if mouse left from top of bar set. Hovered bar inside the set is indexed by index.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBarSet.Pressed">
+            <summary>
+            <para>The signal is emitted if the user presses with a mouse on top of bar set. Pressed bar inside set is indexed by index</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBarSet.Released">
+            <summary>
+            <para>The signal is emitted if the user releases with a mouse on top of bar set. Released bar inside set is indexed by index</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBarSet.DoubleClicked">
+            <summary>
+            <para>The signal is emitted if the user doubleclicks with a mouse on top of bar set. Doubleclicked bar inside set is indexed by index</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBarSet.PenChanged">
+            <summary>
+            <para>This signal is emitted when the pen of the bar set has changed.</para>
+            <para>Note: Notifier signal for property pen. </para>
+            <para>See also pen.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBarSet.BrushChanged">
+            <summary>
+            <para>This signal is emitted when the brush of the bar set has changed.</para>
+            <para>Note: Notifier signal for property brush. </para>
+            <para>See also brush.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBarSet.LabelChanged">
+            <summary>
+            <para>This signal is emitted when the label of the bar set has changed.</para>
+            <para>Note: Notifier signal for property label. </para>
+            <para>See also label.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBarSet.LabelBrushChanged">
+            <summary>
+            <para>This signal is emitted when the brush of the bar set's label has changed.</para>
+            <para>Note: Notifier signal for property labelBrush. </para>
+            <para>See also labelBrush.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBarSet.LabelFontChanged">
+            <summary>
+            <para>This signal is emitted when the font of the bar set's label has changed.</para>
+            <para>Note: Notifier signal for property labelFont. </para>
+            <para>See also labelBrush.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBarSet.ColorChanged">
+            <summary>
+            <para>This signal is emitted when the fill (brush) color of the set has changed to color.</para>
+            <para>Note: Notifier signal for property color. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBarSet.BorderColorChanged">
+            <summary>
+            <para>This signal is emitted when the line (pen) color of the set has changed to color.</para>
+            <para>Note: Notifier signal for property borderColor. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBarSet.LabelColorChanged">
+            <summary>
+            <para>This signal is emitted when the text (label) color of the set has changed to color.</para>
+            <para>Note: Notifier signal for property labelColor. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBarSet.ValuesAdded">
+            <summary>
+            <para>This signal is emitted when new values have been added to the set. Parameter index indicates the position of the first inserted value. Parameter count is the number of inserted values.</para>
+            <para>See also append() and insert().</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBarSet.ValuesRemoved">
+            <summary>
+            <para>This signal is emitted values have been removed from the set. Parameter index indicates the position of the first removed value. Parameter count is the number of removed values.</para>
+            <para>See also remove().</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBarSet.ValueChanged">
+            <summary>
+            <para>This signal is emitted values the value in the set has been modified. Parameter index indicates the position of the modified value.</para>
+            <para>See also at().</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QBarSet.Item(System.Int32)">
+            <summary>
+            <para>Returns value of set indexed by index. If the index is out of bounds 0.0 is returned.</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QBarSet.Count">
+            <summary>
+            <para>Returns count of values in set.</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QBarSet.Sum">
+            <summary>
+            <para>Returns sum of all values in the bar set.</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QHBarModelMapper">
+            <summary>
+            <para>Horizontal model mapper for bar series.</para>
+            </summary>
+            <remarks>
+            <para>Model mappers allow you to use QAbstractItemModel derived models as a data source for a chart series. Horizontal model mapper is used to create a connection between QAbstractBarSeries and QAbstractItemModel derived model object. Model mapper maintains equal size of all the BarSets. Adding/removing value from the BarSet causes the the same change in the rest of the BarSets added to the same series.</para>
+            <para>Note: Used model has to support adding/removing rows/columns and modifying the data of the cells.</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QHBarModelMapper.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs a mapper object which is a child of parent.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QHBarModelMapper.SeriesReplaced">
+            <summary>
+            <para>Emitted when the series to which mapper is connected to has changed.</para>
+            <para>Note: Notifier signal for property series. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QHBarModelMapper.ModelReplaced">
+            <summary>
+            <para>Emitted when the model to which mapper is connected to has changed.</para>
+            <para>Note: Notifier signal for property model. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QHBarModelMapper.FirstBarSetRowChanged">
+            <summary>
+            <para>Emitted when the firstBarSetRow has changed.</para>
+            <para>Note: Notifier signal for property firstBarSetRow. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QHBarModelMapper.LastBarSetRowChanged">
+            <summary>
+            <para>Emitted when the lastBarSetRow has changed.</para>
+            <para>Note: Notifier signal for property lastBarSetRow. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QHBarModelMapper.FirstColumnChanged">
+            <summary>
+            <para>Emitted when the firstColumn has changed.</para>
+            <para>Note: Notifier signal for property firstColumn. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QHBarModelMapper.ColumnCountChanged">
+            <summary>
+            <para>Emitted when the columnCount has changed.</para>
+            <para>Note: Notifier signal for property columnCount. </para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QHBarModelMapper.Model">
+            <summary>
+            <para>This property defines the model that is used by the mapper.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QAbstractItemModel *	model() const</para>
+            <para> void 	setModel(QAbstractItemModel *model)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	modelReplaced()</para>
+            <para></para>
+            <para></para>
+            <para>This property defines the model that is used by the mapper.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QAbstractItemModel *	model() const</para>
+            <para> void 	setModel(QAbstractItemModel *model)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	modelReplaced()</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QHBarModelMapper.Series">
+            <summary>
+            <para>This property defines the QPieSeries object that is used by the mapper.</para>
+            <para>All the data in the series is discarded when it is set to the mapper. When new series is specified the old series is disconnected (it preserves its data)</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QAbstractBarSeries *	series() const</para>
+            <para> void 	setSeries(QAbstractBarSeries *series)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	seriesReplaced()</para>
+            <para></para>
+            <para></para>
+            <para>This property defines the QPieSeries object that is used by the mapper.</para>
+            <para>All the data in the series is discarded when it is set to the mapper. When new series is specified the old series is disconnected (it preserves its data)</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QAbstractBarSeries *	series() const</para>
+            <para> void 	setSeries(QAbstractBarSeries *series)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	seriesReplaced()</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QVBarModelMapper">
+            <summary>
+            <para>Vertical model mapper for bar series.</para>
+            </summary>
+            <remarks>
+            <para>Model mappers allow you to use QAbstractItemModel derived models as a data source for a chart series. Vertical model mapper is used to create a connection between QAbstractBarSeries and QAbstractItemModel derived model object. Model mapper maintains equal size of all the BarSets. Adding/removing value from the BarSet causes the the same change in the rest of the BarSets added to the same series.</para>
+            <para>Note: Used model has to support adding/removing rows/columns and modifying the data of the cells.</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QVBarModelMapper.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs a mapper object which is a child of parent.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QVBarModelMapper.SeriesReplaced">
+            <summary>
+            <para>Emitted when the series to which mapper is connected to has changed.</para>
+            <para>Note: Notifier signal for property series. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QVBarModelMapper.ModelReplaced">
+            <summary>
+            <para>Emitted when the model to which mapper is connected to has changed.</para>
+            <para>Note: Notifier signal for property model. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QVBarModelMapper.FirstBarSetColumnChanged">
+            <summary>
+            <para>Emitted when the firstBarSetColumn has changed.</para>
+            <para>Note: Notifier signal for property firstBarSetColumn. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QVBarModelMapper.LastBarSetColumnChanged">
+            <summary>
+            <para>Emitted when the lastBarSetColumn has changed.</para>
+            <para>Note: Notifier signal for property lastBarSetColumn. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QVBarModelMapper.FirstRowChanged">
+            <summary>
+            <para>Emitted when the firstRow has changed.</para>
+            <para>Note: Notifier signal for property firstRow. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QVBarModelMapper.RowCountChanged">
+            <summary>
+            <para>Emitted when the rowCount has changed.</para>
+            <para>Note: Notifier signal for property rowCount. </para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QVBarModelMapper.Model">
+            <summary>
+            <para>This property defines the model that is used by the mapper.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QAbstractItemModel *	model() const</para>
+            <para> void 	setModel(QAbstractItemModel *model)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	modelReplaced()</para>
+            <para></para>
+            <para></para>
+            <para>This property defines the model that is used by the mapper.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QAbstractItemModel *	model() const</para>
+            <para> void 	setModel(QAbstractItemModel *model)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	modelReplaced()</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QVBarModelMapper.Series">
+            <summary>
+            <para>This property defines the QBarSeries object that is used by the mapper.</para>
+            <para>All the data in the series is discarded when it is set to the mapper. When new series is specified the old series is disconnected (it preserves its data)</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QAbstractBarSeries *	series() const</para>
+            <para> void 	setSeries(QAbstractBarSeries *series)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	seriesReplaced()</para>
+            <para></para>
+            <para></para>
+            <para>This property defines the QBarSeries object that is used by the mapper.</para>
+            <para>All the data in the series is discarded when it is set to the mapper. When new series is specified the old series is disconnected (it preserves its data)</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QAbstractBarSeries *	series() const</para>
+            <para> void 	setSeries(QAbstractBarSeries *series)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	seriesReplaced()</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QBoxSet">
+            <summary>
+            <para>Building block for box-and-whiskers chart.</para>
+            </summary>
+            <remarks>
+            <para>QBoxSet represents one box-and-whiskers item. It takes five values to create a graphical representation of range and three medians. There are two ways to give the values. The first one is with constructor or stream operator (&lt;&lt;). The values have to be given in the following order: lower extreme, lower quartile, median, upper quartile and upper extreme. The Second method is to create an empty QBoxSet instance and give the values using setValue method.</para>
+            <para></para>
+            <para>See also QBoxPlotSeries.</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QBoxSet.#ctor(System.String,QtCore.QObject)">
+            <summary>
+            <para>Constructs QBoxSet with optional label and parent of parent</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QBoxSet.#ctor(System.Double,System.Double,System.Double,System.Double,System.Double,System.String,QtCore.QObject)">
+            <summary>
+            <para>Constructs QBoxSet with given ordered values. le for lower extreme, lq for lower quartile, m for median, uq for upper quartile and ue for upper quartile. label and parent are optional.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QBoxSet.Append(System.Double)">
+            <summary>
+            <para>Appends new value value to the end of set.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QBoxSet.Clear">
+            <summary>
+            <para>Sets all values on the set to 0.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QBoxSet.SetValue(System.Int32,System.Double)">
+            <summary>
+            <para>Sets a new value on the index position. For index ValuePositions can be used.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QBoxSet.At(System.Int32)">
+            <summary>
+            <para>Returns value of set indexed by index. For index ValuePositions can be used. If the index is out of bounds 0.0 is returned.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBoxSet.Clicked">
+            <summary>
+            <para>The signal is emitted if the user clicks with a mouse on top of box-and-whisker item.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBoxSet.Hovered">
+            <summary>
+            <para>The signal is emitted if mouse is hovered on top of box-and-whisker item. Parameter status is true, if mouse entered on top of item, false if mouse left from top of item.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBoxSet.Pressed">
+            <summary>
+            <para>The signal is emitted if the user presses with a mouse on top of box-and-whisker item.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBoxSet.Released">
+            <summary>
+            <para>The signal is emitted if the user releases with a mouse on top of box-and-whisker item.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBoxSet.DoubleClicked">
+            <summary>
+            <para>The signal is emitted if the user doubleclicks with a mouse on top of box-and-whisker item.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBoxSet.PenChanged">
+            <summary>
+            <para>This signal is emitted when the pen of the box-and-whisker item has changed.</para>
+            <para>Note: Notifier signal for property pen. </para>
+            <para>See also pen.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBoxSet.BrushChanged">
+            <summary>
+            <para>This signal is emitted when the brush of the box-and-whisker item has changed.</para>
+            <para>Note: Notifier signal for property brush. </para>
+            <para>See also brush.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBoxSet.ValuesChanged">
+            <summary>
+            <para>This signal is emitted when multiple values have been changed on the box-and-whisker item.</para>
+            <para>See also append().</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBoxSet.ValueChanged">
+            <summary>
+            <para>This signal is emitted values the value in the box-and-whisker item has been modified. Parameter index indicates the position of the modified value.</para>
+            <para>See also at().</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBoxSet.Cleared">
+            <summary>
+            <para>This signal is emitted when all the values on the set are cleared to 0.</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QBoxSet.Item(System.Int32)">
+            <summary>
+            <para>Returns value of set indexed by index. For index ValuePositions can be used. If the index is out of bounds 0.0 is returned.</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QBoxSet.Label">
+            <summary>
+            <para>Returns the label of the the category of the set.</para>
+            <para>See also setLabel().</para>
+            <para></para>
+            <para>Sets new label for the category of the set.</para>
+            <para>See also label().</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QBoxSet.Count">
+            <summary>
+            <para>Returns count of values appended to the set.</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QBoxPlotSeries">
+            <summary>
+            <para>Series for creating box-and-whiskers chart.</para>
+            </summary>
+            <remarks>
+            <para>QBoxPlotSeries represents a series of data shown as box-and-whisker bars. The purpose of this class is to act as a container for single box-and-whisker items. Each item is drawn to own slot. If chart includes multiple instances of QBoxPlotSeries then box-and-whiskers items with the same index are drawn to same slot.</para>
+            <para>Note: The slot, each item in QBoxPlotSeries is drawn, represents a category in QBarCategoryAxis. The category labels have to be unique. If same category label is defined for several box-and-whisker items only the first one is drawn.</para>
+            <para>See the box-and-whiskers chart example to learn how to create a box-and-whiskers chart.</para>
+            <para></para>
+            <para></para>
+            <para>See also QBoxSet and QBarCategoryAxis.</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QBoxPlotSeries.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs empty QBoxPlotSeries. QBoxPlotSeries is QObject which is a child of a parent.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QBoxPlotSeries.Append(QtCharts.QBoxSet)">
+            <summary>
+            <para>Adds a single box and whiskers set to series. Takes ownership of the set. If the set is null or is already in series, it won't be appended. Returns true, if appending succeeded.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QBoxPlotSeries.Remove(QtCharts.QBoxSet)">
+            <summary>
+            <para>Removes boxset from the series. Deletes the set and returns true if successful.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QBoxPlotSeries.Take(QtCharts.QBoxSet)">
+            <summary>
+            <para>Takes a single set from the series. Does not delete the boxset object.</para>
+            <para>NOTE: The series remains as the boxset's parent object. You must set the parent object to take full ownership.</para>
+            <para>Returns true if take was successful.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QBoxPlotSeries.Insert(System.Int32,QtCharts.QBoxSet)">
+            <summary>
+            <para>Insert a box-and-whiskers set to the series at index postion. Takes ownership of the set. If the set is null or is already in series, it won't be appended. Returns true, if inserting succeeded.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QBoxPlotSeries.Clear">
+            <summary>
+            <para>Removes all boxsets from the series. Deletes removed sets.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBoxPlotSeries.Clicked">
+            <summary>
+            <para>Signal is emitted when the user clicks the boxset on the chart.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBoxPlotSeries.Hovered">
+            <summary>
+            <para>Signal is emitted when there is change in hover status over boxset.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBoxPlotSeries.Pressed">
+            <summary>
+            <para>Signal is emitted when the user presses the boxset on the chart.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBoxPlotSeries.Released">
+            <summary>
+            <para>Signal is emitted when the user releases the boxset on the chart.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBoxPlotSeries.DoubleClicked">
+            <summary>
+            <para>Signal is emitted when the user doubleclicks the boxset on the chart.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBoxPlotSeries.CountChanged">
+            <summary>
+            <para>Signal is emitted when there is change in count of box-and-whiskers items in the series.</para>
+            <para>Note: Notifier signal for property count. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBoxPlotSeries.PenChanged">
+            <summary>
+            <para>This signal is emitted when the pen of the box-and-whiskers has changed.</para>
+            <para>Note: Notifier signal for property pen. </para>
+            <para>See also brush.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBoxPlotSeries.BrushChanged">
+            <summary>
+            <para>This signal is emitted when the brush of the box-and-whiskers has changed.</para>
+            <para>Note: Notifier signal for property brush. </para>
+            <para>See also brush.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBoxPlotSeries.BoxOutlineVisibilityChanged">
+            <summary>
+            <para>Signal is emitted when the middle box outline visibility is changed.</para>
+            <para>Note: Notifier signal for property boxOutlineVisible. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBoxPlotSeries.BoxWidthChanged">
+            <summary>
+            <para>Signal is emitted when the width of the box-and-whiskers item is changed.</para>
+            <para>Note: Notifier signal for property boxWidth. </para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QBoxPlotSeries.Type">
+            <summary>
+            <para>Reimplemented from QAbstractSeries::type().</para>
+            <para>Returns type of series.</para>
+            <para>See also QAbstractSeries and SeriesType.</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QVBoxPlotModelMapper">
+            <summary>
+            <para>Vertical model mapper for box plot series.</para>
+            </summary>
+            <remarks>
+            <para>Model mappers allow you to use QAbstractItemModel derived models as a data source for a chart series. Vertical model mapper is used to create a connection between QBoxPlotSeries and QAbstractItemModel derived model object. Model mapper maintains equal size of all the QBoxSets.</para>
+            <para>Note: used model has to support adding/removing rows/columns and modifying the data of the cells.</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QVBoxPlotModelMapper.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs a mapper object which is a child of parent.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QVBoxPlotModelMapper.SeriesReplaced">
+            <summary>
+            <para>Emitted when the series to which mapper is connected to has changed.</para>
+            <para>Note: Notifier signal for property series. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QVBoxPlotModelMapper.ModelReplaced">
+            <summary>
+            <para>Emitted when the model to which mapper is connected to has changed.</para>
+            <para>Note: Notifier signal for property model. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QVBoxPlotModelMapper.FirstBoxSetColumnChanged">
+            <summary>
+            <para>Emitted when the firstBoxSetColumn has changed.</para>
+            <para>Note: Notifier signal for property firstBoxSetColumn. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QVBoxPlotModelMapper.LastBoxSetColumnChanged">
+            <summary>
+            <para>Emitted when the lastBoxSetColumn has changed.</para>
+            <para>Note: Notifier signal for property lastBoxSetColumn. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QVBoxPlotModelMapper.FirstRowChanged">
+            <summary>
+            <para>Emitted when the firstRow has changed.</para>
+            <para>Note: Notifier signal for property firstRow. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QVBoxPlotModelMapper.RowCountChanged">
+            <summary>
+            <para>Emitted when the rowCount has changed.</para>
+            <para>Note: Notifier signal for property rowCount. </para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QVBoxPlotModelMapper.Model">
+            <summary>
+            <para>This property defines the model that is used by the mapper.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QAbstractItemModel *	model() const</para>
+            <para> void 	setModel(QAbstractItemModel *model)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	modelReplaced()</para>
+            <para></para>
+            <para></para>
+            <para>This property defines the model that is used by the mapper.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QAbstractItemModel *	model() const</para>
+            <para> void 	setModel(QAbstractItemModel *model)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	modelReplaced()</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QVBoxPlotModelMapper.Series">
+            <summary>
+            <para>This property defines the QBoxPlotSeries object that is used by the mapper.</para>
+            <para>All the data in the series is discarded when it is set to the mapper. When new series is specified the old series is disconnected (it preserves its data)</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QBoxPlotSeries *	series() const</para>
+            <para> void 	setSeries(QBoxPlotSeries *series)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	seriesReplaced()</para>
+            <para></para>
+            <para></para>
+            <para>This property defines the QBoxPlotSeries object that is used by the mapper.</para>
+            <para>All the data in the series is discarded when it is set to the mapper. When new series is specified the old series is disconnected (it preserves its data)</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QBoxPlotSeries *	series() const</para>
+            <para> void 	setSeries(QBoxPlotSeries *series)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	seriesReplaced()</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QLegendMarker">
+            <summary>
+            <para>LegendMarker object.</para>
+            </summary>
+            <remarks>
+            <para>QLegendMarker is abstract object that can be used to access markers inside QLegend. Legend marker consists of two items: The colored box, which reflects the color of series and label, which is the name of series (or label of slice/barset in case of pie or bar series) The QLegendMarker is always related to one series.</para>
+            <para></para>
+            <para></para>
+            <para>See also QLegend.</para>
+            </remarks>
+        </member>
+        <member name="E:QtCharts.QLegendMarker.Clicked">
+            <summary>
+            <para>This signal is emitted, when marker is clicked with mouse.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QLegendMarker.Hovered">
+            <summary>
+            <para>This signal is emitted, when mouse is hovered over marker. status is true, when mouse enters the marker and false when it leaves the marker.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QLegendMarker.LabelChanged">
+            <summary>
+            <para>This signal is emitted when the label of the legend marker has changed.</para>
+            <para>Note: Notifier signal for property label. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QLegendMarker.LabelBrushChanged">
+            <summary>
+            <para>This signal is emitted when the label brush of the legend marker has changed.</para>
+            <para>Note: Notifier signal for property labelBrush. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QLegendMarker.FontChanged">
+            <summary>
+            <para>This signal is emitted when the (label) font of the legend marker has changed.</para>
+            <para>Note: Notifier signal for property font. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QLegendMarker.PenChanged">
+            <summary>
+            <para>This signal is emitted when the pen of the legend marker has changed.</para>
+            <para>Note: Notifier signal for property pen. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QLegendMarker.BrushChanged">
+            <summary>
+            <para>This signal is emitted when the brush of the legend marker has changed.</para>
+            <para>Note: Notifier signal for property brush. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QLegendMarker.VisibleChanged">
+            <summary>
+            <para>This signal is emitted when the visibility of the legend marker has changed.</para>
+            <para>Note: Notifier signal for property visible. </para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QLegendMarker.Type">
+            <summary>
+            <para>Returns the type of legendmarker. Type depends of the related series. LegendMarkerTypeXY is used for all QXYSeries derived classes.</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QLegendMarker.Series">
+            <summary>
+            <para>Returns pointer to series, which is related to this marker. Marker is always related to some series.</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QLegendMarker.LegendMarkerType">
+            <summary>
+            <para>The type of the legendmarker object.</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QAreaLegendMarker">
+            <summary>
+            <para>QLegendMarker subclass for area series.</para>
+            </summary>
+            <remarks>
+            <para>QAreaLegendMarker is related to QAreaSeries. One QAreaSeries results in one marker.</para>
+            <para></para>
+            <para>See also QLegend and QAreaSeries.</para>
+            </remarks>
+        </member>
+        <member name="P:QtCharts.QAreaLegendMarker.Type">
+            <summary>
+            <para>Reimplemented from QLegendMarker::type().</para>
+            <para>Returns QLegendMarker::LegendMarkerTypeArea</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QAreaLegendMarker.Series">
+            <summary>
+            <para>Reimplemented from QLegendMarker::series().</para>
+            <para>Returns related series of marker</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QBarLegendMarker">
+            <summary>
+            <para>QLegendMarker subclass for bar series.</para>
+            </summary>
+            <remarks>
+            <para>QBarLegendMarker is related to QAbstractBarSeries derived classes. With bar series, each marker is related to one QBarSet.</para>
+            <para></para>
+            <para>See also QLegend, QAbstractBarSeries, and QBarSet.</para>
+            </remarks>
+        </member>
+        <member name="P:QtCharts.QBarLegendMarker.Type">
+            <summary>
+            <para>Reimplemented from QLegendMarker::type().</para>
+            <para>Returns QLegendMarker::LegendMarkerTypeBar</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QBarLegendMarker.Series">
+            <summary>
+            <para>Reimplemented from QLegendMarker::series().</para>
+            <para>Returns the related series of marker</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QBarLegendMarker.Barset">
+            <summary>
+            <para>Returns the related barset of marker</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QBoxPlotLegendMarker">
+            <summary>
+            <para>QLegendMarker subclass for box plot series.</para>
+            </summary>
+            <remarks>
+            <para>QBoxPlotLegendMarker is related to QBoxPlotSeries classes.</para>
+            <para></para>
+            <para>See also QLegend and QBoxPlotSeries.</para>
+            </remarks>
+        </member>
+        <member name="P:QtCharts.QBoxPlotLegendMarker.Type">
+            <summary>
+            <para>Reimplemented from QLegendMarker::type().</para>
+            <para>Returns QLegendMarker::LegendMarkerTypeBoxPlot</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QBoxPlotLegendMarker.Series">
+            <summary>
+            <para>Reimplemented from QLegendMarker::series().</para>
+            <para>Returns the related series</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QPieSlice">
+            <summary>
+            <para>Defines a slice in pie series.</para>
+            </summary>
+            <remarks>
+            <para>This object defines the properties of a single slice in a QPieSeries.</para>
+            <para>In addition to the obvious value and label properties the user can also control the visual appearance of a slice. By modifying the visual appearance also means that the user is overriding the default appearance set by the theme.</para>
+            <para>Note that if the user has customized slices and theme is changed all customizations will be lost.</para>
+            <para>To enable user interaction with the pie some basic signals are provided about clicking and hovering.</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QPieSlice.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs an empty slice with a parent.</para>
+            <para>See also QPieSeries::append() and QPieSeries::insert().</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QPieSlice.#ctor(System.String,System.Double,QtCore.QObject)">
+            <summary>
+            <para>Constructs an empty slice with given value, label and a parent.</para>
+            <para>See also QPieSeries::append() and QPieSeries::insert().</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QPieSlice.StartAngle">
+            <summary>
+            <para>Defines the starting angle of this slice in the series it belongs to. Full pie is 360 degrees where 0 degrees is at 12 a'clock. Updated automatically once the slice is added to the series.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> qreal 	startAngle() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	startAngleChanged()</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QPieSlice.Clicked">
+            <summary>
+            <para>This signal is emitted when user has clicked the slice.</para>
+            <para>See also QPieSeries::clicked().</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QPieSlice.Hovered">
+            <summary>
+            <para>This signal is emitted when user has hovered over or away from the slice. state is true when user has hovered over the slice and false when hover has moved away from the slice.</para>
+            <para>See also QPieSeries::hovered().</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QPieSlice.Pressed">
+            <summary>
+            <para>This signal is emitted when user has pressed the slice.</para>
+            <para>See also QPieSeries::pressed().</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QPieSlice.Released">
+            <summary>
+            <para>This signal is emitted when user has released the slice.</para>
+            <para>See also QPieSeries::released().</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QPieSlice.DoubleClicked">
+            <summary>
+            <para>This signal is emitted when user has doubleclicked the slice.</para>
+            <para>See also QPieSeries::doubleClicked().</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QPieSlice.LabelChanged">
+            <summary>
+            <para>This signal emitted when the slice label has been changed.</para>
+            <para>Note: Notifier signal for property label. </para>
+            <para>See also label.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QPieSlice.ValueChanged">
+            <summary>
+            <para>This signal is emitted when the slice value changes.</para>
+            <para>Note: Notifier signal for property value. </para>
+            <para>See also value.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QPieSlice.LabelVisibleChanged">
+            <summary>
+            <para>This signal emitted when visibility of the slice label has changed.</para>
+            <para>Note: Notifier signal for property labelVisible. </para>
+            <para>See also labelVisible.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QPieSlice.PenChanged">
+            <summary>
+            <para>This signal is emitted when the pen of the slice has changed.</para>
+            <para>Note: Notifier signal for property pen. </para>
+            <para>See also pen.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QPieSlice.BrushChanged">
+            <summary>
+            <para>This signal is emitted when the brush of the slice has changed.</para>
+            <para>Note: Notifier signal for property brush. </para>
+            <para>See also brush.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QPieSlice.LabelBrushChanged">
+            <summary>
+            <para>This signal is emitted when the label brush of the slice has changed.</para>
+            <para>Note: Notifier signal for property labelBrush. </para>
+            <para>See also labelBrush.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QPieSlice.LabelFontChanged">
+            <summary>
+            <para>This signal is emitted when the label font of the slice has changed.</para>
+            <para>Note: Notifier signal for property labelFont. </para>
+            <para>See also labelFont.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QPieSlice.PercentageChanged">
+            <summary>
+            <para>This signal is emitted when the percentage of the slice has changed.</para>
+            <para>Note: Notifier signal for property percentage. </para>
+            <para>See also percentage.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QPieSlice.StartAngleChanged">
+            <summary>
+            <para>This signal is emitted when the starting angle f the slice has changed.</para>
+            <para>Note: Notifier signal for property startAngle. </para>
+            <para>See also startAngle.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QPieSlice.AngleSpanChanged">
+            <summary>
+            <para>This signal is emitted when the angle span of the slice has changed.</para>
+            <para>Note: Notifier signal for property angleSpan. </para>
+            <para>See also angleSpan.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QPieSlice.ColorChanged">
+            <summary>
+            <para>This signal is emitted when slice color changes.</para>
+            <para>Note: Notifier signal for property color. </para>
+            <para>See also brush.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QPieSlice.BorderColorChanged">
+            <summary>
+            <para>This signal is emitted when slice border color changes.</para>
+            <para>Note: Notifier signal for property borderColor. </para>
+            <para>See also pen and borderColor.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QPieSlice.BorderWidthChanged">
+            <summary>
+            <para>This signal is emitted when slice border width changes.</para>
+            <para>Note: Notifier signal for property borderWidth. </para>
+            <para>See also pen and borderWidth.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QPieSlice.LabelColorChanged">
+            <summary>
+            <para>This signal is emitted when slice label color changes.</para>
+            <para>Note: Notifier signal for property labelColor. </para>
+            <para>See also labelColor.</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QPieSlice.Series">
+            <summary>
+            <para>Returns the series that this slice belongs to.</para>
+            <para>See also QPieSeries::append().</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QPieSlice.LabelPosition">
+            <summary>
+            <para>This enum describes the position of the slice label.</para>
+            </summary>
+        </member>
+        <member name="F:QtCharts.QPieSlice.LabelPosition.LabelOutside">
+            <summary>Label is outside the slice with an arm.</summary>
+        </member>
+        <member name="F:QtCharts.QPieSlice.LabelPosition.LabelInsideHorizontal">
+            <summary>Label is centered inside the slice and laid out horizontally.</summary>
+        </member>
+        <member name="F:QtCharts.QPieSlice.LabelPosition.LabelInsideTangential">
+            <summary>Label is centered inside the slice and rotated to be parallel to the tangential of the slice's arc.</summary>
+        </member>
+        <member name="F:QtCharts.QPieSlice.LabelPosition.LabelInsideNormal">
+            <summary>Label is centered inside the slice rotated to be parallel to the normal of the slice's arc.</summary>
+        </member>
+        <member name="T:QtCharts.QPieSeries">
+            <summary>
+            <para>Pie series API for Qt Charts.</para>
+            </summary>
+            <remarks>
+            <para>The pie series defines a pie chart which consists of pie slices which are defined as QPieSlice objects. The slices can have any values as the QPieSeries will calculate its relative value to the sum of all slices. The actual slice size is determined by that relative value.</para>
+            <para>Pie size and position on the chart is controlled by using relative values which range from 0.0 to 1.0. These relate to the actual chart rectangle.</para>
+            <para>By default the pie is defined as a full pie but it can also be a partial pie. This can be done by setting a starting angle and angle span to the series. Full pie is 360 degrees where 0 is at 12 a'clock.</para>
+            <para>See the pie chart example or donut chart example to learn how to use QPieSeries.</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QPieSeries.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs a series object which is a child of parent.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QPieSeries.Append(QtCharts.QPieSlice)">
+            <summary>
+            <para>Appends a single slice to the series. Slice ownership is passed to the series.</para>
+            <para>Returns true if append was succesfull.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QPieSeries.Append(System.String,System.Double)">
+            <summary>
+            <para>Appends a single slice to the series with give value and label. Slice ownership is passed to the series. Returns NULL if value is NaN, Inf or -Inf and no slice is added to the series.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QPieSeries.Insert(System.Int32,QtCharts.QPieSlice)">
+            <summary>
+            <para>Inserts a single slice to the series before the slice at index position. Slice ownership is passed to the series.</para>
+            <para>Returns true if insert was successful.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QPieSeries.Remove(QtCharts.QPieSlice)">
+            <summary>
+            <para>Removes a single slice from the series and deletes the slice.</para>
+            <para>Do not reference the pointer after this call.</para>
+            <para>Returns true if remove was successful.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QPieSeries.Take(QtCharts.QPieSlice)">
+            <summary>
+            <para>Takes a single slice from the series. Does not destroy the slice object.</para>
+            <para>Note: The series remains as the slice's parent object. You must set the parent object to take full ownership.</para>
+            <para>Returns true if take was successful.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QPieSeries.Clear">
+            <summary>
+            <para>Clears all slices from the series.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QPieSeries.SetLabelsVisible(System.Boolean)">
+            <summary>
+            <para>Sets the all the slice labels visible or invisible.</para>
+            <para>Note that this affects only the current slices in the series. If user adds a new slice the default label visibility is false.</para>
+            <para>See also QPieSlice::isLabelVisible() and QPieSlice::setLabelVisible().</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QPieSeries.SetLabelsPosition(QtCharts.QPieSlice.LabelPosition)">
+            <summary>
+            <para>Sets the all the slice labels position</para>
+            <para>Note that this affects only the current slices in the series. If user adds a new slice the default label position is LabelOutside</para>
+            <para>See also QPieSlice::labelPosition() and QPieSlice::setLabelPosition().</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QPieSeries.Clicked">
+            <summary>
+            <para>This signal is emitted when a slice has been clicked.</para>
+            <para>See also QPieSlice::clicked().</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QPieSeries.Hovered">
+            <summary>
+            <para>This signal is emitted when user has hovered over or away from the slice. state is true when user has hovered over the slice and false when hover has moved away from the slice.</para>
+            <para>See also QPieSlice::hovered().</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QPieSeries.Pressed">
+            <summary>
+            <para>This signal is emitted when a slice has been pressed.</para>
+            <para>See also QPieSlice::pressed().</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QPieSeries.Released">
+            <summary>
+            <para>This signal is emitted when a slice has been released.</para>
+            <para>See also QPieSlice::released().</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QPieSeries.DoubleClicked">
+            <summary>
+            <para>This signal is emitted when a slice has been doubleClicked.</para>
+            <para>See also QPieSlice::doubleClicked().</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QPieSeries.CountChanged">
+            <summary>
+            <para>Emitted when the slice count has changed.</para>
+            <para>Note: Notifier signal for property count. </para>
+            <para>See also count.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QPieSeries.SumChanged">
+            <summary>
+            <para>Emitted when the sum of all slices has changed.</para>
+            <para>Note: Notifier signal for property sum. </para>
+            <para>See also sum.</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QPieSeries.PieSize">
+            <summary>
+            <para>This property defines the pie size.</para>
+            <para>The value is a relative value to the chart rectangle where:</para>
+            <para></para>
+            <para>0.0 is the minimum size (pie not drawn).</para>
+            <para>1.0 is the maximum size that can fit the chart.</para>
+            <para></para>
+            <para>When setting this property the holeSize property is adjusted if necessary, to ensure that the hole size is not greater than the outer size.</para>
+            <para>Default value is 0.7.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> qreal 	pieSize() const</para>
+            <para> void 	setPieSize(qreal relativeSize)</para>
+            <para></para>
+            <para></para>
+            <para>This property defines the pie size.</para>
+            <para>The value is a relative value to the chart rectangle where:</para>
+            <para></para>
+            <para>0.0 is the minimum size (pie not drawn).</para>
+            <para>1.0 is the maximum size that can fit the chart.</para>
+            <para></para>
+            <para>When setting this property the holeSize property is adjusted if necessary, to ensure that the hole size is not greater than the outer size.</para>
+            <para>Default value is 0.7.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> qreal 	pieSize() const</para>
+            <para> void 	setPieSize(qreal relativeSize)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QPieSeries.PieStartAngle">
+            <summary>
+            <para>This property defines the starting angle of the pie.</para>
+            <para>Full pie is 360 degrees where 0 degrees is at 12 a'clock.</para>
+            <para>Default is value is 0.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> qreal 	pieStartAngle() const</para>
+            <para> void 	setPieStartAngle(qreal startAngle)</para>
+            <para></para>
+            <para></para>
+            <para>This property defines the starting angle of the pie.</para>
+            <para>Full pie is 360 degrees where 0 degrees is at 12 a'clock.</para>
+            <para>Default is value is 0.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> qreal 	pieStartAngle() const</para>
+            <para> void 	setPieStartAngle(qreal startAngle)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QPieSeries.PieEndAngle">
+            <summary>
+            <para>Returns the end angle of the pie.</para>
+            <para>Full pie is 360 degrees where 0 degrees is at 12 a'clock.</para>
+            <para>Note: Getter function for property endAngle. </para>
+            <para>See also setPieEndAngle(), pieStartAngle(), and setPieStartAngle().</para>
+            <para></para>
+            <para>Sets the end angle of the pie.</para>
+            <para>Full pie is 360 degrees where 0 degrees is at 12 a'clock.</para>
+            <para>angle must be greater than start angle.</para>
+            <para>Note: Setter function for property endAngle. </para>
+            <para>See also pieEndAngle(), pieStartAngle(), and setPieStartAngle().</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QPieSeries.Type">
+            <summary>
+            <para>Reimplemented from QAbstractSeries::type().</para>
+            <para>Returns QAbstractSeries::SeriesTypePie.</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QPieSeries.IsEmpty">
+            <summary>
+            <para>Returns true is the series is empty.</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QPieLegendMarker">
+            <summary>
+            <para>QLegendMarker subclass for pie series.</para>
+            </summary>
+            <remarks>
+            <para>QPieLegendMarker is related to QPieSeries. With QPieSeries, each slice of pie is related to one marker in QLegend.</para>
+            <para></para>
+            <para>See also QLegend, QPieSeries, and QPieSlice.</para>
+            </remarks>
+        </member>
+        <member name="P:QtCharts.QPieLegendMarker.Type">
+            <summary>
+            <para>Reimplemented from QLegendMarker::type().</para>
+            <para>Returns QLegendMarker::LegendMarkerTypePie</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QPieLegendMarker.Series">
+            <summary>
+            <para>Reimplemented from QLegendMarker::series().</para>
+            <para>Returns the related series of marker.</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QPieLegendMarker.Slice">
+            <summary>
+            <para>Returns the related slice of marker.</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QXYSeries">
+            <summary>
+            <para>The QXYSeries class is a base class for line, spline and scatter series.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QXYSeries.Append(System.Double,System.Double)">
+            <summary>
+            <para>Adds data point (x, y) to the series.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QXYSeries.Append(QtCore.QPointF)">
+            <summary>
+            <para>This is an overloaded function. Adds data point to the series.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QXYSeries.Replace(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            <para>Replaces data point (oldX, oldY) with data point (newX, newY).</para>
+            <para>See also pointReplaced().</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QXYSeries.Replace(QtCore.QPointF,QtCore.QPointF)">
+            <summary>
+            <para>Replaces oldPoint with newPoint.</para>
+            <para>See also pointReplaced().</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QXYSeries.Replace(System.Int32,System.Double,System.Double)">
+            <summary>
+            <para>Replaces the point at index with data point (newX, newY).</para>
+            <para>See also pointReplaced().</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QXYSeries.Replace(System.Int32,QtCore.QPointF)">
+            <summary>
+            <para>Replaces the point at index with newPoint.</para>
+            <para>See also pointReplaced().</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QXYSeries.Remove(System.Double,System.Double)">
+            <summary>
+            <para>Removes the point (x, y) from the series.</para>
+            <para>See also pointRemoved().</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QXYSeries.Remove(QtCore.QPointF)">
+            <summary>
+            <para>Removes the point from the series.</para>
+            <para>See also pointRemoved().</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QXYSeries.Remove(System.Int32)">
+            <summary>
+            <para>Removes the point at index from the series.</para>
+            <para>See also pointRemoved().</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QXYSeries.RemovePoints(System.Int32,System.Int32)">
+            <summary>
+            <para>Removes count number of points from the series starting at index.</para>
+            <para>See also pointsRemoved().</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QXYSeries.Insert(System.Int32,QtCore.QPointF)">
+            <summary>
+            <para>Inserts a point in the series at index position.</para>
+            <para>See also pointAdded().</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QXYSeries.Clear">
+            <summary>
+            <para>Removes all points from the series.</para>
+            <para>See also pointsRemoved().</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QXYSeries.At(System.Int32)">
+            <summary>
+            <para>Returns point at index in internal points vector.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QXYSeries.Clicked">
+            <summary>
+            <para>Signal is emitted when user clicks the point on chart. The point is the point where the press was triggered.</para>
+            <para>See also pressed, released, and doubleClicked.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QXYSeries.Hovered">
+            <summary>
+            <para>This signal is emitted when user has hovered over or away from the series. point shows the origin (coordinate) of the hover event. state is true when user has hovered over the series and false when hover has moved away from the series.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QXYSeries.Pressed">
+            <summary>
+            <para>Signal is emitted when user presses the point on chart.</para>
+            <para>See also clicked, released, and doubleClicked.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QXYSeries.Released">
+            <summary>
+            <para>Signal is emitted when user releases a press that was triggered on a point on chart.</para>
+            <para>See also pressed, clicked, and doubleClicked.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QXYSeries.DoubleClicked">
+            <summary>
+            <para>Signal is emitted when user doubleclicks the point on chart. The point is the point where the first press was triggered.</para>
+            <para>See also pressed, released, and clicked.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QXYSeries.PointReplaced">
+            <summary>
+            <para>Signal is emitted when a point has been replaced at index.</para>
+            <para>See also replace().</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QXYSeries.PointRemoved">
+            <summary>
+            <para>Signal is emitted when a point has been removed from index.</para>
+            <para>See also remove().</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QXYSeries.PointAdded">
+            <summary>
+            <para>Signal is emitted when a point has been added at index.</para>
+            <para>See also append() and insert().</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QXYSeries.ColorChanged">
+            <summary>
+            <para>Signal is emitted when the line (pen) color has changed to color.</para>
+            <para>Note: Notifier signal for property color. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QXYSeries.PointsReplaced">
+            <summary>
+            <para>Signal is emitted when all points have been replaced with other points.</para>
+            <para>See also replace().</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QXYSeries.PointLabelsFormatChanged">
+            <summary>
+            <para>Signal is emitted when the format of data point labels is changed.</para>
+            <para>Note: Notifier signal for property pointLabelsFormat. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QXYSeries.PointLabelsVisibilityChanged">
+            <summary>
+            <para>The visibility of the data point labels is changed to visible.</para>
+            <para>Note: Notifier signal for property pointLabelsVisible. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QXYSeries.PointLabelsFontChanged">
+            <summary>
+            <para>The font used for data point labels is changed to font.</para>
+            <para>Note: Notifier signal for property pointLabelsFont. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QXYSeries.PointLabelsColorChanged">
+            <summary>
+            <para>The color used for data point labels is changed to color.</para>
+            <para>Note: Notifier signal for property pointLabelsColor. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QXYSeries.PointLabelsClippingChanged">
+            <summary>
+            <para>The clipping of the data point labels is changed to clipping.</para>
+            <para>Note: Notifier signal for property pointLabelsClipping. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QXYSeries.PointsRemoved">
+            <summary>
+            <para>Signal is emitted when a count of points has been removed starting at index.</para>
+            <para>See also removePoints() and clear().</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QXYSeries.PenChanged">
+            <summary>
+            <para>Signal is emitted when the line pen has changed to pen.</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QXYSeries.Pen">
+            <summary>
+            <para>Returns pen used to draw points for series.</para>
+            <para>See also setPen().</para>
+            <para></para>
+            <para>Sets pen used for drawing points on the chart. If the pen is not defined, the pen from chart theme is used.</para>
+            <para>See also pen() and QChart::setTheme().</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QXYSeries.Brush">
+            <summary>
+            <para>Returns brush used to draw points for series.</para>
+            <para>See also setBrush().</para>
+            <para></para>
+            <para>Sets brush used for drawing points on the chart. If the brush is not defined, brush from chart theme setting is used.</para>
+            <para>See also brush() and QChart::setTheme().</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QXYSeries.Count">
+            <summary>
+            <para>Returns number of data points within series.</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QXYLegendMarker">
+            <summary>
+            <para>QLegendMarker subclass for QXYSeries.</para>
+            </summary>
+            <remarks>
+            <para>QXYLegendMarker is related to QXYSeries derived classes. Each marker is related to one series.</para>
+            <para></para>
+            <para>See also QLegend, QXYSeries, QSplineSeries, QScatterSeries, and QLineSeries.</para>
+            </remarks>
+        </member>
+        <member name="P:QtCharts.QXYLegendMarker.Type">
+            <summary>
+            <para>Reimplemented from QLegendMarker::type().</para>
+            <para>Returns QLegendMarker::LegendMarkerTypeXY</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QXYLegendMarker.Series">
+            <summary>
+            <para>Reimplemented from QLegendMarker::series().</para>
+            <para>Returns the related series</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QLineSeries">
+            <summary>
+            <para>The QLineSeries class is used for making line charts.</para>
+            </summary>
+            <remarks>
+            <para>A line chart is used to show information as a series of data points connected by straight lines.</para>
+            <para></para>
+            <para>Creating basic line chart is simple:</para>
+            <para></para>
+            <para></para>
+            <para>  QLineSeries* series = new QLineSeries();</para>
+            <para>  series-&gt;append(0, 6);</para>
+            <para>  series-&gt;append(2, 4);</para>
+            <para>  ...</para>
+            <para>  chart-&gt;addSeries(series);</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QLineSeries.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs empty series object which is a child of parent. When series object is added to QChartView or QChart instance ownerships is transferred.</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QLineSeries.Type">
+            <summary>
+            <para>Reimplemented from QAbstractSeries::type().</para>
+            <para>Returns type of series.</para>
+            <para>See also QAbstractSeries and SeriesType.</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QHPieModelMapper">
+            <summary>
+            <para>Horizontal model mapper for pie series.</para>
+            </summary>
+            <remarks>
+            <para>Model mappers allow you to use QAbstractItemModel derived models as a data source for a chart series. Horizontal model mapper is used to create a connection between QPieSeries and QAbstractItemModel derived model object that keeps the consecutive pie slices data in rows. It is possible to use both QAbstractItemModel and QPieSeries model API. QHPieModelMapper makes sure that Pie and the model are kept in sync.</para>
+            <para>Note: Used model has to support adding/removing rows/columns and modifying the data of the cells.</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QHPieModelMapper.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs a mapper object which is a child of parent.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QHPieModelMapper.SeriesReplaced">
+            <summary>
+            <para>Emitted when the series to which mapper is connected to has changed.</para>
+            <para>Note: Notifier signal for property series. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QHPieModelMapper.ModelReplaced">
+            <summary>
+            <para>Emitted when the model to which mapper is connected to has changed.</para>
+            <para>Note: Notifier signal for property model. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QHPieModelMapper.ValuesRowChanged">
+            <summary>
+            <para>Emitted when the valuesRow has changed.</para>
+            <para>Note: Notifier signal for property valuesRow. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QHPieModelMapper.LabelsRowChanged">
+            <summary>
+            <para>Emitted when the labelsRow has changed.</para>
+            <para>Note: Notifier signal for property labelsRow. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QHPieModelMapper.FirstColumnChanged">
+            <summary>
+            <para>Emitted when the firstColumn has changed.</para>
+            <para>Note: Notifier signal for property firstColumn. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QHPieModelMapper.ColumnCountChanged">
+            <summary>
+            <para>Emitted when the columnCount has changed.</para>
+            <para>Note: Notifier signal for property columnCount. </para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QHPieModelMapper.Model">
+            <summary>
+            <para>This property defines the model that is used by the mapper.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QAbstractItemModel *	model() const</para>
+            <para> void 	setModel(QAbstractItemModel *model)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	modelReplaced()</para>
+            <para></para>
+            <para></para>
+            <para>This property defines the model that is used by the mapper.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QAbstractItemModel *	model() const</para>
+            <para> void 	setModel(QAbstractItemModel *model)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	modelReplaced()</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QHPieModelMapper.Series">
+            <summary>
+            <para>This property defines the QPieSeries object that is used by the mapper.</para>
+            <para>All the data in the series is discarded when it is set to the mapper. When new series is specified the old series is disconnected (it preserves its data)</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QPieSeries *	series() const</para>
+            <para> void 	setSeries(QPieSeries *series)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	seriesReplaced()</para>
+            <para></para>
+            <para></para>
+            <para>This property defines the QPieSeries object that is used by the mapper.</para>
+            <para>All the data in the series is discarded when it is set to the mapper. When new series is specified the old series is disconnected (it preserves its data)</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QPieSeries *	series() const</para>
+            <para> void 	setSeries(QPieSeries *series)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	seriesReplaced()</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QVPieModelMapper">
+            <summary>
+            <para>Vertical model mapper for pie series.</para>
+            </summary>
+            <remarks>
+            <para>Model mappers allow you to use QAbstractItemModel derived models as a data source for a chart series. Vertical model mapper is used to create a connection between QPieSeries and QAbstractItemModel derived model object that keeps the consecutive pie slices data in columns. It is possible to use both QAbstractItemModel and QPieSeries model API. QVPieModelMapper makes sure that Pie and the model are kept in sync.</para>
+            <para>Note: Used model has to support adding/removing rows/columns and modifying the data of the cells.</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QVPieModelMapper.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs a mapper object which is a child of parent.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QVPieModelMapper.SeriesReplaced">
+            <summary>
+            <para>Emitted when the series to which mapper is connected to has changed.</para>
+            <para>Note: Notifier signal for property series. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QVPieModelMapper.ModelReplaced">
+            <summary>
+            <para>Emitted when the model to which mapper is connected to has changed.</para>
+            <para>Note: Notifier signal for property model. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QVPieModelMapper.ValuesColumnChanged">
+            <summary>
+            <para>Emitted when the valuesColumn has changed.</para>
+            <para>Note: Notifier signal for property valuesColumn. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QVPieModelMapper.LabelsColumnChanged">
+            <summary>
+            <para>Emitted when the labelsColumn has changed.</para>
+            <para>Note: Notifier signal for property labelsColumn. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QVPieModelMapper.FirstRowChanged">
+            <summary>
+            <para>Emitted when the firstRow has changed.</para>
+            <para>Note: Notifier signal for property firstRow. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QVPieModelMapper.RowCountChanged">
+            <summary>
+            <para>Emitted when the rowCount has changed.</para>
+            <para>Note: Notifier signal for property rowCount. </para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QVPieModelMapper.Model">
+            <summary>
+            <para>This property defines the model that is used by the mapper.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QAbstractItemModel *	model() const</para>
+            <para> void 	setModel(QAbstractItemModel *model)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	modelReplaced()</para>
+            <para></para>
+            <para></para>
+            <para>This property defines the model that is used by the mapper.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QAbstractItemModel *	model() const</para>
+            <para> void 	setModel(QAbstractItemModel *model)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	modelReplaced()</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QVPieModelMapper.Series">
+            <summary>
+            <para>This property defines the QPieSeries object that is used by the mapper. All the data in the series is discarded when it is set to the mapper. When new series is specified the old series is disconnected (it preserves its data).</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QPieSeries *	series() const</para>
+            <para> void 	setSeries(QPieSeries *series)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	seriesReplaced()</para>
+            <para></para>
+            <para></para>
+            <para>This property defines the QPieSeries object that is used by the mapper. All the data in the series is discarded when it is set to the mapper. When new series is specified the old series is disconnected (it preserves its data).</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QPieSeries *	series() const</para>
+            <para> void 	setSeries(QPieSeries *series)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	seriesReplaced()</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QScatterSeries">
+            <summary>
+            <para>The QScatterSeries class is used for making scatter charts.</para>
+            </summary>
+            <remarks>
+            <para>The scatter data is displayed as a collection of points on the chart. Each point determines the position on the horizontal axis and the vertical axis.</para>
+            <para></para>
+            <para>Creating basic scatter chart is simple:</para>
+            <para></para>
+            <para></para>
+            <para>  QScatterSeries* series = new QScatterSeries();</para>
+            <para>  series-&gt;append(0, 6);</para>
+            <para>  series-&gt;append(2, 4);</para>
+            <para>  ...</para>
+            <para>  chart-&gt;addSeries(series);</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QScatterSeries.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs a series object which is a child of parent.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QScatterSeries.ColorChanged">
+            <summary>
+            <para>Signal is emitted when the fill (brush) color has changed to color.</para>
+            <para>Note: Notifier signal for property color. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QScatterSeries.BorderColorChanged">
+            <summary>
+            <para>Signal is emitted when the line (pen) color has changed to color.</para>
+            <para>Note: Notifier signal for property borderColor. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QScatterSeries.MarkerShapeChanged">
+            <summary>
+            <para>Signal is emitted when the marker shape has changed to shape.</para>
+            <para>Note: Notifier signal for property markerShape. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QScatterSeries.MarkerSizeChanged">
+            <summary>
+            <para>Signal is emitted when the marker size has changed to size.</para>
+            <para>Note: Notifier signal for property markerSize. </para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QScatterSeries.Pen">
+            <summary>
+            <para>Returns pen used to draw points for series.</para>
+            <para>See also setPen().</para>
+            <para></para>
+            <para>Sets pen used for drawing points on the chart. If the pen is not defined, the pen from chart theme is used.</para>
+            <para>See also pen() and QChart::setTheme().</para>
+            <para></para>
+            <para>Reimplemented from QXYSeries::setPen().</para>
+            <para>Sets pen used for drawing points' border on the chart. If the pen is not defined, the pen from chart theme is used.</para>
+            <para>See also QChart::setTheme().</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QScatterSeries.Type">
+            <summary>
+            <para>Reimplemented from QAbstractSeries::type().</para>
+            <para>Returns QAbstractSeries::SeriesTypeScatter.</para>
+            <para>See also QAbstractSeries and SeriesType.</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QScatterSeries.MarkerShape">
+            <summary>
+            <para>This enum describes the shape used when rendering marker items.</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QSplineSeries">
+            <summary>
+            <para>Series type used to store data needed to draw a spline.</para>
+            </summary>
+            <remarks>
+            <para>QSplineSeries stores the data points along with the segment control points needed by QPainterPath to draw spline Control points are automatically calculated when data changes. The algorithm computes the points so that the normal spline can be drawn.</para>
+            <para></para>
+            <para>Creating basic spline chart is simple:</para>
+            <para></para>
+            <para></para>
+            <para>  QSplineSeries* series = new QSplineSeries();</para>
+            <para>  series-&gt;append(0, 6);</para>
+            <para>  series-&gt;append(2, 4);</para>
+            <para>  ...</para>
+            <para>  chart-&gt;addSeries(series);</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QSplineSeries.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs empty series object which is a child of parent. When series object is added to a QChart instance then the ownerships is transferred.</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QSplineSeries.Type">
+            <summary>
+            <para>Reimplemented from QAbstractSeries::type().</para>
+            <para>Returns the type of the series</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QHXYModelMapper">
+            <summary>
+            <para>Horizontal model mapper for QXYSeries.</para>
+            </summary>
+            <remarks>
+            <para>Model mappers allow you to use QAbstractItemModel derived models as a data source for a chart series. Horizontal model mapper is used to create a connection between QXYSeries and QAbstractItemModel derived model object. It is possible to use both QAbstractItemModel and QXYSeries model API. QXYModelMapper makes sure that QXYSeries and the model are kept in sync. Note: used model has to support adding/removing rows/columns and modifying the data of the cells.</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QHXYModelMapper.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs a mapper object which is a child of parent.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QHXYModelMapper.SeriesReplaced">
+            <summary>
+            <para>Emitted when the series to which mapper is connected to has changed.</para>
+            <para>Note: Notifier signal for property series. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QHXYModelMapper.ModelReplaced">
+            <summary>
+            <para>Emitted when the model to which mapper is connected to has changed.</para>
+            <para>Note: Notifier signal for property model. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QHXYModelMapper.XRowChanged">
+            <summary>
+            <para>Emitted when the xRow has changed.</para>
+            <para>Note: Notifier signal for property xRow. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QHXYModelMapper.YRowChanged">
+            <summary>
+            <para>Emitted when the yRow has changed.</para>
+            <para>Note: Notifier signal for property yRow. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QHXYModelMapper.FirstColumnChanged">
+            <summary>
+            <para>Emitted when the firstColumn has changed.</para>
+            <para>Note: Notifier signal for property firstColumn. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QHXYModelMapper.ColumnCountChanged">
+            <summary>
+            <para>Emitted when the columnCount has changed.</para>
+            <para>Note: Notifier signal for property columnCount. </para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QHXYModelMapper.Model">
+            <summary>
+            <para>This property defines the model that is used by the mapper.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QAbstractItemModel *	model() const</para>
+            <para> void 	setModel(QAbstractItemModel *model)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	modelReplaced()</para>
+            <para></para>
+            <para></para>
+            <para>This property defines the model that is used by the mapper.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QAbstractItemModel *	model() const</para>
+            <para> void 	setModel(QAbstractItemModel *model)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	modelReplaced()</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QHXYModelMapper.Series">
+            <summary>
+            <para>This property defines the QXYSeries object that is used by the mapper.</para>
+            <para>All the data in the series is discarded when it is set to the mapper. When new series is specified the old series is disconnected (it preserves its data)</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QXYSeries *	series() const</para>
+            <para> void 	setSeries(QXYSeries *series)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	seriesReplaced()</para>
+            <para></para>
+            <para></para>
+            <para>This property defines the QXYSeries object that is used by the mapper.</para>
+            <para>All the data in the series is discarded when it is set to the mapper. When new series is specified the old series is disconnected (it preserves its data)</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QXYSeries *	series() const</para>
+            <para> void 	setSeries(QXYSeries *series)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	seriesReplaced()</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QVXYModelMapper">
+            <summary>
+            <para>Vertical model mapper for QXYSeries.</para>
+            </summary>
+            <remarks>
+            <para>Model mappers allow you to use QAbstractItemModel derived models as a data source for a chart series. Vertical model mapper is used to create a connection between QXYSeries and QAbstractItemModel derived model object. It is possible to use both QAbstractItemModel and QXYSeries model API. QXYModelMapper makes sure that QXYSeries and the model are kept in sync. Note: used model has to support adding/removing rows/columns and modifying the data of the cells.</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QVXYModelMapper.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs a mapper object which is a child of parent.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QVXYModelMapper.SeriesReplaced">
+            <summary>
+            <para>Emitted when the series to which mapper is connected to has changed.</para>
+            <para>Note: Notifier signal for property series. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QVXYModelMapper.ModelReplaced">
+            <summary>
+            <para>Emitted when the model to which mapper is connected to has changed.</para>
+            <para>Note: Notifier signal for property model. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QVXYModelMapper.XColumnChanged">
+            <summary>
+            <para>Emitted when the xColumn has changed.</para>
+            <para>Note: Notifier signal for property xColumn. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QVXYModelMapper.YColumnChanged">
+            <summary>
+            <para>Emitted when the yColumn has changed.</para>
+            <para>Note: Notifier signal for property yColumn. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QVXYModelMapper.FirstRowChanged">
+            <summary>
+            <para>Emitted when the firstRow has changed.</para>
+            <para>Note: Notifier signal for property firstRow. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QVXYModelMapper.RowCountChanged">
+            <summary>
+            <para>Emitted when the rowCount has changed.</para>
+            <para>Note: Notifier signal for property rowCount. </para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QVXYModelMapper.Model">
+            <summary>
+            <para>This property defines the model that is used by the mapper.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QAbstractItemModel *	model() const</para>
+            <para> void 	setModel(QAbstractItemModel *model)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	modelReplaced()</para>
+            <para></para>
+            <para></para>
+            <para>This property defines the model that is used by the mapper.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QAbstractItemModel *	model() const</para>
+            <para> void 	setModel(QAbstractItemModel *model)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	modelReplaced()</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QVXYModelMapper.Series">
+            <summary>
+            <para>This property defines the QXYSeries object that is used by the mapper.</para>
+            <para>All the data in the series is discarded when it is set to the mapper. When new series is specified the old series is disconnected (it preserves its data)</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QXYSeries *	series() const</para>
+            <para> void 	setSeries(QXYSeries *series)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	seriesReplaced()</para>
+            <para></para>
+            <para></para>
+            <para>This property defines the QXYSeries object that is used by the mapper.</para>
+            <para>All the data in the series is discarded when it is set to the mapper. When new series is specified the old series is disconnected (it preserves its data)</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QXYSeries *	series() const</para>
+            <para> void 	setSeries(QXYSeries *series)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	seriesReplaced()</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QBarCategoryAxis">
+            <summary>
+            <para>The QBarCategoryAxis class is used for manipulating chart's axis.</para>
+            </summary>
+            <remarks>
+            <para>QBarCategoryAxis can be setup to show axis line with tick marks, grid lines and shades. Categories are drawn between ticks. Note that you can use this also with lineseries too. See the Line and BarChart Example to learn how to do that.</para>
+            <para>Example code on how to use QBarCategoryAxis.</para>
+            <para></para>
+            <para></para>
+            <para>  QChartView *chartView = new QChartView;</para>
+            <para>  QBarSeries *series = new QBarSeries;</para>
+            <para>  // ...</para>
+            <para>  chartView-&gt;chart()-&gt;addSeries(series);</para>
+            <para>  chartView-&gt;chart()-&gt;createDefaultAxes();</para>
+            <para></para>
+            <para>  QBarCategoryAxis *axisX = new QBarCategoryAxis;</para>
+            <para>  QStringList categories;</para>
+            <para>  categories &lt;&lt; &quot;Jan&quot; &lt;&lt; &quot;Feb&quot; &lt;&lt; &quot;Mar&quot; &lt;&lt; &quot;Apr&quot; &lt;&lt; &quot;May&quot; &lt;&lt; &quot;Jun&quot;;</para>
+            <para>  axisX-&gt;append(categories);</para>
+            <para>  axisX-&gt;setRange(&quot;Feb&quot;, &quot;May&quot;);</para>
+            <para>  chartView-&gt;chart()-&gt;setAxisX(axisX, series);</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QBarCategoryAxis.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs an axis object which is a child of parent.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QBarCategoryAxis.Append(QtCore.QStringList)">
+            <summary>
+            <para>Appends categories to axis. A maximum of the axis will be changed to last category in categories. If there were no categories previously defined, minimum of axis will be also changed to first category in categories. A category has to be valid QStrings and can not be duplicated. Duplicated categories will not be appended.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QBarCategoryAxis.Append(System.String)">
+            <summary>
+            <para>Appends category to axis. A maximum of the axis will be changed to last category. If there were no categories previously defined, minimum of axis will be also changed to category. A category has to be valid QStrings and can not be duplicated. Duplicated categories will not be appended.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QBarCategoryAxis.Remove(System.String)">
+            <summary>
+            <para>Removes category from axis. Removing category which is currently maximum or minimum will affect the axis range.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QBarCategoryAxis.Insert(System.Int32,System.String)">
+            <summary>
+            <para>Inserts category to axis at index. A category has to be valid QStrings and can not be duplicated. If category is prepended or appended to categories, minimum and maximum of axis is updated accordingly.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QBarCategoryAxis.Replace(System.String,System.String)">
+            <summary>
+            <para>Replaces oldCategory with newCategory. If oldCategory does not exist on the axis nothing is done. A newCategory has to be valid QStrings and can not be duplicated. In case of replacing minimum or maximum category, minimum and maximum of axis is updated accordingly.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QBarCategoryAxis.Clear">
+            <summary>
+            <para>Removes all categories. Sets the maximum and minimum of the axis's range to QString::null.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QBarCategoryAxis.At(System.Int32)">
+            <summary>
+            <para>Returns category at index. Index must be valid.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QBarCategoryAxis.SetRange(System.String,System.String)">
+            <summary>
+            <para>Sets range from minCategory to maxCategory</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBarCategoryAxis.CategoriesChanged">
+            <summary>
+            <para>Axis emits signal when the categories of the axis have changed.</para>
+            <para>Note: Notifier signal for property categories. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBarCategoryAxis.MinChanged">
+            <summary>
+            <para>Axis emits signal when min of axis has changed.</para>
+            <para>Note: Notifier signal for property min. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBarCategoryAxis.MaxChanged">
+            <summary>
+            <para>Axis emits signal when max of axis has changed.</para>
+            <para>Note: Notifier signal for property max. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBarCategoryAxis.RangeChanged">
+            <summary>
+            <para>Axis emits signal when min or max of axis has changed.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QBarCategoryAxis.CountChanged">
+            <summary>
+            <para>Axis emits signal when the count of categories has changed.</para>
+            <para>Note: Notifier signal for property count. </para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QBarCategoryAxis.Type">
+            <summary>
+            <para>Reimplemented from QAbstractAxis::type().</para>
+            <para>Returns the type of the axis</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QValueAxis">
+            <summary>
+            <para>The QValueAxis class is used for manipulating chart's axis.</para>
+            </summary>
+            <remarks>
+            <para>ValueAxis can be setup to show axis line with tick marks, grid lines and shades. Values of axis are drawn to position of ticks.</para>
+            <para>Example code on how to use QValueAxis.</para>
+            <para></para>
+            <para></para>
+            <para>  QChartView *chartView = new QChartView;</para>
+            <para>  QLineSeries *series = new QLineSeries;</para>
+            <para>  // ...</para>
+            <para>  chartView-&gt;chart()-&gt;addSeries(series);</para>
+            <para></para>
+            <para>  QValueAxis *axisX = new QValueAxis;</para>
+            <para>  axisX-&gt;setRange(10, 20.5);</para>
+            <para>  axisX-&gt;setTickCount(10);</para>
+            <para>  axisX-&gt;setLabelFormat(&quot;%.2f&quot;);</para>
+            <para>  chartView-&gt;chart()-&gt;setAxisX(axisX, series);</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QValueAxis.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs an axis object which is a child of parent.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QValueAxis.SetRange(System.Double,System.Double)">
+            <summary>
+            <para>Sets range from min to max on the axis. If min is greater than max then this function returns without making any changes.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QValueAxis.ApplyNiceNumbers">
+            <summary>
+            <para>This method modifies range and number of ticks on the axis to look &quot;nice&quot;. Algorithm considers numbers that can be expressed as form of 1*10^n, 2* 10^n or 5*10^n as a nice numbers. These numbers are used for spacing the ticks. This method will modify the current range and number of ticks.</para>
+            <para>See also setRange() and setTickCount().</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QValueAxis.MinChanged">
+            <summary>
+            <para>Axis emits signal when min of axis has changed.</para>
+            <para>Note: Notifier signal for property min. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QValueAxis.MaxChanged">
+            <summary>
+            <para>Axis emits signal when max of axis has changed.</para>
+            <para>Note: Notifier signal for property max. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QValueAxis.RangeChanged">
+            <summary>
+            <para>Axis emits signal when min or max of axis has changed.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QValueAxis.TickCountChanged">
+            <summary>
+            <para>Axis emits signal when tickCount of axis has changed.</para>
+            <para>Note: Notifier signal for property tickCount. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QValueAxis.MinorTickCountChanged">
+            <summary>
+            <para>Axis emits signal when minorTickCount of axis has changed.</para>
+            <para>Note: Notifier signal for property minorTickCount. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QValueAxis.LabelFormatChanged">
+            <summary>
+            <para>Axis emits signal when format of axis labels has changed.</para>
+            <para>Note: Notifier signal for property labelFormat. </para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QValueAxis.Type">
+            <summary>
+            <para>Reimplemented from QAbstractAxis::type().</para>
+            <para>Returns the type of the axis</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QCategoryAxis">
+            <summary>
+            <para>The QCategoryAxis class allows putting a named ranges on the axis.</para>
+            </summary>
+            <remarks>
+            <para>This class can be used when the underlying data needs to be given extra meaning. Unlike with the QBarCategoryAxis the QCategoryAxis allows the categories ranges widths to be specified freely.</para>
+            <para>Example code on how to use QCategoryAxis:</para>
+            <para></para>
+            <para></para>
+            <para></para>
+            <para>  QChartView *chartView = new QChartView;</para>
+            <para>  QLineSeries *series = new QLineSeries;</para>
+            <para>  // ...</para>
+            <para>  chartView-&gt;chart()-&gt;addSeries(series);</para>
+            <para></para>
+            <para>  QCategoryAxis *axisY = new QCategoryAxis;</para>
+            <para>  axisY-&gt;setMin(0);</para>
+            <para>  axisY-&gt;setMax(52);</para>
+            <para>  axisY-&gt;setStartValue(15);</para>
+            <para>  axisY-&gt;append(&quot;First&quot;, 20);</para>
+            <para>  axisY-&gt;append(&quot;Second&quot;, 37);</para>
+            <para>  axisY-&gt;append(&quot;Third&quot;, 52);</para>
+            <para>  chartView-&gt;chart()-&gt;setAxisY(axisY, series);</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QCategoryAxis.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs an axis object which is a child of parent.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QCategoryAxis.Append(System.String,System.Double)">
+            <summary>
+            <para>Appends new category to the axis with an categoryLabel. Category label has to be unique. Parameter categoryEndValue specifies the high end limit of the category. It has to be greater than the high end limit of the previous category. Otherwise the method returns without adding a new category.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QCategoryAxis.Remove(System.String)">
+            <summary>
+            <para>Removes an interval specified by the categoryLabel from the axis</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QCategoryAxis.ReplaceLabel(System.String,System.String)">
+            <summary>
+            <para>Replaces oldLabel of an existing category with a newLabel If the old label does not exist the method returns without making any changes.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QCategoryAxis.StartValue(System.String)">
+            <summary>
+            <para>Returns the low end limit of the category specified by an categoryLabel</para>
+            <para>Note: Getter function for property startValue. </para>
+            <para>See also setStartValue().</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QCategoryAxis.SetStartValue(System.Double)">
+            <summary>
+            <para>Sets min to be the low end limit of the first category on the axis. If there is already some categories added to the axis then passed value must be lower than the high end value of the already defined first category range. Otherwise nothing is done.</para>
+            <para>Note: Setter function for property startValue. </para>
+            <para>See also startValue().</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QCategoryAxis.EndValue(System.String)">
+            <summary>
+            <para>Returns the high end limit of the interval specified by an categoryLabel</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QCategoryAxis.CategoriesChanged">
+            <summary>
+            <para>Axis emits signal when the categories of the axis have changed.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QCategoryAxis.LabelsPositionChanged">
+            <summary>
+            <para>Defines the position of the category labels. The labels in the beginning and in the end of the axes may overlap other axes labels when positioned on value.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QCategoryAxis::AxisLabelsPosition 	labelsPosition() const</para>
+            <para> void 	setLabelsPosition(QCategoryAxis::AxisLabelsPosition position)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	labelsPositionChanged(QCategoryAxis::AxisLabelsPosition position)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QCategoryAxis.Type">
+            <summary>
+            <para>Reimplemented from QAbstractAxis::type().</para>
+            <para>Returns the type of the axis</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QCategoryAxis.AxisLabelsPosition">
+            <summary>
+            <para>This enum describes the position of the category labels.</para>
+            </summary>
+        </member>
+        <member name="F:QtCharts.QCategoryAxis.AxisLabelsPosition.AxisLabelsPositionCenter">
+            <summary>Labels are centered to category.</summary>
+        </member>
+        <member name="F:QtCharts.QCategoryAxis.AxisLabelsPosition.AxisLabelsPositionOnValue">
+            <summary>Labels are positioned to the high end limit of the category.</summary>
+        </member>
+        <member name="T:QtCharts.QDateTimeAxis">
+            <summary>
+            <para>The QDateTimeAxis class is used for manipulating chart's axis.</para>
+            </summary>
+            <remarks>
+            <para>The labels can be configured by setting an appropriate DateTime format. QDateTimeAxis works correctly with dates from 4714 BCE to 287396 CE. There are also other limitiation related to QDateTime. Please refer to QDateTime documentation. QDateTimeAxis can be setup to show axis line with tick marks, grid lines and shades.</para>
+            <para>Note: QDateTimeAxis is disabled on platforms that define qreal as float.</para>
+            <para></para>
+            <para>QDateTimeAxis can be used with any QXYSeries. To add a data point to the series QDateTime::toMSecsSinceEpoch() is used.</para>
+            <para></para>
+            <para></para>
+            <para>  QLineSeries *series = new QLineSeries;</para>
+            <para></para>
+            <para>  QDateTime xValue;</para>
+            <para>  xValue.setDate(QDate(2012, 1 , 18));</para>
+            <para>  xValue.setTime(QTime(9, 34));</para>
+            <para>  qreal yValue = 12;</para>
+            <para>  series-&gt;append(xValue.toMSecsSinceEpoch(), yValue);</para>
+            <para></para>
+            <para>  xValue.setDate(QDate(2013, 5 , 11));</para>
+            <para>  xValue.setTime(QTime(11, 14));</para>
+            <para>  qreal yValue = 22;</para>
+            <para>  series-&gt;append(xValue.toMSecsSinceEpoch(), yValue);</para>
+            <para></para>
+            <para></para>
+            <para>Adding the series to the chart and setting up the QDateTimeAxis.</para>
+            <para></para>
+            <para></para>
+            <para>  QChartView *chartView = new QChartView;</para>
+            <para>  chartView-&gt;chart()-&gt;addSeries(series);</para>
+            <para></para>
+            <para>  // ...</para>
+            <para>  QDateTimeAxis *axisX = new QDateTimeAxis;</para>
+            <para>  axisX-&gt;setFormat(&quot;dd-MM-yyyy h:mm&quot;);</para>
+            <para>  chartView-&gt;chart()-&gt;setAxisX(axisX, series);</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QDateTimeAxis.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs an axis object which is a child of parent.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QDateTimeAxis.SetRange(QtCore.QDateTime,QtCore.QDateTime)">
+            <summary>
+            <para>Sets range from min to max on the axis. If min is greater than max then this function returns without making any changes.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QDateTimeAxis.MinChanged">
+            <summary>
+            <para>Axis emits signal when min of axis has changed.</para>
+            <para>Note: Notifier signal for property min. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QDateTimeAxis.MaxChanged">
+            <summary>
+            <para>Axis emits signal when max of axis has changed.</para>
+            <para>Note: Notifier signal for property max. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QDateTimeAxis.RangeChanged">
+            <summary>
+            <para>Axis emits signal when min or max of axis has changed.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QDateTimeAxis.FormatChanged">
+            <summary>
+            <para>Axis emits signal when format of the axis has changed.</para>
+            <para>Note: Notifier signal for property format. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QDateTimeAxis.TickCountChanged">
+            <summary>
+            <para>Axis emits signal when tickCount number on axis have changed.</para>
+            <para>Note: Notifier signal for property tickCount. </para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QDateTimeAxis.Type">
+            <summary>
+            <para>Reimplemented from QAbstractAxis::type().</para>
+            <para>Returns the type of the axis.</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QLogValueAxis">
+            <summary>
+            <para>The QLogValueAxis class is used for manipulating chart's axis.</para>
+            </summary>
+            <remarks>
+            <para>Note: If a QLogValueAxis is attached to a series with one or more points with negative or zero values on the associated dimension, the series will not be plotted at all. This is particularly relevant when XYModelMappers are used, since empty cells in models typically contain zero values.</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QLogValueAxis.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs an axis object which is a child of parent.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QLogValueAxis.SetRange(System.Double,System.Double)">
+            <summary>
+            <para>Sets range from min to max on the axis. If min is greater than max then this function returns without making any changes.</para>
+            </summary>
+        </member>
+        <member name="M:QtCharts.QLogValueAxis.SetBase(System.Double)">
+            <summary>
+            <para>Defines the base of the logarithm. Value has to be greater than 0 and not equal 1</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> qreal 	base() const</para>
+            <para> void 	setBase(qreal base)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	baseChanged(qreal base)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QLogValueAxis.MinChanged">
+            <summary>
+            <para>Axis emits signal when min of axis has changed.</para>
+            <para>Note: Notifier signal for property min. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QLogValueAxis.MaxChanged">
+            <summary>
+            <para>Axis emits signal when max of axis has changed.</para>
+            <para>Note: Notifier signal for property max. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QLogValueAxis.RangeChanged">
+            <summary>
+            <para>Axis emits signal when min or max of axis has changed.</para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QLogValueAxis.LabelFormatChanged">
+            <summary>
+            <para>Axis emits signal when format of axis labels has changed.</para>
+            <para>Note: Notifier signal for property labelFormat. </para>
+            </summary>
+        </member>
+        <member name="E:QtCharts.QLogValueAxis.BaseChanged">
+            <summary>
+            <para>Axis emits signal when base of logarithm of the axis has changed.</para>
+            <para>Note: Notifier signal for property base. </para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QLogValueAxis.Type">
+            <summary>
+            <para>Reimplemented from QAbstractAxis::type().</para>
+            <para>Returns the type of the axis</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QLogValueAxis.Base">
+            <summary>
+            <para>Defines the base of the logarithm. Value has to be greater than 0 and not equal 1</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> qreal 	base() const</para>
+            <para> void 	setBase(qreal base)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	baseChanged(qreal base)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QHorizontalBarSeries">
+            <summary>
+            <para>Series for creating horizontal bar chart.</para>
+            </summary>
+            <remarks>
+            <para>QHorizontalBarSeries represents a series of data shown as bars. The purpose of this class is to draw bars as groups, where bars in same category are grouped next to each other. QHorizontalBarSeries groups the data from sets to categories, which are defined by a QStringList.</para>
+            <para>See the horizontal bar chart example to learn how to create a horizontal bar chart.</para>
+            <para></para>
+            <para></para>
+            <para>See also QBarSet, QBarSeries, QPercentBarSeries, QAbstractBarSeries, QStackedBarSeries, QHorizontalStackedBarSeries, and QHorizontalPercentBarSeries.</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QHorizontalBarSeries.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs empty QHorizontalBarSeries. QHorizontalBarSeries is QObject which is a child of a parent.</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QHorizontalBarSeries.Type">
+            <summary>
+            <para>Reimplemented from QAbstractSeries::type().</para>
+            <para>Returns QChartSeries::SeriesTypeHorizontalBar.</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QHorizontalPercentBarSeries">
+            <summary>
+            <para>Series for creating horizontal percent bar chart.</para>
+            </summary>
+            <remarks>
+            <para>QHorizontalPercentBarSeries represents a series of data shown as bars. The purpose of this class is to draw bars as groups, where bars in same category are grouped next to each other. QHorizontalPercentBarSeries groups the data from sets to categories, which are defined by a QStringList. Bars with zero value are not drawn.</para>
+            <para>See the horizontal percent bar chart example to learn how to create a horizontal percent bar chart.</para>
+            <para></para>
+            <para></para>
+            <para>See also QBarSet, QBarSeries, QPercentBarSeries, QAbstractBarSeries, QStackedBarSeries, QHorizontalStackedBarSeries, and QHorizontalBarSeries.</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QHorizontalPercentBarSeries.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs empty QHorizontalPercentBarSeries. QHorizontalPercentBarSeries is QObject which is a child of a parent.</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QHorizontalPercentBarSeries.Type">
+            <summary>
+            <para>Reimplemented from QAbstractSeries::type().</para>
+            <para>Returns QAbstractSeries::SeriesTypeHorizontalPercentBar.</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QHorizontalStackedBarSeries">
+            <summary>
+            <para>Series for creating horizontal stacked bar chart.</para>
+            </summary>
+            <remarks>
+            <para>QHorizontalStackedBarSeries represents a series of data shown as bars. The purpose of this class is to draw bars as groups, where bars in same category are grouped next to each other. QHorizontalStackedBarSeries groups the data from sets to categories, which are defined by a QStringList.</para>
+            <para>See the horizontal stacked bar chart example to learn how to create a horizontal stacked bar chart.</para>
+            <para></para>
+            <para></para>
+            <para>See also QBarSet, QBarSeries, QPercentBarSeries, QAbstractBarSeries, QStackedBarSeries, QHorizontalPercentBarSeries, and QHorizontalBarSeries.</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QHorizontalStackedBarSeries.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs empty QHorizontalStackedBarSeries. QHorizontalStackedBarSeries is QObject which is a child of a parent.</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QHorizontalStackedBarSeries.Type">
+            <summary>
+            <para>Reimplemented from QAbstractSeries::type().</para>
+            <para>Returns QAbstractSeries::SeriesTypeHorizontalStackedBar.</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QBarSeries">
+            <summary>
+            <para>Series for creating bar chart.</para>
+            </summary>
+            <remarks>
+            <para>QBarSeries represents a series of data shown as bars. The purpose of this class is to draw bars as groups, where bars in same category are grouped next to each other. QBarSeries groups the data from sets to categories, which are defined by a QStringList.</para>
+            <para>See the bar chart example to learn how to create a grouped bar chart.</para>
+            <para></para>
+            <para></para>
+            <para>See also QBarSet, QPercentBarSeries, QAbstractBarSeries, and QStackedBarSeries.</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QBarSeries.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs empty QBarSeries. QBarSeries is QObject which is a child of a parent.</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QBarSeries.Type">
+            <summary>
+            <para>Reimplemented from QAbstractSeries::type().</para>
+            <para>Returns QAbstractSeries::SeriesTypeBar.</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QPercentBarSeries">
+            <summary>
+            <para>Series for creating percent bar chart.</para>
+            </summary>
+            <remarks>
+            <para>QPercentBarSeries represents a series of data shown as bars. The purpose of this class is to draw bars as stacks, where each bar is shown as percentage of all bars in that category. QPercentBarSeries groups the data from sets to categories, which are defined by a QStringList. Bars with zero value are not drawn.</para>
+            <para>See the percent bar chart example to learn how to create a percent bar chart.</para>
+            <para></para>
+            <para></para>
+            <para>See also QBarSet, QStackedBarSeries, and QAbstractBarSeries.</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QPercentBarSeries.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs empty QPercentBarSeries. QPercentBarSeries is QObject which is a child of a parent.</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QPercentBarSeries.Type">
+            <summary>
+            <para>Reimplemented from QAbstractSeries::type().</para>
+            <para>Returns QAbstractSeries::SeriesTypePercentBar.</para>
+            </summary>
+        </member>
+        <member name="T:QtCharts.QStackedBarSeries">
+            <summary>
+            <para>Series for creating stacked bar chart.</para>
+            </summary>
+            <remarks>
+            <para>QStackedBarSeries represents a series of data shown as bars. The purpose of this class is to draw bars as stacks, where bars in same category are stacked on top of each other. QStackedBarSeries groups the data from sets to categories, which are defined by QStringList.</para>
+            <para>See the stacked bar chart example to learn how to create a stacked bar chart.</para>
+            <para></para>
+            <para></para>
+            <para>See also QBarSet, QPercentBarSeries, and QAbstractBarSeries.</para>
+            </remarks>
+        </member>
+        <member name="M:QtCharts.QStackedBarSeries.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs empty QStackedBarSeries. QStackedBarSeries is QObject which is a child of a parent.</para>
+            </summary>
+        </member>
+        <member name="P:QtCharts.QStackedBarSeries.Type">
+            <summary>
+            <para>Reimplemented from QAbstractSeries::type().</para>
+            <para>Returns QAbstractSeries::SeriesTypeStackedBar.</para>
+            </summary>
+        </member>
+    </members>
+</doc>

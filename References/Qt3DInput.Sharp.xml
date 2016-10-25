@@ -1,0 +1,1276 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Qt3DInput.Sharp</name>
+    </assembly>
+    <members>
+        <member name="T:Qt3DInput.QAbstractActionInput">
+            <summary>
+            <para>QAbstractActionInput is the base class for the Action Input and all Aggregate Action Inputs.</para>
+            </summary>
+        </member>
+        <member name="T:Qt3DInput.QAbstractPhysicalDevice">
+            <summary>
+            <para>QAbstractPhysicalDevice is the base class used by Qt3d to interact with arbitrary input devices.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QAbstractPhysicalDevice.#ctor(Qt3DCore.QNode)">
+            <summary>
+            <para>Constructs a new QAbstractPhysicalDevice instance with parent.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QAbstractPhysicalDevice.AxisIdentifier(System.String)">
+            <summary>
+            <para>Returns the integer identifer of the axis name or -1 if it does not exist on this device.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QAbstractPhysicalDevice.ButtonIdentifier(System.String)">
+            <summary>
+            <para>Returns the integer identifer of the button name or -1 if it does not exist on this device.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QAbstractPhysicalDevice.AddAxisSetting(Qt3DInput.QAxisSetting)">
+            <summary>
+            <para>Add the axisSetting axisSetting to this device.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QAbstractPhysicalDevice.RemoveAxisSetting(Qt3DInput.QAxisSetting)">
+            <summary>
+            <para>Remove the axisSetting axisSetting to this device.</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QAbstractPhysicalDevice.AxisCount">
+            <summary>
+            <para>Returns the number of axis this device has.</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QAbstractPhysicalDevice.ButtonCount">
+            <summary>
+            <para>Returns the number of buttons this device has.</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QAbstractPhysicalDevice.AxisNames">
+            <summary>
+            <para>Returns a list of the names of device's axis.</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QAbstractPhysicalDevice.ButtonNames">
+            <summary>
+            <para>Returns a list of the names of device's buttons.</para>
+            </summary>
+        </member>
+        <member name="T:Qt3DInput.QAbstractAxisInput">
+            <summary>
+            <para>QAbstractActionInput is the base class for all Axis Input.</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QAbstractAxisInput.SourceDeviceChanged">
+            <summary>
+            <para>The source device for the QAbstractAxisInput.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QAbstractPhysicalDevice *	sourceDevice() const</para>
+            <para> void 	setSourceDevice(QAbstractPhysicalDevice *sourceDevice)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	sourceDeviceChanged(QAbstractPhysicalDevice *sourceDevice)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QAbstractAxisInput.SourceDevice">
+            <summary>
+            <para>The source device for the QAbstractAxisInput.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QAbstractPhysicalDevice *	sourceDevice() const</para>
+            <para> void 	setSourceDevice(QAbstractPhysicalDevice *sourceDevice)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	sourceDeviceChanged(QAbstractPhysicalDevice *sourceDevice)</para>
+            <para></para>
+            <para></para>
+            <para>The source device for the QAbstractAxisInput.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QAbstractPhysicalDevice *	sourceDevice() const</para>
+            <para> void 	setSourceDevice(QAbstractPhysicalDevice *sourceDevice)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	sourceDeviceChanged(QAbstractPhysicalDevice *sourceDevice)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="T:Qt3DInput.QAction">
+            <summary>
+            <para>The QAction class provides an abstract user interface action that can be inserted into widgets.</para>
+            </summary>
+            <remarks>
+            <para>In applications many common commands can be invoked via menus, toolbar buttons, and keyboard shortcuts. Since the user expects each command to be performed in the same way, regardless of the user interface used, it is useful to represent each command as an action.</para>
+            <para>Actions can be added to menus and toolbars, and will automatically keep them in sync. For example, in a word processor, if the user presses a Bold toolbar button, the Bold menu item will automatically be checked.</para>
+            <para>Actions can be created as independent objects, but they may also be created during the construction of menus; the QMenu class contains convenience functions for creating actions suitable for use as menu items.</para>
+            <para>A QAction may contain an icon, menu text, a shortcut, status text, &quot;What's This?&quot; text, and a tooltip. Most of these can be set in the constructor. They can also be set independently with setIcon(), setText(), setIconText(), setShortcut(), setStatusTip(), setWhatsThis(), and setToolTip(). For menu items, it is possible to set an individual font with setFont().</para>
+            <para>Actions are added to widgets using QWidget::addAction() or QGraphicsWidget::addAction(). Note that an action must be added to a widget before it can be used; this is also true when the shortcut should be global (i.e., Qt::ApplicationShortcut as Qt::ShortcutContext).</para>
+            <para>Once a QAction has been created it should be added to the relevant menu and toolbar, then connected to the slot which will perform the action. For example:</para>
+            <para></para>
+            <para></para>
+            <para>      const QIcon openIcon = QIcon::fromTheme(&quot;document-open&quot;, QIcon(&quot;:/images/open.png&quot;));</para>
+            <para>      QAction *openAct = new QAction(openIcon, tr(&quot;&amp;Open...&quot;), this);</para>
+            <para>      openAct-&gt;setShortcuts(QKeySequence::Open);</para>
+            <para>      openAct-&gt;setStatusTip(tr(&quot;Open an existing file&quot;));</para>
+            <para>      connect(openAct, &amp;QAction::triggered, this, &amp;MainWindow::open);</para>
+            <para>      fileMenu-&gt;addAction(openAct);</para>
+            <para>      fileToolBar-&gt;addAction(openAct);</para>
+            <para></para>
+            <para></para>
+            <para></para>
+            <para></para>
+            <para>  fileMenu-&gt;addAction(openAct);</para>
+            <para></para>
+            <para></para>
+            <para>We recommend that actions are created as children of the window they are used in. In most cases actions will be children of the application's main window.</para>
+            <para></para>
+            <para>See also QMenu, QToolBar, and Application Example.</para>
+            </remarks>
+        </member>
+        <member name="M:Qt3DInput.QAction.#ctor(Qt3DCore.QNode)">
+            <summary>
+            <para>Constructs a new QAction instance with parent parent.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QAction.AddInput(Qt3DInput.QAbstractActionInput)">
+            <summary>
+            <para>Append QAbstractActionInput input to the list of inputs that can trigger this action.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QAction.RemoveInput(Qt3DInput.QAbstractActionInput)">
+            <summary>
+            <para>Remove QAbstractActionInput input to the list of inputs that can trigger this action.</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QAction.ActiveChanged">
+            <summary>
+            <para>Holds true if the action is active.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	isActive() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	activeChanged(bool isActive)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QAction.IsActive">
+            <summary>
+            <para>Holds true if the action is active.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	isActive() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	activeChanged(bool isActive)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="T:Qt3DInput.QActionInput">
+            <summary>
+            <para>QActionInput stores Device and Buttons used to trigger an input event.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QActionInput.#ctor(Qt3DCore.QNode)">
+            <summary>
+            <para>Constructs a new QActionInput instance with parent.</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QActionInput.SourceDeviceChanged">
+            <summary>
+            <para>This signal is emitted when the source device associated with the action input is changed to sourceDevice.</para>
+            <para>Note: Notifier signal for property sourceDevice. </para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QActionInput.SourceDevice">
+            <summary>
+            <para>The current source device of the QActionInput.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QAbstractPhysicalDevice *	sourceDevice() const</para>
+            <para> void 	setSourceDevice(QAbstractPhysicalDevice *sourceDevice)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	sourceDeviceChanged(QAbstractPhysicalDevice *sourceDevice)</para>
+            <para></para>
+            <para></para>
+            <para>The current source device of the QActionInput.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QAbstractPhysicalDevice *	sourceDevice() const</para>
+            <para> void 	setSourceDevice(QAbstractPhysicalDevice *sourceDevice)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	sourceDeviceChanged(QAbstractPhysicalDevice *sourceDevice)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="T:Qt3DInput.QAnalogAxisInput">
+            <summary>
+            <para>An axis input controlled by an analog input The axis value is controlled like a traditional analog input such as a joystick.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QAnalogAxisInput.#ctor(Qt3DCore.QNode)">
+            <summary>
+            <para>Constructs a new QAnalogAxisInput instance with parent.</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QAnalogAxisInput.AxisChanged">
+            <summary>
+            <para>Axis for the analog input.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> int 	axis() const</para>
+            <para> void 	setAxis(int axis)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	axisChanged(int axis)</para>
+            <para></para>
+            <para>See also Qt3DInput::QMouseDevice::Axis.</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QAnalogAxisInput.Axis">
+            <summary>
+            <para>Axis for the analog input.</para>
+            <para>See also Qt3DInput::QMouseDevice::Axis.</para>
+            </summary>
+        </member>
+        <member name="T:Qt3DInput.QAxis">
+            <summary>
+            <para>Constructs a new QAxis instance with parent.</para>
+            </summary>
+            <remarks>
+            <para>QAxis stores QAbstractAxisInputs used to trigger an input event.</para>
+            </remarks>
+        </member>
+        <member name="M:Qt3DInput.QAxis.#ctor(Qt3DCore.QNode)">
+            <summary>
+            <para>Constructs a new QAxis instance with parent parent.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QAxis.AddInput(Qt3DInput.QAbstractAxisInput)">
+            <summary>
+            <para>QAxis::addInput Adds an input for the axis.</para>
+            <para>See also Qt3DInput::QAbstractAxisInput.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QAxis.RemoveInput(Qt3DInput.QAbstractAxisInput)">
+            <summary>
+            <para>QAxis::removeInput</para>
+            <para>Removes an input from the axis.</para>
+            <para>See also Qt3DInput::QAbstractAxisInput.</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QAxis.ValueChanged">
+            <summary>
+            <para>The value of the axis.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> float 	value() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	valueChanged(float value)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QAxis.Value">
+            <summary>
+            <para>The value of the axis.</para>
+            </summary>
+        </member>
+        <member name="T:Qt3DInput.QAxisSetting">
+            <summary>
+            <para>QAxisSetting stores settings for the specified list of Axis.</para>
+            </summary>
+            <remarks>
+            <para>Stores the dead zone associated with this axis and defines if smoothing is enabled</para>
+            </remarks>
+        </member>
+        <member name="M:Qt3DInput.QAxisSetting.#ctor(Qt3DCore.QNode)">
+            <summary>
+            <para>Constructs a new QAxisSetting instance with parent.</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QAxisSetting.DeadZoneRadiusChanged">
+            <summary>
+            <para>This signal is emitted when the Dead Zone radius associated with the axis setting is changed to deadZoneRadius.</para>
+            <para>Note: Notifier signal for property deadZoneRadius. </para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QAxisSetting.SmoothChanged">
+            <summary>
+            <para>This signal is emitted when the smoothing state is changed to smooth.</para>
+            <para>Note: Notifier signal for property smooth. </para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QAxisSetting.SmoothEnabled">
+            <summary>
+            <para>QAxisSetting::isSmoothEnabled Returns if smoothing is enabled.</para>
+            <para>Note: Getter function for property smooth. </para>
+            <para></para>
+            <para>Set the current state of the QAxisSettings smoothing to enabled.</para>
+            <para>Note: Setter function for property smooth. </para>
+            <para>See also isSmoothEnabled().</para>
+            </summary>
+        </member>
+        <member name="T:Qt3DInput.QButtonAxisInput">
+            <summary>
+            <para>An axis input controlled by buttons The axis value is controlled by buttons rather than a traditional analog input such as a joystick.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QButtonAxisInput.#ctor(Qt3DCore.QNode)">
+            <summary>
+            <para>Constructs a new QButtonAxisInput instance with parent.</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QButtonAxisInput.ScaleChanged">
+            <summary>
+            <para>Access functions:</para>
+            <para></para>
+            <para> float 	scale() const</para>
+            <para> void 	setScale(float scale)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	scaleChanged(float scale)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QButtonAxisInput.AccelerationChanged">
+            <summary>
+            <para>Specifies the rate at which the axis value changes when a button is held</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> float 	acceleration() const</para>
+            <para> void 	setAcceleration(float acceleration)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	accelerationChanged(float acceleration)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QButtonAxisInput.DecelerationChanged">
+            <summary>
+            <para>Specifies the rate at which the axis value returns to normal when a button is released</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> float 	deceleration() const</para>
+            <para> void 	setDeceleration(float deceleration)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	decelerationChanged(float deceleration)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QButtonAxisInput.Acceleration">
+            <summary>
+            <para>Specifies the rate at which the axis value changes when a button is held</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QButtonAxisInput.Deceleration">
+            <summary>
+            <para>Specifies the rate at which the axis value returns to normal when a button is released</para>
+            </summary>
+        </member>
+        <member name="T:Qt3DInput.QInputAspect">
+            <summary>
+            <para>Responsible for creating physical devices and handling associated jobs.</para>
+            </summary>
+            <remarks>
+            <para>Handles mapping between front and backend nodes</para>
+            <para>QInputAspect is responsible for creating physical devices. It is also the object responsible establishing the jobs to run at a particular time from the current input setup.</para>
+            </remarks>
+        </member>
+        <member name="M:Qt3DInput.QInputAspect.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Constructs a new QInputAspect with parent.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QInputAspect.CreatePhysicalDevice(System.String)">
+            <summary>
+            <para>Create a physical device identified by name using the input device integrations present returns a Q_NULLPTR if it is not found.</para>
+            <para>Note: caller is responsible for ownership</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QInputAspect.AvailablePhysicalDevices">
+            <summary>
+            <para>Returns a list of all available physical devices.</para>
+            </summary>
+        </member>
+        <member name="T:Qt3DInput.QInputChord">
+            <summary>
+            <para>QInputChord represents a set of QAbstractActionInput's that must be triggerd at once.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QInputChord.#ctor(Qt3DCore.QNode)">
+            <summary>
+            <para>Constructs a new QInputChord with parent parent.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QInputChord.AddChord(Qt3DInput.QAbstractActionInput)">
+            <summary>
+            <para>Append the QAbstractActionInput input to the end of this QInputChord's chord vector.</para>
+            <para>See also removeChord.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QInputChord.RemoveChord(Qt3DInput.QAbstractActionInput)">
+            <summary>
+            <para>Remove the QAbstractActionInput input from this QInputChord's chord vector.</para>
+            <para>See also addChord.</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QInputChord.TimeoutChanged">
+            <summary>
+            <para>The time in which all QAbstractActionInput's in the input chord must triggered within. The time is in milliseconds.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> int 	timeout() const</para>
+            <para> void 	setTimeout(int timeout)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	timeoutChanged(int timeout)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QInputChord.Timeout">
+            <summary>
+            <para>The time in which all QAbstractActionInput's in the input chord must triggered within. The time is in milliseconds.</para>
+            </summary>
+        </member>
+        <member name="T:Qt3DInput.QInputSequence">
+            <summary>
+            <para>QInputSequence represents a set of QAbstractActionInput's that must be triggerd one after the other.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QInputSequence.#ctor(Qt3DCore.QNode)">
+            <summary>
+            <para>Constructs a new QInputSequence with parent parent.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QInputSequence.AddSequence(Qt3DInput.QAbstractActionInput)">
+            <summary>
+            <para>Append the QAbstractActionInput input to the end of this QInputSequence's sequence vector.</para>
+            <para>See also removeSequence.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QInputSequence.RemoveSequence(Qt3DInput.QAbstractActionInput)">
+            <summary>
+            <para>Remove the QAbstractActionInput input from this QInputSequence's sequence vector.</para>
+            <para>See also addSequence.</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QInputSequence.TimeoutChanged">
+            <summary>
+            <para>The time in which all QAbstractActionInput's in the input sequence must triggered within. The time is in milliseconds.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> int 	timeout() const</para>
+            <para> void 	setTimeout(int timeout)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	timeoutChanged(int timeout)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QInputSequence.ButtonIntervalChanged">
+            <summary>
+            <para>The maximum time in between consecutive QAbstractActionInput's in the input sequence. The time is in milliseconds.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> int 	buttonInterval() const</para>
+            <para> void 	setButtonInterval(int buttonInterval)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	buttonIntervalChanged(int buttonInterval)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QInputSequence.Timeout">
+            <summary>
+            <para>The time in which all QAbstractActionInput's in the input sequence must triggered within. The time is in milliseconds.</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QInputSequence.ButtonInterval">
+            <summary>
+            <para>The maximum time in between consecutive QAbstractActionInput's in the input sequence. The time is in milliseconds.</para>
+            </summary>
+        </member>
+        <member name="T:Qt3DInput.QInputSettings">
+            <summary>
+            <para>QInputSettings stores settings for the specified eventSource.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QInputSettings.#ctor(Qt3DCore.QNode)">
+            <summary>
+            <para>Constructs a new QInputSettings instance with parent.</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QInputSettings.EventSourceChanged">
+            <summary>
+            <para>This signal is emitted when the even source associated with the input setting is changed.</para>
+            <para>Note: Notifier signal for property eventSource. </para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QInputSettings.EventSource">
+            <summary>
+            <para>QInputSettings::eventSource Returns the current event source of the QInputSettings instance.</para>
+            <para>Note: Getter function for property eventSource. </para>
+            <para>See also setEventSource().</para>
+            <para></para>
+            <para>Set the current event source of the QInputSettings instance to eventSource.</para>
+            <para>Note: Setter function for property eventSource. </para>
+            <para>See also eventSource().</para>
+            </summary>
+        </member>
+        <member name="T:Qt3DInput.QKeyEvent">
+            <summary>
+            <para>QKeyEvent event type send by KeyBoardHandler.</para>
+            </summary>
+            <remarks>
+            <para>Contains parameters that describe a key event</para>
+            </remarks>
+        </member>
+        <member name="M:Qt3DInput.QKeyEvent.#ctor(QtCore.QEvent.Type,System.Int32,QtCore.Qt.KeyboardModifier,System.String,System.Boolean,System.UInt16)">
+            <summary>
+            <para>Default constructs an instance of QKeyEvent.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QKeyEvent.#ctor(QtGui.QKeyEvent)">
+            <summary>
+            <para>Copy constructor.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QKeyEvent.Matches(QtGui.QKeySequence.StandardKey)">
+            <summary>
+            <para>Returns true if the key event matches the given standard key key_; otherwise returns false.</para>
+            <para>See also QKeySequence::StandardKey.</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QKeyEvent.Accepted">
+            <summary>
+            <para>Setting accepted to true prevents the key event from being propagated to the item's parent.</para>
+            <para>Generally, if the item acts on the key event then it should be accepted so that ancestor items do not also respond to the same event.</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QKeyEvent.Key">
+            <summary>
+            <para>This property holds the code of the key that was pressed or released.</para>
+            <para>See Qt.Key for the list of keyboard codes.</para>
+            <para>See also QKeyEvent::key.</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QKeyEvent.Text">
+            <summary>
+            <para>This property holds the Unicode text that the key generated. The text returned can be an empty string in cases where modifier keys, such as Shift, Control, Alt, and Meta, are being pressed or released. In such cases key will contain a valid value.</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QKeyEvent.Modifiers">
+            <summary>
+            <para>This property holds the keyboard modifier flags that existed immediately before the event occurred.</para>
+            <para>See also QKeyEvent::modifiers.</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QKeyEvent.IsAutoRepeat">
+            <summary>
+            <para>Holds whether this event comes from an auto-repeating key.</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QKeyEvent.Count">
+            <summary>
+            <para>Holds the number of keys involved in this event. If text is not empty, this is simply the length of the string.</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QKeyEvent.NativeScanCode">
+            <summary>
+            <para>This property contains the native scan code of the key that was pressed. It is passed through from QKeyEvent unchanged.</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QKeyEvent.Type">
+            <summary>
+            <para>Returns the type of event</para>
+            </summary>
+        </member>
+        <member name="T:Qt3DInput.QKeyboardHandler">
+            <summary>
+            <para>Provides keyboard event notification</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QKeyboardHandler.#ctor(Qt3DCore.QNode)">
+            <summary>
+            <para>Constructs a new QKeyboardHandler instance with parent parent.</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.SourceDeviceChanged">
+            <summary>
+            <para>Holds the keyboard device of the QKeyboardHandler. Without a valid device, the QKeyboardHandler won't receive any event.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> Qt3DInput::QKeyboardDevice *	sourceDevice() const</para>
+            <para> void 	setSourceDevice(Qt3DInput::QKeyboardDevice *keyboardDevice)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	sourceDeviceChanged(QKeyboardDevice *keyboardDevice)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.FocusChanged">
+            <summary>
+            <para>Holds true if the QKeyboardHandlers has focus.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	focus() const</para>
+            <para> void 	setFocus(bool focus)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	focusChanged(bool focus)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.Digit0Pressed">
+            <summary>
+            <para>This signal is emitted when the 0 key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.Digit1Pressed">
+            <summary>
+            <para>This signal is emitted when the 1 key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.Digit2Pressed">
+            <summary>
+            <para>This signal is emitted when the 2 key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.Digit3Pressed">
+            <summary>
+            <para>This signal is emitted when the 3 key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.Digit4Pressed">
+            <summary>
+            <para>This signal is emitted when the 4 key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.Digit5Pressed">
+            <summary>
+            <para>This signal is emitted when the 5 key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.Digit6Pressed">
+            <summary>
+            <para>This signal is emitted when the 6 key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.Digit7Pressed">
+            <summary>
+            <para>This signal is emitted when the 7 key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.Digit8Pressed">
+            <summary>
+            <para>This signal is emitted when the 8 key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.Digit9Pressed">
+            <summary>
+            <para>This signal is emitted when the 9 key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.LeftPressed">
+            <summary>
+            <para>This signal is emitted when the left key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.RightPressed">
+            <summary>
+            <para>This signal is emitted when the right key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.UpPressed">
+            <summary>
+            <para>This signal is emitted when the up key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.DownPressed">
+            <summary>
+            <para>This signal is emitted when the down key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.TabPressed">
+            <summary>
+            <para>This signal is emitted when the tab key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.BacktabPressed">
+            <summary>
+            <para>This signal is emitted when the backtab key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.AsteriskPressed">
+            <summary>
+            <para>This signal is emitted when the * key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.NumberSignPressed">
+            <summary>
+            <para>This signal is emitted when the number sign key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.EscapePressed">
+            <summary>
+            <para>This signal is emitted when the escape key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.ReturnPressed">
+            <summary>
+            <para>This signal is emitted when the return key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.EnterPressed">
+            <summary>
+            <para>This signal is emitted when the enter key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.DeletePressed">
+            <summary>
+            <para>This signal is emitted when the delete key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.SpacePressed">
+            <summary>
+            <para>This signal is emitted when the space key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.BackPressed">
+            <summary>
+            <para>This signal is emitted when the back key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.CancelPressed">
+            <summary>
+            <para>This signal is emitted when the cancel key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.SelectPressed">
+            <summary>
+            <para>This signal is emitted when the select key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.YesPressed">
+            <summary>
+            <para>This signal is emitted when the yes key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.NoPressed">
+            <summary>
+            <para>This signal is emitted when the yes key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.Context1Pressed">
+            <summary>
+            <para>This signal is emitted when the context 1 key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.Context2Pressed">
+            <summary>
+            <para>This signal is emitted when the context 2 key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.Context3Pressed">
+            <summary>
+            <para>This signal is emitted when the context 2 key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.Context4Pressed">
+            <summary>
+            <para>This signal is emitted when the context 4 key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.CallPressed">
+            <summary>
+            <para>This signal is emitted when the call key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.HangupPressed">
+            <summary>
+            <para>This signal is emitted when the hangup key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.FlipPressed">
+            <summary>
+            <para>This signal is emitted when the flip key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.MenuPressed">
+            <summary>
+            <para>This signal is emitted when the menu key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.VolumeUpPressed">
+            <summary>
+            <para>This signal is emitted when the volume up key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.VolumeDownPressed">
+            <summary>
+            <para>This signal is emitted when the volume down key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.Pressed">
+            <summary>
+            <para>This signal is emitted when a key is pressed with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardHandler.Released">
+            <summary>
+            <para>This signal is emitted when a key is released with the event details being contained within event</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QKeyboardHandler.SourceDevice">
+            <summary>
+            <para>Returns the current keyboard device.</para>
+            <para>Note: Getter function for property sourceDevice. </para>
+            <para>See also setSourceDevice().</para>
+            <para></para>
+            <para>Holds the keyboard device of the QKeyboardHandler. Without a valid device, the QKeyboardHandler won't receive any event.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> Qt3DInput::QKeyboardDevice *	sourceDevice() const</para>
+            <para> void 	setSourceDevice(Qt3DInput::QKeyboardDevice *keyboardDevice)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	sourceDeviceChanged(QKeyboardDevice *keyboardDevice)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QKeyboardHandler.Focus">
+            <summary>
+            <para>Holds true if the QKeyboardHandlers has focus.</para>
+            </summary>
+        </member>
+        <member name="T:Qt3DInput.QKeyboardDevice">
+            <summary>
+            <para>QKeyboardDevice is in charge of dispatching keyboard events to attached QQKeyboardHandler objects.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QKeyboardDevice.#ctor(Qt3DCore.QNode)">
+            <summary>
+            <para>Constructs a new QKeyboardDevice instance with parent.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QKeyboardDevice.AxisIdentifier(System.String)">
+            <summary>
+            <para>Reimplemented from QAbstractPhysicalDevice::axisIdentifier().</para>
+            <para>Returns the axisIdentifier matching the name.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QKeyboardDevice.ButtonIdentifier(System.String)">
+            <summary>
+            <para>Reimplemented from QAbstractPhysicalDevice::buttonIdentifier().</para>
+            <para>Returns the buttonIdentifier matching the name.</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QKeyboardDevice.ActiveInputChanged">
+            <summary>
+            <para>Holds the active QKeyboardHandler of the device.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QKeyboardHandler *	activeInput() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	activeInputChanged(QKeyboardHandler *activeInput)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QKeyboardDevice.AxisCount">
+            <summary>
+            <para>Reimplemented from QAbstractPhysicalDevice::axisCount().</para>
+            <para>Returns the axis count.</para>
+            <para>Note: Currently always returns zero.</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QKeyboardDevice.ButtonCount">
+            <summary>
+            <para>Reimplemented from QAbstractPhysicalDevice::buttonCount().</para>
+            <para>Returns the button count.</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QKeyboardDevice.AxisNames">
+            <summary>
+            <para>Reimplemented from QAbstractPhysicalDevice::axisNames().</para>
+            <para>Returns the axis names.</para>
+            <para>Note: Currently always returns empty QStringList.</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QKeyboardDevice.ButtonNames">
+            <summary>
+            <para>Reimplemented from QAbstractPhysicalDevice::buttonNames().</para>
+            <para>Returns the button names.</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QKeyboardDevice.ActiveInput">
+            <summary>
+            <para>Holds the active QKeyboardHandler of the device.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QKeyboardHandler *	activeInput() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	activeInputChanged(QKeyboardHandler *activeInput)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="T:Qt3DInput.QLogicalDevice">
+            <summary>
+            <para>QLogicalDevice allows the user to define a set of actions that they wish to use within an application.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QLogicalDevice.#ctor(Qt3DCore.QNode)">
+            <summary>
+            <para>Constructs a new QLogicalDevice instance with parent parent.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QLogicalDevice.AddAction(Qt3DInput.QAction)">
+            <summary>
+            <para>Add an action to the list of actions.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QLogicalDevice.RemoveAction(Qt3DInput.QAction)">
+            <summary>
+            <para>Remove an action from the list of actions.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QLogicalDevice.AddAxis(Qt3DInput.QAxis)">
+            <summary>
+            <para>Add an axis to the list of axis.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QLogicalDevice.RemoveAxis(Qt3DInput.QAxis)">
+            <summary>
+            <para>Remove an axis drom the list of axis.</para>
+            </summary>
+        </member>
+        <member name="T:Qt3DInput.QMouseDevice">
+            <summary>
+            <para>QMouseDevice is in charge of dispatching mouse events to attached QMouseHandler objects.</para>
+            </summary>
+            <remarks>
+            <para>See also QMouseHandler.</para>
+            </remarks>
+        </member>
+        <member name="M:Qt3DInput.QMouseDevice.#ctor(Qt3DCore.QNode)">
+            <summary>
+            <para>Default constructs an instance of QMouseDevice.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QMouseDevice.AxisIdentifier(System.String)">
+            <summary>
+            <para>Reimplemented from QAbstractPhysicalDevice::axisIdentifier().</para>
+            <para>Convert axis name to axis identifier.</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QMouseDevice.SensitivityChanged">
+            <summary>
+            <para>The sensitivity of the device.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> float 	sensitivity() const</para>
+            <para> void 	setSensitivity(float value)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	sensitivityChanged(float value)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QMouseDevice.Sensitivity">
+            <summary>
+            <para>The sensitivity of the device.</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QMouseDevice.AxisCount">
+            <summary>
+            <para>Reimplemented from QAbstractPhysicalDevice::axisCount().</para>
+            <para>Returns the axis count.</para>
+            <para>Note: Currently always returns 2.</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QMouseDevice.ButtonCount">
+            <summary>
+            <para>Reimplemented from QAbstractPhysicalDevice::buttonCount().</para>
+            <para>Returns the button count.</para>
+            <para>Note: Currently always returns 3.</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QMouseDevice.AxisNames">
+            <summary>
+            <para>Reimplemented from QAbstractPhysicalDevice::axisNames().</para>
+            <para>Returns the names of the axis.</para>
+            <para>Note: Currently always returns StringList[&quot;X&quot;, &quot;Y&quot;]</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QMouseDevice.ButtonNames">
+            <summary>
+            <para>Reimplemented from QAbstractPhysicalDevice::buttonNames().</para>
+            <para>Returns the names of the buttons.</para>
+            <para>Note: Currently always returns StringList[&quot;Left&quot;, &quot;Right&quot;, &quot;Center&quot;]</para>
+            </summary>
+        </member>
+        <member name="T:Qt3DInput.QMouseDevice.Axis">
+            <summary>
+            <para>The mouse axis.</para>
+            <para>See also Qt3DInput::QAnalogAxisInput::setAxis.</para>
+            </summary>
+        </member>
+        <member name="T:Qt3DInput.QMouseEvent">
+            <summary>
+            <para>The Qt3DCore::QMouseEvent contains parameters that describe a mouse event.</para>
+            </summary>
+            <remarks>
+            <para>Mouse events occur when a mouse button is pressed and the ray traversing the view, originating from the mouse position intersects with one or more elements of the scene.</para>
+            <para></para>
+            <para>See also QKeyEvent, QWheelEvent, and QMouseHandler.</para>
+            </remarks>
+        </member>
+        <member name="M:Qt3DInput.QMouseEvent.#ctor(QtGui.QMouseEvent)">
+            <summary>
+            <para>Constructs a new QMouseEvent instance for the QMouseEvent e.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QMouseEvent.WasHeld">
+            <summary>
+            <para>Specifies if a mouse button was held down during the mouse event</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	wasHeld() const</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QMouseEvent.Accepted">
+            <summary>
+            <para>Specifies if the mouse event has been accepted</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QMouseEvent.X">
+            <summary>
+            <para>Specifies The X coordinate of the mouse event</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QMouseEvent.Y">
+            <summary>
+            <para>Specifies The y coordinate of the mouse event</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QMouseEvent.Button">
+            <summary>
+            <para>Specifies the button triggering the mouse event</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QMouseEvent.buttons">
+            <summary>
+            <para>Specifies the button triggering the mouse event</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QMouseEvent.modifiers">
+            <summary>
+            <para>Specifies if any modifiers were applied to the mouse event</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QMouseEvent.Type">
+            <summary>
+            <para>Returns the QEvent::Type of the event.</para>
+            </summary>
+        </member>
+        <member name="T:Qt3DInput.QWheelEvent">
+            <summary>
+            <para>The QWheelEvent class contains parameters that describe a mouse wheel event.</para>
+            </summary>
+            <remarks>
+            <para>Mouse wheel events occur when the mouse is rotated.</para>
+            <para></para>
+            <para>See also QKeyEvent, QMouseEvent, and QMouseHandler.</para>
+            </remarks>
+        </member>
+        <member name="M:Qt3DInput.QWheelEvent.#ctor(QtGui.QWheelEvent)">
+            <summary>
+            <para>Constructs a new QWheelEvent instance from the QWheelEvent e.</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QWheelEvent.Accepted">
+            <summary>
+            <para>Specifies if the mouse wheel event has been accepted</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QWheelEvent.X">
+            <summary>
+            <para>Specifies The X coordinate of the mouse wheel event</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QWheelEvent.Y">
+            <summary>
+            <para>Specifies The Y coordinate of the mouse wheel event</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QWheelEvent.AngleDelta">
+            <summary>
+            <para>Specifies The change wheel angle of the mouse wheel event</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QWheelEvent.buttons">
+            <summary>
+            <para>Specifies the button if present in the mouse wheel event</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QWheelEvent.modifiers">
+            <summary>
+            <para>Specifies if any modifiers were applied to the mouse wheel event</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QWheelEvent.Type">
+            <summary>
+            <para>Returns the QEvent::Type of the event.</para>
+            </summary>
+        </member>
+        <member name="T:Qt3DInput.QMouseHandler">
+            <summary>
+            <para>Provides a means of being notified about mouse events when attached to a QMouseDevice instance.</para>
+            </summary>
+            <remarks>
+            <para>Note: QMouseHandler components shouldn't be shared, not respecting that condition will most likely result in undefined behaviors.</para>
+            <para></para>
+            <para>See also QMouseDevice.</para>
+            </remarks>
+        </member>
+        <member name="M:Qt3DInput.QMouseHandler.#ctor(Qt3DCore.QNode)">
+            <summary>
+            <para>Constructs a new QMouseHandler instance with parent parent.</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QMouseHandler.SourceDeviceChanged">
+            <summary>
+            <para>Holds the current mouse source device of the QMouseHandler instance.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QMouseDevice *	sourceDevice() const</para>
+            <para> void 	setSourceDevice(QMouseDevice *mouseDevice)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	sourceDeviceChanged(QMouseDevice *mouseDevice)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QMouseHandler.ContainsMouseChanged">
+            <summary>
+            <para>Holds true if the QMouseHandler currently contains the mouse.</para>
+            <para>Note: In this context, contains mean that the ray originating from the mouse is intersecting with the Qt3DCore::QEntity that aggregates the current QMouseHandler instance component.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	containsMouse() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	containsMouseChanged(bool containsMouse)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QMouseHandler.Clicked">
+            <summary>
+            <para>This signal is emitted when a mouse button is clicked with the event details being contained within mouse</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QMouseHandler.DoubleClicked">
+            <summary>
+            <para>This signal is emitted when a mouse button is double clicked with the event details being contained within mouse</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QMouseHandler.Entered">
+            <summary>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QMouseHandler.Exited">
+            <summary>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QMouseHandler.Pressed">
+            <summary>
+            <para>This signal is emitted when a mouse button is pressed with the event details being contained within mouse</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QMouseHandler.Released">
+            <summary>
+            <para>This signal is emitted when a mouse button is released with the event details being contained within mouse</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QMouseHandler.PressAndHold">
+            <summary>
+            <para>This signal is emitted when a mouse button is pressed and held down with the event details being contained within mouse</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QMouseHandler.PositionChanged">
+            <summary>
+            <para>This signal is emitted when the mouse position changes with the event details being contained within mouse</para>
+            </summary>
+        </member>
+        <member name="E:Qt3DInput.QMouseHandler.Wheel">
+            <summary>
+            <para>This signal is emitted when the mouse wheel is used with the event details being contained within wheel</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QMouseHandler.SourceDevice">
+            <summary>
+            <para>Holds the current mouse source device of the QMouseHandler instance.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QMouseDevice *	sourceDevice() const</para>
+            <para> void 	setSourceDevice(QMouseDevice *mouseDevice)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	sourceDeviceChanged(QMouseDevice *mouseDevice)</para>
+            <para></para>
+            <para></para>
+            <para>Sets the mouse device of the QMouseHandler instance to mouseDevice.</para>
+            <para>Note: Setter function for property sourceDevice. </para>
+            <para>See also sourceDevice().</para>
+            </summary>
+        </member>
+        <member name="P:Qt3DInput.QMouseHandler.ContainsMouse">
+            <summary>
+            <para>Holds true if the QMouseHandler currently contains the mouse.</para>
+            <para>Note: In this context, contains mean that the ray originating from the mouse is intersecting with the Qt3DCore::QEntity that aggregates the current QMouseHandler instance component.</para>
+            </summary>
+        </member>
+        <member name="M:Qt3DInput.QPhysicalDeviceCreatedChangeBase.#ctor(Qt3DInput.QAbstractPhysicalDevice)">
+            <summary>
+            <para>Default constructs an instance of QPhysicalDeviceCreatedChangeBase.</para>
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,832 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>QtScxml.Sharp</name>
+    </assembly>
+    <members>
+        <member name="T:QtScxml.QScxmlDataModel">
+            <summary>
+            <para>The QScxmlDataModel class is the data model base class for a Qt SCXML state machine.</para>
+            </summary>
+            <remarks>
+            <para>SCXML data models are described in SCXML Specification - 5 Data Model and Data Manipulation. For more information about supported data models, see SCXML Compliance.</para>
+            <para>One data model can only belong to one state machine.</para>
+            <para></para>
+            <para>See also QScxmlStateMachine, QScxmlCppDataModel, QScxmlEcmaScriptDataModel, and QScxmlNullDataModel.</para>
+            </remarks>
+        </member>
+        <member name="M:QtScxml.QScxmlDataModel.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Creates a new data model, with the parent object parent.</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlDataModel.OnSetScxmlEvent(QtScxml.QScxmlEvent)">
+            <summary>
+            <para>Sets the event to use in the subsequent executable content execution.</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlDataModel.ScxmlProperty(System.String)">
+            <summary>
+            <para>Returns the value of the property name.</para>
+            <para>See also setScxmlProperty().</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlDataModel.HasScxmlProperty(System.String)">
+            <summary>
+            <para>Returns true if a property with the given name exists, false otherwise.</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlDataModel.SetScxmlProperty(System.String,QtCore.QVariant,System.String)">
+            <summary>
+            <para>Sets a the value value for the property name.</para>
+            <para>The context is a string that is used in error messages to indicate the location in the SCXML file where the error occurred.</para>
+            <para>Returns true if successful or false if an error occurred.</para>
+            <para>See also scxmlProperty().</para>
+            </summary>
+        </member>
+        <member name="E:QtScxml.QScxmlDataModel.StateMachineChanged">
+            <summary>
+            <para>This property holds the state machine this data model belongs to.</para>
+            <para>A data model can only belong to a single state machine and a state machine can only have one data model. This relation needs to be set up before the state machine is started. Setting this property on a data model will automatically set the corresponding dataModel property on the stateMachine.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QScxmlStateMachine *	stateMachine() const</para>
+            <para> void 	setStateMachine(QScxmlStateMachine *stateMachine)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	stateMachineChanged(QScxmlStateMachine *stateMachine)</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="E:QtScxml.QScxmlDataModel.SetScxmlEvent">
+            <summary>
+            <para>Sets the event to use in the subsequent executable content execution.</para>
+            </summary>
+        </member>
+        <member name="P:QtScxml.QScxmlDataModel.StateMachine">
+            <summary>
+            <para>Returns the state machine associated with the data model.</para>
+            <para>Note: Getter function for property stateMachine. </para>
+            <para>See also setStateMachine().</para>
+            <para></para>
+            <para>Sets the state machine this model belongs to to stateMachine. There is a 1:1 relation between state machines and models. After setting the state machine once you cannot change it anymore. Any further attempts to set the state machine using this method will be ignored.</para>
+            <para>Note: Setter function for property stateMachine. </para>
+            <para>See also stateMachine().</para>
+            </summary>
+        </member>
+        <member name="T:QtScxml.QScxmlCppDataModel">
+            <summary>
+            <para>The QScxmlCppDataModel class is a C++ data model for a Qt SCXML state machine.</para>
+            </summary>
+            <remarks>
+            <para>The C++ data model for SCXML that lets you write C++ code for expr attributes and &lt;script&gt; elements. The data part of the data model is backed by a subclass of QScxmlCppDataModel, for which the Qt SCXML compiler (qscxmlc) will generate the dispatch methods. It cannot be used when loading an SCXML file at runtime.</para>
+            <para>Usage is through the datamodel attribute of the &lt;scxml&gt; element:</para>
+            <para></para>
+            <para></para>
+            <para>  &lt;scxml datamodel=&quot;cplusplus:TheDataModel:thedatamodel.h&quot;  ....&gt;</para>
+            <para></para>
+            <para></para>
+            <para>The format of the datamodel attribute is: cplusplus:&lt;class-name&gt;:&lt;classdef-header&gt;. So, for the example above, there should be a file thedatamodel.h containing a subclass of QScxmlCppDataModel, containing at least the following:</para>
+            <para></para>
+            <para></para>
+            <para>  #include &quot;qscxmlcppdatamodel.h&quot;</para>
+            <para></para>
+            <para>  class TheDataModel: public QScxmlCppDataModel</para>
+            <para>  {</para>
+            <para>      Q_SCXML_DATAMODEL</para>
+            <para>  };</para>
+            <para></para>
+            <para></para>
+            <para>The Q_SCXML_DATAMODEL has to appear in the private section of the class definition, for example right after the opening bracket, or after a Q_OBJECT macro. This macro expands to the declaration of some virtual methods whose implementation is generated by the Qt SCXML compiler.</para>
+            <para>Note: You can of course inherit from both QScxmlCppDataModel and QObject.</para>
+            <para>The Qt SCXML compiler will generate the various evaluateTo methods, and convert expressions and scripts into lambdas inside those methods. For example:</para>
+            <para></para>
+            <para></para>
+            <para>  &lt;scxml datamodel=&quot;cplusplus:TheDataModel:thedatamodel.h&quot; xmlns=&quot;http://www.w3.org/2005/07/scxml&quot; version=&quot;1.0&quot; name=&quot;MediaPlayerStateMachine&quot;&gt;</para>
+            <para>      &lt;state id=&quot;stopped&quot;&gt;</para>
+            <para>          &lt;transition event=&quot;tap&quot; cond=&quot;isValidMedia()&quot; target=&quot;playing&quot;/&gt;</para>
+            <para>      &lt;/state&gt;</para>
+            <para></para>
+            <para>      &lt;state id=&quot;playing&quot;&gt;</para>
+            <para>          &lt;onentry&gt;</para>
+            <para>              &lt;script&gt;</para>
+            <para>                  media = eventData().value(QStringLiteral(&amp;quot;media&amp;quot;)).toString();</para>
+            <para>              &lt;/script&gt;</para>
+            <para>              &lt;send type=&quot;qt:signal&quot; event=&quot;playbackStarted&quot;&gt;</para>
+            <para>                  &lt;param name=&quot;media&quot; expr=&quot;media&quot;/&gt;</para>
+            <para>              &lt;/send&gt;</para>
+            <para>          &lt;/onentry&gt;</para>
+            <para>      &lt;/state&gt;</para>
+            <para>  &lt;/scxml&gt;</para>
+            <para></para>
+            <para></para>
+            <para>This will result in:</para>
+            <para></para>
+            <para></para>
+            <para>  bool TheDataModel::evaluateToBool(QScxmlExecutableContent::EvaluatorId id, bool *ok) {</para>
+            <para>      // ....</para>
+            <para>          return [this]()-&gt;bool{ return isValidMedia(); }();</para>
+            <para>      // ....</para>
+            <para>  }</para>
+            <para></para>
+            <para>  QVariant TheDataModel::evaluateToVariant(QScxmlExecutableContent::EvaluatorId id, bool *ok) {</para>
+            <para>      // ....</para>
+            <para>          return [this]()-&gt;QVariant{ return media; }();</para>
+            <para>      // ....</para>
+            <para>  }</para>
+            <para></para>
+            <para>  void TheDataModel::evaluateToVoid(QScxmlExecutableContent::EvaluatorId id, bool *ok) {</para>
+            <para>      // ....</para>
+            <para>          [this]()-&gt;void{ media = eventData().value(QStringLiteral(&quot;media&quot;)).toString(); }();</para>
+            <para>      // ....</para>
+            <para>  }</para>
+            <para></para>
+            <para></para>
+            <para>So, you are not limited to call functions. In a &lt;script&gt; element you can put zero or more C++ statements, and in cond or expr attributes you can use any C++ expression that can be converted to the respective bool or QVariant. And, as the this pointer is also captured, you can call or access the data model (the media attribute in the example above). For the full example, see Qt SCXML: Media Player QML Example (C++ Data Model).</para>
+            <para></para>
+            <para>See also QScxmlStateMachine and QScxmlDataModel.</para>
+            </remarks>
+        </member>
+        <member name="M:QtScxml.QScxmlCppDataModel.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Creates a new C++ data model with the parent object parent.</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlCppDataModel.OnSetScxmlEvent(QtScxml.QScxmlEvent)">
+            <summary>
+            <para>Reimplemented from QScxmlDataModel::setScxmlEvent().</para>
+            <para>Sets the event that will be processed next.</para>
+            <para>See also QScxmlCppDataModel::scxmlEvent.</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlCppDataModel.ScxmlProperty(System.String)">
+            <summary>
+            <para>Reimplemented from QScxmlDataModel::scxmlProperty().</para>
+            <para>See also setScxmlProperty().</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlCppDataModel.HasScxmlProperty(System.String)">
+            <summary>
+            <para>Reimplemented from QScxmlDataModel::hasScxmlProperty().</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlCppDataModel.SetScxmlProperty(System.String,QtCore.QVariant,System.String)">
+            <summary>
+            <para>Reimplemented from QScxmlDataModel::setScxmlProperty().</para>
+            <para>See also scxmlProperty().</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlCppDataModel.In(System.String)">
+            <summary>
+            <para>Returns true if the state machine is in the state specified by stateName, false otherwise.</para>
+            </summary>
+        </member>
+        <member name="E:QtScxml.QScxmlCppDataModel.SetScxmlEvent">
+            <summary>
+            <para>Reimplemented from QScxmlDataModel::setScxmlEvent().</para>
+            <para>Sets the event that will be processed next.</para>
+            <para>See also QScxmlCppDataModel::scxmlEvent.</para>
+            </summary>
+        </member>
+        <member name="P:QtScxml.QScxmlCppDataModel.ScxmlEvent">
+            <summary>
+            <para>Holds the current event that is being processed by the state machine.</para>
+            <para>See also SCXML Specification - 5.10 System Variables for the description of the _event variable.</para>
+            <para>Returns the event currently being processed.</para>
+            <para>See also setScxmlEvent().</para>
+            </summary>
+        </member>
+        <member name="T:QtScxml.QScxmlEcmaScriptDataModel">
+            <summary>
+            <para>The QScxmlEcmaScriptDataModel class is the ECMAScript data model for a Qt SCXML state machine.</para>
+            </summary>
+            <remarks>
+            <para>This class implements the ECMAScript data model as described in SCXML Specification - B.2 The ECMAScript Data Model. It can be subclassed to perform custom initialization.</para>
+            <para></para>
+            <para>See also QScxmlStateMachine and QScxmlDataModel.</para>
+            </remarks>
+        </member>
+        <member name="M:QtScxml.QScxmlEcmaScriptDataModel.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Creates a new ECMAScript data model, with the parent object parent.</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlEcmaScriptDataModel.OnSetScxmlEvent(QtScxml.QScxmlEvent)">
+            <summary>
+            <para>Reimplemented from QScxmlDataModel::setScxmlEvent().</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlEcmaScriptDataModel.ScxmlProperty(System.String)">
+            <summary>
+            <para>Reimplemented from QScxmlDataModel::scxmlProperty().</para>
+            <para>See also setScxmlProperty().</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlEcmaScriptDataModel.HasScxmlProperty(System.String)">
+            <summary>
+            <para>Reimplemented from QScxmlDataModel::hasScxmlProperty().</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlEcmaScriptDataModel.SetScxmlProperty(System.String,QtCore.QVariant,System.String)">
+            <summary>
+            <para>Reimplemented from QScxmlDataModel::setScxmlProperty().</para>
+            <para>See also scxmlProperty().</para>
+            </summary>
+        </member>
+        <member name="E:QtScxml.QScxmlEcmaScriptDataModel.SetScxmlEvent">
+            <summary>
+            <para>Reimplemented from QScxmlDataModel::setScxmlEvent().</para>
+            </summary>
+        </member>
+        <member name="P:QtScxml.QScxmlEcmaScriptDataModel.Engine">
+            <summary>
+            <para>Returns the JavaScript engine used by this data model.</para>
+            <para>See also setEngine().</para>
+            <para></para>
+            <para>Sets the JavaScript engine used by this data model to engine.</para>
+            <para>See also engine().</para>
+            </summary>
+        </member>
+        <member name="T:QtScxml.QScxmlError">
+            <summary>
+            <para>The QScxmlError class describes the errors returned by the Qt SCXML state machine when parsing an SCXML file.</para>
+            </summary>
+            <remarks>
+            <para>See also QScxmlStateMachine and QScxmlParser.</para>
+            </remarks>
+        </member>
+        <member name="M:QtScxml.QScxmlError.#ctor">
+            <summary>
+            <para>Creates a new invalid SCXML error.</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlError.#ctor(System.String,System.Int32,System.Int32,System.String)">
+            <summary>
+            <para>Creates a new valid SCXML error that contains the error message, description, as well as the fileName, line, and column where the error occurred.</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlError.#ctor(QtScxml.QScxmlError)">
+            <summary>
+            <para>Constructs a copy of other.</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlError.ToString">
+            <summary>
+            <para>This convenience method converts an error to a string. Returns the error message formatted as: &quot;filename:line:column: error: description&quot;</para>
+            </summary>
+        </member>
+        <member name="P:QtScxml.QScxmlError.IsValid">
+            <summary>
+            <para>Returns true if the error is valid, false otherwise. An invalid error can only be created by calling the default constructor or by assigning an invalid error.</para>
+            </summary>
+        </member>
+        <member name="P:QtScxml.QScxmlError.FileName">
+            <summary>
+            <para>Returns the name of the file in which the error occurred.</para>
+            </summary>
+        </member>
+        <member name="P:QtScxml.QScxmlError.Line">
+            <summary>
+            <para>Returns the line on which the error occurred.</para>
+            </summary>
+        </member>
+        <member name="P:QtScxml.QScxmlError.Column">
+            <summary>
+            <para>Returns the column in which the error occurred.</para>
+            </summary>
+        </member>
+        <member name="P:QtScxml.QScxmlError.Description">
+            <summary>
+            <para>Returns the error message.</para>
+            </summary>
+        </member>
+        <member name="T:QtScxml.QScxmlEvent">
+            <summary>
+            <para>The QScxmlEvent class is an event for a Qt SCXML state machine.</para>
+            </summary>
+            <remarks>
+            <para>SCXML events drive transitions. Most events are generated by using the &lt;raise&gt; and &lt;send&gt; elements in the application. The state machine automatically generates some mandatory events, such as errors.</para>
+            <para>For more information, see SCXML Specification - 5.10.1 The Internal Structure of Events. For more information about how the Qt SCXML API differs from the specification, see SCXML Compliance.</para>
+            <para></para>
+            <para>See also QScxmlStateMachine.</para>
+            </remarks>
+        </member>
+        <member name="M:QtScxml.QScxmlEvent.#ctor">
+            <summary>
+            <para>Creates a new external SCXML event.</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlEvent.#ctor(QtScxml.QScxmlEvent)">
+            <summary>
+            <para>Constructs a copy of other.</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlEvent.Clear">
+            <summary>
+            <para>Clears the contents of the event.</para>
+            </summary>
+        </member>
+        <member name="P:QtScxml.QScxmlEvent.Name">
+            <summary>
+            <para>This property holds the name of the event.</para>
+            <para>If the event is generated inside the SCXML document, this property holds the value of the event attribute specified inside the &lt;raise&gt; or &lt;send&gt; element.</para>
+            <para>If the event is created in the C++ code and submitted to the QScxmlStateMachine, the value of this property is matched against the value of the event attribute specified inside the &lt;transition&gt; element in the SCXML document.</para>
+            </summary>
+        </member>
+        <member name="P:QtScxml.QScxmlEvent.eventType">
+            <summary>
+            <para>This property holds the type of the event.</para>
+            </summary>
+        </member>
+        <member name="P:QtScxml.QScxmlEvent.SendId">
+            <summary>
+            <para>This property holds the ID of the event.</para>
+            <para>The ID is used by the &lt;cancel&gt; element to identify the event to be canceled.</para>
+            <para>Note: The state machine generates a unique ID if the id attribute is not specified in the &lt;send&gt; element. The generated ID can be accessed through this property.</para>
+            </summary>
+        </member>
+        <member name="P:QtScxml.QScxmlEvent.Origin">
+            <summary>
+            <para>This property holds the URI that points to the origin of an SCXML event.</para>
+            <para>The origin is equivalent to the target attribute of the &lt;send&gt; element.</para>
+            </summary>
+        </member>
+        <member name="P:QtScxml.QScxmlEvent.OriginType">
+            <summary>
+            <para>This property holds the origin type of an SCXML event.</para>
+            <para>The origin type is equivalent to the type attribute of the &lt;send&gt; element.</para>
+            </summary>
+        </member>
+        <member name="P:QtScxml.QScxmlEvent.InvokeId">
+            <summary>
+            <para>This property holds the ID of the invoked state machine if the event is generated by one.</para>
+            </summary>
+        </member>
+        <member name="P:QtScxml.QScxmlEvent.Delay">
+            <summary>
+            <para>Returns the delay in milliseconds after which this event is to be delivered after processing the &lt;send&gt; element.</para>
+            <para>See also setDelay().</para>
+            <para></para>
+            <para>Sets the delay in milliseconds as the value of delayInMiliSecs.</para>
+            <para>See also QScxmlEvent::delay.</para>
+            </summary>
+        </member>
+        <member name="P:QtScxml.QScxmlEvent.Data">
+            <summary>
+            <para>This property holds the data included by the sender.</para>
+            <para>When &lt;param&gt; elements are used in the &lt;send&gt; element, the data will contain a QVariantMap where the key is the name attribute, and the value is taken from the expr attribute or the location attribute.</para>
+            <para>When a &lt;content&gt; element is used, the data will contain a single item with either the value of the expr attribute of the &lt;content&gt; element or the child data of the &lt;content&gt; element.</para>
+            </summary>
+        </member>
+        <member name="P:QtScxml.QScxmlEvent.ErrorMessage">
+            <summary>
+            <para>If this is an error event, returns the error message. Otherwise, returns an empty QString.</para>
+            <para>See also setErrorMessage().</para>
+            <para></para>
+            <para>If this is an error event, the message is set as the error message.</para>
+            <para>See also errorMessage().</para>
+            </summary>
+        </member>
+        <member name="P:QtScxml.QScxmlEvent.ScxmlType">
+            <summary>
+            <para>Returns the event type.</para>
+            <para>Note: Getter function for property eventType. </para>
+            </summary>
+        </member>
+        <member name="P:QtScxml.QScxmlEvent.IsErrorEvent">
+            <summary>
+            <para>Returns true when this is an error event, false otherwise.</para>
+            </summary>
+        </member>
+        <member name="T:QtScxml.QScxmlEvent.EventType">
+            <summary>
+            <para>This enum type specifies the type of an SCXML event:</para>
+            </summary>
+        </member>
+        <member name="F:QtScxml.QScxmlEvent.EventType.PlatformEvent">
+            <summary>An event generated internally by the state machine. For example, errors.</summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:QtScxml.QScxmlEvent.EventType.InternalEvent" -->
+        <!-- Badly formed XML comment ignored for member "F:QtScxml.QScxmlEvent.EventType.ExternalEvent" -->
+        <member name="T:QtScxml.QScxmlNullDataModel">
+            <summary>
+            <para>The QScxmlNullDataModel class is the null data model for a Qt SCXML stateMachine</para>
+            </summary>
+            <remarks>
+            <para>This class implements the null data model as described in the SCXML Specification - B.1 The Null Data Model. Using the value &quot;null&quot; for the datamodel attribute of the &lt;scxml&gt; element means that there is no underlying data model.</para>
+            <para></para>
+            <para>See also QScxmlStateMachine and QScxmlDataModel.</para>
+            </remarks>
+        </member>
+        <member name="M:QtScxml.QScxmlNullDataModel.#ctor(QtCore.QObject)">
+            <summary>
+            <para>Creates a new Qt SCXML data model, with the parent object parent.</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlNullDataModel.OnSetScxmlEvent(QtScxml.QScxmlEvent)">
+            <summary>
+            <para>Reimplemented from QScxmlDataModel::setScxmlEvent().</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlNullDataModel.ScxmlProperty(System.String)">
+            <summary>
+            <para>Reimplemented from QScxmlDataModel::scxmlProperty().</para>
+            <para>Returns an invalid variant, because the null data model does not support properties.</para>
+            <para>See also setScxmlProperty().</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlNullDataModel.HasScxmlProperty(System.String)">
+            <summary>
+            <para>Reimplemented from QScxmlDataModel::hasScxmlProperty().</para>
+            <para>Returns false, because the null data model does not support properties.</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlNullDataModel.SetScxmlProperty(System.String,QtCore.QVariant,System.String)">
+            <summary>
+            <para>Reimplemented from QScxmlDataModel::setScxmlProperty().</para>
+            <para>Returns false, because the null data model does not support properties.</para>
+            <para>See also scxmlProperty().</para>
+            </summary>
+        </member>
+        <member name="E:QtScxml.QScxmlNullDataModel.SetScxmlEvent">
+            <summary>
+            <para>Reimplemented from QScxmlDataModel::setScxmlEvent().</para>
+            </summary>
+        </member>
+        <member name="T:QtScxml.QScxmlParser">
+            <summary>
+            <para>The QScxmlParser class is a parser for SCXML files.</para>
+            </summary>
+            <remarks>
+            <para>Parses an SCXML file. It can also dynamically instantiate a state machine for a successfully parsed SCXML file. If parsing failed and instantiateStateMachine() is called, the new state machine cannot start. All errors are returned by QScxmlStateMachine::parseErrors().</para>
+            <para>To load an SCXML file, QScxmlStateMachine::fromFile or QScxmlStateMachine::fromData should be used. Using QScxmlParser directly is only needed when the parser needs to use a custom QScxmlParser::Loader.</para>
+            </remarks>
+        </member>
+        <member name="M:QtScxml.QScxmlParser.#ctor(QtCore.QXmlStreamReader)">
+            <summary>
+            <para>Creates a new SCXML parser for the specified reader.</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlParser.Parse">
+            <summary>
+            <para>Parses an SCXML file.</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlParser.InstantiateStateMachine">
+            <summary>
+            <para>Instantiates a new state machine from the parsed SCXML.</para>
+            <para>If parsing is successful, the returned state machine can be initialized and started. If parsing fails, QScxmlStateMachine::parseErrors() can be used to retrieve a list of errors.</para>
+            <para>Note: The instantiated state machine will not have an associated data model set.</para>
+            <para>See also QScxmlParser::instantiateDataModel.</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlParser.InstantiateDataModel(QtScxml.QScxmlStateMachine)">
+            <summary>
+            <para>Instantiates the data model as described in the SCXML file.</para>
+            <para>After instantiation, the stateMachine takes ownership of the data model.</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlParser.AddError(System.String)">
+            <summary>
+            <para>Adds the error message msg.</para>
+            <para>The line and column numbers for the error message are the current line and column numbers of the QXmlStreamReader.</para>
+            </summary>
+        </member>
+        <member name="P:QtScxml.QScxmlParser.FileName">
+            <summary>
+            <para>Returns the file name associated with the current input.</para>
+            <para>See also setFileName().</para>
+            <para></para>
+            <para>Sets the file name for the current input to fileName.</para>
+            <para>The file name is used for error reporting and for resolving relative path URIs.</para>
+            <para>See also fileName().</para>
+            </summary>
+        </member>
+        <member name="P:QtScxml.QScxmlParser.loader">
+            <summary>
+            <para>Returns the loader that is currently used to resolve and load URIs.</para>
+            <para>See also setLoader().</para>
+            <para></para>
+            <para>Sets newLoader to be used for resolving and loading URIs.</para>
+            <para>See also loader().</para>
+            </summary>
+        </member>
+        <member name="P:QtScxml.QScxmlParser.qtMode">
+            <summary>
+            <para>Returns how the parser decides if the SCXML document should conform to Qt mode.</para>
+            <para>See also setQtMode() and QtMode.</para>
+            <para></para>
+            <para>Sets the qtMode to mode. This property overrides the XML comment. You can force Qt mode to be used by setting it to QtModeEnabled or force any XML comments to be ignored and Qt mode to be used by setting it to QtModeDisabled. The default is QtModeFromInputFile, which will switch Qt mode on if the XML comment is present in the source file.</para>
+            <para>See also qtMode() and QtMode.</para>
+            </summary>
+        </member>
+        <member name="T:QtScxml.QScxmlParser.QtMode">
+            <summary>
+            <para>This enum specifies if the document should be parsed in Qt mode. In Qt mode, event and state names have to be valid C++ identifiers. If that is the case some additional convenience methods are generated. If not, the parser will reject the document. Qt mode can be enabled in the document itself by adding an XML comment of the form:</para>
+            <para>&lt;!-- enable-qt-mode: yes --&gt;</para>
+            </summary>
+        </member>
+        <member name="F:QtScxml.QScxmlParser.QtMode.QtModeDisabled">
+            <summary>Ignore the XML comment and do not generate additional methods.</summary>
+        </member>
+        <member name="F:QtScxml.QScxmlParser.QtMode.QtModeEnabled">
+            <summary>Force parsing in Qt mode and try to generate the additional methods, no matter if the XML comment is present.</summary>
+        </member>
+        <member name="F:QtScxml.QScxmlParser.QtMode.QtModeFromInputFile">
+            <summary>Enable Qt mode only if the XML comment is present in the document.</summary>
+        </member>
+        <member name="T:QtScxml.QScxmlParser.Loader">
+            <summary>
+            <para>The Loader class is a URI resolver and resource loader for an SCXML parser.</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlParser.Loader.#ctor(QtScxml.QScxmlParser)">
+            <summary>
+            <para>Creates a new loader for the specified parser.</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlParser.Loader.Load(System.String,System.String,System.Boolean@)">
+            <summary>
+            <para>Resolves the URI name and loads an SCXML file from the directory specified by baseDir. The boolean parameter ok indicates whether the loading was successful.</para>
+            <para>Returns a QByteArray that stores the contents of the file.</para>
+            </summary>
+        </member>
+        <member name="P:QtScxml.QScxmlParser.Loader.Parser">
+            <summary>
+            <para>Returns the parser that is associated with this loader.</para>
+            </summary>
+        </member>
+        <member name="T:QtScxml.QScxmlEventFilter">
+            <summary>
+            <para>The QScxmlEventFilter class is an event filter for an SCXML state machine.</para>
+            </summary>
+            <remarks>
+            <para>An event filter can be used to intercept events generated by an SCXML state machine. By default, the QScxmlStateMachine will have an event filter that will intercept events that are marked as external and that have the type qt:signal to emit signals.</para>
+            <para></para>
+            <para>See also QScxmlStateMachine.</para>
+            </remarks>
+        </member>
+        <member name="M:QtScxml.QScxmlEventFilter.Handle(QtScxml.QScxmlEvent,QtScxml.QScxmlStateMachine)">
+            <summary>
+            <para>Returns true if the event should be submitted to the stateMachine and it was not intercepted inside the event filter, false otherwise.</para>
+            </summary>
+        </member>
+        <member name="T:QtScxml.QScxmlStateMachine">
+            <summary>
+            <para>The QScxmlStateMachine class provides an interface to the state machines created from SCXML files.</para>
+            </summary>
+            <remarks>
+            <para>QScxmlStateMachine is an implementation of the State Chart XML (SCXML).</para>
+            <para>All states that are defined in the SCXML file are accessible as properties of QScxmlStateMachine. These properties are boolean values and indicate whether the state is active or inactive.</para>
+            <para>All external signals defined inside the SCXML file that are of the qt:signal type, are accessible as signals of QScxmlStateMachine in the Qt mode. The only argument of these signals is always QVariant, which is of QMap&lt;QString, QVariant&gt; type containing the content of all the &lt;param&gt; elements specified as children of a &lt;send&gt; element. The name of each QScxmlStateMachine signal corresponds to the value defined in the event attribute of one &lt;send&gt; tag in the SCXML file.</para>
+            </remarks>
+        </member>
+        <member name="M:QtScxml.QScxmlStateMachine.StateNames(System.Boolean)">
+            <summary>
+            <para>Retrieves a list of state names of all states.</para>
+            <para>When compress is true (the default), the states that contain child states will be filtered out and only the leaf states will be returned. When it is false, the full list of all states will be returned.</para>
+            <para>The returned list does not contain the states of possible nested state machines.</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlStateMachine.ActiveStateNames(System.Boolean)">
+            <summary>
+            <para>Retrieves a list of state names of all active states.</para>
+            <para>When a state is active, all its parent states are active by definition. When compress is true (the default), the parent states will be filtered out and only the leaf states will be returned. When it is false, the full list of active states will be returned.</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlStateMachine.IsActive(System.String)">
+            <summary>
+            <para>Returns true if the state specified by scxmlStateName is active, false otherwise.</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlStateMachine.ConnectToState(System.String,QtCore.QObject,System.String,QtCore.Qt.ConnectionType)">
+            <summary>
+            <para>Creates a connection of the given type from the state identified by scxmlStateName to the method in the receiver object. The receiver's method may contain a boolean argument that indicates whether the state connected became active or inactive.</para>
+            <para>Returns a handle to the connection, which can be used later to disconnect.</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlStateMachine.OnSubmitEvent(QtScxml.QScxmlEvent)">
+            <summary>
+            <para>Submits the SCXML event event to the internal or external event queue depending on the priority of the event.</para>
+            <para>When a delay is set, the event will be queued for delivery after the timeout has passed.</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlStateMachine.SubmitEvent(System.String)">
+            <summary>
+            <para>A utility method to create and submit an external event with the specified eventName as the name.</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlStateMachine.SubmitEvent(System.String,QtCore.QVariant)">
+            <summary>
+            <para>A utility method to create and submit an external event with the specified eventName as the name and data as the payload data.</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlStateMachine.CancelDelayedEvent(System.String)">
+            <summary>
+            <para>Cancels a delayed event with the specified sendId.</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlStateMachine.IsDispatchableTarget(System.String)">
+            <summary>
+            <para>Returns true if a message to target can be dispatched by this state machine.</para>
+            <para>Valid targets are:</para>
+            <para></para>
+            <para>#_parent for the parent state machine if the current state machine is started by &lt;invoke&gt;</para>
+            <para>#_internal for the current state machine</para>
+            <para>#_scxml_sessionid, where sessionid is the session ID of the current state machine</para>
+            <para>#_servicename, where servicename is the ID or name of a service started with &lt;invoke&gt; by this state machine</para>
+            <para></para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlStateMachine.Start">
+            <summary>
+            <para>Starts this state machine. The machine will reset its configuration and transition to the initial state. When a final top-level state is entered, the machine will emit the finished() signal.</para>
+            <para>Note: A state machine will not run without a running event loop, such as the main application event loop started with QCoreApplication::exec() or QApplication::exec().</para>
+            <para>See also runningChanged(), setRunning(), stop(), and finished().</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlStateMachine.Stop">
+            <summary>
+            <para>Stops this state machine. The machine will not execute any further state transitions. Its running property is set to false.</para>
+            <para>See also runningChanged(), start(), and setRunning().</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlStateMachine.FromFile(System.String)">
+            <summary>
+            <para>Creates a state machine from the SCXML file specified by fileName.</para>
+            <para>This method will always return a state machine. If errors occur while reading the SCXML file, the state machine cannot be started. The errors can be retrieved by calling the parseErrors() method.</para>
+            <para>See also parseErrors().</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlStateMachine.FromData(QtCore.QIODevice,System.String)">
+            <summary>
+            <para>Creates a state machine by reading from the QIODevice specified by data.</para>
+            <para>This method will always return a state machine. If errors occur while reading the SCXML file, fileName, the state machine cannot be started. The errors can be retrieved by calling the parseErrors() method.</para>
+            <para>See also parseErrors().</para>
+            </summary>
+        </member>
+        <member name="M:QtScxml.QScxmlStateMachine.GenerateSessionId(System.String)">
+            <summary>
+            <para>Generates a unique ID by appending a unique number to the prefix.</para>
+            <para>The number is only unique within a single run of an application. This method is used when an invoked service does not have an ID set (the id attribute in &lt;invoke&gt;).</para>
+            </summary>
+        </member>
+        <member name="E:QtScxml.QScxmlStateMachine.RunningChanged">
+            <summary>
+            <para>This signal is emitted when the running property is changed with running as argument.</para>
+            <para>Note: Notifier signal for property running. </para>
+            </summary>
+        </member>
+        <member name="E:QtScxml.QScxmlStateMachine.Log">
+            <summary>
+            <para>This signal is emitted if a &lt;log&gt; tag is used in the SCXML. label is the value of the label attribute of the &lt;log&gt; tag. msg is the value of the evaluated expr attribute of the &lt;log&gt; tag. If there is no expr attribute, a null string will be returned.</para>
+            </summary>
+        </member>
+        <member name="E:QtScxml.QScxmlStateMachine.ReachedStableState">
+            <summary>
+            <para>This signal is emitted when the event queue is empty at the end of a macro step or when a final state is reached.</para>
+            </summary>
+        </member>
+        <member name="E:QtScxml.QScxmlStateMachine.Finished">
+            <summary>
+            <para>This signal is emitted when the state machine reaches a top-level final state.</para>
+            <para>See also running.</para>
+            </summary>
+        </member>
+        <member name="E:QtScxml.QScxmlStateMachine.EventOccurred">
+            <summary>
+            <para>This signal is emitted when the SCXML event event occurs. This signal is emitted for all events.</para>
+            <para>See also externalEventOccurred().</para>
+            </summary>
+        </member>
+        <member name="E:QtScxml.QScxmlStateMachine.DataModelChanged">
+            <summary>
+            <para>This property holds the data model to be used for this state machine.</para>
+            <para>SCXML data models are described in SCXML Specification - 5 Data Model and Data Manipulation. For more information about supported data models, see SCXML Compliance.</para>
+            <para>Changing the data model when the state machine has been initialized is not specified in the SCXML standard and leads to undefined behavior.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> QScxmlDataModel *	dataModel() const</para>
+            <para> void 	setDataModel(QScxmlDataModel *model)</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	dataModelChanged(QScxmlDataModel *model)</para>
+            <para></para>
+            <para>See also QScxmlDataModel, QScxmlNullDataModel, QScxmlEcmaScriptDataModel, and QScxmlCppDataModel.</para>
+            </summary>
+        </member>
+        <member name="E:QtScxml.QScxmlStateMachine.InitializedChanged">
+            <summary>
+            <para>This property holds whether the state machine has been initialized.</para>
+            <para>It is true if the state machine has been initialized, false otherwise.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	isInitialized() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	initializedChanged(bool initialized)</para>
+            <para></para>
+            <para>See also QScxmlStateMachine::init() and QScxmlDataModel.</para>
+            </summary>
+        </member>
+        <member name="E:QtScxml.QScxmlStateMachine.ExternalEventOccurred">
+            <summary>
+            <para>This signal is emitted for each &lt;send&gt; element in the SCXML file that contains the attribute type=&quot;qt:signal&quot;. The event that occurred is specified by event.</para>
+            <para>See also eventOccurred().</para>
+            </summary>
+        </member>
+        <member name="E:QtScxml.QScxmlStateMachine.submitEvent">
+            <summary>
+            <para>Submits the SCXML event event to the internal or external event queue depending on the priority of the event.</para>
+            <para>When a delay is set, the event will be queued for delivery after the timeout has passed.</para>
+            </summary>
+        </member>
+        <member name="P:QtScxml.QScxmlStateMachine.SessionId">
+            <summary>
+            <para>Returns the session ID for the current state machine.</para>
+            <para>The session ID is used for message routing between parent and child state machines. If a state machine is started by an &lt;invoke&gt; element, any event it sends will have the invokeid field set to the session ID. The state machine will use the origin of an event (which is set by the target or targetexpr attribute in a &lt;send&gt; element) to dispatch messages to the correct child state machine.</para>
+            <para>See also setSessionId() and QScxmlEvent::invokeId().</para>
+            <para></para>
+            <para>Sets the session ID for the current state machine to id.</para>
+            <para>See also sessionId().</para>
+            </summary>
+        </member>
+        <member name="P:QtScxml.QScxmlStateMachine.DataModel">
+            <summary>
+            <para>Returns the data model used by the state machine.</para>
+            <para>Note: Getter function for property dataModel. </para>
+            <para>See also setDataModel().</para>
+            <para></para>
+            <para>Sets the data model for this state machine to model. There is a 1:1 relation between state machines and models. After setting the model once you cannot change it anymore. Any further attempts to set the model using this method will be ignored.</para>
+            <para>Note: Setter function for property dataModel. </para>
+            <para>See also dataModel().</para>
+            </summary>
+        </member>
+        <member name="P:QtScxml.QScxmlStateMachine.Running">
+            <summary>
+            <para>This property holds the running state of this state machine.</para>
+            <para>See also start().</para>
+            </summary>
+        </member>
+        <member name="P:QtScxml.QScxmlStateMachine.ScxmlEventFilter">
+            <summary>
+            <para>Returns the SCXML event filter if one is set, otherwise returns null.</para>
+            <para>See also setScxmlEventFilter().</para>
+            <para></para>
+            <para>Sets the newFilter as the SCXML event filter. Passing null will remove the current filter.</para>
+            <para>See also scxmlEventFilter().</para>
+            </summary>
+        </member>
+        <member name="P:QtScxml.QScxmlStateMachine.DataBinding">
+            <summary>
+            <para>Returns the binding method used by the state machine.</para>
+            </summary>
+        </member>
+        <member name="P:QtScxml.QScxmlStateMachine.IsInvoked">
+            <summary>
+            <para>Returns true when the state machine was started as a service with the &lt;invoke&gt; element, false otherwise.</para>
+            </summary>
+        </member>
+        <member name="P:QtScxml.QScxmlStateMachine.IsInitialized">
+            <summary>
+            <para>This property holds whether the state machine has been initialized.</para>
+            <para>It is true if the state machine has been initialized, false otherwise.</para>
+            <para>Access functions:</para>
+            <para></para>
+            <para> bool 	isInitialized() const</para>
+            <para></para>
+            <para>Notifier signal:</para>
+            <para></para>
+            <para> void 	initializedChanged(bool initialized)</para>
+            <para></para>
+            <para>See also QScxmlStateMachine::init() and QScxmlDataModel.</para>
+            </summary>
+        </member>
+        <member name="P:QtScxml.QScxmlStateMachine.Name">
+            <summary>
+            <para>Returns the name of the state machine as set by the name attribute of the &lt;scxml&gt; tag.</para>
+            </summary>
+        </member>
+        <member name="P:QtScxml.QScxmlStateMachine.Init">
+            <summary>
+            <para>Initializes the state machine.</para>
+            <para>State machine initialization consists of calling QScxmlDataModel::setup(), setting the initial values for &lt;data&gt; elements, and executing any &lt;script&gt; tags of the &lt;scxml&gt; tag. The initial data values are taken from the initialValues property.</para>
+            <para>Returns false if parse errors occur or if any of the initialization steps fail. Returns true otherwise.</para>
+            </summary>
+        </member>
+        <member name="T:QtScxml.QScxmlStateMachine.BindingMethod">
+            <summary>
+            <para>This enum specifies the binding method. The binding method controls the point in time when the initial values are assigned to the data elements.</para>
+            </summary>
+        </member>
+        <member name="F:QtScxml.QScxmlStateMachine.BindingMethod.EarlyBinding">
+            <summary>All data elements are created and initialized at data-model initialization. This is the default.</summary>
+        </member>
+        <member name="F:QtScxml.QScxmlStateMachine.BindingMethod.LateBinding">
+            <summary>All data elements are created at initialization, but the initial values are assigned only when the containing state is entered for the first time. This is done before any executable content is executed.</summary>
+        </member>
+    </members>
+</doc>

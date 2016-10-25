@@ -31,7 +31,7 @@ Public Class Program
         ' Looks like we'll need to re-implement our own findchild / find children method
         ' using QWidget.Qt_qFindChild_helper
         ' see C:\Qt\Qt5.5.1\5.5\Src\qtbase\src\corelib\kernel\qobject.h
-        'Dim test1 = findChild(Of QPushButton)(widg1,"pushButton")
+        Dim test1 = findChild(Of QPushButton)(widg1,"pushButton")
 
         ' Run the QApplication Process
         QApplication.Exec()
@@ -46,7 +46,7 @@ Public Class Program
         Dim meta As QMetaObject = QPushButton.StaticMetaObject
         'Dim meta As QMetaObject = GetType(T).GetProperty("StaticMetaObject").GetValue(Nothing, Nothing)
         
-        Dim ret = QWidget.Qt_qFindChild_helper(parent,name,meta,options)
+        Dim ret = QWidget.QtQFindChildHelper(parent,name,meta,options)
         Return ret
     End Function
 
@@ -58,13 +58,13 @@ Public Class Program
         Dim ret As New List(Of T)
 
         ' TODO need to find a way of passing types into QList, then getting the QMetaObject from it
-        Dim x As New QList()
+        'Dim x As New QList()
 
 
         Dim meta As QMetaObject = QPushButton.StaticMetaObject
         'Dim meta As QMetaObject = GetType(T).GetProperty("StaticMetaObject").GetValue(Nothing, Nothing)
         
-        Dim test1 = QWidget.Qt_qFindChild_helper(parent,name,meta,options)
+        Dim test1 = QWidget.QtQFindChildHelper(parent,name,meta,options)
 
         Return ret
     End Function

@@ -4,7 +4,6 @@ Imports QtWidgets
 ' Note make sure the build type of the application is set to x86 (32bit) not Any CPU
 
 Public Class Program
-
     Public Shared QApp As QApp
 
     Public Shared Sub Main()
@@ -18,7 +17,5 @@ Public Class Program
         widg1.Show()
 
         QApplication.Exec()
-
     End Sub
-
 End Class
